@@ -1,0 +1,95 @@
+---
+title: "Introduction"
+date: "2022-09-02"
+---
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- ""
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "Introduction", "1", TRUE,
+  "", "Class details", "class-details", FALSE,
+  "", "Motivation", "motivation", FALSE,
+  "", "Review", "review", FALSE,
+  "", "Key concepts in experimental design", "key-concepts-experimental", FALSE
+)
+```
+## Content
+
+- Syllabus and learning objectives
+- Review
+    - Population and samples
+    - Observational versus experimental studies
+    - Sampling schemes: random, stratified and cluster sampling
+- Introduction to experimental designs
+- Terminology of experimental design
+- Requirements for a good experiment
+
+
+## Learning objectives
+
+- Learning the terminology associated to experiments.
+- Assessing the generalizability of a study based on the consideration of the sample characteristics, sampling scheme and population.
+- Distinguishing between observational and experimental studies.
+- Understanding the rationale behind the requirements for good experimental studies.
+
+## Preliminaries
+
+- Familiarize yourself with the [syllabus](/syllabus/), [content](/content/), [examples](/example/), and [evaluations](/evaluations/) pages for this class.
+- {{< fa book >}} Read Chapter 1 (Intro to Data) of [OpenIntro Statistics](https://www.openintro.org/book/os/) and the accompanying {{< fa brands youtube >}} [videos](https://www.youtube.com/playlist?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8)
+
+
+## Readings
+
+:::{.callout-warning}
+These readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies --- the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.
+:::
+
+- {{< fa book >}} Chapter 1 of the [Course notes](https://lbelzile.github.io/math80667a/introduction.html)
+
+Feel free to inform me in the weekly check-in of your take on these references.
+
+## Complementary readings
+
+:::{.callout-warning}
+Complementary readings are additional sources of information that are not required readings, but may be useful substitutes. Sometimes, they go beyond the scope of what we cover (in more details).
+:::
+
+- {{< fa book >}}  Chapter 2 (*Study design*) of [*Introduction to Modern Statistics*](https://openintro-ims.netlify.app/data-design.html)
+- {{< fa book >}} Chapter 1 and Sections 2.1-2.2 in *Design and Analysis of Experiments*  [@Dean:2017]
+- {{< fa book >}} Chapter 1 (*Preliminaries*) in *Planning of experiments*  [@Cox:1958]. Out of print, but addresses the basic concepts using a variety of examples (mostly from agricultural field trials), and particularly well written.
+
+
+## Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/01-slides")
+slide_tabs(slide_details, "/slides/01-slides.html")
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
+:::
+
+## Case study
+
+We will discuss the summary of @Mask:2022 ["The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh"](https://www.poverty-action.org/printpdf/47486) in class.
+
+During the activity, you will be asked to identify in teams the following:
+
+- the objective of the study
+- the target population (which findings generalize?)
+- the sampling scheme
+- the observational and experimental units
+- the treatments
+- the outcome variable(s)
+

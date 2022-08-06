@@ -1,0 +1,219 @@
+---
+title: Syllabus
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(dplyr)
+library(tibble)
+library(pander)
+```
+
+::: {.grid .course-details .course-details-smaller}
+
+::: {.g-col-6}
+### Instructor
+
+- {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
+- {{< fa university >}} &nbsp; {{< var instructor.office >}}
+- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
+
+:::
+
+::: {.g-col-6}
+### Course details
+
+- {{< fa calendar-alt >}} &nbsp; {{< var course.semester >}}
+- {{< fa calendar >}} &nbsp; {{< var course.days >}}
+- {{< fa clock >}} &nbsp; {{< var course.time >}}
+- {{< fa location-dot >}} &nbsp; {{< var course.location >}}
+
+:::
+
+:::
+
+# Course content
+
+
+Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs.
+
+This course has four main objectives: 
+
+- to present the major experimental designs used for research in management and in the behavioural sciences; 
+- to familiarize students with the statistical methods and a software to analyze experimental data (e.g., SPSS); 
+- to interpret and present results from the statistical analyses and discuss the validity and limits of the results; 
+-  to understand and to critique the methodology and statistical results of published articles in the research fields of the students.
+
+
+
+# Target audience and prerequisites
+
+The course is part of the PhD program in Administration offered by HEC Montréal jointly with McGill, Concordia and Université du Québec à Montréal (UQÀM).
+
+The course is designed for non-specialists, but a college/freshman/undergraduate level exposition to statistics is assumed. I expect students to know what are data types (continuous, categorical, binary variables), basic graphical representation (histogram, box-and-whisker plots), descriptive statistics (mean, variance), how to perform an hypothesis test (e.g., a t-test for comparing two means, simple linear regression), etc. The pace the first few weeks will be quite fast if you have no prior exposure to statistics.
+
+What we cover, notably analysis of variance, could appear in an undergraduate level course. However, the course is calibrated for PhD students needs (how to write a statistical analysis in a paper, how to assess the statistical methodology of a paper as a peer-reviewer, how to avoid statistical fallacies that could invalidate your work, etc.)
+
+If you want to brush up, I can recommend the free ressource [Advanced High School Statistics by Open Intro](https://www.openintro.org/book/ahss/) or @OpenIntro4 --- the material is pretty comprehensive and well structured. I expect many students will have at least this level of knowledge.
+
+
+# Course materials
+
+I will provide slides, videos and example code in R/SPSS/SAS. In addition to those, there will be assigned readings from textbook and reference papers.
+
+## Textbooks
+
+Course notes for the class can be found [online](https://lbelzile.github.io/math80667a)
+
+I will also assign readings from @Meier:2022
+[ANOVA and Mixed Models: A Short Intro Using R](https://stat.ethz.ch/~meier/teaching/anova/), which is available online for free reading.
+
+## Other references
+
+There will occasionally be additional articles to read; links to these other resources will be included on the content page for that session.
+
+Other good references for (some or most of) the content we will cover includes
+
+- @Keppel/Wickens:2004: out of print; comprehensive reference with a focus on effect size and marginal effects, all calculations are done by hand.
+- @Cox:1958: out of print, but beautifully written and nontechnical.
+- @Dean:2017: comprehensive and freely available via Springer link; students last year found it too dry and technical.
+- @Box/Hunter:1978.
+- @Vanderweele:2015.
+- @Pearl:2016.
+
+
+# Course content
+
+1. **Introduction and motivation**
+    - Review (population and samples, observational versus experimental studies)
+    - Introduction to experimental designs
+    - Terminology and key concepts of experimental design
+    - Requirements for a good experiment
+2. **Review of key statistics concepts**
+    - Sampling variability
+    - Hypothesis testing
+    - Confidence intervals
+    - Examples of basic tests
+        - two sample t-test and Welch's t-test
+        - chi-square test for contingency table
+        - permutation test
+3. **Completely randomized designs with one factor**
+    - Introduction to one-way analysis of variance
+    - $F$-statistic and sum of square decomposition
+    - Parametrization
+    - Model assumptions
+4. **Contrasts and multiple testing**
+    - Contrasts
+    - Multiple testing, family-wise error rate and false discovery rate
+    - Methods for control: methods for ANOVA (Tukey, Dunnett and Scheffé) 
+    - General methods (Bonferroni, Holm and Benjamini-Hochberg)
+5. **Completely randomized designs with two or more factors**
+    - Interactions
+    - Marginal and conditional contrasts
+6. **Blocked designs and analysis of covariance**
+    - Designs to reduce the error
+    - Terminology (blocking factor, covariate, noise variable)
+    - Complete block design
+    - Analysis of covariance and equal slope assumptions
+7. **Replication crisis and effect sizes**
+    - Effect sizes
+    - Planned and post-hoc comparisons
+    - Replication crisis and reproducibility
+    - Statistical fallacies
+    - Solutions to replication crisis
+8. **General design principles**
+    - Unbalanced designs and implications for inference 
+    - More general linear regression models
+    - Nonparametric tests (rank tests, via linear model)
+    - AB testing and stopping rules
+9. **Repeated measure designs and random effects**
+    - Repeated measure designs
+    - Tests of sphericity
+    - Intro to random effects
+10. **Mixed models**
+    - Linear mixed models
+    - Model specification: crossed and nested factors
+    - Showcase: replication and meta-analysis
+11. **Power and introduction to causal inference**
+    - Power calculations
+    - Interplay between sample size, effect and power
+    - Directed acyclic graphs
+    - Types of association: causation, mediation, confounding and collision
+12. **Causal inference (continued) and linear mediation model**
+    - Assumptions for causal inference
+    - *do*-operator and backdoor
+    - Baron--Kenny linear mediation model
+    - Sobol's test and introduction to the bootstrap bootstrap.
+13. **Additional topics and review**
+    - Advanced topics (Bayesian ANOVA, multivariate analysis of variance)
+    - Q&A, final review and practice exam
+
+
+# Course policies
+
+
+## Student hours
+
+I am available Friday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.
+
+Please watch this video:
+
+<iframe src="https://player.vimeo.com/video/270014784" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display: block; margin: 0 auto 1rem;"></iframe>
+
+Student hours are set times dedicated to all of you (most professors call these "office hours"; I don't^[There's fairly widespread misunderstanding about what office hours actually are! [Many students often think that they are the times I *shouldn't* be disturbed](https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/), which is the exact opposite of what they're for!]). This means that I will be in my office waiting for you to come by if you want to talk to me in person (or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns.
+
+## Late work
+
+The submission modules will stay open for two weeks after the due date for weekly check-in. As much as possible, we will discuss problem sets in class the day after (provided all students have handed in their work). I will not assign penalties, but will gently nudge you to stay on track.
+
+# Evaluations and grades
+
+You can find descriptions for all the assignments on the [evaluations](/evaluations/) page.
+
+
+
+Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Tuesday, December 13th, 2022, from 13:30--16:30. 
+
+
+```{r assignments-grades, include=FALSE}
+assignments <- tibble::tribble(
+  ~Points,  ~Assignment,
+  12 * 0.5 , "Weekly check-in (12 × 0.5 pt)",
+  11 * 4 ,   "Problem set (11 x 4 pt)",
+  14      , "Paper review (10 pt)",
+  40      , "Final examination (40 pt)",
+)
+
+grading <- tibble::tribble(
+  ~Grade, ~Range,  ~Grade1, ~Range1,
+  "A+",  "90-100%", "B",  "70-75%",
+  "A", "85–90%",  "B-", "65-70%",
+  "A-", "80–85%",  "C+", "60-65%",
+  "B+",  "75-80%",  "F",  "<60%"
+)
+```
+
+<div class="centered-table">
+
+```{r show-assignments-table, echo=FALSE, results="asis"}
+assignments_total <- tibble(Assignment = "Total",
+                            Points = sum(assignments$Points))
+
+bind_rows(assignments, assignments_total) %>% 
+  select(Assignment, Points) %>% 
+  pandoc.table(justify = "lc", missing = "—")
+```
+</div>
+
+<div class="centered-table">
+
+```{r show-grades-table, echo=FALSE, results="asis"}
+grading %>%
+  pandoc.table(justify = "lclc", 
+               col.names = c("Grade", "Range", "Grade", "Range"))
+```
+
+<div>
+
+Team work counts toward your final grade only if you obtain  more than 50\% on the individual evaluations. Otherwise, the final grade is calculated on a pro rata basis using only individual evaluations.
+
+# References {-}

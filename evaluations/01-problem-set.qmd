@@ -1,0 +1,32 @@
+---
+title: "Problem set 1"
+---
+
+# Task 1
+
+@Clayton:2018 considers measures of implicit bias for multiple participants from an "in-field implicit association tests". The [codebook](https://lbelzile.github.io/hecedsm/reference/C18.html) contains a description of the data.
+
+
+1. What is the population under study?
+2. Identify the type of sampling.
+3. What are the observational and experimental units? How many observations are there for each in the sample?
+4. Comment on the quality of the sample and the generalizability of the findings.
+5. Identify the response variable and the treatment levels.
+
+<!--
+# Task 2: Getting started
+
+Starting from next week, you will need to perform statistical analyses using a suitable software. Most programming language with dedicated statistics module can be used to perform the analyses we will cover in class.
+
+Property software options include IBM SPSS Statistics (Windows and Mac only) and SAS. HEC Montréal provides download for [SPSS](https://hecmontreal.atlassian.net/wiki/spaces/DTIKB/pages/1952252037) and SAS, but the latter can be freely accessed using the cloud-based version SAS OnDemand for Academics.
+
+I am a strong advocate of **R**. Other open-access options include Python and Julia.
+
+If you are more comfortable with click-and-drop menus, JAMOVI, PSPP (the GNU equivalent of SPSS) and JASP are suitable options.
+
+
+- [**R**](http://openintrostat.github.io/oilabs-tidy/01_intro_to_r/intro_to_r.html)
+- [JAMOVI](https://openintrostat.github.io/oilabs-jamovi/01_intro_to_jamovi/intro_to_jamovi.html)
+- [JASP](https://openintrostat.github.io/oilabs-jasp/02_intro_to_data/intro_to_data.html)
+
+-->

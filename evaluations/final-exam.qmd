@@ -1,0 +1,24 @@
+---
+title: Final examination
+---
+
+The final is a 180 minutes closed-book examination covering all of the material from class.
+
+The exam format is as follows:
+
+- One question on the fundamentals of experimental designs (blocking, randomization, etc.)
+- One question on reproducibility/replication crisis
+- One question on key concepts (power, effect size, multiple testing).
+- One question on advanced topics (mixed models, causal inference and mediation analysis, etc.)
+- Two data analysis questions, using completely randomized or blocked designs (between-subjects or within-subject) with multi-way analysis of variance, ANCOVA, mixed model, with specific questions on various aspects including 
+  - parametrization of ANOVA
+  - adequate setup of model
+  - interaction plots 
+  - use of different tests and methods
+  - calculation of degrees of freedom of the model / sample size
+  - conclusions related to output of tests
+  - interpretation of effect sizes
+  - contrasts and pairwise comparisons
+  - tests for model assumptions and diagnostic plots
+  
+A practice final can be downloaded [here](/evaluations/MATH80667A_final_practice.pdf)

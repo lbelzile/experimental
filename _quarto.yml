@@ -1,0 +1,137 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+    - "!slides/"
+  resources:
+    - "files/"
+    - "projects/"
+    - "slides/*.html"
+    - "slides/*.pdf"
+    - "slides/img/"
+    - "slides/libs/"
+    - "slides/css/"
+    - "slides/*_files/"
+
+# See https://quarto.org/docs/projects/code-execution.html#freeze
+execute:
+  freeze: auto  # Re-render only when source changes
+
+bibliography: files/bib/references.bib
+csl: files/bib/apa.csl
+
+website:
+  title: "Experimental Designs and Statistical Methods"
+  site-url: "https://edsm.rbind.io"
+  description-meta: "Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs."
+
+  favicon: "/files/icon.png"
+
+  navbar:
+    pinned: true
+    background: "#ad1aac"
+    right:
+      - syllabus.qmd
+      - schedule.qmd
+      - text: "Content"
+        file: content/index.qmd
+      - text: "Evaluations"
+        file: evaluations/index.qmd
+      - text: "Examples"
+        file: example/index.qmd
+      - text: "Notes"
+        href: "https://lbelzile.github.io/math80667a"
+      	 
+ 
+  sidebar:
+    - title: "Content"
+      style: "docked"
+      search: false
+      foreground: "#ad1aac"
+      contents:
+        - section: "Overview"
+          contents:
+            - content/index.qmd
+        - section: "Course content"
+          contents:
+            - text: "1: Introduction"
+              file: content/01-content.qmd
+          #  - text: "2: Hypothesis testing"
+          #    file: content/02-content.qmd
+          #  - text: "3: One way ANOVA"
+          #    file: content/03-content.qmd
+          #  - text: "4: Contrasts and multiple testing"
+          #    file: content/04-content.qmd          
+
+    - title: "Evaluations"
+      style: "docked"
+      search: false
+      foreground: "#ad1aac"
+      contents:
+        - section: "Overview"
+          contents:
+            - evaluations/index.qmd
+            - text: "Weekly check-in"
+              file: evaluations/weekly-check-in.qmd
+            - evaluations/critical-review.qmd
+            - evaluations/final-exam.qmd
+        - section: "Problem sets"
+          contents:
+            - evaluations/01-problem-set.qmd
+        #    - evaluations/02-problem-set.qmd
+        #    - evaluations/03-problem-set.qmd
+        #    - evaluations/04-problem-set.qmd
+        #    - evaluations/05-problem-set.qmd
+        #    - evaluations/06-problem-set.qmd
+        #    - evaluations/07-problem-set.qmd
+        #    - evaluations/08-problem-set.qmd
+        #    - evaluations/09-problem-set.qmd
+        #    - evaluations/10-problem-set.qmd
+        #    - evaluations/11-problem-set.qmd
+        #    - evaluations/12-problem-set.qmd
+    - title: "Examples"
+      style: "docked"
+      search: false
+      foreground: "#ad1aac"
+      contents:
+        - section: "Overview"
+          contents:
+            - example/index.qmd
+        - section: "Installation"
+          contents:
+            - text: "**R** and RStudio"
+              file: example/installation.qmd
+         # - section: "Examples"
+         # contents:
+         #   - text: "Introduction"
+         #     file: example/01-introduction.qmd
+         #   - text: "Null distributions"
+         #     file: example/02-hypothesis_testing.qmd
+         #   - text: "One-way ANOVA"
+         #     file: example/03-onewayanova.qmd
+         #   - text: "Two-way ANOVA"
+         #   - text: "Three-way ANOVA"
+         #     file: example/05-threewayanova.qmd
+         #   - text: "Analysis of covariance"
+         #     file: example/06-ancova.qmd
+         #   - text: "Linear causal mediation"
+         #     file: example/08-mediation.qmd
+
+
+  page-footer:
+    left: |
+      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}); website template by [Dr. Andrew Heiss](https://www.andrewheiss.com/) <br>
+      All content licensed under a {{< fa brands creative-commons >}}
+      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
+      [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+      [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
+
+format:
+  html:
+    theme:
+      - litera
+      - html/custom.scss
+    toc: true
+    highlight-style: github

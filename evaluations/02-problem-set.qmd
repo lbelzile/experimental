@@ -1,0 +1,15 @@
+---
+title: "Problem set 2"
+---
+
+# Task 1
+
+Perform a chi-square test for contingency table
+
+# Task 2
+
+Use the data to perform a one-way analysis of variance
+Also do a t-test.
+
+Use APA guidelines for formatting the results. In **R**, the `papaja` package 
+
