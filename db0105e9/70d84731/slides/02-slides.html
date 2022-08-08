@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hypothesis tests</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-08-05" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Hypothesis testing
+
+.class-info[
+
+**Session 2**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-5
+
+# Outline
+--
+
+.box-8.medium.sp-after-half[Variability]
+
+--
+
+.box-4.medium.sp-after-half[Hypothesis tests]
+
+--
+
+
+.box-2.medium.sp-after-half[**R** examples]
+
+
+---
+
+
+
+layout: false
+name: signal-vs-noise
+class: center middle section-title section-title-8 animated fadeIn
+
+# Signal versus noise
+
+---
+
+class: title title-8
+
+# The signal and the noise
+
+&lt;img src="02-slides_files/figure-html/plots-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Can you spot the differences?
+
+---
+
+class: title title-8
+
+# Sampling variability
+
+&lt;img src="02-slides_files/figure-html/sampvar-1.gif" style="display: block; margin: auto;" /&gt;
+
+???
+
+Not all samples are born alike
+- Analogy: comparing kids (or siblings): not everyone look alike (except twins...)
+- Chance and haphazard variability mean that we might have a good idea, but not exactly know the truth.
+
+---
+
+layout: false
+name: hypothesis-tests
+class: center middle section-title section-title-4 animated fadeIn
+
+# Hypothesis tests
+
+---
+
+class: title title-4
+
+# The general recipe of hypothesis testing
+
+.medium[
+1. Define variables
+2. Write down hypotheses (null/alternative)
+3. Choose and compute a test statistic
+4. Compare the value to the null distribution (benchmark)
+5. Compute the _p_-value
+6. Conclude (reject/fail to reject)
+7. Report findings
+
+]
+
+---
+
+class: title title-4
+
+# Hypothesis tests versus trials
+
+.pull-left[
+![Scene from "12 Angry Men" by Sidney Lumet](img/02/12angrymen.mp4)
+
+
+&lt;video width="800" height="400"&gt;
+&lt;source src="img/02/12angrymen.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+]
+
+
+.pull-right[
+.box-inv-4[Trial]
+
+- Binary decision: guilty/not guilty
+- Summarize evidences (proof)
+- Assess evidence in light of **presumption of innocence**
+- Verdict: either guilty or not guilty
+- Potential for judicial mistakes
+ 
+
+]
+
+
+---
+
+class: title title-4
+
+# Impact of encouragement on teaching
+
+From Davison (2008), Example 9.2
+
+&gt; In an investigation on the teaching of arithmetic, 45 pupils were divided at random into five groups of nine. Groups A and B were taught in separate classes by the usual method. Groups C, D, and E were taught together for a number of days. On each day C were praised publicly for their work, D were publicly reproved and E were ignored. At the end of the period all pupils took a standard test.
+
+---
+
+.panelset[
+.panel[.panel-name[Load data]
+
+.pull-left[
+
+
+```r
+# Load libraries
+library(tidyverse) 
+# Load and reformat data
+url &lt;- "https://edsm.rbind.io/data/arithmetic.csv"
+arithmetic &lt;- 
+ read_csv(url) %&gt;%
+  mutate(group = factor(group))
+# categorical variable == factor &lt;fct&gt; 
+glimpse(arithmetic)
+```
+
+]
+
+.pull-right[
+
+```
+## Rows: 45
+## Columns: 2
+## $ group &lt;fct&gt; A, A, A, A, A,…
+## $ score &lt;dbl&gt; 17, 14, 24, 20…
+```
+]
+]
+
+.panel[.panel-name[Summary statistics]
+.pull-left[
+
+```r
+# compute summary statistics
+arithmetic %&gt;% 
+  group_by(group) %&gt;%
+  summarize(mean = mean(score),
+            sd = sd(score))
+```
+]
+.pull-right[
+
+```
+## # A tibble: 5 × 3
+##   group  mean    sd
+##   &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 A      19.7  4.21
+## 2 B      18.3  3.57
+## 3 C      27.4  2.46
+## 4 D      23.4  3.09
+## 5 E      16.1  3.62
+```
+]
+]
+
+.panel[.panel-name[Plot]
+.pull-left[
+
+
+```r
+# Boxplot with jittered data
+ggplot(data = arithmetic,
+       aes(x = group,
+           y = score, 
+           color = group)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.3) +
+  theme_bw()
+```
+]
+.pull-right[
+&lt;img src="02-slides_files/figure-html/panel-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+
+
+]
+
+---
+class: title title-4
+# Pick a test, compute its value 
+
+One-way analysis of variance uses an `\(F\)` statistic.
+
+
+```r
+#one way analysis of variance
+aov(data = arithmetic, 
+    formula = score ~ group)
+```
+
+- In **R**, the function `anova` prints the analysis of variance table.
+- The value of the statistic is 15.268.
+
+--
+
+.medium[How 'extreme' is this number? ]
+
+???
+
+Could it have happened by chance if there was no difference between groups?
+
+---
+class: title title-4
+
+# Assessing evidence
+
+
+.pull-left[
+![Is 1 big?](img/02/meme-isonebig.jpeg)
+ ]
+
+--
+ 
+.pull-right[
+.box-inv-4.large[Benchmarking]
+
+.medium[
+- The same number can have different meanings
+    - units matter!
+- Meaningful comparisons require some reference
+]
+]
+
+---
+
+class: title title-4
+# Possible, but not plausible
+
+The null distribution tells us what are the plausible values for the statistic and there relative frequency 
+
+- what can we expect to see **by chance** if there is **no difference** between groups.
+
+&lt;img src="02-slides_files/figure-html/nullF-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+???
+
+Oftentimes, the null distribution comes with the test statistic
+
+Alternatives include
+
+- Large sample behaviour (asymptotic distribution)
+- Resampling/bootstrap/permutation
+
+
+---
+class: title title-4
+# _P_-value
+
+.pull-left[
+Null distributions are different, which makes comparisons uneasy.
+
+- The _P_-values gives the probability of observing an outcome as extreme **if the null hypothesis was true**.
+
+
+```r
+pf(stat, 
+   df1 = 4, 
+   df2 = 40, 
+   lower.tail = FALSE)
+```
+]
+.pull-right[
+&lt;img src="02-slides_files/figure-html/nulltopval-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+Uniform distribution under H0
+
+
+
+class: title title-2
+
+# Pairwise differences and _t_-tests
+
+
+The pairwise differences (_p_-values) and confidence intervals for groups `\(j\)` and `\(k\)` are based on the _t_-statistic:
+
+`\begin{align*}
+t = \frac{\text{estimated} - \text{postulated difference}}{\text{uncertainty}}= \frac{(\widehat{\mu}_j - \widehat{\mu}_k) - (\mu_j - \mu_k)}{\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)}
+\end{align*}`
+which has a Student-_t_ null distribution, denoted `\(\mathsf{St}(n-k)\)`.
+
+The standard error `\(\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)\)` uses the pooled variance estimate (based on all groups).
+
+---
+
+class: title title-2
+
+# _t_-tests
+
+If we postulate `\(\delta_{jk} = \mu_j - \mu_k = 0\)`, the test statistic becomes
+
+`\begin{align*}
+t = \frac{\widehat{\delta}_{jk} - 0}{\mathsf{se}(\widehat{\delta}_{jk})}
+\end{align*}`
+
+The `\(p\)`-value is `\(p = 1- \Pr(-|t| \leq T \leq |t|)\)` for `\(T \sim \mathsf{St}_{n-k}\)`.
+   - probability of statistic being more extreme than `\(t\)`
+
+
+The larger the values of `\(t\)` (positive or negative), the more evidence against the null hypothesis.
+---
+class: title title-2
+# Example
+
+Consider the pairwise average difference in scores between the praised (group C) and the reproved (group D) of the `arithmetic` study.
+
+
+- Sample averages are `\(\widehat{\mu}_C = 27.4\)` and `\(\widehat{\mu}_D = 23.4\)`
+- The estimated pooled standard deviation for the five groups is `\(1.15\)`
+- The estimated average difference between groups `\(C\)` and `\(D\)` is `\(\widehat{\delta}_{CD} = 4\)`.
+- The standard error for the difference is `\(\mathsf{se}(\widehat{\delta}_{CD}) = 1.6216\)`
+---
+class: title title-2
+# Example
+
+- If `\(\mathscr{H}_0: \delta_{CD}=0\)`, the `\(t\)` statistic is 
+`$$t=\frac{\widehat{\delta}_{CD} - 0}{\mathsf{se}(\widehat{\delta}_{CD})} = \frac{4}{1.6216}=2.467$$`
+- The `\(p\)`-value is `\(p=0.018\)`. 
+- We reject the null at level `\(\alpha=5\)`% since `\(0.018 &lt; 0.05\)`.
+- Conclude that there is a significant difference at level `\(\alpha=0.05\)` between the average scores of subpopulations `\(C\)` and `\(D\)`.
+
+
+---
+
+class: title title-2
+# Null distribution
+
+
+The blue area defines the set of values for which we fail to reject null `\(\mathscr{H}_0\)`.
+
+All values of `\(t\)` falling in the red area lead to rejection at level `\(5\)`%.
+
+&lt;img src="02-slides_files/figure-html/tcurve-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: title title-2
+# Critical values
+
+For a test at level `\(\alpha\)` (two-sided), fail to reject all values of the test statistic `\(t\)` that are in interval
+
+`$$\mathfrak{t}_{n-k}(\alpha/2) \leq t \leq \mathfrak{t}_{n-k}(1-\alpha/2)$$`
+
+Because of symmetry around zero, `\(\mathfrak{t}_{n-k}(1-\alpha/2) = -\mathfrak{t}_{n-k}(\alpha/2)\)`.
+
+- We call `\(\mathfrak{t}_{n-k}(1-\alpha/2)\)` a **critical value**. 
+- in **R**, `qt(1-alpha/2, df = n - k)` where `n` is the number of observations and `k` the number of groups
+
+---
+class: title title-2
+# Confidence interval 
+
+.small[
+
+Let `\(\delta_{jk}=\mu_j - \mu_k\)` denote the population difference, `\(\widehat{\delta}_{jk}\)` the estimated difference (difference in sample averages) and `\(\mathsf{se}(\widehat{\delta}_{jk})\)` the estimated standard error.
+
+The region for which we fail to reject the null is 
+`\begin{align*}
+\mathfrak{t}_{n-k}(\alpha/2) \leq  \frac{\widehat{\delta}_{jk} - \delta_{jk}}{\mathsf{se}(\widehat{\delta}_{jk})} \leq \mathfrak{t}_{n-k}(1-\alpha/2)
+\end{align*}`
+which rearranged gives the `\((1-\alpha)\)` confidence interval for the (unknown) difference `\(\delta_{jk}\)`.
+
+`\begin{align*}
+\widehat{\delta}_{jk} + \mathsf{se}(\widehat{\delta}_{jk})\mathfrak{t}_{n-k}(\alpha/2) \leq \delta_{jk} \leq \widehat{\delta}_{jk} + \mathsf{se}(\widehat{\delta}_{jk})\mathfrak{t}_{n-k}(1-\alpha/2)
+\end{align*}`
+
+]
+
+---
+class: title title-2
+
+# Interpretation of confidence intervals
+
+The reported confidence interval is `$$[\widehat{\delta}_{jk} + \mathsf{se}(\widehat{\delta}_{jk})\mathfrak{t}_{n-k}(\alpha/2), \widehat{\delta}_{jk} + \mathsf{se}(\widehat{\delta}_{jk})\mathfrak{t}_{n-k}(1-\alpha/2)].$$`
+.small[
+Each bound is of the form
+
+$$ \text{estimate} + \text{critical value} \times \text{standard error}$$
+
+]
+.box-2.sp-after-half[ confidence interval = [lower, upper] units]
+
+
+If we replicate the experiment and compute confidence intervals each time
+- on average, 95% of those intervals will contain the true value if the assumptions underlying the model are met.
+
+
+---
+class: title title-2
+
+# Interpretation in a picture: coin toss analogy
+.small[
+Each interval either contains the true value (black horizontal line) or doesn't.
+]
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-3-1.png" title="100 confidence intervals" alt="100 confidence intervals" width="70%" style="display: block; margin: auto;" /&gt;
+---
+
+
+
+class: title title-2
+
+# Why confidence intervals?
+
+Test statistics are standardized, 
+- Good for comparisons with benchmark
+- typically meaningless (standardized = unitless quantities)
+
+Two options for reporting: 
+
+- `\(p\)`-value: probability of more extreme outcome if no mean difference
+- confidence intervals: set of all values for which we fail to reject the null hypothesis at level `\(\alpha\)` for the given sample
+
+
+---
+class: title title-2
+# Example
+
+
+- Mean difference of `\(\widehat{\delta}_{CD}=4\)`,  with `\(\mathsf{se}(\widehat{\delta}_{CD})=1.6216\)`.
+- The critical values for a test at level `\(\alpha = 5\)`% are `\(-2.021\)` and `\(2.021\)` 
+   - `qt(0.975, df = 45 - 5)`
+- Since `\(|t| &gt; 2.021\)`, reject `\(\mathscr{H}_0\)`: the two population are statistically significant at level `\(\alpha=5\)`%.
+- The confidence interval is `$$[4-1.6216\times 2.021, 4+1.6216\times 2.021] = [0.723, 7.28]$$`
+
+The postulated value `\(\delta_{CD}=0\)` is not in the interval: reject `\(\mathscr{H}_0\)`.
+
+---
+class: title title-2
+
+# Pairwise differences in **R**
+
+
+```r
+library(tidyverse) # data manipulation
+library(emmeans) # marginal means and contrasts
+url &lt;- "https://edsm.rbind.io/data/arithmetic.csv" 
+# load data, define column type (factor and integer)
+arithmetic &lt;- read_csv(url, col_types = "fi") 
+# fit one-way ANOVA model
+model &lt;- lm(score ~ group, data = arithmetic)
+# Compute average of groups with model specification
+margmeans &lt;- emmeans::emmeans(model, specs = "group")
+# Contrasts (default to pairwise comparisons) - no adjustment
+contrast(margmeans, adjust = 'none', infer = TRUE) 
+#infer = TRUE for confidence intervals
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
