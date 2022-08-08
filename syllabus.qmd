@@ -55,10 +55,28 @@ What we cover, notably analysis of variance, could appear in an undergraduate le
 
 If you want to brush up, I can recommend the free ressource [Advanced High School Statistics by Open Intro](https://www.openintro.org/book/ahss/) or @OpenIntro4 --- the material is pretty comprehensive and well structured. I expect many students will have at least this level of knowledge.
 
+# Programming
+
+ Most programming language with dedicated statistics module can be used to perform the analyses we will cover in class^[The ability to compute custom contrasts and fit linear mixed models are deal breakers.]
+
+Property software options include [IBM SPSS Statistics](https://www.ibm.com/products/spss-statistics) (Windows and Mac only) and SAS (Windows only). HEC Montréal provides download for [SPSS](https://hecmontreal.atlassian.net/wiki/spaces/DTIKB/pages/1952252037) and SAS, but the latter can be freely accessed using the cloud-based version [SAS OnDemand for Academics](https://www.sas.com/en_us/software/on-demand-for-academics.html).^[This is the easiest way to set up SAS and does not require a virtual machine with Windows alongside a Unix operating system.]
+
+I am a strong advocate of [**R**](https://cran.r-project.org/) and will provide code and material for the latter. There is a steep learning curve, but the user community is vibrant, so most routines of interest have been contributed by other users and you can get support through help forums. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/example/installation/)
+
+If you are more comfortable with click-and-drop menus, [JAMOVI](https://www.jamovi.org/), [PSPP](https://www.gnu.org/software/pspp/) and [JASP](https://jasp-stats.org/) are suitable open-access options.
+
+
+## Learning **R**
+
+Searching for help with **R** on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot").
+
+Check out [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the tidyverse).
+
+I will try provide example code in different languages, depending on the software are most commonly adopted.
 
 # Course materials
 
-I will provide slides, videos and example code in R/SPSS/SAS. In addition to those, there will be assigned readings from textbook and reference papers.
+I will provide slides and videos. In addition to those, there will be assigned readings from textbook and reference papers.
 
 ## Textbooks
 
@@ -82,6 +100,8 @@ Other good references for (some or most of) the content we will cover includes
 
 
 # Course content
+
+Below is a tentative schedule for the semester. 
 
 1. **Introduction and motivation**
     - Review (population and samples, observational versus experimental studies)
@@ -141,10 +161,11 @@ Other good references for (some or most of) the content we will cover includes
 12. **Causal inference (continued) and linear mediation model**
     - Assumptions for causal inference
     - *do*-operator and backdoor
-    - Baron--Kenny linear mediation model
-    - Sobol's test and introduction to the bootstrap bootstrap.
-13. **Additional topics and review**
-    - Advanced topics (Bayesian ANOVA, multivariate analysis of variance)
+    - Baron--Kenny linear mediation model: Sobol's statistic and introduction to the bootstrap.
+    - Linear mediation model
+13. **Categorical data analysis and final review**
+    - Contingency tables and count data
+    - Goodness-of-fit, independence, Fisher and McNemar tests
     - Q&A, final review and practice exam
 
 

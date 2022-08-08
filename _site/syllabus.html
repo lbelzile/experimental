@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Experimental Designs and Statistical Methods - Syllabus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href=".//files/icon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Experimental Designs and Statistical Methods</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./syllabus.html" aria-current="page">Syllabus</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./schedule.html">Schedule</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./content/index.html">Content</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./evaluations/index.html">Evaluations</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./example/index.html">Examples</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a">Notes</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-content" id="toc-course-content" class="nav-link active" data-scroll-target="#course-content">Course content</a></li>
+  <li><a href="#target-audience-and-prerequisites" id="toc-target-audience-and-prerequisites" class="nav-link" data-scroll-target="#target-audience-and-prerequisites">Target audience and prerequisites</a></li>
+  <li><a href="#programming" id="toc-programming" class="nav-link" data-scroll-target="#programming">Programming</a>
+  <ul class="collapse">
+  <li><a href="#learning-r" id="toc-learning-r" class="nav-link" data-scroll-target="#learning-r">Learning <strong>R</strong></a></li>
+  </ul></li>
+  <li><a href="#course-materials" id="toc-course-materials" class="nav-link" data-scroll-target="#course-materials">Course materials</a>
+  <ul class="collapse">
+  <li><a href="#textbooks" id="toc-textbooks" class="nav-link" data-scroll-target="#textbooks">Textbooks</a></li>
+  <li><a href="#other-references" id="toc-other-references" class="nav-link" data-scroll-target="#other-references">Other references</a></li>
+  </ul></li>
+  <li><a href="#course-content-1" id="toc-course-content-1" class="nav-link" data-scroll-target="#course-content-1">Course content</a></li>
+  <li><a href="#course-policies" id="toc-course-policies" class="nav-link" data-scroll-target="#course-policies">Course policies</a>
+  <ul class="collapse">
+  <li><a href="#student-hours" id="toc-student-hours" class="nav-link" data-scroll-target="#student-hours">Student hours</a></li>
+  <li><a href="#late-work" id="toc-late-work" class="nav-link" data-scroll-target="#late-work">Late work</a></li>
+  </ul></li>
+  <li><a href="#evaluations-and-grades" id="toc-evaluations-and-grades" class="nav-link" data-scroll-target="#evaluations-and-grades">Evaluations and grades</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Syllabus</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="grid course-details course-details-smaller">
+<section id="instructor" class="level3 g-col-6">
+<h3 class="anchored" data-anchor-id="instructor">Instructor</h3>
+<ul>
+<li><i class="fa-solid fa-user" aria-hidden="true"></i> &nbsp; <a href="https://www.lbelzile.bitbucket.io">Dr.&nbsp;Léo Belzile</a></li>
+<li><i class="fa-solid fa-university" aria-hidden="true"></i> &nbsp; 4.850, Côte-Sainte-Catherine</li>
+<li><i class="fa-solid fa-envelope" aria-hidden="true"></i> &nbsp; <a href="mailto:leo.belzile@hec.ca">leo.belzile@hec.ca</a></li>
+</ul>
+</section>
+<section id="course-details" class="level3 g-col-6">
+<h3 class="anchored" data-anchor-id="course-details">Course details</h3>
+<ul>
+<li><i class="fa-solid fa-calendar-alt" aria-hidden="true"></i> &nbsp; Fall 2022</li>
+<li><i class="fa-solid fa-calendar" aria-hidden="true"></i> &nbsp; Fridays</li>
+<li><i class="fa-solid fa-clock" aria-hidden="true"></i> &nbsp; 8:30-11:30</li>
+<li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> &nbsp; <a href="https://www.hec.ca/campus/edifices/cote_sainte_catherine/1er_etage/salles_cours/deschenes.html">Côte-Sainte-Catherine, Groupe Deschênes</a></li>
+</ul>
+</section>
+</div>
+<section id="course-content" class="level1">
+<h1>Course content</h1>
+<p>Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs.</p>
+<p>This course has four main objectives:</p>
+<ul>
+<li>to present the major experimental designs used for research in management and in the behavioural sciences;</li>
+<li>to familiarize students with the statistical methods and a software to analyze experimental data (e.g., SPSS);</li>
+<li>to interpret and present results from the statistical analyses and discuss the validity and limits of the results;</li>
+<li>to understand and to critique the methodology and statistical results of published articles in the research fields of the students.</li>
+</ul>
+</section>
+<section id="target-audience-and-prerequisites" class="level1">
+<h1>Target audience and prerequisites</h1>
+<p>The course is part of the PhD program in Administration offered by HEC Montréal jointly with McGill, Concordia and Université du Québec à Montréal (UQÀM).</p>
+<p>The course is designed for non-specialists, but a college/freshman/undergraduate level exposition to statistics is assumed. I expect students to know what are data types (continuous, categorical, binary variables), basic graphical representation (histogram, box-and-whisker plots), descriptive statistics (mean, variance), how to perform an hypothesis test (e.g., a t-test for comparing two means, simple linear regression), etc. The pace the first few weeks will be quite fast if you have no prior exposure to statistics.</p>
+<p>What we cover, notably analysis of variance, could appear in an undergraduate level course. However, the course is calibrated for PhD students needs (how to write a statistical analysis in a paper, how to assess the statistical methodology of a paper as a peer-reviewer, how to avoid statistical fallacies that could invalidate your work, etc.)</p>
+<p>If you want to brush up, I can recommend the free ressource <a href="https://www.openintro.org/book/ahss/">Advanced High School Statistics by Open Intro</a> or <span class="citation" data-cites="OpenIntro4">Diez et al. (<a href="#ref-OpenIntro4" role="doc-biblioref">2019</a>)</span> — the material is pretty comprehensive and well structured. I expect many students will have at least this level of knowledge.</p>
+</section>
+<section id="programming" class="level1">
+<h1>Programming</h1>
+<p>Most programming language with dedicated statistics module can be used to perform the analyses we will cover in class<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Property software options include <a href="https://www.ibm.com/products/spss-statistics">IBM SPSS Statistics</a> (Windows and Mac only) and SAS (Windows only). HEC Montréal provides download for <a href="https://hecmontreal.atlassian.net/wiki/spaces/DTIKB/pages/1952252037">SPSS</a> and SAS, but the latter can be freely accessed using the cloud-based version <a href="https://www.sas.com/en_us/software/on-demand-for-academics.html">SAS OnDemand for Academics</a>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>I am a strong advocate of <a href="https://cran.r-project.org/"><strong>R</strong></a> and will provide code and material for the latter. There is a steep learning curve, but the user community is vibrant, so most routines of interest have been contributed by other users and you can get support through help forums. You can <a href="./example/installation/">find instructions for installing R, RStudio, and all the tidyverse packages here.</a></p>
+<p>If you are more comfortable with click-and-drop menus, <a href="https://www.jamovi.org/">JAMOVI</a>, <a href="https://www.gnu.org/software/pspp/">PSPP</a> and <a href="https://jasp-stats.org/">JASP</a> are suitable open-access options.</p>
+<section id="learning-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-r">Learning <strong>R</strong></h2>
+<p>Searching for help with <strong>R</strong> on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for “r scatterplot”, but if it does struggle, try searching for “rstats” instead (e.g., “rstats scatterplot”).</p>
+<p>Check out <a href="https://stackoverflow.com/">StackOverflow</a> (a Q&amp;A site with hundreds of thousands of answers to all sorts of programming questions) and <a href="https://community.rstudio.com/">RStudio Community</a> (a forum specifically designed for people using RStudio and the tidyverse).</p>
+<p>I will try provide example code in different languages, depending on the software are most commonly adopted.</p>
+</section>
+</section>
+<section id="course-materials" class="level1">
+<h1>Course materials</h1>
+<p>I will provide slides and videos. In addition to those, there will be assigned readings from textbook and reference papers.</p>
+<section id="textbooks" class="level2">
+<h2 class="anchored" data-anchor-id="textbooks">Textbooks</h2>
+<p>Course notes for the class can be found <a href="https://lbelzile.github.io/math80667a">online</a></p>
+<p>I will also assign readings from <span class="citation" data-cites="Meier:2022">Meier (<a href="#ref-Meier:2022" role="doc-biblioref">2022</a>)</span> <a href="https://stat.ethz.ch/~meier/teaching/anova/">ANOVA and Mixed Models: A Short Intro Using R</a>, which is available online for free reading.</p>
+</section>
+<section id="other-references" class="level2">
+<h2 class="anchored" data-anchor-id="other-references">Other references</h2>
+<p>There will occasionally be additional articles to read; links to these other resources will be included on the content page for that session.</p>
+<p>Other good references for (some or most of) the content we will cover includes</p>
+<ul>
+<li><span class="citation" data-cites="Keppel/Wickens:2004">Keppel &amp; Wickens (<a href="#ref-Keppel/Wickens:2004" role="doc-biblioref">2004</a>)</span>: out of print; comprehensive reference with a focus on effect size and marginal effects, all calculations are done by hand.</li>
+<li><span class="citation" data-cites="Cox:1958">Cox (<a href="#ref-Cox:1958" role="doc-biblioref">1958</a>)</span>: out of print, but beautifully written and nontechnical.</li>
+<li><span class="citation" data-cites="Dean:2017">Dean et al. (<a href="#ref-Dean:2017" role="doc-biblioref">2017</a>)</span>: comprehensive and freely available via Springer link; students last year found it too dry and technical.</li>
+<li><span class="citation" data-cites="Box/Hunter:1978">Box et al. (<a href="#ref-Box/Hunter:1978" role="doc-biblioref">1978</a>)</span>.</li>
+<li><span class="citation" data-cites="Vanderweele:2015">VanderWeele (<a href="#ref-Vanderweele:2015" role="doc-biblioref">2015</a>)</span>.</li>
+<li><span class="citation" data-cites="Pearl:2016">Pearl et al. (<a href="#ref-Pearl:2016" role="doc-biblioref">2016</a>)</span>.</li>
+</ul>
+</section>
+</section>
+<section id="course-content-1" class="level1">
+<h1>Course content</h1>
+<p>Below is a tentative schedule for the semester.</p>
+<ol type="1">
+<li><strong>Introduction and motivation</strong>
+<ul>
+<li>Review (population and samples, observational versus experimental studies)</li>
+<li>Introduction to experimental designs</li>
+<li>Terminology and key concepts of experimental design</li>
+<li>Requirements for a good experiment</li>
+</ul></li>
+<li><strong>Review of key statistics concepts</strong>
+<ul>
+<li>Sampling variability</li>
+<li>Hypothesis testing</li>
+<li>Confidence intervals</li>
+<li>Examples of basic tests
+<ul>
+<li>two sample t-test and Welch’s t-test</li>
+<li>chi-square test for contingency table</li>
+<li>permutation test</li>
+</ul></li>
+</ul></li>
+<li><strong>Completely randomized designs with one factor</strong>
+<ul>
+<li>Introduction to one-way analysis of variance</li>
+<li><span class="math inline">\(F\)</span>-statistic and sum of square decomposition</li>
+<li>Parametrization</li>
+<li>Model assumptions</li>
+</ul></li>
+<li><strong>Contrasts and multiple testing</strong>
+<ul>
+<li>Contrasts</li>
+<li>Multiple testing, family-wise error rate and false discovery rate</li>
+<li>Methods for control: methods for ANOVA (Tukey, Dunnett and Scheffé)</li>
+<li>General methods (Bonferroni, Holm and Benjamini-Hochberg)</li>
+</ul></li>
+<li><strong>Completely randomized designs with two or more factors</strong>
+<ul>
+<li>Interactions</li>
+<li>Marginal and conditional contrasts</li>
+</ul></li>
+<li><strong>Blocked designs and analysis of covariance</strong>
+<ul>
+<li>Designs to reduce the error</li>
+<li>Terminology (blocking factor, covariate, noise variable)</li>
+<li>Complete block design</li>
+<li>Analysis of covariance and equal slope assumptions</li>
+</ul></li>
+<li><strong>Replication crisis and effect sizes</strong>
+<ul>
+<li>Effect sizes</li>
+<li>Planned and post-hoc comparisons</li>
+<li>Replication crisis and reproducibility</li>
+<li>Statistical fallacies</li>
+<li>Solutions to replication crisis</li>
+</ul></li>
+<li><strong>General design principles</strong>
+<ul>
+<li>Unbalanced designs and implications for inference</li>
+<li>More general linear regression models</li>
+<li>Nonparametric tests (rank tests, via linear model)</li>
+<li>AB testing and stopping rules</li>
+</ul></li>
+<li><strong>Repeated measure designs and random effects</strong>
+<ul>
+<li>Repeated measure designs</li>
+<li>Tests of sphericity</li>
+<li>Intro to random effects</li>
+</ul></li>
+<li><strong>Mixed models</strong>
+<ul>
+<li>Linear mixed models</li>
+<li>Model specification: crossed and nested factors</li>
+<li>Showcase: replication and meta-analysis</li>
+</ul></li>
+<li><strong>Power and introduction to causal inference</strong>
+<ul>
+<li>Power calculations</li>
+<li>Interplay between sample size, effect and power</li>
+<li>Directed acyclic graphs</li>
+<li>Types of association: causation, mediation, confounding and collision</li>
+</ul></li>
+<li><strong>Causal inference (continued) and linear mediation model</strong>
+<ul>
+<li>Assumptions for causal inference</li>
+<li><em>do</em>-operator and backdoor</li>
+<li>Baron–Kenny linear mediation model: Sobol’s statistic and introduction to the bootstrap.</li>
+<li>Linear mediation model</li>
+</ul></li>
+<li><strong>Categorical data analysis and final review</strong>
+<ul>
+<li>Contingency tables and count data</li>
+<li>Goodness-of-fit, independence, Fisher and McNemar tests</li>
+<li>Q&amp;A, final review and practice exam</li>
+</ul></li>
+</ol>
+</section>
+<section id="course-policies" class="level1">
+<h1>Course policies</h1>
+<section id="student-hours" class="level2">
+<h2 class="anchored" data-anchor-id="student-hours">Student hours</h2>
+<p>I am available Friday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.</p>
+<p>Please watch this video:</p>
+<iframe src="https://player.vimeo.com/video/270014784" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" style="display: block; margin: 0 auto 1rem;">
+</iframe>
+<p>Student hours are set times dedicated to all of you (most professors call these “office hours”; I don’t<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>). This means that I will be in my office waiting for you to come by if you want to talk to me in person (or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns.</p>
+</section>
+<section id="late-work" class="level2">
+<h2 class="anchored" data-anchor-id="late-work">Late work</h2>
+<p>The submission modules will stay open for two weeks after the due date for weekly check-in. As much as possible, we will discuss problem sets in class the day after (provided all students have handed in their work). I will not assign penalties, but will gently nudge you to stay on track.</p>
+</section>
+</section>
+<section id="evaluations-and-grades" class="level1">
+<h1>Evaluations and grades</h1>
+<p>You can find descriptions for all the assignments on the <a href="./evaluations/">evaluations</a> page.</p>
+<p>Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Tuesday, December 13th, 2022, from 13:30–16:30.</p>
+<div class="centered-table">
+<table class="table">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Assignment</th>
+<th style="text-align: center;">Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Weekly check-in (12 × 0.5 pt)</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Problem set (11 x 4 pt)</td>
+<td style="text-align: center;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Paper review (10 pt)</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Final examination (40 pt)</td>
+<td style="text-align: center;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">104</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="centered-table">
+
+
+
+<table class="table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Grade</th>
+<th style="text-align: center;">Range</th>
+<th style="text-align: left;">Grade</th>
+<th style="text-align: center;">Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A+</td>
+<td style="text-align: center;">90-100%</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: center;">70-75%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A</td>
+<td style="text-align: center;">85–90%</td>
+<td style="text-align: left;">B-</td>
+<td style="text-align: center;">65-70%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A-</td>
+<td style="text-align: center;">80–85%</td>
+<td style="text-align: left;">C+</td>
+<td style="text-align: center;">60-65%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B+</td>
+<td style="text-align: center;">75-80%</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: center;">&lt;60%</td>
+</tr>
+</tbody>
+</table>
+<div>
+
+<p>Team work counts toward your final grade only if you obtain more than 50% on the individual evaluations. Otherwise, the final grade is calculated on a pro rata basis using only individual evaluations.</p>
+</div></div></section>
+<section id="references" class="level1 unnumbered">
+
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-Box/Hunter:1978" class="csl-entry" role="doc-biblioentry">
+Box, G. E. P., Hunter, W. G., &amp; Hunter, J. S. (1978). <em>Statistics for experimenters : An introduction to design, data analysis, and model building</em>. Wiley.
+</div>
+<div id="ref-Cox:1958" class="csl-entry" role="doc-biblioentry">
+Cox, D. R. (1958). <em>Planning of experiments</em>. Wiley.
+</div>
+<div id="ref-Dean:2017" class="csl-entry" role="doc-biblioentry">
+Dean, A., Voss, D., &amp; Draguljić, D. (2017). <em>Design and analysis of experiments</em>. Springer. <a href="https://www.springer.com/gp/book/9783319522487">https://www.springer.com/gp/book/9783319522487</a>
+</div>
+<div id="ref-OpenIntro4" class="csl-entry" role="doc-biblioentry">
+Diez, D., Çetinkaya-Rundel, M., &amp; Barr, C. D. (2019). <em>OpenIntro statistics</em> (4th ed.). OpenIntro.
+</div>
+<div id="ref-Keppel/Wickens:2004" class="csl-entry" role="doc-biblioentry">
+Keppel, G., &amp; Wickens, T. D. (2004). <em>Design and analysis: A researcher’s handbook</em>. Pearson Prentice Hall.
+</div>
+<div id="ref-Meier:2022" class="csl-entry" role="doc-biblioentry">
+Meier, L. (2022). <em><span>ANOVA</span> and mixed models: A short introduction using <span>R</span></em> (Chapman &amp; Hall/CRC, Eds.). <a href="https://doi.org/10.1201/9781003146216">https://doi.org/10.1201/9781003146216</a>
+</div>
+<div id="ref-Pearl:2016" class="csl-entry" role="doc-biblioentry">
+Pearl, J., Glymour, M., &amp; Jewell, N. (2016). <em>Causal inference in statistics: A primer</em>. Wiley.
+</div>
+<div id="ref-Vanderweele:2015" class="csl-entry" role="doc-biblioentry">
+VanderWeele, T. (2015). <em>Explanation in causal inference: Methods for mediation and interaction</em>. Oxford University Press.
+</div>
+</div></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>The ability to compute custom contrasts and fit linear mixed models are deal breakers.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This is the easiest way to set up SAS and does not require a virtual machine with Windows alongside a Unix operating system.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>There’s fairly widespread misunderstanding about what office hours actually are! <a href="https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/">Many students often think that they are the times I <em>shouldn’t</em> be disturbed</a>, which is the exact opposite of what they’re for!<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2022 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>; website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -14,16 +14,15 @@ title: "Problem set 1"
 5. Identify the response variable and the treatment levels.
 
 <!--
+
 # Task 2: Getting started
 
-Starting from next week, you will need to perform statistical analyses using a suitable software. Most programming language with dedicated statistics module can be used to perform the analyses we will cover in class.
+Starting from next week, you will need to perform statistical analyses using a *suitable* software of your choosing. 
 
-Property software options include IBM SPSS Statistics (Windows and Mac only) and SAS. HEC Montréal provides download for [SPSS](https://hecmontreal.atlassian.net/wiki/spaces/DTIKB/pages/1952252037) and SAS, but the latter can be freely accessed using the cloud-based version SAS OnDemand for Academics.
+Your job is to install a software of your liking. Tell me which one you chose and report back on your success! Also go through tutorials to get started with loading data, producing basic plots and computing simple descriptive statistics.
 
-I am a strong advocate of **R**. Other open-access options include Python and Julia.
 
-If you are more comfortable with click-and-drop menus, JAMOVI, PSPP (the GNU equivalent of SPSS) and JASP are suitable options.
-
+Below are some tutorials for selected software and programming language.
 
 - [**R**](http://openintrostat.github.io/oilabs-tidy/01_intro_to_r/intro_to_r.html)
 - [JAMOVI](https://openintrostat.github.io/oilabs-jamovi/01_intro_to_jamovi/intro_to_jamovi.html)

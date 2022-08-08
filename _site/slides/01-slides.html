@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to experimental design</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-08-05" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/countdown-0.3.5/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown-0.3.5/countdown.js"></script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Introduction to experimental design
+
+.class-info[
+
+**Session 1**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-8
+
+# Outline
+--
+
+.box-6.medium.sp-after-half[Class details]
+
+--
+
+.box-5.medium.sp-after-half[Motivation]
+
+--
+
+.box-3.medium.sp-after-half[Review]
+
+--
+
+.box-2.medium.sp-after-half[Key concepts in experimental designs]
+
+---
+
+
+
+layout: false
+name: class-details
+class: center middle section-title section-title-6 animated fadeIn
+
+# Class details
+
+---
+
+class: title title-6
+
+# Course content
+.pull-left[
+.box-inv-6[Content]
+
+- Basics of experimental design
+- Statistical inference
+- Completely randomized designs
+- Analysis of variance
+- Blocked designs
+- Analysis of covariance
+- Mixed models
+- Intro to causal inference
+- Mediation analysis
+
+]
+
+???
+
+We will focus on simple designs as they lead to simple analysis. For more complicated schemes, consult an expert or find a collaborator.
+
+A single introductory course in statistics does not make one an expert. The purpose is more numerical literacy then expert knowledge.
+
+However, the assessment, activities and interdisciplinary skills are targeted for PhD students
+
+We will spend a lot of time on ANOVA (one-way, two-way, multivariate, repeated measures, etc.)
+
+--
+
+.pull-right[
+.box-inv-6[Cross-disciplinary skills]
+
+- Scientific workflow
+- Peer-review
+- Reporting
+- Statistical fallacies
+- Reproducibility
+ 
+
+]
+
+???
+
+The reproducibility crisis has changed the publishing landscape, so the requirements for publications are more stringent. I intend to cover these in details.
+
+Statistical fallacies are common mistakes that discredit the validity of your work. Learning to recognize them in the wild is crucial (also as reviewer).
+
+---
+
+class: title title-6
+# Prerequisites
+
+--
+
+.box-6.medium[**Math skills**]
+
+.box-inv-6.small.sp-after[Basic algebra]
+
+--
+
+.box-6.medium[**Computer science**]
+
+.box-inv-6.small.sp-after[None]
+
+--
+
+.box-6.medium[**Statistics**]
+
+.box-inv-6.small[At the level of OpenIntro Statistics (Chapter 1)]
+
+???
+More specifically for statistics:
+- variable types (continuous, discrete, etc.) 
+- basic graphs (histograms, scatterplots)
+- hypothesis testing
+- differences in mean (e.g., t-test)
+- simple linear regression
+
+The OpenIntro Statistics book can be freely downloaded from &lt;https://www.openintro.org/book/os/&gt;
+
+---
+
+
+layout: false
+name: motivation
+class: center middle section-title section-title-5 animated fadeIn
+
+# Motivation
+
+---
+
+class: title title-5
+
+# Experiments as gold-standard
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/01/BJOG_randomized_trials.png" alt="Screenshot of a paper in BJOG by Hariton and Locascio" title="Screenshot of a paper in BJOG by Hariton and Locascio" width="60%"&gt;
+&lt;/figure&gt;
+]
+
+.small[
+&gt; *Randomised controlled trials (RCTs) are the reference standard for studying causal relationships between interventions and outcomes as randomisation eliminates much of the bias inherent with other study designs.*
+]
+???
+
+Paper available at https://doi.org/10.1111/1471-0528.15199
+
+From the abstract:
+"Randomised controlled trials (RCTs) are the reference standard for studying causal relationships between interventions and outcomes as randomisation eliminates much of the bias inherent with other study designs."
+
+---
+
+class: title title-5
+
+# History
+
+Experiments on agricultural trials in Rothamsted ongoing since 1843
+.pull-left[
+&lt;figure&gt;
+  &lt;img src="img/01/ECN_Rothamsted1.png" alt="Description of the Rothamsted station" title="Rothamsted station" width="110%"&gt;
+&lt;/figure&gt;
+]
+
+.pull-right[
+&lt;figure&gt;
+  &lt;img src="img/01/Broadbalk.jpg" alt="Broadbalk photo" title="Broadbalk, by e-RA (Rothamsted Archives) circa 2012" width="75%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://www.rothamsted.ac.uk/environmental-change-network
+
+http://www.era.rothamsted.ac.uk/images/metadata/rbk1/2012-AJ-12-10.jpg
+
+R.A. Fisher worked 14 years at Rothamsted from 1919 and developed much of the theory underlying experimental design
+See this recollection by Yates on his contribution: https://doi.org/10.2307/2528399 
+
+Fisher was a eugenist and his views are largely decried nowadays.
+
+---
+
+class: title title-5
+
+# Modern experiments: A/B testing
+
+&lt;figure&gt;
+  &lt;img src="img/01/twitter_overhaul.png" alt="Screenshot of Twitter page following changes made to interface in 2021 (the follow button is black for higher contrast)." title="Screenshot of Twitter following changes made to interface" width="80%"&gt;
+&lt;/figure&gt;
+
+???
+
+This illustrates changes to the design (Follow now high-contrast in black). This is an example of A/B testing common in web design.
+---
+
+class: title title-5
+
+# Evidence-based policy
+
+
+
+
+
+&lt;br&gt;
+
+.box-inv-5.medium[RAND health insurance study]
+
+&lt;br&gt;
+
+.box-inv-5.medium[Student Teacher Achievement Ratio (STAR)]
+
+
+
+???
+
+RAND: In a large-scale, multiyear experiment, participants who paid for a share of their health care used fewer health services than a comparison group given free care. It concluded that cost sharing reduced "inappropriate or unnecessary" medical care (overutilization), but also reduced "appropriate or needed" medical care.
+https://www.rand.org/health-care/projects/hie.html
+
+Tennessee's STAR project: smaller class sizes lead to better outcomes
+"Over 7,000 students in 79 schools were randomly assigned into one of 3 interventions: small class (13 to 17 students per teacher), regular class (22 to 25 students per teacher), and regular-with-aide class (22 to 25 students with a full-time teacher's aide). Classroom teachers were also randomly assigned to the classes they would teach. The interventions were initiated as the students entered school in kindergarten and continued through third grade."
+https://dss.princeton.edu/catalog/resource1589
+
+---
+class: title title-5
+# Nobel memorial prize
+
+&lt;figure&gt;
+&lt;img src="img/01/jpal-nobel.png" alt="Composite photo by Andrew Heiss: excerpt from the Washington Post following the announcement of the Nobel prize in economics for experimental approach to solving poverty, Abdul Latif Jameel Poverty Action Lab (J-PAL) video and a Twitter feed with a photo of Abhijit Banerjee and Esther Duflo upon the announcement of the Nobel memorial price." title="" width="80%"&gt;
+&lt;/figure&gt;
+
+---
+
+layout: false
+name: review
+class: center middle section-title section-title-3 animated fadeIn
+
+# Review
+
+---
+class: title title-3
+
+# Population and sampling
+
+.pull-left[
+
+.box-inv-3.medium[Defining a population]
+
+.box-inv-3.medium[Sampling frame]
+
+.box-inv-3.medium[Randomization]
+
+]
+
+--
+
+.pull-right[
+
+.box-inv-3.medium[Convenience samples]
+
+.box-inv-3.medium[Non-response bias]
+
+
+]
+---
+
+class: title title-3
+
+# Sampling scheme
+
+
+.box-inv-3.medium[Simple random sampling]
+
+--
+
+.box-inv-3.medium[Stratified sampling]
+
+
+.box-3[Gender, ethnicity, etc.]
+
+--
+
+.box-inv-3.medium[Cluster sampling]
+
+.box-3[Villages, housing block, classrooms, etc.]
+
+--
+
+.box-inv-3.medium[Multi-stage sampling]
+
+
+---
+
+class: title title-3
+
+.box-inv-3-center.large[# Judging the quality of a sample]
+
+.box-inv-3.medium[Summary statistics]
+
+Reported to check representativeness of the sample relative to population.
+
+--
+
+.box-inv-3.medium[Raw data]
+
+Used for reproducibility and to assess whether data is fraudulent.
+
+--
+
+.box-inv-3.medium[Pre-testing]
+
+Check whether sampling allocation is sufficiently random.
+
+???
+
+U. Simonsohn, L. Nelson and J. Simmons. *Evidence of Fraud in an Influential Field Experiment About Dishonesty*, 2021, https://datacolada.org/98.
+
+---
+
+class: title title-3
+
+.box-inv-3-center.large.sp-after-half[# Experimental versus observational]
+
+.center[
+&lt;figure&gt;
+&lt;img src="img/01/nyt-wellness-program.png" alt="Figure from a New York Times on a RCT studying the effectiveness of wellness programs." title="" width="60%"&gt;
+&lt;/figure&gt;
+]
+
+
+
+---
+
+class: title title-3
+
+.box-inv-3-center.large[# Study type versus sampling]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/01/random_sample_assignment.png" alt="Random versus non-random assignment and sampling" title="Two by two classification matrix for experiments based on sampling and study type. Material from Mine Çetinkaya-Rundel and OpenIntro distributed under the CC BY-SA license." width="90%"&gt;
+&lt;/figure&gt;
+]
+---
+
+layout: false
+name: key-concepts-experimental
+class: center middle section-title section-title-2 animated fadeIn
+
+# Key concepts in experimental design
+
+---
+
+class: title title-2
+# Technical vocabulary
+
+.box-inv-2.medium[Experimental unit]
+
+.box-inv-2.medium[Observational unit]
+
+.box-inv-2.medium[Factor / treatment]
+
+.box-inv-2.medium[Treatment group]
+
+.box-inv-2.medium[Control group]
+
+
+---
+
+class: title title-2
+
+# Impact of encouragement on teaching
+
+From Davison (2008), Example 9.2
+
+&gt; In an investigation on the teaching of arithmetic, 45 pupils were divided at random into five groups of nine. Groups A and B were taught in separate classes by the usual method. Groups C, D, and E were taught together for a number of days. On each day C were praised publicly for their work, D were publicly reproved and E were ignored. At the end of the period all pupils took a standard test.
+
+---
+
+.box-inv-2.large.left[Exercise]
+.medium[
+
+In pairs, identify
+- the experimental and observational units
+- the treatment levels
+- the response variable
+
+]
+<div class="countdown" id="timer_62ed1b52" style="right:0;bottom:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+class: title title-2
+# Comparing treatments
+
+.medium[
+- Without treatment, .color-2[**variability**] in output from one observation to the next.
+- Differences between treatment are .color-2[**comparatively stable**].
+
+]
+
+---
+class: title title-2
+# Choices in experimental designs
+
+.medium[
+
+- **treatments** for comparison
+- observations to be made (number of repetitions, etc.)
+- experimental units
+
+]
+
+---
+class: title title-2
+# Requirements for good experiments (1/2)
+
+
+.box-inv-2.large.left[Absence of systematic error]
+
+Achieved via randomization
+
+--
+
+.left.box-inv-2.large[Precision]
+
+- depends on the intrinsic variability 
+- function of
+    1. accuracy of experimental work
+    2. number of experimental units / repetitions per unit
+    3. design and methods of analysis
+
+
+
+---
+
+class: title title-2
+# Requirements for good experiments (2/2)
+
+.left.box-inv-2.large[Range of validity]
+
+- What is population?
+- Identify restrictions
+- Extrapolation only if proper sampling scheme
+
+--
+
+.left.box-inv-2.large[Simplicity of the design]
+
+- Simple designs lead to simple analyses 
+
+???
+
+Important: understand reasons for difference
+- do not limit to experimental knowledge about the differences
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

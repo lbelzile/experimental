@@ -15,15 +15,15 @@ Here's how you install all these things
 
 ### Install **R**
 
-First you need to install the *latest* version of **R** itself (the engine).
+First you need to install the *latest* version of **R** itself (the engine), currently `r paste0(R.Version()$major,".", R.Version()$minor, " (", R.Version()$nickname,")")`.
 
 1. Go to the Comprehensive **R** Archive Network (CRAN) website: <https://cran.r-project.org/>
 2. Click on "Download **R** for `XXX`", where `XXX` is either Mac or Windows:
 
 ```{r, echo=FALSE, out.width="60%"}
-include_graphics("/img/install/install-r-links.png", error = FALSE)
+include_graphics("/files/img/install/install-r-links.png", error = FALSE)
 ```
-If you use macOS, scroll down to the first `.pkg` file in the list of files and download it (in this picture, it's `R-4.0.0.pkg`; as of right now, the current version is `r paste0(R.Version()$major,".", R.Version()$minor, " (", R.Version()$nickname,")")`).
+If you use macOS, scroll down to the first `.pkg` file in the list of files and download it.
     
 ```{r, echo=FALSE, out.width="100%"}
 include_graphics("/files/img/install/install-r-mac.png", error = FALSE)
