@@ -1,0 +1,212 @@
+[
+  {
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Syllabus and learning objectives\nReview\n\nPopulation and samples\nObservational versus experimental studies\nSampling schemes: random, stratified and cluster sampling\n\nIntroduction to experimental designs\nTerminology of experimental design\nRequirements for a good experiment"
+  },
+  {
+    "objectID": "content/01-content.html#learning-objectives",
+    "href": "content/01-content.html#learning-objectives",
+    "title": "Introduction",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nLearning the terminology associated to experiments.\nAssessing the generalizability of a study based on the consideration of the sample characteristics, sampling scheme and population.\nDistinguishing between observational and experimental studies.\nUnderstanding the rationale behind the requirements for good experimental studies."
+  },
+  {
+    "objectID": "content/01-content.html#preliminaries",
+    "href": "content/01-content.html#preliminaries",
+    "title": "Introduction",
+    "section": "Preliminaries",
+    "text": "Preliminaries\n\nFamiliarize yourself with the syllabus, content, examples, and evaluations pages for this class.\n Read Chapter 1 (Intro to Data) of OpenIntro Statistics and the accompanying  videos"
+  },
+  {
+    "objectID": "content/01-content.html#readings",
+    "href": "content/01-content.html#readings",
+    "title": "Introduction",
+    "section": "Readings",
+    "text": "Readings\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.\n\n\n\n Chapter 1 of the Course notes\n Chapter 2 (Study design) of Introduction to Modern Statistics\n\nFeel free to inform me in the weekly check-in of your take on these references."
+  },
+  {
+    "objectID": "content/01-content.html#complementary-readings",
+    "href": "content/01-content.html#complementary-readings",
+    "title": "Introduction",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n\n\n\n\n\nWarning\n\n\n\nComplementary readings are additional sources of information that are not required readings, but may be useful substitutes. Sometimes, they go beyond the scope of what we cover (in more details).\n\n\n\n Chapter 1 (Preliminaries) in Planning of experiments (Cox, 1958). Out of print, but addresses the basic concepts using a variety of examples (mostly from agricultural field trials), and particularly well written.\n Chapter 1 and Sections 2.1-2.2 in Design and Analysis of Experiments (Dean et al., 2017)"
+  },
+  {
+    "objectID": "content/01-content.html#slides",
+    "href": "content/01-content.html#slides",
+    "title": "Introduction",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nIntroduction\n\n\nMotivation\n\n\nReview\n\n\nKey concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+  },
+  {
+    "objectID": "content/01-content.html#case-study",
+    "href": "content/01-content.html#case-study",
+    "title": "Introduction",
+    "section": "Case study",
+    "text": "Case study\nWe will discuss the summary of Abaluck et al. (2022) “The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh” in class.\nDuring the activity, you will be asked to identify in teams the following:\n\nthe objective of the study\nthe target population (which findings generalize?)\nthe sampling scheme\nthe observational and experimental units\nthe treatments\nthe outcome variable(s)"
+  },
+  {
+    "objectID": "content/index.html",
+    "href": "content/index.html",
+    "title": "Readings, lectures, and videos",
+    "section": "",
+    "text": "Every class session also has a YouTube playlist of short recorded videos for each of the lecture sections. The lecture slides are special HTML files made with the R package xaringan . On each class session page you’ll see buttons for opening the presentation in a new tab or for downloading a PDF of the slides in case you want to print them or store them on your computer:\n\n View all slides in new window  Download PDF of all slides\n\nThe slides are also embedded on each page. You can click in the slides and navigate through them with ← and →. If you type ? (or shift + /) while viewing the slides you can see a list of slide-specific commands (like f for fullscreen or p for presenter mode if you want to see my notes)."
+  },
+  {
+    "objectID": "evaluations/01-problem-set.html",
+    "href": "evaluations/01-problem-set.html",
+    "title": "Problem set 1",
+    "section": "",
+    "text": "References\n\nClayton, A. (2018). Do gender quotas really reduce bias? Evidence from a policy experiment in Southern Africa. Journal of Experimental Political Science, 5(3), 182--194. https://doi.org/10.1017/XPS.2018.8"
+  },
+  {
+    "objectID": "evaluations/02-problem-set.html",
+    "href": "evaluations/02-problem-set.html",
+    "title": "Problem set 2",
+    "section": "",
+    "text": "Task 2\nUse the data to perform a one-way analysis of variance Also do a t-test.\nUse APA guidelines for formatting the results. In R, the papaja package"
+  },
+  {
+    "objectID": "evaluations/critical-review.html",
+    "href": "evaluations/critical-review.html",
+    "title": "Critical review",
+    "section": "",
+    "text": "Select a scientific paper published in one of the journal in the list of the Financial Times Top 50 list, on a preprint repository like PsyArXiv, or in a top tier journal in your field of research containing an experimental study. Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. The paper has to contain statistical analyses seen in class. If your selected paper has more than one study, you can select only one for the task.\nYou need to send a copy of your selected paper for approval prior to your peer review, which should be at most three pages long.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review.\nNote that many element of your review may be positive if the paper has already been published (especially in a top scientific journal, even if this is no guarantee of correctness)."
+  },
+  {
+    "objectID": "evaluations/critical-review.html#deliverables",
+    "href": "evaluations/critical-review.html#deliverables",
+    "title": "Critical review",
+    "section": "Deliverables",
+    "text": "Deliverables\n\nA copy of the article you are peer-reviewing\nA portable document file (PDF) of your critique (max 3 pages, excluding bibliography)"
+  },
+  {
+    "objectID": "evaluations/critical-review.html#grading-rubric",
+    "href": "evaluations/critical-review.html#grading-rubric",
+    "title": "Critical review",
+    "section": "Grading rubric",
+    "text": "Grading rubric\n\nIdentification of strength and weaknesses: 10\nCorrectness of the interpretation of statistical results: 10\nScope: 10\nClarity of report: 10\nUsefulness of suggestions: 5\nWriting and referencing: 5"
+  },
+  {
+    "objectID": "evaluations/final-exam.html",
+    "href": "evaluations/final-exam.html",
+    "title": "Final examination",
+    "section": "",
+    "text": "The exam format is as follows:\n\nOne question on the fundamentals of experimental designs (blocking, randomization, etc.)\nOne question on reproducibility/replication crisis\nOne question on key concepts (power, effect size, multiple testing).\nOne question on advanced topics (mixed models, causal inference and mediation analysis, etc.)\nTwo data analysis questions, using completely randomized or blocked designs (between-subjects or within-subject) with multi-way analysis of variance, ANCOVA, mixed model, with specific questions on various aspects including\n\nparametrization of ANOVA\nadequate setup of model\ninteraction plots\nuse of different tests and methods\ncalculation of degrees of freedom of the model / sample size\nconclusions related to output of tests\ninterpretation of effect sizes\ncontrasts and pairwise comparisons\ntests for model assumptions and diagnostic plots\n\n\nA practice final can be downloaded here"
+  },
+  {
+    "objectID": "evaluations/index.html",
+    "href": "evaluations/index.html",
+    "title": "Evaluations",
+    "section": "",
+    "text": "The main goals of this class are to help you understand the steps require to design and analyse the results of an experiment."
+  },
+  {
+    "objectID": "evaluations/index.html#weekly-check-in",
+    "href": "evaluations/index.html#weekly-check-in",
+    "title": "Evaluations",
+    "section": "Weekly check-in",
+    "text": "Weekly check-in\nI want to hear back from you regarding the course material, activities and learning material.\nI will grade these check-ins using a check system:\n\n✔+: (115% in gradebook) Response shows phenomenal thought and engagement with the course content. I will not assign these often.\n✔: (100% in gradebook) Response is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance.\n✔−: (50% in gradebook) Response is hastily composed, too short, and/or only cursorily engages with the course content. This grade signals that you need to improve next time. I will hopefully not assign these often.\n\nNotice that is essentially a pass/fail or completion-based system. I’m not grading your writing ability, I’m not counting the exact number of words you’re writing, and I’m not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I’m looking for thoughtful engagement, that’s all. Do good work and you’ll get a ✔.\nYou will submit these responses via ZoneCours."
+  },
+  {
+    "objectID": "evaluations/index.html#problem-sets",
+    "href": "evaluations/index.html#problem-sets",
+    "title": "Evaluations",
+    "section": "Problem sets",
+    "text": "Problem sets\nThere are 12 problem sets on the schedule. I will keep the highest grades for 11 of them. I will drop the lowest score - this means you can skip one of the problem sets. You need to show that you made a good faith effort to work each question. I will not grade these in detail. The problem sets will be graded using a check system:\n\n✔+: (110% in gradebook) Assignment is 100% completed. Every question was attempted and answered, and most answers are correct. Document is clean and easy to follow. Work is exceptional. I will not assign these often.\n✔: (100% in gradebook) Assignment is 70–99% complete and most answers are correct. This is the expected level of performance.\n✔−: (50% in gradebook) Assignment is less than 70% complete and/or most answers are incorrect. This indicates that you need to improve next time. I will hopefully not assign these often.\n\nYou may (and should!) work together on the problem sets, but you must turn in your own answers. You cannot work in groups of more than four people, and you must note who participated in the group in your assignment."
+  },
+  {
+    "objectID": "evaluations/index.html#final-project",
+    "href": "evaluations/index.html#final-project",
+    "title": "Evaluations",
+    "section": "Final project",
+    "text": "Final project\nFor your final project, you will perform a critical review of a peer-reviewed paper from a list containing an experiment and which uses one of the statistical techniques covered in class. You will pay particular attention to reproducibility, readability and the correctness of the analysis, discussing points of improvement, statistical fallacies. This will help you develop skills for efficient peer-review of the statistical methodology section."
+  },
+  {
+    "objectID": "evaluations/index.html#final-examination",
+    "href": "evaluations/index.html#final-examination",
+    "title": "Evaluations",
+    "section": "Final examination",
+    "text": "Final examination\nThere will be a closed-book final exam covering the content of the whole semester. Most of the questions will relate to the tasks you performed in problem set and to discussions we had in class. The exam will be in-person (see the Syllabus for details)."
+  },
+  {
+    "objectID": "evaluations/weekly-check-in.html",
+    "href": "evaluations/weekly-check-in.html",
+    "title": "Questions",
+    "section": "",
+    "text": "You should answer the following three questions each week:\n\nWhat was the most exciting thing you learned from the session? Why?\nWhat was the muddiest thing from the session this week? What are you still wondering about?\n\nWhich activity did you find the most useful? What could have been skipped?"
+  },
+  {
+    "objectID": "example/index.html",
+    "href": "example/index.html",
+    "title": "Examples",
+    "section": "",
+    "text": "Useful resources for learning R, the tidyverse and Rmarkdown basics include\n\nThe Introduction to R and RStudio by Open Intro Stat\nTeacups, giraffes & statistics: basic statistical concepts and programming\nthe notebook RYouWithMe from R-Ladies Sydney\nthe book R for Data Science, which adheres to the tidyverse principles.\nthe R package DoSStoolkit, developped at the University of Toronto.\nthe introverse documentation.\nthe RStudio cheatsheets, also available from RStudio menu in Help > Cheat Sheets\n\nTo install all R packages used throughout the course, use the command\n\n\nCode\nlib <- c(\"afex\", \"car\", \"emmeans\", \"effectsize\", \"lme4\", \n         \"lmerTest\", \"nlme\", \"pwr\", \"tidyverse\", \"tidymodels\")\ninstall.packages(lib)"
+  },
+  {
+    "objectID": "example/installation.html",
+    "href": "example/installation.html",
+    "title": "Installing R and RStudio",
+    "section": "",
+    "text": "Install R\nFirst you need to install the latest version of R itself (the engine), currently 4.2.1 (Funny-Looking Kid).\n\nGo to the Comprehensive R Archive Network (CRAN) website: https://cran.r-project.org/\nClick on “Download R for XXX”, where XXX is either Mac or Windows:\n\n\n\n\n\n\nIf you use macOS, scroll down to the first .pkg file in the list of files and download it.\n\n\n\n\n\nIf you use Windows, click “base” (or click on the bolded “install R for the first time” link) and download it.\n\n\n\n\n\n\nDouble click on the downloaded file (check your Downloads folder). Click yes through all the prompts to install like any other program.\nIf you use macOS, download and install XQuartz. You do not need to do this on Windows.\n\n\n\nInstall RStudio\nNext, you need to install RStudio, the nicer graphical user interface (GUI) for R (the dashboard). Once R and RStudio are both installed, you can ignore R and only use RStudio. RStudio will use R automatically and you won’t ever have to interact with it directly.\n\nGo to the free download location on RStudio’s website: https://www.rstudio.com/products/rstudio/download/#download\nThe website should automatically detect your operating system (Linux, macOS or Windows) and show a big download button for it:\n\n\n\n\n\n\nIf not, scroll down a little to the large table and choose the version of RStudio that matches your operating system.\n\n\n\n\n\n\nDouble click on the downloaded file (again, check your Downloads folder). Click yes through all the prompts to install like any other program.\n\nDouble click on RStudio to run it (check your applications folder or start menu).\n\n\nInstall tidyverse\nR packages are easy to install with RStudio. Select the packages panel, click on “Install,” type the name of the package you want to install, and press enter.\n\n\n\n\n\nThis can sometimes be tedious when you’re installing lots of packages, though. The tidyverse, for instance, consists of dozens of packages (including ggplot2) that all work together. Rather than install each individually, you can install a single magical package and get them all at the same time.\nGo to the packages panel in RStudio, click on “Install,” type “tidyverse”, and press enter. You’ll see a bunch of output in the RStudio console as all the tidyverse packages are installed.\n\n\n\n\n\nNotice also that RStudio will generate a line of code for you and run it: install.packages(\"tidyverse\"). You can also just paste and run this instead of using the packages panel.\n\n\nInstall tinytex\nWhen you knit to PDF, R uses a special scientific typesetting program named LaTeX, which is complicated and a large download. To make life easier, there’s an R package named tinytex that installs a minimal LaTeX program and that automatically deals with differences between macOS and Windows.\nTo install tinytex:\n\nUse the Packages in panel in RStudio to install tinytex like you did above with tidyverse. Alternatively, run install.packages(\"tinytex\") in the console.\nRun tinytex::install_tinytex() in the console.\nWait for a bit while R downloads and installs everything you need.\nYou should now be able to knit to PDF."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Experimental Designs and Statistical Methods",
+    "section": "",
+    "text": "Instructor\n\n   Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\nCourse details\n\n   Fall 2022\n   Fridays\n   8:30-11:30\n   Côte-Sainte-Catherine, Groupe Deschênes\n\n\n\nContacting me\nI am best reached by email or Slack."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by 11:55 PM on the day before class.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nevaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nSeptember 2\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 8\n\n\nWeekly check-in 1  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 8\n\n\nProblem set 1  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nSeptember 9\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 15\n\n\nWeekly check-in 2  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 15\n\n\nProblem set 2  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nevaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nSeptember 16\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 22\n\n\nWeekly check-in 3  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 22\n\n\nProblem set 3  (submit by 23:55:00)"
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\n\n\n   Fall 2022\n   Fridays\n   8:30-11:30\n   Côte-Sainte-Catherine, Groupe Deschênes"
+  },
+  {
+    "objectID": "syllabus.html#learning-r",
+    "href": "syllabus.html#learning-r",
+    "title": "Syllabus",
+    "section": "Learning R",
+    "text": "Learning R\nSearching for help with R on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for “r scatterplot”, but if it does struggle, try searching for “rstats” instead (e.g., “rstats scatterplot”).\nCheck out StackOverflow (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and RStudio Community (a forum specifically designed for people using RStudio and the tidyverse)."
+  },
+  {
+    "objectID": "syllabus.html#textbooks",
+    "href": "syllabus.html#textbooks",
+    "title": "Syllabus",
+    "section": "Textbooks",
+    "text": "Textbooks\nCourse notes for the class can be found online\nI will also assign readings from Meier (2022) ANOVA and Mixed Models: A Short Intro Using R, which is available online for free reading."
+  },
+  {
+    "objectID": "syllabus.html#other-references",
+    "href": "syllabus.html#other-references",
+    "title": "Syllabus",
+    "section": "Other references",
+    "text": "Other references\nThere will occasionally be additional articles to read; links to these other resources will be included on the content page for that session.\nOther good references for (some or most of) the content we will cover includes\n\nKeppel & Wickens (2004): out of print; comprehensive reference with a focus on effect size and marginal effects, all calculations are done by hand.\nCox (1958): out of print, but beautifully written and nontechnical.\nDean et al. (2017): comprehensive and freely available via Springer link; students last year found it too dry and technical.\nBox et al. (1978).\nVanderWeele (2015).\nPearl et al. (2016)."
+  },
+  {
+    "objectID": "syllabus.html#student-hours",
+    "href": "syllabus.html#student-hours",
+    "title": "Syllabus",
+    "section": "Student hours",
+    "text": "Student hours\nI am available Friday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.\nPlease watch this video:\n\n\nStudent hours are set times dedicated to all of you (most professors call these “office hours”; I don’t3). This means that I will be in my office waiting for you to come by if you want to talk to me in person (or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns."
+  },
+  {
+    "objectID": "syllabus.html#late-work",
+    "href": "syllabus.html#late-work",
+    "title": "Syllabus",
+    "section": "Late work",
+    "text": "Late work\nThe submission modules will stay open for two weeks after the due date for weekly check-in. As much as possible, we will discuss problem sets in class the day after (provided all students have handed in their work). I will not assign penalties, but will gently nudge you to stay on track."
+  }
+]
