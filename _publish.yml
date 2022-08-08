@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: "6b3bcf73-b516-46e8-88ce-e7dd966c8030"
+      url: "https://math80667a.netlify.app"
