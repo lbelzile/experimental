@@ -10,12 +10,12 @@ slide_tabs <- function(slide_df, slide_url) {
     return(x)
   }
 
-  nav_li <- function(title, selected = FALSE) {
+  nav_li <- function(title, slide, selected = FALSE, url) {
     select_flag <- ifelse(selected, "true", "false")
     active_flag <- ifelse(selected, " active", "")
     out <- glue::glue('<li class="nav-item">\n',
                       '<a class="nav-link{active_flag}" id="{slugify(title)}-tab" data-toggle="tab" ',
-                      'href="#{slugify(title)}" role="tab" ',
+                      'href="{url}#{slugify(slide)}" role="tab" ',
                       'aria-controls="{slugify(title)}" aria-selected="{select_flag}">',
                       '{title}</a>\n',
                       '</li>')
@@ -34,7 +34,7 @@ slide_tabs <- function(slide_df, slide_url) {
 
   sections <- dplyr::mutate(
     slide_df,
-    li = purrr::pmap_chr(list(title, active), nav_li),
+    li = purrr::pmap_chr(list(title, slide, active, slide_url), nav_li),
     pane = purrr::pmap_chr(list(title, slide, active, slide_url), tab_pane)
   )
 

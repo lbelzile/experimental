@@ -1,8 +1,5 @@
 ---
 title: Page Not Found
-sidebar: false
-toc: false
 ---
 
-OH NO! The page you were looking for isn't here!
-
+The page you requested cannot be found. Perhaps try using the search bar or navigating the menu?

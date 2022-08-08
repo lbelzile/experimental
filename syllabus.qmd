@@ -72,8 +72,6 @@ Searching for help with **R** on Google can sometimes be tricky because the prog
 
 Check out [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the tidyverse).
 
-I will try provide example code in different languages, depending on the software are most commonly adopted.
-
 # Course materials
 
 I will provide slides and videos. In addition to those, there will be assigned readings from textbook and reference papers.

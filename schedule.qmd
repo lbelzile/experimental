@@ -10,7 +10,7 @@ page-layout: full
 Here's your roadmap for the semester!
 
 - [**Content**](/content/) ({{< fa book-open-reader >}}): This page contains the readings, slides, and recorded lectures for the week. Read and watch these **before** our in-person class.
-- [**Example**](/example/) ({{< fa laptop-code >}}): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluationss and project. This is only a reference page—you don't have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work with R in real time. This page will be *very* helpful as you work on your evaluationss.
+- [**Example**](/example/) ({{< fa laptop-code >}}): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don't have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be *very* helpful as you work on your evaluations.
 - [**Evaluations**](/evaluations/) ({{< fa pen-ruler >}}): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by *11:55 PM* on the day before class.
 
 ```{r build-table, include=FALSE}

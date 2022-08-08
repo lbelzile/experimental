@@ -217,7 +217,7 @@ div.csl-indent {
 <section id="preliminaries" class="level2">
 <h2 class="anchored" data-anchor-id="preliminaries">Preliminaries</h2>
 <ul>
-<li>Familiarize yourself with the <a href="../syllabus/">syllabus</a>, <a href="../content/">content</a>, <a href="../example/">examples</a>, and <a href="../evaluations/">evaluations</a> pages for this class.</li>
+<li>Familiarize yourself with the <a href="../syllabus">syllabus</a>, <a href="../content/">content</a>, <a href="../example/">examples</a>, and <a href="../evaluations/">evaluations</a> pages for this class.</li>
 <li><i class="fa-solid fa-book" aria-hidden="true"></i> Read Chapter 1 (Intro to Data) of <a href="https://www.openintro.org/book/os/">OpenIntro Statistics</a> and the accompanying <i class="fa-brands fa-youtube" aria-hidden="true"></i> <a href="https://www.youtube.com/playlist?list=PLkIselvEzpM6pZ76FD3NoCvvgkj_p-dE8">videos</a></li>
 </ul>
 </section>
@@ -238,6 +238,7 @@ Warning
 </div>
 <ul>
 <li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 1 of the <a href="https://lbelzile.github.io/math80667a/introduction.html">Course notes</a></li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 2 (<em>Study design</em>) of <a href="https://openintro-ims.netlify.app/data-design.html"><em>Introduction to Modern Statistics</em></a></li>
 </ul>
 <p>Feel free to inform me in the weekly check-in of your take on these references.</p>
 </section>
@@ -257,9 +258,8 @@ Warning
 </div>
 </div>
 <ul>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 2 (<em>Study design</em>) of <a href="https://openintro-ims.netlify.app/data-design.html"><em>Introduction to Modern Statistics</em></a></li>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 1 and Sections 2.1-2.2 in <em>Design and Analysis of Experiments</em> <span class="citation" data-cites="Dean:2017">(<a href="#ref-Dean:2017" role="doc-biblioref">Dean et al., 2017</a>)</span></li>
 <li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 1 (<em>Preliminaries</em>) in <em>Planning of experiments</em> <span class="citation" data-cites="Cox:1958">(<a href="#ref-Cox:1958" role="doc-biblioref">Cox, 1958</a>)</span>. Out of print, but addresses the basic concepts using a variety of examples (mostly from agricultural field trials), and particularly well written.</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 1 and Sections 2.1-2.2 in <em>Design and Analysis of Experiments</em> <span class="citation" data-cites="Dean:2017">(<a href="#ref-Dean:2017" role="doc-biblioref">Dean et al., 2017</a>)</span></li>
 </ul>
 </section>
 <section id="slides" class="level2">
@@ -270,31 +270,22 @@ Warning
 </p>
 <ul class="nav nav-tabs" id="slide-tabs" role="tablist">
 <li class="nav-item">
-<a class="nav-link active" id="introduction-tab" data-toggle="tab" href="#introduction" role="tab" aria-controls="introduction" aria-selected="true">Introduction</a>
+<a class="nav-link active" id="introduction-tab" data-toggle="tab" href="../slides/01-slides.html#1" role="tab" aria-controls="introduction" aria-selected="true">Introduction</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" id="class-details-tab" data-toggle="tab" href="#class-details" role="tab" aria-controls="class-details" aria-selected="false">Class details</a>
+<a class="nav-link" id="motivation-tab" data-toggle="tab" href="../slides/01-slides.html#motivation" role="tab" aria-controls="motivation" aria-selected="false">Motivation</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" id="motivation-tab" data-toggle="tab" href="#motivation" role="tab" aria-controls="motivation" aria-selected="false">Motivation</a>
+<a class="nav-link" id="review-tab" data-toggle="tab" href="../slides/01-slides.html#review" role="tab" aria-controls="review" aria-selected="false">Review</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Review</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" id="key-concepts-in-experimental-design-tab" data-toggle="tab" href="#key-concepts-in-experimental-design" role="tab" aria-controls="key-concepts-in-experimental-design" aria-selected="false">Key concepts in experimental design</a>
+<a class="nav-link" id="key-concepts-tab" data-toggle="tab" href="../slides/01-slides.html#keyconceptsexperimental" role="tab" aria-controls="key-concepts" aria-selected="false">Key concepts</a>
 </li>
 </ul>
 <div id="slide-tabs" class="tab-content">
 <div id="introduction" class="tab-pane fade show active" role="tabpanel" aria-labelledby="introduction-tab">
 <div class="ratio ratio-16x9">
 <iframe src="../slides/01-slides.html#1">
-</iframe>
-</div>
-</div>
-<div id="class-details" class="tab-pane fade" role="tabpanel" aria-labelledby="class-details-tab">
-<div class="ratio ratio-16x9">
-<iframe src="../slides/01-slides.html#class-details">
 </iframe>
 </div>
 </div>
@@ -310,9 +301,9 @@ Warning
 </iframe>
 </div>
 </div>
-<div id="key-concepts-in-experimental-design" class="tab-pane fade" role="tabpanel" aria-labelledby="key-concepts-in-experimental-design-tab">
+<div id="key-concepts" class="tab-pane fade" role="tabpanel" aria-labelledby="key-concepts-tab">
 <div class="ratio ratio-16x9">
-<iframe src="../slides/01-slides.html#key-concepts-experimental">
+<iframe src="../slides/01-slides.html#keyconceptsexperimental">
 </iframe>
 </div>
 </div>
@@ -327,7 +318,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Fun fact</strong>: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.</p>
+<p><strong>Fun fact</strong>: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.</p>
 </div>
 </div>
 </section>

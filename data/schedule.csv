@@ -1,5 +1,5 @@
 group,subgroup,date,date_end,title,deadline,content,example,evaluations
-Introduction,Session 1,2022-09-02,,Introduction to experimental designs and motivation,,content/01-content,example/rstudio-tidyverse,
+Introduction,Session 1,2022-09-02,,Introduction to experimental designs and motivation,,content/01-content,,
 Introduction,Session 1,2022-09-08,,Weekly check-in 1,23:55,,,evaluations/weekly-check-in
 Introduction,Session 1,2022-09-08,,Problem set 1,23:55,,,evaluations/01-problem-set
 Introduction,Session 2,2022-09-09,,Review of key statistics concepts,,content/02-content,,
