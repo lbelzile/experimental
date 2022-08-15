@@ -1,55 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lbelzile.github.io/experimental/content/01-content.html</loc>
-    <lastmod>2022-08-08T16:11:50.129Z</lastmod>
+    <loc>https://edsm.rbind.io/content/01-content.html</loc>
+    <lastmod>2022-08-15T17:40:47.746Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/content/index.html</loc>
-    <lastmod>2022-08-08T16:11:50.709Z</lastmod>
+    <loc>https://edsm.rbind.io/content/index.html</loc>
+    <lastmod>2022-08-15T17:40:48.496Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/evaluations/01-problem-set.html</loc>
-    <lastmod>2022-08-08T16:11:51.839Z</lastmod>
+    <loc>https://edsm.rbind.io/evaluations/01-problem-set.html</loc>
+    <lastmod>2022-08-15T17:40:49.436Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/evaluations/02-problem-set.html</loc>
-    <lastmod>2022-08-08T16:11:52.368Z</lastmod>
+    <loc>https://edsm.rbind.io/evaluations/final-exam.html</loc>
+    <lastmod>2022-08-15T17:40:49.966Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/evaluations/critical-review.html</loc>
-    <lastmod>2022-08-08T16:11:52.938Z</lastmod>
+    <loc>https://edsm.rbind.io/evaluations/index.html</loc>
+    <lastmod>2022-08-15T17:40:50.876Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/evaluations/final-exam.html</loc>
-    <lastmod>2022-08-08T16:11:53.478Z</lastmod>
+    <loc>https://edsm.rbind.io/evaluations/paper-review.html</loc>
+    <lastmod>2022-08-15T17:40:51.746Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/evaluations/index.html</loc>
-    <lastmod>2022-08-08T16:11:54.038Z</lastmod>
+    <loc>https://edsm.rbind.io/evaluations/weekly-check-in.html</loc>
+    <lastmod>2022-08-15T17:40:52.426Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/evaluations/weekly-check-in.html</loc>
-    <lastmod>2022-08-08T16:11:54.548Z</lastmod>
+    <loc>https://edsm.rbind.io/example/index.html</loc>
+    <lastmod>2022-08-15T17:40:53.456Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/example/index.html</loc>
-    <lastmod>2022-08-08T16:11:55.348Z</lastmod>
+    <loc>https://edsm.rbind.io/example/installation.html</loc>
+    <lastmod>2022-08-15T17:40:54.376Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/example/installation.html</loc>
-    <lastmod>2022-08-08T16:11:56.118Z</lastmod>
+    <loc>https://edsm.rbind.io/index.html</loc>
+    <lastmod>2022-08-15T17:40:54.916Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/index.html</loc>
-    <lastmod>2022-08-08T16:11:56.688Z</lastmod>
+    <loc>https://edsm.rbind.io/schedule.html</loc>
+    <lastmod>2022-08-15T17:40:59.726Z</lastmod>
   </url>
   <url>
-    <loc>https://lbelzile.github.io/experimental/schedule.html</loc>
-    <lastmod>2022-08-08T16:11:57.338Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/experimental/syllabus.html</loc>
-    <lastmod>2022-08-08T16:11:58.198Z</lastmod>
+    <loc>https://edsm.rbind.io/syllabus.html</loc>
+    <lastmod>2022-08-15T17:41:00.626Z</lastmod>
   </url>
 </urlset>

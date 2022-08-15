@@ -1,0 +1,38 @@
+---
+title: "Paper review"
+---
+
+
+## Description of the task
+
+You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.
+
+Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.
+
+
+You should focus on the following elements in your review:
+
+- Strengths and weaknesses of the methodology used to test the research hypotheses.
+- Appropriateness of experimental design and the choice of dependent variables, control variables, treatment
+conditions.
+- Appropriateness of statistical analyses.
+- Presentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)
+- Discussion of the limits of the study
+- Possible sources of bias
+- Pre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.
+
+In addition to the material seen in class, see @Wilkinson:1999 and @Campion:1993 to inform your review. 
+
+
+## Deliverables
+
+A portable document file (PDF) of your critique (maximum 3 pages, excluding bibliography)
+
+## Grading rubric
+
+- Identification of strength and weaknesses: 10
+- Correctness of the interpretation of statistical results: 10
+- Scope: 10
+- Clarity of report: 10
+- Usefulness of suggestions: 5
+- Writing and referencing: 5

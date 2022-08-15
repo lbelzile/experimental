@@ -1,1 +1,1 @@
-Sitemap: https://lbelzile.github.io/experimental/sitemap.xml
+Sitemap: https://edsm.rbind.io/sitemap.xml

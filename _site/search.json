@@ -25,7 +25,7 @@
     "href": "content/01-content.html#readings",
     "title": "Introduction",
     "section": "Readings",
-    "text": "Readings\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.\n\n\n\n Chapter 1 of the Course notes\n Chapter 2 (Study design) of Introduction to Modern Statistics\n\nFeel free to inform me in the weekly check-in of your take on these references."
+    "text": "Readings\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.\n\n\n\n Chapter 1 of the Course notes\n Chapter 2 of Introduction to Modern Statistics\n\nFeel free to inform me in the weekly check-in of your take on these references."
   },
   {
     "objectID": "content/01-content.html#complementary-readings",
@@ -39,7 +39,7 @@
     "href": "content/01-content.html#slides",
     "title": "Introduction",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nIntroduction\n\n\nMotivation\n\n\nReview\n\n\nKey concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
     "objectID": "content/01-content.html#case-study",
@@ -60,35 +60,7 @@
     "href": "evaluations/01-problem-set.html",
     "title": "Problem set 1",
     "section": "",
-    "text": "References\n\nClayton, A. (2018). Do gender quotas really reduce bias? Evidence from a policy experiment in Southern Africa. Journal of Experimental Political Science, 5(3), 182--194. https://doi.org/10.1017/XPS.2018.8"
-  },
-  {
-    "objectID": "evaluations/02-problem-set.html",
-    "href": "evaluations/02-problem-set.html",
-    "title": "Problem set 2",
-    "section": "",
-    "text": "Task 2\nUse the data to perform a one-way analysis of variance Also do a t-test.\nUse APA guidelines for formatting the results. In R, the papaja package"
-  },
-  {
-    "objectID": "evaluations/critical-review.html",
-    "href": "evaluations/critical-review.html",
-    "title": "Critical review",
-    "section": "",
-    "text": "Select a scientific paper published in one of the journal in the list of the Financial Times Top 50 list, on a preprint repository like PsyArXiv, or in a top tier journal in your field of research containing an experimental study. Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. The paper has to contain statistical analyses seen in class. If your selected paper has more than one study, you can select only one for the task.\nYou need to send a copy of your selected paper for approval prior to your peer review, which should be at most three pages long.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review.\nNote that many element of your review may be positive if the paper has already been published (especially in a top scientific journal, even if this is no guarantee of correctness)."
-  },
-  {
-    "objectID": "evaluations/critical-review.html#deliverables",
-    "href": "evaluations/critical-review.html#deliverables",
-    "title": "Critical review",
-    "section": "Deliverables",
-    "text": "Deliverables\n\nA copy of the article you are peer-reviewing\nA portable document file (PDF) of your critique (max 3 pages, excluding bibliography)"
-  },
-  {
-    "objectID": "evaluations/critical-review.html#grading-rubric",
-    "href": "evaluations/critical-review.html#grading-rubric",
-    "title": "Critical review",
-    "section": "Grading rubric",
-    "text": "Grading rubric\n\nIdentification of strength and weaknesses: 10\nCorrectness of the interpretation of statistical results: 10\nScope: 10\nClarity of report: 10\nUsefulness of suggestions: 5\nWriting and referencing: 5"
+    "text": "Task 2: Getting started with programming\nStarting from next week, you will need to perform statistical analyses using a suitable software of your choosing.\nYour job is to install a software of your liking. Tell me which one you chose and report back on your success! Also go through tutorials to get started with loading data, producing basic plots and computing simple descriptive statistics.\n\n\n\n\n\n\nReferences\n\nClayton, A. (2018). Do gender quotas really reduce bias? Evidence from a policy experiment in Southern Africa. Journal of Experimental Political Science, 5(3), 182--194. https://doi.org/10.1017/XPS.2018.8\n\n\nGoldstein, N. J., Cialdini, R. B., & Griskevicius, V. (2008). A room with a viewpoint: Using social norms to motivate environmental conservation in hotels. Journal of Consumer Research, 35(3), 472–482. https://doi.org/10.1086/586910"
   },
   {
     "objectID": "evaluations/final-exam.html",
@@ -133,6 +105,27 @@
     "text": "Final examination\nThere will be a closed-book final exam covering the content of the whole semester. Most of the questions will relate to the tasks you performed in problem set and to discussions we had in class. The exam will be in-person (see the Syllabus for details)."
   },
   {
+    "objectID": "evaluations/paper-review.html",
+    "href": "evaluations/paper-review.html",
+    "title": "Paper review",
+    "section": "",
+    "text": "You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.\nComment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice of dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review."
+  },
+  {
+    "objectID": "evaluations/paper-review.html#deliverables",
+    "href": "evaluations/paper-review.html#deliverables",
+    "title": "Paper review",
+    "section": "Deliverables",
+    "text": "Deliverables\nA portable document file (PDF) of your critique (maximum 3 pages, excluding bibliography)"
+  },
+  {
+    "objectID": "evaluations/paper-review.html#grading-rubric",
+    "href": "evaluations/paper-review.html#grading-rubric",
+    "title": "Paper review",
+    "section": "Grading rubric",
+    "text": "Grading rubric\n\nIdentification of strength and weaknesses: 10\nCorrectness of the interpretation of statistical results: 10\nScope: 10\nClarity of report: 10\nUsefulness of suggestions: 5\nWriting and referencing: 5"
+  },
+  {
     "objectID": "evaluations/weekly-check-in.html",
     "href": "evaluations/weekly-check-in.html",
     "title": "Questions",
@@ -165,7 +158,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by 11:55 PM on the day before class.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nevaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nSeptember 2\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 8\n\n\nWeekly check-in 1  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 8\n\n\nProblem set 1  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nSeptember 9\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 15\n\n\nWeekly check-in 2  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 15\n\n\nProblem set 2  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nevaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nSeptember 16\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 22\n\n\nWeekly check-in 3  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 22\n\n\nProblem set 3  (submit by 23:55:00)"
+    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by noon on the day before class.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nSeptember 2\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 8\n\n\nWeekly check-in 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 8\n\n\nProblem set 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nSeptember 9\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 15\n\n\nWeekly check-in 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 15\n\n\nProblem set 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nSeptember 16\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 22\n\n\nWeekly check-in 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 22\n\n\nProblem set 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 4\n\n\n\n\nSeptember 23\n\n\nContrasts and multiple testing\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 30\n\n\nWeekly check-in 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 30\n\n\nProblem set 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 5\n\n\n\n\nSeptember 30\n\n\nCompletely randomized designs with two factors\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 6\n\n\nWeekly check-in 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 6\n\n\nProblem set 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 6\n\n\n\n\nOctober 7\n\n\nBlock designs and analysis of covariance\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 13\n\n\nWeekly check-in 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 13\n\n\nProblem set 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreak\n\n\n\n\nOctober 20–October 26\n\n\nFall break\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 7\n\n\n\n\nOctober 14\n\n\nEffect sizes and the replication crisis\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 20\n\n\nWeekly check-in 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 20\n\n\nProblem set 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 8\n\n\n\n\nOctober 28\n\n\nLinear model and nonparametric tests\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 3\n\n\nWeekly check-in 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 3\n\n\nProblem set 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 9\n\n\n\n\nNovember 4\n\n\nRepeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 10\n\n\nWeekly check-in 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 10\n\n\nProblem set 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 10\n\n\n\n\nNovember 11\n\n\nMixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 17\n\n\nWeekly check-in 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 17\n\n\nProblem set 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 11\n\n\n\n\nNovember 18\n\n\nPower and intro to causal inference\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 24\n\n\nWeekly check-in 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 24\n\n\nProblem set 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 12\n\n\n\n\nNovember 25\n\n\nLinear mediation analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 1\n\n\nWeekly check-in 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 1\n\n\nProblem set 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 13\n\n\n\n\nDecember 2\n\n\nCategorical data and final review\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 8\n\n\nWeekly check-in 13  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nEnd of term\n\n\n\n\nDecember 9\n\n\nPaper review  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\nFinal exam  (submit by 13:30:00)"
   },
   {
     "objectID": "syllabus.html",

@@ -1,0 +1,42 @@
+group,subgroup,date,date_end,title,deadline,content,example,evaluations
+Introduction,Session 1,2022-09-02,,Introduction to experimental designs and motivation,,content/01-content,,
+Introduction,Session 1,2022-09-08,,Weekly check-in 1,12:00,,,evaluations/weekly-check-in
+Introduction,Session 1,2022-09-08,,Problem set 1,12:00,,,evaluations/01-problem-set
+Introduction,Session 2,2022-09-09,,Review of key statistics concepts,,content/02-content,,
+Introduction,Session 2,2022-09-15,,Weekly check-in 2,12:00,,,evaluations/weekly-check-in
+Introduction,Session 2,2022-09-15,,Problem set 2,12:00,,,evaluations/02-problem-set
+Completely randomized designs,Session 3,2022-09-16,,Completely randomized designs with one factor,,content/03-content,,
+Completely randomized designs,Session 3,2022-09-22,,Weekly check-in 3,12:00,,,evaluations/weekly-check-in
+Completely randomized designs,Session 3,2022-09-22,,Problem set 3,12:00,,,evaluations/03-problem-set
+Completely randomized designs,Session 4,2022-09-23,,Contrasts and multiple testing,,content/04-content,,
+Completely randomized designs,Session 4,2022-09-30,,Weekly check-in 4,12:00,,,evaluations/weekly-check-in
+Completely randomized designs,Session 4,2022-09-30,,Problem set 4,12:00,,,evaluations/04-problem-set
+Completely randomized designs,Session 5,2022-09-30,,Completely randomized designs with two factors,,content/05-content,,
+Completely randomized designs,Session 5,2022-10-06,,Weekly check-in 5,12:00,,,evaluations/weekly-check-in
+Completely randomized designs,Session 5,2022-10-06,,Problem set 5,12:00,,,evaluations/05-problem-set
+Advanced topics,Session 6,2022-10-07,,Block designs and analysis of covariance,,content/06-content,,
+Advanced topics,Session 6,2022-10-13,,Weekly check-in 6,12:00,,,evaluations/weekly-check-in
+Advanced topics,Session 6,2022-10-13,,Problem set 6,12:00,,,evaluations/06-problem-set
+Advanced topics,Break,2022-10-20,2022-10-26,Fall break,,,,
+Advanced topics,Session 7,2022-10-14,,Effect sizes and the replication crisis,,content/07-content,,
+Advanced topics,Session 7,2022-10-20,,Weekly check-in 7,12:00,,,evaluations/weekly-check-in
+Advanced topics,Session 7,2022-10-20,,Problem set 7,12:00,,,evaluations/07-problem-set
+Advanced topics,Session 8,2022-10-28,,Linear model and nonparametric tests,,content/08-content,,
+Advanced topics,Session 8,2022-11-03,,Weekly check-in 8,12:00,,,evaluations/weekly-check-in
+Advanced topics,Session 8,2022-11-03,,Problem set 8,12:00,,,evaluations/08-problem-set
+Repeated measure designs,Session 9,2022-11-04,,Repeated measures,,content/09-content,,
+Repeated measure designs,Session 9,2022-11-10,,Weekly check-in 9,12:00,,,evaluations/weekly-check-in
+Repeated measure designs,Session 9,2022-11-10,,Problem set 9,12:00,,,evaluations/09-problem-set
+Repeated measure designs,Session 10,2022-11-11,,Mixed models,,content/10-content,,
+Repeated measure designs,Session 10,2022-11-17,,Weekly check-in 10,12:00,,,evaluations/weekly-check-in
+Repeated measure designs,Session 10,2022-11-17,,Problem set 10,12:00,,,evaluations/10-problem-set
+Causal inference,Session 11,2022-11-18,,Power and intro to causal inference,,content/11-content,,
+Causal inference,Session 11,2022-11-24,,Weekly check-in 11,12:00,,,evaluations/weekly-check-in
+Causal inference,Session 11,2022-11-24,,Problem set 11,12:00,,,evaluations/11-problem-set
+Causal inference,Session 12,2022-11-25,,Linear mediation analysis,,content/12-content,,
+Causal inference,Session 12,2022-12-01,,Weekly check-in 12,12:00,,,evaluations/weekly-check-in
+Causal inference,Session 12,2022-12-01,,Problem set 12,12:00,,,evaluations/12-problem-set
+Categorical data,Session 13,2022-12-02,,Categorical data and final review,,content/13-content,,
+Categorical data,Session 13,2022-12-08,,Weekly check-in 13,12:00,,,evaluations/weekly-check-in
+Final,End of term,2022-12-09,,Paper review,23:55,,,evaluations/paper-review
+Final,End of term,2022-12-13,,Final exam,13:30,,,evaluations/final-exam

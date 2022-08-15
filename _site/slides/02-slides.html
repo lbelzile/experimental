@@ -4,7 +4,7 @@
     <title>Hypothesis tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-08-05" />
+    <meta name="date" content="2022-08-15" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -175,7 +175,7 @@ From Davison (2008), Example 9.2
 # Load libraries
 library(tidyverse) 
 # Load and reformat data
-url &lt;- "https://edsm.rbind.io/data/arithmetic.csv"
+url &lt;- "https://raw.githubusercontent.com/lbelzile/experimental-F21/main/static/data/arithmetic.csv"
 arithmetic &lt;- 
  read_csv(url) %&gt;%
   mutate(group = factor(group))
@@ -238,7 +238,7 @@ ggplot(data = arithmetic,
 ```
 ]
 .pull-right[
-&lt;img src="02-slides_files/figure-html/panel-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="02-slides_files/figure-html/panel-chunk-3-1.png" width="672" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -507,7 +507,7 @@ class: title title-2
 ```r
 library(tidyverse) # data manipulation
 library(emmeans) # marginal means and contrasts
-url &lt;- "https://edsm.rbind.io/data/arithmetic.csv" 
+url &lt;- "https://raw.githubusercontent.com/lbelzile/experimental-F21/main/static/data/arithmetic.csv" 
 # load data, define column type (factor and integer)
 arithmetic &lt;- read_csv(url, col_types = "fi") 
 # fit one-way ANOVA model

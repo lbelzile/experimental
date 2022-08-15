@@ -25,8 +25,6 @@ website:
   site-url: "https://edsm.rbind.io"
   description-meta: "Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs."
 
-  favicon: "/files/icon.png"
-
   navbar:
     pinned: true
     background: "#ad1aac"
@@ -73,7 +71,7 @@ website:
             - evaluations/index.qmd
             - text: "Weekly check-in"
               file: evaluations/weekly-check-in.qmd
-            - evaluations/critical-review.qmd
+            - evaluations/paper-review.qmd
             - evaluations/final-exam.qmd
         - section: "Problem sets"
           contents:
@@ -120,7 +118,8 @@ website:
 
   page-footer:
     left: |
-      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}); website template by [Dr. Andrew Heiss](https://www.andrewheiss.com/) <br>
+      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}})<br>
+      Website template by [Dr. Andrew Heiss](https://www.andrewheiss.com/) under [MIT License](https://mit-license.org/)<br>
       All content licensed under a {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
       [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)

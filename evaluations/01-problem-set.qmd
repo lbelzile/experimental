@@ -2,7 +2,7 @@
 title: "Problem set 1"
 ---
 
-# Task 1
+# Task 1: Identifying information.
 
 @Clayton:2018 considers measures of implicit bias for multiple participants from an "in-field implicit association tests". The [codebook](https://lbelzile.github.io/hecedsm/reference/C18.html) contains a description of the data.
 
@@ -11,17 +11,23 @@ title: "Problem set 1"
 2. Identify the type of sampling.
 3. What are the observational and experimental units? How many observations are there for each in the sample?
 4. Comment on the quality of the sample and the generalizability of the findings.
-5. Identify the response variable and the treatment levels.
+5. Identify the response variable, the factor and the treatment levels.
 
-<!--
+Consider next the first field experiment of @Goldstein:2008:
 
-# Task 2: Getting started
+1. Briefly describe the experimental setup
+2. What is the population of interest?
+3. Identify the experimental units and the sample size.
+
+
+
+# Task 2: Getting started with programming
 
 Starting from next week, you will need to perform statistical analyses using a *suitable* software of your choosing. 
 
 Your job is to install a software of your liking. Tell me which one you chose and report back on your success! Also go through tutorials to get started with loading data, producing basic plots and computing simple descriptive statistics.
 
-
+<!--
 Below are some tutorials for selected software and programming language.
 
 - [**R**](http://openintrostat.github.io/oilabs-tidy/01_intro_to_r/intro_to_r.html)

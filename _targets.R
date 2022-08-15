@@ -91,7 +91,7 @@ list(
   #
 
   ## Class schedule file ----
-  tar_target(schedule_file, here_rel("data", "schedule.csv"), format = "file"),
+  tar_target(schedule_file, here_rel("files", "schedule.csv"), format = "file"),
 
 
   ## Build site ----
