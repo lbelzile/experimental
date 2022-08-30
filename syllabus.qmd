@@ -182,7 +182,34 @@ Student hours are set times dedicated to all of you (most professors call these 
 
 ## Late work
 
-The submission modules will stay open for two weeks after the due date for weekly check-in. As much as possible, we will discuss problem sets in class the day after (provided all students have handed in their work). I will not assign penalties, but will gently nudge you to stay on track.
+The submission modules will stay open for two weeks after the due date for weekly check-in. As much as possible, we will discuss problem sets in class the day after they are due (provided all students have handed in their work). I will not assign penalties, but will gently nudge you to stay on track.
+
+
+## Intellectual integrity
+
+Please don't cheat! The [official policy](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf) lists the school rules regarding plagiarism and academic integrity.
+
+## Student services
+
+Students with special needs should feel free to approach me so we can best discuss accommodations. Do check out [HEC Montréal's disabled students](https://www.hec.ca/en/students/support-resources/support-disabled-students/index.html) and [psychological] (https://www.hec.ca/en/students/support-resources/psychological-support/index.html) support services.
+
+## Harassment and sexual violence
+
+The Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at [`harcelement@hec.ca`](mailto:harcelement@hec.ca) from Monday until Friday, from 8:30 until 4:30pm.
+
+If you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.
+
+[Check the school official policy on these matters](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/policy-to-prevent-and-fight-sexual-violence.pdf) for more details.
+
+## Family policy
+
+HEC does not have an official family policy, so the following guidelines reflect my own beliefs and commitments towards parent students^[Shamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander]
+
+1. Babies are welcome in class as often as necessary for support feeding relationship.
+2. You are welcome to bring your child to class in order to cover unforeseeable gaps in childcare. 
+3. If you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child.
+
+
 
 # Evaluations and grades
 
@@ -234,5 +261,6 @@ grading %>%
 <div>
 
 Team work counts toward your final grade only if you obtain  more than 50\% on the individual evaluations. Otherwise, the final grade is calculated on a pro rata basis using only individual evaluations.
+
 
 # References {-}
