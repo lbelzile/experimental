@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://edsm.rbind.io/content/01-content.html</loc>
-    <lastmod>2022-08-30T18:15:03.836Z</lastmod>
+    <lastmod>2022-09-04T01:50:07.400Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/02-content.html</loc>
+    <lastmod>2022-09-04T01:50:08.000Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/content/index.html</loc>
-    <lastmod>2022-08-30T18:15:04.506Z</lastmod>
+    <lastmod>2022-09-04T01:50:08.590Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/01-problem-set.html</loc>
-    <lastmod>2022-08-30T18:15:05.226Z</lastmod>
+    <lastmod>2022-09-04T01:50:09.220Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/final-exam.html</loc>
-    <lastmod>2022-08-30T18:15:05.846Z</lastmod>
+    <lastmod>2022-09-04T01:50:09.720Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/index.html</loc>
-    <lastmod>2022-08-30T18:15:06.456Z</lastmod>
+    <lastmod>2022-09-04T01:50:10.380Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/paper-review.html</loc>
-    <lastmod>2022-08-30T18:15:07.076Z</lastmod>
+    <lastmod>2022-09-04T01:50:10.930Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/weekly-check-in.html</loc>
-    <lastmod>2022-08-30T18:15:07.696Z</lastmod>
+    <lastmod>2022-09-04T01:50:11.480Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/index.html</loc>
-    <lastmod>2022-08-30T18:15:08.676Z</lastmod>
+    <lastmod>2022-09-04T01:50:12.320Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/installation.html</loc>
-    <lastmod>2022-08-30T18:15:09.566Z</lastmod>
+    <lastmod>2022-09-04T01:50:13.100Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/index.html</loc>
-    <lastmod>2022-08-30T18:15:10.266Z</lastmod>
+    <lastmod>2022-09-04T01:50:13.620Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/schedule.html</loc>
-    <lastmod>2022-08-30T18:15:11.606Z</lastmod>
+    <lastmod>2022-09-04T01:50:14.800Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/syllabus.html</loc>
-    <lastmod>2022-08-30T18:15:14.956Z</lastmod>
+    <lastmod>2022-09-04T01:50:15.710Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,48 @@
+---
+title: "Hypothesis testing"
+date: "2022-09-09"
+---
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- ""
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "Introduction", "1", TRUE,
+  "", "Variability", "signal-vs-noise", FALSE,
+  "", "Hypothesis testing", "hypothesis-tests", FALSE
+)
+```
+
+
+## Content
+
+- Sampling variability
+- Hypothesis testing
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- understanding the mechanics behind generic hypothesis tests
+- correctly interpreting the output of generic tests
+
+
+## Readings
+
+- {{< fa book >}} Chapter 2 of the [Course notes](https://lbelzile.github.io/math80667a/hypothesis-testing.html)
+- {{< fa book >}}  Chapter 5 (*Foundations for inference*) of [Matthew Crump's course notes](https://www.crumplab.com/statistics/foundations-for-inference.html)
+- {{< fa file >}}  [The permutation test by Jared Wilson](https://www.jwilber.me/permutationtest/)
+
+## Complementary readings
+
+- {{< fa book >}}  Chapter 3 of @Keppel/Wickens:2004.
+
+## References

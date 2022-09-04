@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.163">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -84,9 +89,11 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Experimental Designs and Statistical Methods</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -165,7 +172,7 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -309,7 +316,7 @@ Tip
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
 <div id="ref-Mask:2022" class="csl-entry" role="doc-biblioentry">
-Abaluck, J., Kwong, L. H., Styczynski, A., Haque, A., Kabir, Md. A., Bates-Jefferys, E., Crawford, E., Benjamin-Chung, J., Raihan, S., Rahman, S., Benhachmi, S., Bintee, N. Z., Winch, P. J., Hossain, M., Reza, H. M., Jaber, A. A., Momen, S. G., Rahman, A., Banti, F. L., … Mobarak, A. M. (2022). Impact of community masking on COVID-19: A cluster-randomized trial in bangladesh. <em>Science</em>, <em>375</em>(6577). <a href="https://doi.org/10.1126/science.abi9069">https://doi.org/10.1126/science.abi9069</a>
+Abaluck, J., Kwong, L. H., Styczynski, A., Haque, A., Kabir, Md. A., Bates-Jefferys, E., Crawford, E., Benjamin-Chung, J., Raihan, S., Rahman, S., Benhachmi, S., Bintee, N. Z., Winch, P. J., Hossain, M., Reza, H. M., Jaber, A. A., Momen, S. G., Rahman, A., Banti, F. L., … Mobarak, A. M. (2022). Impact of community masking on <span>COVID-19</span>: A cluster-randomized trial in <span>B</span>angladesh. <em>Science</em>, <em>375</em>(6577). <a href="https://doi.org/10.1126/science.abi9069">https://doi.org/10.1126/science.abi9069</a>
 </div>
 <div id="ref-Cox:1958" class="csl-entry" role="doc-biblioentry">
 Cox, D. R. (1958). <em>Planning of experiments</em>. Wiley.
@@ -387,7 +394,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

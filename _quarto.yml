@@ -23,7 +23,7 @@ csl: files/bib/apa.csl
 website:
   title: "Experimental Designs and Statistical Methods"
   site-url: "https://edsm.rbind.io"
-  description-meta: "Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs."
+  description: "Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs."
 
   navbar:
     pinned: true

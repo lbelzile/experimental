@@ -4,11 +4,16 @@
     <title>Introduction to experimental design</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-08-15" />
+    <meta name="date" content="2022-09-03" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
     <link href="libs/countdown-0.3.5/countdown.css" rel="stylesheet" />
     <script src="libs/countdown-0.3.5/countdown.js"></script>
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
@@ -73,7 +78,11 @@ class: center middle section-title section-title-6 animated fadeIn
 
 ---
 
+
+layout: true
 class: title title-6
+
+---
 
 # Course content
 .pull-left[
@@ -123,26 +132,25 @@ Statistical fallacies are common mistakes that discredit the validity of your wo
 
 ---
 
-class: title title-6
 # Prerequisites
 
 --
 
 .box-6.medium[**Math skills**]
 
-.box-inv-6.small.sp-after[Basic algebra]
+.box-inv-6.sp-after[Basic algebra]
 
 --
 
 .box-6.medium[**Computer science**]
 
-.box-inv-6.small.sp-after[None]
+.box-inv-6.sp-after[None]
 
 --
 
 .box-6.medium[**Statistics**]
 
-.box-inv-6.small[At the level of OpenIntro Statistics (Chapter 1)]
+.box-inv-6[At the level of OpenIntro Statistics (Chapter 1)]
 
 ???
 More specifically for statistics:
@@ -165,29 +173,12 @@ class: center middle section-title section-title-5 animated fadeIn
 
 ---
 
+
+layout: true
 class: title title-5
-
-# Experiments as gold-standard
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/01/BJOG_randomized_trials.png" alt="Screenshot of a paper in BJOG by Hariton and Locascio" title="Screenshot of a paper in BJOG by Hariton and Locascio" width="60%"&gt;
-&lt;/figure&gt;
-]
-
-.small[
-&gt; *Randomised controlled trials (RCTs) are the reference standard for studying causal relationships between interventions and outcomes as randomisation eliminates much of the bias inherent with other study designs.*
-]
-???
-
-Paper available at https://doi.org/10.1111/1471-0528.15199
-
-From the abstract:
-"Randomised controlled trials (RCTs) are the reference standard for studying causal relationships between interventions and outcomes as randomisation eliminates much of the bias inherent with other study designs."
 
 ---
 
-class: title title-5
 
 # History
 
@@ -217,7 +208,6 @@ Fisher was a eugenist and his views are largely decried nowadays.
 
 ---
 
-class: title title-5
 
 # Modern experiments: A/B testing
 
@@ -229,8 +219,6 @@ class: title title-5
 
 This illustrates changes to the design (Follow now high-contrast in black). This is an example of A/B testing common in web design.
 ---
-
-class: title title-5
 
 # Evidence-based policy
 
@@ -258,7 +246,7 @@ Tennessee's STAR project: smaller class sizes lead to better outcomes
 https://dss.princeton.edu/catalog/resource1589
 
 ---
-class: title title-5
+
 # Nobel memorial prize
 
 &lt;figure&gt;
@@ -274,55 +262,60 @@ class: center middle section-title section-title-3 animated fadeIn
 # Review
 
 ---
+
+layout: true
 class: title title-3
+
+---
 
 # Population and sampling
 
-.pull-left[
 
-.box-inv-3.medium[Defining a population]
+.box-inv-3.medium.sp-after[Defining a target population]
 
-.box-inv-3.medium[Sampling frame]
+.box-inv-3.medium.sp-after-half[Sampling frame]
 
-.box-inv-3.medium[Randomization]
+.box-3.sp-after[Where to draw sample from]
 
-]
-
---
-
-.pull-right[
-
-.box-inv-3.medium[Convenience samples]
-
-.box-inv-3.medium[Non-response bias]
+.box-inv-3.medium.sp-after-half[Sampling procedure]
 
 
-]
+.box-3[Randomness]
+
+
 ---
 
-class: title title-3
+# Convenience samples and non-response bias
+
+.center[
+&lt;figure&gt;
+&lt;img src="img/01/samplingbias.jpg" alt="Illustration of flawed survey due to differential nonresponse." title="" width="60%"&gt;
+&lt;/figure&gt;
+]
+
+
+---
 
 # Sampling scheme
 
 
-.box-inv-3.medium[Simple random sampling]
-
---
-
-.box-inv-3.medium[Stratified sampling]
+.box-inv-3.medium.sp-after[Simple random sampling]
 
 
-.box-3[Gender, ethnicity, etc.]
+.box-inv-3.medium.sp-after[Stratified sampling]
 
---
 
-.box-inv-3.medium[Cluster sampling]
+.box-inv-3.medium.sp-after[Cluster sampling]
 
-.box-3[Villages, housing block, classrooms, etc.]
 
---
+.box-inv-3.medium.sp-after[Multi-stage sampling]
 
-.box-inv-3.medium[Multi-stage sampling]
+???
+
+Stratified sampling: select the same fraction (gender, ethnicity, etc.) Useful for oversampling rare categories
+Clustering sampling: villages, housing blocks, classrooms. Lower quality  than stratified sampling, but cheaper
+
+.box-3[Combination of different sampling]
 
 
 ---
@@ -331,25 +324,63 @@ class: title title-3
 
 .box-inv-3-center.large[# Judging the quality of a sample]
 
-.box-inv-3.medium[Summary statistics]
+.box-inv-3.medium.sp-after[Summary statistics]
 
-Reported to check representativeness of the sample relative to population.
 
---
+.box-inv-3.medium.sp-after[Raw data]
 
-.box-inv-3.medium[Raw data]
 
-Used for reproducibility and to assess whether data is fraudulent.
+.box-inv-3.medium.sp-after[Pre-testing]
 
---
-
-.box-inv-3.medium[Pre-testing]
-
-Check whether sampling allocation is sufficiently random.
 
 ???
+Summary statistics: Reported to check representativeness of the sample relative to population.
+
+Raw data: Used for reproducibility and to assess whether data is fraudulent.
+
+Pre-testing: Check whether sampling allocation is sufficiently random.
+
+
 
 U. Simonsohn, L. Nelson and J. Simmons. *Evidence of Fraud in an Influential Field Experiment About Dishonesty*, 2021, https://datacolada.org/98.
+
+
+
+---
+
+
+class: title title-3
+
+# Experiments as gold-standard
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/01/BJOG_randomized_trials.png" alt="Screenshot of a paper in BJOG by Hariton and Locascio" title="Screenshot of a paper in BJOG by Hariton and Locascio" width="60%"&gt;
+&lt;/figure&gt;
+]
+
+.small[
+&gt; *Randomised controlled trials (RCTs) are the reference standard for studying **causal relationships** between interventions and outcomes as randomisation eliminates much of the bias inherent with other study designs.*
+]
+???
+
+Paper available at https://doi.org/10.1111/1471-0528.15199
+
+From the abstract:
+"Randomised controlled trials (RCTs) are the reference standard for studying causal relationships between interventions and outcomes as randomisation eliminates much of the bias inherent with other study designs."
+
+---
+
+class: title title-3
+
+.box-inv-3-center.large[# Study type versus sampling]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/01/random_sample_assignment.png" alt="Random versus non-random assignment and sampling" title="Two by two classification matrix for experiments based on sampling and study type. Material from Mine Çetinkaya-Rundel and OpenIntro distributed under the CC BY-SA license." width="90%"&gt;
+&lt;/figure&gt;
+]
+
 
 ---
 
@@ -363,19 +394,6 @@ class: title title-3
 &lt;/figure&gt;
 ]
 
-
-
----
-
-class: title title-3
-
-.box-inv-3-center.large[# Study type versus sampling]
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/01/random_sample_assignment.png" alt="Random versus non-random assignment and sampling" title="Two by two classification matrix for experiments based on sampling and study type. Material from Mine Çetinkaya-Rundel and OpenIntro distributed under the CC BY-SA license." width="90%"&gt;
-&lt;/figure&gt;
-]
 ---
 
 layout: false
@@ -386,23 +404,23 @@ class: center middle section-title section-title-2 animated fadeIn
 
 ---
 
+layout: true
 class: title title-2
+
+---
+
 # Technical vocabulary
 
-.box-inv-2.medium[Experimental unit]
+.box-inv-2.medium.sp-after[Experimental unit]
 
-.box-inv-2.medium[Observational unit]
+.box-inv-2.medium.sp-after[Observational unit]
 
-.box-inv-2.medium[Factor / treatment]
+.box-inv-2.medium.sp-after[Factor / treatment]
 
-.box-inv-2.medium[Treatment group]
-
-.box-inv-2.medium[Control group]
 
 
 ---
 
-class: title title-2
 
 # Impact of encouragement on teaching
 
@@ -421,13 +439,13 @@ In pairs, identify
 - the response variable
 
 ]
-<div class="countdown" id="timer_62fa716f" style="right:0;bottom:0;" data-warnwhen="0">
+<div class="countdown" id="timer_631406d6" style="right:0;bottom:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
 ---
 
-class: title title-2
+
 # Comparing treatments
 
 .medium[
@@ -437,7 +455,7 @@ class: title title-2
 ]
 
 ---
-class: title title-2
+
 # Choices in experimental designs
 
 .medium[
@@ -449,7 +467,7 @@ class: title title-2
 ]
 
 ---
-class: title title-2
+
 # Requirements for good experiments
 
 
@@ -461,7 +479,7 @@ class: title title-2
 ]
 
 ---
-class: title title-2
+
 # Absence of systematic error
 
 
@@ -471,8 +489,26 @@ class: title title-2
 - Controlling the environment
 ]
 
+???
+
+If we allocate observations non-randomly (for example timing of a course vs instructor), we cannot necessarily distinguish between effects
+
+ Controlled environment: reduce as much variability (room temperature, experimental apparatus, instructions, etc.)
+
 ---
-class: title title-2
+
+
+# Precision
+
+&lt;figure&gt;
+  &lt;img src="img/01/xkcd2581_health_stats.png" alt="Cartoon" title="xkcd 2581: Health Stats (Randall Munroe)" width="100%"&gt;
+&lt;/figure&gt;
+
+
+
+---
+
+
 # Precision
 
 .medium[
@@ -482,26 +518,50 @@ class: title title-2
     1. accuracy of experimental work
     2. number of experimental units / repetitions per unit
     3. design and methods of analysis
-
 ]
 
 ---
-class: title title-2
+
 # Range of validity
+
+.pull-left[
 
 .medium[
 - What is population?
 - Identify restrictions
-- Extrapolation only if proper sampling scheme and random sample
+- Extrapolation 
+  - if proper random sampling scheme
+  - range of validity 
+]
 ]
 
+.pull-right[
+&lt;figure&gt;
+  &lt;img src="img/01/xkcd605_extrapolating.png" alt="Cartoon" title="xkcd 605: Extrapolating (Randall Munroe)" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+
 ---
-class: title title-2
+
 # Simplicity of the design
+
+
+.pull-left[
 
 .medium[
 - Simple designs lead to simple statistical analyses 
 ]
+
+]
+.pull-right[
+
+&lt;figure&gt;
+  &lt;img src="img/01/xkcd2400_statistics.png" alt="Cartoon" title="xkcd 2400: Statistics (Randall Munroe)" width="80%"&gt;
+&lt;/figure&gt;
+
+]
+
 ???
 
 Important: understand reasons for difference
