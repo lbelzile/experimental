@@ -4,7 +4,7 @@
     <title>Hypothesis tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-08-15" />
+    <meta name="date" content="2022-09-05" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -14,6 +14,10 @@
     <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
     <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
     <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
@@ -48,12 +52,12 @@ HEC Montréal
 ---
 
 name: outline
-class: title title-inv-5
+class: title title-inv-1
 
 # Outline
 --
 
-.box-8.medium.sp-after-half[Variability]
+.box-2.medium.sp-after-half[Variability]
 
 --
 
@@ -62,7 +66,7 @@ class: title title-inv-5
 --
 
 
-.box-2.medium.sp-after-half[**R** examples]
+.box-5.medium.sp-after-half[Pairwise comparisons]
 
 
 ---
@@ -71,23 +75,79 @@ class: title title-inv-5
 
 layout: false
 name: signal-vs-noise
-class: center middle section-title section-title-8 animated fadeIn
+class: center middle section-title section-title-2 animated fadeIn
 
-# Signal versus noise
-
----
-
-class: title title-8
-
-# The signal and the noise
-
-&lt;img src="02-slides_files/figure-html/plots-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-Can you spot the differences?
+# Sampling variability
 
 ---
 
-class: title title-8
+layout: true
+class: title title-2
+
+---
+
+# Studying a population
+.medium[
+
+Interest in impacts of intervention or policy
+
+]
+
+
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-1-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Population distribution (describing possible outcomes and their frequencies) encodes everything we could be interested in.
+
+
+---
+
+# Decision making under uncertainty
+
+.medium[
+- Data collection costly 
+
+   `\(\to\)` limited information available about population.
+- Focus instead on particular aspects of population
+  
+  `\(\to\)` mean, variance, odds, etc.
+
+]
+
+---
+
+# Population characteristics
+
+
+
+.pull-left[
+.box-inv-2.medium.sp-after-half[
+mean / expectation
+]
+
+`$$\mu$$`
+
+.box-inv-2.medium.sp-after-half[
+standard deviation
+]
+
+`$$\sigma= \sqrt{\text{variance}}$$`
+.center[
+same scale as observations
+]
+
+]
+
+.pull-right[
+
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-2-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+]
+
+???
+
+Do not confuse standard error (variability of statistic) and standard deviation (variability of observation from population)
+
+---
 
 # Sampling variability
 
@@ -101,15 +161,51 @@ Not all samples are born alike
 
 ---
 
+# Sampling variability (bis)
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="02-slides_files/figure-html/unifsamp1-1.png" alt="Histograms for 10 random samples of size 20 from a discrete uniform distribution." width="80%" /&gt;
+&lt;p class="caption"&gt;Histograms for 10 random samples of size 20 from a discrete uniform distribution.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+
+
+# The signal and the noise
+
+&lt;img src="02-slides_files/figure-html/plots-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Can you spot the differences?
+
+---
+
+# Information accumulates
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="02-slides_files/figure-html/uniformsamp2-1.png" alt="Histograms of data from uniform (top) and non-uniform (bottom)
+distributions with increasing sample sizes." width="576" /&gt;
+&lt;p class="caption"&gt;Histograms of data from uniform (top) and non-uniform (bottom)
+distributions with increasing sample sizes.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
 layout: false
 name: hypothesis-tests
 class: center middle section-title section-title-4 animated fadeIn
+
 
 # Hypothesis tests
 
 ---
 
+layout: true
 class: title title-4
+
+
+---
 
 # The general recipe of hypothesis testing
 
@@ -125,23 +221,15 @@ class: title title-4
 ]
 
 ---
-
-class: title title-4
-
 # Hypothesis tests versus trials
 
 .pull-left[
-![Scene from "12 Angry Men" by Sidney Lumet](img/02/12angrymen.mp4)
+![Scene from "12 Angry Men" by Sidney Lumet](img/02/12_Angry_Men.jpg)
 
-
-&lt;video width="800" height="400"&gt;
-&lt;source src="img/02/12angrymen.mp4" type="video/mp4"&gt;
-&lt;/video&gt;
 ]
 
 
 .pull-right[
-.box-inv-4[Trial]
 
 - Binary decision: guilty/not guilty
 - Summarize evidences (proof)
@@ -155,7 +243,40 @@ class: title title-4
 
 ---
 
-class: title title-4
+# How to assess evidence?
+
+
+.box-inv-4.medium.sp-after[statistic = numerical summary of the data.]
+
+--
+
+.box-inv-4.medium.sp-after[requires benchmark / standardization]
+
+.box-4.sp-after-half[typically a unitless quantity]
+
+.box-4.sp-after-half[need measure of uncertainty of statistic]
+---
+
+# General construction principles
+
+.box-inv-4.medium[Wald statistic]
+
+`\begin{align*}
+W = \frac{\text{estimated qty} - \text{postulated qty}}{\text{std. error (estimated qty)}}
+\end{align*}`
+
+
+.box-inv-4.sp-after-half[standard error = measure of variability (same units as obs.)]
+
+.box-inv-4.sp-after-half[resulting ratio is unitless!]
+
+
+???
+
+
+The standard error is typically function of the sample size and the standard deviation `\(\sigma\)` of the observations.
+
+---
 
 # Impact of encouragement on teaching
 
@@ -165,64 +286,60 @@ From Davison (2008), Example 9.2
 
 ---
 
-.panelset[
-.panel[.panel-name[Load data]
+# Basic manipulations in **R**: load data
 
-.pull-left[
 
 
 ```r
-# Load libraries
-library(tidyverse) 
-# Load and reformat data
-url &lt;- "https://raw.githubusercontent.com/lbelzile/experimental-F21/main/static/data/arithmetic.csv"
-arithmetic &lt;- 
- read_csv(url) %&gt;%
-  mutate(group = factor(group))
-# categorical variable == factor &lt;fct&gt; 
-glimpse(arithmetic)
+data(arithmetic, 
+     package = "hecedsm")
+# categorical variable = factor
+
+# Look up data
+str(arithmetic)
 ```
 
-]
 
-.pull-right[
 
 ```
-## Rows: 45
-## Columns: 2
-## $ group &lt;fct&gt; A, A, A, A, A,…
-## $ score &lt;dbl&gt; 17, 14, 24, 20…
+## 'data.frame':	45 obs. of  2 variables:
+##  $ group: Factor w/ 5 levels "control 1","control 2",..: 1 1 1 1 1 1 1 1 1 2 ...
+##  $ score: num  17 14 24 20 24 23 16 15 24 21 ...
 ```
-]
-]
 
-.panel[.panel-name[Summary statistics]
+
+---
+
+# Basic manipulations in **R**:  summary statistics
+
 .pull-left[
 
 ```r
 # compute summary statistics
-arithmetic %&gt;% 
-  group_by(group) %&gt;%
+summary_stat &lt;-
+  arithmetic |&gt; 
+  group_by(group) |&gt;
   summarize(mean = mean(score),
             sd = sd(score))
+knitr::kable(summary_stat, 
+             digits = 2)
 ```
 ]
 .pull-right[
 
-```
-## # A tibble: 5 × 3
-##   group  mean    sd
-##   &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 A      19.7  4.21
-## 2 B      18.3  3.57
-## 3 C      27.4  2.46
-## 4 D      23.4  3.09
-## 5 E      16.1  3.62
-```
-]
+|group     |  mean|   sd|
+|:---------|-----:|----:|
+|control 1 | 19.67| 4.21|
+|control 2 | 18.33| 3.57|
+|praise    | 27.44| 2.46|
+|reprove   | 23.44| 3.09|
+|ignore    | 16.11| 3.62|
 ]
 
-.panel[.panel-name[Plot]
+---
+
+# Basic manipulations in **R**: plot
+
 .pull-left[
 
 
@@ -238,25 +355,24 @@ ggplot(data = arithmetic,
 ```
 ]
 .pull-right[
-&lt;img src="02-slides_files/figure-html/panel-chunk-3-1.png" width="672" style="display: block; margin: auto;" /&gt;
-]
-]
 
-
+&lt;img src="02-slides_files/figure-html/panel-chunk-4-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
 ]
+
 
 ---
-class: title title-4
+
 # Pick a test, compute its value 
 
-One-way analysis of variance uses an `\(F\)` statistic.
+One-way analysis of variance, `\(F\)` statistic.
 
 
 ```r
-#one way analysis of variance
-aov(data = arithmetic, 
-    formula = score ~ group)
+#Fit one way analysis of variance
+test &lt;- aov(data = arithmetic, 
+            formula = score ~ group)
+anova(test)
 ```
 
 - In **R**, the function `anova` prints the analysis of variance table.
@@ -271,7 +387,7 @@ aov(data = arithmetic,
 Could it have happened by chance if there was no difference between groups?
 
 ---
-class: title title-4
+
 
 # Assessing evidence
 
@@ -292,16 +408,30 @@ class: title title-4
 ]
 ]
 
+
 ---
+
+
 
 class: title title-4
 # Possible, but not plausible
+.medium[
 
-The null distribution tells us what are the plausible values for the statistic and there relative frequency 
 
-- what can we expect to see **by chance** if there is **no difference** between groups.
+The null distribution tells us what are the *plausible* values for the statistic and their relative frequency if the null hypothesis holds.
+
+]
+.pull-left[
+
+What can we expect to see **by chance** if there is **no difference** between groups?
+]
+
+.pull-right[
+
 
 &lt;img src="02-slides_files/figure-html/nullF-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+]
 
 ???
 
@@ -338,9 +468,42 @@ pf(stat,
 
 Uniform distribution under H0
 
+---
+
+# What is a _p_-value?
+
+&lt;img src="img/02/pvalues.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+.small[
+
+Illustration by Lucy D’Agostino McGowan, based on ASA statement on _p_-values
+
+]
+
+---
+
+# Reporting results of a statistical procedure
 
 
-class: title title-2
+&lt;img src="img/02/Nature_reporting_statistics.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Nature's checklist
+---
+
+layout: false
+name: hypothesis-tests
+class: center middle section-title section-title-5 animated fadeIn
+
+
+# Pairwise comparisons
+
+---
+
+layout: true
+class: title title-5
+
+
+---
 
 # Pairwise differences and _t_-tests
 
@@ -356,9 +519,21 @@ The standard error `\(\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)\)` uses the
 
 ---
 
-class: title title-2
 
-# _t_-tests
+# Pairwise comparison
+
+Consider the pairwise average difference in scores between the praised (group C) and the reproved (group D) of the `arithmetic` data.
+
+
+- Group sample averages are `\(\widehat{\mu}_C = 27.4\)` and `\(\widehat{\mu}_D = 23.4\)`
+- The estimated average difference between groups `\(C\)` and `\(D\)` is `\(\widehat{\delta}_{CD} = 4\)`
+- The estimated pooled *standard deviation* for the five groups is `\(1.15\vphantom{\widehat{\delta}_{CD}}\)`
+- The *standard error* for the difference is `\(\mathsf{se}(\widehat{\delta}_{CD}) = 1.6216\)`
+
+---
+
+
+# _t_-tests: null distribution is Student-_t_
 
 If we postulate `\(\delta_{jk} = \mu_j - \mu_k = 0\)`, the test statistic becomes
 
@@ -370,32 +545,23 @@ The `\(p\)`-value is `\(p = 1- \Pr(-|t| \leq T \leq |t|)\)` for `\(T \sim \maths
    - probability of statistic being more extreme than `\(t\)`
 
 
-The larger the values of `\(t\)` (positive or negative), the more evidence against the null hypothesis.
----
-class: title title-2
-# Example
-
-Consider the pairwise average difference in scores between the praised (group C) and the reproved (group D) of the `arithmetic` study.
-
-
-- Sample averages are `\(\widehat{\mu}_C = 27.4\)` and `\(\widehat{\mu}_D = 23.4\)`
-- The estimated pooled standard deviation for the five groups is `\(1.15\)`
-- The estimated average difference between groups `\(C\)` and `\(D\)` is `\(\widehat{\delta}_{CD} = 4\)`.
-- The standard error for the difference is `\(\mathsf{se}(\widehat{\delta}_{CD}) = 1.6216\)`
----
-class: title title-2
-# Example
-
-- If `\(\mathscr{H}_0: \delta_{CD}=0\)`, the `\(t\)` statistic is 
-`$$t=\frac{\widehat{\delta}_{CD} - 0}{\mathsf{se}(\widehat{\delta}_{CD})} = \frac{4}{1.6216}=2.467$$`
-- The `\(p\)`-value is `\(p=0.018\)`. 
-- We reject the null at level `\(\alpha=5\)`% since `\(0.018 &lt; 0.05\)`.
-- Conclude that there is a significant difference at level `\(\alpha=0.05\)` between the average scores of subpopulations `\(C\)` and `\(D\)`.
-
+The larger the values of the statistic `\(t\)` (positive or negative), the more evidence against the null hypothesis.
 
 ---
 
-class: title title-2
+# Critical values
+
+For a test at level `\(\alpha\)` (two-sided), fail to reject null hypothesis for all values of the test statistic `\(t\)` that are in interval
+
+`$$\mathfrak{t}_{n-k}(\alpha/2) \leq t \leq \mathfrak{t}_{n-k}(1-\alpha/2)$$`
+
+Because of symmetry around zero, `\(\mathfrak{t}_{n-k}(1-\alpha/2) = -\mathfrak{t}_{n-k}(\alpha/2)\)`.
+
+- We call `\(\mathfrak{t}_{n-k}(1-\alpha/2)\)` a **critical value**. 
+- in **R**, `qt(1-alpha/2, df = n - k)` where `n` is the number of observations and `k` the number of groups (computed automatically by software).
+
+---
+
 # Null distribution
 
 
@@ -408,20 +574,18 @@ All values of `\(t\)` falling in the red area lead to rejection at level `\(5\)`
 
 ---
 
-class: title title-2
-# Critical values
 
-For a test at level `\(\alpha\)` (two-sided), fail to reject all values of the test statistic `\(t\)` that are in interval
+# Example
 
-`$$\mathfrak{t}_{n-k}(\alpha/2) \leq t \leq \mathfrak{t}_{n-k}(1-\alpha/2)$$`
+- If `\(\mathscr{H}_0: \delta_{CD}=0\)`, the `\(t\)` statistic is 
+`$$t=\frac{\widehat{\delta}_{CD} - 0}{\mathsf{se}(\widehat{\delta}_{CD})} = \frac{4}{1.6216}=2.467$$`
+- The `\(p\)`-value is `\(p=0.018\)`. 
+- We reject the null at level `\(\alpha=5\)`% since `\(0.018 &lt; 0.05\)`.
+- Conclude that there is a significant difference at level `\(\alpha=0.05\)` between the average scores of subpopulations `\(C\)` and `\(D\)`.
 
-Because of symmetry around zero, `\(\mathfrak{t}_{n-k}(1-\alpha/2) = -\mathfrak{t}_{n-k}(\alpha/2)\)`.
-
-- We call `\(\mathfrak{t}_{n-k}(1-\alpha/2)\)` a **critical value**. 
-- in **R**, `qt(1-alpha/2, df = n - k)` where `n` is the number of observations and `k` the number of groups
 
 ---
-class: title title-2
+
 # Confidence interval 
 
 .small[
@@ -452,7 +616,7 @@ Each bound is of the form
 $$ \text{estimate} + \text{critical value} \times \text{standard error}$$
 
 ]
-.box-2.sp-after-half[ confidence interval = [lower, upper] units]
+.box-5.sp-after-half[ confidence interval = [lower, upper] units]
 
 
 If we replicate the experiment and compute confidence intervals each time
@@ -466,12 +630,9 @@ class: title title-2
 .small[
 Each interval either contains the true value (black horizontal line) or doesn't.
 ]
-&lt;img src="02-slides_files/figure-html/unnamed-chunk-3-1.png" title="100 confidence intervals" alt="100 confidence intervals" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-6-1.png" title="100 confidence intervals" alt="100 confidence intervals" width="70%" style="display: block; margin: auto;" /&gt;
 ---
 
-
-
-class: title title-2
 
 # Why confidence intervals?
 
@@ -486,7 +647,7 @@ Two options for reporting:
 
 
 ---
-class: title title-2
+
 # Example
 
 
@@ -494,30 +655,73 @@ class: title title-2
 - The critical values for a test at level `\(\alpha = 5\)`% are `\(-2.021\)` and `\(2.021\)` 
    - `qt(0.975, df = 45 - 5)`
 - Since `\(|t| &gt; 2.021\)`, reject `\(\mathscr{H}_0\)`: the two population are statistically significant at level `\(\alpha=5\)`%.
-- The confidence interval is `$$[4-1.6216\times 2.021, 4+1.6216\times 2.021] = [0.723, 7.28]$$`
+- The confidence interval is `$$[4-1.6216\times 2.021, 4+1.6216\times 2.021] = [0.723, 7.277]$$`
 
 The postulated value `\(\delta_{CD}=0\)` is not in the interval: reject `\(\mathscr{H}_0\)`.
 
 ---
-class: title title-2
 
 # Pairwise differences in **R**
 
 
 ```r
-library(tidyverse) # data manipulation
 library(emmeans) # marginal means and contrasts
-url &lt;- "https://raw.githubusercontent.com/lbelzile/experimental-F21/main/static/data/arithmetic.csv" 
-# load data, define column type (factor and integer)
-arithmetic &lt;- read_csv(url, col_types = "fi") 
-# fit one-way ANOVA model
-model &lt;- lm(score ~ group, data = arithmetic)
-# Compute average of groups with model specification
-margmeans &lt;- emmeans::emmeans(model, specs = "group")
-# Contrasts (default to pairwise comparisons) - no adjustment
-contrast(margmeans, adjust = 'none', infer = TRUE) 
-#infer = TRUE for confidence intervals
+model &lt;- aov(score ~ group, data = arithmetic)
+margmeans &lt;- emmeans(model, specs = "group")
+contrast(margmeans, 
+         method = "pairwise",
+         adjust = 'none', 
+         infer = TRUE) |&gt;
+  as_tibble() |&gt;
+  filter(contrast == "praise - reprove") |&gt;
+  knitr::kable(digits = 3)
 ```
+
+
+
+|contrast         | estimate|    SE| df| lower.CL| upper.CL| t.ratio| p.value|
+|:----------------|--------:|-----:|--:|--------:|--------:|-------:|-------:|
+|praise - reprove |        4| 1.622| 40|    0.723|    7.277|   2.467|   0.018|
+
+---
+
+layout: true
+class: title title-1
+
+---
+
+# Recap 1
+.medium[
+
+- Due to sampling variability, looking at differences between empirical measures (sample mean, etc.) is not enough.
+- Testing procedures factor in the uncertainty inherent to sampling.
+- Adopt particular viewpoint: null hypothesis (simpler model, e.g. no difference between group) is true and view evidence under that optic.
+
+]
+
+---
+
+# Recap 2
+
+.medium[
+
+- _p_-values  measures compatibility with the null model (relative to an alternative)
+- Tests are standardized, output _p_-value or CI
+   - confidence interval: on scale of data (meaningful interpretation)
+   - _p_-values: uniform on [0,1]
+   
+]
+---
+
+# Recap 3
+
+.medium[
+
+- All hypothesis tests share common ingredients
+- Many ways, models and test can lead to the same conclusion.
+- Transparent reporting is important!
+
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>

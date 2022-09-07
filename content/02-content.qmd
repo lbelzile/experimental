@@ -25,6 +25,7 @@ slide_details <- tibble::tribble(
 
 - Sampling variability
 - Hypothesis testing
+- Pairwise comparisons
 
 
 ## Learning objectives
@@ -32,7 +33,8 @@ slide_details <- tibble::tribble(
 At the end of the session, students should be capable of
 
 - understanding the mechanics behind generic hypothesis tests
-- correctly interpreting the output of generic tests
+- interpreting the output of generic tests
+- correctly reporting the output of a testing procedure
 
 
 ## Readings
@@ -44,5 +46,33 @@ At the end of the session, students should be capable of
 ## Complementary readings
 
 - {{< fa book >}}  Chapter 3 of @Keppel/Wickens:2004.
+
+
+## Slides
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/02-slides")
+# slide_tabs(slide_details, "/slides/02-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/02-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::
+
+## Case study
+
+We will look at the way authors report the conclusion of their statistical tests with
+
+- @Rosen:1974
+- @Brucks.Levav:2022
+- @Liu.Rim.Min.Min:2022, Experiment 1
+
 
 ## References

@@ -53,14 +53,14 @@
     "href": "content/02-content.html",
     "title": "Hypothesis testing",
     "section": "",
-    "text": "Sampling variability\nHypothesis testing"
+    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons"
   },
   {
     "objectID": "content/02-content.html#learning-objectives",
     "href": "content/02-content.html#learning-objectives",
     "title": "Hypothesis testing",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the mechanics behind generic hypothesis tests\ncorrectly interpreting the output of generic tests"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the mechanics behind generic hypothesis tests\ninterpreting the output of generic tests\ncorrectly reporting the output of a testing procedure"
   },
   {
     "objectID": "content/02-content.html#readings",
@@ -75,6 +75,20 @@
     "title": "Hypothesis testing",
     "section": "Complementary readings",
     "text": "Complementary readings\n\n Chapter 3 of Keppel & Wickens (2004)."
+  },
+  {
+    "objectID": "content/02-content.html#slides",
+    "href": "content/02-content.html#slides",
+    "title": "Hypothesis testing",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+  },
+  {
+    "objectID": "content/02-content.html#case-study",
+    "href": "content/02-content.html#case-study",
+    "title": "Hypothesis testing",
+    "section": "Case study",
+    "text": "Case study\nWe will look at the way authors report the conclusion of their statistical tests with\n\nRosen & Jerdee (1974)\nBrucks & Levav (2022)\nLiu et al. (2022+), Experiment 1"
   },
   {
     "objectID": "content/index.html",

@@ -39,7 +39,12 @@ website:
         file: example/index.qmd
       - text: "Notes"
         href: "https://lbelzile.github.io/math80667a"
-      	 
+      - icon: slack
+        href: "https://edsmf22.slack.com"
+        aria-label: Slack
+      - icon: box
+        href: "https://lbelzile.github.io/hecedsm"
+        aria-label: Datasets 
  
   sidebar:
     - title: "Content"
@@ -54,8 +59,8 @@ website:
           contents:
             - text: "1: Introduction"
               file: content/01-content.qmd
-          #  - text: "2: Hypothesis testing"
-          #    file: content/02-content.qmd
+            - text: "2: Hypothesis testing"
+              file: content/02-content.qmd
           #  - text: "3: One way ANOVA"
           #    file: content/03-content.qmd
           #  - text: "4: Contrasts and multiple testing"
