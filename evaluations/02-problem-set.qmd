@@ -1,0 +1,26 @@
+---
+title: "Problem set 2"
+---
+
+# Task 1: Hypothesis testing
+
+We consider the hypothesis test performed by @Bastian:2014 with the [data](https://lbelzile.github.io/hecedsm/reference/BJF14_S1.html) they collected in their Experiment 1. The [**R**](/evaluations/02-problem-set.R) and [SPSS](/evaluations/02-problem-set.sps) files containing code for performing the testing procedures and extracting the output are provided. You can also download the [SPSS data file](/files/data/SPSS/BJF14_S1.sav) and the paper via [OpenStats Lab](http://www.google.com/url?q=http%3A%2F%2Fjournals.sagepub.com%2Fstoken%2Fdefault%2Bdomain%2FyFi5kZDGWMGBNQY62zIE%2Ffull&sa=D&sntz=1&usg=AFQjCNEgRSiQLzbjFcLTBNEsoPdzjV1-ng). 
+
+1. Briefly comment on the generalisability of the study in light of the sample composition and data collection.
+2. The authors used a two-sample _t_-test to assess the hypothesis that people in the pain condition felt more threatened by the tasks (a manipulation check). One criticism of using such a test statistic is that it assumes that observations in both group have potentially different group average, but similar standard deviation.^[We will see modelling assumptions in Week 3, take my word on it for now.] An alternative test which doesn't assume equal variance in each experimental condition is Welch's _t_-test. Use the latter instead to model the manipulation check for `threat` and report the output. Do the conclusions change?
+3. The authors report results based on a one-way analysis of variance, a testing procedure that compares the mean of $m$ different groups. The latter is *equivalent* to a two-sample _t_-test when there are only $m=2$ groups.
+   a) Using the two-sample _t_-test, obtain a 95% and a 99% confidence interval for the mean difference score for perceived `bonding`. 
+   b) Explain how the two methods (_p_-value and confidence intervals) are equivalent for performing an hypothesis test with a significance level of 5% and 1%, respectively. Report the conclusions of your procedure in each case.
+   c) List an advantage of each over the other.
+4. Extract the degrees of freedom, the value of the $F$-statistic and the _p_-value, suitably rounded and report these. 
+5. What can we reasonably conclude about the effect of bonding based on the output of the testing procedure? Is this reflected in the writing of the authors?
+6. Figure 1 of @Bastian:2014 shows a dynamite plot, i.e., a bar plot with 95% confidence intervals for each condition. Note that this is standard display, but overall it is poor graphical choice [(why?)](https://simplystatistics.org/posts/2019-02-21-dynamite-plots-must-die/). Briefly summarize the blog post.
+
+# Task 2 - Reproducibility
+
+Section 3.2 of @Duke.Amir:2022 report the results of an online experiment and the impact on sales of sequential vs integrated decision making; the data can be found in the **R** package `hecedsm` under `DA22_E2`; you can also download the [SPSS database](/files/data/SPSS/DA22_E2.sav).
+
+Reproduce the results reported in Section 3.2.2 and check that your results match those of the paper. Submit your code alongside your report.
+
+
+

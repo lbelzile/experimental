@@ -81,7 +81,7 @@ website:
         - section: "Problem sets"
           contents:
             - evaluations/01-problem-set.qmd
-        #    - evaluations/02-problem-set.qmd
+            - evaluations/02-problem-set.qmd
         #    - evaluations/03-problem-set.qmd
         #    - evaluations/04-problem-set.qmd
         #    - evaluations/05-problem-set.qmd
@@ -104,14 +104,14 @@ website:
           contents:
             - text: "**R** and RStudio"
               file: example/installation.qmd
-         # - section: "Examples"
-         # contents:
-         #   - text: "Introduction"
-         #     file: example/01-introduction.qmd
+        - section: "Examples"
+          contents:
+            - text: "Introduction"
+              file: example/introduction.qmd
          #   - text: "Null distributions"
          #     file: example/02-hypothesis_testing.qmd
-         #   - text: "One-way ANOVA"
-         #     file: example/03-onewayanova.qmd
+            - text: "One-way ANOVA"
+              file: example/onewayanova.qmd
          #   - text: "Two-way ANOVA"
          #   - text: "Three-way ANOVA"
          #     file: example/05-threewayanova.qmd

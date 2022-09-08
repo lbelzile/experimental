@@ -2,54 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://edsm.rbind.io/content/01-content.html</loc>
-    <lastmod>2022-09-06T01:44:50.451Z</lastmod>
+    <lastmod>2022-09-08T03:27:36.531Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/content/02-content.html</loc>
-    <lastmod>2022-09-06T01:44:51.121Z</lastmod>
+    <lastmod>2022-09-08T03:27:37.551Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/content/index.html</loc>
-    <lastmod>2022-09-06T01:44:51.651Z</lastmod>
+    <lastmod>2022-09-08T03:27:38.321Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/01-problem-set.html</loc>
-    <lastmod>2022-09-06T01:44:52.281Z</lastmod>
+    <lastmod>2022-09-08T03:27:38.961Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/02-problem-set.html</loc>
+    <lastmod>2022-09-08T03:27:39.621Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/final-exam.html</loc>
-    <lastmod>2022-09-06T01:44:52.761Z</lastmod>
+    <lastmod>2022-09-08T03:27:40.211Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/index.html</loc>
-    <lastmod>2022-09-06T01:44:53.281Z</lastmod>
+    <lastmod>2022-09-08T03:27:40.961Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/paper-review.html</loc>
-    <lastmod>2022-09-06T01:44:53.781Z</lastmod>
+    <lastmod>2022-09-08T03:27:41.681Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/weekly-check-in.html</loc>
-    <lastmod>2022-09-06T01:44:54.261Z</lastmod>
+    <lastmod>2022-09-08T03:27:42.441Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/index.html</loc>
-    <lastmod>2022-09-06T01:44:55.011Z</lastmod>
+    <lastmod>2022-09-08T03:27:43.511Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/installation.html</loc>
-    <lastmod>2022-09-06T01:44:55.741Z</lastmod>
+    <lastmod>2022-09-08T03:27:44.591Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/example/introduction.html</loc>
+    <lastmod>2022-09-08T03:27:46.501Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/example/onewayanova.html</loc>
+    <lastmod>2022-09-08T03:27:52.441Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/index.html</loc>
-    <lastmod>2022-09-06T01:44:56.231Z</lastmod>
+    <lastmod>2022-09-08T03:27:53.261Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/schedule.html</loc>
-    <lastmod>2022-09-06T01:44:57.201Z</lastmod>
+    <lastmod>2022-09-08T03:27:54.651Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/syllabus.html</loc>
-    <lastmod>2022-09-06T01:44:57.981Z</lastmod>
+    <lastmod>2022-09-08T03:27:55.761Z</lastmod>
   </url>
 </urlset>
