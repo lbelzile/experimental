@@ -1,0 +1,59 @@
+---
+title: "Problem set 3"
+---
+
+**Submission information**: please submit on ZoneCours
+
+- a PDF report
+- your code
+ 
+following the naming convention `PS3-studentid.extension` where `studentid` is replaced with your student ID and `extension` is the file extension (e.g., `.pdf`, `.R`, `.Rmd`, `.sps`)
+
+**Instructions**: We consider data collected for Study 3 of @Grossman:2014 (click the links to download [the paper](https://journals.sagepub.com/stoken/default+domain/vIg5KBmaiJHKTXfUpXZK/full) and the [Supplementary material](https://journals.sagepub.com/doi/suppl/10.1177/0956797614535400/suppl_file/DS_10.11770956797614535400_SupplementalMethodandResults.pdf)). You can access these data directly from **R** from the `hecedsm` package or [download the SPSS data](/files/data/SPSS/GK14_S3.sav).
+
+Have a quick look at the paper and fit the one way analysis of variance model to responses for young adults (20 to 40 years) only.
+
+1. Report the test statistic, the null distribution and the p-value.
+2. Provide a conclusion in the context of the study.
+3. There are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?
+
+We next look at model assumptions
+
+4. Is the independence assumption plausible in the context?
+5. How many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition and forego normality checks? 
+6. Produce a normal quantile-quantile plot and comment on the distribution of the residuals (check out [this response on CrossValidated](https://stats.stackexchange.com/q/101290) first).
+7. Check the equality of variance assumption using a suitable test statistic and report the results.
+8. Use Welch's one-way analysis of variance model (`oneway.test()` in **R**) and compare the output and the conclusion with that of the usual $F$-test. 
+
+**Hints and R snippets**
+
+To subset the data, you can use the following commands:
+
+```{r}
+data(GK14_S3, package = "hecedsm")
+db <- GK14_S3 |>
+    dplyr::filter(
+      !is.na(persp), # exclude missing values
+      age == "young") # only young adults
+```
+
+The following code filters out missing values for `persp` for young adults and shows the counts for each condition:
+```{r}
+GK14_S3 |>
+  dplyr::filter(is.na(persp),      
+                age == "young") |> 
+  dplyr::group_by(condition) |> 
+  dplyr::summarize(count = dplyr::n()) 
+```
+
+and finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.
+
+```{r}
+library(ggplot2) # grammar of graphics
+ggplot(data = db,
+       mapping = aes(x = condition,
+                     y = persp,
+                     color = condition)) +
+  geom_boxplot() +
+  geom_jitter()
+```

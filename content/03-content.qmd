@@ -1,0 +1,73 @@
+---
+title: "Analysis of variance"
+date: "2022-09-16"
+---
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- ""
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "Introduction", "1", TRUE,
+  "", "Recap", "recap", FALSE,
+  "", "One way ANOVA", "f-test", FALSE,
+  "", "Parametrizations and interpretation", "parametrization", FALSE,
+  "", "Planned comparisons and post-hoc tests", "planned-comparisons", FALSE
+)
+```
+
+
+## Content
+
+- ANOVA and _F_-test statistic
+- Power of the _F_-test
+- Model assumptions
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- carry-out a one-way analysis of variance test
+- list and explain which factors impact the power of the _F_-test
+- check model assumptions using hypothesis tests and graphics.
+
+
+## Readings
+
+- {{< fa book >}} Chapter 3 of the [Course notes](https://lbelzile.github.io/math80667a/CRT.html)
+
+
+## Complementary readings
+
+- {{< fa book >}}  [Chapter 2](https://stat.ethz.ch/~meier/teaching/anova/completely-randomized-designs.html) of @Meier:2022
+- {{< fa book >}}  Chapter 3 and 7 of @Keppel/Wickens:2004.
+
+
+## Slides
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/03-slides")
+# slide_tabs(slide_details, "/slides/03-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/03-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::
+
+
+
+## References

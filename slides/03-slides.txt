@@ -1,0 +1,126 @@
+
+layout: false
+name: parametrization
+class: center middle section-title section-title-4 animated fadeIn
+
+# Parametrizations and interpretation
+
+---
+
+class: title title-4
+
+# Parametrization 1: sample averages
+
+Most natural parametrization, not useful for test
+
+- Sample sizes in each group: $n_1, \ldots, n_K$, are known.
+
+- sample average of each treatment group: $\widehat{\mu}_1, \ldots, \widehat{\mu}_K$.
+
+.box-inv-4.sp-after-half[
+$K$ means  = $K$ parameters
+]
+
+Overall mean is 
+\begin{align*}
+n \widehat{\mu} = n_1 \widehat{\mu}_1 + \cdots + n_K \widehat{\mu}_K
+\end{align*}
+
+
+---
+class: title title-4
+
+# Parametrization 2: difference to baseline
+
+In terms of differences, relative to a baseline category $j$
+
+
+
+- Intercept = sample mean of group j, $\widehat{\mu}_j$
+- Coefficient for group $k \neq j$: $\widehat{\mu}_k - \widehat{\mu}_j$
+    - difference between averages of group $k$ and baseline
+
+In **R**, the baseline group is the smallest alphanumerical value.
+
+.box-inv-4[
+```{r echo = TRUE, eval = FALSE}
+lm(response ~ group)
+```
+]
+
+---
+class: title title-4
+
+# Parametrization 3: sum-to-zero
+
+In terms of differences, relative to average of $\widehat{\mu}_1, \ldots, \widehat{\mu}_K$
+
+- Intercept = $(\widehat{\mu}_1 + \cdots + \widehat{\mu}_K)/K$
+- Coefficient for group $k$: $\widehat{\mu}_k$ minus intercept
+
+In **R**, the last factor level is not reported (by default).
+
+.box-inv-4[
+```{r echo = TRUE, eval = FALSE}
+aov(response ~ group)
+lm(response ~ group, contrasts = contr.sum(group))
+```
+]
+
+Warning: Intercept $\neq \widehat{\mu}$ unless the sample is balanced.
+
+---
+class: title title-4
+
+# Comparison for the arithmetic example
+
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> group </th>
+   <th style="text-align:right;"> mean </th>
+   <th style="text-align:right;"> contrasts </th>
+   <th style="text-align:right;"> sum-to-zero </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> intercept </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 19.66 </td>
+   <td style="text-align:right;"> 21.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> control 1 </td>
+   <td style="text-align:right;"> 19.66 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> -1.33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> control 2 </td>
+   <td style="text-align:right;"> 18.33 </td>
+   <td style="text-align:right;"> -1.33 </td>
+   <td style="text-align:right;"> -2.66 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> praised </td>
+   <td style="text-align:right;"> 27.44 </td>
+   <td style="text-align:right;"> 7.77 </td>
+   <td style="text-align:right;"> 6.44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reproved </td>
+   <td style="text-align:right;"> 23.44 </td>
+   <td style="text-align:right;"> 3.77 </td>
+   <td style="text-align:right;"> 2.44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ignored </td>
+   <td style="text-align:right;"> 16.11 </td>
+   <td style="text-align:right;"> -3.55 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+</tbody>
+</table>
+

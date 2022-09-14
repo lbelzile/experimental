@@ -61,10 +61,10 @@ website:
               file: content/01-content.qmd
             - text: "2: Hypothesis testing"
               file: content/02-content.qmd
-          #  - text: "3: One way ANOVA"
-          #    file: content/03-content.qmd
-          #  - text: "4: Contrasts and multiple testing"
-          #    file: content/04-content.qmd          
+            - text: "3: One way ANOVA"
+              file: content/03-content.qmd
+            - text: "4: Contrasts and multiple testing"
+              file: content/04-content.qmd          
 
     - title: "Evaluations"
       style: "docked"

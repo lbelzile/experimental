@@ -33,7 +33,7 @@ youtube_list(slide_details, playlist_id, example = TRUE)
 
 This notebook shows the various manipulation that an experimenter may undertake to test whether the population averages are the same based on some experimental data.
 
-Recall the setup of [Example 1](/example/01-introduction). 
+Recall the setup of [Example 1](/example/introduction.html). 
 
 ```{r setup, include = FALSE}
 library(knitr)
@@ -110,7 +110,7 @@ knitr::kable(anova_post,
 
 ## Contrasts and estimated marginal means
 
-While the $F$ test may strongly indicate that the means ofeach group are different, 
+While the $F$ test may strongly indicate that the means of each group are different, 
 it doesn't indicate which group is different from the rest.
 Because we can compare different groups doesn't mean these comparisons are of any 
 scientific interest and going fishing by looking at all pairwise differences is 

@@ -68,7 +68,7 @@ Depending on the format (particularly if you have SAS, SPSS or Stata formatted d
 
 We consider data from @Baumann:1992. The abstract of the paper provides a brief description of the study
 
-> This study investigated the effectiveness of explicit instruction in think aloud as a means to promote elementary students' comprehension monitoring abilities. Sixty-six fourth-grade students were randomly assigned to one of three experimental groups: (a) a Think-Aloud (TA) group, in which students were taught various comprehension monitoring strategies for BSJ92 stories (e.g., self-questioning, prediction, retelling, reBSJ92) through the medium of thinking aloud; (b) a Directed BSJ92-Thinking Activity (DRTA) group, in which students were taught a predict-verify strategy for BSJ92 and responding to stories; or (c) a Directed BSJ92 Activity (DRA) group, an instructed control, in which students engaged in a noninteractive, guided BSJ92 of stories. 
+> This study investigated the effectiveness of explicit instruction in think aloud as a means to promote elementary students' comprehension monitoring abilities. Sixty-six fourth-grade students were randomly assigned to one of three experimental groups: (a) a Think-Aloud (TA) group, in which students were taught various comprehension monitoring strategies for reading stories (e.g., self-questioning, prediction, retelling, rereading) through the medium of thinking aloud; (b) a Directed reading-Thinking Activity (DRTA) group, in which students were taught a predict-verify strategy for reading and responding to stories; or (c) a Directed reading Activity (DRA) group, an instructed control, in which students engaged in a noninteractive, guided reading of stories. 
 
 We have multiple columns for each of the tests (pre-intervention and post-intervention) from @Baumann:1992. For the time being, we focus on the first, `pretest`, which was used to act as control and to ensure that the random allocation of students to the three treatment groups resulted in similar average performances. This allows allows us to perform paired comparisons at a later stage by subtracting post- and pre-intervention scores to check their progress. 
 
@@ -78,19 +78,14 @@ The reader is invited at this stage to look at the description of the first task
 ```{r loaddata, echo = TRUE, eval = TRUE}
 # Load packages
 library(tidyverse)
-# Load data
-# We directly fetch the data from the URL
+# Load data from the package
 data(BSJ92, package = 'hecedsm')
-```
-
-The first column, `group`, is stored as a string (of type `character` or `<chr>`, indicating that the values are text). In **R**, [categorical variables](https://lbelzile.github.io/math80667a/introduction.html#review-of-basic-concepts) are stored as objects of type `factor`, so we need first to tell the software that the labels `"DR"`, `"DRTA"`, `"TA"`, stored as strings, corresponds to different categories labels. We use mutate to transform `group` into a `factor` and leave the other variables unchanged (`<dbl>`, which stands for double, indicates numerical values).
-
-```{r mutatefactor, eval = TRUE, echo = TRUE}
-BSJ92 <- BSJ92 |>
-  mutate(group = as_factor(group))
 # Look at data to check variable type
 glimpse(BSJ92)
 ```
+
+In **R**, [categorical variables](https://lbelzile.github.io/math80667a/introduction.html#review-of-basic-concepts) are stored as objects of type `factor` and numerical values as `<dbl>`, which stands for double.
+
 
 We are now ready to proceed with the data analysis.
 

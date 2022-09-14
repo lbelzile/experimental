@@ -1,0 +1,66 @@
+---
+title: "Contrasts and multiple testing"
+date: "2022-09-23"
+---
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- ""
+
+```
+
+
+## Content
+
+- Contrasts
+- Multiple testing
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- specifying and calculating custom contrasts in factorial designs
+- determining the number of tests in a family that need to be corrected for
+- understanding how to correct _p_-values to account for multiple testing
+- listing multiplicity testing methods suitable depending on context
+
+
+## Readings
+
+- {{< fa book >}}  [Chapter ](https://stat.ethz.ch/~meier/teaching/anova/contrasts-and-multiple-testing.html) of @Meier:2022
+- {{< fa book-open-reader >}} [One-way ANOVA example](/example/onewayanova.html)
+
+
+## Complementary readings
+
+
+- {{< fa book >}}  Chapters 4 and 6 of @Keppel/Wickens:2004.
+
+
+## Slides
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/04-slides")
+# slide_tabs(slide_details, "/slides/04-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/04-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::
+
+
+
+## References
