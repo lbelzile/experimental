@@ -230,6 +230,15 @@ g1 + g2
 
 ---
 
+# What happens under the null regime?
+
+If all groups have the same mean, both numerator and denominator are estimators of $\sigma^2$, thus
+- the $F$ ratio should be 1 on average if there are no mean differences.
+- but the numerator is more variable because it is based on $K$ observations
+  - benchmark is skewed to the right.
+
+---
+
 # Null distribution and degrees of freedom
 
 
@@ -278,11 +287,9 @@ g1 <- ggplot() +
                 xlim = c(0,10),
                 n = 1001) +
   theme_classic() +
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        legend.position = "none") +
-  scale_y_continuous(expand = c(0,0))
+  theme(legend.position = "none") +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0))
 g1
 ```
 
@@ -291,16 +298,6 @@ g1
 ]
 
 ---
-
-# Intuition behind _F_-distribution
-
-If all groups have the same mean, both numerator and denominator are estimators of $\sigma^2$, thus
-- the $F$ ratio should be 1 on average if there are no mean differences.
-- but the numerator is more variable because it is based on $K$ observations
-  - benchmark is skewed to the right.
-
----
-
 
 # Impact of encouragement on teaching
 
@@ -354,11 +351,13 @@ The _p_-value gives the probability of observing an outcome as extreme **if the 
 
 ```{r echo = TRUE, eval = FALSE}
 # Compute p-value
-pf(stat, 
+pf(15.27, 
    df1 = 4, 
    df2 = 40, 
    lower.tail = FALSE)
 ```
+
+Probability that a $\mathsf{F}(4,40)$ exceeds 15.27.
 
 ]
 
@@ -428,7 +427,7 @@ ggplot(region) +
   stat_function(fun = dt, args = list(ncp = 1.5, df=10), xlim = c(qt(0.975, df = 10), 10),
                 geom = "area", fill = "white") +
   stat_function(fun = dt, n = 1000, args = list(df= 10), xlim = c(-5,6)) +
-  stat_function(fun = dt, n = 1000, args = list(ncp = 1.5, df=10), lty = 2, xlim = c(-5,6)) +
+  stat_function(fun = dt, n = 1000, args = list(ncp = 1.5, df=10), lty = 2, xlim = c(-5,6), lwd = 2) +
   ylab("density")
 ```
   .small.center[Null distribution (full) and given alternative distribution (dashed).]
@@ -449,7 +448,8 @@ p1 <- ggplot(region1) +
                 geom = "area", fill = "white") +
   ylab("density") +
   stat_function(fun = dnorm, args = list(mean = 0, sd = 1), xlim = c(-5,5)) +
-  stat_function(fun = dnorm, n = 1000, args = list(mean = 3, sd = 1), lty = 2, xlim = c(-5,5))
+  stat_function(fun = dnorm, n = 1000, args = list(mean = 3, sd = 1), lty = 2, lwd = 2,
+                xlim = c(-5,5))
 p1
 ```
  .small.center[Power is the area in white under the dashed curved, beyond the cutoff. ]
@@ -866,9 +866,17 @@ nobsgroup <- 20L
 ntotal <- ngroup*nstrat*nobsgroup
 eps <- rgamma(n = ntotal,shape = 2)
 y <- rep(c(-2,1,3,4,0,2), each = nobsgroup) + eps
-data_fake <- tibble::tibble(resp = y, 
-       treatment = factor(rep(rep(c("yes","no"), each = nobsgroup), length.out = ntotal)),
-       age = factor(rep(rep(c("< 25","25 to 55","> 55"), each = nobsgroup), length.out = ntotal),ordered = TRUE))
+data_fake <- tibble::tibble(
+  resp = y, 
+  treatment = factor(
+    rep(
+      rep(c("yes","no"), 
+          each = nobsgroup), 
+    length.out = ntotal)),
+       age = factor(rep(
+         rep(c("18 to 25","25 to 55","55+"), 
+             each = nobsgroup), 
+             length.out = ntotal), ordered = TRUE))
 summary_stats_whole <- data_fake %>%
     group_by(treatment) %>%
     summarize(mean = mean(resp))
@@ -1047,19 +1055,6 @@ Knowing the value of one observation tells us nothing about the value taken by t
 - Dependence on instrumentation, experimenter, time of the day, etc.
 
 Observations close by tend to be more alike (correlated).
-
----
-
-# Impact of (lack of) independence
-.small[
-Probability of rejecting null hypothesis when there is no difference in mean as a function of correlation between observations in a group.]
-
-
-```{r echo = FALSE, out.width='62%'}
-knitr::include_graphics("img/03/plotLevelIndep.png")
-```
-
-
 ---
 
 # \# 4: Sample size (normality?)
@@ -1199,16 +1194,6 @@ g1 + g2
 
 
 .small[Normal quantile-quantile plot (left) and Tukey's mean different QQ-plot (right).]
-
-
----
-
-# Loss to follow-up
-
-- In longitudinal studies, may lose subjects to attrition
-- Creates missing values
-- Matters less if we
-It may be necessary to exclude subjects 
 
 
 ---

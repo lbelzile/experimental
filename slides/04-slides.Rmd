@@ -102,7 +102,7 @@ knitr::include_graphics("img/04/Spot-Light.png")
 
 ]
 
-.small[Image source: PNGAll.com, CC-BY-NC 4.0]
+.tiny[Image source: PNGAll.com, CC-BY-NC 4.0]
 
 ???
 
@@ -112,7 +112,7 @@ Analogy here is that the global test is a dim light: it shows there are differen
 
 With $K$ groups, null hypothesis of the form
 
-$$\mathscr{H}_0: \underset{\text{weighted sum of subpopulation means}}{c_1 \mu_1 + \cdots + c_K\mu_K} =a$$
+$$\mathscr{H}_0: \underset{\text{weighted sum of subpopulation means}}{C = c_1 \mu_1 + \cdots + c_K\mu_K} =a$$
 --
 
 .box-3.medium.sp-after[
@@ -127,7 +127,7 @@ Global mean larger than $a$?
 
 ]
 
-$$\mathscr{H}_0: \frac{n_1}{n} \mu_1 + \cdots + \frac{n_K}{n} \mu_K > a$$
+$$\mathscr{H}_0: \frac{n_1}{n} \mu_1 + \cdots + \frac{n_K}{n} \mu_K  \leq a$$
 
 .box-inv-3.sp-after-half[
 Pairwise comparison
@@ -138,18 +138,24 @@ $$\mathscr{H}_0: \mu_i = \mu_j, \quad i \neq j$$
 ---
 
 # Characterization of linear contrasts
+
+
+- Weights $c_1, \ldots, c_K$ are specified by the **user**.
+- Mean response in each experimental group is estimated as sample average of observations in that group, $\widehat{\mu}_1, \ldots, \widehat{\mu}_K$.
+- Assuming equal variance, the contrast statistic behaves in large samples like a Student-_t_ distribution with $n-K$ degrees of freedom.
+
+
+---
+# Sum-to-zero constraint
+
 .medium.center[
+
 If $c_1 + \cdots+c_K = 0$, the contrast encodes
 
 .box-3[**differences between treatments**] 
 
 rather than information about the overall mean.
 ]
-
-
-- Weights $c_1, \ldots, c_K$ are specified by the **user**.
-- Mean response in each experimental group is estimated as sample average of observations in that group, $\widehat{\mu}_1, \ldots, \widehat{\mu}_K$.
-- Assuming equal variance, the contrast statistic behaves in large samples like a Student-_t_ distribution with $n-K$ degrees of freedom.
 
 
 ---
@@ -186,10 +192,10 @@ group 3
 
 --
 
-.box-3.medium[Hypothesis of interest]
+.box-3.medium[Hypotheses of interest]
 
-- $\mathscr{H}_{01}$: $\mu_{\text{praise}} = \mu_{\text{reproved}}$ (attention)
-- $\mathscr{H}_{02}$: $\frac{1}{2}(\mu_{\text{control}_1}+\mu_{\text{control}_2}) = \mu_{\text{praised}}$ (encouragement)
+- $\mathscr{H}_{01}: \mu_{\text{praise}} = \mu_{\text{reproved}}$ (attention)
+- $\mathscr{H}_{02}: \frac{1}{2}(\mu_{\text{control}_1}+\mu_{\text{control}_2}) = \mu_{\text{praised}}$ (encouragement)
 
 ???
 
@@ -208,25 +214,22 @@ $0\cdot \mu_{\text{control}_1}$ + $0\cdot \mu_{\text{control}_2}$ + $1 \cdot \mu
 
 ]
 
-The sum of the coefficients, $(0, 0, 1, -1, 0)$, is zero.
-
-.box-3[sum-to-zero constraint]
+The sum of the coefficient vector, $\boldsymbol{c} = (0, 0, 1, -1, 0)$, is zero.
 
 --
 
 Similarly, for $\mathscr{H}_{02}: \frac{1}{2}(\mu_{\text{control}_1}+\mu_{\text{control}_2}) = \mu_{\text{praise}}$
-.small.center[
 
-$\frac{1}{2} \cdot \mu_{\text{control}_1}$ + $\frac{1}{2}\cdot \mu_{\text{control}_2}$ - $1 \cdot \mu_{\text{praised}}$ + $0\cdot \mu_{\text{reproved}}$ + $0 \cdot \mu_{\text{ignored}}$
+$$\frac{1}{2} \cdot \mu_{\text{control}_1} + \frac{1}{2}\cdot \mu_{\text{control}_2} - 1 \cdot \mu_{\text{praised}} + 0\cdot \mu_{\text{reproved}} + 0 \cdot \mu_{\text{ignored}}$$
 
-]
 
-The entries of the contrast vector $\left(\frac{1}{2}, \frac{1}{2}, -1, 0, 0\right)$ sum to zero.
 
-Equivalent formulation is obtained by picking $(1,1,-3,0,0)$
+The contrast vector is $\boldsymbol{c}=\left(\frac{1}{2}, \frac{1}{2}, -1, 0, 0\right)$; entries again sum to zero.
+
+Equivalent formulation is obtained by picking $\boldsymbol{c} = (1,1,-2,0,0)$
 
 ---
-# Contrasts in **R**
+# Contrasts in **R** with `emmeans`
 
 ```{r eval = FALSE, echo = TRUE}
 library(emmeans)
@@ -272,6 +275,7 @@ knitr::kable(tab, digits = 2)
 
 <br>
 
+.box-3[Confidence intervals]
 ```{r, echo=FALSE}
 # Obtain confidence intervals instead of p-values
 out2 <- tibble(contrast = tab$contrast, 
@@ -281,6 +285,116 @@ knitr::kable(out2, digits = 2)
 ```
 
 ---
+# One-sided tests
+
+Suppose we postulate that the contrast statistic is **bigger** than some value $a$.
+
+- The alternative is $\mathscr{H}_0: C>a$ (what we are trying to prove)!
+- The null hypothesis is therefore $\mathscr{H}_0: C \leq a$ (Devil's advocate)
+
+
+It suffices  to consider the endpoint $C = a$ (why?)
+
+- If we reject $C=a$ in favour of $C>a$, all other values of the null hypothesis are even less compatible with the data.
+
+
+
+---
+# Comparing rejection regions
+
+
+
+```{r tcurveonesided, eval = TRUE, echo = FALSE, retina = 3, out.width = '80%', fig.width=6, fig.height=3}
+g1 <- ggplot() +
+  coord_cartesian(xlim = c(-5,5), 
+                  ylim = c(0, 0.5), 
+                  expand = FALSE) +
+    stat_function(fun = dt, 
+                args = list(df = 40), 
+                xlim = c(-5, qt(0.9, df = 40)),
+                geom = "area", 
+                fill = "blue", 
+                alpha = 0.2) +
+    stat_function(fun = dt, 
+                args = list(df = 40), 
+                xlim = c(qt(0.9, df = 40),5),
+                geom = "area", 
+                fill = "red", 
+                alpha = 0.2) + 
+    stat_function(fun = dt, 
+    xlim = c(-5,5),
+                args = list(df = 40), n = 1000) + 
+       theme_classic() +
+  labs(y = "", x = "") +
+  geom_segment(data = data.frame(
+    x = qt(0.9, 40), 
+    ymin = 0, 
+    ymax = dt(qt(0.9, 40), 40)),
+    aes(x = x, xend = x, 
+        y = ymin, yend = ymax),
+    linetype = "dashed") 
+
+g2 <- ggplot() +
+  coord_cartesian(xlim = c(-5,5), 
+                  ylim = c(0, 0.5), 
+                  expand = FALSE) +
+  stat_function(fun = dt, 
+                args = list(df = 40), 
+                xlim = c(qt(0.95, df = 40),5),
+                geom = "area", 
+                fill = "red", 
+                alpha = 0.2) +
+    stat_function(fun = dt, 
+                args = list(df = 40), 
+                xlim = c(-5, qt(0.05, df = 40)),
+                geom = "area", 
+                fill = "red", 
+                alpha = 0.2) +
+    stat_function(fun = dt, 
+                args = list(df = 40), 
+                xlim = c(qt(0.05, df = 40),
+                         qt(0.95, df = 40)),
+                geom = "area", 
+                fill = "blue", 
+                alpha = 0.2) + 
+    stat_function(fun = dt, 
+    xlim = c(-5,5),
+                args = list(df = 40), n = 1000) + 
+       theme_classic() + 
+  labs(y = "", x = "") +
+  geom_segment(data = data.frame(
+    x = qt(0.95, 40), 
+    ymin = 0, 
+    ymax = dt(qt(0.95, 40), 40)),
+    aes(x = x, xend = x, 
+        y = ymin, yend = ymax),
+    linetype = "dashed") +
+  geom_segment(data = data.frame(
+    x = -qt(0.95, 40), 
+    ymin = 0, 
+    ymax = dt(qt(0.95, 40), 40)),
+    aes(x = x, xend = x, 
+        y = ymin, yend = ymax),
+    linetype = "dashed")
+g1 + g2
+```
+
+Rejection regions for a one-sided test (left) and a two-sided test (right).
+
+---
+
+# When to use one-sided tests?
+
+In principle, one-sided tests are more powerful (larger rejection region on one sided).
+
+- However, important to **pre-register** hypothesis
+   - can't look at the data before formulating the hypothesis (as always)!
+- More logical for follow-up studies and replications.
+
+If you postulate $\mathscr{H}_a: C>a$ and the data show the opposite with $\widehat{C} \leq a$, then the $p$-value for the one-sided test is 1!
+
+---
+
 
 layout: false
 name: multiple-testing
@@ -309,34 +423,6 @@ Comparing all pairwise differences: $m=\binom{K}{2}$ tests
 ???
 
 The recommendation for ANOVA is to limit the number of tests to the number of subgroups
-
----
-
-
-# Scientifist, investigate!
-
-- Consider the Cartoon *Significant* by Randall Munroe (https://xkcd.com/882/)
-
-.center.small[
-![](img/04/xkcd_882_4.png)
-
-]
-.small[
-It highlights two problems: lack of accounting for multiple testing and selective reporting.
-]
-
-
-
-???
-
-Bring students to realize the multiple testing problem: quiz them on potential consequences
-
-Gone fishing
-
-- Having found no difference between group, you decide to stratify with another categorical variable and perform the comparisons for each level (subgroup analysis)
- 
-The more tests you perform, the larger the type I error.
-
 
 ---
 
@@ -379,14 +465,43 @@ Yoav B. reported that 11/100 engaged with selection, but only cursorily
 ---
 
 
+# Scientifist, investigate!
+
+- Consider the Cartoon *Significant* by Randall Munroe (https://xkcd.com/882/)
+
+.center.small[
+![](img/04/xkcd_882_4.png)
+
+]
+.small[
+It highlights two problems: lack of accounting for multiple testing and selective reporting.
+]
+
+
+
+???
+
+Bring students to realize the multiple testing problem: quiz them on potential consequences
+
+Gone fishing
+
+- Having found no difference between group, you decide to stratify with another categorical variable and perform the comparisons for each level (subgroup analysis)
+ 
+The more tests you perform, the larger the type I error.
+
+
+---
+
+
 # Probability of type I error
 
 If we do $m$ **independent** comparisons, each
 one at the level $\alpha$, the probability of making at least one type I error, say $\alpha^{\star}$, is
 
-\begin{align*}\alpha^{\star} &= 
-1 – \text{probability of making no type I error} \\&= 1- (1-\alpha)^m
-\end{align*}
+$$
+\alpha^{\star} = 
+1 – \text{probability of making no type I error} = 1- (1-\alpha)^m.
+$$
 
 With $\alpha = 0.05$
 - $m=4$ tests, $\alpha^{\star} \approx 0.185$.
@@ -767,7 +882,7 @@ $$k=\max\left\{i: p_{(i)} \leq \frac{i}{m}\alpha\right\}$$
 ]
 .pull-right[
 
-```{r, echo = FALSE,fig.width=4, fig.height=4,out.width='100%' }
+```{r, echo = FALSE, fig.width=3, fig.height=3, out.width='100%'}
 set.seed(1234)
 pval <- sort(c(runif(n = 5, min =0, max = 0.02),
           runif(n = 5)))
@@ -795,3 +910,52 @@ ggplot(data = data.frame(pvalue = pval,
 ```
 
 ]
+
+---
+
+layout: true
+class: title title-1
+
+---
+# Recap 1
+
+- The test of equality of variance of the one-way ANOVA is seldom of interest (too general or vague)
+- Rather, we care about specific comparisons (often linear contrasts)
+- Must specify ahead of time which comparisons are of interest
+    - otherwise it's easy to find something significant!
+    - and multiplicity correction will be unfavorable.
+    
+
+---
+
+# Recap 2
+
+- Researchers often carry lots of hypothesis testing tests
+   - the more you look, the more you find!
+   - One of the many reasons for the replication crisis!
+- Thus want to control probability of making a type I error (condemn innocent, incorrect finding) among all $m$ tests performed
+   - aka family-wise error rate (FWER)
+   - Downside of multiplicity correction/adjustment is loss of power
+   - upside is (more robust findings).
+
+
+
+---
+
+# Recap 3
+   
+ANOVA specific solutions (assuming equal variance, balanced large samples...)
+   - Tukey's HSD (all pairwise differences), 
+   - Dunnett's method (only differences relative to a reference category)
+   - Scheffé's method (all potential linear contrasts)
+
+Outside of ANOVA, some more general recipes:
+
+   - FWER: Bonferroni (suboptimal), Bonferroni-Holm (more powerful)
+   - FDR: Benjamini-Hochberg
+
+Pick the one that controls FWER, but penalizes less!
+
+???
+
+Example of the last point is comparison between Bonferroni and Scheffé: with large number of tests, the latter may be less stringent and lead to more discovery while having guarantees for the FWER

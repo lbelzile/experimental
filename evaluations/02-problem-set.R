@@ -71,10 +71,14 @@ test3b <- t.test(bonding ~ condition,
                  var.equal = TRUE)
 broom::tidy(test3b)
 
-# Experiment 2 of Duke and Amir (2022+)
+# Experiment 1 of Duke and Amir (2022+)
 # https://doi.org/10.1287/mksc.2022.1364
 # Perform a two-sample t-test
-data(DA22_E2, package = "hecedsm")
+data(DA22_E1, package = "hecedsm")
 # Check documentation for the list and
 # description of the variables
-?DA22_E2
+?DA22_E1
+
+# To filter only observations of people who bought
+# use the subset "DA22_E1s"
+DA22_E1s <- DA22_E1 |> dplyr::filter(purchased == 1L)

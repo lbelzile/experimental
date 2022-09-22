@@ -225,7 +225,7 @@ assignments <- tibble::tribble(
   ~Points,  ~Assignment,
   12 * 0.5 , "Weekly check-in (12 × 0.5 pt)",
   11 * 4 ,   "Problem set (11 x 4 pt)",
-  14      , "Paper review (10 pt)",
+  10      , "Paper review (10 pt)",
   40      , "Final examination (40 pt)",
 )
 

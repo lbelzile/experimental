@@ -4,7 +4,7 @@
     <title>One way ANOVA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-09-11" />
+    <meta name="date" content="2022-09-18" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -146,6 +146,15 @@ F &amp;= \frac{\text{between-group variability}}{\text{within-group variability}
 
 ---
 
+# What happens under the null regime?
+
+If all groups have the same mean, both numerator and denominator are estimators of `\(\sigma^2\)`, thus
+- the `\(F\)` ratio should be 1 on average if there are no mean differences.
+- but the numerator is more variable because it is based on `\(K\)` observations
+  - benchmark is skewed to the right.
+
+---
+
 # Null distribution and degrees of freedom
 
 
@@ -174,16 +183,6 @@ The number of constraints come from the fact we go from K means under alternativ
 ]
 
 ---
-
-# Intuition behind _F_-distribution
-
-If all groups have the same mean, both numerator and denominator are estimators of `\(\sigma^2\)`, thus
-- the `\(F\)` ratio should be 1 on average if there are no mean differences.
-- but the numerator is more variable because it is based on `\(K\)` observations
-  - benchmark is skewed to the right.
-
----
-
 
 # Impact of encouragement on teaching
 
@@ -232,11 +231,13 @@ The _p_-value gives the probability of observing an outcome as extreme **if the 
 
 ```r
 # Compute p-value
-pf(stat, 
+pf(15.27, 
    df1 = 4, 
    df2 = 40, 
    lower.tail = FALSE)
 ```
+
+Probability that a `\(\mathsf{F}(4,40)\)` exceeds 15.27.
 
 ]
 
@@ -651,17 +652,6 @@ Knowing the value of one observation tells us nothing about the value taken by t
 - Dependence on instrumentation, experimenter, time of the day, etc.
 
 Observations close by tend to be more alike (correlated).
-
----
-
-# Impact of (lack of) independence
-.small[
-Probability of rejecting null hypothesis when there is no difference in mean as a function of correlation between observations in a group.]
-
-
-&lt;img src="img/03/plotLevelIndep.png" width="62%" style="display: block; margin: auto;" /&gt;
-
-
 ---
 
 # \# 4: Sample size (normality?)
@@ -722,16 +712,6 @@ The ordered residuals should align on a straight line.
 
 
 .small[Normal quantile-quantile plot (left) and Tukey's mean different QQ-plot (right).]
-
-
----
-
-# Loss to follow-up
-
-- In longitudinal studies, may lose subjects to attrition
-- Creates missing values
-- Matters less if we
-It may be necessary to exclude subjects 
 
 
 ---

@@ -82,8 +82,8 @@ website:
           contents:
             - evaluations/01-problem-set.qmd
             - evaluations/02-problem-set.qmd
-        #    - evaluations/03-problem-set.qmd
-        #    - evaluations/04-problem-set.qmd
+            - evaluations/03-problem-set.qmd
+            - evaluations/04-problem-set.qmd
         #    - evaluations/05-problem-set.qmd
         #    - evaluations/06-problem-set.qmd
         #    - evaluations/07-problem-set.qmd
