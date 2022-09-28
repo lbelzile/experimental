@@ -62,7 +62,8 @@ The function `anova` is a method: when applied to the result of a call to `lm`, 
 We need to decide beforehand the level of the test (typically 5\% or lower): this is the percentage of times we will reject the null hypothesis when its true based on observing an extreme outcome. We are asked to perform a binary decision (reject or fail to reject): if the _p_-value is less than the level, we 'reject' the null hypothesis of equal (population) means.
 
 ```{r anova-stat, echo = TRUE, eval = TRUE}
-mod_pre <- lm(formula = pretest1 ~ group,
+data(BSJ92, package = 'hecedsm')
+mod_pre <- aov(formula = pretest1 ~ group,
                      data = BSJ92)
 anova_tab <- broom::tidy(anova(mod_pre))
 # Save the output in a tibble to get more meaningful column names
@@ -89,7 +90,7 @@ We carried a one-way analysis for the pre-test results to ensure that the group 
 A similar result for the scores of the first post-test as response variable lead to strong evidence of difference between teaching methods.
 
 ```{r linmod2, echo = FALSE, eval = TRUE}
-mod_post <- lm(posttest1 ~ group,
+mod_post <- aov(posttest1 ~ group,
                  data = BSJ92)
 anova_post <- broom::tidy(anova(mod_post))
 ```
@@ -118,6 +119,7 @@ not necessarily the best strategy.
 
 ```{r pairwise-baumann, echo = TRUE, eval = TRUE}
 library(emmeans) #load package
+mod_post <- aov(posttest1 ~ group, data = BSJ92)
 emmeans_post <- emmeans(object = mod_post, 
                         specs = "group")
 ```
@@ -167,7 +169,7 @@ contrasts_list <- list(
   "C1: DRTA+TA vs 2DR" = c(-2, 1, 1), 
   # Contrasts: linear combination of means, coefficients sum to zero
   # 2xDR = DRTA + TA => -2*DR + 1*DRTA + 1*TA = 0 and -2+1+1 = 0
-  "C1b: average (DRTA+TA) vs DR" = c(-1, 0.5, 0.5), 
+  "C1: average (DRTA+TA) vs DR" = c(-1, 0.5, 0.5), 
   #same thing, but halved so in terms of average
   "C2: DRTA vs TA" = c(0, 1, -1),
   "C2: TA vs DRTA" = c(0, -1, 1) 
