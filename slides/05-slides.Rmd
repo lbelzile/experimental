@@ -670,19 +670,21 @@ ggplot(mapping = aes(x = power,
 
 ```{r popcornplot2, echo = FALSE, eval = TRUE, message = FALSE, cache = TRUE, fig.asp = 0.35, out.width = '80%'}
 popcorn |>
-group_by(brand, time, power) |> 
-summarize(mean_percentage = mean(percentage)) |> 
-ggplot(aes(x = power, 
-y = mean_percentage, 
-col = time, 
-group = time)) + 
-geom_line() + 
-facet_wrap(~brand) + 
-labs(y = "percentage of\n popped kernels",
-col = "time (min)", 
-x = "power (W)") + 
-theme_bw() + 
-theme(legend.position = "bottom")
+  group_by(brand, time, power) |>
+  summarize(mean_percentage = mean(percentage)) |>
+  ggplot(aes(
+    x = power,
+    y = mean_percentage,
+    col = time,
+    group = time
+  )) +
+  geom_line() +
+  facet_wrap( ~ brand) +
+  labs(y = "percentage of\n popped kernels",
+       col = "time (min)",
+       x = "power (W)") +
+  theme_bw() +
+  theme(legend.position = "bottom")
 ```
 
 No three-way interaction (hard to tell with $r=2$ replications).
@@ -754,10 +756,10 @@ class: title title-5
 Start with the most complicated term (top down)
 
 - If the three-way interaction $ABC$ is significative:
-- don't interpret main effects or two-way interactions!
-- comparison is done cell by cell within each level
+    - don't interpret main effects or two-way interactions!
+    - comparison is done cell by cell within each level
 - If the $ABC$ term isn't significative:
-- can marginalize and interpret lower order terms
+    - can marginalize and interpret lower order terms
 
 --
 

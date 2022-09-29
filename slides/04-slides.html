@@ -4,7 +4,7 @@
     <title>Contrasts and multiple testing</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-09-14" />
+    <meta name="date" content="2022-09-29" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ confint(contrasts_res)
 
 Suppose we postulate that the contrast statistic is **bigger** than some value `\(a\)`.
 
-- The alternative is `\(\mathscr{H}_0: C&gt;a\)` (what we are trying to prove)!
+- The alternative is `\(\mathscr{H}_a: C&gt;a\)` (what we are trying to prove)!
 - The null hypothesis is therefore `\(\mathscr{H}_0: C \leq a\)` (Devil's advocate)
 
 
@@ -476,22 +476,6 @@ with
 
 ---
 
-
-# Decision rule
-
-Classify the decision on the `\(m\)` tests in a table based on whether the null hypothesis is true or false.
-
-We reject the null hypothesis `\(\mathscr{H}_0\)` if the _p_-value is less than the level, `\(p &lt; \alpha\)`.
-
-|Truth \ Decision         | Reject null hypothesis   | Fail to reject null|
-|:------------------------|:------------------------:|:------------------:|
-| `\(\mathscr{H}_0\)` is true | `\(R-V\)` correct rejections | `\(-\)` |
-| `\(\mathscr{H}_a\)` is true | `\(V\)` type I errors | `\(-\)` |
-| Total                   | `\(R\)` rejections | `\(m-R\)` non-rejections | 
-
-
----
-
 class: title title-6
 # Familywise error rate
 
@@ -545,9 +529,10 @@ class: title title-6
 # Sequential Holm-Bonferroni procedure
 
 .medium[
-
-1. start with the smallest `\(p\)`-value
-2. check significance one test at a time
+ 
+0. order `\(p\)`-values from smallest to largest.
+1. start with the smallest `\(p\)`-value.
+2. check significance one test at a time.
 3. stop when the first non-significant `\(p\)`-value is found or no more test.
 
 ]
@@ -561,7 +546,7 @@ class: title title-6
 
 Reject smallest _p_-values until you find one that fails, reject rest
 
-If `\(p_{(j)} \geq \alpha_{(j)}\)` but `\(p_{(i)} \leq \alpha_{(i)}\)` for `\(i=1, \ldots, j-1\)` (all smaller `\(p\)`-values)
+If `\(p_{(j)} \geq \alpha_{(j)}\)` but `\(p_{(i)} &lt; \alpha_{(i)}\)` for `\(i=1, \ldots, j-1\)` (all smaller `\(p\)`-values)
 - reject `\(\mathscr{H}_{0(1)}, \ldots, \mathscr{H}_{0(j-1)}\)`
 - fail to reject `\(\mathscr{H}_{0(j)}, \ldots, \mathscr{H}_{0(m)}\)`
 ]
@@ -598,17 +583,17 @@ class: title title-6
 
 # Why choose Bonferroni's procedure?
 
-- simple
-- generally applicable (any design)
+- `\(m\)` must be prespecified
+- simple and generally applicable (any design)
 - but dominated by sequential procedures (Holm-Bonferroni uniformly more powerful)
 - low power when the number of test `\(m\)` is large
-- `\(m\)` must be prespecified
+- also controls for the expected number of false positive, `\(\mathsf{E}(V)\)`, a more stringent criterion called **per-family error rate** (PFER)
 
 .small[
 **Careful**: adjust for the real number of comparisons made (often reporter just correct only the 'significant tests', which is wrong).
 ]
 
----
+???
 
 
 # Controlling the average number of errors

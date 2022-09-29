@@ -27,15 +27,13 @@ playlist_id <- ""
 At the end of the session, students should be capable of
 
 - specifying and calculating custom contrasts in multiway factorial designs
-- determining whether 
-- understanding how to correct _p_-values to account for multiple testing
-- listing multiplicity testing methods suitable depending on context
+- determining whether or not simple or main effects are most suitable
 
 
 ## Readings
 
 - {{< fa book >}}  [Chapter 4](https://stat.ethz.ch/~meier/teaching/anova/factorial-treatment-structure.html) of @Meier:2022
-
+-  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/complete-factorial-designs.html) of the course notes
 
 
 ## Complementary readings

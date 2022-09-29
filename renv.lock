@@ -873,10 +873,10 @@
     },
     "globals": {
       "Package": "globals",
-      "Version": "0.15.1",
+      "Version": "0.16.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9449b1dfaf8609db72556cfbe228285d",
+      "Hash": "e14798793892c6bebdbe2f144aacf6e6",
       "Requirements": [
         "codetools"
       ]
@@ -1020,15 +1020,15 @@
     },
     "hecedsm": {
       "Package": "hecedsm",
-      "Version": "2022.07.06",
+      "Version": "2022.09.27",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "hecedsm",
       "RemoteUsername": "lbelzile",
       "RemoteRef": "HEAD",
-      "RemoteSha": "17ff87e026055e934cc951a28b42c50431e8e252",
-      "Hash": "61e20850446410cb5cdd03c2d39de98a",
+      "RemoteSha": "85a521be92541bfabef344533bc434af704468aa",
+      "Hash": "c12b8e8314ce550ac04f800f1758d991",
       "Requirements": []
     },
     "here": {

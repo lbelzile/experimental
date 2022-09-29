@@ -64,7 +64,9 @@ website:
             - text: "3: One way ANOVA"
               file: content/03-content.qmd
             - text: "4: Contrasts and multiple testing"
-              file: content/04-content.qmd          
+              file: content/04-content.qmd   
+            - text: "5: Complete factorial designs"
+              file: content/05-content.qmd         
 
     - title: "Evaluations"
       style: "docked"
@@ -114,7 +116,7 @@ website:
               file: example/onewayanova.qmd
          #   - text: "Two-way ANOVA"
          #   - text: "Three-way ANOVA"
-         #     file: example/05-threewayanova.qmd
+         #     file: example/threewayanova.qmd
          #   - text: "Analysis of covariance"
          #     file: example/06-ancova.qmd
          #   - text: "Linear causal mediation"
