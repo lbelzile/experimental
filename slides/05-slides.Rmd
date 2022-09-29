@@ -67,7 +67,10 @@ class: title title-inv-1
 .box-4.medium.sp-after-half[Factorial designs and interactions]
 
 
-.box-6.medium.sp-after-half[Contrasts]
+.box-6.medium.sp-after-half[Parametrization and testing]
+
+
+.box-8.medium.sp-after-half[Contrasts]
 
 ---
 
@@ -86,185 +89,218 @@ class: title title-4
 
 # Motivating example
 
+.box-inv-4[**Response**:<br> retention of information <br>two hours after reading a story]
 
-Consider a study on the retention of information by children aged 4 two hours after reading a story.
-
-We expect the ending (happy/sad/neutral) and the complexity (easy/average/hard) to impact their retention.
+.box-inv-4[**Population**:<br> children aged four]
 
 
-.large[
+.box-inv-4.align-left[**experimental factor 1**:<br> ending (happy or sad)]
 
-```{r, echo=FALSE, warning=FALSE, out.width = '80%', cache = TRUE}
+.box-inv-4[**experimental factor 2**:<br> complexity (easy, average or hard).]
+
+
+
+
+---
+
+# Data as table
+
+
+
+```{r, echo=FALSE, warning=FALSE, cache = TRUE}
 library(gt)
 library(gtsummary)
 # list of all the icons used in table
-path_figure <- list(
-"img/05/icons8-smiling-100.png",
-"img/05/icons8-disappointed-100.png",
-"img/05/icons8-neutral-100.png"
-)
+path_figure <- list("img/05/icons8-smiling-100.png",
+                    "img/05/icons8-disappointed-100.png")
 # making table with gt
 list(
-ending = c("happy", "sad", "neutral"),
-complexity = c("complicated", "average", "simple")
+  ending = c("happy", "sad"),
+  complexity = c("complicated", "average", "simple")
 ) |>
-purrr::cross_df() |>
-dplyr::mutate(response = rep(1:3, each = 3)) |>
-tidyr::pivot_wider(id_cols = complexity, 
-names_from = ending,
-values_from = response) |>
-gt() |>
-# cols_hide(columns = c(ending)) |>
-data_color(
-columns = c(happy,sad,neutral),#c(complicated,normal,simple),
-colors = scales::col_factor(
-palette = c("#bae1ff","#ffdfba","#ffb3ba"),
-domain = NULL,
-ordered = TRUE,
-reverse = TRUE
-),
-alpha = 0.8
-) |>
-text_transform(
-locations = cells_body(columns = c(happy)),
-fn = function(x) {
-local_image(filename = path_figure[[1]])
-}) |>
-text_transform(
-locations = cells_body(columns = c(sad)),
-fn = function(x) {
-local_image(filename = path_figure[[2]])
-}) |>
-text_transform(
-locations = cells_body(columns = c(neutral)),
-fn = function(x) {
-local_image(filename = path_figure[[3]])
-}) |>
-cols_width(c(happy,sad,neutral) ~ px(80))
+  purrr::cross_df() |>
+  dplyr::mutate(response = rep(1:3, each = 2)) |>
+  tidyr::pivot_wider(id_cols = complexity,
+                     names_from = ending,
+                     values_from = response) |>
+  gt() |>
+  # cols_hide(columns = c(ending)) |>
+  data_color(
+    columns = c(happy, sad),
+    #c(complicated,normal,simple),
+    colors = scales::col_factor(
+      palette = c("#bae1ff", "#ffdfba", "#ffb3ba"),
+      domain = NULL,
+      ordered = TRUE,
+      reverse = TRUE
+    ),
+    alpha = 0.8
+  ) |>
+  text_transform(
+    locations = cells_body(columns = c(happy)),
+    fn = function(x) {
+      local_image(height = 80, filename = path_figure[[1]])
+    }
+  ) |>
+  text_transform(
+    locations = cells_body(columns = c(sad)),
+    fn = function(x) {
+      local_image(height = 80, filename = path_figure[[2]])
+    }
+  )  |>
+  cols_width(c(happy, sad) ~ px(120)) |>
+  tab_options(column_labels.font.size = 40,
+              table.font.size = 40)
 ```
 
+
+.box-inv-4[Each cell contains the mean measurements of the subcategory]
+
+---
+
+# Why complete factorial designs?
+
+.box-inv-4.sp-after[
+.large[**Factorial design**]<br> study with multiple factors (subgroups)
+]
+
+
+.box-inv-4[
+.large[**Complete**]
+<br>
+Gather observations for every subgroup
 ]
 
 ---
+# Efficiency of factorial design
 
-# Why factorial designs?
+.box-inv-4.sp-after[Cast problem<br>as a series of one-way ANOVA <br> vs simultaneous estimation]
 
-To study the impact of story complexity and ending, we could run a series of one-way ANOVA.
 
-Factorial designs are more efficient: can study the impact of multiple variables simultaneously with **fewer overall observations**.
+.box-4.medium.sp-before[Factorial designs requires<br> **fewer overall observations**]
 
 ???
 
-To study each interaction (complexity, story book ending) we would need to make three group for each comparison in rows, and one in each column. So a total of 6 one-way ANOVA each with 3 groups. The two-way ANOVA will lead to 9 groups instead of 18.
-
----
-
-
-# Estimates
-
-**Factorial design**: study with multiple factors (subgroups)
-
-- **simple effects**: difference between levels of one in a fixed combination of others (change in difficulty for happy ending)
-- **main effects**: differences relative to average for each condition of a factor (happy vs neutral vs sad ending)
-- **interaction effects**: when simple effects differ depending on levels of another factor
-
----
-
-# Vocabulary
-
-- Simple effects are estimates from each ANOVA (either ending or difficulty of story) 
-- comparing cell averages within a given row or column
-
-- Main effects are row/column averages
-
-- Interactions effects are difference relative to the row or column average
+To study each interaction (complexity, story book ending) we would need to make three group for each comparison in rows, and one in each column. So a total of 3 one-way ANOVA each with  2 groups and 2 one-way anova with 3 groups. The two-way ANOVA will lead to 6 groups instead of 12.
 
 ---
 
 # Interaction
 
-**Interaction**: when the effect of one factor depends on the levels of another factor.
+.box-inv-4.sp-after[
+**Definition**: when the effect of one factor<br> depends on the levels of another factor.
+]
+
+.box-inv-4[
+
+Effect together<br>
+$\neq$
+<br> sum of individual effects
+
+]
+
+.box-inv-4.sp-after[Graphical display = <br>**interaction plot**<br>]
+
+.box-4.sp-after-half[sample mean per category]
+
+.box-4.sp-after-half[measure of uncertainty <br>(1 std. error for mean, confidence interval, etc.)]
 
 
 
+---
 
-```{r interaction_plots2, echo = FALSE, fig.asp=0.5, cache=TRUE}
+# Interaction plot with interaction
+
+```{r}
+#| label: "interaction_plots2"
+#| echo: false
+#| eval: true
+#| out.width: '80%'
+#| cache: true
+#| fig.width: 7
+#| fig.height: 3
 set.seed(1234)
 data_fake <- tibble::tibble(
-"ending" = factor(c("happy","sad","neutral")),
-"complexity" = factor(c("complicated","average","simple"))) |>
-purrr::cross_df()  |>
-mutate(image = rep(unlist(path_figure), length.out = 9),
-mean = 10 + rnorm(n = 9)
-)
+  "ending" = factor(rep(c("happy", "sad"), each = 3)),
+  "complexity" = factor(rep(c("complicated", "average", "simple"), 
+                            length.out = 6)),
+                
+         mean = 10 + rnorm(n = 6))
 
 g1 <- ggplot(data = data_fake,
-aes(x=complexity, y = mean)) +
-geom_line(aes(group = ending, linetype = ending), 
-alpha = 0.1) +
-ggimage::geom_image(aes(image = image),
-size = 0.1, 
-by = "width", 
-asp = 1.618) +
-# geom_point(size = 2.6, aes(shape = ending)) +
-theme_classic() + 
-theme(legend.position = "bottom") +
-labs(title = "Lines are not parallel = interaction")
+             aes(x = complexity, y = mean)) +
+  geom_line(aes(group = ending, 
+                linetype = ending),
+            alpha = 0.9,
+            linewidth = 2) +
+  geom_point() + 
+  # ggimage::geom_image(aes(image = image),
+  #                     size = 0.1,
+  #                     by = "width",
+  #                     asp = 1.618) +
+  # geom_point(size = 2.6, aes(shape = ending)) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(title = "Lines are not parallel = interaction")
 g2 <- ggplot(data = data_fake,
-aes(x=ending, 
-y = mean,
-group = complexity, 
-color = complexity)) +
-scale_color_manual(
-values = c("#ffdfba","#ffb3ba","#bae1ff")) +
-geom_line(size = 1.2) +
-geom_point(size = 2.6, shape = 15) +
-theme_classic() + 
-theme(legend.position = "bottom")
+             aes(
+               x = ending,
+               y = mean,
+               group = complexity,
+               color = complexity
+             )) +
+  scale_color_manual(values = c("#ffdfba", "#ffb3ba", "#bae1ff")) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2.6, shape = 15) +
+  theme_classic() +
+  theme(legend.position = "bottom")
 
 g1 + g2
 ```
 
 ---
 
-# Lack of interaction
+# Interaction plot without interaction
 
-If lines are parallel, there is no interaction
-
-```{r interaction_plots1, echo = FALSE, fig.asp = 0.5, out.width = '60%', cache = TRUE}
+```{r interaction_plots1, echo = FALSE, fig.asp = 0.5, out.width = '80%', cache = TRUE}
 set.seed(1234)
 data_fake <- tibble::tibble(
-"ending" = factor(c("happy","sad","neutral")),
-"complexity" = factor(c("complicated","average","simple"))) |>
-purrr::cross_df()  |>
-mutate(image = rep(unlist(path_figure), length.out = 9),
-mean = 10 + rep(rnorm(n = 3), each = 3) + rep(rexp(n = 3, rate = 1/3), length.out = 9)
+  "ending" = factor(rep(c("happy", "sad"), each = 3)),
+  "complexity" = factor(rep(c("complicated", "average", "simple"), 
+                            length.out = 6))) |>
+  # purrr::cross_df()  |>
+  mutate(
+      mean = 10 + 
+      rep(rnorm(n = 2), each = 3) +
+      rep(rexp(n = 3, rate = 1 / 3), length.out = 6)
 # c(4,5,6,9,10,11,8,9,10)
 )
 
+
 g1 <- ggplot(data = data_fake,
-aes(x=complexity, y = mean)) +
-geom_line(aes(group = ending, linetype = ending), 
-alpha = 0.1) +
-ggimage::geom_image(aes(image = image),
-size = 0.1, 
-by = "width", 
-asp = 1.618) +
-# geom_point(size = 2.6, aes(shape = ending)) +
-theme_classic() + 
-theme(legend.position = "bottom") +
-labs(title = "Lines are parallel = no interaction")
+             aes(x = complexity, y = mean)) +
+  geom_line(aes(group = ending, linetype = ending),
+            alpha = 0.1) +
+  # ggimage::geom_image(aes(image = image),
+  #                     size = 0.1,
+  #                     by = "width",
+  #                     asp = 1.618) +
+   geom_point(size = 2.6, aes(shape = ending)) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(title = "Lines are parallel = no interaction")
 g2 <- ggplot(data = data_fake,
-aes(x=ending, 
-y = mean,
-group = complexity, 
-color = complexity)) +
-scale_color_manual(
-values = c("#ffdfba","#ffb3ba","#bae1ff")) +
-geom_line(size = 1.2) +
-geom_point(size = 2.6, shape = 15) +
-theme_classic() + 
-theme(legend.position = "bottom")
+             aes(
+               x = ending,
+               y = mean,
+               group = complexity,
+               color = complexity
+             )) +
+  scale_color_manual(values = c("#ffdfba", "#ffb3ba", "#bae1ff")) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2.6, shape = 15) +
+  theme_classic() +
+  theme(legend.position = "bottom")
 
 g1 + g2
 ```
@@ -272,18 +308,83 @@ g1 + g2
 
 ---
 
-# Assessing interactions
+# Interaction plot for 2 by 2 design
 
-
-In practice, the subgroup averages are unknown! 
-
-- Plot sample averages with confidence intervals or $\pm 1$ standard error.
-- But difficult to judge based on graphs alone.
-
-
-Better to proceed with hypothesis tests.
-
-
+```{r}
+#| label: fig-2by2
+#| eval: true
+#| echo: false
+#| cache: true
+#| fig-cap: "Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of @Crump.Navarro.Suzuki:2019 by Matthew Crump (CC BY-SA 4.0 license)."
+#| out-width: "80%"
+p1 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 5, 5, 5)
+)
+p2 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(10, 10, 5, 5)
+)
+p3 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(10, 13, 5, 2)
+)
+p4 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 10, 10, 15)
+)
+p5 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(10, 18, 5, 7)
+)
+p6 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 10, 5, 10)
+)
+p7 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(2, 12, 5, 9)
+)
+p8 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 10, 10, 5)
+)
+all_22s <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
+type <- factor(rep(1:8, each = 4), 
+               labels = c("no effect",
+                          "main effect of A only",
+                          "main effect of A and interaction",
+                          "both main effects",
+                          "both main effects and interaction",
+                          "main effect of B only",
+                          "main effect of B and interaction",
+                          "interaction only"))
+all_22s <- cbind(all_22s, type)
+options(ggplot2.discrete.colour= MetBrewer::met.brewer(name = "Hiroshige", 2))
+ggplot(all_22s, 
+       mapping = aes(x = factorA, 
+                     y = means, 
+                     type = type,
+                     group = factorB, 
+                     color = factorB))+
+  geom_point() +
+  geom_line() +
+  labs(x = "factor A",
+       subtitle = "mean response",
+       y = "",
+       color = "factor B") +
+  facet_wrap(~type, nrow = 2) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
 
 ---
 
@@ -302,31 +403,89 @@ class: title title-5
 
 # Formulation of the two-way ANOVA
 
-Two factors: $A$ (complexity) and $B$ (ending) with $a$ and $b$ levels.
+Two factors: $A$ (complexity) and $B$ (ending) with $n_a$ and $n_b$ levels.
 
 Write the average response $Y_{ijk}$ of the $k$th measurement in group $(a_i, b_j)$ as
-$$Y_{ijk} = \mu_{ij} + \varepsilon_{ijk}$$
+\begin{align*}
+\underset{\text{response}\vphantom{b}}{Y_{ijk}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijk}}
+\end{align*}
 where 
 
 - $Y_{ijk}$ is the $k$th replicate for $i$th level of factor $A$ and $j$th level of factor $B$
 - $\varepsilon_{ijk}$ are independent error terms with mean zero and variance $\sigma^2$.
 
+---
+# One average for each subgroup
 
-.box-inv-5[One average for each subgroup]
+| $\qquad B$ `ending`<br> $A$ `complexity` $\qquad$ | $b_1$ (`happy`) | $b_2$ (`sad`)| *row mean* |
+|------------|:----------:|:-----:|:-----:|
+| $a_1$ (`complicated`) | $\mu_{11}$ | $\mu_{12}$ | $\mu_{1.}$ |
+|  $a_2$ (`average`)  | $\mu_{21}$ | $\mu_{22}$ | $\mu_{2.}$ |
+| $a_3$ (`simple`) |  $\mu_{31}$ | $\mu_{32}$ | $\mu_{3.}$ |
+|*column mean* | $\mu_{.1}$ | $\mu_{.2}$ | $\mu$ |
 
 
 ---
 
+# Row, column and overall average
 
+.pull-left[
 
-# Hypothesis tests
+- Mean of $A_i$ (average of row $i$): 
+$$\mu_{i.} = \frac{\mu_{i1} + \cdots + \mu_{in_b}}{n_b}$$
 
-.box-inv-5.sp-after-half[
-Interaction between factors $A$ and $B$
+- Mean of $B_j$ (average of column $j$):
+$$\mu_{.j} = \frac{\mu_{1j} + \cdots + \mu_{n_aj}}{n_a}$$
+
+]
+.pull-right[
+- Overall average (overall all rows and columns):
+$$\mu = \frac{\sum_{i=1}^{n_a} \sum_{j=1}^{n_b} \mu_{ij}}{n_an_b}$$
+
 ]
 
-$\mathscr{H}_0$: no interaction between factors $A$ and $B$ vs $\mathscr{H}_a$: there is an interaction
+---
 
+
+# Vocabulary of effects
+.pull-left[
+.box-5[Definitions]
+- .color-5[**simple effects**]: difference between levels of one in a fixed combination of others (change in difficulty for happy ending)
+- .color-5[**main effects**]: differences relative to average for each condition of a factor (happy vs sad ending)
+- .color-5[**interaction effects**]: when simple effects differ depending on levels of another factor
+]
+.pull-right[
+.box-5[What it means relative to the table]
+
+- .color-5[**simple effects**] are comparisons between cell averages within a given row or column
+
+
+- .color-5[**main effects**] are comparisons between row or column averages
+
+
+- .color-5[**interaction effects**] are difference relative to the row or column average
+
+]
+---
+
+
+# Contrasts
+
+Suppose the order of the coefficients is factor $A$ (complexity, 3 levels, complicated/average/easy) and factor $B$ (ending, 2 levels, happy/sad).
+
+| test | $\mu_{11}$ | $\mu_{12}$ | $\mu_{21}$ | $\mu_{22}$ | $\mu_{31}$ | $\mu_{32}$ |
+|:--|--:|--:|--:|--:|--:|--:|
+| main effect $A$ (complicated vs average) |  $1$ | $1$ | $-1$ |  $-1$ | $0$ | $0$ |
+| main effect $A$ (complicated vs simple) |    $1$ |  $1$ | $0$ | $0$ | $-1$ |  $-1$ |
+| main effect $B$ (happy vs sad) |    $1$ |  $-1$ | $1$ |  $-1$ | $1$ | $-1$ |
+| interaction $AB$ (comp. vs av, happy vs sad) | $1$ | $-1$ | $-1$ | $1$ | $0$ | $0$ |
+| interaction $AB$ (comp. vs easy, happy vs sad) |  $1$ | $-1$ | $0$ | $0$ | $-1$ | $1$ |
+
+---
+
+# Hypothesis tests for main effects
+
+Generally, need to compare multiple effects at once
 .box-inv-5.sp-after-half[
 Main effect of factor $A$
 ]
@@ -339,63 +498,61 @@ Main effect of factor $B$
 $\mathscr{H}_0$: $\mu_{.1} = \cdots = \mu_{.b}$ vs $\mathscr{H}_a$: at least two marginal means of $B$ are different.
 
 ---
+# Equivalent formulation of the two-way ANOVA
 
-# Reparametrization
-
-.small[
-- Mean of $A_i$ (average of row $i$): 
-$$\mu_{i.} = \frac{\mu_{i1} + \cdots + \mu_{ib}}{b}$$
-- Mean of $B_j$ (average of column $j$):
-$$\mu_{.j} = \frac{\mu_{1j} + \cdots + \mu_{aj}}{a}$$
-- Overall average:
-$$\mu = \frac{\sum_{i=1}^a \sum_{j=1}^b \mu_{ij}}{ab}$$
-]
-
----
-
-# Formulation of the two-way ANOVA
-
-Write the model for a response variable $Y$ in terms of two factors $A_i$, $B_j$.
+Write the model for a response variable $Y$ in terms of two factors $a_i$, $b_j$.
 
 $$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
-with the parameters in the sum-to-zero constraints
 
 - $\alpha_i = \mu_{i.} - \mu$
-- mean of level $A_i$ minus overall mean.
+- mean of level $a_i$ minus overall mean.
 - $\beta_j  = \mu_{.j} - \mu$
-- mean of level $B_j$ minus overall mean.
+- mean of level $b_j$ minus overall mean.
 - $(\alpha\beta)_{ij} = \mu_{ij} - \mu_{i.} - \mu_{.j} + \mu$
-- the interaction term for $A_i$ and $B_j$.
-
-???
-
-Specify the sum over any $i$ and $j$ of $(\alpha\beta)_{ij}$ is zero.
+- the interaction term for $a_i$ and $b_j$.
 
 ---
 
 # Sum-to-zero parametrization
 
+.box-inv-5[Too many parameters!]
+
+
 The model in terms of $\alpha$, $\beta$ and $(\alpha\beta)$ is overparametrized.
 
-For the sum-to-zero constraint, impose that 
+.box-inv-5[More parameter than cells!]
+Impose sum to zero constraints
 
-$$\sum_{i=1}^a \alpha_i=0, \quad \sum_{j=1}^b \beta_j=0, \quad  \sum_{j=1}^b (\alpha\beta)_{ij}=0, \quad \sum_{i=1}^a (\alpha\beta)_{ij}=0.$$
+$$\sum_{i=1}^{n_a} \alpha_i=0, \quad \sum_{j=1}^{n_b} \beta_j=0, \quad  \sum_{j=1}^{n_b} (\alpha\beta)_{ij}=0, \quad \sum_{i=1}^{n_a} (\alpha\beta)_{ij}=0.$$
 
-which imposes $1 +  a + b$ constraints.
+which imposes $1 +  n_a + n_b$ constraints.
+
+---
+
+# Seeking balance
+
+.box-inv-5.sp-after[
+Balanced sample<br>
+(equal nb of obs per group)]
+
+.box-inv-5.small[
+With $K$ replications per subgroup,<br>total sample size is $n = n_an_bK$
+]
 
 ---
 
 
 # Analysis of variance table
 
+
 .small[
 
 | term | degrees of freedom | mean square | $F$ | 
 |------|--------|------|--------|
-| $A$  | $a-1$   | $\mathsf{MS}_{A}=\mathsf{SS}_A/(a-1)$ | $\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}$ |
-| $B$  | $b-1$   | $\mathsf{MS}_{B}=\mathsf{SS}_B/(b-1)$ | $\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}$ |
-| $AB$ | $(a-1)(b-1)$ | $\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(a-1)(b-1)\}$ | $\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}$ |
-| residuals | $n-ab$ | $\mathsf{MS}_{\text{res}}=\mathsf{SS}_{\text{res}}/ (n-ab)$ | |
+| $A$  | $n_a-1$   | $\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)$ | $\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}$ |
+| $B$  | $n_b-1$   | $\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)$ | $\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}$ |
+| $AB$ | $(n_a-1)(n_b-1)$ | $\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}$ | $\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}$ |
+| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{res}}=\mathsf{SS}_{\text{res}}/ (n-ab)$ | |
 | total | $n-1$ | | 
 
 ]
@@ -405,36 +562,17 @@ which imposes $1 +  a + b$ constraints.
 
 # Intuition behind degrees of freedom
 
-Example with $a=3, b=5$.
-
-| $A$ \\ $B$ | $b_1$ | $b_2$ | $b_3$ | $b_4$ | $b_5$ | sum |
-|---|:---:|:---:|:---:|:---:|:--:|:--:|
-| $a_1$ | $A_{1}B_{1}$ | $A_1B_{2}$ | $A_1B_{3}$ |  $A_1B_{4}$ | $\mathsf{X}$ | $A_1$ |
-| $a_2$ | $A_2B_{1}$ | $A_2B_{2}$ | $A_2B_{3}$ | $A_2B_{4}$ | $\mathsf{X}$ | $A_2$ |
-| $a_3$ | $\mathsf{X}$ | $\mathsf{X}$ | $\mathsf{X}$ | $\mathsf{X}$ | $\mathsf{X}$ | $\mathsf{X}$ |
-| **sum** | $B_1$ | $B_2$ | $B_3$ | $B_4$ | $\mathsf{X}$ | total |
+| $\qquad B$ `ending`<br> $A$ `complexity` $\qquad$ | $b_1$ (`happy`) | $b_2$ (`sad`)| *row mean* |
+|------------|:----------:|:-----:|:-----:|
+| $a_1$ (`complicated`) | $\mu_{11}$ | $\mathsf{X}$ | $\mu_{1.}$ |
+|  $a_2$ (`average`)  | $\mu_{21}$ | $\mathsf{X}$  | $\mu_{2.}$ |
+| $a_3$ (`simple`) |  $\mathsf{X}$  | $\mathsf{X}$  | $\mathsf{X}$ |
+|*column mean* | $\mu_{.1}$ | $\mathsf{X}$ | $\mu$ |
 
 .small[ 
 Terms with $\mathsf{X}$ are fully determined by row/column/total averages
 
 ]
-
-
----
-
-# Contrasts for the main effects
-
-In the interaction model, we cast the main effect in terms of parameters.
-
-Suppose the order of the coefficients for factor $A$ (drug, 3 levels) and factor $B$ (deprivation, 2 levels).
-
-| test | $\mu_{11}$ | $\mu_{12}$ | $\mu_{21}$ | $\mu_{22}$ | $\mu_{31}$ | $\mu_{32}$ |
-|:--|--:|--:|--:|--:|--:|--:|
-| main effect $A$ (1 vs 2) |  $1$ | $1$ | $-1$ |  $-1$ | $0$ | $0$ |
-| main effect $A$ (1 vs 3) |    $1$ |  $1$ | $0$ | $0$ | $-1$ |  $-1$ |
-| main effect $B$ (1 vs 2) |    $1$ |  $-1$ | $1$ |  $-1$ | $1$ | $-1$ |
-| interaction $AB$ (1 vs 2, 1 vs 2) | $1$ | $-1$ | $-1$ | $1$ | $0$ | $0$ |
-| interaction $AB$ (1 vs 3, 1 vs 2) |  $1$ | $-1$ | $0$ | $0$ | $-1$ | $1$ |
 
 
 ---
@@ -449,6 +587,7 @@ We only tests hypothesis that are of interest
 ---
 
 # Controlling the FWER
+
 - What is the number of hypothesis of interest? Often, this is pairwise comparisons within each level of the other factor
 - much less than $\binom{ab}{2}$ pairwise comparisons
 - Scheffé's method for all custom contrasts still applicable, but may be conservative
