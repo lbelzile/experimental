@@ -114,7 +114,8 @@ website:
          #     file: example/02-hypothesis_testing.qmd
             - text: "One-way ANOVA"
               file: example/onewayanova.qmd
-         #   - text: "Two-way ANOVA"
+            - text: "Two-way ANOVA"
+              file: example/twowayanova.qmd
          #   - text: "Three-way ANOVA"
          #     file: example/threewayanova.qmd
          #   - text: "Analysis of covariance"

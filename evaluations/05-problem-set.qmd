@@ -7,13 +7,3 @@ title: "Problem set 5"
 - a PDF report
 - your code
 
-# Replication of 'Precision of the anchor influences the amount of adjustment'
-
-
-We consider data from a replication by Chandler (2016) of Study 4a of Janiszewski and Uy (2008). Both studies measured the amount of adjustment when presented with vague or precise range of value for objects, with potential encouragement for adjusting more the value.
-
-@Chandler:2016 described the effect in the replication report:
-
-> Janiszewski and Uy (2008) conceptualized people’s attempt to adjust following presentation of an anchor as movement along a subjective representation scale by a certain number of units. Precise numbers (e.g. $9.99) imply a finer-resolution scale than round numbers (e.g. $10). Consequently, adjustment along a subjectively finer resolution scale will result in less objective adjustment than adjustment by the same number of units along a subjectively coarse resolution scale.
-
-The experiment is a 2 by 2 factorial design (two-way ANOVA) with `anchor` (either round or precise) and `magnitude` (`0` for small, `1` for big adjustment) as experimental factors. A total of 120 students were recruited and randomly assigned to one of the four experimental sub-condition, for a total of 30 observations per subgroup (`anchor`, `magnitude`). The response variable is `majust`, the mean adjustment for the price estimate of the item.

@@ -1,6 +1,0 @@
-BJOG_randomized_trials.png: 		https://doi.org/10.1111/1471-0528.15199
-replication_experimental_econ.png: 	https://experimentaleconreplications.com/
-ECN_Rothamsted:				https://www.rothamsted.ac.uk/environmental-change-network
-ECN_Rothamsted_patch.jpg:		http://www.era.rothamsted.ac.uk/images/banners/overview.jpg
-Broadbalk-02.jpg:			http://www.era.rothamsted.ac.uk/images/banners/Broadbalk-02.jpg
-Broadbalk.jpg				http://www.era.rothamsted.ac.uk/images/metadata/rbk1/2012-AJ-12-10.jpg

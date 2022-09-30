@@ -1,5 +1,5 @@
 ---
-title: "Multiway factorial designs"
+title: "Complete factorial designs"
 author: "Léo Belzile"
 date: "`r Sys.Date()`"
 output:
@@ -43,7 +43,7 @@ xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipbo
 
 class: center middle main-title section-title-1
 
-# ANOVA for two or more factor experiments
+# Complete factorial designs
 
 .class-info[
 
@@ -67,10 +67,12 @@ class: title title-inv-1
 .box-4.medium.sp-after-half[Factorial designs and interactions]
 
 
-.box-6.medium.sp-after-half[Parametrization and testing]
+
+.box-5.medium.sp-after-half[Model formulation]
+
+.box-6.medium.sp-after-half[Multifactorial designs]
 
 
-.box-8.medium.sp-after-half[Contrasts]
 
 ---
 
@@ -84,6 +86,18 @@ class: center middle section-title section-title-4 animated fadeIn
 
 layout: true
 class: title title-4
+
+---
+
+# Complete factorial designs?
+
+.box-inv-4.sp-after[
+.large[**Factorial design**]<br> study with multiple factors (subgroups)
+]
+
+
+.box-inv-4[.large[**Complete**]
+<br>Gather observations for every subgroup]
 
 ---
 
@@ -103,7 +117,7 @@ class: title title-4
 
 ---
 
-# Data as table
+# Setup of design
 
 
 
@@ -154,30 +168,19 @@ list(
 ```
 
 
-.box-inv-4[Each cell contains the mean measurements of the subcategory]
+.box-inv-4[Factors are crossed]
+
 
 ---
 
-# Why complete factorial designs?
-
-.box-inv-4.sp-after[
-.large[**Factorial design**]<br> study with multiple factors (subgroups)
-]
-
-
-.box-inv-4[
-.large[**Complete**]
-<br>
-Gather observations for every subgroup
-]
-
----
 # Efficiency of factorial design
 
-.box-inv-4.sp-after[Cast problem<br>as a series of one-way ANOVA <br> vs simultaneous estimation]
+.box-inv-4.sp-after.medium[Cast problem<br>as a series of one-way ANOVA <br> vs simultaneous estimation]
 
 
 .box-4.medium.sp-before[Factorial designs requires<br> **fewer overall observations**]
+
+.box-4.medium.sp-before[Can study **interactions**]
 
 ???
 
@@ -187,37 +190,35 @@ To study each interaction (complexity, story book ending) we would need to make 
 
 # Interaction
 
-.box-inv-4.sp-after[
+.box-inv-4.sp-after.medium[
 **Definition**: when the effect of one factor<br> depends on the levels of another factor.
 ]
 
 .box-inv-4[
-
 Effect together<br>
 $\neq$
 <br> sum of individual effects
-
 ]
 
-.box-inv-4.sp-after[Graphical display = <br>**interaction plot**<br>]
+---
 
-.box-4.sp-after-half[sample mean per category]
+# Interaction or profile plot
+.box-inv-4.large.sp-after[Graphical display: <br>plot sample mean per category]
 
-.box-4.sp-after-half[measure of uncertainty <br>(1 std. error for mean, confidence interval, etc.)]
+.box-4.sp-after-half[with uncertainty measure<br>(1 std. error for mean<br>confidence interval, etc.)]
 
 
 
 ---
 
-# Interaction plot with interaction
+# Interaction: lines are not parallel
 
 ```{r}
 #| label: "interaction_plots2"
 #| echo: false
 #| eval: true
 #| out.width: '80%'
-#| cache: true
-#| fig.width: 7
+#| fig.width: 8
 #| fig.height: 3
 set.seed(1234)
 data_fake <- tibble::tibble(
@@ -232,16 +233,16 @@ g1 <- ggplot(data = data_fake,
   geom_line(aes(group = ending, 
                 linetype = ending),
             alpha = 0.9,
-            linewidth = 2) +
+            size = 1.2) +
   geom_point() + 
   # ggimage::geom_image(aes(image = image),
   #                     size = 0.1,
   #                     by = "width",
   #                     asp = 1.618) +
-  # geom_point(size = 2.6, aes(shape = ending)) +
+  geom_point(size = 2.6, aes(shape = ending)) +
   theme_classic() +
   theme(legend.position = "bottom") +
-  labs(title = "Lines are not parallel = interaction")
+  labs(title = "")
 g2 <- ggplot(data = data_fake,
              aes(
                x = ending,
@@ -260,9 +261,15 @@ g1 + g2
 
 ---
 
-# Interaction plot without interaction
+# No interaction: parallel lines
 
-```{r interaction_plots1, echo = FALSE, fig.asp = 0.5, out.width = '80%', cache = TRUE}
+```{r}
+#| label: "interaction_plots1"
+#| echo: false
+#| eval: true
+#| out.width: '80%'
+#| fig.width: 8
+#| fig.height: 3
 set.seed(1234)
 data_fake <- tibble::tibble(
   "ending" = factor(rep(c("happy", "sad"), each = 3)),
@@ -279,8 +286,9 @@ data_fake <- tibble::tibble(
 
 g1 <- ggplot(data = data_fake,
              aes(x = complexity, y = mean)) +
-  geom_line(aes(group = ending, linetype = ending),
-            alpha = 0.1) +
+  geom_line(aes(group = ending, 
+                linetype = ending),
+            size = 1.2) +
   # ggimage::geom_image(aes(image = image),
   #                     size = 0.1,
   #                     by = "width",
@@ -311,11 +319,9 @@ g1 + g2
 # Interaction plot for 2 by 2 design
 
 ```{r}
-#| label: fig-2by2
+#| label: 2by2-interaction
 #| eval: true
 #| echo: false
-#| cache: true
-#| fig-cap: "Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of @Crump.Navarro.Suzuki:2019 by Matthew Crump (CC BY-SA 4.0 license)."
 #| out-width: "80%"
 p1 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
@@ -386,6 +392,11 @@ ggplot(all_22s,
   theme(legend.position = "bottom")
 ```
 
+
+???
+
+Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
+
 ---
 
 layout: false
@@ -405,14 +416,14 @@ class: title title-5
 
 Two factors: $A$ (complexity) and $B$ (ending) with $n_a$ and $n_b$ levels.
 
-Write the average response $Y_{ijk}$ of the $k$th measurement in group $(a_i, b_j)$ as
+Write the average response $Y_{ijr}$ of the $r$th measurement in group $(a_i, b_j)$ as
 \begin{align*}
-\underset{\text{response}\vphantom{b}}{Y_{ijk}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijk}}
+\underset{\text{response}\vphantom{b}}{Y_{ijr}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijr}}
 \end{align*}
 where 
 
-- $Y_{ijk}$ is the $k$th replicate for $i$th level of factor $A$ and $j$th level of factor $B$
-- $\varepsilon_{ijk}$ are independent error terms with mean zero and variance $\sigma^2$.
+- $Y_{ijr}$ is the $r$th replicate for $i$th level of factor $A$ and $j$th level of factor $B$
+- $\varepsilon_{ijr}$ are independent error terms with mean zero and variance $\sigma^2$.
 
 ---
 # One average for each subgroup
@@ -502,25 +513,45 @@ $\mathscr{H}_0$: $\mu_{.1} = \cdots = \mu_{.b}$ vs $\mathscr{H}_a$: at least two
 
 Write the model for a response variable $Y$ in terms of two factors $a_i$, $b_j$.
 
-$$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
+$$Y_{ijr} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijr}$$
 
+where 
 - $\alpha_i = \mu_{i.} - \mu$
-- mean of level $a_i$ minus overall mean.
+    - mean of level $a_i$ minus overall mean.
 - $\beta_j  = \mu_{.j} - \mu$
-- mean of level $b_j$ minus overall mean.
+    - mean of level $b_j$ minus overall mean.
 - $(\alpha\beta)_{ij} = \mu_{ij} - \mu_{i.} - \mu_{.j} + \mu$
-- the interaction term for $a_i$ and $b_j$.
+    - the interaction term for $a_i$ and $b_j$.
 
 ---
+
+# One average for each subgroup
+
+.small[
+
+| $\qquad B$ `ending`<br> $A$ `complexity` $\qquad$ | $b_1$ (`happy`) | $b_2$ (`sad`)| *row mean* |
+|------------|:----------:|:-----:|:-----:|
+| $a_1$ (`complicated`) | $\mu + \alpha_1 + \beta_1 + (\alpha\beta)_{11}$ | $\mu + \alpha_1 + \beta_2 + (\alpha\beta)_{12}$ | $\mu + \alpha_1$ |
+|  $a_2$ (`average`)  | $\mu + \alpha_2 + \beta_1 + (\alpha\beta)_{21}$ | $\mu + \alpha_2 + \beta_2 + (\alpha\beta)_{22}$ | $\mu + \alpha_2$ |
+| $a_3$ (`simple`) |  $\mu + \alpha_3 + \beta_1 + (\alpha\beta)_{31}$ | $\mu + \alpha_3 + \beta_2 + (\alpha\beta)_{32}$ | $\mu + \alpha_3$ |
+|*column mean* | $\mu + \beta_1$ | $\mu + \beta_2$ | $\mu$ |
+
+]
+
+
+.box-inv-5[More parameters than data cells!]
+
+The model in terms of $\alpha$, $\beta$ and $(\alpha\beta)$ is overparametrized.
+
+
+---
+
 
 # Sum-to-zero parametrization
 
 .box-inv-5[Too many parameters!]
 
 
-The model in terms of $\alpha$, $\beta$ and $(\alpha\beta)$ is overparametrized.
-
-.box-inv-5[More parameter than cells!]
 Impose sum to zero constraints
 
 $$\sum_{i=1}^{n_a} \alpha_i=0, \quad \sum_{j=1}^{n_b} \beta_j=0, \quad  \sum_{j=1}^{n_b} (\alpha\beta)_{ij}=0, \quad \sum_{i=1}^{n_a} (\alpha\beta)_{ij}=0.$$
@@ -529,19 +560,83 @@ which imposes $1 +  n_a + n_b$ constraints.
 
 ---
 
+# Why use the sum to zero parametrization?
+
+- Testing for main effect of $A$: $$\mathscr{H}_0: \alpha_1 = \cdots = \alpha_{n_a} = 0$$
+- Testing for main effect of $B$: $$\mathscr{H}_0: \beta_1 = \cdots = \beta_{n_b} = 0$$ 
+- Testing for interaction between $A$ and $B$: $$\mathscr{H}_0: (\alpha\beta)_{11} = \cdots = (\alpha\beta)_{n_an_b} = 0$$
+
+In all cases, alternative is that at least two coefficients are different.
+
+---
+
 # Seeking balance
 
-.box-inv-5.sp-after[
-Balanced sample<br>
-(equal nb of obs per group)]
+.box-inv-5.sp-after.medium[
+**Balanced sample**<br>
+(equal nb of obs per group)
 
-.box-inv-5.small[
-With $K$ replications per subgroup,<br>total sample size is $n = n_an_bK$
+]
+
+.box-inv-5[
+With $n_r$ replications per subgroup,<br>total sample size is $n = n_an_bn_r$.
 ]
 
 ---
 
+# Why balanced design?
 
+With equal variance, this is the optimal allocation of treatment unit.
+
+.box-inv-5.sp-after.medium[maximize power]
+
+Estimated means for main and total effects correspond to marginal averages.
+
+.box-inv-5.sp-after.medium[equiweighting]
+
+Unambiguous decomposition of effects of $A$, $B$ and interaction.
+
+.box-inv-5.sp-after.medium[orthogonality]
+
+---
+
+# Rewriting observations
+
+
+\begin{align*}
+\underset{\text{obs vs grand mean}}{(y_{ijr} - \widehat{\mu})} &= 
+\underset{\text{row mean vs grand mean}}{(\widehat{\mu}_{i.} - \widehat{\mu})} \\& +\underset{\text{col mean vs grand mean}}{(\widehat{\mu}_{.j} - \widehat{\mu})} \\&+
+\underset{\text{cell mean vs additive effect}}{(\widehat{\mu}_{ij} - \widehat{\mu}_{i.} - \widehat{\mu}_{.j}+ \widehat{\mu})} \\&+ \underset{\text{obs vs cell mean}}{(y_{ijr} - \widehat{\mu}_{ij})}
+\end{align*}
+
+---
+
+# Decomposing variability
+
+Constructing statistics as before by decomposing variability into blocks.
+
+We can square both sides and sum over all observations.
+
+With balanced design, all cross terms cancel, leaving us with the .color-5[**sum of square**] decomposition
+
+$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$
+
+---
+
+# Sum of square decomposition
+
+The sum of square decomposition
+
+$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$
+is an estimator of the population variance decomposition
+$$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_{B} + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$
+where $\sigma^2_A = n_a^{-1}\sum_{i=1}^{n_a} \alpha_i^2$, $\sigma^2_{AB} = (n_an_b)^{-1} \sum_{i=1}^{n_a} \sum_{j=1}^{n_b} (\alpha\beta)^2_{ij}$, etc.
+
+
+Take ratio of variability (effect relative to residual) and standardize numerator and denominator to build an $F$ statistic.
+
+
+---
 # Analysis of variance table
 
 
@@ -552,11 +647,13 @@ With $K$ replications per subgroup,<br>total sample size is $n = n_an_bK$
 | $A$  | $n_a-1$   | $\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)$ | $\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}$ |
 | $B$  | $n_b-1$   | $\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)$ | $\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}$ |
 | $AB$ | $(n_a-1)(n_b-1)$ | $\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}$ | $\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}$ |
-| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{res}}=\mathsf{SS}_{\text{res}}/ (n-ab)$ | |
+| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{resid}}=\mathsf{SS}_{\text{res}}/ (n-ab)$ | |
 | total | $n-1$ | | 
 
 ]
 
+Read the table backward (starting with the interaction).
+- If there is a significant interaction, the main effects are **not** of interest and potentially misleading.
 
 ---
 
@@ -574,58 +671,62 @@ Terms with $\mathsf{X}$ are fully determined by row/column/total averages
 
 ]
 
+---
+
+# Multiplicity correction
+
+With equal sample size and equal variance, usual recipes for ANOVA hold.
+
+Correction depends on the effect: e.g., for factor $A$, the critical values are
+
+- Bonferroni: $1-\alpha/(2m)$ quantile of $\mathsf{St}(n-n_an_b)$
+- Tukey: Studentized range (`qtukey`)
+   - level $1-\alpha/2$, $n_a$ groups, $n-n_an_b$ degrees of freedom.
+- Scheffé: critical value is $\{(a-1) \mathfrak{f}_{1-\alpha}\}^{1/2}$
+   - $\mathfrak{f}_{1-\alpha}$ is $1-\alpha$ quantile of $\mathsf{F}(\nu_1 = n_a-1, \nu_2 = n-n_an_b)$.
+
+Software implementations available in `emmeans` in **R**.
 
 ---
 
-# Testing hypothesis of interest
 
-We only tests hypothesis that are of interest
+layout: false
+name: factorial-designs
+class: center middle section-title section-title-5 animated fadeIn
 
-- If there is a significant interaction, the marginal means are **not** of interest
-- Rather, compute the simple effects.
-
----
-
-# Controlling the FWER
-
-- What is the number of hypothesis of interest? Often, this is pairwise comparisons within each level of the other factor
-- much less than $\binom{ab}{2}$ pairwise comparisons
-- Scheffé's method for all custom contrasts still applicable, but may be conservative
-- Tukey's method also continues to hold.
-- Omnibus procedures for controlling the FWER  (Holm-Bonferroni) may be more powerful than either Scheffé or Tukey's methods.
-
+# Numerical example
 
 ---
 
 layout: false
 name: factorial-designs
-class: center middle section-title section-title-4 animated fadeIn
+class: center middle section-title section-title-6 animated fadeIn
 
 # Multifactorial designs
 
 ---
 
-class: title title-4
+class: title title-6
 # Beyond two factors
 
-We can consider multiple factors $A$, $B$, $C$, $\ldots$ with respectively $a$, $b$, $c$, $\ldots$ levels and with $r$ replications for each.
+We can consider multiple factors $A$, $B$, $C$, $\ldots$ with respectively $n_a$, $n_b$, $n_c$, $\ldots$ levels and with $n_r$ replications for each.
 
 The total number of treatment combinations is 
 
-.box-inv-4.sp-after-half[
-$a \times b \times c \times \cdots$
+.box-inv-6.sp-after-half[
+$n_a \times n_b \times n_c \times \cdots$
 ]
 
 
 --
 
-.box-4.medium[
+.box-6.medium[
 **Curse of dimensionality**
 ]
 
 ---
 
-class: title title-4
+class: title title-6
 # Full three-way ANOVA model
 
 Each cell of the cube is allowed to have a different mean
@@ -633,14 +734,14 @@ Each cell of the cube is allowed to have a different mean
 $$\begin{align*}
 \underset{\text{response}\vphantom{cell}}{Y_{ijkr}\vphantom{\mu_{j}}} = \underset{\text{cell mean}}{\mu_{ijk}} + \underset{\text{error}\vphantom{cell}}{\varepsilon_{ijkr}\vphantom{\mu_{j}}}
 \end{align*}$$
-with $\varepsilon_{ijkt}$ an independent $\mathsf{No}(0, \sigma^2)$ error term for 
+with $\varepsilon_{ijkt}$ are independent error term for 
 - row $i$
 - column $j$
 - depth $k$
 - replication $r$
 
 ---
-class: title title-4
+class: title title-6
 # Parametrization of a three-way ANOVA model
 
 With the **sum-to-zero** parametrization with factors $A$, $B$ and $C$, write the response as
@@ -667,7 +768,7 @@ knitr::include_graphics("img/05/cube_all.png")
 ]
 
 ---
-class: title title-4
+class: title title-6
 # Example of three-way design
 
 .small[
@@ -685,7 +786,7 @@ Setup: should a comprehensive exam be administered to bachelor students in their
 ]
 
 ---
-class: title title-4
+class: title title-6
 
 # Interaction plot
 
@@ -713,7 +814,7 @@ p.472 of Keppel and Wickens
 
 
 ---
-class: title title-4
+class: title title-6
 #  The microwave popcorn experiment
 
 What is the best brand of microwave popcorn? 
@@ -729,22 +830,12 @@ What is the best brand of microwave popcorn?
 ---
 
 ```{r popcorn_pre, echo = FALSE, eval = TRUE}
-# Somehow there is an error messsage when knitting
+# Somehow there is an error message when knitting
 library(tidyverse) #load packages
 # Sum-to-zero parametrization
-options(contrasts = rep("contr.sum", 2))
-url <-
-  "http://deanvossdraguljic.ietsandbox.net/DeanVossDraguljic/R-data/popcorn.microwave.txt"
-popcorn <- read.table(url,
-                      header = TRUE,
-                      stringsAsFactor = TRUE) |>
-  mutate(
-    brand = factor(brand),
-    power = factor(power, labels = c("500W", "600W")),
-    time = factor(time, labels = c("4m", "4m30s", "5m"))
-  ) |>
-  rename(percentage = y)
-model <- lm(percentage ~ brand * power * time, data = popcorn)
+data(popcorn, package = "hecedsm")
+model <- aov(percentage ~ brand * power * time, 
+             data = popcorn)
 # ANOVA table
 anova_table <- anova(model) # 'anova' is for balanced designs
 ```
@@ -753,21 +844,18 @@ anova_table <- anova(model) # 'anova' is for balanced designs
 
 .panel[.panel-name[ANOVA]
 ```{r popcorn_qqplot, echo = TRUE, eval = FALSE}
+data(popcorn, package = 'hecedsm')
 # Fit model with three-way interaction
-model <- aov(percentage ~ brand*power*time, 
-data = popcorn)
-# ANOVA table
+model <- aov(percentage ~ brand*power*time,
+             data = popcorn)
+# ANOVA table - 'anova' is ONLY for balanced designs
 anova_table <- anova(model) 
-# 'anova' is for balanced designs
-# Check model assumptions
-# plots + tests meaningless with r=2 replications per group...
-# except for quantile-quantile plot
-car::qqPlot(model, # points should be on straight line!
-id = FALSE, 
-ylab = 'studentized residuals',
-xlab = "Student-t quantiles")
-
+# Quantile-quantile plot
+car::qqPlot(model)
 ```
+
+.small[Model assumptions: plots and tests are meaningless with $n_r=2$ replications per group...]
+
 ]
 
 .panel[.panel-name[QQ-plot]
@@ -788,19 +876,13 @@ All points fall roughly on a straight line.
 ```{r popcorn_plot, echo = TRUE, eval = FALSE, message = FALSE}
 popcorn |> 
    group_by(brand, time, power) |>
-   summarize(mean_percentage = mean(percentage)) |>
+   summarize(meanp = mean(percentage)) |>
 ggplot(mapping = aes(x = power, 
-                     y = mean_percentage, 
+                     y = meanp, 
                      col = time, 
                      group = time)) + 
   geom_line() + 
-  facet_wrap(~brand) + 
-  labs(subtitle = "percentage of popped kernels",
-       y = "",
-       col = "time (min)",
-       x = "power (W)") + 
-  theme_bw() + 
-  theme(legend.position = "bottom")
+  facet_wrap(~brand)
 ```
 ]
 
@@ -826,7 +908,7 @@ popcorn |>
   theme(legend.position = "bottom")
 ```
 
-No three-way interaction (hard to tell with $r=2$ replications).
+No evidence of three-way interaction (hard to tell with $r=2$ replications).
 ]
 
 
@@ -834,22 +916,22 @@ No three-way interaction (hard to tell with $r=2$ replications).
 
 ---
 
-class: title title-4
+class: title title-6
 # Analysis of variance table for balanced designs
 
 .small[
 
 | terms | degrees of freedom | 
 |:---:|:-----|:-------|
-| $A$ | $a-1$ | 
-| $B$ | $b-1$ | 
-| $C$ | $c-1$ | 
-| $AB$ | $(a-1)(b-1)$ | 
-| $AC$ | $(a-1)(c-1)$ | 
-| $BC$ | $(b-1)(c-1)$ | 
-| $ABC$ | ${\small (a-1)(b-1)(c-1)}$ | 
-| $\text{residual}$ | $abc(r-1)$ | 
-| $\text{total}$ | $abcr-1$ | 
+| $A$ | $n_a-1$ | 
+| $B$ | $n_b-1$ | 
+| $C$ | $n_c-1$ | 
+| $AB$ | $(n_a-1)(n_b-1)$ | 
+| $AC$ | $(n_a-1)(n_c-1)$ | 
+| $BC$ | $(n_b-1)(n_c-1)$ | 
+| $ABC$ | ${\small (n_a-1)(n_b-1)(n_c-1)}$ | 
+| $\text{residual}$ | $n_an_bn_c(R-1)$ | 
+| $\text{total}$ | $n_an_bn_cn_r-1$ | 
 
 ]
 
@@ -868,7 +950,7 @@ kableExtra::kable_styling(position = "center")
 ```
 
 ---
-class: title title-4
+class: title title-6
 # Omitting terms in a factorial design
 
 The more levels and factors, the more parameters to estimate (and replications needed)
@@ -880,16 +962,7 @@ It may be useful not to consider some interactions if they are known or (strongl
 - If important interactions are omitted from the model, biased estimates/output!
 
 ---
-
-layout: false
-name: contrasts
-class: center middle section-title section-title-5 animated fadeIn
-
-# Custom contrasts and marginal means
-
-
----
-class: title title-5
+class: title title-6
 # Guidelines for the interpretation of effects
 
 Start with the most complicated term (top down)
@@ -899,17 +972,11 @@ Start with the most complicated term (top down)
     - comparison is done cell by cell within each level
 - If the $ABC$ term isn't significative:
     - can marginalize and interpret lower order terms
-
---
-
-.box-inv-5[Analytical comparisons]
-
-- Preplanned
-- *Post-hoc*: after seeing that the three-way interaction isn't significative, compare all pairwise differences within two-way.
+    - back to a series of two-way ANOVAs
 
 ---
 
-class: title title-5
+class: title title-6
 
 # What contrasts are of interest?
 
@@ -922,9 +989,10 @@ Depending on the goal, could compare for variable $A$
 - contrast differences between treatment at $\psi_A \times B$, averaging over $C$.
 - etc.
 
-See [helper code](https://edsm.rbind.io/examples/example_threewayanova_contrasts.R) and chapter 22 of Keppel & Wickens (2004) for a detailed example.
+See helper code and chapter 22 of Keppel & Wickens (2004) for a detailed example.
+
 ---
-class: title title-5
+class: title title-6
 # Effects and contrasts for microwave-popcorn
 
 Following preplanned comparisons
@@ -938,7 +1006,7 @@ Following preplanned comparisons
 
 ---
 
-class: title title-5
+class: title title-6
 # Preplanned comparisons using `emmeans`
 
 
@@ -952,10 +1020,13 @@ $$\mathscr{H}_0: (\mu_{1.2} -\mu_{1.3}) - (\mu_{2.2} - \mu_{2.3}) = 0$$
 ```{r plannedcomparisonspopcorn, echo = TRUE, eval = FALSE}
 library(emmeans)
 # marginal means
-emm_popcorn_AC <- emmeans(model, specs = c("brand","time"))
-contrast_list <- list(brand12with4.5vs5min = c(0, 0, 0, 1, -1, 0, -1, 1,0))
+emm_popcorn_AC <- emmeans(model, 
+                          specs = c("brand","time"))
+contrast_list <- 
+  list(
+    brand12with4.5vs5min = c(0, 0, 0, 1, -1, 0, -1, 1,0))
 contrast(emm_popcorn_AC,  # marginal mean (no time)
- method = contrast_list) # list of contrasts
+         method = contrast_list) # list of contrasts
 ```
 
 ```{r Scheffebyhand, echo = FALSE, eval = FALSE}
@@ -971,18 +1042,22 @@ Scrit <- sqrt(17*qf(0.99, 17, 18)) # 18 cells, but all in terms of 17 combos of 
 
 ---
 
-class: title title-5
+class: title title-6
 # Preplanned comparisons
 
+Compare all three times (4, 4.5 and 5 minutes)
 
-At level 99% with Tukey's method, compare all three times (4, 4.5 and 5 minutes)
+At level 99% with Tukey's HSD method
 
 - Careful! Potentially misleading because there is a `brand * time` interaction present.
 
 ```{r plannedcomparisons2popcorn, echo = TRUE, eval = FALSE}
 # List of variables to keep go in `specs`: keep only time
 emm_popcorn_C <- emmeans(model, specs = "time")
-pairs(emm_popcorn_C, adjust = "tukey", level = 0.99, infer = TRUE)
+pairs(emm_popcorn_C, 
+      adjust = "tukey", 
+      level = 0.99, 
+      infer = TRUE)
 
 ```
 

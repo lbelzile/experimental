@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Multiway factorial designs</title>
+    <title>Complete factorial designs</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
     <meta name="date" content="2022-09-29" />
@@ -39,7 +39,7 @@
 
 class: center middle main-title section-title-1
 
-# ANOVA for two or more factor experiments
+# Complete factorial designs
 
 .class-info[
 
@@ -63,10 +63,12 @@ class: title title-inv-1
 .box-4.medium.sp-after-half[Factorial designs and interactions]
 
 
-.box-6.medium.sp-after-half[Parametrization and testing]
+
+.box-5.medium.sp-after-half[Model formulation]
+
+.box-6.medium.sp-after-half[Multifactorial designs]
 
 
-.box-8.medium.sp-after-half[Contrasts]
 
 ---
 
@@ -80,6 +82,18 @@ class: center middle section-title section-title-4 animated fadeIn
 
 layout: true
 class: title title-4
+
+---
+
+# Complete factorial designs?
+
+.box-inv-4.sp-after[
+.large[**Factorial design**]&lt;br&gt; study with multiple factors (subgroups)
+]
+
+
+.box-inv-4[.large[**Complete**]
+&lt;br&gt;Gather observations for every subgroup]
 
 ---
 
@@ -99,16 +113,16 @@ class: title title-4
 
 ---
 
-# Data as table
+# Setup of design
 
 
 
-<div id="znauvvavos" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mlqhdevnwr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#znauvvavos .gt_table {
+#mlqhdevnwr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -133,7 +147,7 @@ class: title title-4
   border-left-color: #D3D3D3;
 }
 
-#znauvvavos .gt_heading {
+#mlqhdevnwr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -145,7 +159,7 @@ class: title title-4
   border-right-color: #D3D3D3;
 }
 
-#znauvvavos .gt_title {
+#mlqhdevnwr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -157,7 +171,7 @@ class: title title-4
   border-bottom-width: 0;
 }
 
-#znauvvavos .gt_subtitle {
+#mlqhdevnwr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -169,13 +183,13 @@ class: title title-4
   border-top-width: 0;
 }
 
-#znauvvavos .gt_bottom_border {
+#mlqhdevnwr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#znauvvavos .gt_col_headings {
+#mlqhdevnwr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -190,7 +204,7 @@ class: title title-4
   border-right-color: #D3D3D3;
 }
 
-#znauvvavos .gt_col_heading {
+#mlqhdevnwr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -210,7 +224,7 @@ class: title title-4
   overflow-x: hidden;
 }
 
-#znauvvavos .gt_column_spanner_outer {
+#mlqhdevnwr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -222,15 +236,15 @@ class: title title-4
   padding-right: 4px;
 }
 
-#znauvvavos .gt_column_spanner_outer:first-child {
+#mlqhdevnwr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#znauvvavos .gt_column_spanner_outer:last-child {
+#mlqhdevnwr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#znauvvavos .gt_column_spanner {
+#mlqhdevnwr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -242,7 +256,7 @@ class: title title-4
   width: 100%;
 }
 
-#znauvvavos .gt_group_heading {
+#mlqhdevnwr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -267,7 +281,7 @@ class: title title-4
   vertical-align: middle;
 }
 
-#znauvvavos .gt_empty_group_heading {
+#mlqhdevnwr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -282,15 +296,15 @@ class: title title-4
   vertical-align: middle;
 }
 
-#znauvvavos .gt_from_md > :first-child {
+#mlqhdevnwr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#znauvvavos .gt_from_md > :last-child {
+#mlqhdevnwr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#znauvvavos .gt_row {
+#mlqhdevnwr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -309,7 +323,7 @@ class: title title-4
   overflow-x: hidden;
 }
 
-#znauvvavos .gt_stub {
+#mlqhdevnwr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -322,7 +336,7 @@ class: title title-4
   padding-right: 5px;
 }
 
-#znauvvavos .gt_stub_row_group {
+#mlqhdevnwr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -336,11 +350,11 @@ class: title title-4
   vertical-align: top;
 }
 
-#znauvvavos .gt_row_group_first td {
+#mlqhdevnwr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#znauvvavos .gt_summary_row {
+#mlqhdevnwr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -350,16 +364,16 @@ class: title title-4
   padding-right: 5px;
 }
 
-#znauvvavos .gt_first_summary_row {
+#mlqhdevnwr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#znauvvavos .gt_first_summary_row.thick {
+#mlqhdevnwr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#znauvvavos .gt_last_summary_row {
+#mlqhdevnwr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -369,7 +383,7 @@ class: title title-4
   border-bottom-color: #D3D3D3;
 }
 
-#znauvvavos .gt_grand_summary_row {
+#mlqhdevnwr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -379,7 +393,7 @@ class: title title-4
   padding-right: 5px;
 }
 
-#znauvvavos .gt_first_grand_summary_row {
+#mlqhdevnwr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -389,11 +403,11 @@ class: title title-4
   border-top-color: #D3D3D3;
 }
 
-#znauvvavos .gt_striped {
+#mlqhdevnwr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#znauvvavos .gt_table_body {
+#mlqhdevnwr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -402,7 +416,7 @@ class: title title-4
   border-bottom-color: #D3D3D3;
 }
 
-#znauvvavos .gt_footnotes {
+#mlqhdevnwr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -416,7 +430,7 @@ class: title title-4
   border-right-color: #D3D3D3;
 }
 
-#znauvvavos .gt_footnote {
+#mlqhdevnwr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -425,7 +439,7 @@ class: title title-4
   padding-right: 5px;
 }
 
-#znauvvavos .gt_sourcenotes {
+#mlqhdevnwr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -439,7 +453,7 @@ class: title title-4
   border-right-color: #D3D3D3;
 }
 
-#znauvvavos .gt_sourcenote {
+#mlqhdevnwr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -447,36 +461,36 @@ class: title title-4
   padding-right: 5px;
 }
 
-#znauvvavos .gt_left {
+#mlqhdevnwr .gt_left {
   text-align: left;
 }
 
-#znauvvavos .gt_center {
+#mlqhdevnwr .gt_center {
   text-align: center;
 }
 
-#znauvvavos .gt_right {
+#mlqhdevnwr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#znauvvavos .gt_font_normal {
+#mlqhdevnwr .gt_font_normal {
   font-weight: normal;
 }
 
-#znauvvavos .gt_font_bold {
+#mlqhdevnwr .gt_font_bold {
   font-weight: bold;
 }
 
-#znauvvavos .gt_font_italic {
+#mlqhdevnwr .gt_font_italic {
   font-style: italic;
 }
 
-#znauvvavos .gt_super {
+#mlqhdevnwr .gt_super {
   font-size: 65%;
 }
 
-#znauvvavos .gt_two_val_uncert {
+#mlqhdevnwr .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -485,31 +499,31 @@ class: title title-4
   margin-left: 0.1em;
 }
 
-#znauvvavos .gt_footnote_marks {
+#mlqhdevnwr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#znauvvavos .gt_asterisk {
+#mlqhdevnwr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#znauvvavos .gt_slash_mark {
+#mlqhdevnwr .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#znauvvavos .gt_fraction_numerator {
+#mlqhdevnwr .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#znauvvavos .gt_fraction_denominator {
+#mlqhdevnwr .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -546,30 +560,19 @@ class: title title-4
 </div>
 
 
-.box-inv-4[Each cell contains the mean measurements of the subcategory]
+.box-inv-4[Factors are crossed]
+
 
 ---
 
-# Why complete factorial designs?
-
-.box-inv-4.sp-after[
-.large[**Factorial design**]&lt;br&gt; study with multiple factors (subgroups)
-]
-
-
-.box-inv-4[
-.large[**Complete**]
-&lt;br&gt;
-Gather observations for every subgroup
-]
-
----
 # Efficiency of factorial design
 
-.box-inv-4.sp-after[Cast problem&lt;br&gt;as a series of one-way ANOVA &lt;br&gt; vs simultaneous estimation]
+.box-inv-4.sp-after.medium[Cast problem&lt;br&gt;as a series of one-way ANOVA &lt;br&gt; vs simultaneous estimation]
 
 
 .box-4.medium.sp-before[Factorial designs requires&lt;br&gt; **fewer overall observations**]
+
+.box-4.medium.sp-before[Can study **interactions**]
 
 ???
 
@@ -579,35 +582,34 @@ To study each interaction (complexity, story book ending) we would need to make 
 
 # Interaction
 
-.box-inv-4.sp-after[
+.box-inv-4.sp-after.medium[
 **Definition**: when the effect of one factor&lt;br&gt; depends on the levels of another factor.
 ]
 
 .box-inv-4[
-
 Effect together&lt;br&gt;
 `\(\neq\)`
 &lt;br&gt; sum of individual effects
-
 ]
 
-.box-inv-4.sp-after[Graphical display = &lt;br&gt;**interaction plot**&lt;br&gt;]
+---
 
-.box-4.sp-after-half[sample mean per category]
+# Interaction or profile plot
+.box-inv-4.large.sp-after[Graphical display: &lt;br&gt;plot sample mean per category]
 
-.box-4.sp-after-half[measure of uncertainty &lt;br&gt;(1 std. error for mean, confidence interval, etc.)]
+.box-4.sp-after-half[with uncertainty measure&lt;br&gt;(1 std. error for mean&lt;br&gt;confidence interval, etc.)]
 
 
 
 ---
 
-# Interaction plot with interaction
+# Interaction: lines are not parallel
 
 &lt;img src="05-slides_files/figure-html/interaction_plots2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# Interaction plot without interaction
+# No interaction: parallel lines
 
 &lt;img src="05-slides_files/figure-html/interaction_plots1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
@@ -616,10 +618,12 @@ Effect together&lt;br&gt;
 
 # Interaction plot for 2 by 2 design
 
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="05-slides_files/figure-html/fig-2by2-1.png" alt="Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of @Crump.Navarro.Suzuki:2019 by Matthew Crump (CC BY-SA 4.0 license)." width="80%" /&gt;
-&lt;p class="caption"&gt;Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of @Crump.Navarro.Suzuki:2019 by Matthew Crump (CC BY-SA 4.0 license).&lt;/p&gt;
-&lt;/div&gt;
+&lt;img src="05-slides_files/figure-html/2by2-interaction-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+???
+
+Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
 
 ---
 
@@ -640,14 +644,14 @@ class: title title-5
 
 Two factors: `\(A\)` (complexity) and `\(B\)` (ending) with `\(n_a\)` and `\(n_b\)` levels.
 
-Write the average response `\(Y_{ijk}\)` of the `\(k\)`th measurement in group `\((a_i, b_j)\)` as
+Write the average response `\(Y_{ijr}\)` of the `\(r\)`th measurement in group `\((a_i, b_j)\)` as
 `\begin{align*}
-\underset{\text{response}\vphantom{b}}{Y_{ijk}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijk}}
+\underset{\text{response}\vphantom{b}}{Y_{ijr}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijr}}
 \end{align*}`
 where 
 
-- `\(Y_{ijk}\)` is the `\(k\)`th replicate for `\(i\)`th level of factor `\(A\)` and `\(j\)`th level of factor `\(B\)`
-- `\(\varepsilon_{ijk}\)` are independent error terms with mean zero and variance `\(\sigma^2\)`.
+- `\(Y_{ijr}\)` is the `\(r\)`th replicate for `\(i\)`th level of factor `\(A\)` and `\(j\)`th level of factor `\(B\)`
+- `\(\varepsilon_{ijr}\)` are independent error terms with mean zero and variance `\(\sigma^2\)`.
 
 ---
 # One average for each subgroup
@@ -737,25 +741,45 @@ Main effect of factor `\(B\)`
 
 Write the model for a response variable `\(Y\)` in terms of two factors `\(a_i\)`, `\(b_j\)`.
 
-`$$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$`
+`$$Y_{ijr} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijr}$$`
 
+where 
 - `\(\alpha_i = \mu_{i.} - \mu\)`
-- mean of level `\(a_i\)` minus overall mean.
+    - mean of level `\(a_i\)` minus overall mean.
 - `\(\beta_j  = \mu_{.j} - \mu\)`
-- mean of level `\(b_j\)` minus overall mean.
+    - mean of level `\(b_j\)` minus overall mean.
 - `\((\alpha\beta)_{ij} = \mu_{ij} - \mu_{i.} - \mu_{.j} + \mu\)`
-- the interaction term for `\(a_i\)` and `\(b_j\)`.
+    - the interaction term for `\(a_i\)` and `\(b_j\)`.
 
 ---
+
+# One average for each subgroup
+
+.small[
+
+| `\(\qquad B\)` `ending`&lt;br&gt; `\(A\)` `complexity` `\(\qquad\)` | `\(b_1\)` (`happy`) | `\(b_2\)` (`sad`)| *row mean* |
+|------------|:----------:|:-----:|:-----:|
+| `\(a_1\)` (`complicated`) | `\(\mu + \alpha_1 + \beta_1 + (\alpha\beta)_{11}\)` | `\(\mu + \alpha_1 + \beta_2 + (\alpha\beta)_{12}\)` | `\(\mu + \alpha_1\)` |
+|  `\(a_2\)` (`average`)  | `\(\mu + \alpha_2 + \beta_1 + (\alpha\beta)_{21}\)` | `\(\mu + \alpha_2 + \beta_2 + (\alpha\beta)_{22}\)` | `\(\mu + \alpha_2\)` |
+| `\(a_3\)` (`simple`) |  `\(\mu + \alpha_3 + \beta_1 + (\alpha\beta)_{31}\)` | `\(\mu + \alpha_3 + \beta_2 + (\alpha\beta)_{32}\)` | `\(\mu + \alpha_3\)` |
+|*column mean* | `\(\mu + \beta_1\)` | `\(\mu + \beta_2\)` | `\(\mu\)` |
+
+]
+
+
+.box-inv-5[More parameters than data cells!]
+
+The model in terms of `\(\alpha\)`, `\(\beta\)` and `\((\alpha\beta)\)` is overparametrized.
+
+
+---
+
 
 # Sum-to-zero parametrization
 
 .box-inv-5[Too many parameters!]
 
 
-The model in terms of `\(\alpha\)`, `\(\beta\)` and `\((\alpha\beta)\)` is overparametrized.
-
-.box-inv-5[More parameter than cells!]
 Impose sum to zero constraints
 
 `$$\sum_{i=1}^{n_a} \alpha_i=0, \quad \sum_{j=1}^{n_b} \beta_j=0, \quad  \sum_{j=1}^{n_b} (\alpha\beta)_{ij}=0, \quad \sum_{i=1}^{n_a} (\alpha\beta)_{ij}=0.$$`
@@ -764,19 +788,83 @@ which imposes `\(1 +  n_a + n_b\)` constraints.
 
 ---
 
+# Why use the sum to zero parametrization?
+
+- Testing for main effect of `\(A\)`: `$$\mathscr{H}_0: \alpha_1 = \cdots = \alpha_{n_a} = 0$$`
+- Testing for main effect of `\(B\)`: `$$\mathscr{H}_0: \beta_1 = \cdots = \beta_{n_b} = 0$$` 
+- Testing for interaction between `\(A\)` and `\(B\)`: `$$\mathscr{H}_0: (\alpha\beta)_{11} = \cdots = (\alpha\beta)_{n_an_b} = 0$$`
+
+In all cases, alternative is that at least two coefficients are different.
+
+---
+
 # Seeking balance
 
-.box-inv-5.sp-after[
-Balanced sample&lt;br&gt;
-(equal nb of obs per group)]
+.box-inv-5.sp-after.medium[
+**Balanced sample**&lt;br&gt;
+(equal nb of obs per group)
 
-.box-inv-5.small[
-With `\(K\)` replications per subgroup,&lt;br&gt;total sample size is `\(n = n_an_bK\)`
+]
+
+.box-inv-5[
+With `\(n_r\)` replications per subgroup,&lt;br&gt;total sample size is `\(n = n_an_bn_r\)`.
 ]
 
 ---
 
+# Why balanced design?
 
+With equal variance, this is the optimal allocation of treatment unit.
+
+.box-inv-5.sp-after.medium[maximize power]
+
+Estimated means for main and total effects correspond to marginal averages.
+
+.box-inv-5.sp-after.medium[equiweighting]
+
+Unambiguous decomposition of effects of `\(A\)`, `\(B\)` and interaction.
+
+.box-inv-5.sp-after.medium[orthogonality]
+
+---
+
+# Rewriting observations
+
+
+`\begin{align*}
+\underset{\text{obs vs grand mean}}{(y_{ijr} - \widehat{\mu})} &amp;= 
+\underset{\text{row mean vs grand mean}}{(\widehat{\mu}_{i.} - \widehat{\mu})} \\&amp; +\underset{\text{col mean vs grand mean}}{(\widehat{\mu}_{.j} - \widehat{\mu})} \\&amp;+
+\underset{\text{cell mean vs additive effect}}{(\widehat{\mu}_{ij} - \widehat{\mu}_{i.} - \widehat{\mu}_{.j}+ \widehat{\mu})} \\&amp;+ \underset{\text{obs vs cell mean}}{(y_{ijr} - \widehat{\mu}_{ij})}
+\end{align*}`
+
+---
+
+# Decomposing variability
+
+Constructing statistics as before by decomposing variability into blocks.
+
+We can square both sides and sum over all observations.
+
+With balanced design, all cross terms cancel, leaving us with the .color-5[**sum of square**] decomposition
+
+`$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$`
+
+---
+
+# Sum of square decomposition
+
+The sum of square decomposition
+
+`$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$`
+is an estimator of the population variance decomposition
+`$$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_{B} + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$`
+where `\(\sigma^2_A = n_a^{-1}\sum_{i=1}^{n_a} \alpha_i^2\)`, `\(\sigma^2_{AB} = (n_an_b)^{-1} \sum_{i=1}^{n_a} \sum_{j=1}^{n_b} (\alpha\beta)^2_{ij}\)`, etc.
+
+
+Take ratio of variability (effect relative to residual) and standardize numerator and denominator to build an `\(F\)` statistic.
+
+
+---
 # Analysis of variance table
 
 
@@ -787,11 +875,13 @@ With `\(K\)` replications per subgroup,&lt;br&gt;total sample size is `\(n = n_a
 | `\(A\)`  | `\(n_a-1\)`   | `\(\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)\)` | `\(\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}\)` |
 | `\(B\)`  | `\(n_b-1\)`   | `\(\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)\)` | `\(\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}\)` |
 | `\(AB\)` | `\((n_a-1)(n_b-1)\)` | `\(\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}\)` | `\(\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}\)` |
-| residuals | `\(n-n_an_b\)` | `\(\mathsf{MS}_{\text{res}}=\mathsf{SS}_{\text{res}}/ (n-ab)\)` | |
+| residuals | `\(n-n_an_b\)` | `\(\mathsf{MS}_{\text{resid}}=\mathsf{SS}_{\text{res}}/ (n-ab)\)` | |
 | total | `\(n-1\)` | | 
 
 ]
 
+Read the table backward (starting with the interaction).
+- If there is a significant interaction, the main effects are **not** of interest and potentially misleading.
 
 ---
 
@@ -809,58 +899,62 @@ Terms with `\(\mathsf{X}\)` are fully determined by row/column/total averages
 
 ]
 
+---
+
+# Multiplicity correction
+
+With equal sample size and equal variance, usual recipes for ANOVA hold.
+
+Correction depends on the effect: e.g., for factor `\(A\)`, the critical values are
+
+- Bonferroni: `\(1-\alpha/(2m)\)` quantile of `\(\mathsf{St}(n-n_an_b)\)`
+- Tukey: Studentized range (`qtukey`)
+   - level `\(1-\alpha/2\)`, `\(n_a\)` groups, `\(n-n_an_b\)` degrees of freedom.
+- Scheffé: critical value is `\(\{(a-1) \mathfrak{f}_{1-\alpha}\}^{1/2}\)`
+   - `\(\mathfrak{f}_{1-\alpha}\)` is `\(1-\alpha\)` quantile of `\(\mathsf{F}(\nu_1 = n_a-1, \nu_2 = n-n_an_b)\)`.
+
+Software implementations available in `emmeans` in **R**.
 
 ---
 
-# Testing hypothesis of interest
 
-We only tests hypothesis that are of interest
+layout: false
+name: factorial-designs
+class: center middle section-title section-title-5 animated fadeIn
 
-- If there is a significant interaction, the marginal means are **not** of interest
-- Rather, compute the simple effects.
-
----
-
-# Controlling the FWER
-
-- What is the number of hypothesis of interest? Often, this is pairwise comparisons within each level of the other factor
-- much less than `\(\binom{ab}{2}\)` pairwise comparisons
-- Scheffé's method for all custom contrasts still applicable, but may be conservative
-- Tukey's method also continues to hold.
-- Omnibus procedures for controlling the FWER  (Holm-Bonferroni) may be more powerful than either Scheffé or Tukey's methods.
-
+# Numerical example
 
 ---
 
 layout: false
 name: factorial-designs
-class: center middle section-title section-title-4 animated fadeIn
+class: center middle section-title section-title-6 animated fadeIn
 
 # Multifactorial designs
 
 ---
 
-class: title title-4
+class: title title-6
 # Beyond two factors
 
-We can consider multiple factors `\(A\)`, `\(B\)`, `\(C\)`, `\(\ldots\)` with respectively `\(a\)`, `\(b\)`, `\(c\)`, `\(\ldots\)` levels and with `\(r\)` replications for each.
+We can consider multiple factors `\(A\)`, `\(B\)`, `\(C\)`, `\(\ldots\)` with respectively `\(n_a\)`, `\(n_b\)`, `\(n_c\)`, `\(\ldots\)` levels and with `\(n_r\)` replications for each.
 
 The total number of treatment combinations is 
 
-.box-inv-4.sp-after-half[
-`\(a \times b \times c \times \cdots\)`
+.box-inv-6.sp-after-half[
+`\(n_a \times n_b \times n_c \times \cdots\)`
 ]
 
 
 --
 
-.box-4.medium[
+.box-6.medium[
 **Curse of dimensionality**
 ]
 
 ---
 
-class: title title-4
+class: title title-6
 # Full three-way ANOVA model
 
 Each cell of the cube is allowed to have a different mean
@@ -868,14 +962,14 @@ Each cell of the cube is allowed to have a different mean
 `$$\begin{align*}
 \underset{\text{response}\vphantom{cell}}{Y_{ijkr}\vphantom{\mu_{j}}} = \underset{\text{cell mean}}{\mu_{ijk}} + \underset{\text{error}\vphantom{cell}}{\varepsilon_{ijkr}\vphantom{\mu_{j}}}
 \end{align*}$$`
-with `\(\varepsilon_{ijkt}\)` an independent `\(\mathsf{No}(0, \sigma^2)\)` error term for 
+with `\(\varepsilon_{ijkt}\)` are independent error term for 
 - row `\(i\)`
 - column `\(j\)`
 - depth `\(k\)`
 - replication `\(r\)`
 
 ---
-class: title title-4
+class: title title-6
 # Parametrization of a three-way ANOVA model
 
 With the **sum-to-zero** parametrization with factors `\(A\)`, `\(B\)` and `\(C\)`, write the response as
@@ -897,7 +991,7 @@ With the **sum-to-zero** parametrization with factors `\(A\)`, `\(B\)` and `\(C\
 ]
 
 ---
-class: title title-4
+class: title title-6
 # Example of three-way design
 
 .small[
@@ -915,7 +1009,7 @@ Setup: should a comprehensive exam be administered to bachelor students in their
 ]
 
 ---
-class: title title-4
+class: title title-6
 
 # Interaction plot
 
@@ -931,7 +1025,7 @@ p.472 of Keppel and Wickens
 
 
 ---
-class: title title-4
+class: title title-6
 #  The microwave popcorn experiment
 
 What is the best brand of microwave popcorn? 
@@ -953,20 +1047,18 @@ What is the best brand of microwave popcorn?
 .panel[.panel-name[ANOVA]
 
 ```r
+data(popcorn, package = 'hecedsm')
 # Fit model with three-way interaction
-model &lt;- aov(percentage ~ brand*power*time, 
-data = popcorn)
-# ANOVA table
+model &lt;- aov(percentage ~ brand*power*time,
+             data = popcorn)
+# ANOVA table - 'anova' is ONLY for balanced designs
 anova_table &lt;- anova(model) 
-# 'anova' is for balanced designs
-# Check model assumptions
-# plots + tests meaningless with r=2 replications per group...
-# except for quantile-quantile plot
-car::qqPlot(model, # points should be on straight line!
-id = FALSE, 
-ylab = 'studentized residuals',
-xlab = "Student-t quantiles")
+# Quantile-quantile plot
+car::qqPlot(model)
 ```
+
+.small[Model assumptions: plots and tests are meaningless with `\(n_r=2\)` replications per group...]
+
 ]
 
 .panel[.panel-name[QQ-plot]
@@ -982,19 +1074,13 @@ All points fall roughly on a straight line.
 ```r
 popcorn |&gt; 
    group_by(brand, time, power) |&gt;
-   summarize(mean_percentage = mean(percentage)) |&gt;
+   summarize(meanp = mean(percentage)) |&gt;
 ggplot(mapping = aes(x = power, 
-                     y = mean_percentage, 
+                     y = meanp, 
                      col = time, 
                      group = time)) + 
   geom_line() + 
-  facet_wrap(~brand) + 
-  labs(subtitle = "percentage of popped kernels",
-       y = "",
-       col = "time (min)",
-       x = "power (W)") + 
-  theme_bw() + 
-  theme(legend.position = "bottom")
+  facet_wrap(~brand)
 ```
 ]
 
@@ -1003,7 +1089,7 @@ ggplot(mapping = aes(x = power,
 
 &lt;img src="05-slides_files/figure-html/popcornplot2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-No three-way interaction (hard to tell with `\(r=2\)` replications).
+No evidence of three-way interaction (hard to tell with `\(r=2\)` replications).
 ]
 
 
@@ -1011,22 +1097,22 @@ No three-way interaction (hard to tell with `\(r=2\)` replications).
 
 ---
 
-class: title title-4
+class: title title-6
 # Analysis of variance table for balanced designs
 
 .small[
 
 | terms | degrees of freedom | 
 |:---:|:-----|:-------|
-| `\(A\)` | `\(a-1\)` | 
-| `\(B\)` | `\(b-1\)` | 
-| `\(C\)` | `\(c-1\)` | 
-| `\(AB\)` | `\((a-1)(b-1)\)` | 
-| `\(AC\)` | `\((a-1)(c-1)\)` | 
-| `\(BC\)` | `\((b-1)(c-1)\)` | 
-| `\(ABC\)` | `\({\small (a-1)(b-1)(c-1)}\)` | 
-| `\(\text{residual}\)` | `\(abc(r-1)\)` | 
-| `\(\text{total}\)` | `\(abcr-1\)` | 
+| `\(A\)` | `\(n_a-1\)` | 
+| `\(B\)` | `\(n_b-1\)` | 
+| `\(C\)` | `\(n_c-1\)` | 
+| `\(AB\)` | `\((n_a-1)(n_b-1)\)` | 
+| `\(AC\)` | `\((n_a-1)(n_c-1)\)` | 
+| `\(BC\)` | `\((n_b-1)(n_c-1)\)` | 
+| `\(ABC\)` | `\({\small (n_a-1)(n_b-1)(n_c-1)}\)` | 
+| `\(\text{residual}\)` | `\(n_an_bn_c(R-1)\)` | 
+| `\(\text{total}\)` | `\(n_an_bn_cn_r-1\)` | 
 
 ]
 
@@ -1113,7 +1199,7 @@ class: title title-4
 &lt;/table&gt;
 
 ---
-class: title title-4
+class: title title-6
 # Omitting terms in a factorial design
 
 The more levels and factors, the more parameters to estimate (and replications needed)
@@ -1125,16 +1211,7 @@ It may be useful not to consider some interactions if they are known or (strongl
 - If important interactions are omitted from the model, biased estimates/output!
 
 ---
-
-layout: false
-name: contrasts
-class: center middle section-title section-title-5 animated fadeIn
-
-# Custom contrasts and marginal means
-
-
----
-class: title title-5
+class: title title-6
 # Guidelines for the interpretation of effects
 
 Start with the most complicated term (top down)
@@ -1144,17 +1221,11 @@ Start with the most complicated term (top down)
     - comparison is done cell by cell within each level
 - If the `\(ABC\)` term isn't significative:
     - can marginalize and interpret lower order terms
-
---
-
-.box-inv-5[Analytical comparisons]
-
-- Preplanned
-- *Post-hoc*: after seeing that the three-way interaction isn't significative, compare all pairwise differences within two-way.
+    - back to a series of two-way ANOVAs
 
 ---
 
-class: title title-5
+class: title title-6
 
 # What contrasts are of interest?
 
@@ -1167,9 +1238,10 @@ Depending on the goal, could compare for variable `\(A\)`
 - contrast differences between treatment at `\(\psi_A \times B\)`, averaging over `\(C\)`.
 - etc.
 
-See [helper code](https://edsm.rbind.io/examples/example_threewayanova_contrasts.R) and chapter 22 of Keppel &amp; Wickens (2004) for a detailed example.
+See helper code and chapter 22 of Keppel &amp; Wickens (2004) for a detailed example.
+
 ---
-class: title title-5
+class: title title-6
 # Effects and contrasts for microwave-popcorn
 
 Following preplanned comparisons
@@ -1183,7 +1255,7 @@ Following preplanned comparisons
 
 ---
 
-class: title title-5
+class: title title-6
 # Preplanned comparisons using `emmeans`
 
 
@@ -1198,10 +1270,13 @@ Compare difference between percentage of popped kernels for 4.5 versus 5 minutes
 ```r
 library(emmeans)
 # marginal means
-emm_popcorn_AC &lt;- emmeans(model, specs = c("brand","time"))
-contrast_list &lt;- list(brand12with4.5vs5min = c(0, 0, 0, 1, -1, 0, -1, 1,0))
+emm_popcorn_AC &lt;- emmeans(model, 
+                          specs = c("brand","time"))
+contrast_list &lt;- 
+  list(
+    brand12with4.5vs5min = c(0, 0, 0, 1, -1, 0, -1, 1,0))
 contrast(emm_popcorn_AC,  # marginal mean (no time)
- method = contrast_list) # list of contrasts
+         method = contrast_list) # list of contrasts
 ```
 
 
@@ -1209,11 +1284,12 @@ contrast(emm_popcorn_AC,  # marginal mean (no time)
 
 ---
 
-class: title title-5
+class: title title-6
 # Preplanned comparisons
 
+Compare all three times (4, 4.5 and 5 minutes)
 
-At level 99% with Tukey's method, compare all three times (4, 4.5 and 5 minutes)
+At level 99% with Tukey's HSD method
 
 - Careful! Potentially misleading because there is a `brand * time` interaction present.
 
@@ -1221,7 +1297,10 @@ At level 99% with Tukey's method, compare all three times (4, 4.5 and 5 minutes)
 ```r
 # List of variables to keep go in `specs`: keep only time
 emm_popcorn_C &lt;- emmeans(model, specs = "time")
-pairs(emm_popcorn_C, adjust = "tukey", level = 0.99, infer = TRUE)
+pairs(emm_popcorn_C, 
+      adjust = "tukey", 
+      level = 0.99, 
+      infer = TRUE)
 ```
 
     </textarea>

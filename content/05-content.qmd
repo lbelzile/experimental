@@ -1,5 +1,5 @@
 ---
-title: "Completely randomized designs with two or more factors"
+title: "Complete factorial designs"
 date: "2022-09-30"
 ---
 
@@ -26,6 +26,10 @@ playlist_id <- ""
 
 At the end of the session, students should be capable of
 
+- listing the benefits of factorial designs
+- interpreting an interaction plot and being aware of it's limitation
+- interpreting model effects in sum-to-zero parametrization
+- reporting results from a two-way analysis of variance
 - specifying and calculating custom contrasts in multiway factorial designs
 - determining whether or not simple or main effects are most suitable
 
@@ -39,19 +43,19 @@ At the end of the session, students should be capable of
 ## Complementary readings
 
 
-- {{< fa book >}}  Chapters 11, 12, 13, 21 and 22 of @Keppel/Wickens:2004.
+- {{< fa book >}}  Chapters 10-13, 21-22 of @Keppel/Wickens:2004.
 
 
 ## Slides
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_buttons("/slides/04-slides")
+slide_buttons("/slides/05-slides")
 # slide_tabs(slide_details, "/slides/04-slides.html")
 ```
 
 ```{r show-slides-xaringan, echo=FALSE}
 xaringanExtra::embed_xaringan(
-  url = "/slides/04-slides.html",
+  url = "/slides/05-slides.html",
   ratio = "16:9"
 )
 ```

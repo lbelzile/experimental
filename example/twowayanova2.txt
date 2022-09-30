@@ -1,0 +1,234 @@
+
+# Unbalanced design
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "youtube-playlist.R"))
+playlist_id <- "PLUB8VZzxA8ItJKq70HCdYrRcsDUsJYKhb"
+slide_details <- tibble::tribble(
+~title, ~youtube_id,
+"Analysis of variance", "pxQgRTWwITI",
+"Interaction plots", "rYudu_vns6I",
+"Contrast and marginal means", "0ifni3rNOss",
+"Effect size and power", "jcqpe3Z-YNs"
+)
+
+```
+
+# Videos
+
+The code created in the video [can be downloaded here](/example/04-twowayanova-video.R).
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id, example = TRUE)
+```
+
+
+We reproduce the results of Study 1 of @Maglio/Polman:2014. Data were obtained from the Open Science Foundation and are available in the `MP14_S1` dataset in package `hecedsm`.
+
+> We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings
+
+
+
+```{r, eval = FALSE, echo = FALSE}
+# Reproduction of Spatial Orientation Shrinks and Expands Psychological Distance
+# by Maglio and Polman (2014), Psychological Science
+# Data from "https://osf.io/846cb/download"
+library(tidyverse)
+# Name of subway stations
+labs <- c("Bloor-Yonge", "Sherbourne", "Spadina", "St. George")
+# Order of stations from West to East is 
+# Spadina > St. George > Bay > Bloor-Yonge > Sherbourne
+olabs <- c("Spadina", "St. George", "Bloor-Yonge", "Sherbourne")
+data <- read_csv("https://edsm.rbind.io/data/MaglioPolman2014S1.csv",
+                 col_types = "fiff") %>%
+  # STN_NUMBER redundant with STN_NAME
+  transmute(station = fct_relevel(factor(STN_NAME, labels = labs), olabs),
+            direction = factor(DIRECTION, labels = tolower(levels(DIRECTION))),
+            distance = DISTANCE)
+
+# A 5x2 factorial design (two-way ANOVA)
+options(contrasts = c("contr.sum", "contr.poly"))
+model <- lm(distance ~ station*direction, data = data)
+summary(model)
+```
+
+```
+## 
+## Call:
+## lm(formula = distance ~ station * direction, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.6538 -0.6400  0.1154  0.3913  2.8077 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)          2.65916    0.07294  36.458  < 2e-16 ***
+## station1             0.48776    0.12587   3.875 0.000146 ***
+## station2            -0.45455    0.12587  -3.611 0.000388 ***
+## station3            -0.75866    0.12771  -5.941 1.29e-08 ***
+## direction1           0.04109    0.07294   0.563 0.573870    
+## station1:direction1  0.46584    0.12587   3.701 0.000280 ***
+## station2:direction1  0.52353    0.12587   4.159 4.79e-05 ***
+## station3:direction1 -0.33289    0.12771  -2.607 0.009853 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.036 on 194 degrees of freedom
+## Multiple R-squared:  0.3813,	Adjusted R-squared:  0.359 
+## F-statistic: 17.08 on 7 and 194 DF,  p-value: < 2.2e-16
+```
+
+```r
+car::Anova(model, type = "3")
+```
+
+```
+## Anova Table (Type III tests)
+## 
+## Response: distance
+##                    Sum Sq  Df   F value    Pr(>F)    
+## (Intercept)       1426.15   1 1329.1917 < 2.2e-16 ***
+## station             77.58   3   24.1005 2.665e-13 ***
+## direction            0.34   1    0.3173    0.5739    
+## station:direction   52.41   3   16.2832 1.765e-09 ***
+## Residuals          208.15 194                        
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+# Interaction plot 
+# average of each subgroup, with +/- 1 std. error
+
+data %>%
+  group_by(direction, station) %>%
+  summarize(mean = mean(distance),
+            se = sigma(model) / sqrt(n()),
+            lower = mean - se,
+            upper = mean + se) %>%
+  ggplot(mapping = aes(x = station,
+                       y = mean, 
+                       group = direction,
+                       col = direction)) + 
+  geom_line() +
+  geom_errorbar(aes(ymin = lower, 
+                    ymax = upper),
+                width = 0.2) +
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = "top") + 
+  scale_colour_grey() +
+  labs(y = "subjective distance",
+       x = "subway station",
+       col = "direction of travel")
+```
+
+```
+## `summarise()` has grouped output by 'direction'. You can override using the `.groups` argument.
+```
+
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
+
+```r
+library(emmeans)
+emm <- emmeans(model, specs = c('direction', 'station'))
+emmeans(model, specs = "direction", by = "station")
+```
+
+```
+## station = Spadina:
+##  direction emmean    SE  df lower.CL upper.CL
+##  east        3.65 0.203 194     3.25     4.05
+##  west        2.64 0.207 194     2.23     3.05
+## 
+## station = St. George:
+##  direction emmean    SE  df lower.CL upper.CL
+##  east        2.77 0.203 194     2.37     3.17
+##  west        1.64 0.207 194     1.23     2.05
+## 
+## station = Bloor-Yonge:
+##  direction emmean    SE  df lower.CL upper.CL
+##  east        1.61 0.216 194     1.18     2.03
+##  west        2.19 0.203 194     1.79     2.59
+## 
+## station = Sherbourne:
+##  direction emmean    SE  df lower.CL upper.CL
+##  east        2.77 0.203 194     2.37     3.17
+##  west        4.00 0.207 194     3.59     4.41
+## 
+## Confidence level used: 0.95
+```
+
+```r
+pairw <- contrast(emm, by = "station", method = "pairwise")
+p.adjust(summary(pairw)$p.value, method = "holm")
+```
+
+```
+## [1] 0.0011778638 0.0004099985 0.0504602138 0.0001371920
+```
+
+```r
+# custom contrasts
+custom_contrast <- list(SpadinaEvsW = c(1, -1, rep(0, 6)),
+                        symmetry = c(1, -1, 1, -1, 1, -1, 1, -1))
+confint(contrast(emm, 
+         method = custom_contrast,
+         adjust = "scheffe",
+         infer = TRUE), scheffe.rank = 7)
+```
+
+```
+##  contrast    estimate    SE  df lower.CL upper.CL
+##  SpadinaEvsW    1.014 0.290 194  -0.0872     2.11
+##  symmetry       0.329 0.584 194  -1.8855     2.54
+## 
+## Confidence level used: 0.95 
+## Conf-level adjustment: scheffe method with rank 7
+```
+
+```r
+# Scheffe's method has an argument scheffe.rank ng-1
+
+# Effect size and power
+library(effectsize)
+# sigmasq_{AB} / (sigmasq_{AB} + sigmasq_{res})
+omsq <- omega_squared(model)$Omega2_partial
+cohensf <- sqrt(omsq / (1 - omsq))
+```
+
+```
+## Warning in sqrt(omsq/(1 - omsq)): Production de NaN
+```
+
+```r
+# Power calculations
+library(WebPower)
+wp.kanova(ndf = 3, f = cohensf[3], ng = 8, power = 0.8)
+```
+
+```
+## Multiple way ANOVA analysis
+## 
+##            n ndf      ddf         f ng alpha power
+##     52.46239   3 44.46239 0.4764222  8  0.05   0.8
+## 
+## NOTE: Sample size is the total sample size
+## URL: http://psychstat.org/kanova
+```
+
+```r
+wp.kanova(ndf = 3, f = 0.3381892, ng = 8, alpha = 0.01, power = 0.99)
+```
+
+```
+## Multiple way ANOVA analysis
+## 
+##            n ndf      ddf         f ng alpha power
+##     266.5917   3 258.5917 0.3381892  8  0.01  0.99
+## 
+## NOTE: Sample size is the total sample size
+## URL: http://psychstat.org/kanova
+```
+
