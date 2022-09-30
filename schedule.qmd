@@ -65,7 +65,7 @@ show_table <- function(group_id) {
   # Add a heading
   cat(as.character(paste("\n\n###", schedule_nested$group[[group_id]], "\n\n")))
   # Make the table
-  tbl <- schedule_nested$data[[group_id]] %>% 
+  tbl <- schedule_nested$data[[group_id]] |>
     select(-subgroup) %>% 
     kbl(escape = FALSE, align = "rlccc", table.attr = 'class="schedule-table"') %>% 
     kable_styling() %>% 

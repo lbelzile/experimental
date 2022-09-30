@@ -18,12 +18,17 @@ The experiment is a 2 by 2 factorial design (two-way ANOVA) with `anchor` (eithe
 
 ```{r}
 #| eval: true
-#| echo: false
+#| echo: true
 # Example of two-way ANOVA with balanced design
 data(C16, package = "hecedsm")
 # Check for balance
 xtabs(formula = ~ anchor + magnitude,
       data = C16)
+```
+
+We can see that there are 30 observations in each group in the replication, as advertised
+
+```{r}
 # Fit two-way ANOVA model
 mod <- aov(madjust ~ anchor * magnitude,
            data = C16)
