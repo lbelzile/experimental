@@ -66,7 +66,9 @@ website:
             - text: "4: Contrasts and multiple testing"
               file: content/04-content.qmd   
             - text: "5: Complete factorial designs"
-              file: content/05-content.qmd         
+              file: content/05-content.qmd   
+            - text: "6: Multiway factorial designs"
+              file: content/06-content.qmd          
 
     - title: "Evaluations"
       style: "docked"
