@@ -219,8 +219,13 @@ knitr::kable(summary_stats,
 .pull-left.small[
 
 ```{r emms, echo = TRUE, eval = TRUE}
-model <- aov(likelihood ~ gender * condition,
-            data = RS_unb)
+# Enforce sum-to-zero parametrization
+options(contrasts = rep("contr.sum", 2))
+# Anova is a linear model, fit using 'lm'
+# 'aov' only for *balanced data*
+model <- lm(
+  likelihood ~ gender * condition,
+  data = RS_unb)
 library(emmeans)
 emm <- emmeans(model, 
                specs = "condition")
@@ -255,13 +260,12 @@ The two coincide when $n_{11} = \cdots = n_{22}$.
 class: title title-5
 # Why equal weight?
 
-.medium[
 
 - The ANOVA and contrast analyses, in the case of unequal sample sizes, are generally based on marginal means (same weight for each subgroup).
 - This choice is justified because research questions generally concern comparisons of means across experimental groups.
 
 
-]
+
 ---
 class: title title-5
 # Revisiting the $F$ statistic
@@ -306,12 +310,12 @@ class: title title-5
 Consider an unbalanced sample
 
 ```{r unbalancedanova, echo = TRUE, eval = FALSE}
-anova(aov(likelihood ~ 1, data = RS_unb), 
-      aov(likelihood ~ condition, 
+anova(lm(likelihood ~ 1, data = RS_unb), 
+      lm(likelihood ~ condition, 
          data = RS_unb))
 # When gender is present      
-anova(aov(likelihood ~ gender, data = RS_unb), 
-      aov(likelihood ~ gender + condition, 
+anova(lm(likelihood ~ gender, data = RS_unb), 
+      lm(likelihood ~ gender + condition, 
          data = RS_unb))
     
 ```
@@ -384,7 +388,7 @@ class: title title-5
 .pull-left.small[
 
 ```{r allmods, echo = TRUE, eval = FALSE}
-model <- aov(
+model <- lm(
   likelihood ~ condition * gender,
   data = RS_unb)
 # Three distinct decompositions
@@ -418,8 +422,8 @@ class: title title-5
 .pull-left.small[
 
 ```{r allmodsb, echo = TRUE, eval = FALSE}
-model2 <- aov(
-  likelihood ~ condition*gender,
+model2 <- lm(
+  likelihood ~ condition * gender,
   data = RS_bal)
 anova(model2) #type 1
 car::Anova(model2, type = 2)

@@ -23,9 +23,8 @@ At the end of the session, students should be capable of
 
 ## Readings
 
-- {{< fa book >}}  [Chapter 4](https://stat.ethz.ch/~meier/teaching/anova/factorial-treatment-structure.html) of @Meier:2022
 -  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/complete-factorial-designs.html) of the course notes
-
+- {{< fa file >}} [Two-way ANOVA example](/example/twowayanova.html)
 
 ## Complementary readings
 
