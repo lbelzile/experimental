@@ -43,6 +43,9 @@ xtabs(formula = ~ anchor + magnitude,
 
 We can see that there are 30 observations in each group in the replication, as advertised.
 
+### Model fitting
+
+
 In **R**, the function `aov` fits an analysis of variance model for *balanced data*. Analysis of variance are simple instances of linear regression models, and the main difference between fitting the model
 using `aov` and `lm` is the default parametrization used. In more general settings (including continuous covariates), we will use `lm` as a workshorse to fit the model, with an option to set up the contrasts so the output matches our expectations (and needs).
 
@@ -54,20 +57,12 @@ mod <- aov(madjust ~ anchor * magnitude,
 summary(mod)
 ```
 
-### Model fitting
-
 The model is fitted as before by specifying the `response ~ explanatories`: the `*` notation is a shortcut to specify `anchor + magnitude + anchor:magnitude`, with the last term separated by a semi-colon `:` denoting an interaction between two variables. Here, the experimental factors `anchor` and `magnitude` are crossed, as it is possible to be in both experimental groups simultaneously.
 
-```{r}
-# Interaction plot
-emmeans::emmip(mod, 
-               magnitude ~ anchor, 
-               CIs = TRUE)
-```
 
 ### Interaction plots
 
-The `interaction.plot` function in base **R** allows one to create an interaction (or profile) plot for a two-way design. More generally, we can simply compute the group means for each combination of the experimental conditiosn, map the mean response to the $y$-axis of a graph and add the experimental factors to other dimensions ($x$-axis, panel, color, etc.) 
+The `interaction.plot` function in base **R** allows one to create an interaction (or profile) plot for a two-way design. More generally, we can simply compute the group means for each combination of the experimental conditions, map the mean response to the $y$-axis of a graph and add the experimental factors to other dimensions ($x$-axis, panel, color, etc.) 
 
 ```{r}
 C16 |>
@@ -88,6 +83,17 @@ C16 |>
 
 
 In our example, the interaction plot shows a large main effect for `magnitude`, a smaller one for `anchor` and no evidence of interaction --- despite the uncertainty associated with the estimation, the lines are very close to being parallel. Overlaying the jitter observations shows there is quite a bit of spread, but with limited overlap. Despite the graphical evidence hinting that the interaction isn't significant, we will fit the two-way analysis of variance model with the interaction unless we invalidate our statistical inference.
+
+The `emmip` function allows one to return a plot automagically.
+
+```{r}
+# Interaction plot
+emmeans::emmip(mod, 
+               magnitude ~ anchor, 
+               CIs = TRUE)
+```
+
+### Estimated marginal means
 
 Because our dataset is balanced, the marginal means (the summary statistics obtained by grouping the data for a single factor) and the marginal effects (obtained by calculating the average cell means by either row or column) will coincide. There are multiple functions that allow one to obtain estimates means for cells, rows or columns, including functionalities, notably `emmeans` from the eponymous package and `model.tables`
 
@@ -128,8 +134,6 @@ The output confirms our intuition that there is not much different from zero, wi
 
 While the conclusions are probably unambiguous due to the large evidence, it would be useful to check the model assumptions. 
 
-
-
 The sample size is just enough to forego normality checks, but the quantile-quantile plot can be useful to detect outliers and extremes. Outside of one potential value much lower than it's group mean, there is no cause for concern.
 
 ```{r}
@@ -142,8 +146,13 @@ The Tukey-Anscombe plot of residuals against fitted values (the group means) ind
 
 ```{r}
 # Evidence of unequal variance (multiplicative?)
-plot(resid(mod)~ fitted(mod))
-car::leveneTest(mod) #Brown-Forsythe
+ggplot(data = data.frame(residuals = resid(mod),
+                         fitted = fitted(mod)),
+       mapping = aes(x = fitted,
+                     y = residuals)) +
+   geom_point()
+# Equality of variance - Brown-Forsythe
+car::leveneTest(mod) 
 ```
 
 Given the Brown-Forsythe test output, we can 
@@ -159,8 +168,11 @@ mod2 <- nlme::gls(
 
 # Different ANOVA - we use type II here
 car::Anova(mod2, type = 2)
+```
 
-# Note the unequal std. deviation per group
+We can see the unequal std. deviation per group when passing the model with unequal variance and unequal means and computing the estimated marginal means. The package `emmeans` automatically adjusts for these changes.
+
+```{r}
 emmeans(object = mod2, 
         specs = c("anchor", "magnitude"))
 # Compute pairwise difference for anchor
