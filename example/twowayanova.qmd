@@ -301,7 +301,7 @@ MP14_S1 |>
 ```
 
 
-## Contrasts
+### Contrasts
 
 If the data lend some support for this claim, we could consider the following follow-up questions:
 
