@@ -1,0 +1,851 @@
+---
+title: "Complete factorial designs"
+author: "Léo Belzile"
+date: "`r Sys.Date()`"
+output:
+   xaringan::moon_reader:
+      lib_dir: "libs"
+      chakra: "libs/remark-latest.min.js"
+      css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
+      seal: false
+      anchor_sections: false
+      nature:
+          highlightStyle: github
+          highlightLines: false
+          countIncrementalSlides: false
+          ratio: "16:9"
+      navigation:
+        scroll: false
+      editor_options: 
+        chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+message = FALSE, 
+fig.retina = 3, 
+fig.align = "center",
+fig.width = 10,
+fig.asp = 0.618,
+out.width = "70%")
+```
+```{r packages-data, echo = FALSE, include=FALSE}
+library(knitr)
+options(knitr.kable.NA = '')
+options(tidyverse.quiet = TRUE)
+options(knitr.table.format = "html")
+library(tidyverse)
+library(patchwork)
+```
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
+```
+
+class: center middle main-title section-title-1
+
+# Complete factorial designs
+
+.class-info[
+
+**Session 6**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-1
+
+# Outline
+
+
+
+.box-5.medium.sp-after-half[Unbalanced designs]
+
+
+.box-6.medium.sp-after-half[Multifactorial designs]
+
+
+---
+layout: false
+name: unbalanced-designs
+class: center middle section-title section-title-5
+
+# Unbalanced designs
+
+---
+class: title title-5
+# Premise
+
+So far, we have exclusively considered balanced samples 
+
+.box-inv-5.large.sp-after-half.sp-before[
+balanced = same number of observational units in each subgroup
+]
+
+Most experiments (even planned) end up with unequal sample sizes.
+
+---
+
+class: title title-5
+# Noninformative drop-out
+
+Unbalanced samples may be due to many causes, including randomization (need not balance) and loss-to-follow up (dropout)
+
+If dropout is random, not a  problem
+- Example of Baumannn, Seifert-Kessel, Jones (1992): 
+   > Because of illness and transfer to another school, incomplete data were obtained for one subject each from the TA and DRTA group 
+
+---
+
+class: title title-5
+# Problematic drop-out or exclusion
+
+If loss of units due to treatment or underlying conditions, problematic!
+
+Rosensaal (2021) rebuking a study on the effectiveness of  hydrochloriquine as treatment for Covid19 and reviewing allocation:
+   > Of these 26, six were excluded (and incorrectly labelled as lost to follow-up): three were transferred to the ICU, one died, and two terminated treatment or were discharged
+
+Sick people excluded from the treatment group! then claim it is better.
+
+Worst: "The index [treatment] group and control group were drawn from different centres."
+
+???
+
+Review of: “Hydroxychloroquine and azithromycin as a treatment of COVID-19: results of an open-label non-randomized clinical trial Gautret et al 2010, DOI:10.1016/j.ijantimicag.2020.105949
+https://doi.org/10.1016/j.ijantimicag.2020.106063
+---
+
+class: title title-5
+# Why seek balance?
+
+Two main reasons
+
+
+1. Power considerations: with equal variance in each group, balanced samples gives the best allocation
+2. Simplicity of interpretation and calculations: the interpretation of the $F$ test in a linear regression is unambiguous
+
+
+---
+
+class: title title-5
+# Finding power in balance
+
+Consider a t-test for assessing the difference between treatments $A$ and $B$ with equal variability
+$$t= \frac{\text{estimated difference}}{\text{estimated variability}} = \frac{(\widehat{\mu}_A - \widehat{\mu}_B) - 0}{\mathsf{se}(\widehat{\mu}_A - \widehat{\mu}_B)}.$$
+
+The standard error of the average difference is 
+$$\sqrt{\frac{\text{variance}_A}{\text{nb of obs. in }A} + \frac{\text{variance}_B}{\text{nb of obs. in }B}} = \sqrt{\frac{\sigma^2}{n_A} + \frac{\sigma^2}{n_B}}$$
+
+---
+class: title title-5
+# Optimal allocation of ressources
+
+```{r stderrordiffcurve, echo = FALSE, eval = TRUE, out.width = '65%', fig.retina = 3, fig.width = 5, fig.height = 3}
+stdfun <- function(n, n1){sqrt(1/n1 + 1/(n-n1))}
+ggplot(data = tibble( n1 = 1:99, stderror = stdfun(n = 100, n1 = 1:99)),
+       mapping = aes(x = n1, y = stderror)) + 
+   geom_line() + 
+   theme_classic() + 
+   labs(y = "std. error / std. dev", 
+        x = "sample size for group A | n = 100")
+```
+.small[
+The allocation  of $n=n_A + n_B$ units that minimizes the std error is $n_A = n_B = n/2$.
+]
+
+---
+class: title title-5
+# Example: tempting fate
+
+We consider data from Multi Lab 2, a replication study that examined Risen and Gilovich (2008) who
+.small[
+> explored the belief that tempting fate increases bad outcomes. They tested whether people judge the likelihood of a negative outcome to be higher when they have imagined themselves [...] tempting fate [...] (by not reading before class) or  not [tempting] fate (by coming to class prepared). Participants then estimated how likely it was that [they] would be called on by the professor (scale from 1, not at all likely, to 10, extremely likely).
+]
+
+The replication data gathered in 37 different labs focuses on a 2 by 2 factorial design with gender (male vs female) and condition (prepared vs unprepared) administered to undergraduates.
+
+---
+
+
+.panelset[
+
+.panel[.panel-name[Load data]
+
+- We consider a 2 by 2 factorial design.
+- The response is `likelihod`
+- The experimental factors are `condition` and `gender`
+- Two data sets: `RS_unb` for the full data, `RS_bal` for the artificially balanced one.
+```{r loaddata, echo = FALSE, eval = TRUE, cache = TRUE}
+library(tidyverse)
+url1 <- "https://edsm.rbind.io/files/data/RG08rep.csv"
+RS_unb <- read_csv(url1, col_types = c("iiff"))
+# Data artificially balanced for the sake
+# of illustration purposes
+url2 <- "https://edsm.rbind.io/files/data/RG08rep_bal.csv"
+RS_bal <- read_csv(url2, col_types = c("iiff"))
+```
+
+]
+
+.panel[.panel-name[Check balance]
+
+.pull-left.small[
+```{r sampsize, echo = TRUE, eval = TRUE, cache = TRUE}
+summary_stats <- 
+  RS_unb |> 
+  group_by(condition) |> 
+  summarize(nobs = n(),
+            mean = mean(likelihood))
+```
+]
+.pull-right[
+
+```{r tabsampsize, echo = FALSE, eval = TRUE, cache = TRUE}
+knitr::kable(summary_stats,
+   caption = "Summary statistics",
+   digits = c(0,0,3))
+```
+  
+]
+]
+
+.panel[.panel-name[Marginal means]
+
+.pull-left.small[
+
+```{r emms, echo = TRUE, eval = TRUE}
+# Enforce sum-to-zero parametrization
+options(contrasts = rep("contr.sum", 2))
+# Anova is a linear model, fit using 'lm'
+# 'aov' only for *balanced data*
+model <- lm(
+  likelihood ~ gender * condition,
+  data = RS_unb)
+library(emmeans)
+emm <- emmeans(model, 
+               specs = "condition")
+```
+]
+.pull-right[
+
+```{r tabmargmeans, echo = FALSE, eval = TRUE, cache = TRUE}
+knitr::kable(summary(emm)[,c(1:3)],
+             caption = "Marginal means for condition",
+             digits = c(0,3,4))
+```
+.small[
+Note unequal standard errors.
+]
+]
+]
+]
+---
+class: title title-5
+# Explaining the discrepancies
+
+Estimated marginal means are based on equiweighted groups:
+$$\widehat{\mu} = \frac{1}{4}\left( \widehat{\mu}_{11} + \widehat{\mu}_{12} + \widehat{\mu}_{21} + \widehat{\mu}_{22}\right)$$
+where $\widehat{\mu}_{ij} = n_{ij}^{-1} \sum_{r=1}^{n_{ij}} y_{ijr}$.
+
+The sample mean is the sum of observations divided by the sample size.
+
+The two coincide when $n_{11} = \cdots = n_{22}$.
+
+---
+class: title title-5
+# Why equal weight?
+
+
+- The ANOVA and contrast analyses, in the case of unequal sample sizes, are generally based on marginal means (same weight for each subgroup).
+- This choice is justified because research questions generally concern comparisons of means across experimental groups.
+
+
+
+---
+class: title title-5
+# Revisiting the $F$ statistic
+
+Statistical tests contrast competing **nested** models:
+
+- an alternative (full) model
+- a null model, which imposes restrictions (a simplification of the alternative models)
+
+The numerator of the $F$-statistic compares the sum of square of a model with (given) main effect, etc. to a model without.
+
+---
+class: title title-5
+# What is explained by condition?
+
+Consider the $2 \times 2$ factorial design with factors $A$: `gender` and $B$: `condition` (prepared vs unprepared) without interaction.
+
+What is the share of variability (sum of squares) explained by the experimental condition?
+---
+class: title title-5
+# Comparing differences in sum of squares (1)
+
+Consider a balanced sample
+
+```{r balancedanova, echo = TRUE, eval = FALSE}
+anova(lm(likelihood ~ 1, data = RS_bal), 
+      lm(likelihood ~ condition, data = RS_bal))
+# When gender is present
+anova(lm(likelihood ~ gender, data = RS_bal), 
+      lm(likelihood ~ gender + condition, data = RS_bal))
+
+```
+
+.small[
+The difference in sum of squares is 141.86 in both cases.
+]
+
+---
+class: title title-5
+# Comparing differences in sum of squares (2)
+
+Consider an unbalanced sample
+
+```{r unbalancedanova, echo = TRUE, eval = FALSE}
+anova(lm(likelihood ~ 1, data = RS_unb), 
+      lm(likelihood ~ condition, 
+         data = RS_unb))
+# When gender is present      
+anova(lm(likelihood ~ gender, data = RS_unb), 
+      lm(likelihood ~ gender + condition, 
+         data = RS_unb))
+    
+```
+
+.small[
+The differences of sum of squares are respectively 330.95 and 332.34.
+]
+
+---
+
+class: title title-5
+# Orthogonality
+
+Balanced designs yield orthogonal factors: the improvement in the goodness of fit (characterized by change in sum of squares) is the same regardless of other factors.
+
+So effect of $B$ and $B \mid A$ (read $B$ given $A$) is the same.
+
+- test for $B \mid A$ compares $\mathsf{SS}(A, B) - \mathsf{SS}(A)$
+- for balanced design, $\mathsf{SS}(A, B) = \mathsf{SS}(A) + \mathsf{SS}(B)$ (factorization).
+
+We lose this property with unbalanced samples: there are distinct formulations of ANOVA.
+
+---
+
+class: title title-5
+# Analysis of variance - Type I (sequential)
+
+The default method in **R** with `anova` is the sequential decomposition: in the order of the variables $A$, $B$ in the formula 
+
+- So $F$ tests are for tests of effect of 
+  - $A$, based on $\mathsf{SS}(A)$
+  - $B \mid A$, based on $\mathsf{SS}(A, B) - \mathsf{SS}(A)$
+  - $AB \mid A, B$ based on $\mathsf{SS}(A, B, AB) - \mathsf{SS}(A, B)$
+
+
+.box-inv-5[Ordering matters]
+
+Since the order in which we list the variable is **arbitrary**, these $F$ tests are not of interest.
+
+---
+
+class: title title-5
+# Analysis of variance - Type II
+
+Impact of 
+- $A \mid B$  based on $\mathsf{SS}(A, B) - \mathsf{SS}(B)$
+- $B \mid A$ based on $\mathsf{SS}(A, B) - \mathsf{SS}(A)$
+- $AB \mid A, B$ based on $\mathsf{SS}(A, B, AB) - \mathsf{SS}(A, B)$
+- tests invalid if there is an interaction.
+- In **R**, use `car::Anova(model, type = 2)`
+
+---
+
+class: title title-5
+# Analysis of variance - Type III
+
+Most commonly used approach
+
+- Improvement due to $A \mid B, AB$, $B \mid A, AB$ and $AB \mid A, B$
+- What is improved by adding a factor, interaction, etc. given the rest 
+- may require imposing equal mean for rows for $A \mid B, AB$, etc. 
+   - (**requires** sum-to-zero parametrization)
+- valid in the presence of interaction
+- but $F$-tests for main effects are not of interest
+- In **R**, use `car::Anova(model, type = 3)`
+
+---
+class: title title-5
+# ANOVA for unbalanced data
+.pull-left.small[
+
+```{r allmods, echo = TRUE, eval = FALSE}
+model <- lm(
+  likelihood ~ condition * gender,
+  data = RS_unb)
+# Three distinct decompositions
+anova(model) #type 1
+car::Anova(model, type = 2)
+car::Anova(model, type = 3)
+```
+
+```{r anovatabs1, echo = FALSE}
+knitr::kable(anova(model)[,c(1:2,4)],
+caption = "ANOVA (type I)", 
+             digits = c(0,2,1))
+```
+]
+
+
+.pull-right.small[
+```{r anovatabs2, echo = FALSE}
+knitr::kable(car::Anova(model, type = 2)[,c(2,1,3)],
+caption = "ANOVA (type II)", 
+             digits = c(0,2,1))
+knitr::kable(car::Anova(model, type = 3)[-1,c(2,1,3)],
+caption = "ANOVA (type III)", 
+             digits = c(0,2,1))
+```
+
+]
+---
+class: title title-5
+# ANOVA for balanced data
+.pull-left.small[
+
+```{r allmodsb, echo = TRUE, eval = FALSE}
+model2 <- lm(
+  likelihood ~ condition * gender,
+  data = RS_bal)
+anova(model2) #type 1
+car::Anova(model2, type = 2)
+car::Anova(model2, type = 3)
+# Same answer - orthogonal!
+```
+
+```{r anovatabs1b, echo = FALSE}
+model2 <- aov(
+  likelihood ~ condition*gender,
+  data = RS_bal)
+knitr::kable(anova(model2)[,c(1:2,4)],
+caption = "ANOVA (type I)", 
+             digits = c(0,2,1))
+```
+]
+
+
+.pull-right.small[
+```{r anovatabs2b, echo = FALSE}
+knitr::kable(car::Anova(model2, type = 2)[,c(2,1,3)],
+caption = "ANOVA (type II)", 
+             digits = c(0,2,1))
+knitr::kable(car::Anova(model2, type = 3)[-1,c(2,1,3)],
+caption = "ANOVA (type III)", 
+             digits = c(0,2,1))
+```
+
+]
+---
+class: title title-5
+# Recap
+
+- If each observation has the same variability, a balanced sample maximizes power.
+- Balanced designs have interesting properties:
+   - estimated marginal means coincide with (sub)samples averages
+   - the tests of effects are unambiguous
+   - for unbalanced samples, we work with marginal means and type 3 ANOVA
+   - if empty cells (no one assigned to a combination of treatment), cannot estimate corresponding coefficients (typically higher order interactions)
+
+---
+
+class: title title-5
+
+# Practice  
+
+From the OSC psychology replication
+
+> People can be influenced by the prior consideration of a numerical anchor when forming numerical judgments. [...]  The anchor provides an initial starting point from which estimates are adjusted, and a large body of research demonstrates that adjustment is usually insufficient, leading estimates to be biased towards the initial anchor.
+
+.small[
+[Replication of Study 4a of Janiszewski & Uy (2008, Psychological Science) by J. Chandler](https://osf.io/aaudl/)
+]
+
+???
+
+People can be influenced by the prior consideration of a numerical anchor when forming numerical judgments. The anchor provides an initial starting point from which estimates are adjusted, and a large body of research demonstrates that adjustment is usually insufficient, leading estimates to be biased towards the initial anchor. Extending this work, Janiszewski and Uy (2008) conceptualized people's attempt to adjust following presentation of an anchor as movement along a subjective representation scale by a certain number of units. Precise numbers (e.g. 9.99) imply a finer-resolution scale than round numbers (e.g. 10). Consequently, adjustment along a subjectively finer resolution scale will result in less objective adjustment than adjustment by the same number of units along a subjectively coarse resolution scale. 
+
+In three experimental studies the authors demonstrate this predicted basic effect and rule out various alternative explanations. Two additional studies (4a and b) found that this effect was especially strong when people were explicitly given more motivation to adjust their estimates (e.g., by implying that the initial anchor substantially overestimated the price). 
+
+---
+
+layout: false
+name: factorial-designs
+class: center middle section-title section-title-6 animated fadeIn
+
+# Multifactorial designs
+
+---
+
+class: title title-6
+# Beyond two factors
+
+We can consider multiple factors $A$, $B$, $C$, $\ldots$ with respectively $n_a$, $n_b$, $n_c$, $\ldots$ levels and with $n_r$ replications for each.
+
+The total number of treatment combinations is 
+
+.box-inv-6.sp-after-half[
+$n_a \times n_b \times n_c \times \cdots$
+]
+
+
+--
+
+.box-6.medium[
+**Curse of dimensionality**
+]
+
+---
+
+class: title title-6
+# Full three-way ANOVA model
+
+Each cell of the cube is allowed to have a different mean
+
+$$\begin{align*}
+\underset{\text{response}\vphantom{cell}}{Y_{ijkr}\vphantom{\mu_{j}}} = \underset{\text{cell mean}}{\mu_{ijk}} + \underset{\text{error}\vphantom{cell}}{\varepsilon_{ijkr}\vphantom{\mu_{j}}}
+\end{align*}$$
+with $\varepsilon_{ijkt}$ are independent error term for 
+- row $i$
+- column $j$
+- depth $k$
+- replication $r$
+
+---
+class: title title-6
+# Parametrization of a three-way ANOVA model
+
+With the **sum-to-zero** parametrization with factors $A$, $B$ and $C$, write the response as
+
+$$\begin{align*}\underset{\text{theoretical average}}{\mathsf{E}(Y_{ijkr})} &= \quad \underset{\text{global mean}}{\mu} \\ &\quad +\underset{\text{main effects}}{\alpha_i + \beta_j + \gamma_k}  \\ & \quad + \underset{\text{two-way interactions}}{(\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk}} \\ & \quad + \underset{\text{three-way interaction}}{(\alpha\beta\gamma)_{ijk}}\end{align*}$$
+
+---
+.small[
+```{r cube1, out.width = '20%', echo = FALSE,  fig.show = 'hold', eval = TRUE, fig.cap = "global mean, row, column and depth main effects"}
+knitr::include_graphics("img/06/cube.png")
+knitr::include_graphics("img/06/cube_rows.png")
+knitr::include_graphics("img/06/cube_column.png")
+knitr::include_graphics("img/06/cube_depth.png")
+```
+]
+.small[
+```{r cube2, out.width = '20%', echo = FALSE, eval = TRUE, fig.show = 'hold', fig.cap = "row/col, row/depth and col/depth interactions and three-way interaction."}
+
+knitr::include_graphics("img/06/cube_rowcol.png")
+knitr::include_graphics("img/06/cube_rowdepth.png")
+knitr::include_graphics("img/06/cube_coldepth.png")
+knitr::include_graphics("img/06/cube_all.png")
+```
+]
+
+---
+class: title title-6
+# Example of three-way design
+
+.small[
+Petty, Cacioppo and Heesacker (1981). Effects of rhetorical questions on persuasion: A cognitive response analysis. Journal of Personality and Social Psychology.
+
+A $2 \times 2 \times 2$ factorial design with 8 treatments groups and $n=160$ undergraduates.
+
+Setup: should a comprehensive exam be administered to bachelor students in their final year?
+
+- **Response** Likert scale on $-5$ (do not agree at all) to $5$ (completely agree)
+- **Factors**
+- $A$: strength of the argument (`strong` or `weak`)
+- $B$: involvement of students `low` (far away, in a long time) or  `high` (next year, at their university)
+- $C$: style of argument, either `regular` form or `rhetorical` (Don't you think?, ...)
+]
+
+---
+class: title title-6
+
+# Interaction plot
+
+.small[
+Interaction plot for a  $2 \times 2 \times 2$ factorial design from Petty, Cacioppo and Heesacker (1981)
+]
+
+```{r interactionpetty, echo = FALSE, fig.retina = 3, fig.width=6,fig.height=2,out.width = '70%'}
+petty <- tibble(agreement = c(0.04,0.75,-0.1,-0.66,0.61,0.05,-0.46,-0.24),
+"strength" = factor(rep(rep(c("strong","weak"), each = 2), length.out = 8)),
+"involvement" = relevel(factor(rep(c("low","high"), length.out = 8)), ref = "low"),
+"style" = factor(rep(c("regular","rhetorical"), each = 4)))
+ggplot(data = petty, 
+aes(x = involvement, y = agreement, col = strength, group = strength)) + 
+geom_line(stat = "identity") + 
+facet_wrap(~style) + 
+  labs(y = "", 
+       subtitle = "mean agreement rating") + 
+theme_bw() + theme(legend.position = "bottom")
+```
+
+???
+
+p.472 of Keppel and Wickens
+
+
+---
+class: title title-6
+#  The microwave popcorn experiment
+
+What is the best brand of microwave popcorn? 
+
+- **Factors**
+- brand (two national, one local)
+- power: 500W and 600W
+- time: 4, 4.5 and 5 minutes
+- **Response**: <s>weight</s>, <s>volume</s>, <s>number</s>, percentage of popped kernels.
+- Pilot study showed average of 70% overall popped kernels (10% standard dev), timing values reasonable
+- Power calculation suggested at least $r=4$ replicates, but researchers proceeded with $r=2$...
+
+---
+
+```{r popcorn_pre, echo = FALSE, eval = TRUE}
+# Somehow there is an error message when knitting
+library(tidyverse) #load packages
+# Sum-to-zero parametrization
+data(popcorn, package = "hecedsm")
+model <- aov(percentage ~ brand * power * time, 
+             data = popcorn)
+# ANOVA table
+anova_table <- anova(model) # 'anova' is for balanced designs
+```
+
+.panelset[
+
+.panel[.panel-name[ANOVA]
+```{r popcorn_qqplot, echo = TRUE, eval = FALSE}
+data(popcorn, package = 'hecedsm')
+# Fit model with three-way interaction
+model <- aov(percentage ~ brand*power*time,
+             data = popcorn)
+# ANOVA table - 'anova' is ONLY for balanced designs
+anova_table <- anova(model) 
+# Quantile-quantile plot
+car::qqPlot(model)
+```
+
+.small[Model assumptions: plots and tests are meaningless with $n_r=2$ replications per group...]
+
+]
+
+.panel[.panel-name[QQ-plot]
+
+```{r popcornplotqqplot, out.width = '35%', fig.retina = 3, fig.asp = 1,eval = TRUE, echo = FALSE}
+
+car::qqPlot(model, # points should be on straight line!
+id = FALSE, 
+ylab = 'studentized residuals',
+xlab = "Student-t quantiles")
+```
+
+All points fall roughly on a straight line.
+
+]
+
+.panel[.panel-name[**R** code]
+```{r popcorn_plot, echo = TRUE, eval = FALSE, message = FALSE}
+popcorn |> 
+   group_by(brand, time, power) |>
+   summarize(meanp = mean(percentage)) |>
+ggplot(mapping = aes(x = power, 
+                     y = meanp, 
+                     col = time, 
+                     group = time)) + 
+  geom_line() + 
+  facet_wrap(~brand)
+```
+]
+
+
+.panel[.panel-name[Interaction plot]
+
+```{r popcornplot2, echo = FALSE, eval = TRUE, message = FALSE, cache = TRUE, fig.asp = 0.35, out.width = '80%'}
+popcorn |>
+  group_by(brand, time, power) |>
+  summarize(mean_percentage = mean(percentage)) |>
+  ggplot(aes(
+    x = power,
+    y = mean_percentage,
+    col = time,
+    group = time
+  )) +
+  geom_line() +
+  facet_wrap( ~ brand) +
+  labs(y = "percentage of\n popped kernels",
+       col = "time (min)",
+       x = "power (W)") +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+
+No evidence of three-way interaction (hard to tell with $r=2$ replications).
+]
+
+
+]
+
+---
+
+class: title title-6
+# Analysis of variance table for balanced designs
+
+.small[
+
+| terms | degrees of freedom | 
+|:---:|:-----|:-------|
+| $A$ | $n_a-1$ | 
+| $B$ | $n_b-1$ | 
+| $C$ | $n_c-1$ | 
+| $AB$ | $(n_a-1)(n_b-1)$ | 
+| $AC$ | $(n_a-1)(n_c-1)$ | 
+| $BC$ | $(n_b-1)(n_c-1)$ | 
+| $ABC$ | ${\small (n_a-1)(n_b-1)(n_c-1)}$ | 
+| $\text{residual}$ | $n_an_bn_c(R-1)$ | 
+| $\text{total}$ | $n_an_bn_cn_r-1$ | 
+
+]
+
+---
+
+```{r printanovaPopcorn, echo = FALSE, eval = TRUE}
+knitr::kable(anova_table,
+digits = c(0,2,2,2,3),
+caption = "Analysis of variance table for microwave-popcorn",
+col.names = c("Degrees of freedom",
+     "Sum of squares",
+     "Mean square",
+     "F statistic",
+     "p-value")) |>
+kableExtra::kable_styling(position = "center")
+```
+
+---
+class: title title-6
+# Omitting terms in a factorial design
+
+The more levels and factors, the more parameters to estimate (and replications needed)
+- Costly to get enough observations / power
+- The assumption of normality becomes more critical when $r=2$!
+
+It may be useful not to consider some interactions if they are known or (strongly) suspected not to be present
+
+- If important interactions are omitted from the model, biased estimates/output!
+
+---
+class: title title-6
+# Guidelines for the interpretation of effects
+
+Start with the most complicated term (top down)
+
+- If the three-way interaction $ABC$ is significative:
+    - don't interpret main effects or two-way interactions!
+    - comparison is done cell by cell within each level
+- If the $ABC$ term isn't significative:
+    - can marginalize and interpret lower order terms
+    - back to a series of two-way ANOVAs
+
+---
+
+class: title title-6
+
+# What contrasts are of interest?
+
+- Can view a three-way ANOVA as a series of one-way ANOVA or two-way ANOVAs...
+
+Depending on the goal, could compare for variable $A$
+- marginal contrast $\psi_A$ (averaging over $B$ and $C$)
+- marginal conditional contrast for particular subgroup: $\psi_A$ within $c_1$
+- contrast involving two variables: $\psi_{AB}$
+- contrast differences between treatment at $\psi_A \times B$, averaging over $C$.
+- etc.
+
+See helper code and chapter 22 of Keppel & Wickens (2004) for a detailed example.
+
+---
+class: title title-6
+# Effects and contrasts for microwave-popcorn
+
+Following preplanned comparisons
+
+- Which combo (brand, power, time) gives highest popping rate? (pairwise comparisons of all combos)
+- Best brand overall (marginal means marginalizing over power and time, assuming no interaction)
+- Effect of time and power on percentage of popped kernels 
+- pairwise comparison of time $\times$ power
+- main effect of power
+- main effect of time
+
+---
+
+class: title title-6
+# Preplanned comparisons using `emmeans`
+
+
+Let $A$=brand, $B$=power, $C$=time
+
+Compare difference between percentage of popped kernels for 4.5 versus 5 minutes, for brands 1 and 2
+
+$$\mathscr{H}_0: (\mu_{1.2} -\mu_{1.3}) - (\mu_{2.2} - \mu_{2.3}) = 0$$
+
+.small[
+```{r plannedcomparisonspopcorn, echo = TRUE, eval = FALSE}
+library(emmeans)
+# marginal means
+emm_popcorn_AC <- emmeans(model, 
+                          specs = c("brand","time"))
+contrast_list <- 
+  list(
+    brand12with4.5vs5min = c(0, 0, 0, 1, -1, 0, -1, 1,0))
+contrast(emm_popcorn_AC,  # marginal mean (no time)
+         method = contrast_list) # list of contrasts
+```
+
+```{r Scheffebyhand, echo = FALSE, eval = FALSE}
+# Scheffé adjustment by hand 
+# emmeans is off because of marginalization - 
+# could be solved but specifying the 18 dim vector for contrast...
+Scrit <- sqrt(17*qf(0.99, 17, 18)) # 18 cells, but all in terms of 17 combos of differences
+# qf() is 99% quantile of F distribution 
+# with 17 df and 18 df=(degrees of freedom of residual, 36 obs - 18 param)
+# with(contrast_popcorn, c(lower = estimate - Scrit*SE, upper = estimate + Scrit*SE))
+```
+]
+
+---
+
+class: title title-6
+# Preplanned comparisons
+
+Compare all three times (4, 4.5 and 5 minutes)
+
+At level 99% with Tukey's HSD method
+
+- Careful! Potentially misleading because there is a `brand * time` interaction present.
+
+```{r plannedcomparisons2popcorn, echo = TRUE, eval = FALSE}
+# List of variables to keep go in `specs`: keep only time
+emm_popcorn_C <- emmeans(model, specs = "time")
+pairs(emm_popcorn_C, 
+      adjust = "tukey", 
+      level = 0.99, 
+      infer = TRUE)
+
+```
+

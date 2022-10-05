@@ -30,7 +30,6 @@ At the end of the session, students should be capable of
 - interpreting an interaction plot and being aware of it's limitation
 - interpreting model effects in sum-to-zero parametrization
 - reporting results from a two-way analysis of variance
-- specifying and calculating custom contrasts in multiway factorial designs
 - determining whether or not simple or main effects are most suitable
 
 
@@ -43,7 +42,7 @@ At the end of the session, students should be capable of
 ## Complementary readings
 
 
-- {{< fa book >}}  Chapters 10-13, 21-22 of @Keppel/Wickens:2004.
+- {{< fa book >}}  Chapters 10-13 of @Keppel/Wickens:2004.
 
 
 ## Slides

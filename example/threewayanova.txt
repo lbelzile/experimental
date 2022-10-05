@@ -1,0 +1,24 @@
+
+library(effectsize)
+library(WebPower)
+
+# Need to compute an effect size for the contrasts or other quantities
+omega_sq <- effectsize::omega_squared(model, partial = TRUE)
+omega_sq_contrast <- (1.993^2-1) / ((1.993^2-1) + 90)
+
+# The value of omega-square (partial) for the three-way interaction is 0.01418
+# Need to convert omega-square (partial) to Cohen's f (partial)
+
+cohens_f <- sqrt(omega_sq$Omega2_partial/(1-omega_sq$Omega2_partial))
+cohens_f_alt <- effectsize::cohens_f(model, partial = TRUE)$Cohens_f_partial
+cohens_f_contrast <- sqrt(omega_sq_contrast / (1-omega_sq_contrast))
+?WebPower::wp.kanova()
+# Power calculation
+# Contrast
+wp.kanova(ndf = 1, f = cohens_f_contrast, ng = 18, power = 0.8)
+# 14*18 = 252
+# Three-way interaction
+wp.kanova(ndf = 4, f = cohens_f_alt[7], ng = 18, power = 0.8)
+# 47*18 = 846 observations
+# Main effect (feedback)
+wp.kanova(ndf = 2, f = cohens_f[1], ng = 18, power = 0.8)
