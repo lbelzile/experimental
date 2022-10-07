@@ -128,7 +128,7 @@ path_figure <- list("img/05/icons8-smiling-100.png",
 # making table with gt
 list(
   ending = c("happy", "sad"),
-  complexity = c("complicated", "average", "simple")
+  complexity = c("complicated", "average", "easy")
 ) |>
   purrr::cross_df() |>
   dplyr::mutate(response = rep(1:3, each = 2)) |>
@@ -139,7 +139,7 @@ list(
   # cols_hide(columns = c(ending)) |>
   data_color(
     columns = c(happy, sad),
-    #c(complicated,normal,simple),
+    #c(complicated,normal,easy),
     colors = scales::col_factor(
       palette = c("#bae1ff", "#ffdfba", "#ffb3ba"),
       domain = NULL,
@@ -221,7 +221,7 @@ $\neq$
 set.seed(1234)
 data_fake <- tibble::tibble(
   "ending" = factor(rep(c("happy", "sad"), each = 3)),
-  "complexity" = factor(rep(c("complicated", "average", "simple"), 
+  "complexity" = factor(rep(c("complicated", "average", "easy"), 
                             length.out = 6)),
                 
          mean = 10 + rnorm(n = 6))
@@ -271,7 +271,7 @@ g1 + g2
 set.seed(1234)
 data_fake <- tibble::tibble(
   "ending" = factor(rep(c("happy", "sad"), each = 3)),
-  "complexity" = factor(rep(c("complicated", "average", "simple"), 
+  "complexity" = factor(rep(c("complicated", "average", "easy"), 
                             length.out = 6))) |>
   # purrr::cross_df()  |>
   mutate(
@@ -320,7 +320,9 @@ g1 + g2
 #| label: 2by2-interaction
 #| eval: true
 #| echo: false
-#| out-width: "80%"
+#| fig.width: 8
+#| fig.height: 3
+#| out.width: "70%"
 p1 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
   factorB = c("b1", "b2", "b1", "b2"),
@@ -361,16 +363,17 @@ p8 <- data.frame(
   factorB = c("b1", "b2", "b1", "b2"),
   means = c(5, 10, 10, 5)
 )
-all_22s <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
+all_22s <- rbind(p1, p2, p6, p4, p8, p5, p3, p7)
 type <- factor(rep(1:8, each = 4), 
                labels = c("no effect",
                           "main effect of A only",
-                          "main effect of A and interaction",
-                          "both main effects",
-                          "both main effects and interaction",
                           "main effect of B only",
-                          "main effect of B and interaction",
-                          "interaction only"))
+                          "both main effects",
+                          "interaction only",
+                          "main effect of A + interaction",
+                          "main effect of B + interaction",
+                          "main effects + interaction"
+                          ))
 all_22s <- cbind(all_22s, type)
 options(ggplot2.discrete.colour= MetBrewer::met.brewer(name = "Hiroshige", 2))
 ggplot(all_22s, 
@@ -382,12 +385,11 @@ ggplot(all_22s,
   geom_point() +
   geom_line() +
   labs(x = "factor A",
-       subtitle = "mean response",
        y = "",
        color = "factor B") +
   facet_wrap(~type, nrow = 2) +
   theme_classic() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "right")
 ```
 
 
@@ -430,7 +432,7 @@ where
 |------------|:----------:|:-----:|:-----:|
 | $a_1$ (`complicated`) | $\mu_{11}$ | $\mu_{12}$ | $\mu_{1.}$ |
 |  $a_2$ (`average`)  | $\mu_{21}$ | $\mu_{22}$ | $\mu_{2.}$ |
-| $a_3$ (`simple`) |  $\mu_{31}$ | $\mu_{32}$ | $\mu_{3.}$ |
+| $a_3$ (`easy`) |  $\mu_{31}$ | $\mu_{32}$ | $\mu_{3.}$ |
 |*column mean* | $\mu_{.1}$ | $\mu_{.2}$ | $\mu$ |
 
 
@@ -477,6 +479,116 @@ $$\mu = \frac{\sum_{i=1}^{n_a} \sum_{j=1}^{n_b} \mu_{ij}}{n_an_b}$$
 ]
 ---
 
+# Marginal effects
+
+.pull-left[
+
+```{r, echo=FALSE, warning=FALSE, cache = TRUE}
+path_figure <- list("img/05/icons8-smiling-100.png",
+                    "img/05/icons8-disappointed-100.png")
+# making table with gt
+data.frame("X" = c("column means"),
+           "happy" = c("$$\\mu_{.1}$$"),
+           "sad" = c("$$\\mu_{.2}$$")) |>
+  gt()   |>
+  cols_width(c(happy, sad) ~ px(120)) |>
+  tab_options(column_labels.font.size = 40,
+              table.font.size = 40) |>
+  cols_label(X = " ")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, warning=FALSE, cache = TRUE}
+library(gt)
+library(gtsummary)
+# list of all the icons used in table
+path_figure <- list("img/05/icons8-smiling-100.png",
+                    "img/05/icons8-disappointed-100.png")
+# making table with gt
+data.frame(complexity = c("complicated", "average", "easy"),
+           response = c("$$\\mu_{1.}$$",
+                        "$$\\mu_{2.}$$",
+                        "$$\\mu_{3.}$$")) |>
+  gt() |>
+  # cols_hide(columns = c(ending)) |>
+  data_color(columns = "response",
+    colors = scales::col_factor(
+      palette = c("#bae1ff", "#ffdfba", "#ffb3ba"),
+      domain = NULL,
+      ordered = TRUE,
+      reverse = TRUE
+    ),
+    alpha = 0.8
+  ) |>
+  cols_width(response ~ px(120)) |>
+  tab_options(column_labels.font.size = 40,
+              table.font.size = 40) |>
+  cols_label(response = "row means")
+```
+
+]
+
+---
+
+# Simple effects
+
+.pull-left[
+
+```{r, echo=FALSE, warning=FALSE, cache = TRUE}
+path_figure <- list("img/05/icons8-smiling-100.png",
+                    "img/05/icons8-disappointed-100.png")
+# making table with gt
+data.frame("X" = c("means (easy)"),
+           "happy" = c("$$\\mu_{1.}$$"),
+           "sad" = c("$$\\mu_{2.}$$")) |>
+  gt() |>
+  data_color(columns = c("happy","sad"),
+    colors = scales::col_factor(
+      palette = "#bae1ff",
+      domain = NULL,
+      ordered = TRUE,
+      reverse = TRUE
+    ),
+    alpha = 0.8
+  ) |>
+  cols_width(c(happy, sad) ~ px(120)) |>
+  tab_options(column_labels.font.size = 40,
+              table.font.size = 40) |>
+  cols_label(X = " ")
+```
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, warning=FALSE, cache = TRUE}
+data.frame(complexity = c("complicated", "average", "easy"),
+           "response" = c("$$\\mu_{11}$$",
+                          "$$\\mu_{21}$$",
+                          "$$\\mu_{31}$$")) |>
+  gt() |>
+  # cols_hide(columns = c(ending)) |>
+  data_color(columns = "response",
+    colors = scales::col_factor(
+      palette = c("#bae1ff", "#ffdfba", "#ffb3ba"),
+      domain = NULL,
+      ordered = TRUE,
+      reverse = TRUE
+    ),
+    alpha = 0.8
+  ) |>
+  cols_width(response ~ px(120)) |>
+  tab_options(column_labels.font.size = 40,
+              table.font.size = 40) |>
+  cols_label(response = "mean (happy)")
+```
+
+]
+
+---
 
 # Contrasts
 
@@ -485,7 +597,7 @@ Suppose the order of the coefficients is factor $A$ (complexity, 3 levels, compl
 | test | $\mu_{11}$ | $\mu_{12}$ | $\mu_{21}$ | $\mu_{22}$ | $\mu_{31}$ | $\mu_{32}$ |
 |:--|--:|--:|--:|--:|--:|--:|
 | main effect $A$ (complicated vs average) |  $1$ | $1$ | $-1$ |  $-1$ | $0$ | $0$ |
-| main effect $A$ (complicated vs simple) |    $1$ |  $1$ | $0$ | $0$ | $-1$ |  $-1$ |
+| main effect $A$ (complicated vs easy) |    $1$ |  $1$ | $0$ | $0$ | $-1$ |  $-1$ |
 | main effect $B$ (happy vs sad) |    $1$ |  $-1$ | $1$ |  $-1$ | $1$ | $-1$ |
 | interaction $AB$ (comp. vs av, happy vs sad) | $1$ | $-1$ | $-1$ | $1$ | $0$ | $0$ |
 | interaction $AB$ (comp. vs easy, happy vs sad) |  $1$ | $-1$ | $0$ | $0$ | $-1$ | $1$ |
@@ -499,12 +611,12 @@ Generally, need to compare multiple effects at once
 Main effect of factor $A$
 ]
 
-$\mathscr{H}_0$: $\mu_{1.} = \cdots = \mu_{a.}$ vs $\mathscr{H}_a$: at least two marginal means of $A$ are different
+$\mathscr{H}_0$: $\mu_{1.} = \cdots = \mu_{n_a.}$ vs $\mathscr{H}_a$: at least two marginal means of $A$ are different
 .box-inv-5.sp-after-half[
 Main effect of factor $B$
 ]
 
-$\mathscr{H}_0$: $\mu_{.1} = \cdots = \mu_{.b}$ vs $\mathscr{H}_a$: at least two marginal means of $B$ are different.
+$\mathscr{H}_0$: $\mu_{.1} = \cdots = \mu_{.n_b}$ vs $\mathscr{H}_a$: at least two marginal means of $B$ are different.
 
 ---
 # Equivalent formulation of the two-way ANOVA
@@ -531,7 +643,7 @@ where
 |------------|:----------:|:-----:|:-----:|
 | $a_1$ (`complicated`) | $\mu + \alpha_1 + \beta_1 + (\alpha\beta)_{11}$ | $\mu + \alpha_1 + \beta_2 + (\alpha\beta)_{12}$ | $\mu + \alpha_1$ |
 |  $a_2$ (`average`)  | $\mu + \alpha_2 + \beta_1 + (\alpha\beta)_{21}$ | $\mu + \alpha_2 + \beta_2 + (\alpha\beta)_{22}$ | $\mu + \alpha_2$ |
-| $a_3$ (`simple`) |  $\mu + \alpha_3 + \beta_1 + (\alpha\beta)_{31}$ | $\mu + \alpha_3 + \beta_2 + (\alpha\beta)_{32}$ | $\mu + \alpha_3$ |
+| $a_3$ (`easy`) |  $\mu + \alpha_3 + \beta_1 + (\alpha\beta)_{31}$ | $\mu + \alpha_3 + \beta_2 + (\alpha\beta)_{32}$ | $\mu + \alpha_3$ |
 |*column mean* | $\mu + \beta_1$ | $\mu + \beta_2$ | $\mu$ |
 
 ]
@@ -602,9 +714,10 @@ Unambiguous decomposition of effects of $A$, $B$ and interaction.
 
 
 \begin{align*}
-\underset{\text{obs vs grand mean}}{(y_{ijr} - \widehat{\mu})} &= 
-\underset{\text{row mean vs grand mean}}{(\widehat{\mu}_{i.} - \widehat{\mu})} \\& +\underset{\text{col mean vs grand mean}}{(\widehat{\mu}_{.j} - \widehat{\mu})} \\&+
-\underset{\text{cell mean vs additive effect}}{(\widehat{\mu}_{ij} - \widehat{\mu}_{i.} - \widehat{\mu}_{.j}+ \widehat{\mu})} \\&+ \underset{\text{obs vs cell mean}}{(y_{ijr} - \widehat{\mu}_{ij})}
+\underset{\text{obs vs grand mean  (total)}}{(y_{ijr} - \widehat{\mu})} 
+&= \underset{\text{row mean vs grand mean} (A)}{(\widehat{\mu}_{i.} - \widehat{\mu})} \\& +\underset{\text{col mean vs grand mean} (B)}{(\widehat{\mu}_{.j} - \widehat{\mu})} 
+\\&+\underset{\text{cell mean vs additive effect} (AB)}{(\widehat{\mu}_{ij} - \widehat{\mu}_{i.} - \widehat{\mu}_{.j}+ \widehat{\mu})} 
+\\&+ \underset{\text{obs vs cell mean (resid)}}{(y_{ijr} - \widehat{\mu}_{ij})}
 \end{align*}
 
 ---
@@ -661,7 +774,7 @@ Read the table backward (starting with the interaction).
 |------------|:----------:|:-----:|:-----:|
 | $a_1$ (`complicated`) | $\mu_{11}$ | $\mathsf{X}$ | $\mu_{1.}$ |
 |  $a_2$ (`average`)  | $\mu_{21}$ | $\mathsf{X}$  | $\mu_{2.}$ |
-| $a_3$ (`simple`) |  $\mathsf{X}$  | $\mathsf{X}$  | $\mathsf{X}$ |
+| $a_3$ (`easy`) |  $\mathsf{X}$  | $\mathsf{X}$  | $\mathsf{X}$ |
 |*column mean* | $\mu_{.1}$ | $\mathsf{X}$ | $\mu$ |
 
 .small[ 
@@ -680,7 +793,7 @@ Correction depends on the effect: e.g., for factor $A$, the critical values are
 - Bonferroni: $1-\alpha/(2m)$ quantile of $\mathsf{St}(n-n_an_b)$
 - Tukey: Studentized range (`qtukey`)
    - level $1-\alpha/2$, $n_a$ groups, $n-n_an_b$ degrees of freedom.
-- Scheffé: critical value is $\{(a-1) \mathfrak{f}_{1-\alpha}\}^{1/2}$
+- Scheffé: critical value is $\{(n_a-1) \mathfrak{f}_{1-\alpha}\}^{1/2}$
    - $\mathfrak{f}_{1-\alpha}$ is $1-\alpha$ quantile of $\mathsf{F}(\nu_1 = n_a-1, \nu_2 = n-n_an_b)$.
 
 Software implementations available in `emmeans` in **R**.
