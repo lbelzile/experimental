@@ -8,9 +8,6 @@
       }
     ]
   },
-  "Bioconductor": {
-    "Version": "3.15"
-  },
   "Packages": {
     "AsioHeaders": {
       "Package": "AsioHeaders",
@@ -18,14 +15,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "57ed34bcad0158fafd9cbdd85bd26881",
-      "Requirements": []
-    },
-    "BiocManager": {
-      "Package": "BiocManager",
-      "Version": "1.30.10",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "db75371846625725e221470b310da1d5",
       "Requirements": []
     },
     "DBI": {
@@ -46,10 +35,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-58",
+      "Version": "7.3-58.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4bf2c61e656bbc238634c798c208d386",
+      "Hash": "762e1804143a332333c054759f89a706",
       "Requirements": []
     },
     "Matrix": {
@@ -70,6 +59,16 @@
       "Hash": "366a8838782928e398b8762c932a42a3",
       "Requirements": [
         "Matrix"
+      ]
+    },
+    "MetBrewer": {
+      "Package": "MetBrewer",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9dda8af6359c4b3932426430c38fa1b1",
+      "Requirements": [
+        "ggplot2"
       ]
     },
     "R6": {
@@ -824,22 +823,6 @@
         "tweenr"
       ]
     },
-    "ggimage": {
-      "Package": "ggimage",
-      "Version": "0.2.8",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "7237b654c1fb1fc33cab107cebd7398f",
-      "Requirements": [
-        "ggplot2",
-        "ggplotify",
-        "jsonlite",
-        "magick",
-        "rvcheck",
-        "scales",
-        "tibble"
-      ]
-    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.3.6",
@@ -859,24 +842,12 @@
         "withr"
       ]
     },
-    "ggplotify": {
-      "Package": "ggplotify",
-      "Version": "0.0.5",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "01f6ad9ce2c4a474974dac7482e4c19f",
-      "Requirements": [
-        "ggplot2",
-        "gridGraphics",
-        "rvcheck"
-      ]
-    },
     "globals": {
       "Package": "globals",
-      "Version": "0.16.1",
+      "Version": "0.15.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e14798793892c6bebdbe2f144aacf6e6",
+      "Hash": "9449b1dfaf8609db72556cfbe228285d",
       "Requirements": [
         "codetools"
       ]
@@ -934,14 +905,6 @@
         "tibble",
         "vctrs"
       ]
-    },
-    "gridGraphics": {
-      "Package": "gridGraphics",
-      "Version": "0.5-1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5b79228594f02385d4df4979284879ae",
-      "Requirements": []
     },
     "gt": {
       "Package": "gt",
@@ -1027,8 +990,8 @@
       "RemoteRepo": "hecedsm",
       "RemoteUsername": "lbelzile",
       "RemoteRef": "HEAD",
-      "RemoteSha": "85a521be92541bfabef344533bc434af704468aa",
-      "Hash": "c12b8e8314ce550ac04f800f1758d991",
+      "RemoteSha": "0a6b5cc22870e65a87ae2b5326091902391cb1e7",
+      "Hash": "5b8748770653b6eb3a603ebcf40a6e63",
       "Requirements": []
     },
     "here": {
@@ -1174,6 +1137,23 @@
       "Repository": "CRAN",
       "Hash": "d07e729b27b372429d42d24d503613a0",
       "Requirements": []
+    },
+    "jtools": {
+      "Package": "jtools",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5d16dd531e4d4d5a9cfeced9b06135b8",
+      "Requirements": [
+        "crayon",
+        "generics",
+        "ggplot2",
+        "magrittr",
+        "pander",
+        "pkgconfig",
+        "rlang",
+        "tibble"
+      ]
     },
     "kableExtra": {
       "Package": "kableExtra",
@@ -1887,10 +1867,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.4",
+      "Version": "1.0.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6539dd8c651e67e3b55b5ffea106362b",
+      "Hash": "4ed1f8336c8d52c3e750adcdc57228a7",
       "Requirements": []
     },
     "rmarkdown": {
@@ -1945,17 +1925,6 @@
       "Repository": "CRAN",
       "Hash": "06c85365a03fdaf699966cc1d3cf53ea",
       "Requirements": []
-    },
-    "rvcheck": {
-      "Package": "rvcheck",
-      "Version": "0.1.8",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "11ebf2d3d4990e8bb9f28d5ab0c204fc",
-      "Requirements": [
-        "BiocManager",
-        "rlang"
-      ]
     },
     "rvest": {
       "Package": "rvest",

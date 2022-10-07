@@ -25,7 +25,7 @@ At the end of the session, students should be capable of
 ## Complementary readings
 
 
-- {{< fa book >}}  Chapter 4 of @Cox:1956.
+- {{< fa book >}}  Chapter 4 of @Cox:1958.
 
 ## Videos
 

@@ -17,6 +17,6 @@ Next, look at one of the experiments conducted in @vanStekelenburg:2021. Cross-c
 ## Task 2
 
 
-Read @Nosek:2018preregistration and reflect on preregistration: is it common in your field? List benefits of preregistration and discuss how you view the topic. 
+Read @Nosek:2018preregistration and list three benefits of preregistration. Reflect on the practical aspects and on the impact.^[Feel free to discuss field-specific issues.]
 
-We will organize a discussion in the near future in class on the [replication crisis](https://lbelzile.github.io/math80667a/replication-crisis.html).
+We will organize a discussion in the near future in class on preregistration and the replication crisis.
