@@ -1,0 +1,22 @@
+---
+title: "Problem set 6"
+---
+
+
+**Submission information**: please submit on ZoneCours
+
+- A PDF
+
+## Task 1
+
+Read @Wilkinson:1999's guidelines for reporting statistical analyses.
+
+Next, look at one of the experiments conducted in @vanStekelenburg:2021. Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors.
+
+
+## Task 2
+
+
+Read @Nosek:2018preregistration and reflect on preregistration: is it common in your field? List benefits of preregistration and discuss how you view the topic. 
+
+We will organize a discussion in the near future in class on the [replication crisis](https://lbelzile.github.io/math80667a/replication-crisis.html).
