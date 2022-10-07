@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Designs to reduce the error</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-10-06" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Designs to reduce the error
+
+.class-info[
+
+**Session 7**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+---
+class: title title-1
+
+# Outline
+
+
+.box-3.large.sp-after-half[Blocking]
+
+--
+
+.box-7.large.sp-after-half[Analysis of covariance]
+
+
+---
+
+layout: false
+name: blocking
+class: center middle section-title section-title-3 animated fadeIn
+
+# Blocking
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Terminology for *nuisance*
+
+.pull-left-3.center[
+
+.box-inv-3.sp-after-half[
+**Block**
+]
+
+Source of variation, but of no interest
+&lt;br&gt; known and controllable
+
+.box-inv-3.sp-after-half[Example]
+timing &lt;br&gt; lab technician &lt;br&gt;  machine
+
+]
+
+.pull-middle-3.center[
+
+.box-inv-3.sp-after-half[
+**Covariates**
+]
+
+Explanatory measured **before** the experiment
+
+Cannot be acted upon
+
+.box-inv-3.sp-after-half[Example]
+socioeconomic variables &lt;br&gt; environmental conditions
+]
+
+.pull-right-3.center[
+
+.box-inv-3.sp-after-half[
+**Noise factor**
+]
+
+Under which setting is response least affected?
+
+.box-inv-3.sp-after-half[Example]
+temperature &lt;br&gt; processing
+]
+
+???
+
+Example 15.2.3 in Dean &amp; Voss of Lipton soup mixture
+
+A: number of mixer ports through which vegetable oil was added (two levels, 1 and 3);
+B: temperature of mixer jacket (two levels; ambient temperature, presence of cooling water);
+C: mixing time (two levels; 60 and 80 sec);
+D: batch weight (two levels; 1500 and 2000 lb);
+E: delay between mixing and packaging (two levels; 1 day and 7 days).
+
+
+---
+
+
+# Why blocking? 
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[ 
+Design experiment to reduce the effect of uncontrolled variations 
+]
+]
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+In general, increases the power of the `\(F\)`
+test for treatment effects.
+]
+]
+
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[
+Group units in sets as alike as possible.
+]
+]
+
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+(Often) compare only treatments, so interactions are not included.
+]
+]
+
+---
+
+# Assignment to treatment
+
+.box-inv-3.medium.sp-after-half[
+Divide subjects within each block
+]
+
+.box-inv-3.medium.sp-after-half[
+Randomly allocate to treatment within block
+]
+
+.box-3.sp-after-half[
+(stratified sampling)
+]
+
+---
+
+
+# Block-treatment design
+
+Without interaction,
+
+`$$\underset{\text{response}}{Y_{ij}\vphantom{\beta_j}} = \mu + \underset{\text{treatment}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}}{\varepsilon_{ij}\vphantom{\beta_j}}$$`
+
+Compromise between 
+
+- reduced variability for residuals
+- loss of degrees of freedom due to estimation of `\(\beta\)`'s.
+
+---
+
+# Example: Resting metabolic rate
+From Dean, Voss and Draguljić (2017), Example 10.4.1 (p. 311)
+
+&gt; experiment that was run to compare the effects of inpatient and outpatient protocols on the in-laboratory measurement of resting metabolic rate (RMR) in humans. A previous study had indicated measurements of RMR on elderly individuals to be 8% higher using an outpatient protocol than with an inpatient protocol. If the measurements depend on the protocol, then comparison of the results of studies conducted by different laboratories using different protocols would be difficult. The experimenters hoped to conclude that the effect on RMR of different protocols was negligible.
+
+???
+
+The experimental treatments consisted of three protocols: (1) an inpatient protocol in which meals
+were controlled—the patient was fed the evening meal and spent the night in the laboratory, then RMR
+was measured in the morning; (2) an outpatient protocol in which meals were controlled—the patient
+was fed the same evening meal at the laboratory but spent the night at home, then RMR was measured
+in the morning; and (3) an outpatient protocol in which meals were not strictly controlled—the patient
+was instructed to fast for 12 hours prior to measurement of RMR in the morning.
+
+---
+
+.panelset[
+
+.panel[ .panel-name[Load]
+
+
+
+```r
+url &lt;- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
+# transform integers to factors (categorical)
+resting &lt;- read.table(url, header = TRUE) %&gt;%
+  dplyr::mutate(
+    subject = factor(subject), #blocking factor
+    protocol = factor(protocol),
+    rate = rate/1000)
+```
+
+]
+
+.panel[.panel-name[Fit]    
+
+
+
+
+```r
+# Force sum-to-zero parametrization for unordered factors
+options(contrasts = c("contr.sum", "contr.poly"))
+# Fit model with blocking
+model_block &lt;- lm(rate ~ subject + protocol, data = resting)
+# One-way ANOVA (no blocking
+model_raw &lt;- lm(rate ~ protocol, data = resting)
+# anova(model_block)
+# anova(model_raw)
+```
+]
+
+  .panel[.panel-name[Plot]       
+
+```r
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+     geom_line() + 
+     labs(y = "mean resting\n metabolic rate") + 
+     theme_classic() +
+     theme(legend.position = "bottom")
+```
+]
+]
+---
+
+# Interaction plot
+
+&lt;img src="07-slides_files/figure-html/plotblocking2-1.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Impact of blocking
+.panelset[
+.panel[.panel-name[ANOVA table (with blocking)]
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Analysis of variance table - with blocking&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Degrees of freedom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean square &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; subject &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protocol &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.795 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.panel[.panel-name[ANOVA table (without blocking)]
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Analysis of variance table - without blocking&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Degrees of freedom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean square &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protocol &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.982 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+]
+
+
+---
+layout: false
+name: ancova
+class: center middle section-title section-title-6
+
+# Analysis of covariance
+
+---
+
+layout: true
+class: title title-6
+---
+
+
+
+# IJLR: It's Just a Linear Regression...
+
+All ANOVA models covered so far are linear regression model.
+
+The latter says that 
+`$$\underset{\text{average response}\vphantom{l}}{\textsf{E}(Y_{i}\vphantom{\beta_p})}  = \underset{\text{linear (i.e., additive) combination of explanatories}}{\beta_0 + \beta_1 \mathrm{X}_{1i} + \cdots + \beta_p \mathrm{X}_{pi}}$$`
+
+---
+
+# What's in a model?
+
+In experimental designs, the explanatories are 
+
+- experimental factors (categorical)
+- continuous (dose-response)
+
+.box-inv-6.medium[
+Random assignment implies&lt;br&gt; no systematic difference between groups.
+]
+
+---
+
+# ANCOVA = Analysis of covariance
+
+ 
+- Analysis of variance with added continuous covariate(s) to reduce experimental error (similar to blocking).
+- These continuous covariates are typically concomitant variables (measured alongside response).
+- Including them in the mean response (as slopes) can help reduce the experimental error (residual error).
+
+---
+
+# Control to gain power!
+
+
+.box-inv-6.sp-after-half[
+Identify external sources of variations
+]
+
+- enhance balance of design (randomization)
+- reduce mean squared error of residuals to increase power
+
+These steps should in principle increase power **if** the variables used as control are correlated with the response.
+
+---
+
+
+# Example
+
+Abstract of [van Stekelenburg et al. (2021)](https://doi.org/10.1177/09567976211007788)
+
+&gt; In three experiments with more than 1,500 U.S. adults who held false beliefs, participants first learned the value of scientific consensus and how to identify it. Subsequently, they read a news article with information about a scientific consensus opposing their beliefs. We found strong evidence that in the domain of genetically engineered food, this two-step communication strategy was more successful in correcting misperceptions than merely communicating scientific consensus.
+
+???
+
+
+Aart van Stekelenburg, Gabi Schaap, Harm Veling and Moniek Buijzen (2021), Boosting Understanding and Identification of Scientific Consensus Can Help to Correct False Beliefs, Psychological Science
+https://doi.org/10.1177/09567976211007788
+---
+
+# Experiment 2: Genetically Engineered Food
+
+We focus on a single experiment; preregistered exclusion criteria led to `\(n=442\)` total sample size (unbalanced design).
+
+Three experimental conditions:
+
+.float-left.center[.box-6[`Boost`] .box-6[`Boost Plus`] .box-6[Consensus only (`consensus`)] ]
+
+
+---
+
+# Model formulation
+
+Use `post` as response variable and `prior` beliefs as a control variable in the analysis of covariance.
+
+&gt; their response was measured on a visual analogue scale ranging from –⁠100 (I am 100% certain this is false) to 100 (I am 100% certain this is true) with 0 (I don’t know) in the middle.
+
+
+
+---
+# Plot of post vs prior response
+
+&lt;img src="img/07/Experiment2.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Model formulation
+
+Average for the `\(r\)`th replication of the `\(i\)`th experimental group is
+`$$\begin{align*}\mathsf{E}(\texttt{post}_{ir}) &amp;= \mu + \alpha_i\texttt{condition}_i + \beta \texttt{prior}_{ir}.\\
+\mathsf{Va}(\texttt{post}_{ir}) &amp;= \sigma^2\end{align*}$$`
+
+We assume that there is no interaction between `condition` and `prior`
+- the slopes for `prior` are the same for each `condition` group.
+- the effect of prior is linear
+
+
+---
+
+# Contrasts of interest
+
+1. Difference between average boosts (`Boost` and `BoostPlus`) and control (`consensus`)
+2. Difference between `Boost` and `BoostPlus` (pairwise)
+
+Inclusion of the `prior` score leads to increased precision for the mean (reduces variability).
+
+---
+
+# Contrasts with ANCOVA
+
+- The estimated marginal means will be based on detrended values `\(\neq\)` group averages
+- In the `emmeans` package, the average of the covariate is used as value.
+- the difference between levels of `condition` are the same for any value of `prior` (parallel lines), but the uncertainty changes.
+
+Multiple testing adjustments:
+
+- Methods of Bonferroni (prespecified number of tests) and Scheffé (arbitrary contrasts) still apply
+- Can't use Tukey anymore (adjusted means are not independent anymore).
+
+---
+
+# Data analysis
+
+.panelset[
+
+.panel[.panel-name[Loading data]
+
+```r
+library(emmeans)
+options(contrasts = c("contr.sum", "contr.poly"))
+data(SSVB21_S2, package = "hecedsm")
+# Check balance
+with(SSVB21_S2, table(condition))
+```
+] 
+.panel[.panel-name[Scatterplot]
+.pull-left.small[
+
+```r
+library(ggplot2)
+ggplot(data = SSVB21_S2,
+       aes(x = prior, y = post)) + 
+       geom_point() + 
+       geom_smooth(method = "lm",
+                   se = FALSE)
+```
+.small[Strong correlation; note responses that achieve max of scale.]
+]
+.pull-right[
+&lt;img src="img/07/Experiment2_scatter.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+]
+]
+.panel[.panel-name[Model]
+
+```r
+# Check that the data are well randomized
+car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 3)
+# Fit linear model with continuous covariate
+model1 &lt;- lm(post ~ condition + prior, data = SSVB21_S2)
+# Fit model without for comparison
+model2 &lt;- lm(post ~ condition, data = SSVB21_S2)
+# Global test for differences - of NO INTEREST
+car::Anova(model1, type = 3)
+car::Anova(model2, type = 3)
+```
+]
+.panel[.panel-name[ANOVA]
+.pull-left.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 166341 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 71.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 14107 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prior &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 385385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 166.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1016461 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.pull-right.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 123377 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 11680 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 1.83 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.162 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1401846 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+]
+]
+---
+class: title title-6
+# Data analysis
+
+.panelset[
+
+.panel[.panel-name[Contrasts]
+
+
+```r
+emm1 &lt;- emmeans(model1, specs = "condition")
+# Note order: Boost, BoostPlus, consensus
+emm2 &lt;- emmeans(model2, specs = "condition")
+# Not comparable: since one is detrended and the other isn't
+contrast_list &lt;- list(
+   "boost vs control" = c(0.5,  0.5, -1), 
+   #av. boosts vs consensus
+   "Boost vs BoostPlus" = c(1, -1,  0))
+contrast(emm1, 
+         method = contrast_list, 
+         p.adjust = "holm")
+```
+]
+.panel[.panel-name[_t_-tests]
+.pull-left.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; se &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; boost vs control &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -8.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.09 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Boost vs BoostPlus &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+Contrasts with ANCOVA with `prior` (Holm-Bonferroni adjustment with `\(k=2\)` tests)
+]
+.pull-right.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; se &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; boost vs control &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Boost vs BoostPlus &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+Contrasts for ANOVA (Holm-Bonferroni adjustment with `\(k=2\)` tests)
+]
+]
+.panel[.panel-name[Assumptions]
+
+.pull-left.small[
+
+```r
+# Test equality of variance
+levene &lt;- car::leveneTest(
+   resid(model1) ~ condition, 
+   data = SSVB21_S2,
+   center = 'mean')
+# Equality of slopes (interaction)
+car::Anova(lm(post ~ condition * prior, 
+           data = SSVB21_S2),
+           model1, type = 3)
+```
+
+Levene's test of equality of variance: _F_ (2, 439) = 2.05 with a `\(p\)`-value of 0.13.
+]
+.pull-right.small[
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 165573 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 71.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4245 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prior &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 382596 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 164.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition:prior &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 3257 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.7 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1016461 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+Model with interaction `condition*prior`. Slopes don't differ between condition.
+]
+]
+]
+---
+
+# The kitchen sink approach
+
+.box-inv-6.large[
+Should we control for more stuff?
+]
+
+--
+
+.box-6.medium[NO! ANCOVA is a design to reduce error]
+
+
+- Randomization should ensure that there is no confounding
+- No difference (on average) between group given a value of the covariate.
+- If it isn't the case, adjustment matters
+
+---
+
+# Equal trends
+.small[
+- If trends are different, meaningful comparisons (?)
+- Differences between groups depend on value of the covariate
+]
+&lt;img src="07-slides_files/figure-html/ancovadifftrend-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+.small[Due to lack of overlap, comparisons hazardous as they entail extrapolation one way or another.]
+
+---
+
+# Testing equal slope
+
+.box-6.sp-after[Compare two nested models]
+
+.box-inv-6.sp-after[
+
+`\(\mathscr{H}_0\)`: Model with covariate
+
+]
+
+.box-inv-6.sp-after[
+`\(\mathscr{H}_a\)`:
+Model with covariate * experimental factor&lt;br&gt;(interaction)]
+
+.center[Use `anova` to compare the models in **R**.]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": false,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

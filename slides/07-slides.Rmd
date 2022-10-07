@@ -1,0 +1,695 @@
+---
+title: "Designs to reduce the error"
+author: "Léo Belzile"
+date: "`r Sys.Date()`"
+output:
+   xaringan::moon_reader:
+      lib_dir: "libs"
+      chakra: "libs/remark-latest.min.js"
+      css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
+      seal: false
+      anchor_sections: false
+      nature:
+          highlightStyle: github
+          highlightLines: false
+          countIncrementalSlides: false
+          ratio: "16:9"
+      navigation:
+        scroll: false
+      editor_options: 
+        chunk_output_type: console
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.retina = 3, 
+                      fig.align = "center",
+                      out.width="70%",
+                      fig.asp = 0.5
+                      )
+                      
+```
+
+```{r packages-data, echo = FALSE, include=FALSE}
+library(knitr)
+options(knitr.kable.NA = '')
+options(tidyverse.quiet = TRUE)
+options(knitr.table.format = "html")
+library(tidyverse)
+library(patchwork)
+```
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
+```
+
+class: center middle main-title section-title-1
+
+# Designs to reduce the error
+
+.class-info[
+
+**Session 7**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+HEC Montréal
+]
+
+]
+---
+class: title title-1
+
+# Outline
+
+
+.box-3.large.sp-after-half[Blocking]
+
+--
+
+.box-7.large.sp-after-half[Analysis of covariance]
+
+
+---
+
+layout: false
+name: blocking
+class: center middle section-title section-title-3 animated fadeIn
+
+# Blocking
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Terminology for *nuisance*
+
+.pull-left-3.center[
+
+.box-inv-3.sp-after-half[
+**Block**
+]
+
+Source of variation, but of no interest
+<br> known and controllable
+
+.box-inv-3.sp-after-half[Example]
+timing <br> lab technician <br>  machine
+
+]
+
+.pull-middle-3.center[
+
+.box-inv-3.sp-after-half[
+**Covariates**
+]
+
+Explanatory measured **before** the experiment
+
+Cannot be acted upon
+
+.box-inv-3.sp-after-half[Example]
+socioeconomic variables <br> environmental conditions
+]
+
+.pull-right-3.center[
+
+.box-inv-3.sp-after-half[
+**Noise factor**
+]
+
+Under which setting is response least affected?
+
+.box-inv-3.sp-after-half[Example]
+temperature <br> processing
+]
+
+???
+
+Example 15.2.3 in Dean & Voss of Lipton soup mixture
+
+A: number of mixer ports through which vegetable oil was added (two levels, 1 and 3);
+B: temperature of mixer jacket (two levels; ambient temperature, presence of cooling water);
+C: mixing time (two levels; 60 and 80 sec);
+D: batch weight (two levels; 1500 and 2000 lb);
+E: delay between mixing and packaging (two levels; 1 day and 7 days).
+
+
+---
+
+
+# Why blocking? 
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[ 
+Design experiment to reduce the effect of uncontrolled variations 
+]
+]
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+In general, increases the power of the $F$
+test for treatment effects.
+]
+]
+
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[
+Group units in sets as alike as possible.
+]
+]
+
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+(Often) compare only treatments, so interactions are not included.
+]
+]
+
+---
+
+# Assignment to treatment
+
+.box-inv-3.medium.sp-after-half[
+Divide subjects within each block
+]
+
+.box-inv-3.medium.sp-after-half[
+Randomly allocate to treatment within block
+]
+
+.box-3.sp-after-half[
+(stratified sampling)
+]
+
+---
+
+
+# Block-treatment design
+
+Without interaction,
+
+$$\underset{\text{response}}{Y_{ij}\vphantom{\beta_j}} = \mu + \underset{\text{treatment}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}}{\varepsilon_{ij}\vphantom{\beta_j}}$$
+
+Compromise between 
+
+- reduced variability for residuals
+- loss of degrees of freedom due to estimation of $\beta$'s.
+
+---
+
+# Example: Resting metabolic rate
+From Dean, Voss and Draguljić (2017), Example 10.4.1 (p. 311)
+
+> experiment that was run to compare the effects of inpatient and outpatient protocols on the in-laboratory measurement of resting metabolic rate (RMR) in humans. A previous study had indicated measurements of RMR on elderly individuals to be 8% higher using an outpatient protocol than with an inpatient protocol. If the measurements depend on the protocol, then comparison of the results of studies conducted by different laboratories using different protocols would be difficult. The experimenters hoped to conclude that the effect on RMR of different protocols was negligible.
+
+???
+
+The experimental treatments consisted of three protocols: (1) an inpatient protocol in which meals
+were controlled—the patient was fed the evening meal and spent the night in the laboratory, then RMR
+was measured in the morning; (2) an outpatient protocol in which meals were controlled—the patient
+was fed the same evening meal at the laboratory but spent the night at home, then RMR was measured
+in the morning; and (3) an outpatient protocol in which meals were not strictly controlled—the patient
+was instructed to fast for 12 hours prior to measurement of RMR in the morning.
+
+---
+
+.panelset[
+
+.panel[ .panel-name[Load]
+
+
+```{r cleanblocking, echo = TRUE}
+url <- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
+# transform integers to factors (categorical)
+resting <- read.table(url, header = TRUE) %>%
+  dplyr::mutate(
+    subject = factor(subject), #blocking factor
+    protocol = factor(protocol),
+    rate = rate/1000)
+```
+
+]
+
+.panel[.panel-name[Fit]    
+
+
+
+```{r fitblocking, echo = TRUE} 
+# Force sum-to-zero parametrization for unordered factors
+options(contrasts = c("contr.sum", "contr.poly"))
+# Fit model with blocking
+model_block <- lm(rate ~ subject + protocol, data = resting)
+# One-way ANOVA (no blocking
+model_raw <- lm(rate ~ protocol, data = resting)
+# anova(model_block)
+# anova(model_raw)
+```
+]
+
+  .panel[.panel-name[Plot]       
+```{r plotblocking, echo = TRUE, fig.show = 'hide', out.width = '50%'} 
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+     geom_line() + 
+     labs(y = "mean resting\n metabolic rate") + 
+     theme_classic() +
+     theme(legend.position = "bottom")
+```
+]
+]
+---
+
+# Interaction plot
+
+```{r plotblocking2, echo = FALSE, eval = TRUE, out.width = '85%'} 
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+     geom_line() + 
+     labs(y = "mean resting\n metabolic rate") + 
+     theme(legend.position = "bottom")
+```
+
+---
+
+# Impact of blocking
+.panelset[
+.panel[.panel-name[ANOVA table (with blocking)]
+```{r printanovaBlockin1, echo = FALSE, eval = TRUE}
+knitr::kable(anova(model_block),
+             digits = c(0,2,2,2,3),
+             caption = "Analysis of variance table - with blocking",
+             col.names = c("Degrees of freedom",
+                           "Sum of squares",
+                           "Mean square",
+                           "F statistic",
+                           "p-value")) %>%
+  kableExtra::kable_styling(position = "center")# %>%
+#  kableExtra::cell_spec(c(2,4), bold = TRUE, color = "black", background = "yellow")
+```
+]
+
+.panel[.panel-name[ANOVA table (without blocking)]
+```{r printanovaBlockin2, echo = FALSE, eval = TRUE}
+knitr::kable(anova(model_raw),
+             digits = c(0,2,2,2,3),
+             caption = "Analysis of variance table - without blocking",
+             col.names = c("Degrees of freedom",
+                           "Sum of squares",
+                           "Mean square",
+                           "F statistic",
+                           "p-value")) %>%
+  kableExtra::kable_styling(position = "center") 
+```
+]
+
+
+]
+
+
+---
+layout: false
+name: ancova
+class: center middle section-title section-title-6
+
+# Analysis of covariance
+
+---
+
+layout: true
+class: title title-6
+---
+
+
+
+# IJLR: It's Just a Linear Regression...
+
+All ANOVA models covered so far are linear regression model.
+
+The latter says that 
+$$\underset{\text{average response}\vphantom{l}}{\textsf{E}(Y_{i}\vphantom{\beta_p})}  = \underset{\text{linear (i.e., additive) combination of explanatories}}{\beta_0 + \beta_1 \mathrm{X}_{1i} + \cdots + \beta_p \mathrm{X}_{pi}}$$
+
+---
+
+# What's in a model?
+
+In experimental designs, the explanatories are 
+
+- experimental factors (categorical)
+- continuous (dose-response)
+
+.box-inv-6.medium[
+Random assignment implies<br> no systematic difference between groups.
+]
+
+---
+
+# ANCOVA = Analysis of covariance
+
+ 
+- Analysis of variance with added continuous covariate(s) to reduce experimental error (similar to blocking).
+- These continuous covariates are typically concomitant variables (measured alongside response).
+- Including them in the mean response (as slopes) can help reduce the experimental error (residual error).
+
+---
+
+# Control to gain power!
+
+
+.box-inv-6.sp-after-half[
+Identify external sources of variations
+]
+
+- enhance balance of design (randomization)
+- reduce mean squared error of residuals to increase power
+
+These steps should in principle increase power **if** the variables used as control are correlated with the response.
+
+---
+
+
+# Example
+
+Abstract of [van Stekelenburg et al. (2021)](https://doi.org/10.1177/09567976211007788)
+
+> In three experiments with more than 1,500 U.S. adults who held false beliefs, participants first learned the value of scientific consensus and how to identify it. Subsequently, they read a news article with information about a scientific consensus opposing their beliefs. We found strong evidence that in the domain of genetically engineered food, this two-step communication strategy was more successful in correcting misperceptions than merely communicating scientific consensus.
+
+???
+
+
+Aart van Stekelenburg, Gabi Schaap, Harm Veling and Moniek Buijzen (2021), Boosting Understanding and Identification of Scientific Consensus Can Help to Correct False Beliefs, Psychological Science
+https://doi.org/10.1177/09567976211007788
+---
+
+# Experiment 2: Genetically Engineered Food
+
+We focus on a single experiment; preregistered exclusion criteria led to $n=442$ total sample size (unbalanced design).
+
+Three experimental conditions:
+
+.float-left.center[.box-6[`Boost`] .box-6[`Boost Plus`] .box-6[Consensus only (`consensus`)] ]
+
+
+---
+
+# Model formulation
+
+Use `post` as response variable and `prior` beliefs as a control variable in the analysis of covariance.
+
+> their response was measured on a visual analogue scale ranging from –⁠100 (I am 100% certain this is false) to 100 (I am 100% certain this is true) with 0 (I don’t know) in the middle.
+
+
+
+---
+# Plot of post vs prior response
+
+```{r figExp2, eval = TRUE, echo = FALSE, out.width = '75%'}
+knitr::include_graphics("img/07/Experiment2.png")
+```
+
+---
+
+# Model formulation
+
+Average for the $r$th replication of the $i$th experimental group is
+$$\begin{align*}\mathsf{E}(\texttt{post}_{ir}) &= \mu + \alpha_i\texttt{condition}_i + \beta \texttt{prior}_{ir}.\\
+\mathsf{Va}(\texttt{post}_{ir}) &= \sigma^2\end{align*}$$
+
+We assume that there is no interaction between `condition` and `prior`
+- the slopes for `prior` are the same for each `condition` group.
+- the effect of prior is linear
+
+
+---
+
+# Contrasts of interest
+
+1. Difference between average boosts (`Boost` and `BoostPlus`) and control (`consensus`)
+2. Difference between `Boost` and `BoostPlus` (pairwise)
+
+Inclusion of the `prior` score leads to increased precision for the mean (reduces variability).
+
+---
+
+# Contrasts with ANCOVA
+
+- The estimated marginal means will be based on detrended values $\neq$ group averages
+- In the `emmeans` package, the average of the covariate is used as value.
+- the difference between levels of `condition` are the same for any value of `prior` (parallel lines), but the uncertainty changes.
+
+Multiple testing adjustments:
+
+- Methods of Bonferroni (prespecified number of tests) and Scheffé (arbitrary contrasts) still apply
+- Can't use Tukey anymore (adjusted means are not independent anymore).
+
+---
+
+# Data analysis
+
+.panelset[
+```{r interaction, echo = FALSE, eval = TRUE, cache = TRUE}
+library(emmeans)
+options(contrasts = c("contr.sum", "contr.poly"))
+data(SSVB21_S2, package = "hecedsm")
+model1 <- lm(post ~ condition + prior, data = SSVB21_S2)
+model2 <- lm(post ~ condition, data = SSVB21_S2)
+levene <- car::leveneTest(
+   resid(model1) ~ condition, 
+   data = SSVB21_S2,
+   center = 'mean')
+```
+.panel[.panel-name[Loading data]
+```{r ancova1, echo = TRUE, eval = FALSE}
+library(emmeans)
+options(contrasts = c("contr.sum", "contr.poly"))
+data(SSVB21_S2, package = "hecedsm")
+# Check balance
+with(SSVB21_S2, table(condition))
+```
+] 
+.panel[.panel-name[Scatterplot]
+.pull-left.small[
+```{r ancova2, echo = TRUE, eval = FALSE}
+library(ggplot2)
+ggplot(data = SSVB21_S2,
+       aes(x = prior, y = post)) + 
+       geom_point() + 
+       geom_smooth(method = "lm",
+                   se = FALSE)
+```
+.small[Strong correlation; note responses that achieve max of scale.]
+]
+.pull-right[
+```{r xaringanGraph, eval = TRUE, echo = FALSE, out.width = '70%'}
+knitr::include_graphics("img/07/Experiment2_scatter.png")
+```
+
+
+]
+]
+.panel[.panel-name[Model]
+```{r ancova3, echo = TRUE, eval = FALSE}
+# Check that the data are well randomized
+car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 3)
+# Fit linear model with continuous covariate
+model1 <- lm(post ~ condition + prior, data = SSVB21_S2)
+# Fit model without for comparison
+model2 <- lm(post ~ condition, data = SSVB21_S2)
+# Global test for differences - of NO INTEREST
+car::Anova(model1, type = 3)
+car::Anova(model2, type = 3)
+```
+]
+.panel[.panel-name[ANOVA]
+.pull-left.small[
+```{r ancova3b, echo = FALSE, eval = TRUE}
+kableExtra::kable(jtools::tidy(car::Anova(model1, type = 3)), 
+		 col.names = c("term",
+			 "sum of squares",
+			 "df",
+			 "statistic",
+			 "p-value"), 
+		 digits = c(0,0,0,1,2,4)) %>% 
+kableExtra::row_spec(2, bold = TRUE, color = "black", background = "yellow")
+```
+]
+.pull-right.small[
+```{r ancova3c, echo = FALSE, eval = TRUE}
+kableExtra::kable(jtools::tidy(car::Anova(model2, type = 3)), 
+		 col.names = c("term",
+			 "sum of squares",
+			 "df",
+			 "statistic",
+			 "p-value"), 
+		 digits = c(0,0,1,2,3)) %>% 
+kableExtra::row_spec(2, bold = TRUE, color = "black", background = "yellow")
+```
+]
+]
+]
+---
+class: title title-6
+# Data analysis
+
+.panelset[
+
+.panel[.panel-name[Contrasts]
+
+```{r ancova4a, echo = TRUE, eval = FALSE}
+emm1 <- emmeans(model1, specs = "condition")
+# Note order: Boost, BoostPlus, consensus
+emm2 <- emmeans(model2, specs = "condition")
+# Not comparable: since one is detrended and the other isn't
+contrast_list <- list(
+   "boost vs control" = c(0.5,  0.5, -1), 
+   #av. boosts vs consensus
+   "Boost vs BoostPlus" = c(1, -1,  0))
+contrast(emm1, 
+         method = contrast_list, 
+         p.adjust = "holm")
+```
+]
+.panel[.panel-name[_t_-tests]
+.pull-left.small[
+```{r ancova4b, echo = FALSE, eval = TRUE}
+library(emmeans)
+emm1 <- emmeans(model1, specs = "condition")
+# Note order: Boost, BoostPlus, consensus
+emm2 <- emmeans(model2, specs = "condition")
+# Not comparable: since one is detrended and the other isn't
+contrast_list <- list(
+   "boost vs control" = c(0.5,  0.5, -1), 
+   #av. boosts vs consensus
+   "Boost vs BoostPlus" = c(1, -1,  0))
+c1 <- contrast(emm1, 
+         method = contrast_list, 
+         p.adjust = "holm")
+kableExtra::kable(c1,
+                  col.names = c("contrast",
+                                "estimate",
+                                "se",
+                                "df",
+                                "t stat",
+                                "p-value"), 
+                  digits = c(2,2,2,0,2,2))
+         
+```
+Contrasts with ANCOVA with `prior` (Holm-Bonferroni adjustment with $k=2$ tests)
+]
+.pull-right.small[
+```{r ancova5a, echo = FALSE, eval = TRUE}
+c2 <- contrast(emm2, 
+         method = contrast_list, 
+         p.adjust = "holm")
+kableExtra::kable(c2,
+                  col.names = c("contrast",
+                                "estimate",
+                                "se",
+                                "df",
+                                "t stat",
+                                "p-value"), 
+                  digits = c(2,2,2,0,2,2))
+```
+Contrasts for ANOVA (Holm-Bonferroni adjustment with $k=2$ tests)
+]
+]
+.panel[.panel-name[Assumptions]
+
+.pull-left.small[
+```{r ancova5b, echo = TRUE, eval = FALSE}
+# Test equality of variance
+levene <- car::leveneTest(
+   resid(model1) ~ condition, 
+   data = SSVB21_S2,
+   center = 'mean')
+# Equality of slopes (interaction)
+car::Anova(lm(post ~ condition * prior, 
+           data = SSVB21_S2),
+           model1, type = 3)
+```
+
+Levene's test of equality of variance: _F_ (`r jtools::tidy(levene)$df`, `r jtools::tidy(levene)$df.residual`) = `r round(jtools::tidy(levene)$statistic, 2)` with a $p$-value of `r format.pval(jtools::tidy(levene)$p.value,digits = 3)`.
+]
+.pull-right.small[
+
+
+```{r kableEqSlope, eval = TRUE, echo = FALSE, cache = TRUE}
+kableExtra::kable(jtools::tidy(car::Anova(lm(post ~ condition * prior, 
+		 data = SSVB21_S2), model1, type = 3)), 
+		 col.names = c("term",
+			 "sum of squares",
+			 "df",
+			 "statistic",
+			 "p-value"), 
+		 digits = c(0,0,0,1,2,3)) %>% 
+kableExtra::row_spec(4, bold = TRUE, color = "black", background = "yellow")
+```
+
+Model with interaction `condition*prior`. Slopes don't differ between condition.
+]
+]
+]
+---
+
+# The kitchen sink approach
+
+.box-inv-6.large[
+Should we control for more stuff?
+]
+
+--
+
+.box-6.medium[NO! ANCOVA is a design to reduce error]
+
+
+- Randomization should ensure that there is no confounding
+- No difference (on average) between group given a value of the covariate.
+- If it isn't the case, adjustment matters
+
+---
+
+# Equal trends
+.small[
+- If trends are different, meaningful comparisons (?)
+- Differences between groups depend on value of the covariate
+]
+```{r ancovadifftrend, echo = FALSE, eval = TRUE, out.width = '50%', cache = TRUE}
+set.seed(123)
+ng <- 24
+x1 <- rgamma(n = ng, shape = 10, scale = 5)
+x2 <- rgamma(n = ng, shape = 7, scale = 3)
+dat <- data.frame(
+  covariate = c(x1, x2),
+  response = c(2 + 0.2*x1 + rnorm(ng, sd = 4), 5 + 0.25*x2 + rnorm(ng, sd = 4)),
+  group = factor(rep(c("treatment", "control"), each = ng)))
+ggplot(data = dat, aes(x = covariate, y = response, group = group, color = group)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_classic() + 
+  theme(legend.position = "bottom")
+```
+.small[Due to lack of overlap, comparisons hazardous as they entail extrapolation one way or another.]
+
+---
+
+# Testing equal slope
+
+.box-6.sp-after[Compare two nested models]
+
+.box-inv-6.sp-after[
+
+$\mathscr{H}_0$: Model with covariate
+
+]
+
+.box-inv-6.sp-after[
+$\mathscr{H}_a$:
+Model with covariate * experimental factor<br>(interaction)]
+
+.center[Use `anova` to compare the models in **R**.]
