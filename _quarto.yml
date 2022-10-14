@@ -122,8 +122,8 @@ website:
               file: example/twowayanova.qmd
             - text: "Three-way ANOVA"
               file: example/threewayanova.qmd
-         #   - text: "Analysis of covariance"
-         #     file: example/06-ancova.qmd
+            - text: "Analysis of covariance"
+              file: example/ancova.qmd
          #   - text: "Linear causal mediation"
          #     file: example/08-mediation.qmd
 
