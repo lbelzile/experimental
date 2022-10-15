@@ -4,7 +4,7 @@
     <title>Designs to reduce the error</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-10-06" />
+    <meta name="date" content="2022-10-15" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -184,11 +184,11 @@ Randomly allocate to treatment within block
 
 Without interaction,
 
-`$$\underset{\text{response}}{Y_{ij}\vphantom{\beta_j}} = \mu + \underset{\text{treatment}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}}{\varepsilon_{ij}\vphantom{\beta_j}}$$`
+`$$\underset{\text{response}\vphantom{b}}{Y_{ij}} =  \underset{\text{global mean}}{\mu\vphantom{\beta_j}} + \underset{\text{treatment}\vphantom{b}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}\vphantom{b}}{\varepsilon_{ij}\vphantom{\beta_j}}$$`
 
 Compromise between 
 
-- reduced variability for residuals
+- reduced variability for residuals,
 - loss of degrees of freedom due to estimation of `\(\beta\)`'s.
 
 ---
@@ -208,6 +208,7 @@ in the morning; and (3) an outpatient protocol in which meals were not strictly 
 was instructed to fast for 12 hours prior to measurement of RMR in the morning.
 
 ---
+# Fitting the complete block design
 
 .panelset[
 
@@ -218,12 +219,14 @@ was instructed to fast for 12 hours prior to measurement of RMR in the morning.
 ```r
 url &lt;- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
 # transform integers to factors (categorical)
-resting &lt;- read.table(url, header = TRUE) %&gt;%
+resting &lt;- read.table(url, header = TRUE) |&gt;
   dplyr::mutate(
     subject = factor(subject), #blocking factor
-    protocol = factor(protocol),
+    protocol = factor(protocol), #experimental factor
     rate = rate/1000)
 ```
+
+.small[This is *de facto* a repeated measure design.]
 
 ]
 
@@ -236,9 +239,9 @@ resting &lt;- read.table(url, header = TRUE) %&gt;%
 # Force sum-to-zero parametrization for unordered factors
 options(contrasts = c("contr.sum", "contr.poly"))
 # Fit model with blocking
-model_block &lt;- lm(rate ~ subject + protocol, data = resting)
-# One-way ANOVA (no blocking
-model_raw &lt;- lm(rate ~ protocol, data = resting)
+model_block &lt;- aov(rate ~ subject + protocol, data = resting)
+# One-way ANOVA (no blocking)
+model_raw &lt;- aov(rate ~ protocol, data = resting)
 # anova(model_block)
 # anova(model_raw)
 ```
@@ -352,14 +355,14 @@ ggplot(data = resting,
 ---
 layout: false
 name: ancova
-class: center middle section-title section-title-6
+class: center middle section-title section-title-7
 
 # Analysis of covariance
 
 ---
 
 layout: true
-class: title title-6
+class: title title-7
 ---
 
 
@@ -369,7 +372,10 @@ class: title title-6
 All ANOVA models covered so far are linear regression model.
 
 The latter says that 
+
 `$$\underset{\text{average response}\vphantom{l}}{\textsf{E}(Y_{i}\vphantom{\beta_p})}  = \underset{\text{linear (i.e., additive) combination of explanatories}}{\beta_0 + \beta_1 \mathrm{X}_{1i} + \cdots + \beta_p \mathrm{X}_{pi}}$$`
+
+In an ANOVA, the model matrix `\(\mathbf{X}\)` simply includes columns with `\(-1\)`, `\(0\)` and `\(1\)` for group indicators that enforce sum-to-zero constraints.
 
 ---
 
@@ -380,7 +386,7 @@ In experimental designs, the explanatories are
 - experimental factors (categorical)
 - continuous (dose-response)
 
-.box-inv-6.medium[
+.box-inv-7.medium[
 Random assignment implies&lt;br&gt; no systematic difference between groups.
 ]
 
@@ -398,7 +404,7 @@ Random assignment implies&lt;br&gt; no systematic difference between groups.
 # Control to gain power!
 
 
-.box-inv-6.sp-after-half[
+.box-inv-7.sp-after-half[
 Identify external sources of variations
 ]
 
@@ -429,7 +435,7 @@ We focus on a single experiment; preregistered exclusion criteria led to `\(n=44
 
 Three experimental conditions:
 
-.float-left.center[.box-6[`Boost`] .box-6[`Boost Plus`] .box-6[Consensus only (`consensus`)] ]
+.float-left.center[.box-7[`Boost`] .box-7[`Boost Plus`] .box-7[Consensus only (`consensus`)] ]
 
 
 ---
@@ -614,7 +620,7 @@ car::Anova(model2, type = 3)
 ]
 ]
 ---
-class: title title-6
+class: title title-7
 # Data analysis
 
 .panelset[
@@ -782,13 +788,11 @@ Model with interaction `condition*prior`. Slopes don't differ between condition.
 
 # The kitchen sink approach
 
-.box-inv-6.large[
-Should we control for more stuff?
-]
+.box-inv-7.medium.sp-after[Should we control for more stuff?]
 
 --
 
-.box-6.medium[NO! ANCOVA is a design to reduce error]
+.box-7.medium.sp-after[NO! ANCOVA is a design to reduce error]
 
 
 - Randomization should ensure that there is no confounding
@@ -809,17 +813,10 @@ Should we control for more stuff?
 
 # Testing equal slope
 
-.box-6.sp-after[Compare two nested models]
+.box-7.sp-after[Compare two nested models]
 
-.box-inv-6.sp-after[
-
-`\(\mathscr{H}_0\)`: Model with covariate
-
-]
-
-.box-inv-6.sp-after[
-`\(\mathscr{H}_a\)`:
-Model with covariate * experimental factor&lt;br&gt;(interaction)]
+- Null `\(\mathscr{H}_0\)`: model with covariate
+- Alternative `\(\mathscr{H}_a\)`: model with interaction covariate * experimental factor
 
 .center[Use `anova` to compare the models in **R**.]
     </textarea>

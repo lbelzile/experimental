@@ -97,7 +97,7 @@ class: title title-5
 Unbalanced samples may be due to many causes, including randomization (need not balance) and loss-to-follow up (dropout)
 
 If dropout is random, not a  problem
-- Example of Baumannn, Seifert-Kessel, Jones (1992): 
+- Example of Baumann, Seifert-Kessel, Jones (1992): 
    > Because of illness and transfer to another school, incomplete data were obtained for one subject each from the TA and DRTA group 
 
 ---

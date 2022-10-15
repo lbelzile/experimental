@@ -125,6 +125,10 @@ anova(model2)
 # and the p-value for group
 ```
 
+As in many instances, there is strong correlation between prior and posterior scores and this helps reduce the leftover unexplained variability, thus increasing power to detect differences between groups.
+One may also consider directly modelling the improvement in scores, by setting `posttest2 - pretest2` as response variable. While the interpretation would be clear, it is clear we can do better by including
+`pretest2` as a covariate instead: the model for the difference in score is equivalent to fixing the parameter $\beta$ associated to `pretest2` to 1.
+
 ```{r fitmodels2, eval = TRUE, echo = FALSE}
 # Model the scores on tests 2
 model1 <- lm(posttest2 ~ group + pretest2, data = BSJ92)
@@ -240,7 +244,7 @@ reading_aug <- BSJ92 |>
          .rstudent = rstudent(model1), 
          # studentized resid. (equal variance)
          .fitted = fitted(model1)) # fitted values yhat
-g2 <- ggplot(data = BSJ92_aug,
+g2 <- ggplot(data = reading_aug,
              aes(x = pretest2,
                  y = .resid)) + 
   geom_point() +
