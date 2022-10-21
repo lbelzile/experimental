@@ -9,7 +9,7 @@ Complete this task in teams of two or three students.
 -   a PDF report
 -   your code
 
-Look at the [ANCOVA example](example/ancova.html); this should be helpful in completing the problem set.
+Look at the [ANCOVA example](/example/ancova.html); this should be helpful in completing the problem set.
 
 We consider Experiment 3 of @vanStekelenburg:2021; ([download the paper](https://doi.org/10.1177/09567976211007788)). The database can be found in `SSVB21_S3` in the `hecedsm` package.
 
