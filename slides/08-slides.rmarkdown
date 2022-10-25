@@ -24,15 +24,18 @@ editor_options:
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
                       fig.retina = 3, fig.align = "center")
 ```
+
 ```{r packages-data, echo = FALSE, include=FALSE}
 library(tidyverse)
 library(patchwork)
 ```
+
 ```{r xaringanExtra, echo=FALSE}
 xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset"))
 # xaringanExtra::use_clipboard()
 xaringanExtra::use_broadcast()
 ```
+
 
 class: center middle main-title section-title-1
 
@@ -64,6 +67,7 @@ class: title title-inv-1
 
 
 
+
 ---
 layout: false
 name: effect
@@ -72,6 +76,7 @@ class: center middle section-title section-title-1 animated fadeIn
 # Effect size
 
 ---
+
 layout: true
 class: title title-1
 
@@ -148,6 +153,7 @@ Estimators popularized in the handbook
 # Illustrating effect size (differences)
 
 
+
 ```{r effectsize, cache = TRUE, echo = FALSE, fig.width=11, fig.height = 5, out.width = '90%', fig.retina = 3}
 region <- data.frame(start = c(-Inf, qnorm(0.025, sd = 2), qnorm(0.975, sd = 2)),
                      end = c(qnorm(0.025, sd = 2), qnorm(0.975, sd = 2), Inf),
@@ -203,9 +209,11 @@ p2 <- ggplot(region1) +
 p1 + p2 + plot_layout(guides = 'collect') & theme(legend.position = 'bottom')
 ```
 
+
 .tiny[
 The plot shows null (thick) and true sampling distributions (dashed) for sample mean with small (left) and large (right) samples.
 ]
+
 ---
 
 # Estimands, estimators, estimates
@@ -242,6 +250,7 @@ Left to right: parameter $\mu$ (target), estimator $\widehat{\mu}$ (recipe) and 
 From Twitter, @simongrund89
 
 ---
+
 
 # Cohen's _d_
 
@@ -344,7 +353,7 @@ If we plug-in estimated values
 
 
 With a completely randomized design with only experimental factors, use **partial** effect size 
-$$\eta^2_{\langle \text{effect} \rangle} = \sigma^2_{\text{effect}} / (\sigma^2_{\text{effect}} + \sigma^2_{\text{resid}})$$
+$$\eta^2_{\langle \text{effect} \rangle} = \sigma^2_{\text{effect}} / (\sigma^2_{\text{effect}} + \sigma^2_{\text{res}})$$
 
 .small[
 
@@ -353,15 +362,20 @@ In **R**, use `effectsize::omega_squared(model, partial = TRUE)` or equivalent.
 ]
 
 
----
-# Partial effects and variance decomposition
 
-Consider a completely randomized balanced design with two factors $A$, $B$ and their interaction $AB$. We can decompose the total variance as
+Consider a completely randomized design with two factors $A$, $B$ and their interaction $AB$.
+
+With a balanced design, we can decompose the total variance as
 
 $$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$
 
+We can report an estimate of the effect size for either of the main effects, for the interaction or overall.
 
-Cohen's partial $f$ measures the proportion of variability that is explained by a main effect or an interaction, e.g.,
+---
+
+# Partial Cohen's $f$
+
+The **population** version of Cohen's partial $f$ measures the proportion of variability that is explained by a main effect or an interaction, e.g.,
 
 $$f_{\langle A \rangle}= \frac{\sigma^2_A}{\sigma^2_{\text{resid}}}, \qquad f_{\langle AB \rangle} = \frac{\sigma^2_{AB}}{\sigma^2_{\text{resid}}}.$$
 
@@ -400,6 +414,7 @@ In **R**, `effectsize::omega_squared` reports these estimates with one-sided con
 ???
 
 The confidence intervals are based on the F distribution, by changing the non-centrality parameter and inverting the distribution function (pivot method). There is a one-to-one correspondence with Cohen's f, and a bijection between the latter and omega_sq_partial or eta_sq_partial. This yields asymmetric intervals.
+
 ---
 
 # Converting $\omega^2$ to Cohen's $f$
@@ -410,6 +425,7 @@ $$\widehat{f}^2_{\langle \text{effect} \rangle} = \frac{\widehat{\omega}^2_{\lan
 The package `effectsize::cohens_f` returns $\widetilde{f}^2 = n^{-1}F_{\text{effect}}\text{df}_{\text{effect}}$, a transformation of $\widehat{\eta}^2_{\langle \text{effect}\rangle}$.
 
 ---
+
 
 # Effect sizes
 
@@ -455,6 +471,7 @@ class: center middle section-title section-title-3 animated fadeIn
 
 layout: true
 class: title title-3
+
 ---
 
 # I cried power!
@@ -508,6 +525,7 @@ p1
 In which of the two figures is power the largest?
 
 ---
+
 
 
 
@@ -642,6 +660,7 @@ The distribution is $F(\nu_1, \nu_2, \Delta)$ distribution with degrees of freed
 One-way ANOVA with $n$ observations and $K$ groups: $\nu_1 = K-1$ and $\nu_2 = n-K$.
 ]
 
+
 ```{r power_curve, echo = FALSE, eval = TRUE,  fig.width = 10, fig.height = 4}
 library(ggplot2)
 df1 <- 4; df2 <- 40; ncp = 3
@@ -684,6 +703,7 @@ ggplot() +
   xlab("F statistic") + 
   theme_classic()
 ```
+
 
 .small[Note: the $F(\nu_1, \nu_2)$ distribution is indistinguishable from $\chi^2(\nu_1)$ for $\nu_2$ large.
 ]
@@ -731,6 +751,7 @@ Plug-in `df1` $=k-1$, `df2` $=n-k$ and `ncp` $=\Delta$ for fixed mean difference
 # Power curves
 .pull-left[
 
+
 ```{r powercurve, eval = FALSE, echo = TRUE,}
 library(pwr)
 power_curve <- 
@@ -742,6 +763,7 @@ power_curve <-
 plot(power_curve)
 ```
 
+
 .tiny[
 
 Recall: convert $\eta^2$ to Cohen's $f$ (the effect size reported in `pwr`) via $f^2=\eta^2/(1-\eta^2)$
@@ -752,6 +774,7 @@ Using $\widetilde{f}$ instead (from $\widehat{\omega}^2$) yields $n=59$ observat
 
 ]
 .pull-right[
+
 ```{r powercurvefig, echo = FALSE, eval = TRUE}
 library(pwr)
 power_curve <- pwr.anova.test(
@@ -760,7 +783,9 @@ power_curve <- pwr.anova.test(
   power = 0.9)
 plot(power_curve, xlab="sample size per group") + theme_minimal() + ylab("power")
 ```
+
 ]
+
 ---
 
 
@@ -784,15 +809,18 @@ Recall the file drawer problem: most studies with small effects lead to *non sig
 
 ---
 
+
 # Beware of small samples
 
 Better to do a large replication than multiple small studies. 
 
 Otherwise, you risk being in this situation:
 
+
 ```{r plot, echo = FALSE, out.width='50%'}
 knitr::include_graphics("img/08/you-have-no-power-here.jpg")
 ```
+
 
 ---
 
@@ -807,10 +835,12 @@ knitr::include_graphics("img/08/you-have-no-power-here.jpg")
 
 
 Example: if `a` and `b` denote the number of levels of each factor and `omega.sq` is $\omega^2_{\langle AB \rangle}$, then the sample size needed to detect the interaction $AB$ with 80% power is
+
 ```{r, echo = TRUE, eval = FALSE}
 fhat <- sqrt(omega.sq/(1-omega.sq))
 WebPower::wp.kanova(power = 0.8, f = fhat, ndf = (a-1)*(b-1), ng = ab)
 ```
+
 
 ---
 
@@ -834,5 +864,6 @@ When is this relevant? If the observed difference seem important (large), but th
 Not recommended unless the observed differences among
 the means seem important in practice but
 are not statistically significant
+
 
 
