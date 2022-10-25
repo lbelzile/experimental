@@ -124,36 +124,36 @@ Below is a tentative schedule for the semester.
     - Multiple testing, family-wise error rate and false discovery rate
     - Methods for control: methods for ANOVA (Tukey, Dunnett and Scheffé) 
     - General methods (Bonferroni, Holm and Benjamini-Hochberg)
-5. **Completely randomized designs with two or more factors**
+5. **Completely randomized designs with two factors**
     - Interactions
     - Marginal and conditional contrasts
-6. **Blocked designs and analysis of covariance**
+6. **General completely randomized designs**
+    - Unbalanced designs and implications for inference 
+    - Three-way ANOVA: Simple, marginal and conditional means
+7. **Blocked designs and analysis of covariance**
     - Designs to reduce the error
     - Terminology (blocking factor, covariate, noise variable)
     - Complete block design
+    - Repeated measure designs and tests of sphericity
     - Analysis of covariance and equal slope assumptions
-7. **Replication crisis and effect sizes**
+8. **Effect sizes and power**
     - Effect sizes
-    - Planned and post-hoc comparisons
-    - Replication crisis and reproducibility
-    - Statistical fallacies
-    - Solutions to replication crisis
-8. **General design principles**
-    - Unbalanced designs and implications for inference 
+    - Interplay between sample size, effect and power
+    - Power calculations
+9. **General design principles**
     - More general linear regression models
     - Nonparametric tests (rank tests, via linear model)
     - AB testing and stopping rules
-9. **Repeated measure designs and random effects**
-    - Repeated measure designs
-    - Tests of sphericity
-    - Intro to random effects
+    - Repeated measures and tests of sphericity
 10. **Mixed models**
+    - Intro to random effects
     - Linear mixed models
     - Model specification: crossed and nested factors
     - Showcase: replication and meta-analysis
-11. **Power and introduction to causal inference**
-    - Power calculations
-    - Interplay between sample size, effect and power
+11. **Replication crisis and introduction to causal inference**
+    - Replication crisis and reproducibility
+    - Statistical fallacies
+    - Solutions to replication crisis
     - Directed acyclic graphs
     - Types of association: causation, mediation, confounding and collision
 12. **Causal inference (continued) and linear mediation model**

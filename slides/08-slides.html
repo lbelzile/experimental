@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Effect size and power</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-10-23" />
+    <script src="libs/header-attrs-2.16/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Effect size and power
+
+.class-info[
+
+**Session 8**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-1
+
+# Outline
+--
+
+.box-1.medium.sp-after-half[Effect sizes]
+
+--
+
+.box-3.medium.sp-after-half[Power]
+
+
+
+---
+layout: false
+name: effect
+class: center middle section-title section-title-1 animated fadeIn
+
+# Effect size
+
+---
+layout: true
+class: title title-1
+
+---
+
+
+# Example from the OSC psychology replication
+
+
+
+&gt; The key statistics provided in the paper to test the “depletion” hypothesis is the main effect of a one-way ANOVA with three experimental conditions and confirmatory information processing as the dependent variable ( `\(F(2, 82) = 4.05\)`, `\(p = 0.02\)`, `\(\eta^2 = 0.09\)`). Considering the original effect size and an alpha of `\(0.05\)` the sample size needed to achieve `\(90\)`% power is `\(132\)` subjects.
+
+.small[
+Replication report of Fischer, Greitemeyer, and Frey (2008, JPSP, Study 2) by E.M. Galliani
+]
+
+---
+
+# Translating statement into science
+
+.box-inv-1.medium.sp-after-half[Q: How many observations should &lt;br&gt;I gather to reliably detect an effect?]
+.box-inv-1.medium.sp-after-half[Q: How big is this effect?]
+
+---
+
+# Does it matter?
+
+.box-inv-1.medium[
+Statistical significance `\(\neq\)` practical relevance
+]
+
+With large enough sample size, **any** sized difference between treatments becomes statistically significant.
+
+But whether this is important depends on the scientific question.
+
+---
+
+# Example
+
+- What is the minimum difference between two treatments that would be large enough to justify commercialization of a drug?
+- Tradeoff between efficacy of new treatment vs status quo, cost of drug, etc.
+
+
+---
+
+
+# Using statistics to measure effects
+
+
+
+Statistics and `\(p\)`-values are not good summaries of magnitude of an effect:
+
+- the larger the sample size, the bigger the statistic, the smaller the `\(p\)`-value
+
+Instead use standardized differences/measures or percentage of variability explained
+
+
+Estimators popularized in the handbook
+&gt; Cohen, Jacob. Statistical Power Analysis for the Behavioral Sciences, 2nd ed., Routhledge, 1988.
+
+---
+
+
+
+# Illustrating effect size (differences)
+
+
+&lt;img src="08-slides_files/figure-html/effectsize-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.tiny[
+The plot shows null (thick) and true sampling distributions (dashed) for sample mean with small (left) and large (right) samples.
+]
+---
+
+# Estimands, estimators, estimates
+
+- `\(\mu_i\)` is the (unknown) population mean of group `\(i\)` (parameter, or estimand)
+- `\(\widehat{\mu}_i\)` is a formula (an estimator) that takes data as input and returns a numerical value (an estimate).
+- throughout, use hats to denote estimated quantities:
+
+.pull-left-3[
+&lt;img src="img/08/estimand.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+]
+.pull-middle-3[
+&lt;img src="img/08/estimator.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right-3[
+&lt;img src="img/08/estimate.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+
+.tiny[
+Left to right: parameter `\(\mu\)` (target), estimator `\(\widehat{\mu}\)` (recipe) and estimate `\(\widehat{\mu}=10\)` (numerical value, proxy)
+]
+
+???
+
+From Twitter, @simongrund89
+
+---
+
+# Cohen's _d_
+
+Standardized measure of effect (dimensionless=no units): 
+
+Assuming equal variance `\(\sigma^2\)`, compare mean of two groups `\(i\)` and `\(j\)`:
+
+$$
+d = \frac{\mu_i - \mu_j}{\sigma}
+$$
+
+The usual estimator `\(\widehat{d}\)` uses sample average of groups and the pooled variance estimator `\(\widehat{\sigma}\)`.
+.small[Note: a finite sample correction (Hedge) can be used.]
+
+Cohen's _d_ is sometimes reported in terms of effect size
+- small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_).
+
+???
+
+Note: this is not the `\(t\)`-statistic (the denominator is the estimated standard deviation, not the standard error of the mean
+
+Note that there are multiple versions of Cohen's coefficients. 
+These are the effects of the pwr package.
+The small/medium/large effect size varies depending on the test! See the vignette of pwr for defaults.
+
+---
+
+# Cohen's _f_
+
+For a one-way ANOVA (equal variance `\(\sigma^2\)`) with more than two groups, 
+
+$$
+f^2 = \frac{1}{\sigma^2} \sum_{j=1}^k \frac{n_j}{n}(\mu_j - \mu)^2,
+$$
+a weighted sum of squared difference relative to the overall mean `\(\mu\)`.
+
+For `\(k=2\)` groups, Cohen's `\(f\)` and Cohen's `\(d\)` are related via `\(f=d/2\)`.
+
+---
+
+# Effect size: proportion of variance
+
+For a one-way ANOVA, break down the variability `$$\sigma^2_{\text{total}} = \sigma^2_{\text{resid}} + \sigma^2_{\text{effect}}$$` and define the percentage of variability explained by the `\(\text{effect}\)`.
+`$$\eta^2 = \frac{\text{explained variability}}{\text{total variability}}= \frac{\sigma^2_{\text{effect}}}{\sigma^2_{\text{total}}}.$$`
+
+
+
+---
+
+# Coefficient of determination estimator
+
+For the balanced one-way ANOVA, typical estimator is
+
+$$
+\widehat{R}{}^2 = \frac{F\nu_1}{F\nu_1 + \nu_2}
+$$
+where `\(\nu_1 = K-1\)` and `\(\nu_2 = n-K\)` are the degrees of freedom for the one-way ANOVA with `\(n\)` observations and `\(K\)` groups. 
+
+- `\(\widehat{R}{}^2\)` is an upward biased estimator (too large on average).
+- People frequently write `\(\eta^2\)` when they mean `\(\widehat{R}{}^2\)`
+- for the replication, `\(\widehat{R}{}^2 = (4.05\times 2)/(4.05\times 2 + 82) = 0.09\)`
+
+
+---
+
+# `\(\omega^2\)` square estimator
+
+Another estimator of `\(\eta^2\)` that is recommended in Keppel &amp; Wickens (2004) for power calculations is `\(\widehat{\omega}^2\)`.
+
+For one-way ANOVA, the latter is obtained from the `\(F\)`-statistic as
+
+`$$\widehat{\omega}^2 = \frac{\nu_1 (F-1)}{\nu_1(F-1)+n}$$`
+
+- for the replication, `\(\widehat{\omega}^2 = (3.05\times 2)/(3.05\times 2 + 84) = 0.0677.\)`
+- if the value returned is negative, report zero.
+
+???
+
+Since the `\(F\)` statistic is approximately 1 on average, this measure removes the average.
+
+---
+
+# Converting `\(\eta^2\)` to Cohen's `\(f\)`
+
+Software usually take Cohen's `\(f\)` (or `\(f^2\)`) as input for the effect size.
+
+Convert from `\(\eta\)` to `\(f\)` via the relationship
+
+`$$f^2=\frac{\eta^2}{1-\eta^2}.$$`
+
+
+If we plug-in estimated values `\(\widehat{R}{}^2\)` and `\(\widehat{\omega}^2\)`, we get `\(\widehat{f} = 0.314\)` and `\(\widetilde{f} = 0.27\)`.
+
+---
+
+
+# Effect sizes for multiway ANOVA
+
+
+Consider a completely randomized design with two factors `\(A\)`, `\(B\)` and their interaction `\(AB\)`.
+
+
+We can report an estimate of the effect size for either of the main effects, for the interaction or overall.
+
+# Partial Cohen's `\(f\)`
+
+The **population** version of Cohen's partial `\(f\)` measures the proportion of variability that is explained by a main effect or an interaction, e.g.,
+
+`$$f_{\langle A \rangle}= \frac{\sigma^2_A}{\sigma^2_{\text{resid}}}, \qquad f_{\langle AB \rangle} = \frac{\sigma^2_{AB}}{\sigma^2_{\text{resid}}}.$$`
+
+???
+
+These variance quantities are **unknown**, so need to be estimated somehow.
+
+---
+
+# Partial effect size (variance)
+
+Effect size are often reported in terms of variability via the ratio
+`$$\eta^2_{\langle \text{effect} \rangle} = \frac{\sigma^2_{\text{effect}}}{\sigma^2_{\text{effect}} + \sigma^2_{\text{resid}}}.$$`
+
+- Both `\(\widehat{\eta}^2_{\langle \text{effect} \rangle}\)` (aka `\(\widehat{R}^2_{\langle \text{effect} \rangle}\)`) and `\(\widehat{\omega}^2_{\langle \text{effect} \rangle}\)` are **estimators** of this quantity and obtained from the `\(F\)` statistic and degrees of freedom of the effect.
+
+
+???
+
+`\(\widehat{\omega}^2_{\langle \text{effect} \rangle}\)` is presumed less biased than `\(\widehat{\eta}^2_{\langle \text{effect} \rangle}\)`, as is `\(\widehat{\epsilon}_{\langle \text{effect} \rangle}\)`. 
+
+
+---
+
+# Estimation of partial `\(\omega^2\)`
+
+Similar formulae as the one-way case, with
+
+`$$\widehat{\omega}^2_{\langle \text{effect} \rangle} = \frac{\text{df}_{\text{effect}}(F_{\text{effect}}-1)}{\text{df}_{\text{effect}}(F_{\text{effect}}-1) + n},$$`
+where `\(n\)` is the overall sample size.
+
+In **R**, `effectsize::omega_squared` reports these estimates with one-sided confidence intervals. 
+
+.small[Reference for confidence intervals: Steiger (2004), Psychological Methods]
+
+???
+
+The confidence intervals are based on the F distribution, by changing the non-centrality parameter and inverting the distribution function (pivot method). There is a one-to-one correspondence with Cohen's f, and a bijection between the latter and omega_sq_partial or eta_sq_partial. This yields asymmetric intervals.
+---
+
+# Converting `\(\omega^2\)` to Cohen's `\(f\)`
+
+Given an estimate of  `\(\eta^2_{\langle \text{effect} \rangle}\)`, convert it into an estimate of Cohen's partial `\(f^2_{\langle \text{effect} \rangle}\)`, e.g.,
+`$$\widehat{f}^2_{\langle \text{effect} \rangle} = \frac{\widehat{\omega}^2_{\langle \text{effect}}\rangle }{1-\widehat{\omega}^2_{\langle \text{effect}}\rangle }.$$`
+
+The package `effectsize::cohens_f` returns `\(\widetilde{f}^2 = n^{-1}F_{\text{effect}}\text{df}_{\text{effect}}\)`, a transformation of `\(\widehat{\eta}^2_{\langle \text{effect}\rangle}\)`.
+
+---
+
+# Effect sizes
+
+- With a design that only consists of experimental factors, use partial effect size 
+`$$\eta^2_{\langle \text{effect} \rangle} = \sigma^2_{\text{effect}} / (\sigma^2_{\text{effect}} + \sigma^2_{\text{res}})$$`
+- If there are only blocking factors and a single experimental factor, use total effect size 
+`$$\eta^2 =\sigma^2_{\text{effect}} / \sigma^2_{\text{total}}$$`
+
+---
+
+
+# Semipartial effect sizes
+
+
+If there is a mix of experimental and blocking factor...
+
+Include the variance of all blocking factors and interactions (only with the effect!) in denominator.
+
+- e.g., if `\(A\)` is effect of interest, `\(B\)` is a blocking factor and `\(C\)` is another experimental factor, use
+`$$\eta_{\langle A \rangle}^2 = \frac{\sigma^2_A}{\sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{res}}}.$$`
+
+.small[
+
+In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "blocking")` where `blocking` gets replaced with a vector containing the name of the blocking factors.
+
+]
+
+---
+
+layout: false
+name: power
+class: center middle section-title section-title-3 animated fadeIn
+
+# Power
+
+---
+
+layout: true
+class: title title-3
+---
+
+# I cried power!
+
+The null alternative corresponds to a single value (equality in mean), whereas there are infinitely many alternatives...
+
+
+.pull-left[
+&lt;img src="08-slides_files/figure-html/powercurve1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+  .small.center[Power is the ability to detect when the null is false, for a given alternative (dashed).]
+]
+.pull-right[
+&lt;img src="08-slides_files/figure-html/powercurve2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+ .small.center[ Power is the area in white under the dashed curved, beyond the cutoff. ]
+]
+
+???
+  
+In which of the two figures is power the largest?
+
+---
+
+
+
+# Parametrization of one-way ANOVA
+
+
+.pull-left.box-inv-3[
+
+group `\(j\)` has `\(n_j\)` observations
+
+]
+
+.pull-right.box-inv-3.sp-after-half[
+
+population average of group `\(j\)` is `\(\mu_j\)`
+
+]
+
+We can parametrize the model in terms of the overall sample average,
+
+`\begin{align*}
+\mu = \frac{1}{n}\sum_{j=1}^K\sum_{i=1}^{n_j} \mu_j = \frac{1}{n}\sum_{j=1}^K n_j \mu_j,
+\end{align*}`
+where `\(n=n_1 + \cdots +n_K\)` is the total sample size.
+
+
+---
+
+
+
+# What determines power?
+
+Think in your head of potential factors.
+
+--
+
+1. The size of the effects, `\(\delta_1 = \mu_1-\mu\)`, `\(\ldots\)`, `\(\delta_K = \mu_K-\mu\)`
+2. The background noise (intrinsic variability, `\(\sigma^2\)`)
+3. The level of the test, `\(\alpha\)`
+4. The sample size in each group, `\(n_j\)`
+5. The choice of experimental design
+6. The choice of test statistic
+
+--
+
+We focus on the interplay between 
+
+.box-3.wide[
+
+`\(\quad\)` effect size `\(\quad\)`  |  `\(\quad\)`  power `\(\quad\)`   |  `\(\quad\)`  sample size `\(\quad\)`
+
+]
+
+
+
+
+???
+
+The level is fixed, but we may consider multiplicity correction within the power function.
+The noise level is oftentimes intrinsic to the measurement .
+
+---
+
+
+# Power and sample size calculations
+
+Journals and grant agencies oftentimes require an estimate of the sample size needed for a study.
+
+- large enough to pick-up effects of scientific interest (good signal-to-noise)
+- efficient allocation of resources (don't waste time/money)
+
+Same for replication studies: how many participants needed?
+
+---
+
+# Living in an alternative world
+
+Recall that with `\(K\)` treatments (groups) `\(n\)` observations, the `\(F\)`-statistic is
+
+`\begin{align*}
+F =  \frac{\text{between sum of squares}/(K-1)}{\text{within sum of squares}/(n-K)}
+\end{align*}`
+
+The null distribution is `\(F(K-1, n-K)\)`.
+
+The denominator is an estimator of `\(\sigma^2\)` under both the null and alternative.
+
+So how does the _F_-test behaves under an alternative?
+
+
+
+---
+
+# Numerator of the _F_-test
+
+What happens to the numerator?
+$$
+\mathsf{E}(\text{between sum of squares}) = \sigma^2\{(K-1) + \Delta\}.
+$$
+where
+$$
+\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2} = nf^2.
+$$
+
+Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)` and `\(\Delta=0\)`.
+
+The greater `\(\Delta\)`, the further the mode (peak of the distribution) is from zero.
+
+---
+
+
+# Noncentrality parameter and power
+
+$$
+\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
+$$
+
+.box-inv-3.medium[When does power increase?]
+
+What is the effect of an increase of the
+- group sample size `\(n_1, \ldots, n_K\)`.
+- variability `\(\sigma^2\)`.
+- true mean difference `\(\mu_j - \mu\)`.
+
+---
+
+# Noncentrality parameter
+
+The distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter `\(\Delta\)`.
+
+.SMALL[
+One-way ANOVA with `\(n\)` observations and `\(K\)` groups: `\(\nu_1 = K-1\)` and `\(\nu_2 = n-K\)`.
+]
+
+&lt;img src="08-slides_files/figure-html/power_curve-1.png" width="720" style="display: block; margin: auto;" /&gt;
+
+.small[Note: the `\(F(\nu_1, \nu_2)\)` distribution is indistinguishable from `\(\chi^2(\nu_1)\)` for `\(\nu_2\)` large.
+]
+
+???
+
+For other tests, parameters vary but the story is the same.
+
+The plot shows the null and alternative distributions. The noncentral F is shifted to the right (mode = peak) and right skewed. The power is shaded in blue, the null distribution is shown in dashed lines.
+
+---
+
+# Computing power
+
+Given a value of `\(\Delta=nf^2\)`, we can compute the tail probability as follows
+
+1. Compute the cutoff point: the value under `\(\mathscr{H}_0\)` that leads to rejection at level `\(\alpha\)`. .box-inv-3.sp-before.sp-after[
+`cutoff &lt;- qf(p = 1-alpha, df1 = df1, df2 = df2)`
+]
+2. Compute probability below the alternative curve, from the cutoff onwards.
+.box-inv-3.sp-before[
+`pf(q = cutoff,
+    df1 = df1, 
+    df2 = df2, 
+    ncp = Delta, 
+    lower.tail = FALSE)`
+]
+
+
+---
+
+# How do we compute the power
+
+Assume that the design is balanced, meaning `\(n_1 = \cdots = n_k = n/k\)`.
+
+Then,
+$$
+\Delta = \frac{n}{k\sigma^2}\sum_{j=1}^k(\mu_j-\mu)^2.
+$$
+
+Plug-in `df1` `\(=k-1\)`, `df2` `\(=n-k\)` and `ncp` `\(=\Delta\)` for fixed mean difference, level and  number of groups in the formulas of the previous slide.
+
+---
+
+# Power curves
+.pull-left[
+
+
+```r
+library(pwr)
+power_curve &lt;- 
+ pwr.anova.test(
+  f = 0.314, #from R-squared
+  k = 3, 
+  power = 0.9,
+  sig.level = 0.05)
+plot(power_curve)
+```
+
+.tiny[
+
+Recall: convert `\(\eta^2\)` to Cohen's `\(f\)` (the effect size reported in `pwr`) via `\(f^2=\eta^2/(1-\eta^2)\)`
+
+Using `\(\widetilde{f}\)` instead (from `\(\widehat{\omega}^2\)`) yields `\(n=59\)` observations per group!
+
+]
+
+]
+.pull-right[
+&lt;img src="08-slides_files/figure-html/powercurvefig-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+---
+
+
+# Effect size estimates
+
+.box-inv-3.large[WARNING!]
+
+Most effects reported in the literature are severely inflated.
+
+.box-3[Publication bias &amp; the file drawer problem]
+
+Estimates reported in meta-analysis, etc. are not reliable. Use scientific knowledge
+
+Replication reveal serious need for shrinkage.
+
+The estimated effects size also have uncertainty: thus report confidence intervals.
+
+???
+
+Recall the file drawer problem: most studies with small effects lead to *non significant results* and are not published. So the reported effects are larger than expected.
+
+---
+
+# Beware of small samples
+
+Better to do a large replication than multiple small studies. 
+
+Otherwise, you risk being in this situation:
+
+&lt;img src="img/08/you-have-no-power-here.jpg" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+# Power for factorial experiments
+
+- `\(\mathrm{G}^{\star}\mathrm{Power}\)` and **R** packages take Cohen's `\(f\)` (or `\(f^2\)`) as inputs.
+- Calculation based on `\(F\)` distribution with 
+   - `\(\nu_1=\text{df}_{\text{effect}}\)` degrees of freedom
+   - `\(\nu_2 = n - n_g\)`, where `\(n_g\)` is the number of mean parameters estimated. 
+   - noncentrality parameter `\(\phi = nf^2_{\langle \text{effect}\rangle}\)` where `\(\text{effect}\)` is either `\(A\)`, `\(B\)` or `\(AB\)`.
+
+
+Example: if `a` and `b` denote the number of levels of each factor and `omega.sq` is `\(\omega^2_{\langle AB \rangle}\)`, then the sample size needed to detect the interaction `\(AB\)` with 80% power is
+
+```r
+fhat &lt;- sqrt(omega.sq/(1-omega.sq))
+WebPower::wp.kanova(power = 0.8, f = fhat, ndf = (a-1)*(b-1), ng = ab)
+```
+
+---
+
+# Observed (post-hoc) power
+
+Sometimes, the estimated values of the effect size, etc. are used as plug-in.
+
+The (estimated) effect size in studies are noisy! 
+
+
+The post-hoc power estimate is also noisy and typically overoptimistic.
+
+.box-inv-3[Statistical fallacy]
+
+Because we reject a null doesn't mean the alternative is true.
+
+When is this relevant? If the observed difference seem important (large), but there isn't enough evidence (too low signal-to-noise).
+
+???
+
+Not recommended unless the observed differences among
+the means seem important in practice but
+are not statistically significant
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
