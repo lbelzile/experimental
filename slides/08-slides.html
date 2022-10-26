@@ -4,7 +4,7 @@
     <title>Effect size and power</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-10-25" />
+    <meta name="date" content="2022-10-26" />
     <script src="libs/header-attrs-2.17/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -348,10 +348,6 @@ The package `effectsize::cohens_f` returns `\(\widetilde{f}^2 = n^{-1}F_{\text{e
 
 ---
 
-# Effect sizes
-
----
-
 
 # Semipartial effect sizes
 
@@ -375,10 +371,11 @@ In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "b
 
 - Effect sizes can be recovered using information found in the ANOVA table.
 - Multiple estimators for the same quantity
-   - report the one used along with confidence or tolerance intervals
+   - report the one used along with confidence or tolerance intervals.
 - The correct measure may depend on the design
-   - partial vs total effects
+   - partial vs total effects,
    - different formulas for within-subjects (repeated measures) designs!
+- Include blocking as part of the variability considered.
 
 ---
 

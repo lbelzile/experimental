@@ -71,6 +71,8 @@ website:
               file: content/06-content.qmd
             - text: "7: Designs to reduce the error"
               file: content/07-content.qmd
+            - text: "8: Effect sizes and power"
+              file: content/08-content.qmd
 
     - title: "Evaluations"
       style: "docked"

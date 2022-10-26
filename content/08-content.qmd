@@ -26,15 +26,7 @@ At the end of the session, students should be capable of
 ## Complementary readings
 
 - {{< fa file >}} @Lakens:2013
-- {{< fa file >}} Steiger:2004
-## Videos
-
-
-<div class="ratio ratio-16x9">
-<iframe src="https://www.youtube.com/embed/gTLp0pplRXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
-</div>
-
+- {{< fa file >}} @Steiger:2004
 
 ## Slides
 

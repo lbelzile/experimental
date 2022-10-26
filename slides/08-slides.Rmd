@@ -411,10 +411,6 @@ The package `effectsize::cohens_f` returns $\widetilde{f}^2 = n^{-1}F_{\text{eff
 
 ---
 
-# Effect sizes
-
----
-
 
 # Semipartial effect sizes
 
@@ -438,10 +434,11 @@ In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "b
 
 - Effect sizes can be recovered using information found in the ANOVA table.
 - Multiple estimators for the same quantity
-   - report the one used along with confidence or tolerance intervals
+   - report the one used along with confidence or tolerance intervals.
 - The correct measure may depend on the design
-   - partial vs total effects
+   - partial vs total effects,
    - different formulas for within-subjects (repeated measures) designs!
+- Include blocking as part of the variability considered.
 
 ---
 
