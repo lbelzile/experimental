@@ -39,7 +39,7 @@ youtube_list(slide_details, playlist_id, example = TRUE)
 
 # Notebook
 
-The purpose of this little demonstration is to reprodue the results from chapter 21 and 22 of @Keppel/Wickens:2004, which were performed manually, using instead the `emmeans` package. Many of the manipulations are intricate.
+The purpose of this little demonstration is to reproduce the results from chapter 21 and 22 of @Keppel/Wickens:2004, which were performed manually, using instead the `emmeans` package. Many of the manipulations are intricate.
 
 We consider fictional data from @Keppel/Wickens:2004 for a study on 
 
@@ -256,4 +256,3 @@ We can adjust for multiplicity by using Scheffé's method, but we need to set up
 
 There is no evidence here that this setup comparison for looking at differences for feedback among high frequency groups is any different between age groups.
 
-## References

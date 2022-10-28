@@ -95,7 +95,7 @@ website:
             - evaluations/05-problem-set.qmd
             - evaluations/06-problem-set.qmd
             - evaluations/07-problem-set.qmd
-        #    - evaluations/08-problem-set.qmd
+            - evaluations/08-problem-set.qmd
         #    - evaluations/09-problem-set.qmd
         #    - evaluations/10-problem-set.qmd
         #    - evaluations/11-problem-set.qmd
@@ -126,6 +126,8 @@ website:
               file: example/threewayanova.qmd
             - text: "Analysis of covariance"
               file: example/ancova.qmd
+            - text: "Effect size and power"
+              file: example/effectsizepower.qmd
          #   - text: "Linear causal mediation"
          #     file: example/08-mediation.qmd
 
