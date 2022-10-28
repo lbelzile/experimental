@@ -4,7 +4,7 @@
     <title>Effect size and power</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-10-26" />
+    <meta name="date" content="2022-10-28" />
     <script src="libs/header-attrs-2.17/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -190,11 +190,10 @@ $$
 d = \frac{\mu_i - \mu_j}{\sigma}
 $$
 
-- Cohen's `\(d\)`'s usual estimator `\(\widehat{d}_s\)` uses sample average of groups and the pooled variance estimator `\(\widehat{\sigma}\)`.
-- Hedge's `\(g\)` includes a finite sample correction and is less biased (**prefered in practice*)
+- Cohen's `\(d\)`'s usual estimator `\(\widehat{d}\)` uses sample average of groups and the pooled variance estimator `\(\widehat{\sigma}\)`.
+- Hedge's `\(g\)` includes a finite sample correction and is less biased (*prefered in practice*)
 
-Cohen's _d_ is sometimes reported in terms of effect size
-- small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_).
+Cohen's classification of effect sizes: small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_).
 
 ???
 
@@ -231,7 +230,7 @@ Break down the variability `$$\sigma^2_{\text{total}} = \sigma^2_{\text{resid}} 
 
 # Coefficient of determination estimator
 
-For the balanced one-way ANOVA, typical estimator is
+For the balanced one-way ANOVA, typical estimator is the **coefficient of determination**
 
 $$
 \widehat{R}{}^2 = \frac{F\nu_1}{F\nu_1 + \nu_2}
@@ -285,7 +284,7 @@ With a completely randomized design with only experimental factors, use **partia
 
 .small[
 
-In **R**, use `effectsize::omega_squared(model, partial = TRUE)` or equivalent.
+In **R**, use `effectsize::omega_squared(model, partial = TRUE)`.
 
 ]
 
@@ -391,6 +390,17 @@ layout: true
 class: title title-3
 ---
 
+# Power and sample size calculations
+
+Journals and grant agencies oftentimes require an estimate of the sample size needed for a study.
+
+- large enough to pick-up effects of scientific interest (good signal-to-noise)
+- efficient allocation of resources (don't waste time/money)
+
+Same for replication studies: how many participants needed?
+
+---
+
 # I cried power!
 
 The null alternative corresponds to a single value (equality in mean), whereas there are infinitely many alternatives...
@@ -413,36 +423,9 @@ In which of the two figures is power the largest?
 
 
 
-# Parametrization of one-way ANOVA
-
-
-.pull-left.box-inv-3[
-
-group `\(j\)` has `\(n_j\)` observations
-
-]
-
-.pull-right.box-inv-3.sp-after-half[
-
-population average of group `\(j\)` is `\(\mu_j\)`
-
-]
-
-We can parametrize the model in terms of the overall sample average,
-
-`\begin{align*}
-\mu = \frac{1}{n}\sum_{j=1}^K\sum_{i=1}^{n_j} \mu_j = \frac{1}{n}\sum_{j=1}^K n_j \mu_j,
-\end{align*}`
-where `\(n=n_1 + \cdots +n_K\)` is the total sample size.
-
-
----
-
-
-
 # What determines power?
 
-Think in your head of potential factors.
+Think in your head of potential factors impact power for a factorial design.
 
 --
 
@@ -469,54 +452,23 @@ We focus on the interplay between
 ???
 
 The level is fixed, but we may consider multiplicity correction within the power function.
-The noise level is oftentimes intrinsic to the measurement .
+The noise level is oftentimes intrinsic to the measurement.
 
 ---
 
 
-# Power and sample size calculations
-
-Journals and grant agencies oftentimes require an estimate of the sample size needed for a study.
-
-- large enough to pick-up effects of scientific interest (good signal-to-noise)
-- efficient allocation of resources (don't waste time/money)
-
-Same for replication studies: how many participants needed?
-
----
 
 # Living in an alternative world
 
-Recall that with `\(K\)` treatments (groups) `\(n\)` observations, the `\(F\)`-statistic is
+In a one-way ANOVA, the alternative distribution of the `\(F\)` test has an additional parameter `\(\Delta\)`, which depends on both the sample and the effect sizes.
 
-`\begin{align*}
-F =  \frac{\text{between sum of squares}/(K-1)}{\text{within sum of squares}/(n-K)}
-\end{align*}`
-
-The null distribution is `\(F(K-1, n-K)\)`.
-
-The denominator is an estimator of `\(\sigma^2\)` under both the null and alternative.
-
-So how does the _F_-test behaves under an alternative?
-
-
-
----
-
-# Numerator of the _F_-test
-
-What happens to the numerator?
-$$
-\mathsf{E}(\text{between sum of squares}) = \sigma^2\{(K-1) + \Delta\}.
-$$
-where
 $$
 \Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2} = nf^2.
 $$
 
 Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)` and `\(\Delta=0\)`.
 
-The greater `\(\Delta\)`, the further the mode (peak of the distribution) is from zero.
+The greater `\(\Delta\)`, the further the mode (peak of the distribution) is from unity.
 
 ---
 
@@ -538,16 +490,10 @@ What is the effect of an increase of the
 
 # Noncentrality parameter
 
-The distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter `\(\Delta\)`.
+The alternative distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter `\(\Delta\)`.
 
-.SMALL[
-One-way ANOVA with `\(n\)` observations and `\(K\)` groups: `\(\nu_1 = K-1\)` and `\(\nu_2 = n-K\)`.
-]
+&lt;img src="08-slides_files/figure-html/power_curve-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="08-slides_files/figure-html/power_curve-1.png" width="720" style="display: block; margin: auto;" /&gt;
-
-.small[Note: the `\(F(\nu_1, \nu_2)\)` distribution is indistinguishable from `\(\chi^2(\nu_1)\)` for `\(\nu_2\)` large.
-]
 
 ???
 
@@ -557,35 +503,33 @@ The plot shows the null and alternative distributions. The noncentral F is shift
 
 ---
 
-# Computing power
 
-Given a value of `\(\Delta=nf^2\)`, we can compute the tail probability as follows
+# Power for factorial experiments
 
-1. Compute the cutoff point: the value under `\(\mathscr{H}_0\)` that leads to rejection at level `\(\alpha\)`. .box-inv-3.sp-before.sp-after[
-`cutoff &lt;- qf(p = 1-alpha, df1 = df1, df2 = df2)`
-]
-2. Compute probability below the alternative curve, from the cutoff onwards.
-.box-inv-3.sp-before[
-`pf(q = cutoff,
-    df1 = df1, 
-    df2 = df2, 
-    ncp = Delta, 
-    lower.tail = FALSE)`
-]
-
+- `\(\mathrm{G}^{\star}\mathrm{Power}\)` and **R** packages take Cohen's `\(f\)` (or `\(f^2\)`) as inputs.
+- Calculation based on `\(F\)` distribution with 
+   - `\(\nu_1=\text{df}_{\text{effect}}\)` degrees of freedom
+   - `\(\nu_2 = n - n_g\)`, where `\(n_g\)` is the number of mean parameters estimated. 
+   - noncentrality parameter `\(\phi = nf^2_{\langle \text{effect}\rangle}\)`
 
 ---
 
-# How do we compute the power
+# Example
 
-Assume that the design is balanced, meaning `\(n_1 = \cdots = n_k = n/k\)`.
+Consider a completely randomized design with two crossed factors `\(A\)` and `\(B\)`.
 
-Then,
-$$
-\Delta = \frac{n}{k\sigma^2}\sum_{j=1}^k(\mu_j-\mu)^2.
-$$
+We are interested by the interaction, `\(\eta^2_{\langle AB \rangle}\)`, and we want 80% power:
 
-Plug-in `df1` `\(=k-1\)`, `df2` `\(=n-k\)` and `ncp` `\(=\Delta\)` for fixed mean difference, level and  number of groups in the formulas of the previous slide.
+
+```r
+# Estimate Cohen's f from omega.sq.partial
+fhat &lt;- sqrt(omega.sq.part/(1-omega.sq.part))
+# na and nb are number of levels of factors
+WebPower::wp.kanova(power = 0.8, 
+                    f = fhat, 
+                    ndf = (na-1)*(nb-1), 
+                    ng = na*nb)
+```
 
 ---
 
@@ -627,11 +571,9 @@ Most effects reported in the literature are severely inflated.
 
 .box-3[Publication bias &amp; the file drawer problem]
 
-Estimates reported in meta-analysis, etc. are not reliable. Use scientific knowledge
-
-Replication reveal serious need for shrinkage.
-
-The estimated effects size also have uncertainty: thus report confidence intervals.
+- Estimates reported in meta-analysis, etc. are not reliable. 
+- Run pilot study, provide educated guesses.
+- Estimated effects size are uncertain (report confidence intervals).
 
 ???
 
@@ -647,24 +589,6 @@ Otherwise, you risk being in this situation:
 
 &lt;img src="img/08/you-have-no-power-here.jpg" width="50%" style="display: block; margin: auto;" /&gt;
 
----
-
-
-# Power for factorial experiments
-
-- `\(\mathrm{G}^{\star}\mathrm{Power}\)` and **R** packages take Cohen's `\(f\)` (or `\(f^2\)`) as inputs.
-- Calculation based on `\(F\)` distribution with 
-   - `\(\nu_1=\text{df}_{\text{effect}}\)` degrees of freedom
-   - `\(\nu_2 = n - n_g\)`, where `\(n_g\)` is the number of mean parameters estimated. 
-   - noncentrality parameter `\(\phi = nf^2_{\langle \text{effect}\rangle}\)` where `\(\text{effect}\)` is either `\(A\)`, `\(B\)` or `\(AB\)`.
-
-
-Example: if `a` and `b` denote the number of levels of each factor and `omega.sq` is `\(\omega^2_{\langle AB \rangle}\)`, then the sample size needed to detect the interaction `\(AB\)` with 80% power is
-
-```r
-fhat &lt;- sqrt(omega.sq/(1-omega.sq))
-WebPower::wp.kanova(power = 0.8, f = fhat, ndf = (a-1)*(b-1), ng = ab)
-```
 
 ---
 
@@ -672,16 +596,15 @@ WebPower::wp.kanova(power = 0.8, f = fhat, ndf = (a-1)*(b-1), ng = ab)
 
 Sometimes, the estimated values of the effect size, etc. are used as plug-in.
 
-The (estimated) effect size in studies are noisy! 
-
-
-The post-hoc power estimate is also noisy and typically overoptimistic.
+- The (estimated) effect size in studies are noisy! 
+- The post-hoc power estimate is also noisy and typically overoptimistic.
+- Not recommended, but useful pointer if the observed difference seems important (large), but there isn't enough evidence (too low signal-to-noise).
 
 .box-inv-3[Statistical fallacy]
 
-Because we reject a null doesn't mean the alternative is true.
+Because we reject a null doesn't mean the alternative is true!
 
-When is this relevant? If the observed difference seem important (large), but there isn't enough evidence (too low signal-to-noise).
+
 
 ???
 
