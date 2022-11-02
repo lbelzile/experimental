@@ -1,0 +1,408 @@
+---
+title: "Introduction to mixed models"
+author: "Léo Belzile"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    chakra: "libs/remark-latest.min.js"
+    css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
+    seal: false
+    anchor_sections: false
+    nature:
+      highlightStyle: github
+      highlightLines: false
+      countIncrementalSlides: false
+      ratio: "16:9"
+      navigation:
+        scroll: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.retina = 3, 
+                      fig.align = "center",
+                      fig.width = 10,
+                      fig.asp = 0.618,
+                      out.width = "70%")
+```
+```{r packages-data, echo = FALSE, include=FALSE}
+library(knitr)
+options(knitr.kable.NA = '')
+options(tidyverse.quiet = TRUE)
+options(knitr.table.format = "html")
+library(tidyverse)
+library(patchwork)
+```
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
+```
+
+class: center middle main-title section-title-1
+
+# Repeated measures and mixed models
+
+.class-info[
+
+**Session 10**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-1
+
+# Outline
+--
+
+.box-8.large.sp-after-half[Why repeated measures?]
+
+--
+
+.box-7.large.sp-after-half[Repeated measures]
+
+--
+
+.box-6.large.sp-after-half[Mixed models]
+
+---
+
+
+layout: false
+name: why-repeated-measures
+class: center middle section-title section-title-8
+
+# Why repeated measures?
+
+---
+
+class: title title-8
+# Beyond between-designs
+
+Each subject (experimental unit) assigned to a single condition.
+
+- individuals (subjects) are **nested** within condition/treatment.
+
+
+In many instances, it may be possible to randomly assign multiple conditions to each experimental unit.
+
+---
+class: title title-8
+# Benefits of within-designs
+
+Assign (some or) all treatments to subjects and measure the response.
+
+Benefits: 
+
+- Filter out effect due to subject (like blocking):
+  - increased precision of effect sizes
+  - increased power (tests are based on within-subject variability)
+- Each subject (experimental unit) serves as its own control (greater comparability among treatment conditions).
+
+Impact: need smaller sample sizes than between-subjects designs
+
+---
+class: title title-8
+# Drawbacks of within-designs
+
+- Potential sources of bias
+  - Period effect (e.g., practice or fatigue)
+  - Carryover effects
+  - Permanent change in the subject condition after a treatment
+  - Loss of subjects over time
+
+---
+class: title title-8
+# Minimizing sources of bias
+
+- Randomize the order of treatment conditions among
+subjects 
+- or use a balanced crossover design and include the period and carryover effect in the statistical model (confounding or control variables to better isolate the treatment effect).
+- Allow enough time between treatment conditions to reduce or eliminate period or carryover effects.
+
+---
+
+layout: false
+name: repeated-measures
+class: center middle section-title section-title-7
+
+# Repeated measures
+
+---
+class: title title-7
+# Exhaustive or small subsample?
+
+So far, we consider factors (treatment factor, blocking) as **fixed**
+
+- Meaning their effect is constant
+
+.box-inv-7[Change of scenery]
+
+Assume that the levels of a factor form a random sample from a large population
+
+
+---
+class: title title-7
+# Fixed vs random: no clear definition
+
+Gelman (2005) lists a handful of definitions:
+
+> When a sample exhausts the population, the corresponding variable is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random [Green and Tukey (1960)].
+
+> Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population (e.g., Searle, Casella and McCulloch [(1992), Section 1.4])
+
+---
+
+class: title title-7
+# One-way ANOVA with a random effect
+
+As before, we have one experimental factor $A$ with $a$ levels, with
+
+$$\begin{align*}\underset{\text{response}\vphantom{l}}{Y_{ij}} = \underset{\text{global mean}}{\mu_{\vphantom{j}}} + \underset{\text{mean difference}}{\alpha_j} + \underset{\text{random effect for subject}}{S_{i\vphantom{j}}} + \underset{\text{error}\vphantom{l}}{\varepsilon_{ij}}\end{align*}$$
+
+where $S_i \sim \mathsf{No}(0, \sigma^2_s)$ and $\varepsilon_{ij} \sim \mathsf{No}(0, \sigma^2_e)$ are random variables.
+
+The errors and random effects are independent from one another.
+
+The model **parameters** are $\mu$, $\sigma^2_s$ and $\sigma^2_e$.
+
+---
+
+class: title title-7
+# Variance components
+
+- The global average is $\mu$.
+- The variance of the response $Y_{ij}$ is $\sigma^2_s + \sigma^2_e$.
+- The **intra-class correlation** between observations in group $i$ is $\sigma^2_s/(\sigma^2_s + \sigma^2_e)$.
+
+This dependence structure within group is termed **compound symmetry**.
+
+---
+class: title title-7
+# Example: happy fakes
+
+An experiment conducted in a graduate course at HEC gathered electroencephalography (EEG) data.
+
+The response variable is the amplitude of a brain signal measured at 170 ms after the participant has been exposed to different faces. 
+
+Repeated measures were collected on 9 participants, but only the average of the 34 replications is provided.
+---
+# Experimental conditions
+
+.pull-left-wide[
+The control (`real`) is a true image, whereas the other were generated using a generative adversarial network (GAN) so be slightly smiling (`GAN_S`) or extremely smiling (`GAN_E`, looks more fake).
+
+Research question: do the GAN image trigger different reactions (pairwise difference with control)?
+]
+.pull-right-narrow[
+
+![](img/10/face_real.jpg)
+![](img/10/face_GAN_S.jpg)
+![](img/10/face_GAN_E.jpg)
+
+]
+---
+
+class: title title-7
+# Models for repeated measures
+
+We have $r=1$ replication per participant for each condition. In this specific case, the repeated-measures ANOVA model amounts to a randomized block, i.e.,
+
+- `participant` (blocking factor)
+- `condition` (experimental factor)
+
+For balanced designs, we can use `aov` in **R**. 
+
+This approach has a drawback: variance estimates can be negative...
+
+---
+.panelset[
+.panel[.panel-name[Load data]
+```{r interaction, echo = TRUE, eval = TRUE, cache = TRUE}
+library(tidyverse)
+library(lme4)
+library(lmerTest)
+options(contrasts = c("contr.sum", "contr.poly"))
+url <- "https://edsm.rbind.io/data/faces.csv"
+faces <- read.csv(url, header = TRUE, 
+                 stringsAsFactors = TRUE) %>%
+  mutate(id = factor(participant),
+         condition = relevel(condition, ref = "real"))
+# Declare participant ID as categorical
+```
+]
+.panel[.panel-name[Graph]
+.pull-left[
+```{r graph, echo = TRUE, eval = FALSE}
+library(tidyverse)
+ggplot(data = faces,
+       aes(x = id,
+           group = condition,
+           colour = condition,
+           y = amplitude)) +
+  geom_point()
+```
+]
+.pull-right[
+```{r graph2, echo = FALSE, eval = TRUE, out.width = '90%', fig.asp = 0.689, fig.width = 5}
+library(tidyverse)
+ggplot(data = faces,
+       aes(x = id,
+           group = condition,
+           colour = condition,
+           y = amplitude)) +
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+
+]
+]
+.panel[.panel-name[ANOVA]
+.small[
+```{r aovcall, eval = TRUE, echo = TRUE}
+anova_model <- aov(amplitude ~ condition + Error(id), data = faces)
+# Random intercept for participant
+model <- lme4::lmer(amplitude ~ condition + (1 | id), 
+               data = faces)
+car::Anova(model, test = "F", type = 3)
+```
+
+- No detectable difference between conditions.
+- The _p_-value (0.782) for the mixed model is the same as `aov`. 
+- Residual degrees of freedom is $(a-1) \times (n-1)=18$ for $n=9$ subjects and $a=3$ levels.
+]
+]
+.panel[.panel-name[QQ plots]
+.pull-left[
+```{r qqplot1, echo = FALSE, eval = TRUE, out.width = '90%',fig.width = 5, fig.height = 5, fig.asp = 1, fig.retina = 3}
+car::qqPlot(as.vector(unlist(lme4::ranef(model)$id)), xlab = "theoretical normal quantiles", ylab = "random effects", id = FALSE)
+```
+]
+.pull-right[
+```{r qqplot2, echo = FALSE, eval = TRUE, out.width = '90%',fig.width = 5, fig.height = 5, fig.asp = 1, fig.retina = 3}
+car::qqPlot(as.vector(resid(model)), xlab = "theoretical normal quantiles", ylab = "residuals", id = FALSE)
+```
+]
+]
+]
+---
+
+class: title title-7
+# Model assumptions
+
+The validity of the $F$ null distribution relies on the model having the correct structure.
+
+- Same variance per observation
+- equal correlation between measurements of the same subject
+- normality of the random effect
+
+
+- Since we care only about differences in treatment, can get away with a weaker assumption than compound symmetry
+   - *sphericity*: variance of difference between treatment is constant
+
+---
+class: title title-7
+# Testing for sphericity
+
+Popular two-stage approach:
+
+- Mauchly's test of sphericity
+   - if statistically significant, use a correction
+   - if no evidence, proceed with $F$ test as usual
+   
+---
+class: title title-7
+# Corrections for sphericity
+
+An idea due to Box is to correct the degrees of freedom from $\mathsf{F}\{a-1, (a-1)(n-1)\}$ to $\mathsf{F}\{\epsilon(a-1), \epsilon(a-1)(n-1)\}$ for $\epsilon < 1$
+
+- Since the statistic is a ratio, it is unaffected
+- Three widely used corrections:
+   - Greenhouse-Geisser 
+   - Huynh-Feldt (more powerful, but can be larger than 1 - cap)
+   - lower bound with $\epsilon = (a-1)^{-1}$, giving $\mathsf{F}(1, n-1)$.
+
+Another option is to go fully multivariate.
+
+---
+layout: false
+name: mixed-models
+class: center middle section-title section-title-6
+
+# Mixed models
+
+---
+class: title title-6
+# Generalization
+
+Using mixed models in place of *old school* ANOVA has benefits in that it's easier to account for complex designs.
+
+In general, things are not obvious
+
+- Estimation via restricted maximum likelihood
+- Theory for testing is more complicated 
+   - $F$-tests via Kenward-Rogers (best, but costly) or Satterthwaite approximation
+   - Determining the degrees of freedom is not always trivial (Hass diagrams)
+- For more layers, need replications to estimate variability (estimability/identifiability)
+
+
+---
+
+class: title title-6
+# Nested versus crossed
+
+.pull-left-wide[
+Nested effects if a factor appears only within a particular level of another factor.
+
+Crossed is for everything else (typically combinations of all factors).
+]
+.pull-right-narrow[
+![Russian dolls](img/10/matroshka.jpg)
+]
+
+.small[
+
+Example of nested random effects: class nested within schools 
+- class 1 is not the same in school 1 than in school 2
+```{r out.width = '70%', eval = TRUE, echo = FALSE}
+knitr::include_graphics("img/10/nested.png")
+```
+
+]
+
+???
+
+Matroschka from Wikimedia Commons CC-BY-SA 3.0
+https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent.png
+---
+class: title title-6
+# Formulae for nested effects
+
+**R** uses the following notation for nested effect: `group1/group2`, to mean `group2` is nested within `group1`. 
+This formula expands to `group1 + group1:group2`
+
+For crossed effects, use rather `group1*group2` which expands to `group1 + group2 + group1:group2`.
+
+In package `lme4`, a random intercept per group is written `(1 | group1/group2)`.
+
+---
+
+layout: false
+class: center middle section-title section-title-6
+
+# Demo and examples
+
+???
+
+https://journals.sagepub.com/stoken/default+domain/2CauuvIqpaIUiIdXSWh4/full
+https://cran.r-project.org/doc/Rnews/Rnews_2007-2.pdf
+

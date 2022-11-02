@@ -1,0 +1,55 @@
+---
+title: "Repeated measures and mixed models"
+date: "2022-10-28"
+---
+
+## Content
+
+- Analysis of within-subject designs
+- Repeated measures and test of sphericity
+- Introduction to mixed models
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- adequately modelling repeated measures
+- correctly interpreting tests of sphericity
+- explaining the difference between fixed and random effects
+
+## Readings
+
+-  {{< fa book >}}  [Chapter 8](https://lbelzile.github.io/math80667a/repeated-mixed.html) of the course notes
+- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
+
+## Complementary readings
+
+- [Chapter 11 of @Oehlert:2010 ](http://users.stat.umn.edu/~gary/book/fcdae.pdf)
+- <i class="fas fa-book"></i> Sections 17.1 and 17.3 of @Keppel/Wickens:2004
+
+
+## Slides
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/09-slides")
+# slide_tabs(slide_details, "/slides/06-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/09-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::
