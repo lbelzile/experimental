@@ -7,7 +7,7 @@ date: "2022-10-28"
 
 - Analysis of within-subject designs
 - Repeated measures and test of sphericity
-- Introduction to mixed models
+- Multivariate analysis of variance
 
 
 ## Learning objectives
@@ -15,18 +15,24 @@ date: "2022-10-28"
 At the end of the session, students should be capable of
 
 - adequately modelling repeated measures
-- correctly interpreting tests of sphericity
-- explaining the difference between fixed and random effects
+- correctly interpreting tests of sphericity using software
+- explaining the benefits and disadvantages of repeated-measure designs
+- testing model assumptions in multivariate model
 
 ## Readings
 
--  {{< fa book >}}  [Chapter 8](https://lbelzile.github.io/math80667a/repeated-mixed.html) of the course notes
-- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
+-  {{< fa book >}}  [Chapter 9](https://lbelzile.github.io/math80667a/repeated-measures-and-multivariate-models.html) of the course notes
+
 
 ## Complementary readings
 
+<!--
+- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
 - [Chapter 11 of @Oehlert:2010 ](http://users.stat.umn.edu/~gary/book/fcdae.pdf)
-- <i class="fas fa-book"></i> Sections 17.1 and 17.3 of @Keppel/Wickens:2004
+
+-->
+
+- <i class="fas fa-book"></i> Chapter 16 to 18 of @Keppel/Wickens:2004
 
 
 ## Slides

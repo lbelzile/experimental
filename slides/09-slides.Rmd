@@ -1,5 +1,5 @@
 ---
-title: "Introduction to mixed models"
+title: "Repeated measures"
 author: "Léo Belzile"
 date: "`r Sys.Date()`"
 output:
@@ -43,11 +43,11 @@ xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipbo
 
 class: center middle main-title section-title-1
 
-# Repeated measures and mixed models
+# Repeated measures and multivariate <br> analysis of variance
 
 .class-info[
 
-**Session 10**
+**Session 9**
 
 .light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
 HEC Montréal
@@ -63,28 +63,28 @@ class: title title-inv-1
 # Outline
 --
 
-.box-8.large.sp-after-half[Why repeated measures?]
+.box-8.large.sp-after-half[Repeated measures]
 
 --
 
-.box-7.large.sp-after-half[Repeated measures]
-
---
-
-.box-6.large.sp-after-half[Mixed models]
+.box-5.large.sp-after-half[MANOVA]
 
 ---
 
 
 layout: false
-name: why-repeated-measures
+name: repeated-measures
 class: center middle section-title section-title-8
 
-# Why repeated measures?
+# Repeated measures ANOVA
 
 ---
 
+layout: true
 class: title title-8
+
+---
+
 # Beyond between-designs
 
 Each subject (experimental unit) assigned to a single condition.
@@ -95,7 +95,7 @@ Each subject (experimental unit) assigned to a single condition.
 In many instances, it may be possible to randomly assign multiple conditions to each experimental unit.
 
 ---
-class: title title-8
+
 # Benefits of within-designs
 
 Assign (some or) all treatments to subjects and measure the response.
@@ -110,17 +110,17 @@ Benefits:
 Impact: need smaller sample sizes than between-subjects designs
 
 ---
-class: title title-8
+
 # Drawbacks of within-designs
 
-- Potential sources of bias
-  - Period effect (e.g., practice or fatigue)
-  - Carryover effects
-  - Permanent change in the subject condition after a treatment
-  - Loss of subjects over time
+Potential sources of bias include
+  - Period effect (e.g., practice or fatigue).
+  - Carryover effects.
+  - Permanent change in the subject condition after a treatment assignment.
+  - Loss of subjects over time (attrition).
 
 ---
-class: title title-8
+
 # Minimizing sources of bias
 
 - Randomize the order of treatment conditions among
@@ -128,43 +128,13 @@ subjects
 - or use a balanced crossover design and include the period and carryover effect in the statistical model (confounding or control variables to better isolate the treatment effect).
 - Allow enough time between treatment conditions to reduce or eliminate period or carryover effects.
 
----
-
-layout: false
-name: repeated-measures
-class: center middle section-title section-title-7
-
-# Repeated measures
-
----
-class: title title-7
-# Exhaustive or small subsample?
-
-So far, we consider factors (treatment factor, blocking) as **fixed**
-
-- Meaning their effect is constant
-
-.box-inv-7[Change of scenery]
-
-Assume that the levels of a factor form a random sample from a large population
-
-
----
-class: title title-7
-# Fixed vs random: no clear definition
-
-Gelman (2005) lists a handful of definitions:
-
-> When a sample exhausts the population, the corresponding variable is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random [Green and Tukey (1960)].
-
-> Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population (e.g., Searle, Casella and McCulloch [(1992), Section 1.4])
 
 ---
 
-class: title title-7
+
 # One-way ANOVA with a random effect
 
-As before, we have one experimental factor $A$ with $a$ levels, with
+As before, we have one experimental factor $A$ with $n_a$ levels, with
 
 $$\begin{align*}\underset{\text{response}\vphantom{l}}{Y_{ij}} = \underset{\text{global mean}}{\mu_{\vphantom{j}}} + \underset{\text{mean difference}}{\alpha_j} + \underset{\text{random effect for subject}}{S_{i\vphantom{j}}} + \underset{\text{error}\vphantom{l}}{\varepsilon_{ij}}\end{align*}$$
 
@@ -172,33 +142,41 @@ where $S_i \sim \mathsf{No}(0, \sigma^2_s)$ and $\varepsilon_{ij} \sim \mathsf{N
 
 The errors and random effects are independent from one another.
 
-The model **parameters** are $\mu$, $\sigma^2_s$ and $\sigma^2_e$.
+
 
 ---
 
-class: title title-7
+
 # Variance components
+
+The model **parameters** are $\mu$, $\alpha_j$'s, $\sigma^2_s$ and $\sigma^2_e$.
+
 
 - The global average is $\mu$.
 - The variance of the response $Y_{ij}$ is $\sigma^2_s + \sigma^2_e$.
 - The **intra-class correlation** between observations in group $i$ is $\sigma^2_s/(\sigma^2_s + \sigma^2_e)$.
-
+   - observations from the same subject are correlated
+   - observations from different subjects are independent
+   
 This dependence structure within group is termed **compound symmetry**.
 
 ---
-class: title title-7
+
 # Example: happy fakes
 
 An experiment conducted in a graduate course at HEC gathered electroencephalography (EEG) data.
 
 The response variable is the amplitude of a brain signal measured at 170 ms after the participant has been exposed to different faces. 
 
-Repeated measures were collected on 9 participants, but only the average of the 34 replications is provided.
+Repeated measures were collected on 12 participants, but we focus only on the average of the replications.
+
 ---
+
+
 # Experimental conditions
 
 .pull-left-wide[
-The control (`real`) is a true image, whereas the other were generated using a generative adversarial network (GAN) so be slightly smiling (`GAN_S`) or extremely smiling (`GAN_E`, looks more fake).
+The control (`real`) is a true image, whereas the other were generated using a generative adversarial network (GAN) so be slightly smiling (`GAN1`) or extremely smiling (`GAN2`, looks more fake).
 
 Research question: do the GAN image trigger different reactions (pairwise difference with control)?
 ]
@@ -211,198 +189,351 @@ Research question: do the GAN image trigger different reactions (pairwise differ
 ]
 ---
 
-class: title title-7
+
 # Models for repeated measures
 
-We have $r=1$ replication per participant for each condition. In this specific case, the repeated-measures ANOVA model amounts to a randomized block, i.e.,
+If we average, we have a balanced randomized blocked design with
 
-- `participant` (blocking factor)
-- `condition` (experimental factor)
-
-For balanced designs, we can use `aov` in **R**. 
+- `id` (blocking factor)
+- `stimulus` (experimental factor)
 
 This approach has a drawback: variance estimates can be negative...
+
+We use the `afex` package to model the within-subject structure.
 
 ---
 .panelset[
 .panel[.panel-name[Load data]
 ```{r interaction, echo = TRUE, eval = TRUE, cache = TRUE}
-library(tidyverse)
-library(lme4)
-library(lmerTest)
+# Set sum-to-zero constraint for factors
 options(contrasts = c("contr.sum", "contr.poly"))
-url <- "https://edsm.rbind.io/data/faces.csv"
-faces <- read.csv(url, header = TRUE, 
-                 stringsAsFactors = TRUE) %>%
-  mutate(id = factor(participant),
-         condition = relevel(condition, ref = "real"))
-# Declare participant ID as categorical
+data(AA21, package = "hecedsm")
+# Compute mean
+AA21_m <- AA21 |>
+  dplyr::group_by(id, stimulus) |>
+  dplyr::summarize(latency = mean(latency))
 ```
 ]
 .panel[.panel-name[Graph]
 .pull-left[
 ```{r graph, echo = TRUE, eval = FALSE}
-library(tidyverse)
-ggplot(data = faces,
+library(ggplot2)
+ggplot(data = AA21_m,
        aes(x = id,
-           group = condition,
-           colour = condition,
-           y = amplitude)) +
+           colour = stimulus,
+           y = latency)) +
   geom_point()
 ```
 ]
 .pull-right[
 ```{r graph2, echo = FALSE, eval = TRUE, out.width = '90%', fig.asp = 0.689, fig.width = 5}
-library(tidyverse)
-ggplot(data = faces,
+library(ggplot2)
+ggplot(data = AA21_m,
        aes(x = id,
-           group = condition,
-           colour = condition,
-           y = amplitude)) +
+           colour = stimulus,
+           y = latency)) +
   geom_point() +
   theme_classic() +
+  labs(subtitle = "latency measure",
+       y = "",
+       x = "participant identifier") + 
   theme(legend.position = "bottom")
 ```
 
 ]
 ]
 .panel[.panel-name[ANOVA]
+
+.pull-left[
 .small[
-```{r aovcall, eval = TRUE, echo = TRUE}
-anova_model <- aov(amplitude ~ condition + Error(id), data = faces)
-# Random intercept for participant
-model <- lme4::lmer(amplitude ~ condition + (1 | id), 
-               data = faces)
-car::Anova(model, test = "F", type = 3)
+```{r aovcall, eval = FALSE, echo = TRUE}
+model <- afex::aov_ez(
+  id = "id",           # subject id
+  dv = "latency",      # response
+  within = "stimulus", # within-subject
+  data = AA21,
+  fun_aggregate = mean)
+anova(model, correction = "none")
 ```
 
 - No detectable difference between conditions.
-- The _p_-value (0.782) for the mixed model is the same as `aov`. 
-- Residual degrees of freedom is $(a-1) \times (n-1)=18$ for $n=9$ subjects and $a=3$ levels.
+
 ]
-]
-.panel[.panel-name[QQ plots]
-.pull-left[
-```{r qqplot1, echo = FALSE, eval = TRUE, out.width = '90%',fig.width = 5, fig.height = 5, fig.asp = 1, fig.retina = 3}
-car::qqPlot(as.vector(unlist(lme4::ranef(model)$id)), xlab = "theoretical normal quantiles", ylab = "random effects", id = FALSE)
-```
 ]
 .pull-right[
-```{r qqplot2, echo = FALSE, eval = TRUE, out.width = '90%',fig.width = 5, fig.height = 5, fig.asp = 1, fig.retina = 3}
-car::qqPlot(as.vector(resid(model)), xlab = "theoretical normal quantiles", ylab = "residuals", id = FALSE)
+
+.small[
+```{r aovcallprint, eval = TRUE, echo = FALSE}
+model <- afex::aov_ez(
+  id = "id",           # subject id
+  dv = "latency",      # response
+  within = "stimulus", # within-subject
+  data = hecedsm::AA21,
+  fun_aggregate = mean)
+anova(model, correction = "none")
 ```
+
+- Residual degrees of freedom: $(n_a-1) \times (n_s-1)=22$ for $n_s=12$ subjects and $n_a=3$ levels.
+
+]
 ]
 ]
 ]
 ---
 
-class: title title-7
+
 # Model assumptions
 
 The validity of the $F$ null distribution relies on the model having the correct structure.
 
 - Same variance per observation
-- equal correlation between measurements of the same subject
+- equal correlation between measurements of the same subject (*compound symmetry*)
 - normality of the random effect
 
 
-- Since we care only about differences in treatment, can get away with a weaker assumption than compound symmetry
-   - *sphericity*: variance of difference between treatment is constant
-
 ---
-class: title title-7
-# Testing for sphericity
 
-Popular two-stage approach:
+# Sphericity
 
-- Mauchly's test of sphericity
+
+Since we care only about differences in treatment, can get away with a weaker assumption than compound symmetry.
+
+
+**Sphericity**: variance of difference between treatment is constant.
+
+
+Typically, people test this assumption (using e.g., Mauchly's test of sphericity)
    - if statistically significant, use a correction
-   - if no evidence, proceed with $F$ test as usual
+   - if no evidence, proceed with $F$ tests as usual
    
 ---
-class: title title-7
+
+
 # Corrections for sphericity
 
-An idea due to Box is to correct the degrees of freedom from $\mathsf{F}\{a-1, (a-1)(n-1)\}$ to $\mathsf{F}\{\epsilon(a-1), \epsilon(a-1)(n-1)\}$ for $\epsilon < 1$
+Box suggested to multiply both degrees of freedom of $F$ statistic by $\epsilon < 1$.
 
-- Since the statistic is a ratio, it is unaffected
-- Three widely used corrections:
+- Three common correction factors $\epsilon$:
    - Greenhouse-Geisser 
-   - Huynh-Feldt (more powerful, but can be larger than 1 - cap)
-   - lower bound with $\epsilon = (a-1)^{-1}$, giving $\mathsf{F}(1, n-1)$.
+   - Huynh-Feldt (more powerful, but can be larger than 1)
+   - lower bound with $\nu_1$, giving $\mathsf{F}(1, \nu_2/\nu_1)$.
 
 Another option is to go fully multivariate.
 
 ---
+# Sphericity tests with `afex`
+
+
+```{r, eval = FALSE, echo = TRUE}
+summary(model)
+```
+
+```
+Mauchly Tests for Sphericity
+
+         Test statistic p-value
+stimulus        0.67814 0.14341
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+          GG eps Pr(>F[GG])
+stimulus 0.75651     0.5667
+
+            HF eps Pr(>F[HF])
+stimulus 0.8514944  0.5872648
+```
+
+---
+
+# Contrasts
+
+In within-subject designs, contrasts are obtained by computing the contrast for every subject. Make sure to check degrees of freedom!
+
+.small[
+```{r, eval = TRUE, echo = TRUE}
+# Set up contrast vector
+cont_vec <- list("real vs GAN" = c(1, -0.5, -0.5))
+model |> emmeans::emmeans(spec = "stimulus", contr = cont_vec)
+```
+]
+
+---
+
 layout: false
-name: mixed-models
-class: center middle section-title section-title-6
+name: manova
+class: center middle section-title section-title-5
 
-# Mixed models
-
----
-class: title title-6
-# Generalization
-
-Using mixed models in place of *old school* ANOVA has benefits in that it's easier to account for complex designs.
-
-In general, things are not obvious
-
-- Estimation via restricted maximum likelihood
-- Theory for testing is more complicated 
-   - $F$-tests via Kenward-Rogers (best, but costly) or Satterthwaite approximation
-   - Determining the degrees of freedom is not always trivial (Hass diagrams)
-- For more layers, need replications to estimate variability (estimability/identifiability)
-
+# Multivariate analysis of variance
 
 ---
 
-class: title title-6
-# Nested versus crossed
+layout: true
+class: title title-5
 
-.pull-left-wide[
-Nested effects if a factor appears only within a particular level of another factor.
 
-Crossed is for everything else (typically combinations of all factors).
-]
-.pull-right-narrow[
-![Russian dolls](img/10/matroshka.jpg)
-]
+
+---
+# Motivational example
+
+From Anandarajan et al. (2002), Canadian Accounting Perspective
+
+
+> This study questions whether the current or proposed Canadian standard of disclosing a going-concern contingency is viewed as equivalent to the standard adopted in the United States by financial statement users. We examined loan officers’ perceptions across three different formats
+
+
+---
+
+# Alternative going-concern reporting formats
+
+Bank loan officers were selected as the appropriate financial statement users for this study. 
+
+Experiment was conducted on the user’s interpretation of a
+going-concern contingency when it is provided in one of three
+disclosure formats:
+
+1. Integrated note (Canadian standard)
+2. Stand-alone note (Proposed standard)
+3. Stand-alone note plus modified report with explanatory
+paragraph (standard adopted in US and other countries)
+
+---
+# Multivariate response
+
+![](img/13/questionnaire.png)
+
+
+---
+
+# Why use MANOVA?
+
+1. Control experimentwise error
+  - do a single test, reduces type I error
+2. Detect differences in combination that would not be found with univariate tests
+3. Increase power (context dependent)
+
+---
+
+
+# Multivariate model
+Postulate the following model:
+$$\boldsymbol{Y}_{ij} \sim \mathsf{No}_p(\boldsymbol{\mu}_j, \boldsymbol{\Sigma}), \qquad j = 1, \ldots J$$
+
+Each response $\boldsymbol{Y}_{ij}$ is $p$-dimensional.
 
 .small[
 
-Example of nested random effects: class nested within schools 
-- class 1 is not the same in school 1 than in school 2
-```{r out.width = '70%', eval = TRUE, echo = FALSE}
-knitr::include_graphics("img/10/nested.png")
+We assume multivariate measurements are independent of one another, with
+
+- the same distribution
+- same covariance matrix $\boldsymbol{\Sigma}$
+- same mean vector $\boldsymbol{\mu}_j$  within each $j=1, \ldots, J$ experimental groups.  
+   - (randomization)
+
+]
+
+The model is fitted using multivariate linear regression.
+
+---
+# Model assumptions
+
+.box-inv-5[The more complex the model, the more assumptions...]
+
+
+Same as ANOVA, with in addition
+
+
+- The data follow a multivariate normal distribution 
+  - Shapiro–Wilk test, univariate QQ-plots
+- The covariance matrix is the same for all subjects
+  - Box's $M$ test is often used, but highly sensitive to departures from the null (other assumptions impact the test)
+
+Normality matters more in small samples.
+
+---
+# When to use MANOVA?
+
+In addition, for this model to make sense, you need just enough correlation (Goldilock principle)
+
+ - if correlation is weak, use univariate analyses 
+   - (no gain from multivariate approach)
+   - less power due to additional covariance parameter estimation
+ - if correlation is too strong, redundancy
+    - don't use Likert scales that measure a similar dimension
+
+.box-inv-5[Only combine elements that theoretically or conceptually make sense together.]
+
+---
+# Testing equality of mean vectors
+
+The null hypothesis is $\mathscr{H}_0: \boldsymbol{\mu}_1 = \cdots = \boldsymbol{\mu}_J$ against the alternative that at least one vector is different from the rest. The null imposes $(J-1) \times p$ restrictions on the parameters.
+
+With $J=2$ (bivariate), the MANOVA test finds the best composite score with weights for $Y_{i1}$ and $Y_{i2}$ that maximizes the value of the $t$-test.
+
+The null distribution is Hotelling's $T^2$, but a modification of the test statistic can be approximated by a $F$ distribution.
+
+
+---
+# Choice of test statistic
+
+In higher dimensions, with $J \geq 3$, there are many statistics that can be used to test equality of mean.
+
+The statistics are constructed from within/between sum covariance matrices.
+
+These are
+
+- Roy's largest root (most powerful provided all assumptions hold)
+- Wilk's $\Lambda$: most powerful, most commonly used
+- **Pillai's trace**: most robust choice for departures from normality or equality of covariance matrices
+
+Most give similar conclusion, and they are all equivalent with $J=2$.
+
+
+---
+
+# Sample size for MANOVA
+
+The number of observations must be sufficiently large.
+
+You can use the software G*Power for power calculations.
+
+
+To achieve a power of 80%, need the following number of replicates **per group**.
+.small[
+
+```{r tablepowersamplesize, echo = FALSE, eval = TRUE, output = "asis"}
+library(tidyverse)
+tab <- data.frame(
+n = c(13,16,18,21,26,33,38,42,44,56,66,72,98,125,145,160,14,18,21,23,29,37,44,48,50,64,74,84,115,145,165,185,16,21,24,27,34,44,52,58,60,76,90,100,135,170,200,230),
+ngroups = factor(rep(3:5, each = 16)),
+ndep = factor(rep(c(2L,4L,6L,8L), length.out = 3*16)),
+effects = factor(rep(rep(c("very large", "large", "medium", "small"), each = 4), length.out = 3*16))
+)
+
+tab_pivot <- tab %>% pivot_wider(values_from = "n", 
+                    names_from = c("ndep","ngroups"))
+library(kableExtra)
+kbl(tab_pivot,
+    col.names = c("effect size \\ p",rep(c("2","4","6","8"), length.out = 12))) %>%
+  kable_classic() %>%
+  add_header_above(c(" " = 1, "3 groups" = 4, "4 groups" = 4, "5 groups" = 4))
 ```
 
+]
+.small[
+Laüter, J. (1978), Sample size requirements for the $T^2$ test of MANOVA (tables for one-way classification). *Biometrical Journal*, **20**, 389-406.
 ]
 
 ???
 
-Matroschka from Wikimedia Commons CC-BY-SA 3.0
-https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent.png
----
-class: title title-6
-# Formulae for nested effects
 
-**R** uses the following notation for nested effect: `group1/group2`, to mean `group2` is nested within `group1`. 
-This formula expands to `group1 + group1:group2`
-
-For crossed effects, use rather `group1*group2` which expands to `group1 + group2 + group1:group2`.
-
-In package `lme4`, a random intercept per group is written `(1 | group1/group2)`.
 
 ---
 
-layout: false
-class: center middle section-title section-title-6
+# Post hoc testing
 
-# Demo and examples
+Researchers often conduct *post hoc* univariate tests using univariate ANOVA.
 
-???
+In **R**, Holm-Bonferonni's method is applied for marginal tests. You need to correct for multiple testing! 
 
-https://journals.sagepub.com/stoken/default+domain/2CauuvIqpaIUiIdXSWh4/full
-https://cran.r-project.org/doc/Rnews/Rnews_2007-2.pdf
-
+A better option is to proceed with descriptive discriminant analysis, a method that tries to find the linear combinations of the vector means to discriminate between groups.

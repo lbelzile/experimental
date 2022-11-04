@@ -73,6 +73,8 @@ website:
               file: content/07-content.qmd
             - text: "8: Effect sizes and power"
               file: content/08-content.qmd
+            - text: "9: Repeated measures"
+              file: content/09-content.qmd
 
     - title: "Evaluations"
       style: "docked"
@@ -128,7 +130,9 @@ website:
               file: example/ancova.qmd
             - text: "Effect size and power"
               file: example/effectsizepower.qmd
-         #   - text: "Linear causal mediation"
+            - text: "Multivariate ANOVA"
+              file: example/manova.qmd
+         #  - text: "Linear causal mediation"
          #     file: example/08-mediation.qmd
 
 
