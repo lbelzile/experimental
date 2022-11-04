@@ -1,6 +1,6 @@
 ---
-title: "Repeated measures and mixed models"
-date: "2022-10-28"
+title: "Repeated measures and multivariate ANOVA"
+date: "2022-11-04"
 ---
 
 ## Content
