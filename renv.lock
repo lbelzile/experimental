@@ -43,10 +43,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-58.1",
+      "Version": "7.3-58",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "762e1804143a332333c054759f89a706",
+      "Hash": "4bf2c61e656bbc238634c798c208d386",
       "Requirements": []
     },
     "Matrix": {
@@ -78,6 +78,14 @@
       "Requirements": [
         "ggplot2"
       ]
+    },
+    "PearsonDS": {
+      "Package": "PearsonDS",
+      "Version": "1.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6ed7aa92a8de680fd751b7f40a1d604e",
+      "Requirements": []
     },
     "R6": {
       "Package": "R6",
@@ -158,6 +166,19 @@
         "randtoolbox"
       ]
     },
+    "WebPower": {
+      "Package": "WebPower",
+      "Version": "0.8.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e36a5a0e9f13f54f59c515c4d2a8ec84",
+      "Requirements": [
+        "MASS",
+        "PearsonDS",
+        "lavaan",
+        "lme4"
+      ]
+    },
     "abind": {
       "Package": "abind",
       "Version": "1.4-5",
@@ -165,6 +186,20 @@
       "Repository": "CRAN",
       "Hash": "4f57884290cc75ab22f4af9e9d4ca862",
       "Requirements": []
+    },
+    "afex": {
+      "Package": "afex",
+      "Version": "1.2-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "275eec059e5302d417f5f5326fcdeaed",
+      "Requirements": [
+        "car",
+        "lme4",
+        "lmerTest",
+        "pbkrtest",
+        "reshape2"
+      ]
     },
     "alabama": {
       "Package": "alabama",
@@ -240,6 +275,17 @@
       "Requirements": [
         "datawizard",
         "insight"
+      ]
+    },
+    "biotools": {
+      "Package": "biotools",
+      "Version": "4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ffb1da73e679975eba6c288ff769d341",
+      "Requirements": [
+        "MASS",
+        "boot"
       ]
     },
     "bit": {
@@ -482,10 +528,10 @@
     },
     "cluster": {
       "Package": "cluster",
-      "Version": "2.1.4",
+      "Version": "2.1.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5edbbabab6ce0bf7900a74fd4358628e",
+      "Hash": "c5f8447373ec2a0f593c694024e5b7ee",
       "Requirements": []
     },
     "clustermq": {
@@ -961,10 +1007,10 @@
     },
     "globals": {
       "Package": "globals",
-      "Version": "0.15.1",
+      "Version": "0.16.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9449b1dfaf8609db72556cfbe228285d",
+      "Hash": "e14798793892c6bebdbe2f144aacf6e6",
       "Requirements": [
         "codetools"
       ]
@@ -1110,15 +1156,15 @@
     },
     "hecedsm": {
       "Package": "hecedsm",
-      "Version": "2022.09.27",
+      "Version": "2022.10.26",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "hecedsm",
       "RemoteUsername": "lbelzile",
       "RemoteRef": "HEAD",
-      "RemoteSha": "0a6b5cc22870e65a87ae2b5326091902391cb1e7",
-      "Hash": "5b8748770653b6eb3a603ebcf40a6e63",
+      "RemoteSha": "cb798e76822768d61331583cd4ab274f0d948aa0",
+      "Hash": "4ae8f849c9b51052d52a8855c8b0b90f",
       "Requirements": []
     },
     "here": {
@@ -1375,6 +1421,19 @@
       "Hash": "b64cdbb2b340437c4ee047a1f4c4377b",
       "Requirements": []
     },
+    "lavaan": {
+      "Package": "lavaan",
+      "Version": "0.6-12",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b482261a1275ed1fe2a39d9f495f09b7",
+      "Requirements": [
+        "MASS",
+        "mnormt",
+        "numDeriv",
+        "pbivnorm"
+      ]
+    },
     "lifecycle": {
       "Package": "lifecycle",
       "Version": "1.0.1",
@@ -1410,6 +1469,19 @@
         "minqa",
         "nlme",
         "nloptr"
+      ]
+    },
+    "lmerTest": {
+      "Package": "lmerTest",
+      "Version": "3.1-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f04948de84602afc23bfa9f5427e954d",
+      "Requirements": [
+        "MASS",
+        "ggplot2",
+        "lme4",
+        "numDeriv"
       ]
     },
     "lmtest": {
@@ -1528,6 +1600,14 @@
         "Rcpp"
       ]
     },
+    "mnormt": {
+      "Package": "mnormt",
+      "Version": "2.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c83992ef63553d1e4b97162a4a753470",
+      "Requirements": []
+    },
     "modelr": {
       "Package": "modelr",
       "Version": "0.1.8",
@@ -1570,6 +1650,14 @@
       "Requirements": [
         "colorspace"
       ]
+    },
+    "mvnormtest": {
+      "Package": "mvnormtest",
+      "Version": "0.1-9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "07c17ca39bb8b2d8609785f6e42e07ca",
+      "Requirements": []
     },
     "mvtnorm": {
       "Package": "mvtnorm",
@@ -1726,6 +1814,14 @@
         "ggplot2",
         "gtable"
       ]
+    },
+    "pbivnorm": {
+      "Package": "pbivnorm",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "643e16a7da6aac3e18cadc3e14abb94b",
+      "Requirements": []
     },
     "pbkrtest": {
       "Package": "pbkrtest",
@@ -2086,6 +2182,18 @@
         "rmarkdown",
         "rstudioapi",
         "withr"
+      ]
+    },
+    "reshape2": {
+      "Package": "reshape2",
+      "Version": "1.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bb5996d0bd962d214a11140d77589917",
+      "Requirements": [
+        "Rcpp",
+        "plyr",
+        "stringr"
       ]
     },
     "rlang": {
@@ -2519,10 +2627,10 @@
     },
     "timeDate": {
       "Package": "timeDate",
-      "Version": "4021.106",
+      "Version": "4021.104",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e2a8ef841df64f3ec7af2dc09001af65",
+      "Hash": "f20ec0cf362646ccfb53fc23194d8ce9",
       "Requirements": []
     },
     "tinytex": {
@@ -2805,10 +2913,10 @@
     },
     "xts": {
       "Package": "xts",
-      "Version": "0.12.2",
+      "Version": "0.12.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6731cbcbe2f9633865b59392aee7966d",
+      "Hash": "ca2fd4ad8ef78cca3aa2b30f992798a8",
       "Requirements": [
         "zoo"
       ]
@@ -2831,10 +2939,10 @@
     },
     "zoo": {
       "Package": "zoo",
-      "Version": "1.8-11",
+      "Version": "1.8-10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "874a5b77fe0cfacf2a3450069ae70926",
+      "Hash": "277b8b4c5b7b47e664aebfe024a2092e",
       "Requirements": [
         "lattice"
       ]

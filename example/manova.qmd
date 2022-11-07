@@ -53,7 +53,7 @@ dummy.coef(model)
 Next, we compute the multivariate analysis of variance table and the follow-up with the univariate functions. By default, we can add a multiplicity correction for the tests, using Holm-Bonferonni with option `'holm'`. For the MANOVA test, there are multiple statistics to pick from, including `Pillai`, `Wilks`, `Hotelling-Lawley` and `Roy`. The default is `Pillai`, which is more robust to departures from the model hypothesis, but `Wilks` is also popular choice among practitioners.
 
 ```{r}
-summary(model, test = "Pillai")
+car::Manova(model, test = "Pillai")
 ```
 
 ## Effect sizes
@@ -61,7 +61,8 @@ summary(model, test = "Pillai")
 We can compute effect sizes overall for the MANOVA statistic using the correspondance with the $F$ distribution, and also the individual effect size variable per variable. Here, the values returned are partial $\widehat{\eta}^2$ measures.
 ```{r}
 effectsize::eta_squared(car::Manova(model))
-effectsize::eta_squared(model)
+# Since it's a one-way between-subject MANOVA, no partial measure
+effectsize::eta_squared(model, partial = FALSE)
 ```
 
 
@@ -90,6 +91,7 @@ Here, there is a smallish $p$-value, so weak evidence against equality of covari
 We can test the normality assumption using univariate quantile-quantile plots or tests of normality, including Shapiro-Wilks.
 
 ```{r}
+par(mfrow = c(1,3)) # one row, 3 columns for plot layout
 car::qqPlot(rstudent(model)[,1], 
             id = FALSE, # don't flag outliers
             ylab = "studentized residuals (prime)")

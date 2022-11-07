@@ -31,7 +31,7 @@ At the end of the session, students should be capable of
 - [Chapter 11 of @Oehlert:2010 ](http://users.stat.umn.edu/~gary/book/fcdae.pdf)
 
 -->
-
+- <i class="fas fa-book"></i> [Chapter 5.2 ](https://opentext.wsu.edu/carriecuttler/chapter/experimental-design/) of @Price:2017
 - <i class="fas fa-book"></i> Chapter 16 to 18 of @Keppel/Wickens:2004
 
 

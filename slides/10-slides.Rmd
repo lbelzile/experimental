@@ -1,0 +1,155 @@
+---
+title: "Introduction to mixed models"
+author: "Léo Belzile"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    chakra: "libs/remark-latest.min.js"
+    css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
+    seal: false
+    anchor_sections: false
+    nature:
+      highlightStyle: github
+      highlightLines: false
+      countIncrementalSlides: false
+      ratio: "16:9"
+      navigation:
+        scroll: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.retina = 3, 
+                      fig.align = "center",
+                      fig.width = 10,
+                      fig.asp = 0.618,
+                      out.width = "70%")
+```
+```{r packages-data, echo = FALSE, include=FALSE}
+library(knitr)
+options(knitr.kable.NA = '')
+options(tidyverse.quiet = TRUE)
+options(knitr.table.format = "html")
+library(tidyverse)
+library(patchwork)
+```
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
+```
+
+class: center middle main-title section-title-1
+
+# Introduction to mixed models
+
+.class-info[
+
+**Session 10**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+HEC Montréal
+]
+
+]
+
+---
+
+layout: true
+class: title title-4
+
+---
+
+# Fixed effects
+
+So far, we considered factors as **fixed** effects.
+
+- We estimate a mean parameter for each factor (including blocking in repeated measures).
+
+.box-inv-4[Change of scenery]
+
+Assume that the levels of a factor form a random sample from a large population.
+
+
+---
+
+# Fixed vs random effects
+
+There is no consensual definition, but Gelman (2005) lists a handful:
+
+> When a sample exhausts the population, the corresponding variable is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random [Green and Tukey (1960)].
+
+> Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population (e.g., Searle, Casella and McCulloch [(1992), Section 1.4])
+
+---
+
+# Setting up a mixed effect
+
+If observations from a group (participant, schools, etc.) are correlated and the sample,
+
+---
+
+# Mixed models vs repeated measures
+
+- In repeated measure ANOVA, effects are averaged across subject.
+- Treat subject identifier as a blocking factor (fixed effect).
+- Estimates are the same as with corresponding mixed models.
+
+
+---
+
+
+# Generalization
+
+Using mixed models in place of *old school* ANOVA has benefits in that it's easier to account for complex designs.
+
+In general, things are not obvious
+
+- Estimation via restricted maximum likelihood
+- Theory for testing is more complicated 
+   - $F$-tests via Kenward-Roger (best, but costly) or Satterthwaite approximation
+   - Determining the degrees of freedom is not always trivial (Hasse diagrams)
+- For more layers, need replications to estimate interactions between subject and factors (estimability/identifiability)
+
+
+---
+# Nested effects
+
+.pull-left-wide[
+Nested effects if a factor appears only within a particular level of another factor.
+
+Crossed is for everything else (typically combinations of all factors).
+]
+.pull-right-narrow[
+![Russian dolls](img/10/matroshka.jpg)
+]
+
+.small[
+
+Example of nested random effects: class nested within schools 
+- class 1 is not the same in school 1 than in school 2
+```{r out.width = '70%', eval = TRUE, echo = FALSE}
+knitr::include_graphics("img/10/nested.png")
+```
+
+]
+
+???
+
+Matroschka from Wikimedia Commons CC-BY-SA 3.0
+https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent.png
+
+
+---
+
+# Formulae for nested effects
+
+**R** uses the following notation for nested effect: `group1/group2`, to mean `group2` is nested within `group1`. 
+This formula expands to `group1 + group1:group2`.
+
+For crossed effects, use rather `group1*group2` which expands to `group1 + group2 + group1:group2`.
+
+In package `lme4`, a random intercept per group is written `(1 | group1/group2)`.
+

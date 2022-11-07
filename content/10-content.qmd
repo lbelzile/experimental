@@ -1,0 +1,50 @@
+---
+title: "Intro to mixed models"
+date: "2022-11-11"
+---
+
+## Content
+
+- Introduction to mixed models
+- Robust standard errors
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- correctly determining crossed and nested effects
+- setting up a linear mixed model
+- Calculating robust standard errors for clustered data
+
+
+## Readings
+
+- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
+-  {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/repeated-measures-and-multivariate-models.html) of the course notes
+
+
+
+## Slides
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/10-slides")
+# slide_tabs(slide_details, "/slides/10-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/10-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::
