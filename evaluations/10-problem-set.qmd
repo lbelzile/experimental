@@ -1,0 +1,18 @@
+---
+title: "Problem set 10"
+---
+
+Complete this task in teams of two or three students.
+
+**Submission information**: please submit on ZoneCours
+
+-   a PDF report
+-   your code
+
+Using @Oelhert:2010 approach
+
+1. Identify sources of variation
+2. Identify whether factors are crossed or nested
+3. Determine whether factors should be fixed or random
+4. Figure out which interactions can exist and whether they can be fitted.
+

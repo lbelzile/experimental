@@ -297,7 +297,7 @@ It is important to understand how data were gathered.
 Oelhert (2010) guidelines
 
 1. Identify sources of variation
-2. Identify whether factors are crossed are nested
+2. Identify whether factors are crossed or nested
 3. Determine whether factors should be fixed or random
 4. Figure out which interactions can exist and whether they can be fitted.
 

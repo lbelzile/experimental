@@ -1,3 +1,83 @@
+---
+title: "Mixed model"
+type: docs
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+
+options(knitr.kable.NA = '')
+```
+
+
+The following examples serves to illustrate the structure of experimental designs with both crossed and nested effects. The models are fitted speciying both random and fixed effects. We use the **R** package `lme4` to estimate the coefficients of the resulting linear mixed effect model and `lmerTest` for additional testing features.
+
+A word of caution: correctly formulating mixed models for complex experimental designs is far from trivial, and the correct interpretation of the output requires subject-matter expertise. Thus, rather than see the following sections as a definitive guide to doing such calculations on your own, it should be viewed as a way to acquire some terminology and intuition for speaking with a statistical consultant and formulating your needs, and gain familiarity for peer-reviewing purposes.
+
+# Example 1
+
+We consider data from Danish company of electronics Bang and Olufsen from the `lmerTest` package (under `data(TVbo)`). The setup of the experiment is as follows: eight experienced raters (`Assessor`) were asked to rate 15 characteristics of televisions to compare two attributes, `Picture` and `TVset`.
+
+Based on this description alone, it is somewhat unclear what the structure of the experiment is. We can start by inspecting the database
+
+```{r}
+library(lmerTest)
+data(TVbo)
+str(TVbo) #inspect data
+```
+
+There are repetitions for ratings. Let us investigate the two manipulated factors, `TVset` and `Picture` and look at the number of occurences.
+
+```{r}
+xtabs(~TVset + Picture, data = TVbo)
+```
+
+There are 16 measurements for each combination, something compatible with a repeated measure design in which each assessor gets to see all factors. Thus, `Picture` and `TVset` are crossed within-subject factors and the dataset is balanced.
+
+
+
+```{r}
+library(lmerTest)
+# TV data from Bang & Olufsen
+data(TVbo, package = "lmerTest")
+# Crossed factors (Picture and TVset)
+# 15 response variables (characteristics of product)
+# these are nested within assessors (8)
+fm <- lmer(Coloursaturation ~ TVset * Picture + 
+       (1 | Assessor) + 
+       (1 | Assessor:TVset) + 
+       (1 | Assessor:Picture), data = TVbo)
+ranova(fm)
+anova(fm, ddf = "Kenward-Roger")
+
+fm <- aov(Coloursaturation ~ TVset * Picture + Error(Assessor/(Picture*TVset)), data = TVbo)
+
+
+library(afex) # analysis of factorial experiments
+library(emmeans) # estimated marginal means
+# Set up sum-to-zero constraint for factors
+options(contrasts = c("contr.sum", "contr.poly"))
+data(C22, package = "hecedsm") # Load data
+str(C22)
+# How are conditions manipulated?
+with(C22, xtabs(~ anchor + verdictsyst))
+# Thus for each individual we see only two pairs of anchor + verdict system
+# a so-called incomplete design.
+# With only two measurements, no interaction is possible within participants
+# Likewise, we cannot have interaction between subject-effect
+# and with anchor and verdict system (why?)
+model <- mixed(guilt ~ anchor*verdictsyst + 
+                 vignette + pjaq + (1 | id),
+      data = C22)
+model <- lme4::lmer(guilt ~ anchor*verdictsyst + 
+                      vignette + pjaq + (1 | id),
+                    data = C22)
+car::Anova(model, test.statistic = "F")
+emmeans(model, spec = "anchor") |> contrast(method = "pairwise")
+
+
 ```{r}
 library(afex) # analysis of factorial experiments
 library(emmeans) # estimated marginal means
