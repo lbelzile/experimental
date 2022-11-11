@@ -4,8 +4,8 @@
     <title>Introduction to mixed models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-05" />
-    <script src="libs/header-attrs-2.16/header-attrs.js"></script>
+    <meta name="date" content="2022-11-10" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -51,45 +51,39 @@ HEC Montréal
 
 ---
 
-name: outline
-class: title title-inv-1
-
-# Outline
---
-
-.box-6.large.sp-after-half[Mixed models]
-
----
-
-
-layout: false
-name: why-repeated-measures
-class: center middle section-title section-title-6
-
-# Mixed models
-
----
 layout: true
-class: title title-6
+class: title title-4
 
 ---
 
-# Exhaustive or small subsample?
+# Fixed effects
 
-So far, we considered factors (treatment factor, blocking) as **fixed**
+All experiments so far treated factors as **fixed** effects.
 
-- Meaning their effect is constant, and we estimate a mean parameter for each.
+- We estimate a mean parameter for each factor (including blocking factors in repeated measures).
 
-.box-inv-7[Change of scenery]
-
-Assume that the levels of a factor form a random sample from a large population
+.box-inv-4.large[Change of scenery]
 
 
 ---
 
-# Fixed vs random: no clear definition
+# Change of scenery
 
-Gelman (2005) lists a handful of definitions:
+Assume that the levels of a factor form a random sample from a large population.
+
+We are interested in making inference about the **variability** of the factor.
+
+- measures of performance of employees
+- results from different labs in an experiment
+- subjects in repeated measures
+
+We treat the factor as a **random** effect.
+
+---
+
+# Fixed vs random effects
+
+There is no consensual definition, but Gelman (2005) lists a handful, of which:
 
 &gt; When a sample exhausts the population, the corresponding variable is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random [Green and Tukey (1960)].
 
@@ -97,26 +91,178 @@ Gelman (2005) lists a handful of definitions:
 
 ---
 
-# Generalization
+# Random effect model
 
-Using mixed models in place of *old school* ANOVA has benefits in that it's easier to account for complex designs.
+Consider a one-way model
 
-In general, things are not obvious
+`$$\underset{\text{response}}{Y_{ij}} =  \underset{\text{global mean}}{\mu} + \underset{\text{random effect}}{\alpha_j} + \underset{\text{error term}}{\varepsilon_{ij}}.$$`
 
-- Estimation via restricted maximum likelihood
-- Theory for testing is more complicated 
-   - `\(F\)`-tests via Kenward-Roger (best, but costly) or Satterthwaite approximation
-   - Determining the degrees of freedom is not always trivial (Hasse diagrams)
-- For more layers, need replications to estimate interactions between subject and factors (estimability/identifiability)
+where 
+
+- `\(\alpha_j \sim \mathsf{No}(0, \sigma^2_\alpha)\)` is normal with mean zero and variance `\(\sigma^2_\alpha\)`.
+- `\(\varepsilon_{ij}\)` are independent `\(\mathsf{No}(0, \sigma^2_\varepsilon)\)`
 
 
 ---
-# Nested effects
+
+# Fictional example
+
+Consider the weekly number of hours spent by staff members at HEC since September. 
+
+We collect a random sample of 40 employees and ask them to measure the number of hours they work from school for 8 consecutive weeks.
+
+---
+# Fitting mixed models in **R**
+
+
+We use the `lme4` package in **R** to fit the models.
+
+The `lmerTest` package provides additional functionalities for testing.
+
+- `lmer` function fits linear mixed effect regression
+
+Random effects are specified using the notation `(1 | factor)`.
+
+
+---
+
+# Model fit
+
+
+
+```r
+library(lmerTest) # also loads lme4
+rmod &lt;- lmer(time ~ (1 | id), data = hecedsm::workhours)
+summary_rmod &lt;- summary(rmod)
+```
+
+```
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id       (Intercept) 38.63    6.215   
+ Residual              5.68    2.383   
+Number of obs: 320, groups:  id, 40
+
+Fixed effects:
+            Estimate Std. Error      df t value Pr(&gt;|t|)    
+(Intercept)  23.3016     0.9917 39.0000    23.5   &lt;2e-16 ***
+```
+
+
+.tiny[Note that std. dev is square root of variance]
+
+---
+
+# Intra-class correlation
+
+
+We are interested in the variance of the **random effect**, `\(\sigma^2_\alpha\)`.
+
+
+Measurements from the same individuals are correlated. The intra-class correlation between measurements `\(Y_{ij}\)` and `\(Y_{ik}\)` from subject `\(i\)` at times `\(j\neq k\)` is
+
+`$$\rho = \frac{\sigma^2_\alpha}{\sigma^2_\alpha + \sigma^2_\varepsilon}.$$`
+
+In the example, `\(\widehat{\sigma}^2_\alpha=38.63\)`, `\(\widehat{\sigma}^2_\varepsilon = 5.68\)` and `\(\widehat{\rho} = 0.87\)`.
+
+The mean number of working hours on the premises is `\(\widehat{\mu}=23.3\)` hours.
+
+---
+# Confidence intervals
+
+We can use confidence intervals for the parameters.
+
+Those are based on profile likelihood methods (asymmetric).
+
+
+```r
+(conf &lt;- confint(rmod, oldNames = FALSE))
+```
+
+```
+##                       2.5 %    97.5 %
+## sd_(Intercept)|id  4.978127  7.799018
+## sigma              2.198813  2.595272
+## (Intercept)       21.335343 25.267782
+```
+
+The variability of the measurements and between employees is very different from zero.
+
+???
+
+Even with old school, we can get confidence intervals but only in simple designs like this one-way.
+
+---
+# Profile plots
+
+&lt;img src="10-slides_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Predictions of random effects
+
+.small[
+There is no mean parameter for employees, but we can get the *best linear unbiased predictor*.
+]
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="10-slides_files/figure-html/fig-catterpilar-1.png" alt="Catterpilar plot of best linear unbiased prediction of random effects with Wald confidence intervals." width="70%" /&gt;
+&lt;p class="caption"&gt;Catterpilar plot of best linear unbiased prediction of random effects with Wald confidence intervals.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Shrinkage or regularization effect
+
+.small[
+Predictions of random effects `\(\alpha_i\)`'s are shrunk towards zero (regularization effect).
+]
+
+&lt;img src="10-slides_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Mixed models
+
+Mixed models include both fixed effects and random effects.
+
+- Fixed effects for experimental manipulations
+- Random effects for subject, lab factors
+
+Mixed models make it easier to 
+
+- handle correlations between measurements and 
+- account for more complex designs.
+
+---
+
+# Theory
+
+Full coverage of linear mixed models and general designs is beyond the scope of the course, but note
+
+- Estimation is performed via restricted maximum likelihood (REML)
+- Testing results may differ from repeated measure ANOVA
+- Different approximations for `\(F\)` degrees of freedom (either Kenward-Roger (costly) or Satterthwaite approximation)
+
+---
+# Structure of the design
+
+It is important to understand how data were gathered. 
+
+Oelhert (2010) guidelines
+
+1. Identify sources of variation
+2. Identify whether factors are crossed are nested
+3. Determine whether factors should be fixed or random
+4. Figure out which interactions can exist and whether they can be fitted.
+
+---
+# Crossed vs nested effects
 
 .pull-left-wide[
 Nested effects if a factor appears only within a particular level of another factor.
 
-Crossed is for everything else (typically combinations of all factors).
+Crossed is for everything else (typically combinations of factors are possible).
 ]
 .pull-right-narrow[
 ![Russian dolls](img/10/matroshka.jpg)
@@ -138,14 +284,68 @@ https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent
 
 ---
 
-# Formulae for nested effects
+# Formulae in **R**
 
-**R** uses the following notation for nested effect: `group1/group2`, to mean `group2` is nested within `group1`. 
-This formula expands to `group1 + group1:group2`.
+**R** uses the following notation 
 
-For crossed effects, use rather `group1*group2` which expands to `group1 + group2 + group1:group2`.
+- `group1/group2` means `group2` is nested within `group1`. 
 
-In package `lme4`, a random intercept per group is written `(1 | group1/group2)`.
+The formula expands to `group1 + group1:group2`.
+
+- `group1*group2` means `group` and `group2` are **crossed**
+
+The formula is a shorthand for `group1 + group2 + group1:group2`.
+
+.small[
+To fit the model, identifiers of subjects must be declared as factors (categorical variables).
+]
+
+---
+
+# Specifying interactions
+
+Consider factors `\(A\)`, `\(B\)` and `\(C\)`.
+
+- If factor `\(A\)` is treated as random, interactions with `\(A\)` must be random too.
+- There must be repeated measurements to estimate variability of those interactions.
+- Testing relies on the variance components.
+
+???
+
+Mixed models vs repeated measures
+
+- In repeated measure ANOVA, repetitions over each sub-condition are averaged across subject.
+- Treat subject identifier as a blocking factor (fixed effect).
+- Impose sum-to-zero for coefficients.
+
+---
+
+# Data structure
+
+
+&lt;img src="img/11/Hasse_diagram.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Example: Curley et al. (2022)
+
+.small[
+
+&gt; Two variables were manipulated within participants: (a) evidence anchor (strong-first versus weak-first); (b) verdict system (two- versus three-verdict systems). Total pre-trial bias score was used as a covariate in the analysis (this score is based on the PJAQ and is explained further in the Materials section). Participants were also given two vignettes (Vignette 1 and Vignette 2); thus, the vignette variable was included in the data analysis [...]
+
+&gt; The dependent variable was the final belief of guilt score, which was measured on an accumulated scale from 0–14, with 0 representing no belief of guilt and 14 representing a total belief that the person is guilty
+
+]
+
+---
+
+# Example: chocolate rating
+
+
+Example from L. Meier, adapted from Oehlert (2010)
+
+&gt; A group of 10 rural and 10 urban raters rated 4 different chocolate types. Every rater got to eat two samples from the same chocolate type in random order.
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
