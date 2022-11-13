@@ -2,17 +2,39 @@
 title: "Problem set 10"
 ---
 
-Complete this task in teams of two or three students.
+Complete this task individually or in teams of up to three students.
 
 **Submission information**: please submit on ZoneCours
 
 -   a PDF report
 -   your code
 
-Using @Oelhert:2010 approach
+
+
+Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#example-chocolate-data) and some of the [examples](/example/mixedmodel.html) from the course notes.
+
+
+Consider the model of @Hatano:2022 for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using @Oelhert:2010 approach
 
 1. Identify sources of variation
 2. Identify whether factors are crossed or nested
 3. Determine whether factors should be fixed or random
 4. Figure out which interactions can exist and whether they can be fitted.
+
+
+Now, fit the linear mixed model using the following code
+
+```{r}
+#| eval: false
+#| echo: true
+library(lmerTest)
+data(HOSM22_E4, package = "hecedsm")
+mixmod <- lmer(imscore ~ #TODO add covariates, etc.
+               data = HOSM22_E4)
+summary(mixmod) # coefficients
+anova(mixmod) # type III analysis of variance table
+```
+
+5. Report the results for the interaction test: is the interaction significative at level 5%? If not, compute estimated marginal means for rating type.
+6. Compute the correlation between measurements from the same students.
 

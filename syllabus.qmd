@@ -182,7 +182,7 @@ Student hours are set times dedicated to all of you (most professors call these 
 
 ## Late work
 
-The submission modules will stay open for two weeks after the due date for weekly check-in. As much as possible, we will discuss problem sets in class the day after they are due (provided all students have handed in their work). I will not assign penalties, but will gently nudge you to stay on track.
+Problem sets and weekly check-ins are due by Thursday the week after class. Strictly speaking, there is no deadline, but timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign penalties, but will gently nudge you to stay on track.
 
 
 ## Intellectual integrity
@@ -259,8 +259,5 @@ grading %>%
 ```
 
 <div>
-
-Team work counts toward your final grade only if you obtain  more than 50\% on the individual evaluations. Otherwise, the final grade is calculated on a pro rata basis using only individual evaluations.
-
 
 # References {-}

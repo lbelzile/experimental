@@ -6,21 +6,21 @@ date: "2022-11-11"
 ## Content
 
 - Introduction to mixed models
-- Robust standard errors
 
 ## Learning objectives
 
 At the end of the session, students should be capable of
 
-- correctly determining crossed and nested effects
+- determining the structure of an experimental design with random and fixed effects
+- correctly determining whether effects are crossed or nested
 - setting up a linear mixed model
-- Calculating robust standard errors for clustered data
+
 
 
 ## Readings
 
 - <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
--  {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/repeated-measures-and-multivariate-models.html) of the course notes
+-  {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/introduction-to-mixed-models.html) of the course notes
 
 
 

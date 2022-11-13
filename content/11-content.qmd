@@ -1,0 +1,69 @@
+---
+title: "Introduction to causal inference"
+date: "2022-11-11"
+---
+
+## Content
+
+- Introduction to causal inference
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- understanding the importance of listing potential confounders
+- determining which variables to control for (confounders vs colliders)
+- drawing a directed acyclic graph describing the interrelation between variables
+- explaining the differences between experimental and observational studies for studying mediation
+
+
+## Readings
+
+- <i class="fas fa-book"></i>Chapter 2 of @Vanderweele:2015
+
+Andrew Heiss' course notes on directed acyclic graphs (DAG) and types of association. 
+
+- Causal models ([video](https://www.youtube.com/watch?v=kJQuH3nssfI&list=PLS6tnpTr39sFVrHdTifzlyS9dsJjhEhsF) and [slides](https://evalf21.classes.andrewheiss.com/slides/04-slides.html#causal-models))
+- Paths, doors, and adjustment ([video](https://www.youtube.com/watch?v=_qs_1B4ySWY) and [slides](https://evalf21.classes.andrewheiss.com/slides/04-slides.html#58))
+
+The structural equation modelling (SEM) approach to mediation
+
+- @Baron/Kenny:1986
+- @Zhao:2010
+
+The causal inference approach
+
+- @Pearl:2014
+- @Imai:2010
+
+## Complementary readings
+
+- @Pearl:2016, Chapter 3
+- @Rohrer:2018
+
+
+## Slides
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/10-slides")
+# slide_tabs(slide_details, "/slides/11-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/11-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::

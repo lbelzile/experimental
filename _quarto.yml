@@ -77,6 +77,8 @@ website:
               file: content/09-content.qmd
             - text: "10: Intro to mixed models"
               file: content/10-content.qmd
+            - text: "11: Causal inference"
+              file: content/11-content.qmd
     - title: "Evaluations"
       style: "docked"
       search: false
@@ -100,7 +102,7 @@ website:
             - evaluations/07-problem-set.qmd
             - evaluations/08-problem-set.qmd
             - evaluations/09-problem-set.qmd
-        #    - evaluations/10-problem-set.qmd
+            - evaluations/10-problem-set.qmd
         #    - evaluations/11-problem-set.qmd
         #    - evaluations/12-problem-set.qmd
     - title: "Examples"
@@ -131,8 +133,12 @@ website:
               file: example/ancova.qmd
             - text: "Effect size and power"
               file: example/effectsizepower.qmd
-            - text: "Multivariate ANOVA"
+            - text: "Repeated measures ANOVA"
+              file: example/repeated.qmd
+            - text: "MANOVA"
               file: example/manova.qmd
+            - text: "Linear mixed models"
+              file: example/mixedmodel.qmd
          #  - text: "Linear causal mediation"
          #     file: example/08-mediation.qmd
 
