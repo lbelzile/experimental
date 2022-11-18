@@ -48,7 +48,7 @@ class: center middle main-title section-title-1
 
 .class-info[
 
-**Session 12**
+**Session 11**
 
 .light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
 HEC Montréal
@@ -227,7 +227,7 @@ dagify(
   geom_dag_text(color = "black", size = 5) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 
@@ -260,7 +260,7 @@ dagify(
   geom_dag_text(color = "black", size = 5) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   coord_cartesian(ylim = c(1, 3)) +
   theme_dag()
 ```
@@ -294,7 +294,7 @@ dagify(
   geom_dag_text(color = "black", size = 5) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 
@@ -328,7 +328,7 @@ dagify(
   geom_dag_text(color = "black", size = 5) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 
@@ -369,7 +369,7 @@ dagify(
   geom_dag_text(color = "black", size = 5) +
   scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 
@@ -524,7 +524,7 @@ dagify(
   geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, -0.25, 0.25)) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 ]
@@ -812,7 +812,7 @@ dagify(
   geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, 0.25, -0.25)) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 ]
@@ -903,7 +903,7 @@ dagify(
   geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, 0.25, -0.25)) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 
@@ -1088,7 +1088,7 @@ dagify(
   geom_dag_text(color = "white", size = 5) +
   scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
-  guides(color = FALSE) +
+  guides(color = "none") +
   theme_dag()
 ```
 ]

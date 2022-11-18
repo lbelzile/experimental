@@ -4,8 +4,8 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-10" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <meta name="date" content="2022-11-16" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -239,9 +239,11 @@ model &lt;- afex::aov_ez(
   id = "id",           # subject id
   dv = "latency",      # response
   within = "stimulus", # within-subject
-  data = AA21,
+  data = hecedsm::AA21,
   fun_aggregate = mean)
-anova(model, correction = "none")
+anova(model, # mixed ANOVA model
+      correction = "none", # sphericity
+      es = "none") # effect size
 ```
 
 - No detectable difference between conditions.
@@ -251,13 +253,12 @@ anova(model, correction = "none")
 .pull-right[
 
 .small[
-
 ```
-## Anova Table (Type 3 tests)
-## 
-## Response: latency
-##          num Df den Df    MSE      F       ges Pr(&gt;F)
-## stimulus      2     22 1.9557 0.4962 0.0083378 0.6155
+# Anova Table (Type 3 tests)
+# 
+# Response: latency
+#          num Df den Df   MSE     F Pr(&gt;F)
+# stimulus      2     22 1.955 0.496 0.6155
 ```
 
 - Residual degrees of freedom: `\((n_a-1) \times (n_s-1)=22\)` for `\(n_s=12\)` subjects and `\(n_a=3\)` levels.
@@ -436,6 +437,37 @@ We assume multivariate measurements are independent of one another, with
 ]
 
 The model is fitted using multivariate linear regression.
+
+---
+
+# Bivariate MANOVA
+
+.pull-left[
+&lt;img src="img/09/fig8.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+Confidence ellipses for bivariate MANOVA with discriminant analysis.
+
+The diagonal line is the best separating plane between the two.
+
+One-way analysis of variance would have lower power to detect differences.
+
+]
+
+---
+
+# Confidence intervals and confidence regions
+
+.pull-left[
+
+&lt;img src="img/09/fig5.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+Simultaneous confidence region (ellipse), marginal confidence intervals (blue) and Bonferroni-adjusted intervals (green). 
+
+The dashed lines show the univariate projections of the confidence ellipse.
+]
 
 ---
 # Model assumptions

@@ -4,8 +4,8 @@
     <title>Effect size and power</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-03" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <meta name="date" content="2022-11-16" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -230,7 +230,7 @@ Break down the variability `$$\sigma^2_{\text{total}} = \sigma^2_{\text{resid}} 
 
 # Coefficient of determination estimator
 
-For the balanced one-way ANOVA, typical estimator is the **coefficient of determination**
+For the balanced one-way between-subject ANOVA, typical estimator is the **coefficient of determination**
 
 $$
 \widehat{R}{}^2 = \frac{F\nu_1}{F\nu_1 + \nu_2}
@@ -248,7 +248,7 @@ where `\(\nu_1 = K-1\)` and `\(\nu_2 = n-K\)` are the degrees of freedom for the
 
 Another estimator of `\(\eta^2\)` that is recommended in Keppel &amp; Wickens (2004) for power calculations is `\(\widehat{\omega}^2\)`.
 
-For one-way ANOVA, the latter is obtained from the `\(F\)`-statistic as
+For one-way  between-subject ANOVA, the latter is obtained from the `\(F\)`-statistic as
 
 `$$\widehat{\omega}^2 = \frac{\nu_1 (F-1)}{\nu_1(F-1)+n}$$`
 
@@ -324,7 +324,7 @@ Effect size are often reported in terms of variability via the ratio
 
 # Estimation of partial `\(\omega^2\)`
 
-Similar formulae as the one-way case, with
+Similar formulae as the one-way case for between-subject experiments, with 
 
 `$$\widehat{\omega}^2_{\langle \text{effect} \rangle} = \frac{\text{df}_{\text{effect}}(F_{\text{effect}}-1)}{\text{df}_{\text{effect}}(F_{\text{effect}}-1) + n},$$`
 where `\(n\)` is the overall sample size.
