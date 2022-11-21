@@ -4,7 +4,7 @@
     <title>Introduction to causal inference</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-17" />
+    <meta name="date" content="2022-11-21" />
     <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -60,10 +60,6 @@ class: title title-inv-1
 
 --
 .box-3.large.sp-after-half[Causal mediation]
-
---
-
-.box-4.large.sp-after-half[Linear SEM and mediation]
 
 ---
 
@@ -628,84 +624,36 @@ Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Co
 # Fundamental problem of causal inference 
 
 
-.box-3.medium[Causal effect is a form of average treatment]
+.box-3.medium[Observe outcome for a single treatment]
 
-For binary treatment `\(X_i\)`
+With binary treatment `\(X_i\)`, I observed either `\(Y_i \mid \text{do}(X_i=1)\)` or `\(Y_i \mid \text{do}(X_i=0)\)` given intervention **do**.
+
+.box-3.medium[Thus define causal effect as an **average** treatment]
+
 `$$\mathsf{E}[Y_i \mid \text{do}(X_i=1)] - \mathsf{E}[Y_i \mid \text{do}(X_i=0)]$$`
 
 
-.box-3.medium[Observe outcome for a single treatment]
-
-
-&lt;!-- We are interested in average causal effect  and observe either but not both. --&gt;
-
-&lt;!-- Likewise, the value taken by the mediating variable `\(M(X_i)\)` for observed treatment. --&gt;
 
 .small[
 Effect cannot be estimated directly in general, even with randomized experiments.
 ]
 ---
-# Examples of mediation
 
-Pearl (2014) discusses an encouragement design with a new education program `\(X\)` (say binary), `\(M\)` the amount of homework and the score on an exam as outcome `\(Y\)`
+# Sequential ignorability assumption
 
+Define 
 
-
----
-# Data generating mechanism
-
-Assume structural models 
-`$$\begin{align*}
-X &amp;= f_X(U_X)\\
-M &amp;= f_M(X, U_M)\\
-Y &amp;= f_Y(X, M, U_Y)
-\end{align*}$$`
-with `\(U_X, U_M, U_Y\)` representing unexplained variability affecting each of the random variables:
-
-- treatment/experimental factor `\(X\)`
-- mediator `\(M\)`
-- response `\(Y\)`
-
----
-
-# Counterfactual framework
-
-`$$\begin{align*}
-M_x &amp;= f_M(x, U), \\ Y_x &amp;= f_Y(x, M_x, U),\\ Y_{x, m} &amp;= f_Y(x, m, U)
-\end{align*}$$`
-
-.box-inv-3.sp-after[
-
-**Potential outcomes**: existence of hypothetical values for `\(Y(X)\)` 
-
-]
-
-
-.box-3.large[(what-if?)]
-
----
-
-# Assumption of sequential ignorability
+- treatment of individual `\(i\)` as `\(X_i\)`, 
+- potential mediation given treatment `\(x\)` as `\(M_i(x)\)` and 
+- potential outcome for treatment `\(x\)` and mediator `\(m\)` as `\(Y_i(x, m)\)`.
 
 Given pre-treatment covariates `\(W\)`, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
 $$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid W_i = w$$
 Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
 $$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, W_i = w$$
 
-The first condition is satisfied in experimental studies due to randomization.
+Formulation in terms of potential outcomes (what if?) with intervention.
 
-The second isn't
-
----
-# Roadmap
-
-Pearl (2014) defines causal effects in terms of `\(f_T, f_M, f_Y\)`
-- Draw a DAG representing the system
-- Determine whether we can identify those effects on the basis of data
-- *Choose* a statistical model to estimate the causal effects of interest
-
-???
-Quantities defined in terms of ratios, 
 ---
 # Total effect
 
@@ -726,16 +674,17 @@ This can be generalized for continuous `\(X\)` to any pair of values `\((x_1, x_
 ---
 # Average controlled direct effect
 
-`$$\begin{align*}\textsf{CDE}(m, x, x^*) &amp;= \mathsf{E}[Y \mid \text{do}(X=x, m=m)] - \mathsf{E}[Y \mid \text{do}(X=x^*, m=m) \\&amp;= \mathsf{E}(Y_{x, m} -Y_{x^*, m}) \end{align*}$$`
+`$$\begin{align*}\textsf{CDE}(m, x, x^*) &amp;= \mathsf{E}[Y \mid \text{do}(X=x, m=m)] - \mathsf{E}[Y \mid \text{do}(X=x^*, m=m) \\&amp;= \mathsf{E}\{Y(x, m) - Y(x^*, m)\} 
+\end{align*}$$`
 Expected population change in response when the experimental factor changes from `\(x\)` to `\(x^*\)` and the mediator is set to a fixed value `\(m\)`.
 
 ---
 # Direct and indirect effects
 
-**Natural direct effect**: `\(\textsf{NDE}(x, x^*) = \mathsf{E}(Y_{x, M_{x^*}} - Y_{x^*,  M_{x^*}})\)`    
+**Natural direct effect**: `\(\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}]\)`    
    - expected change in `\(Y\)` under treatment `\(x\)` if `\(M\)` is set to whatever value it would take under control `\(x^*\)`
 
-**Natural indirect effect**: `\(\textsf{NIE}(x, x^*) = \mathsf{E}(Y_{x^*, M_{x}} - Y_{x^*,  M_{x^*}})\)`  
+**Natural indirect effect**: `\(\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}]\)`  
    - expected change in `\(Y\)` if we set `\(X\)` to its control value and change the mediator value which it would attain under `\(x\)`
 
 .small[
@@ -745,161 +694,17 @@ Counterfactual conditioning reflects a physical intervention, not mere (probabil
 Total effect is `\(\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x)\)`
 ???
 
-This formalizes the additive decomposition
-In linear systems, changing order amounts to flipping signs
-This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
+
 
 # Necessary and sufficiency of mediation
+
 From Pearl (2014):
 
 &gt; The difference `\(\textsf{TE}-\textsf{NDE}\)` quantifies the extent to which the response of `\(Y\)` is owed to mediation, while `\(\textsf{NIE}\)` quantifies the extent to which it is explained by mediation. These two components of mediation, the necessary and the sufficient, coincide into one in models void of interactions (e.g., linear) but differ substantially under moderation
 
----
 
-
-layout: false
-name: linear-sem
-class: center middle section-title section-title-4
-
-# Linear structural equation modelling and mediation
-
----
-
-layout: true
-class: title title-4
-
----
-
-# The Baron−Kenny model
-
-Assume the following models:
-`$$\begin{align}
-f_M(x) &amp;= c_M + \alpha x + U_M\\
-f_Y(x, m) &amp;=  c_Y + \beta x + \gamma m + U_Y
-\end{align}$$`
-Plugging the first equation in the second, we get the marginal model for `\(Y\)` given treatment `\(X\)`,
-`$$\begin{align}
-\mathsf{E}_{U_M}(Y \mid x) &amp;= \underset{\text{intercept}}{(c_Y + \gamma c_M)} + \underset{\text{total effect}}{(\beta + \alpha\gamma)}\cdot x + \underset{\text{error}}{(\gamma U_M + U_Y)}\\
-&amp;= c_Y' + \tau X + U_Y'
-\end{align}$$`
----
-# The old method
-Baron and Kenny recommended running regressions and estimating the three models with
-
-1. whether `\(\mathscr{H}_0: \alpha=0\)`
-2. whether `\(\mathscr{H}_0: \tau=0\)` (total effect)
-3. whether `\(\mathscr{H}_0: \gamma=0\)`
-
-Then, test the CDE `\(\alpha\gamma=0\)` using Sobel's test statistic.
-
-Problems?
-???
-
-- Type I errors
-- The total effect can be zero because `\(\alpha\gamma = - \beta\)`
-- The method has lower power for small mediation effect
----
-# Sobel's test
-
-Based on estimators `\(\widehat{\alpha}\)` and `\(\widehat{\gamma}\)`, construct a Wald-test
-`$$S  = \frac{\widehat{\alpha}\widehat{\gamma}}{\sqrt{\widehat{\gamma}^2\mathsf{Va}(\widehat{\alpha}) + \widehat{\alpha}^2\mathsf{Va}(\widehat{\gamma}) + \mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})}} \stackrel{\cdot}{\sim}\mathsf{No}(0,1)$$` 
-where the point estimate `\(\widehat{\alpha}\)` and its variance `\(\mathsf{Va}(\widehat{\alpha})\)` can be estimated via SEM, or more typically linear regression (ordinary least squares).
-
-???
-Without interaction/accounting for confounders, `\(\alpha\gamma = \tau - \beta\)` and with OLS we get exactly the same point estimates. The derivation of the variance is then relatively straightforward using the delta method.
-
----
-# Null distribution for the test
-
-The large-sample normal approximation is poor in small samples.
-
-The popular way to estimate the _p_-value and the confidence interval is through the nonparametric **bootstrap** with the percentile method.
-
-Repeat `\(B\)` times, say `\(B=10\ 000\)`
-1. sample **with replacement** `\(n\)` observations from the database 
- - tuples `\((Y_i, X_i, M_i)\)`
-2. recalculate estimates `\(\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}\)`
-
-
----
-# Boostrap _p_-values and confidence intervals
-.pull-left[
-.box-inv-3[Confidence interval]
-
-Percentile-based method: for a equi-tailed `\(1-\alpha\)` interval and the collection
-`$$\{\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}\}_{b=1}^B,$$`
-compute the `\(\alpha/2\)` and `\(1-\alpha/2\)` empirical quantiles.
-
-
-]
-.pull-right[
-.box-inv-3[Two-sided _p_-value]
-
-Compute the sample proportion of bootstrap statistics `\(S^{(1)}, \ldots, S^{(B)}\)` that are larger/smaller than zero. 
-
-If `\(S^{(M)} &lt; 0 \leq S^{(M+1)}\)` for `\(1 \leq M \leq B\)`.
-
-`$$p = 2\min\{M/B, 1-M/B\}$$`
-
-and zero otherwise
-]
-
-
-???
-Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (basic, studentized, bias corrected and accelerated
-
----
-# Example from Preacher and Hayes (2004)
-
-.small[
-
-&gt; Suppose an investigator is interested in the effects of a new cognitive therapy on life satisfaction after retirement.
-
-&gt;Residents of a retirement home diagnosed as clinically
-depressed are randomly assigned to receive 10 sessions of a
-new cognitive therapy `\((X = 1)\)` or 10 sessions of an alternative
-(standard) therapeutic method `\((X = 0)\)`.
-
-&gt; After Session 8, the positivity of the attributions the residents
-make for a recent failure experience is assessed `\((M)\)`.
-
-&gt; Finally, at the end of Session 10, the residents are given a
-measure of life satisfaction `\((Y)\)`.
-The question is whether the cognitive therapy’s effect on life
-satisfaction is mediated by the positivity of their causal
-attributions of negative experiences. ”
-
-]
----
-# Defaults of linear SEM
-
-
-
-.pull-left-wide[
-
-- Definitions contingent on model 
-   - (causal quantities have a meaning regardless of estimation method)
-- Linearity assumption not generalizable.
-   - effect constant over individuals/levels
-
-Additional untestable assumption of uncorrelated disturbances (no unmeasured confounders).
-]
-.pull-right-narrow[
-![](img/12/spherical_cow.png)
-.small[Keenan Crane]
-]
-
----
-# Assumptions of causal mediation
-
-Need assumptions to hold (and correct model!) to derive causal statements
-
-- Potential confounding can be accounted for with explanatories.
-- Careful with what is included (colliders)! 
- - *as-if* randomization assumption
- 
-- Generalizations to interactions, multiple mediators, etc. should require careful acknowledgement of confounding.
-
+- In linear systems, changing the order og arguments amounts to flipping signs
+- This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
