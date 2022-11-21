@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Causal mediation</title>
+    <title>Introduction to causal inference</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-16" />
+    <meta name="date" content="2022-11-17" />
     <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -37,7 +37,7 @@
 
 class: center middle main-title section-title-1
 
-# Causal mediation
+# Introduction to causal inference
 
 .class-info[
 
@@ -611,14 +611,18 @@ class: title title-3
 - Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
 - Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
 - Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-3514.51.6.1173), *Journal of Personality and Social Psychology*
+
+Limitations: 
+
+- Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
+- Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
+
+&lt;!--
 - Zhao, Lynch and Chen (2010), [Reconsidering Baron and Kenny: Myths and
 Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Consumer Research*
 - [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
-
-&lt;!--
 - Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
 --&gt;
-
 ---
 
 # Fundamental problem of causal inference 
@@ -690,13 +694,15 @@ $$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, W_i = w$$
 
 The first condition is satisfied in experimental studies due to randomization.
 
+The second isn't
+
 ---
 # Roadmap
 
 Pearl (2014) defines causal effects in terms of `\(f_T, f_M, f_Y\)`
 - Draw a DAG representing the system
 - Determine whether we can identify those effects on the basis of data
-- Choose a statistical model to estimate the causal effects of interest
+- *Choose* a statistical model to estimate the causal effects of interest
 
 ???
 Quantities defined in terms of ratios, 
@@ -741,7 +747,7 @@ Total effect is `\(\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*
 
 This formalizes the additive decomposition
 In linear systems, changing order amounts to flipping signs
-This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear SEM does not)
+This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
 
 # Necessary and sufficiency of mediation
 From Pearl (2014):

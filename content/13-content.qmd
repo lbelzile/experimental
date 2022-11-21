@@ -1,0 +1,50 @@
+---
+title: "Nonparametric tests and count data"
+date: "2022-12-02"
+---
+
+## Content
+
+- Nonparametric tests (signed rank, Wilcoxon, Kruskall--Wallis, and Friedman tests)
+- Models and tests for count data ($\chi^2$ test, Fisher exact test, etc.)
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- Understand the benefits and drawback of rank-based tests
+- Perform tests for count data (Fisher exact test, $\chi^2$ tests) and correctly report their output with effect sizes
+
+
+
+## Readings
+
+- <i class="fas fa-book"></i>[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019
+
+
+
+## Slides
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/13-slides")
+# slide_tabs(slide_details, "/slides/11-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/13-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::

@@ -1,0 +1,38 @@
+---
+title: "Problem set 12"
+---
+
+Complete this task individually.
+
+**Submission information**: please submit on ZoneCours
+
+-   a PDF report
+-   your code
+
+```{r}
+#| eval: false
+#| echo: false
+contingency_tab <- 
+  with(hecedsm::LC19_T2, 
+       xtabs(count ~ text + expected))
+# Score test, chi-square (2) null
+chisq.test(contingency_tab)
+
+# Fit Poisson model
+cmod1 <- glm(
+  count ~ text * expected,
+  data = hecedsm::LC19_T2, 
+  family = poisson)
+cmod0 <- glm(
+  count ~ text + expected,
+  data = hecedsm::LC19_T2, 
+  family = poisson)
+# Likelihood ratio test, chi-square (2) null
+car::Anova(cmod1, type = 3)
+
+# Score test
+anova(cmod0, cmod1, test = "Rao")
+
+```
+
+
