@@ -1,0 +1,42 @@
+
+sobel <- function(data){
+  stopifnot(is.data.frame(data),
+            isTRUE(all(c("M","Y","X") %in% colnames(data))))
+  # Regress M on X
+  ols1 <- lm(M ~ X, data = data)
+  ols2 <- lm(Y ~ X + M, data = data)
+  ols3 <- lm(Y ~ X, data = data)
+  # Extract estimates and their variances
+  alpha_est <- coef(ols1)[2] # intercept, alpha
+  alpha_var <- diag(vcov(ols1))[2] # var of gamma
+  gamma_est <- coef(ols2)[3] # intercept, beta, gamma
+  gamma_var <- diag(vcov(ols2))[3] # var of gamma
+  # Compute Sobel's stat
+  sobel_val <- alpha_est * gamma_est / 
+    sqrt(alpha_est^2 * gamma_var + gamma_est^2 * alpha_var +
+           alpha_var * gamma_var) 
+  # additional factor on last line sometimes omitted from denom
+  c(estimate = alpha_est * gamma_est, 
+    stat = sobel_val)
+}
+alpha <- 2
+beta <- 0.5
+gamma <- 0
+sobel_null <- matrix(0, nrow = 1e4, ncol = 2)
+n <- 20 # sample size
+for(i in seq_len(nrow(sobel_null))){
+  X <- rbinom(n = n, size = 1, prob = c(0.5, 0.5))
+  M <- alpha*X + rnorm(n)
+  Y <- beta*X + gamma*M + rnorm(n)
+  sobel_null[i,] <- sobel(data.frame(Y = Y, X = X, M = M))
+}
+library(ggplot2)
+ggplot(data = data.frame(stat = sobel_null[,2]),
+       aes(x = stat)) +
+  geom_histogram(aes(y = ..density..),
+                 bins = 30,
+                 alpha = 0.1) + 
+  stat_function(fun = dnorm, 
+                n = 1001, 
+                col = "blue") + labs(x = "Sobel statistic") + 
+  theme_classic()

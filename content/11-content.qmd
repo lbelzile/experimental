@@ -1,6 +1,6 @@
 ---
 title: "Introduction to causal inference"
-date: "2022-11-11"
+date: "2022-11-18"
 ---
 
 ## Content
@@ -29,8 +29,8 @@ Andrew Heiss' course notes on directed acyclic graphs (DAG) and types of associa
 
 The structural equation modelling (SEM) approach to mediation
 
-- @Baron/Kenny:1986
-- @Zhao:2010
+- Paper popularizing linear mediation [@Baron/Kenny:1986]
+- Limitations of the linear mediation model approach [@Bullock.Green.Ha:2010]
 
 The causal inference approach
 
@@ -53,7 +53,7 @@ source(here::here("R", "slide-things.R"))
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_buttons("/slides/10-slides")
+slide_buttons("/slides/11-slides")
 # slide_tabs(slide_details, "/slides/11-slides.html")
 ```
 

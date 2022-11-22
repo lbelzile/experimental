@@ -1,0 +1,54 @@
+---
+title: "Mediation and moderation"
+date: "2022-11-25"
+---
+
+## Content
+
+- Linear mediation model
+- Moderation
+
+
+## Learning objectives
+
+At the end of the session, students should be capable of
+
+- Using the linear mediation model
+- discussing limitations of the linear mediation model
+- testing for moderating variables (interactions)
+
+
+## Readings
+
+- - <i class="fas fa-book"></i>Chapter 11 of the [course notes](https://lbelzile.github.io/math80667a/causal-inference.html)
+- <i class="fas fa-book"></i>Chapter 11 of @Vanderweele:2015
+
+- Linear mediation [@Baron/Kenny:1986]
+- Limitations of the linear mediation model approach [@Bullock.Green.Ha:2010]
+- Model assumptions [@Pearl:2014, @Imai:2010]
+
+
+## Slides
+
+```{r}
+#| label: slides-videos
+#| echo: false
+#| include: false
+source(here::here("R", "slide-things.R"))
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/12-slides")
+# slide_tabs(slide_details, "/slides/11-slides.html")
+```
+
+```{r show-slides-xaringan, echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "/slides/12-slides.html",
+  ratio = "16:9"
+)
+```
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::

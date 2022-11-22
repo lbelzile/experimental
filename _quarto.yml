@@ -77,8 +77,12 @@ website:
               file: content/09-content.qmd
             - text: "10: Intro to mixed models"
               file: content/10-content.qmd
-            - text: "11: Causal inference"
+            - text: "11: Intro to causal inference"
               file: content/11-content.qmd
+            - text: "12: Linear mediation and moderation"
+              file: content/12-content.qmd
+            - text: "13: Nonparametric tests and count data"
+              file: content/13-content.qmd
     - title: "Evaluations"
       style: "docked"
       search: false
@@ -103,8 +107,8 @@ website:
             - evaluations/08-problem-set.qmd
             - evaluations/09-problem-set.qmd
             - evaluations/10-problem-set.qmd
-        #    - evaluations/11-problem-set.qmd
-        #    - evaluations/12-problem-set.qmd
+            - evaluations/11-problem-set.qmd
+            - evaluations/12-problem-set.qmd
     - title: "Examples"
       style: "docked"
       search: false
@@ -139,8 +143,8 @@ website:
               file: example/manova.qmd
             - text: "Linear mixed models"
               file: example/mixedmodel.qmd
-         #  - text: "Linear causal mediation"
-         #     file: example/08-mediation.qmd
+            - text: "Linear causal mediation"
+              file: example/linearmediation.qmd
 
 
   page-footer:
