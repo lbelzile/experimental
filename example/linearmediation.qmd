@@ -1,42 +1,110 @@
+---
+title: "Linear mediation model"
+type: docs
+editor_options: 
+  chunk_output_type: console
+---
 
-sobel <- function(data){
-  stopifnot(is.data.frame(data),
-            isTRUE(all(c("M","Y","X") %in% colnames(data))))
-  # Regress M on X
-  ols1 <- lm(M ~ X, data = data)
-  ols2 <- lm(Y ~ X + M, data = data)
-  ols3 <- lm(Y ~ X, data = data)
-  # Extract estimates and their variances
-  alpha_est <- coef(ols1)[2] # intercept, alpha
-  alpha_var <- diag(vcov(ols1))[2] # var of gamma
-  gamma_est <- coef(ols2)[3] # intercept, beta, gamma
-  gamma_var <- diag(vcov(ols2))[3] # var of gamma
-  # Compute Sobel's stat
-  sobel_val <- alpha_est * gamma_est / 
-    sqrt(alpha_est^2 * gamma_var + gamma_est^2 * alpha_var +
-           alpha_var * gamma_var) 
-  # additional factor on last line sometimes omitted from denom
-  c(estimate = alpha_est * gamma_est, 
-    stat = sobel_val)
-}
-alpha <- 2
-beta <- 0.5
-gamma <- 0
-sobel_null <- matrix(0, nrow = 1e4, ncol = 2)
-n <- 20 # sample size
-for(i in seq_len(nrow(sobel_null))){
-  X <- rbinom(n = n, size = 1, prob = c(0.5, 0.5))
-  M <- alpha*X + rnorm(n)
-  Y <- beta*X + gamma*M + rnorm(n)
-  sobel_null[i,] <- sobel(data.frame(Y = Y, X = X, M = M))
-}
+We consider estimation of the linear mediation models of the form
+\begin{align*}
+M \mid X, \boldsymbol{Z}_M &= c_M + \alpha X + \boldsymbol{Z}_M^\top\boldsymbol{\delta} + \varepsilon_M\\
+Y \mid M, X, \boldsymbol{Z}_Y&= c_Y + \beta X + \gamma M + \boldsymbol{Z}_Y^\top\boldsymbol{\omega} + \varepsilon_Y
+\end{align*}
+The total effect is $\beta + \alpha \gamma$.
+
+The average causal mediation effect (ACME) or natural indirect effect for treatment at level $t$ is obtained by changing the potential outcome for the mediator while fixing the treatment level, so 
+\begin{align*}
+\mathsf{E}[Y_i\{t, M_i(1)\} - Y_i\{t, M_i(0)\}].
+\end{align*}
+
+The set of control covariates for the first model $\boldsymbol{Z}_M$ and $\boldsymbol{Z}_Y$, need not be the same. In a randomized experiment, there is no need to include any control lest we mistakingly create correlation by including colliders.
+
+# Example 1
+
+We consider an example from Experiment 1 of @Bastian:2014, who experienced the effect of the effect of shared pain (through a manipulation) on bonding.
+
+> This effect of pain remained when controlling for age (p = .048), gender (p = .052), and group size (p = .050). None of these variables were significantly correlated with experimental condition (ps > .136) or perceived bonding (ps > .925). To determine whether the marginal tendency for the pain tasks to be viewed as more threatening than the control tasks mediated the effect of pain on perceived bonding, we conducted a bootstrap analysis (Preacher & Hayes, 2008) using 5,000 resamples. The results of this analysis revealed that threat was not a significant mediator, indirect effect = −0.11, SE = 0.09, 95% CI = [−0.34, 0.03].
+
+There are several problems with the description: while it seems
+that some covariate (age, gender, group size) were added to regression models, it is unclear whether they could be confounders, whether their effect is linear and in which (if any model they are included). Stating "bootstrap analysis" is the equivalent of "running a statistical test": so vague it could mean anything, and the fact the output is random does not help with reproducibility.
+
+
+The response variable $Y$ is `bonding`, the experimental factor `condition` and `threat`, the average ALES subscale about the perception of the physical task, is the postulated mediator.
+
+We use the `mediation` package [@mediationR] for the model; the package certainly isn't needed (nor the PROCESS macros) to run the bootstrap, which we could obtain with a single for-loop. However, it has utilities, notably for checking model assumptions, that are convenient. 
+
+
+```{r}
+#| message: false
+library(mediation, quietly = TRUE)
+data(BJF14_S1, package = "hecedsm")
+MsX <- lm(threat ~ condition +
+            gender + groupsize + age, 
+          data = BJF14_S1)
+YsXM <- lm(bonding ~ threat + 
+             gender + groupsize + age +
+             condition,
+           data = BJF14_S1)
+```
+
+Both of the `threat` and `bonding` measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.
+
+```{r}
+#| eval: true
+#| echo: true
+#| cache: true
+#| message: false
+set.seed(80667)
+linmed <- mediate(
+  model.m = MsX,
+  model.y = YsXM,
+  sims = 1000L, # number of bootstrap sim
+  boot = TRUE, # use bootstrap
+  boot.ci.type = "perc", #percentile bootstrap
+  mediator = "threat", #name of mediator
+  treat = "condition", #name of treatment
+  control.value = "Control", # name of control level
+  treat.value = "Pain")
+summary(linmed)
+```
+
+
+The first line gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect and the third the total effect. The point estimate for the indirect effect is $\alpha\gamma$ or `coef(YsXM)['threat'] * coef(MsX)['conditionPain']` which is `r round(coef(YsXM)['threat'] * coef(MsX)['conditionPain'], 2)`.
+The bootstrap sampling distribution is skewed to the left, which is reflected in the asymmetry of the percentile confidence interval.
+
+```{r}
+#| eval: true
+#| echo: false
+#| label: fig-densityACME
+#| fig-cap: "Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect $\\alpha\\gamma$."
 library(ggplot2)
-ggplot(data = data.frame(stat = sobel_null[,2]),
-       aes(x = stat)) +
-  geom_histogram(aes(y = ..density..),
-                 bins = 30,
-                 alpha = 0.1) + 
-  stat_function(fun = dnorm, 
-                n = 1001, 
-                col = "blue") + labs(x = "Sobel statistic") + 
-  theme_classic()
+ggplot(data = data.frame(x = linmed$d1.sims),
+       aes(x = x)) + 
+  geom_vline(xintercept = linmed$d1, linetype = "dashed") +
+  geom_vline(xintercept = quantile(linmed$d1.sims, 
+                                   c(0.025, 0.975)), 
+             linetype = "dashed", alpha = 0.1) +
+  geom_density() +
+  scale_y_continuous(limits = c(0,6), expand = c(0,0)) +
+  theme_classic() + 
+  labs(y = "", x = "ACME",
+       subtitle = "Density of bootstrap replicates")
+```
+
+
+
+The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the (least square) coefficient $\widehat{\gamma}$ is $\gamma + \mathsf{Co}(\varepsilon_1, \varepsilon_3)/\mathsf{Va}(\varepsilon_1)$ [@Bullock.Green.Ha:2010]. The variance of the error of the mediation can be estimated and we can vary the correlation due to confounding.
+
+```{r}
+#| eval: true
+#| echo: true
+linmed_sensitivity <- medsens(linmed)
+summary(linmed_sensitivity)
+plot(linmed_sensitivity)
+```
+
+The `medsens` function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments.
+
+We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in [-0.4, 0.4]$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size.
+
+According to the documentation of the `medsens` function (`?medsens`), there are two options, either computing the proportion of the total (tilde, `R^2_M~R^2_Y`) or residual (starred, `R^2_M*R^2_Y*`) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. 

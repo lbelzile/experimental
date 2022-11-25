@@ -11,13 +11,13 @@ Complete this task in teams of up to three students.
 
 ## Task 1
 
-@Liu:2022 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM22_S5b`.
+@Liu.Rim.Min.Min:2022 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM22_S5b`.
 
 1. Fit the linear mediation model using the PROCESS macro or `mediate` function from the `mediation` package
   - use the nonparametric bootstrap with the percentile method
   - compare the coefficients with those of Figure 1 from the paper.
 2. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.
-3. The paper does not discuss any of the model assumptions.  List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by @Liu:2022.
+3. The paper does not discuss any of the model assumptions.  List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by @Liu.Rim.Min.Min:2022.
 
 
 ```{r}
