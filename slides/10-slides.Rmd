@@ -187,52 +187,10 @@ Those are based on profile likelihood methods (asymmetric).
 
 The variability of the measurements and between employees is very different from zero.
 
-???
 
-Even with old school, we can get confidence intervals but only in simple designs like this one-way.
-
----
-# Profile plots
 
 ```{r}
-#| eval: true
-#| echo: false
-lattice::xyplot(profile(rmod))
-```
-
-
----
-
-# Predictions of random effects
-
-.small[
-There is no mean parameter for employees, but we can get the *best linear unbiased predictor*.
-]
-
-```{r}
-#| eval: true
-#| echo: false
-#| fig-cap: "Catterpilar plot of best linear unbiased prediction of random effects with Wald confidence intervals."
-#| label: fig-catterpilar
-#| out-width: '70%'
-#| fig-width: 8
-#| fig-height: 2.5
-ranef_mod <- ranef(rmod, condVar = TRUE)
-d1 <- lattice::dotplot(ranef_mod)
-d1$id$main <- NULL
-d1$id
-```
-
----
-
-# Shrinkage or regularization effect
-
-.small[
-Predictions of random effects $\alpha_i$'s are shrunk towards zero (regularization effect).
-]
-
-```{r}
-#| eval: true
+#| eval: false
 #| echo: false
 #| fig-align: 'center'
 #| out-width: '60%'
@@ -265,6 +223,11 @@ ggplot(data = data.frame(
        subtitle = "predictions of random effects are shrunk towards global mean, more so for larger values.") + 
   theme_classic()
 ```
+
+???
+
+Even with old school, we can get confidence intervals but only in simple designs like this one-way.
+
 
 ---
 # Mixed models
