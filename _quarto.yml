@@ -145,6 +145,8 @@ website:
               file: example/mixedmodel.qmd
             - text: "Linear causal mediation"
               file: example/linearmediation.qmd
+            - text: "Nonparametric tests"
+              file: example/nonparametric.qmd
 
 
   page-footer:

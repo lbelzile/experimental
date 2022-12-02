@@ -5,8 +5,8 @@ date: "2022-12-02"
 
 ## Content
 
-- Nonparametric tests (signed rank, Wilcoxon, Kruskall--Wallis, and Friedman tests)
-- Models and tests for count data ($\chi^2$ test, Fisher exact test, etc.)
+- Nonparametric tests
+- Models and tests for count data
 
 
 ## Learning objectives
@@ -20,8 +20,8 @@ At the end of the session, students should be capable of
 
 ## Readings
 
-- <i class="fas fa-book"></i>[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019
-
+- {{< fa book >}}[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019
+-  [Chapter 12](https://lbelzile.github.io/math80667a/nonparametric-tests.html) of the course notes
 
 
 ## Slides
@@ -32,6 +32,8 @@ At the end of the session, students should be capable of
 #| include: false
 source(here::here("R", "slide-things.R"))
 ```
+
+<!--
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/13-slides")
@@ -44,6 +46,9 @@ xaringanExtra::embed_xaringan(
   ratio = "16:9"
 )
 ```
+
+-->
+
 
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.

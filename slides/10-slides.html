@@ -4,7 +4,7 @@
     <title>Introduction to mixed models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-16" />
+    <meta name="date" content="2022-11-29" />
     <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -188,38 +188,14 @@ Those are based on profile likelihood methods (asymmetric).
 
 The variability of the measurements and between employees is very different from zero.
 
+
+
+
+
 ???
 
 Even with old school, we can get confidence intervals but only in simple designs like this one-way.
 
----
-# Profile plots
-
-&lt;img src="10-slides_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-# Predictions of random effects
-
-.small[
-There is no mean parameter for employees, but we can get the *best linear unbiased predictor*.
-]
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="10-slides_files/figure-html/fig-catterpilar-1.png" alt="Catterpilar plot of best linear unbiased prediction of random effects with Wald confidence intervals." width="70%" /&gt;
-&lt;p class="caption"&gt;Catterpilar plot of best linear unbiased prediction of random effects with Wald confidence intervals.&lt;/p&gt;
-&lt;/div&gt;
-
----
-
-# Shrinkage or regularization effect
-
-.small[
-Predictions of random effects `\(\alpha_i\)`'s are shrunk towards zero (regularization effect).
-]
-
-&lt;img src="10-slides_files/figure-html/unnamed-chunk-5-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Mixed models
