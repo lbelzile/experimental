@@ -254,7 +254,7 @@ Baron and Kenny recommended running regressions and estimating the three models 
 2. whether $\mathscr{H}_0: \tau=0$ (total effect)
 3. whether $\mathscr{H}_0: \gamma=0$
 
-The conditional direct effect $\alpha\gamma$ and we can check whether it's zero using Sobel's test statistic.
+The conditional indirect effect $\alpha\gamma$ and we can check whether it's zero using Sobel's test statistic.
 
 Problems?
 ???

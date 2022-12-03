@@ -20,10 +20,10 @@ At the end of the session, students should be capable of
 
 ## Readings
 
-- - <i class="fas fa-book"></i>Chapter 11 of the [course notes](https://lbelzile.github.io/math80667a/causal-inference.html)
+- <i class="fas fa-book"></i>Chapter 11 of the [course notes](https://lbelzile.github.io/math80667a/causal-inference.html)
 - <i class="fas fa-book"></i>Chapter 11 of @Vanderweele:2015
 
-- Linear mediation [@Baron/Kenny:1986]
+- Linear mediation model [@Baron/Kenny:1986]
 - Limitations of the linear mediation model approach [@Bullock.Green.Ha:2010]
 - Model assumptions [@Pearl:2014, @Imai:2010]
 
