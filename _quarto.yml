@@ -147,7 +147,8 @@ website:
               file: example/linearmediation.qmd
             - text: "Nonparametric tests"
               file: example/nonparametric.qmd
-
+            - text: "Count data"
+              file: example/counts.qmd
 
   page-footer:
     left: |

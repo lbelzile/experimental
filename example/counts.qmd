@@ -1,0 +1,165 @@
+---
+title: "Count data"
+linktitle: "Count data"
+type: docs
+editor_options: 
+  chunk_output_type: console
+execute:
+  echo: true
+  eval: true
+  message: false
+  warning: false
+  cache: true
+  fig-align: 'center'
+  out-width: '80%'
+---
+
+Many experiments can have binary outcomes: aggregating these results by factor leads to contingency tables, which contain the total count per factor combination. These data can be understood in the same way as other ANOVA models, but with the aggregated responses. The following section is meant as both an introduction to the topic, showcasing examples of tests and their application. It also highlights the unifying theme of the book: statistics as summary of evidence, and decision-making in the presence of uncertainty. We use examples drawn from published articles in management sciences.
+
+
+
+We consider for simplicity a bivariate contingency table with $I$ rows and $J$ columns; the count in the $(i,j)$ entry of the matrix is $n_{ij}$ and there are $n$ observations overall.
+
+
+Pearson's $X^2$ goodness of fit test examines discrepancies between  postulated proportions in each cell (with the sum of the probabilities summing to one, $\sum_{i=1}^I \sum_{j=1}^J p_{ij0}=1$). The test compare the expected counts $E_{ij}=np_{ij0}$ with the observed counts $O_{ij}=n_{ij}$. As summary of evidence, we take
+$$ X^2 = \sum_{i,j} \frac{(E_{ij}-O_{ij})^2}{E_{ij}},$$
+the squared difference between expected and observed counts, divided by the expected counts.^[The square root of the summands represents the so-called Pearson residuals.]
+
+The contingency table described above represents a two-way factorial design on which we impose $IJ-1$ constraints. As in any experiment, there are logical comparisons that could be made.
+
+The model with the two-way interaction has $IJ$ parameters, one for each cell. There, the estimated proportions are simply the observed counts in each cell, divided by the overall sample size. Such model has as many parameters as observations and is said to be **saturated**. The first departure one can consider is thus having different marginal proportions in each row and columns, but no interaction. This hypothesis of **independence** between factors thus compares the model with interaction to the one without.
+
+## Study 1 - Lee and Choi (2019)
+
+@Lee.Choi:2019 study the perception of consumers when faced with inconsistent descriptions of times (when the description doesn't match the image). The dataset `LC19_T2` contains the counts for the expected number of toothbrushes for each combination of image and text.
+
+We compute the $X^2$ test of independence between 
+
+a. the text description (`text`) and the expected number of toothbrushes (`expected`).
+b. the image and expected number. 
+
+
+In **R**, the `chisq.test` function will compute the test of independence between rows and columns if you provide a matrix with the cross-counts.
+
+```{r}
+#| eval: true
+#| echo: true
+data(LC19_T2, package = "hecedsm")
+contingency_tab <- 
+  with(LC19_T2, 
+       xtabs(count ~ text + expected))
+# Score test, chi-square (2) null
+chisq.test(contingency_tab)
+```
+
+
+We can check that our summaries match those reported by the authors.
+
+Models for count data are often obtained by specifying a Poisson distribution for the response and setting factors as explanatories. This makes it perhaps clearer what the $\chi^2$ test of independence is computing. Note that this isn't the only statistic to compare: below, I fit both the saturated model and the model without interaction and use regular interactions to fit them. The regression model specifies that the response is counts (`family=poisson`).
+
+```{r}
+#| eval: true
+#| echo: true
+# Fit Poisson model
+cmod1 <- glm(
+  count ~ text * expected,
+  data = LC19_T2, 
+  family = poisson)
+cmod0 <- glm(
+  count ~ text + expected,
+  data = hecedsm::LC19_T2, 
+  family = poisson)
+# Likelihood ratio test, chi-square (2) null
+car::Anova(cmod1, type = 3)
+# Score test - the "chi-squared test of independence"
+anova(cmod0, cmod1, test = "Rao")
+```
+
+The results of the likelihood ratio test and that of the score test are slightly different, but they test the same hypothesis. Here, we reject the null hypothesis of independence between text and expected: there is indeed an interaction present.
+
+## Study 2 - Bertrand and Mullainathan (2004)
+
+While by far the most common, there are more specialized hypothesis that can be considered with design. The following example showcases a test of symmetry for a square contingency table.
+
+
+We consider a  study from @Bertrand.Mullainathan:2004, who study racial discrimination in hiring based on the consonance of applicants names. The authors created curriculum vitae for four applicants and randomly allocated them a name, either one typical of a white person or a black person. The response is a count indicating how many of the applicants were called back (out of two black and two white) depending on their origin.
+
+If there was no racial discrimination (null hypothesis), we would expect the average number of times a white applicant was called back (but no black applicant) to be the same as a single black applicant (but no white). Only the entries for different numbers of call-back (either 0 vs 2, 0 vs 1 or 1 vs 2 for either race) are instructive about our question of interest. The data are reported in @tbl-contingencyMB.
+
+
+```{r}
+#| eval: TRUE
+#| echo: false
+#| tbl-cap: "Contingency table for the racial discrimination in labor market."
+#| label: tbl-contingencyMB
+BM04_T2 <- rbind(c(1103, 74, 19),
+      c(33, 46, 18),
+      c(6, 7, 17))
+colnames(BM04_T2) <- c("no", "1W", "2W")
+rownames(BM04_T2) <- c("no", "1B", "2B")
+knitr::kable(BM04_T2)
+```
+
+
+```{r}
+#| eval: true
+#| echo: false
+BM04_T2 <- rbind(c(1103, 74, 19),
+      c(33, 46, 18),
+      c(6, 7, 17))
+colnames(BM04_T2) <- c("no", "1W", "2W")
+rownames(BM04_T2) <- c("no", "1B", "2B")
+
+qty <- data.frame(white = factor(rep(c("no", "1", "2"), each = 3)),
+                  black = factor(rep(c("no", "1", "2"), length.out = 9)),
+                  count = as.vector(BM04_T2))
+
+# library(emmeans)
+# model <- glm(count ~ white*black, #saturated model 
+#              data = qty, 
+#              family = poisson)
+# library(emmeans)
+# emmeans(model, specs = c("white","black")) |> 
+#   contrast(method = 
+#               list("1vs2" = c(0,1,0,-1,0,0,0,0,0),
+#                    "1vs0" = c(0,0,1,0,0,0,-1,0,0),
+#                    "2vs0" = c(0,0,0,0,0,1,0,-1,0))) |>
+#   emmeans::joint_tests()
+
+PearsonX2 <- (74-33)^2/(74+33) + (19-6)^2/(19+6) + (18-7)^2/(18+7)
+pval <- pchisq(PearsonX2, df = 3, lower.tail = FALSE)
+```
+
+The hypothesis of symmetry postulates that the proportion on either side of the diagonal are the same, so $p_{ij}=p_{ji}$. Under the null hypothesis model, our best estimate of the proportion is thus $(n_{ij} + n_{ji})/2$, which is the sample average of those cells. The statistic is analogous to Fisher's goodness of fit test, except that the expected counts are estimated here. There are $J^2$ entries and we have $J(J-1)/2$ constraints (the degrees of freedom).
+
+The test statistic reduces to 
+$$X^2 = \sum_{i,j} \frac{(E_{ij}-O_{ij})^2}{E_{ij}} = \sum_{j=1}^J \frac{(n_{ij} - n_{ji})^2}{n_{ij}+n_{ji}}.$$ The statistic is `r round(PearsonX2,3)`, to be compared with a $\chi^2_3$ benchmark (three off-diagonal entries). The $p$-value is $`r round(pval, 6)`$, highly suggestive of racial discrimination.
+
+```{r}
+#| eval: false
+#| echo: false
+data(MULTI21_D1, package = "hecedsm")
+contingency <- xtabs(
+  count ~ age + frequency, 
+  data = MULTI21_D1)
+chisq.test(contingency)
+
+counts_5vs7 <- xtabs(
+  count ~ age + frequency, 
+  data = MULTI21_D1,
+  subset = age %in% c("5yo", "7yo"),
+  drop.unused.levels = TRUE)
+chisq.test(counts_5vs7)
+effectsize::cramers_v(chisq.test(counts_5vs7))
+
+data(DA22_E2, package = "hecedsm")
+# How many observations?
+nrow(DA22_E2)
+tabs <- with(DA22_E2, table(purchased, format))
+chisq.test(tabs, correct = FALSE)
+# In the paper, all participants were included for this test but other were excluded at a latter stage. 
+# DA22_E2 only includes the subset
+
+
+
+```
