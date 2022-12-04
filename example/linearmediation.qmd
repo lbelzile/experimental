@@ -51,7 +51,7 @@ YsXM <- lm(bonding ~ threat +
 ```{r}
 #| eval: true
 #| echo: false
-coefs1 <- summary(YsMX) |> broom::tidy() 
+coefs1 <- summary(YsXM) |> broom::tidy() 
 coefs1$term[2:3] <- c("condition [pain]", "gender [female]")
 coefs2 <- summary(MsX) |> broom::tidy()
 coefs2$term[2] <- c("consistency")

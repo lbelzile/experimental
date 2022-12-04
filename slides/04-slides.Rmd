@@ -591,7 +591,7 @@ Consider a family of $m$ hypothesis tests and perform each test at level $\alpha
 - reject $i$th null $\mathscr{H}_{i0}$ if the associated _p_-value $p_i \leq \alpha/m$.
 - build confidence intervals similarly with $1-\alpha/m$ quantiles.
 
-If the (raw) $p$-values are reported, reject $\mathscr{H}_{0i}$ if $m \times p_i \geq \alpha$ (i.e., multiply reported $p$-values by $m$)
+If the (raw) $p$-values are reported, reject $\mathscr{H}_{0i}$ if $m \times p_i \leq \alpha$ (i.e., multiply reported $p$-values by $m$)
 
 
 ???

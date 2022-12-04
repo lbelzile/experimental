@@ -336,7 +336,7 @@ p2 <- data.frame(
 p3 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
   factorB = c("b1", "b2", "b1", "b2"),
-  means = c(10, 13, 5, 2)
+  means = c(5, 10, 5, 10)
 )
 p4 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
@@ -346,12 +346,12 @@ p4 <- data.frame(
 p5 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
   factorB = c("b1", "b2", "b1", "b2"),
-  means = c(10, 18, 5, 7)
+  means = c(5, 10, 10, 5)
 )
 p6 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
   factorB = c("b1", "b2", "b1", "b2"),
-  means = c(5, 10, 5, 10)
+  means = c(10, 13, 5, 2)
 )
 p7 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
@@ -361,19 +361,20 @@ p7 <- data.frame(
 p8 <- data.frame(
   factorA = c("a1", "a1", "a2", "a2"),
   factorB = c("b1", "b2", "b1", "b2"),
-  means = c(5, 10, 10, 5)
+  means = c(10, 18, 5, 7)
 )
-all_22s <- rbind(p1, p2, p6, p4, p8, p5, p3, p7)
+
+all_22s <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
 type <- factor(rep(1:8, each = 4), 
                labels = c("no effect",
                           "main effect of A only",
                           "main effect of B only",
                           "both main effects",
                           "interaction only",
-                          "main effect of A + interaction",
-                          "main effect of B + interaction",
-                          "main effects + interaction"
-                          ))
+                          "main effect of A and interaction",
+                           "main effect of B and interaction",
+                          
+                          "both main effects and interaction" ))
 all_22s <- cbind(all_22s, type)
 options(ggplot2.discrete.colour= MetBrewer::met.brewer(name = "Hiroshige", 2))
 ggplot(all_22s, 
@@ -385,11 +386,12 @@ ggplot(all_22s,
   geom_point() +
   geom_line() +
   labs(x = "factor A",
+       subtitle = "mean response",
        y = "",
        color = "factor B") +
   facet_wrap(~type, nrow = 2) +
   theme_classic() +
-  theme(legend.position = "right")
+  theme(legend.position = "bottom")
 ```
 
 
