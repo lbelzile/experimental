@@ -44,6 +44,31 @@ linmedmod <- mediation::mediate(
 
 Study 4 of @Risen/Gilovich:2008 (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the @Baron/Kenny:1986 methodology. 
 
+```{r}
+#| eval: false
+#| echo: false
+Sobel <- function(alpha, 
+                  gamma, 
+                  var_alpha, 
+                  var_gamma){
+  stat <- alpha*gamma / 
+    sqrt(alpha^2*var_gamma + 
+           gamma^2*var_alpha + 
+           var_alpha*var_gamma)
+  pval <- 2*pnorm(-abs(stat))
+  return(list(stat = stat, pval = pval))
+}
+Sobel(alpha = 0.15, 
+      gamma = -1.8, 
+      var_alpha = 0.05^2, 
+      var_gamma = 0.74^2)
+
+Sobel(alpha = -0.1, 
+      gamma = -2.17, 
+      var_alpha = 0.04^2, 
+      var_gamma = 0.67^2)
+```
+
 1. Read the description and comment on the following aspects:
     a. use of the Baron and Kenny original testing procedure^[The latter is said to be suboptimal; explain why in your words.]
     b. the plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.
