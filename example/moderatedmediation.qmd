@@ -1,0 +1,136 @@
+---
+title: "Moderated mediation"
+type: docs
+editor_options: 
+  chunk_output_type: console
+---
+
+This example from @Roczniewska.Higgins:2019 is an instance of moderated mediation model with two postulated mediators. While such models can be fitted with the PROCESS macros [@Hayes:2022], we illustrate below the postulated causal diagram, the nonparametric bootstrap. We pay particular attention to verification of the linear model assumptions.
+
+The context of the research is a natural experiment (or quasi-experiment), whereby changes in the schooling system leads to the manipulation under study
+
+The statistical model in @Roczniewska.Higgins:2019 can be implicitly deduced from Table 2: the manipulated variable is the message framing and there are three postulated mediators (message fluency, message engagement, process fairness), the latter of which interacts or moderate with the change in outcome.and two moderators assumed to impact both mediators through linear interactions, termed promotion focus and prevention focus.
+
+The mean response from the linear models are 
+
+$$
+\begin{align}
+\mathsf{E}(\texttt{PF}) &= \alpha_0 + \alpha_1 \texttt{Fram} + \alpha_2\texttt{Prom} + \alpha_3 \texttt{Prev}\\&\quad  + \alpha_4 \texttt{Fram}\times\texttt{Prom} +  \alpha_5 \texttt{Fram}\times\texttt{Prev}
+\end{align}
+$$ {#eq-mediator1}
+
+$$
+\begin{align}
+\mathsf{E}(\texttt{ME}) &= \beta_0 + \beta_1 \texttt{Fram} + \beta_2\texttt{Prom} + \beta_3 \texttt{Prev}\\&\quad  + \beta_4 \texttt{Fram}\times\texttt{Prom} +  \beta_5 \texttt{Fram}\times\texttt{Prev}
+\end{align}
+$$ {#eq-mediator2}
+
+$$
+\begin{align}
+\mathsf{E}(\texttt{MF}) &= \alpha_0 + \alpha_1 \texttt{Fram} + \alpha_2\texttt{Prom} + \alpha_3 \texttt{Prev}\\&\quad  + \alpha_4 \texttt{Fram}\times\texttt{Prom} +  \alpha_5 \texttt{Fram}\times\texttt{Prev}
+\end{align}
+$$ {#eq-mediator3}
+
+$$
+\begin{align}
+\mathsf{E}(\texttt{Open}) &= \gamma_0 + \gamma_1 \texttt{Fram} + \gamma_2\texttt{Prom} + \gamma_3 \texttt{Prev}\\&\quad  + \gamma_4 \texttt{Fram}\times\texttt{Prom} +  \gamma_5 \texttt{Fram}\times\texttt{Prev} \\& +\gamma_6 \texttt{PF} + \gamma_7\texttt{ME} + \gamma_8 \texttt{MF} +  \gamma_9\texttt{CO} \\&\quad+ \gamma_{10} \texttt{ME} \times \texttt{CO} + 
++ \gamma_{11} \texttt{PF} \times \texttt{CO} + 
++ \gamma_{12} \texttt{MF} \times \texttt{CO}
+\end{align}
+$$ {#eq-response}
+
+yielding a total of 31 coefficients for $n=198$ observations.
+
+```{r}
+#| eval: true
+#| echo: true
+#| cache: true
+data(RH19_S1, package = "hecedsm")
+set.seed(80667)
+joint_reg <- function(data, indices = 1:nrow(data)){
+  mod1 <- lm(fairness ~ 
+               regfocus * (promem + prevem), 
+             data = data[indices,])
+  mod2 <- lm(engagement ~ 
+               regfocus * (promem + prevem), 
+             data = data[indices,])
+  mod3 <- lm(fluency ~ 
+               regfocus * (promem + prevem), 
+             data = data[indices,])
+  resp <- lm(dopenness ~
+               regfocus * (promem + prevem) +
+               (fairness + fluency + 
+       engagement) * change,
+             data = data[indices,])
+  coefs <- c(coef(mod1), 
+             coef(mod2), 
+             coef(mod3), 
+             coef(resp))
+  return(coefs)
+}
+npboot <- boot::boot(
+  data = RH19_S1, 
+  statistic = joint_reg,
+  R = 9999, # number of bootstrap replicates
+  sim = "ordinary")
+results <- rbind(
+  npboot$t0, 
+  apply(npboot$t, 2, 
+        quantile, c(0.025, 0.975)))
+```
+
+
+<!--
+dag {
+bb="-2.916,-3.142,3.923,3.622"
+M1 [pos="-1.766,-1.563"]
+M2 [pos="-0.668,-1.294"]
+M3 [pos="0.661,-0.551"]
+V1 [pos="-2.347,0.517"]
+V2 [pos="1.302,-2.578"]
+W [pos="1.957,1.681"]
+X [exposure,pos="-1.332,1.514"]
+Y [outcome,pos="0.807,0.856"]
+M1 -> Y
+M2 -> Y
+M3 -> Y
+V1 -> M1
+V1 -> M2
+V1 -> M3
+V1 -> Y
+V2 -> M1
+V2 -> M2
+V2 -> M3
+V2 -> Y
+W -> Y
+X -> M1
+X -> M2
+X -> M3
+X -> Y
+}
+-->
+
+
+```{r}
+testImplications <- function( covariance.matrix, sample.size ){
+	library(ggm)
+	tst <- function(i){ pcor.test( pcor(i,covariance.matrix), length(i)-2, sample.size )$pvalue }
+tos <- function(i){ paste(i,collapse=" ") }
+implications <- list(c("M1","M2","V1","V2","X"),
+		c("M1","M3","V1","V2","X"),
+		c("M1","W"),
+		c("M2","M3","V1","V2","X"),
+		c("M2","W"),
+		c("M3","W"),
+		c("V1","V2"),
+		c("V1","W"),
+		c("V1","X"),
+		c("V2","W"),
+		c("V2","X"),
+		c("W","X"))
+	data.frame( implication=unlist(lapply(implications,tos)),
+		pvalue=unlist( lapply( implications, tst ) ) )
+
+}
+
+```

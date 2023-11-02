@@ -12,12 +12,12 @@ instructor:
 
 course:
   number: "MATH 80667A"
-  semester: "Fall 2022"
-  days: "Fridays"
+  semester: "Winter 2023"
+  days: "Monday"
   time: "8:30-11:30"
-  location: "[Côte-Sainte-Catherine, Groupe Deschênes](https://www.hec.ca/campus/edifices/cote_sainte_catherine/1er_etage/salles_cours/deschenes.html)"
+  location: "TBA"
   github: "https://www.github.com/lbelzile/experimental"
-  copyright_year: "2022"
+  copyright_year: "2021-2023"
 
 university:
   name: "HEC Montréal"

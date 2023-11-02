@@ -11,6 +11,10 @@ Complete this task in teams of up to three students.
 
 ## Task 1
 
+Read @Rohrer:2022 and write down a summary
+
+## Task 2
+
 @Liu.Rim.Min.Min:2022 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM22_S5b`.
 
 1. Fit the linear mediation model using the PROCESS macro or `mediate` function from the `mediation` package
@@ -40,7 +44,7 @@ linmedmod <- mediation::mediate(
    sims = 5000L)
 ```
 
-## Task 2
+## Task 3
 
 Study 4 of @Risen/Gilovich:2008 (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the @Baron/Kenny:1986 methodology. 
 
@@ -75,4 +79,4 @@ Sobel(alpha = -0.1,
 2. Using the summary statistics and coefficients estimates reported, recompute Sobel's statistic^[Some authors may be excluding the $\mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})$ term from the equation.] and the _p_-value and compare them with the values reported.
 .^[In **R**, the $p$-value for the two-sided test can be computed via `2*pnorm(abs(stat), lower.tail = FALSE)`, where `stat` is Sobel's statistic.]
 3. List the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors? 
-3. Can the authors successfully claim mediation considering the study uses an experimental design and randomly allocates condition? Why or why not?
+4. Can the authors successfully claim mediation considering the study uses an experimental design and randomly allocates condition? Why or why not?

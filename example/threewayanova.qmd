@@ -180,7 +180,7 @@ simpleBpC
 
 We could also look at **simple contrasts** by levels of age comparing the three material and looking at low versus high emotions. This amounts to reducing data to a two-way ANOVA in a first step, then taking each depth (age) group in turn and computing a contrast.
 
-Using the notation $A \times B \times $C$ to denote the feedback, material and age groups, this compares
+Using the notation $A \times B \times C$ to denote the feedback, material and age groups, this compares
 
 $$\mathscr{H}_0: \frac{1}{2} \left(\mu_{.1k} + \mu_{.2k}\right) = \mu_{.3k}$$
 for age group $k$. 

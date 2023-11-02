@@ -98,7 +98,7 @@ ttest <- t.test(srank)
 You can think of the test as performing a paired $t$-test for the 31 signed ranks $R_i =\mathsf{sign}(D_i) \mathsf{rank}(|D_i|)$ and testing whether the mean is zero. The $p$-value obtained by doing this after discarding zeros is $`r round(ttest$p.value, 3)`$, which is pretty much the same as the more complicated approximation.
 
 
-## Study 2
+## Study 2: Online vs in-person meetings
 
 @Brucks.Levav:2022 measure the attention of participants based on condition using an eyetracker.
 
