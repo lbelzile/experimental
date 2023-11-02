@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Experimental Designs and Statistical Methods - Linear mediation model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="../site_libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
+<script src="../site_libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Experimental Designs and Statistical Methods</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
+ <span class="menu-text">Evaluations</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../example/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a" rel="" target="">
+ <span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://edsmf22.slack.com" rel="" target=""><i class="bi bi-slack" role="img" aria-label="Slack">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://lbelzile.github.io/hecedsm" rel="" target=""><i class="bi bi-box" role="img" aria-label="Datasets">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/linearmediation.html">Linear causal mediation</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Installation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>R</strong> and RStudio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Examples</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/onewayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/twowayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/threewayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis of covariance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/effectsizepower.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effect size and power</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/repeated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repeated measures ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/manova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/mixedmodel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear mixed models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/linearmediation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Linear causal mediation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/nonparametric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonparametric tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/counts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Count data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link active" data-scroll-target="#example-1">Example 1</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Linear mediation model</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Consider linear regression models in a system where some response <span class="math inline">\(Y\)</span> depends on a mediator is <span class="math inline">\(M\)</span> and an experimental factor is <span class="math inline">\(X\)</span>. We consider estimation of linear mediation models of the form <span class="math display">\[\begin{align*}
+M \mid X, \boldsymbol{Z}_M &amp;= c_M + \alpha X + \boldsymbol{Z}_M^\top\boldsymbol{\delta} + \varepsilon_M\\
+Y \mid M, X, \boldsymbol{Z}_Y&amp;= c_Y + \beta X + \gamma M + \boldsymbol{Z}_Y^\top\boldsymbol{\omega} + \varepsilon_Y,
+\end{align*}\]</span> where <span class="math inline">\(\boldsymbol{Z}_M\)</span> (respectively <span class="math inline">\(\boldsymbol{Z}_Y\)</span>) are explanatory variables for the mediator <span class="math inline">\(M\)</span> (response <span class="math inline">\(Y\)</span>).</p>
+<div class="cell" data-layout-align="center" data-hash="linearmediation_cache/html/fig-dag-linearmed_cf15d950cc901d69e0bbb64fc2ccee6e">
+<div class="cell-output-display">
+<div id="fig-dag-linearmed" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="linearmediation_files/figure-html/fig-dag-linearmed-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Directed acyclic graph for linear mediation model.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The total effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta + \alpha \gamma\)</span>.</p>
+<p>The average causal mediation effect (ACME) or natural indirect effect for treatment at level <span class="math inline">\(t\)</span> is obtained by changing the potential outcome for the mediator while fixing the treatment level, so <span class="math display">\[\begin{align*}
+\mathsf{E}[Y_i\{t, M_i(1)\} - Y_i\{t, M_i(0)\}].
+\end{align*}\]</span></p>
+<p>The set of control covariates for the first model <span class="math inline">\(\boldsymbol{Z}_M\)</span> and <span class="math inline">\(\boldsymbol{Z}_Y\)</span>, need not be the same. In a randomized experiment, there is no need to include any control lest we mistakenly create correlation by including colliders.</p>
+<section id="example-1" class="level1">
+<h1>Example 1</h1>
+<p>We consider an example from Experiment 1 of <span class="citation" data-cites="Bastian:2014">Bastian et al. (<a href="#ref-Bastian:2014" role="doc-biblioref">2014</a>)</span>, who experienced the effect of the effect of shared pain (through a manipulation) on bonding.</p>
+<blockquote class="blockquote">
+<p>This effect of pain remained when controlling for age (p = .048), gender (p = .052), and group size (p = .050). None of these variables were significantly correlated with experimental condition (ps &gt; .136) or perceived bonding (ps &gt; .925). To determine whether the marginal tendency for the pain tasks to be viewed as more threatening than the control tasks mediated the effect of pain on perceived bonding, we conducted a bootstrap analysis (Preacher &amp; Hayes, 2008) using 5,000 resamples. The results of this analysis revealed that threat was not a significant mediator, indirect effect = −0.11, SE = 0.09, 95% CI = [−0.34, 0.03].</p>
+</blockquote>
+<p>There are several problems with the description: while it seems that some covariate (age, gender, group size) were added to regression models, it is unclear whether they could be confounders, whether their effect is linear and in which (if any model they are included). Stating “bootstrap analysis” is the equivalent of “running a statistical test”: so vague it could mean anything, and the fact the output is random does not help with reproducibility.</p>
+<p>The response variable <span class="math inline">\(Y\)</span> is <code>bonding</code>, the experimental factor <code>condition</code> and <code>threat</code>, the average ALES subscale about the perception of the physical task, is the postulated mediator.</p>
+<p>We use the <code>mediation</code> package <span class="citation" data-cites="mediationR">(<a href="#ref-mediationR" role="doc-biblioref">Tingley et al., 2014</a>)</span> for the model; the package certainly isn’t needed (nor the PROCESS macros) to run the bootstrap, which we could obtain with a single for-loop. However, it has utilities, notably for checking model assumptions, that are convenient.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mediation, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BJF14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>MsX <span class="ot">&lt;-</span> <span class="fu">lm</span>(threat <span class="sc">~</span> condition <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            gender <span class="sc">+</span> groupsize <span class="sc">+</span> age, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> BJF14_S1)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>YsXM <span class="ot">&lt;-</span> <span class="fu">lm</span>(bonding <span class="sc">~</span> threat <span class="sc">+</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>             gender <span class="sc">+</span> groupsize <span class="sc">+</span> age <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>             condition,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BJF14_S1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="tbl-mediationcoefs" class="cell tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Coefficients of the mediation (left) and outcome (right) models.</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="kable_wrapper table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-0.16</td>
+<td style="text-align: right;">0.59</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">consistency</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">genderFemale</td>
+<td style="text-align: right;">-0.05</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">groupsize</td>
+<td style="text-align: right;">-0.07</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+</tbody>
+</table></td>
+<td style="text-align: left;"><table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.66</td>
+<td style="text-align: right;">1.47</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">condition [pain]</td>
+<td style="text-align: right;">-0.24</td>
+<td style="text-align: right;">0.36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gender [female]</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">0.33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">groupsize</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">conditionPain</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+
+
+</div>
+</div>
+</div>
+<p>Both of the <code>threat</code> and <code>bonding</code> measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.</p>
+<div class="cell" data-hash="linearmediation_cache/html/unnamed-chunk-4_b2dd069ab5a6f1c26c2dcdbe6c010077">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> 1000L, <span class="co"># number of bootstrap sim</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co">#percentile bootstrap</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co">#name of mediator</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat =</span> <span class="st">"condition"</span>, <span class="co">#name of treatment</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">control.value =</span> <span class="st">"Control"</span>, <span class="co"># name of control level</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat.value =</span> <span class="st">"Pain"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Causal Mediation Analysis 
+
+Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+
+               Estimate 95% CI Lower 95% CI Upper p-value  
+ACME            -0.0714      -0.3631         0.15   0.548  
+ADE              0.6598      -0.0117         1.26   0.056 .
+Total Effect     0.5884       0.0123         1.14   0.048 *
+Prop. Mediated  -0.1213      -1.5011         0.62   0.564  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Sample Size Used: 54 
+
+
+Simulations: 1000 </code></pre>
+</div>
+</div>
+<p>The first line gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect and the third the total effect. The point estimate for the indirect effect is <span class="math inline">\(\alpha\gamma\)</span> or <code>r</code>coef(YsXM)[‘threat’] * coef(MsX)[‘conditionPain’]` which is -0.07. The bootstrap sampling distribution is skewed to the left, which is reflected in the asymmetry of the percentile confidence interval.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-densityACME" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="linearmediation_files/figure-html/fig-densityACME-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect <span class="math inline">\(\alpha\gamma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the (least square) coefficient <span class="math inline">\(\widehat{\gamma}\)</span> is <span class="math inline">\(\gamma + \mathsf{Co}(\varepsilon_1, \varepsilon_3)/\mathsf{Va}(\varepsilon_1)\)</span> <span class="citation" data-cites="Bullock.Green.Ha:2010">(<a href="#ref-Bullock.Green.Ha:2010" role="doc-biblioref">Bullock et al., 2010</a>)</span>. The variance of the error of the mediation can be estimated and we can vary the correlation due to confounding.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>linmed_sensitivity <span class="ot">&lt;-</span> <span class="fu">medsens</span>(linmed)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed_sensitivity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mediation Sensitivity Analysis for Average Causal Mediation Effect
+
+Sensitivity Region
+
+      Rho    ACME 95% CI Lower 95% CI Upper R^2_M*R^2_Y* R^2_M~R^2_Y~
+[1,] -0.4  0.2533      -0.0236       0.5302         0.16       0.1144
+[2,] -0.3  0.1626      -0.0723       0.3975         0.09       0.0644
+[3,] -0.2  0.0805      -0.1288       0.2898         0.04       0.0286
+[4,] -0.1  0.0034      -0.1969       0.2037         0.01       0.0072
+[5,]  0.0 -0.0714      -0.2788       0.1360         0.00       0.0000
+[6,]  0.1 -0.1462      -0.3748       0.0825         0.01       0.0072
+[7,]  0.2 -0.2233      -0.4850       0.0385         0.04       0.0286
+
+Rho at which ACME = 0: -0.1
+R^2_M*R^2_Y* at which ACME = 0: 0.01
+R^2_M~R^2_Y~ at which ACME = 0: 0.0072 </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linmed_sensitivity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="linearmediation_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The <code>medsens</code> function implements the sensitivity diagnostic presented in Section 5.1 of <span class="citation" data-cites="Imai.Keele.Yamamoto:2010">Imai et al. (<a href="#ref-Imai.Keele.Yamamoto:2010" role="doc-biblioref">2010</a>)</span> for the linear mediation model. By default, the correlation <span class="math inline">\(\rho\)</span> varies in 0.1 increments.</p>
+<p>We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from <span class="math inline">\(0.2\)</span> to <span class="math inline">\(-0.288\)</span> for correlations in the range <span class="math inline">\(\rho \in [-0.4, 0.4]\)</span>. In this example, nearly any correlation in this range would lead to “insignificant results”, mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation would be needed for this effect to be an artefact of correlation and vanish.</p>
+<p>According to the documentation of the <code>medsens</code> function (<code>?medsens</code>), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, <code>R^2_M~R^2_Y</code>) or residual (starred, <code>R^2_M*R^2_Y*</code>) variance from the mediation and outcome models that are due to hypothetical unobserved confounders.</p>
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Bastian:2014" class="csl-entry" role="listitem">
+Bastian, B., Jetten, J., &amp; Ferris, L. J. (2014). Pain as social glue: Shared pain increases cooperation. <em>Psychological Science</em>, <em>25</em>(11), 2079–2085. <a href="https://doi.org/10.1177/0956797614545886">https://doi.org/10.1177/0956797614545886</a>
+</div>
+<div id="ref-Bullock.Green.Ha:2010" class="csl-entry" role="listitem">
+Bullock, J. G., Green, D. P., &amp; Ha, S. E. (2010). <em>Journal of personality and social psychology</em>. <em>98</em>(4), 550–558. <a href="https://doi.org/10.1037/a0018933">https://doi.org/10.1037/a0018933</a>
+</div>
+<div id="ref-Imai.Keele.Yamamoto:2010" class="csl-entry" role="listitem">
+Imai, K., Keele, L., &amp; Yamamoto, T. (2010). Identification, inference and sensitivity analysis for causal mediation effects. <em>Statistical Science</em>, <em>25</em>(1), 51–71. <a href="https://doi.org/10.1214/10-STS321">https://doi.org/10.1214/10-STS321</a>
+</div>
+<div id="ref-mediationR" class="csl-entry" role="listitem">
+Tingley, D., Yamamoto, T., Hirose, K., Keele, L., &amp; Imai, K. (2014). <code>mediation</code>: <span>R</span> package for causal mediation analysis. <em>Journal of Statistical Software</em>, <em>59</em>(5), 1–38. <a href="https://doi.org/10.18637/jss.v059.i05">https://doi.org/10.18637/jss.v059.i05</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Linear mediation model"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">type:</span><span class="co"> docs</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>Consider linear regression models in a system where some response $Y$ depends on a mediator is $M$ and an experimental factor is $X$.</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>We consider estimation of linear mediation models of the form</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>M \mid X, \boldsymbol{Z}_M &amp;= c_M + \alpha X + \boldsymbol{Z}_M^\top\boldsymbol{\delta} + \varepsilon_M<span class="sc">\\</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>Y \mid M, X, \boldsymbol{Z}_Y&amp;= c_Y + \beta X + \gamma M + \boldsymbol{Z}_Y^\top\boldsymbol{\omega} + \varepsilon_Y,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>where $\boldsymbol{Z}_M$ (respectively $\boldsymbol{Z}_Y$) are explanatory variables for the mediator $M$ (response $Y$). </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{tikz}</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: true</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-dag-linearmed</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Directed acyclic graph for linear mediation model."</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-align: 'center'</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-ext: "png"</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-dpi: 300</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">\usetikzlibrary{positioning}</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[every node/.append style={draw, minimum size=0.5cm}]</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="in">\node [circle,fill=blue] (X) at (-2,0) {$X$};</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="in">\node [circle] (Y) at (2,0) {$Y$};</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="in">\node [circle] (M) at (0,1) {$M$};</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="in">\node [rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="in">\node [rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="in">\path [-latex] (X) edge (Y);</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (M) edge (Y);</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (X) edge (M);</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (Zy) edge (Y);</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (Zm) edge (M);</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">\end{tikzpicture}</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>The total effect of $X$ on $Y$ is $\beta + \alpha \gamma$.</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>The average causal mediation effect (ACME) or natural indirect effect for treatment at level $t$ is obtained by changing the potential outcome for the mediator while fixing the treatment level, so </span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>\mathsf{E}<span class="co">[</span><span class="ot">Y_i\{t, M_i(1)\} - Y_i\{t, M_i(0)\}</span><span class="co">]</span>.</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>The set of control covariates for the first model $\boldsymbol{Z}_M$ and $\boldsymbol{Z}_Y$, need not be the same. In a randomized experiment, there is no need to include any control lest we mistakenly create correlation by including colliders.</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 1</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>We consider an example from Experiment 1 of @Bastian:2014, who experienced the effect of the effect of shared pain (through a manipulation) on bonding.</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This effect of pain remained when controlling for age (p = .048), gender (p = .052), and group size (p = .050). None of these variables were significantly correlated with experimental condition (ps &gt; .136) or perceived bonding (ps &gt; .925). To determine whether the marginal tendency for the pain tasks to be viewed as more threatening than the control tasks mediated the effect of pain on perceived bonding, we conducted a bootstrap analysis (Preacher &amp; Hayes, 2008) using 5,000 resamples. The results of this analysis revealed that threat was not a significant mediator, indirect effect = −0.11, SE = 0.09, 95% CI = </span><span class="co">[</span><span class="ot">−0.34, 0.03</span><span class="co">]</span><span class="at">.</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>There are several problems with the description: while it seems</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>that some covariate (age, gender, group size) were added to regression models, it is unclear whether they could be confounders, whether their effect is linear and in which (if any model they are included). Stating "bootstrap analysis" is the equivalent of "running a statistical test": so vague it could mean anything, and the fact the output is random does not help with reproducibility.</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>The response variable $Y$ is <span class="in">`bonding`</span>, the experimental factor <span class="in">`condition`</span> and <span class="in">`threat`</span>, the average ALES subscale about the perception of the physical task, is the postulated mediator.</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`mediation`</span> package <span class="co">[</span><span class="ot">@mediationR</span><span class="co">]</span> for the model; the package certainly isn't needed (nor the PROCESS macros) to run the bootstrap, which we could obtain with a single for-loop. However, it has utilities, notably for checking model assumptions, that are convenient. </span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mediation, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BJF14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>MsX <span class="ot">&lt;-</span> <span class="fu">lm</span>(threat <span class="sc">~</span> condition <span class="sc">+</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>            gender <span class="sc">+</span> groupsize <span class="sc">+</span> age, </span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> BJF14_S1)</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>YsXM <span class="ot">&lt;-</span> <span class="fu">lm</span>(bonding <span class="sc">~</span> threat <span class="sc">+</span> </span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>             gender <span class="sc">+</span> groupsize <span class="sc">+</span> age <span class="sc">+</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>             condition,</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BJF14_S1)</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mediationcoefs</span></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Coefficients of the mediation (left) and outcome (right) models."</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>coefs1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(YsXM) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>() </span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>coefs1<span class="sc">$</span>term[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"condition [pain]"</span>, <span class="st">"gender [female]"</span>)</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>coefs2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(MsX) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>coefs2<span class="sc">$</span>term[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"consistency"</span>)</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>kab1 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(coefs1[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>kab2 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(coefs2[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="co"># kab2 |&gt; kableExtra::kable_styling()</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="co"># kab1 |&gt; kableExtra::kable_styling()</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kables</span>(<span class="at">x =</span> <span class="fu">list</span>(kab2, kab1)) <span class="sc">|&gt;</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>Both of the <span class="in">`threat`</span> and <span class="in">`bonding`</span> measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> 1000L, <span class="co"># number of bootstrap sim</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co">#percentile bootstrap</span></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co">#name of mediator</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat =</span> <span class="st">"condition"</span>, <span class="co">#name of treatment</span></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>  <span class="at">control.value =</span> <span class="st">"Control"</span>, <span class="co"># name of control level</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat.value =</span> <span class="st">"Pain"</span>)</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed)</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>The first line gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect and the third the total effect. The point estimate for the indirect effect is $\alpha\gamma$ or <span class="in">`r `</span>coef(YsXM)<span class="co">[</span><span class="ot">'threat'</span><span class="co">]</span> * coef(MsX)<span class="co">[</span><span class="ot">'conditionPain'</span><span class="co">]</span><span class="in">` which is `</span>r round(coef(YsXM)<span class="co">[</span><span class="ot">'threat'</span><span class="co">]</span> * coef(MsX)<span class="co">[</span><span class="ot">'conditionPain'</span><span class="co">]</span>, 2)`.</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>The bootstrap sampling distribution is skewed to the left, which is reflected in the asymmetry of the percentile confidence interval.</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-densityACME</span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect $\\alpha\\gamma$."</span></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> linmed<span class="sc">$</span>d1.sims),</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span> </span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> linmed<span class="sc">$</span>d1, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">quantile</span>(linmed<span class="sc">$</span>d1.sims, </span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)), </span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">6</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"ACME"</span>,</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Density of bootstrap replicates"</span>)</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the (least square) coefficient $\widehat{\gamma}$ is $\gamma + \mathsf{Co}(\varepsilon_1, \varepsilon_3)/\mathsf{Va}(\varepsilon_1)$ <span class="co">[</span><span class="ot">@Bullock.Green.Ha:2010</span><span class="co">]</span>. The variance of the error of the mediation can be estimated and we can vary the correlation due to confounding.</span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>linmed_sensitivity <span class="ot">&lt;-</span> <span class="fu">medsens</span>(linmed)</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed_sensitivity)</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linmed_sensitivity)</span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>The <span class="in">`medsens`</span> function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments.</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in <span class="co">[</span><span class="ot">-0.4, 0.4</span><span class="co">]</span>$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation would be needed for this effect to be an artefact of correlation and vanish.</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>According to the documentation of the <span class="in">`medsens`</span> function (<span class="in">`?medsens`</span>), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, <span class="in">`R^2_M~R^2_Y`</span>) or residual (starred, <span class="in">`R^2_M*R^2_Y*`</span>) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. </span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2023 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a><br> Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

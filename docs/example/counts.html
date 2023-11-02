@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Experimental Designs and Statistical Methods - Count data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Experimental Designs and Statistical Methods</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
+ <span class="menu-text">Evaluations</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../example/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a" rel="" target="">
+ <span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://edsmf22.slack.com" rel="" target=""><i class="bi bi-slack" role="img" aria-label="Slack">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://lbelzile.github.io/hecedsm" rel="" target=""><i class="bi bi-box" role="img" aria-label="Datasets">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/counts.html">Count data</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Installation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>R</strong> and RStudio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Examples</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/onewayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/twowayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/threewayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis of covariance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/effectsizepower.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effect size and power</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/repeated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repeated measures ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/manova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/mixedmodel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear mixed models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/linearmediation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear causal mediation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/nonparametric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonparametric tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/counts.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Count data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#study-1---lee-and-choi-2019" id="toc-study-1---lee-and-choi-2019" class="nav-link" data-scroll-target="#study-1---lee-and-choi-2019">Study 1 - Lee and Choi (2019)</a></li>
+  <li><a href="#study-2---bertrand-and-mullainathan-2004" id="toc-study-2---bertrand-and-mullainathan-2004" class="nav-link" data-scroll-target="#study-2---bertrand-and-mullainathan-2004">Study 2 - Bertrand and Mullainathan (2004)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Count data</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Many experiments can have categorical outcomes, which themselves are function of one or several experimental factors. These data can be understood in the same way as other ANOVA models. Such data are often found in papers in the form of contingency tables, giving the total count per factor combination.</p>
+<p>The analogy with analysis of variance doesn’t stop there. If we have a two-factor design, the most complicated model is the <strong>saturated</strong> model which has one parameter per cell (since, with count data, we have a single count per cell). The model without the interaction should have the same proportion of observations in both row means and columns, and we can compare the difference in goodness-of-fit arising from dropping the interaction.</p>
+<p>If we have more than two factors, we could pool and aggregate the counts and ignore one dimension to run a series of tests with the two-dimensional tables, amounting to marginalization. Much like in ANOVA, this only makes sense if there is no interaction between the factors. If there is an interaction, we must look at simple effects and fix the level of one factor while comparing the others.</p>
+<p>The following section is an introduction to the topic, showcasing examples of tests and their application. It highlights the unifying theme of the course: statistics as summary of evidence, and decision-making in the presence of uncertainty. We use examples drawn from published articles in management sciences.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>We consider for simplicity a bivariate contingency table with <span class="math inline">\(I\)</span> rows and <span class="math inline">\(J\)</span> columns and <span class="math inline">\(n\)</span> observations overall; the count in the <span class="math inline">\((i,j)\)</span> entry of the matrix is <span class="math inline">\(n_{ij}\)</span>.</p>
+<p>Pearson’s <span class="math inline">\(X^2\)</span> goodness-of-fit test examines discrepancies between postulated proportions in each cell (with the sum of the probabilities summing to one, <span class="math inline">\(\sum_{i=1}^I \sum_{j=1}^J p_{ij0}=1\)</span>). The test compare the expected counts <span class="math inline">\(E_{ij}=n \cdot p_{ij0}\)</span> with the observed counts <span class="math inline">\(O_{ij}=n_{ij}\)</span>. As summary of evidence, we take the statistic <span class="math display">\[ X^2 = \sum_{i,j} \frac{(E_{ij}-O_{ij})^2}{E_{ij}},\]</span> the squared difference between expected and observed counts, divided by the expected counts.</p>
+<p>The contingency table described above represents a two-way factorial design on which we impose <span class="math inline">\(IJ-1\)</span>: the one constraint comes from the fact the overall counts must sum to <span class="math inline">\(n\)</span>, so one of the numbers is predetermined by others.</p>
+<p>Rather than specify a full description.</p>
+<p>The model with the two-way interaction has <span class="math inline">\(IJ\)</span> parameters, one for each cell. There, the estimated proportions are simply the observed counts in each cell, divided by the overall sample size. Such model has as many parameters as observations and is said to be <strong>saturated</strong>. The first departure one can consider is thus having different marginal proportions in each row and columns, but no interaction. This hypothesis of <strong>independence</strong> between factors thus compares the model with interaction to the one without.</p>
+</section>
+<section id="study-1---lee-and-choi-2019" class="level2">
+<h2 class="anchored" data-anchor-id="study-1---lee-and-choi-2019">Study 1 - Lee and Choi (2019)</h2>
+<p><span class="citation" data-cites="Lee.Choi:2019">Lee &amp; Choi (<a href="#ref-Lee.Choi:2019" role="doc-biblioref">2019</a>)</span> study the perception of consumers when faced with inconsistent descriptions of times (when the description doesn’t match the image). The dataset <code>LC19_T2</code> contains the counts for the expected number of toothbrushes for each combination of image and text.</p>
+<p>We compute the <span class="math inline">\(X^2\)</span> test of independence between</p>
+<ol type="a">
+<li>the text description (<code>text</code>) and the expected number of toothbrushes (<code>expected</code>).</li>
+<li>the image and expected number.</li>
+</ol>
+<p>In <strong>R</strong>, the <code>chisq.test</code> function will compute the test of independence between rows and columns if you provide a matrix with the cross-counts.</p>
+<div class="cell" data-hash="counts_cache/html/unnamed-chunk-1_1ecd7ebfcd87f75ef8c23d3e3596ecc9">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(LC19_T2, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>contingency_tab <span class="ot">&lt;-</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(LC19_T2, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">xtabs</span>(count <span class="sc">~</span> text <span class="sc">+</span> expected))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Score test, chi-square (2) null</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(contingency_tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  contingency_tab
+X-squared = 81.071, df = 2, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>We can check that our summaries match those reported by the authors, so the results are reproducible.</p>
+<p>Models for count data are often obtained by specifying a Poisson distribution for the response and setting factors as explanatories. This makes it perhaps clearer what the <span class="math inline">\(\chi^2\)</span> test of independence is computing. Note that this isn’t the only statistic to compare: below, I fit both the saturated model and the model without interaction and use regular interactions to fit them. The regression model specifies that the response is counts (<code>family=poisson</code>).</p>
+<div class="cell" data-hash="counts_cache/html/unnamed-chunk-2_4da259879d3dedb035c5d5a8911cdb99">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Poisson model</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cmod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  count <span class="sc">~</span> text <span class="sc">*</span> expected,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> LC19_T2, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>cmod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  count <span class="sc">~</span> text <span class="sc">+</span> expected,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> hecedsm<span class="sc">::</span>LC19_T2, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Likelihood ratio test, chi-square (2) null</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(cmod1, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type III tests)
+
+Response: count
+              LR Chisq Df Pr(&gt;Chisq)    
+text             0.182  1     0.6696    
+expected        89.150  2     &lt;2e-16 ***
+text:expected   88.705  2     &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Score test - the "chi-squared test of independence"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(cmod0, cmod1, <span class="at">test =</span> <span class="st">"Rao"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: count ~ text + expected
+Model 2: count ~ text * expected
+  Resid. Df Resid. Dev Df Deviance    Rao  Pr(&gt;Chi)    
+1         8     96.372                                 
+2         6      7.667  2   88.705 81.071 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The results of the likelihood ratio test and that of the score test are slightly different, but they test the same hypothesis. Here, we reject the null hypothesis of independence between text and expected: there is indeed an interaction present.</p>
+<p>The results are somehow meaningless. First, one would need to check that there is no interaction between text and image before marginalizing, which is unlikely because part of the confusion would stem from inconsistent description along with the photo: if the display is a picture of six toothbrushes and the text description is 1 pack of 1, this is confusing. If the image agrees with the text, we expect people to answer correctly.</p>
+<p>Rather than perform the test of <span class="citation" data-cites="Lee.Choi:2019">Lee &amp; Choi (<a href="#ref-Lee.Choi:2019" role="doc-biblioref">2019</a>)</span>, the comparison of interest in my humble opinion is consistent (text one vs expected one has the same proportion as text 6 vs expected 6), and similarly for inconsistent. To test this, it suffices to permute entries and change the labels of the <code>expected</code> factor.</p>
+<div class="cell" data-hash="counts_cache/html/tbl-contingency2_434e4f54ab4621acf3f583a5601ea395">
+<div class="cell-output-display">
+<div id="tbl-contingency2" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;1: Contingency table for null hypothesis of independence looking at the correspondance between text description and expectation of customers.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">not sure</th>
+<th style="text-align: right;">incorrect</th>
+<th style="text-align: right;">correct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">81</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">68</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The test statistic for this hypothesis is 2 with a <span class="math inline">\(p\)</span>-value of 0.37. There is no evidence here that people have different levels of confusion if the text mentions a different quantity.</p>
+</section>
+<section id="study-2---bertrand-and-mullainathan-2004" class="level2">
+<h2 class="anchored" data-anchor-id="study-2---bertrand-and-mullainathan-2004">Study 2 - Bertrand and Mullainathan (2004)</h2>
+<p>While by far the most common, there are more specialized hypothesis that can be considered with design. The following example showcases a test of symmetry for a square contingency table.</p>
+<p>We consider a study from <span class="citation" data-cites="Bertrand.Mullainathan:2004">Bertrand &amp; Mullainathan (<a href="#ref-Bertrand.Mullainathan:2004" role="doc-biblioref">2004</a>)</span>, who study racial discrimination in hiring based on the consonance of applicants names. The authors created curriculum vitae for four applicants and randomly allocated them a name, either one typical of a white person or a black person. The response is a count indicating how many of the applicants were called back (out of two black and two white) depending on their origin.</p>
+<p>If there was no racial discrimination (null hypothesis), we would expect the average number of times a white applicant was called back (but no black applicant) to be the same as a single black applicant (but no white). Only the entries for different numbers of call-back (either 0 vs 2, 0 vs 1 or 1 vs 2 for either race) are instructive about our question of interest. The data are reported in <a href="#tbl-contingencyMB">Table&nbsp;2</a>.</p>
+<div class="cell" data-hash="counts_cache/html/tbl-contingencyMB_e5c4590566a1378496cc309b8d7b4bcd">
+<div class="cell-output-display">
+<div id="tbl-contingencyMB" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Table&nbsp;2: Contingency table for the racial discrimination in labor market.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">no</th>
+<th style="text-align: right;">1W</th>
+<th style="text-align: right;">2W</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">1103</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1B</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2B</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">17</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The hypothesis of symmetry postulates that the proportion on either side of the diagonal are the same, so <span class="math inline">\(p_{ij}=p_{ji}\)</span>. Under the null hypothesis model, our best estimate of the proportion is thus <span class="math inline">\((n_{ij} + n_{ji})/2\)</span>, which is the sample average of those cells. The statistic is analogous to Fisher’s goodness of fit test, except that the expected counts are estimated here. There are <span class="math inline">\(J^2\)</span> entries and we have <span class="math inline">\(J(J-1)/2\)</span> constraints (the degrees of freedom).</p>
+<p>The test statistic reduces to <span class="math display">\[X^2 = \sum_{i,j} \frac{(E_{ij}-O_{ij})^2}{E_{ij}} = \sum_{j=1}^J \frac{(n_{ij} - n_{ji})^2}{n_{ij}+n_{ji}}.\]</span> The statistic is 27.31, to be compared with a <span class="math inline">\(\chi^2_3\)</span> benchmark (three off-diagonal entries). The <span class="math inline">\(p\)</span>-value is <span class="math inline">\(5\times 10^{-6}\)</span>, highly suggestive of racial discrimination.</p>
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Bertrand.Mullainathan:2004" class="csl-entry" role="listitem">
+Bertrand, M., &amp; Mullainathan, S. (2004). Are <span>E</span>mily and <span>G</span>reg more employable than <span>L</span>akisha and <span>J</span>amal? A field experiment on labor market discrimination. <em>American Economic Review</em>, <em>94</em>(4), 991–1013. <a href="https://doi.org/10.1257/0002828042002561">https://doi.org/10.1257/0002828042002561</a>
+</div>
+<div id="ref-Lee.Choi:2019" class="csl-entry" role="listitem">
+Lee, K., &amp; Choi, J. (2019). Image-text inconsistency effect on product evaluation in online retailing. <em>Journal of Retailing and Consumer Services</em>, <em>49</em>, 279–288. <a href="https://doi.org/10.1016/j.jretconser.2019.03.015">https://doi.org/10.1016/j.jretconser.2019.03.015</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Count data"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">linktitle:</span><span class="co"> "Count data"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">type:</span><span class="co"> docs</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">  fig-align: 'center'</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">  out-width: '80%'</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>Many experiments can have categorical outcomes, which themselves are function of one or several experimental factors. These data can be understood in the same way as other ANOVA models. Such data are often found in papers in the form of contingency tables, giving the total count per factor combination.</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>The analogy with analysis of variance doesn't stop there. If we have a two-factor design, the most complicated model is the **saturated** model which has one parameter per cell (since, with count data, we have a single count per cell). The model without the interaction should have the same proportion of observations in both row means and columns, and we can compare the difference in goodness-of-fit arising from dropping the interaction.</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>If we have more than two factors, we could pool and aggregate the counts and ignore one dimension to run a series of tests with the two-dimensional tables, amounting to marginalization. Much like in ANOVA, this only makes sense if there is no interaction between the factors. If there is an interaction, we must look at simple effects and fix the level of one factor while comparing the others.</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>The following section is an introduction to the topic, showcasing examples of tests and their application. It highlights the unifying theme of the course: statistics as summary of evidence, and decision-making in the presence of uncertainty. We use examples drawn from published articles in management sciences.</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setup</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>We consider for simplicity a bivariate contingency table with $I$ rows and $J$ columns and $n$ observations overall; the count in the $(i,j)$ entry of the matrix is $n_{ij}$.</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>Pearson's $X^2$ goodness-of-fit test examines discrepancies between  postulated proportions in each cell (with the sum of the probabilities summing to one, $\sum_{i=1}^I \sum_{j=1}^J p_{ij0}=1$). The test compare the expected counts $E_{ij}=n \cdot p_{ij0}$ with the observed counts $O_{ij}=n_{ij}$. As summary of evidence, we take the statistic</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>$$ X^2 = \sum_{i,j} \frac{(E_{ij}-O_{ij})^2}{E_{ij}},$$</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>the squared difference between expected and observed counts, divided by the expected counts.</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>The contingency table described above represents a two-way factorial design on which we impose $IJ-1$: the one constraint comes from the fact the overall counts must sum to $n$, so one of the numbers is predetermined by others.</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>Rather than specify a full description.</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>The model with the two-way interaction has $IJ$ parameters, one for each cell. There, the estimated proportions are simply the observed counts in each cell, divided by the overall sample size. Such model has as many parameters as observations and is said to be **saturated**. The first departure one can consider is thus having different marginal proportions in each row and columns, but no interaction. This hypothesis of **independence** between factors thus compares the model with interaction to the one without.</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study 1 - Lee and Choi (2019)</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>@Lee.Choi:2019 study the perception of consumers when faced with inconsistent descriptions of times (when the description doesn't match the image). The dataset <span class="in">`LC19_T2`</span> contains the counts for the expected number of toothbrushes for each combination of image and text.</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>We compute the $X^2$ test of independence between </span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>a. the text description (<span class="in">`text`</span>) and the expected number of toothbrushes (<span class="in">`expected`</span>).</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>b. the image and expected number. </span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>In **R**, the <span class="in">`chisq.test`</span> function will compute the test of independence between rows and columns if you provide a matrix with the cross-counts.</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(LC19_T2, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>contingency_tab <span class="ot">&lt;-</span> </span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(LC19_T2, </span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>       <span class="fu">xtabs</span>(count <span class="sc">~</span> text <span class="sc">+</span> expected))</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Score test, chi-square (2) null</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(contingency_tab)</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>We can check that our summaries match those reported by the authors, so the results are reproducible. </span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>Models for count data are often obtained by specifying a Poisson distribution for the response and setting factors as explanatories. This makes it perhaps clearer what the $\chi^2$ test of independence is computing. Note that this isn't the only statistic to compare: below, I fit both the saturated model and the model without interaction and use regular interactions to fit them. The regression model specifies that the response is counts (<span class="in">`family=poisson`</span>).</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Poisson model</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>cmod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>  count <span class="sc">~</span> text <span class="sc">*</span> expected,</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> LC19_T2, </span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson)</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>cmod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>  count <span class="sc">~</span> text <span class="sc">+</span> expected,</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> hecedsm<span class="sc">::</span>LC19_T2, </span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> poisson)</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Likelihood ratio test, chi-square (2) null</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(cmod1, <span class="at">type =</span> <span class="dv">3</span>)</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Score test - the "chi-squared test of independence"</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(cmod0, cmod1, <span class="at">test =</span> <span class="st">"Rao"</span>)</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>The results of the likelihood ratio test and that of the score test are slightly different, but they test the same hypothesis. Here, we reject the null hypothesis of independence between text and expected: there is indeed an interaction present.</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>The results are somehow meaningless. First, one would need to check that there is no interaction between text and image before marginalizing, which is unlikely because part of the confusion would stem from inconsistent description along with the photo: if the display is a picture of six toothbrushes and the text description is 1 pack of 1, this is confusing. If the image agrees with the text, we expect people to answer correctly.</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>Rather than perform the test of @Lee.Choi:2019, the comparison of interest in my humble opinion is consistent (text one vs expected one has the same proportion as text 6 vs expected 6), and similarly for inconsistent. To test this, it suffices to permute entries and change the labels of the <span class="in">`expected`</span>  factor.</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-contingency2</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Contingency table for null hypothesis of independence looking at the correspondance between text description and expectation of customers."</span></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>new <span class="ot">&lt;-</span> contingency_tab</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>new[<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> new[<span class="dv">1</span>,<span class="dv">3</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(new)[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"incorrect"</span>,<span class="st">"correct"</span>)</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(new)</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>stat <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(new)</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>The test statistic for this hypothesis is <span class="in">`r round(stat$statistic, 2)`</span> with a $p$-value of <span class="in">`r round(stat$p.value, 2)`</span>. There is no evidence here that people have different levels of confusion if the text mentions a different quantity.</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study 2 - Bertrand and Mullainathan (2004)</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>While by far the most common, there are more specialized hypothesis that can be considered with design. The following example showcases a test of symmetry for a square contingency table.</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>We consider a  study from @Bertrand.Mullainathan:2004, who study racial discrimination in hiring based on the consonance of applicants names. The authors created curriculum vitae for four applicants and randomly allocated them a name, either one typical of a white person or a black person. The response is a count indicating how many of the applicants were called back (out of two black and two white) depending on their origin.</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>If there was no racial discrimination (null hypothesis), we would expect the average number of times a white applicant was called back (but no black applicant) to be the same as a single black applicant (but no white). Only the entries for different numbers of call-back (either 0 vs 2, 0 vs 1 or 1 vs 2 for either race) are instructive about our question of interest. The data are reported in @tbl-contingencyMB.</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: TRUE</span></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Contingency table for the racial discrimination in labor market."</span></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-contingencyMB</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>BM04_T2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1103</span>, <span class="dv">74</span>, <span class="dv">19</span>),</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">46</span>, <span class="dv">18</span>),</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">17</span>))</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(BM04_T2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"1W"</span>, <span class="st">"2W"</span>)</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(BM04_T2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"1B"</span>, <span class="st">"2B"</span>)</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(BM04_T2)</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>BM04_T2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1103</span>, <span class="dv">74</span>, <span class="dv">19</span>),</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">33</span>, <span class="dv">46</span>, <span class="dv">18</span>),</span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">17</span>))</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(BM04_T2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"1W"</span>, <span class="st">"2W"</span>)</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(BM04_T2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"1B"</span>, <span class="st">"2B"</span>)</span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>qty <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">white =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>), <span class="at">each =</span> <span class="dv">3</span>)),</span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>                  <span class="at">black =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"1"</span>, <span class="st">"2"</span>), <span class="at">length.out =</span> <span class="dv">9</span>)),</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>                  <span class="at">count =</span> <span class="fu">as.vector</span>(BM04_T2))</span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a><span class="co"># library(emmeans)</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- glm(count ~ white*black, #saturated model </span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a><span class="co">#              data = qty, </span></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a><span class="co">#              family = poisson)</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="co"># library(emmeans)</span></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a><span class="co"># emmeans(model, specs = c("white","black")) |&gt; </span></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a><span class="co">#   contrast(method = </span></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a><span class="co">#               list("1vs2" = c(0,1,0,-1,0,0,0,0,0),</span></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a><span class="co">#                    "1vs0" = c(0,0,1,0,0,0,-1,0,0),</span></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="co">#                    "2vs0" = c(0,0,0,0,0,1,0,-1,0))) |&gt;</span></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="co">#   emmeans::joint_tests()</span></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>PearsonX2 <span class="ot">&lt;-</span> (<span class="dv">74-33</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">74</span><span class="sc">+</span><span class="dv">33</span>) <span class="sc">+</span> (<span class="dv">19-6</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">19</span><span class="sc">+</span><span class="dv">6</span>) <span class="sc">+</span> (<span class="dv">18-7</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">18</span><span class="sc">+</span><span class="dv">7</span>)</span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(PearsonX2, <span class="at">df =</span> <span class="dv">3</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>The hypothesis of symmetry postulates that the proportion on either side of the diagonal are the same, so $p_{ij}=p_{ji}$. Under the null hypothesis model, our best estimate of the proportion is thus $(n_{ij} + n_{ji})/2$, which is the sample average of those cells. The statistic is analogous to Fisher's goodness of fit test, except that the expected counts are estimated here. There are $J^2$ entries and we have $J(J-1)/2$ constraints (the degrees of freedom).</span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a>The test statistic reduces to </span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>$$X^2 = \sum_{i,j} \frac{(E_{ij}-O_{ij})^2}{E_{ij}} = \sum_{j=1}^J \frac{(n_{ij} - n_{ji})^2}{n_{ij}+n_{ji}}.$$ The statistic is <span class="in">`r round(PearsonX2,3)`</span>, to be compared with a $\chi^2_3$ benchmark (three off-diagonal entries). The $p$-value is $<span class="in">`r round(pval, 6)`</span>$, highly suggestive of racial discrimination.</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MULTI21_D1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a>contingency <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(</span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a>  count <span class="sc">~</span> age <span class="sc">+</span> frequency, </span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> MULTI21_D1)</span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(contingency)</span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a>counts_5vs7 <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(</span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a>  count <span class="sc">~</span> age <span class="sc">+</span> frequency, </span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> MULTI21_D1,</span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a>  <span class="at">subset =</span> age <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"5yo"</span>, <span class="st">"7yo"</span>),</span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop.unused.levels =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(counts_5vs7)</span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">cramers_v</span>(<span class="fu">chisq.test</span>(counts_5vs7))</span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(DA22_E2, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a><span class="co"># How many observations?</span></span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(DA22_E2)</span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>tabs <span class="ot">&lt;-</span> <span class="fu">with</span>(DA22_E2, <span class="fu">table</span>(purchased, format))</span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tabs, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="co"># In the paper, all participants were included for this test but other were excluded at a latter stage. </span></span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a><span class="co"># DA22_E2 only includes the subset</span></span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2023 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a><br> Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

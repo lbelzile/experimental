@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hypothesis tests</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-09-11" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <link href="libs/shareon-1.4.1/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon-1.4.1/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Hypothesis testing
+
+.class-info[
+
+**Session 2**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-1
+
+# Outline
+--
+
+.box-2.medium.sp-after-half[Variability]
+
+--
+
+.box-4.medium.sp-after-half[Hypothesis tests]
+
+--
+
+
+.box-5.medium.sp-after-half[Pairwise comparisons]
+
+
+---
+
+
+
+layout: false
+name: signal-vs-noise
+class: center middle section-title section-title-2 animated fadeIn
+
+# Sampling variability
+
+---
+
+layout: true
+class: title title-2
+
+---
+
+# Studying a population
+.medium[
+
+Interest in impacts of intervention or policy
+
+]
+
+
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-1-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Population distribution (describing possible outcomes and their frequencies) encodes everything we could be interested in.
+
+
+---
+
+
+# Sampling variability
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="02-slides_files/figure-html/unifsamp1-1.png" alt="Histograms for 10 random samples of size 20 from a discrete uniform distribution." width="80%" /&gt;
+&lt;p class="caption"&gt;Histograms for 10 random samples of size 20 from a discrete uniform distribution.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+
+# Decision making under uncertainty
+
+.medium[
+- Data collection costly 
+
+   `\(\to\)` limited information available about population.
+   
+- Sample too small to reliably estimate distribution   
+   
+- Focus instead on particular summaries
+  
+  `\(\to\)` mean, variance, odds, etc.
+
+]
+
+---
+
+# Population characteristics
+
+
+
+.pull-left[
+.box-inv-2.medium.sp-after-half[
+mean / expectation
+]
+
+`$$\mu$$`
+
+.box-inv-2.medium.sp-after-half[
+standard deviation
+]
+
+`$$\sigma= \sqrt{\text{variance}}$$`
+.center[
+same scale as observations
+]
+
+]
+
+.pull-right[
+
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-2-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+]
+
+???
+
+Do not confuse standard error (variability of statistic) and standard deviation (variability of observation from population)
+
+---
+
+# Sampling variability
+
+&lt;img src="02-slides_files/figure-html/sampvar-1.gif" style="display: block; margin: auto;" /&gt;
+
+???
+
+Not all samples are born alike
+- Analogy: comparing kids (or siblings): not everyone look alike (except twins...)
+- Chance and haphazard variability mean that we might have a good idea, but not exactly know the truth.
+
+---
+
+
+
+# The signal and the noise
+
+&lt;img src="02-slides_files/figure-html/plots-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Can you spot the differences?
+
+---
+
+# Information accumulates
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="02-slides_files/figure-html/uniformsamp2-1.png" alt="Histograms of data from uniform (top) and non-uniform (bottom)
+distributions with increasing sample sizes." width="576" /&gt;
+&lt;p class="caption"&gt;Histograms of data from uniform (top) and non-uniform (bottom)
+distributions with increasing sample sizes.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+layout: false
+name: hypothesis-tests
+class: center middle section-title section-title-4 animated fadeIn
+
+
+# Hypothesis tests
+
+---
+
+layout: true
+class: title title-4
+
+
+---
+
+# The general recipe of hypothesis testing
+
+.medium[
+1. Define variables
+2. Write down hypotheses (null/alternative)
+3. Choose and compute a test statistic
+4. Compare the value to the null distribution (benchmark)
+5. Compute the _p_-value
+6. Conclude (reject/fail to reject)
+7. Report findings
+
+]
+
+---
+# Hypothesis tests versus trials
+
+.pull-left[
+![Scene from "12 Angry Men" by Sidney Lumet](img/02/12_Angry_Men.jpg)
+
+]
+
+
+.pull-right[
+
+- Binary decision: guilty/not guilty
+- Summarize evidences (proof)
+- Assess evidence in light of **presumption of innocence**
+- Verdict: either guilty or not guilty
+- Potential for judicial mistakes
+ 
+
+]
+
+
+---
+
+# How to assess evidence?
+
+
+.box-inv-4.medium.sp-after[statistic = numerical summary of the data.]
+
+--
+
+.box-inv-4.medium.sp-after[requires benchmark / standardization]
+
+.box-4.sp-after-half[typically a unitless quantity]
+
+.box-4.sp-after-half[need measure of uncertainty of statistic]
+---
+
+# General construction principles
+
+.box-inv-4.medium[Wald statistic]
+
+`\begin{align*}
+W = \frac{\text{estimated qty} - \text{postulated qty}}{\text{std. error (estimated qty)}}
+\end{align*}`
+
+
+.box-inv-4.sp-after-half[standard error = measure of variability (same units as obs.)]
+
+.box-inv-4.sp-after-half[resulting ratio is unitless!]
+
+
+???
+
+
+The standard error is typically function of the sample size and the standard deviation `\(\sigma\)` of the observations.
+
+---
+
+# Impact of encouragement on teaching
+
+From Davison (2008), Example 9.2
+
+&gt; In an investigation on the teaching of arithmetic, 45 pupils were divided at random into five groups of nine. Groups A and B were taught in separate classes by the usual method. Groups C, D, and E were taught together for a number of days. On each day C were praised publicly for their work, D were publicly reproved and E were ignored. At the end of the period all pupils took a standard test.
+
+
+---
+
+
+# Basic manipulations in **R**: load data
+
+
+
+```r
+data(arithmetic, 
+     package = "hecedsm")
+# categorical variable = factor
+
+# Look up data
+str(arithmetic)
+```
+
+
+
+```
+## 'data.frame':	45 obs. of  2 variables:
+##  $ group: Factor w/ 5 levels "control 1","control 2",..: 1 1 1 1 1 1 1 1 1 2 ...
+##  $ score: num  17 14 24 20 24 23 16 15 24 21 ...
+```
+
+
+---
+
+# Basic manipulations in **R**:  summary statistics
+
+.pull-left[
+
+```r
+# compute summary statistics
+summary_stat &lt;-
+  arithmetic |&gt; 
+  group_by(group) |&gt;
+  summarize(mean = mean(score),
+            sd = sd(score))
+knitr::kable(summary_stat, 
+             digits = 2)
+```
+]
+.pull-right[
+
+|group     |  mean|   sd|
+|:---------|-----:|----:|
+|control 1 | 19.67| 4.21|
+|control 2 | 18.33| 3.57|
+|praise    | 27.44| 2.46|
+|reprove   | 23.44| 3.09|
+|ignore    | 16.11| 3.62|
+]
+
+---
+
+# Basic manipulations in **R**: plot
+
+.pull-left[
+
+
+```r
+# Boxplot with jittered data
+ggplot(data = arithmetic,
+       aes(x = group,
+           y = score, 
+           color = group)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.3) +
+  theme_bw()
+```
+]
+.pull-right[
+
+&lt;img src="02-slides_files/figure-html/panel-chunk-4-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Formulating an hypothesis
+
+
+Let `\(\mu_{C}\)` and `\(\mu_{D}\)` denote the population average (expectation) score for praise and reprove, respectively.
+
+Our null hypothesis is 
+`$$\mathscr{H}_0: \mu_{C} = \mu_{D}$$`
+against the alternative `\(\mathscr{H}_a\)` that they are different (two-sided test).
+
+Equivalent to `\(\delta_{CD} = \mu_C - \mu_D = 0\)`.
+
+---
+
+# Test statistic
+
+The value of the Wald statistic is 
+`$$t=\frac{\widehat{\delta}_{CD} - 0}{\mathsf{se}(\widehat{\delta}_{CD})} = \frac{4}{1.6216}=2.467$$`
+
+--
+
+
+.medium[How 'extreme' is this number? ]
+
+???
+
+Could it have happened by chance if there was no difference between groups?
+
+---
+
+# Assessing evidence
+
+
+.pull-left[
+![Is 1 big?](img/02/meme-isonebig.jpeg)
+ ]
+
+--
+ 
+.pull-right[
+.box-inv-4.large[Benchmarking]
+
+.medium[
+- The same number can have different meanings
+    - units matter!
+- Meaningful comparisons require some reference
+]
+]
+
+
+---
+
+
+
+class: title title-4
+# Possible, but not plausible
+.medium[
+
+
+The null distribution tells us what are the *plausible* values for the statistic and their relative frequency if the null hypothesis holds.
+
+]
+.pull-left[
+
+What can we expect to see **by chance** if there is **no difference** between groups?
+]
+
+.pull-right[
+
+
+&lt;img src="02-slides_files/figure-html/nullF-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+]
+
+???
+
+Oftentimes, the null distribution comes with the test statistic
+
+Alternatives include
+
+- Large sample behaviour (asymptotic distribution)
+- Resampling/bootstrap/permutation
+
+
+---
+
+# _P_-value
+
+.pull-left[
+Null distributions are different, which makes comparisons uneasy.
+
+- The _p_-value gives the probability of observing an outcome as extreme **if the null hypothesis was true**.
+
+]
+.pull-right[
+&lt;img src="02-slides_files/figure-html/nulltopval-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+Uniform distribution under H0
+
+---
+
+# Level = probability of condemning an innocent
+
+.box-4.sp-after-half.medium[
+Fix **level** `\(\alpha\)`
+**before** the experiment.
+]
+
+.box-inv-4.sp-after-half.medium[
+
+Choose small `\(\alpha\)` (typical value is 5%)
+]
+
+
+.box-4.sp-after-half.medium[
+Reject `\(\mathscr{H}_0\)` if p-value less than `\(\alpha\)`
+]
+
+
+???
+
+Question: why can't we fix `\(\alpha=0\)`?
+
+
+---
+
+# What is really a _p_-value?
+
+
+The [American Statistical Association (ASA)](https://doi.org/10.1080/00031305.2016.1154108) published a statement on
+(mis)interpretation of p-values.
+
+&gt; (2) P-values do not measure the probability that the studied hypothesis is true
+
+&gt; (3) Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.
+
+&gt;(4) P-values and related analyses should not be reported selectively
+
+&gt; (5) P-value, or statistical significance, does not measure the size of an effect or the importance of a result
+---
+
+# Reporting results of a statistical procedure
+
+
+&lt;img src="img/02/Nature_reporting_statistics.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Nature's checklist
+
+---
+
+layout: false
+name: hypothesis-tests
+class: center middle section-title section-title-5 animated fadeIn
+
+
+# Pairwise comparisons
+
+---
+
+layout: true
+class: title title-5
+
+
+---
+
+# Pairwise differences and _t_-tests
+
+
+The pairwise differences (_p_-values) and confidence intervals for groups `\(j\)` and `\(k\)` are based on the _t_-statistic:
+
+`\begin{align*}
+t = \frac{\text{estimated} - \text{postulated difference}}{\text{uncertainty}}= \frac{(\widehat{\mu}_j - \widehat{\mu}_k) - (\mu_j - \mu_k)}{\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)}
+\end{align*}`
+which has a Student-_t_ null distribution, denoted `\(\mathsf{St}(n-K)\)`.
+
+.small[
+
+Note: in an analysis of variance model, the standard error `\(\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)\)` is based the pooled variance estimate (estimated using all observations).
+
+]
+---
+
+
+# Pairwise comparison
+
+Consider the pairwise average difference in scores between the praise (group C) and the reprove (group D) of the `arithmetic` data.
+
+
+- Group sample averages are `\(\widehat{\mu}_C = 27.4\)` and `\(\widehat{\mu}_D = 23.4\)`
+- The estimated average difference between groups `\(C\)` and `\(D\)` is `\(\widehat{\delta}_{CD} = 4\)`
+- The estimated pooled *standard deviation* for the five groups is `\(1.15\vphantom{\widehat{\delta}_{CD}}\)`
+- The *standard error* for the pairwise difference is `\(\mathsf{se}(\widehat{\delta}_{CD}) = 1.6216\)`
+- There are `\(n=45\)` observations and `\(K=5\)` groups
+
+---
+
+
+# _t_-tests: null distribution is Student-_t_
+
+If we postulate `\(\delta_{jk} = \mu_j - \mu_k = 0\)`, the test statistic becomes
+
+`\begin{align*}
+t = \frac{\widehat{\delta}_{jk} - 0}{\mathsf{se}(\widehat{\delta}_{jk})}
+\end{align*}`
+
+The `\(p\)`-value is `\(p = 1- \Pr(-|t| \leq T \leq |t|)\)` for `\(T \sim \mathsf{St}_{n-K}\)`.
+   - probability of statistic being more extreme than `\(t\)`
+
+
+The larger the values of the statistic `\(t\)` (positive or negative), the more evidence against the null hypothesis.
+
+---
+
+# Critical values
+
+For a test at level `\(\alpha\)` (two-sided), fail to reject null hypothesis for all values of the test statistic `\(t\)` that are in interval
+
+`$$\mathfrak{t}_{n-K}(\alpha/2) \leq t \leq \mathfrak{t}_{n-K}(1-\alpha/2)$$`
+
+Because of symmetry around zero, `\(\mathfrak{t}_{n-K}(1-\alpha/2) = -\mathfrak{t}_{n-K}(\alpha/2)\)`.
+
+- We call `\(\mathfrak{t}_{n-K}(1-\alpha/2)\)` a **critical value**. 
+- in **R**, `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups (computed automatically by software).
+
+---
+
+# Null distribution
+
+
+The blue area defines the set of values for which we fail to reject null `\(\mathscr{H}_0\)`.
+
+All values of `\(t\)` falling in the red area lead to rejection at level `\(5\)`%.
+
+&lt;img src="02-slides_files/figure-html/tcurve-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+# Example
+
+- If `\(\mathscr{H}_0: \delta_{CD}=0\)`, the `\(t\)` statistic is 
+`$$t=\frac{\widehat{\delta}_{CD} - 0}{\mathsf{se}(\widehat{\delta}_{CD})} = \frac{4}{1.6216}=2.467$$`
+- The `\(p\)`-value is `\(p=0.018\)`. 
+- We reject the null at level `\(\alpha=5\)`% since `\(0.018 &lt; 0.05\)`.
+- Conclude that there is a significant difference at level `\(\alpha=0.05\)` between the average scores of subpopulations `\(C\)` and `\(D\)`.
+
+
+---
+
+# Confidence interval 
+
+.small[
+
+Let `\(\delta_{jk}=\mu_j - \mu_k\)` denote the population difference, `\(\widehat{\delta}_{jk}\)` the estimated difference (difference in sample averages) and `\(\mathsf{se}(\widehat{\delta}_{jk})\)` the estimated standard error.
+
+The region for which we fail to reject the null is 
+`\begin{align*}
+-\mathfrak{t}_{n-K}(1-\alpha/2) \leq  \frac{\widehat{\delta}_{jk} - \delta_{jk}}{\mathsf{se}(\widehat{\delta}_{jk})} \leq \mathfrak{t}_{n-K}(1-\alpha/2)
+\end{align*}`
+which rearranged gives the `\((1-\alpha)\)` confidence interval for the (unknown) difference `\(\delta_{jk}\)`.
+
+`\begin{align*}
+\widehat{\delta}_{jk} - \mathsf{se}(\widehat{\delta}_{jk})\mathfrak{t}_{n-K}(1-\alpha/2) \leq \delta_{jk} \leq \widehat{\delta}_{jk} + \mathsf{se}(\widehat{\delta}_{jk})\mathfrak{t}_{n-K}(1-\alpha/2)
+\end{align*}`
+
+]
+
+---
+class: title title-2
+
+# Interpretation of confidence intervals
+
+The reported confidence interval is of the form
+
+$$ \text{estimate} \pm \text{critical value} \times \text{standard error}$$
+
+
+.box-5.sp-after-half[ confidence interval = [lower, upper] units]
+
+
+If we replicate the experiment and compute confidence intervals each time
+- on average, 95% of those intervals will contain the true value if the assumptions underlying the model are met.
+
+
+---
+class: title title-2
+
+# Interpretation in a picture: coin toss analogy
+.small[
+Each interval either contains the true value (black horizontal line) or doesn't.
+]
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-6-1.png" title="100 confidence intervals" alt="100 confidence intervals" width="70%" style="display: block; margin: auto;" /&gt;
+---
+
+
+# Why confidence intervals?
+
+Test statistics are standardized, 
+- Good for comparisons with benchmark
+- typically meaningless (standardized = unitless quantities)
+
+Two options for reporting: 
+
+- `\(p\)`-value: probability of more extreme outcome if no mean difference
+- confidence intervals: set of all values for which we fail to reject the null hypothesis at level `\(\alpha\)` for the given sample
+
+
+---
+
+# Example
+
+
+- Mean difference of `\(\widehat{\delta}_{CD}=4\)`,  with `\(\mathsf{se}(\widehat{\delta}_{CD})=1.6216\)`.
+- The critical values for a test at level `\(\alpha = 5\)`% are `\(-2.021\)` and `\(2.021\)` 
+   - `qt(0.975, df = 45 - 5)`
+- Since `\(|t| &gt; 2.021\)`, reject `\(\mathscr{H}_0\)`: the two population are statistically significant at level `\(\alpha=5\)`%.
+- The confidence interval is `$$[4-1.6216\times 2.021, 4+1.6216\times 2.021] = [0.723, 7.277]$$`
+
+The postulated value `\(\delta_{CD}=0\)` is not in the interval: reject `\(\mathscr{H}_0\)`.
+
+---
+
+# Pairwise differences in **R**
+
+
+```r
+library(emmeans) # marginal means and contrasts
+model &lt;- aov(score ~ group, data = arithmetic)
+margmeans &lt;- emmeans(model, specs = "group")
+contrast(margmeans, 
+         method = "pairwise",
+         adjust = 'none', 
+         infer = TRUE) |&gt;
+  as_tibble() |&gt;
+  filter(contrast == "praise - reprove") |&gt;
+  knitr::kable(digits = 3)
+```
+
+
+
+|contrast         | estimate|    SE| df| lower.CL| upper.CL| t.ratio| p.value|
+|:----------------|--------:|-----:|--:|--------:|--------:|-------:|-------:|
+|praise - reprove |        4| 1.622| 40|    0.723|    7.277|   2.467|   0.018|
+
+---
+
+layout: true
+class: title title-1
+
+---
+
+# Recap 1
+.medium[
+
+- Due to sampling variability, looking at differences between empirical measures (sample mean, etc.) is not enough.
+- Testing procedures factor in the uncertainty inherent to sampling.
+- Adopt particular viewpoint: null hypothesis (simpler model, e.g. no difference between group) is true and view evidence under that optic.
+
+]
+
+---
+
+# Recap 2
+
+.medium[
+
+- _p_-values  measures compatibility with the null model (relative to an alternative)
+- Tests are standardized, output _p_-value or CI
+   - confidence interval: on scale of data (meaningful interpretation)
+   - _p_-values: uniform on [0,1]
+   
+]
+---
+
+# Recap 3
+
+.medium[
+
+- All hypothesis tests share common ingredients
+- Many ways, models and test can lead to the same conclusion.
+- Transparent reporting is important!
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

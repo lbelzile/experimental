@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>One way ANOVA</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-09-18" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# One way ANOVA
+
+.class-info[
+
+**Session 3**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-1
+
+# Outline
+--
+
+
+.box-2.medium.sp-after-half[Hypothesis tests for ANOVA]
+
+--
+
+.box-4.medium.sp-after-half[Power]
+
+--
+
+.box-5.medium.sp-after-half[Model assumptions]
+
+
+---
+
+layout: true
+class: title title-2
+
+---
+
+# F-test for one way ANOVA
+
+.box-inv-2.medium[Global null hypothesis]
+
+No difference between treatments
+
+- `\(\mathscr{H}_0\)` (null): all of the `\(K\)` treatment groups have the same average `\(\mu\)`
+- `\(\mathscr{H}_a\)` (alternative): at least two treatments have different averages
+
+Tacitly assume that all observations have the same standard deviation `\(\sigma\)`.
+
+???
+
+- The null hypothesis can be viewed as a special case from a bigger class of possibilities
+- it always corresponds to some restrictions from the alternative class
+
+
+---
+
+# Building a statistic
+
+.small[
+- `\(y_{ik}\)` is observation `\(i\)` of group `\(k\)`
+- `\(\widehat{\mu}_1, \ldots, \widehat{\mu}_K\)` are sample averages of groups `\(1, \ldots, K\)`
+- `\(\widehat{\mu}\)` is the overall sample mean
+
+]
+
+.box-2[Decomposing variability into bits]
+
+`\begin{align*}
+\underset{\text{total sum of squares}}{\sum_{i}\sum_{k} (y_{ik} - \widehat{\mu})^2} &amp;= \underset{\text{within sum of squares}}{\sum_i \sum_k (y_{ik} - \widehat{\mu}_k)^2} +  \underset{\text{between sum of squares}}{\sum_k n_i (\widehat{\mu}_k - \widehat{\mu})^2}.
+\end{align*}`
+
+.pull-left-3[
+.box-inv-2[null model]
+]
+.pull-middle-3[
+.box-inv-2[alternative model]
+]
+.pull-right-3[
+.box-inv-2[added variability]
+]
+
+---
+
+
+
+# _F_-test statistic
+
+.box-2.medium[Omnibus test]
+
+With `\(K\)` groups and `\(n\)` observations, the statistic is
+
+`\begin{align*}
+F &amp;= \frac{\text{between-group variability}}{\text{within-group variability}} \\&amp;=  \frac{\text{between sum of squares}/(K-1)}{\text{within sum of squares}/(n-K)}
+\end{align*}`
+
+
+---
+
+# Ratio of variance
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="03-slides_files/figure-html/squareddistanova-1.png" alt="Data with equal mean (left) and different mean per group (right)." width="80%" /&gt;
+&lt;p class="caption"&gt;Data with equal mean (left) and different mean per group (right).&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# What happens under the null regime?
+
+If all groups have the same mean, both numerator and denominator are estimators of `\(\sigma^2\)`, thus
+- the `\(F\)` ratio should be 1 on average if there are no mean differences.
+- but the numerator is more variable because it is based on `\(K\)` observations
+  - benchmark is skewed to the right.
+
+---
+
+# Null distribution and degrees of freedom
+
+
+The null distribution (benchmark) is a Fisher distribution `\(\mathsf{F}(\nu_1, \nu_2)\)`.
+
+
+The parameters `\(\nu_1, \nu_2\)` are called **degrees of freedom**.
+
+For the one-way ANOVA:
+
+- `\(\nu_1 = K-1\)` is the number of constraints imposed by the null (number of groups minus one)
+- `\(\nu_2 = n-K\)` is the number of observations minus number of mean parameters estimated under alternative
+
+???
+
+The number of constraints come from the fact we go from K means under alternative, to 1 mean under null.
+
+---
+
+# Fisher distribution
+
+&lt;img src="03-slides_files/figure-html/unnamed-chunk-1-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+.small[Note: the `\(\mathsf{F}(\nu_1, \nu_2)\)` distribution is indistinguishable from `\(\chi^2(\nu_1)\)` for `\(\nu_2\)` large.
+]
+
+---
+
+# Impact of encouragement on teaching
+
+From Davison (2008), Example 9.2
+
+&gt; In an investigation on the teaching of arithmetic, 45 pupils were divided at random into five groups of nine. Groups A and B were taught in separate classes by the usual method. Groups C, D, and E were taught together for a number of days. On each day C were praised publicly for their work, D were publicly reproved and E were ignored. At the end of the period all pupils took a standard test.
+
+
+---
+
+# Formulating an hypothesis
+
+Let `\(\mu_A, \ldots,  \mu_E\)` denote the population average (expectation) score for the test for each experimental condition.
+
+The null hypothesis is 
+`$$\mathscr{H}_0: \mu_A = \mu_B = \cdots = \mu_E$$`
+against the alternative `\(\mathscr{H}_a\)` that at least one of the population average is different.
+
+---
+
+# _F_ statistic
+
+
+
+```r
+#Fit one way analysis of variance
+test &lt;- aov(data = arithmetic, 
+            formula = score ~ group)
+anova(test) #print anova table
+```
+
+
+|term      | df| sum of square| mean square| statistic|p-value |
+|:---------|--:|-------------:|-----------:|---------:|:-------|
+|group     |  4|        722.67|      180.67|     15.27|&lt; 1e-04 |
+|Residuals | 40|        473.33|       11.83|          |        |
+
+---
+
+# P-value
+
+.pull-left[
+
+The _p_-value gives the probability of observing an outcome as extreme **if the null hypothesis was true**.
+
+
+```r
+# Compute p-value
+pf(15.27, 
+   df1 = 4, 
+   df2 = 40, 
+   lower.tail = FALSE)
+```
+
+Probability that a `\(\mathsf{F}(4,40)\)` exceeds 15.27.
+
+]
+
+.pull-right[
+&lt;img src="03-slides_files/figure-html/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+layout: false
+name: multiple-testing
+class: center middle section-title section-title-4 animated fadeIn
+
+# Power
+
+---
+
+layout: true
+class: title title-4
+
+---
+
+# I cried power!
+
+.medium[
+- **Power** is the ability to detect when the null is false, for a given alternative
+- It is the *probability* of correctly rejecting the null hypothesis under an alternative.
+- The larger the power, the better.
+]
+
+---
+# Power of an alternative
+
+There are infinitely many alternatives...
+
+
+.pull-left[
+&lt;img src="03-slides_files/figure-html/powercurve1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+  .small.center[Null distribution (full) and given alternative distribution (dashed).]
+]
+.pull-right[
+&lt;img src="03-slides_files/figure-html/powercurve2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+ .small.center[Power is the area in white under the dashed curved, beyond the cutoff. ]
+]
+
+???
+  
+In which of the two figures is power the largest?
+
+---
+
+# Living in an alternative world
+
+How does the _F_-test behaves under an alternative?
+
+&lt;img src="03-slides_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Thinking about power
+
+What do you think is the effect on **power** of an increase of the
+- group sample size `\(n_1, \ldots, n_K\)`.
+- variability `\(\sigma^2\)`.
+- true mean difference `\(\mu_j - \mu\)`.
+
+
+---
+
+# What happens under the alternative?
+
+The peak of the distribution shifts to the right.
+
+Why? on average, the numerator of the `\(F\)`-statistic is
+
+`$$\begin{align*}
+\mathsf{E}(\text{between-group variability}) = \sigma^2+ \frac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{K-1}.
+\end{align*}$$`
+
+
+Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)`
+   - the rightmost term is 0.
+
+
+---
+
+# Noncentrality parameter and power
+
+The alternative distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter 
+`$$\begin{align*}
+\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
+\end{align*}$$`
+
+---
+
+
+# Impact of noncentrality parameter
+
+
+&lt;img src="03-slides_files/figure-html/power_curve-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+.small[
+`\(\mathsf{F}\)` distribution with `\(\Delta=0\)`  (solid line), `\(\Delta=3\)` (dashed) and `\(\Delta=6\)`  (dotted).
+]
+
+???
+
+For other tests, parameters vary but the story is the same.
+
+The plot shows the null and alternative distributions. The noncentral F is shifted to the right (mode = peak) and right skewed. The power is shaded in blue, the null distribution is shown in dashed lines.
+
+
+
+---
+
+layout: false
+name: multiple-testing
+class: center middle section-title section-title-5 animated fadeIn
+
+# Model assumptions
+
+---
+
+layout: true
+class: title title-5
+
+---
+
+# Quality of approximations
+
+- The null and alternative hypothesis of the analysis of variance only specify the mean of each group
+- We need to assume more .footnote[Read the fine print conditions!] to derive the behaviour of the statistic
+
+
+.box-inv-5.medium[All statements about _p_-values&lt;br&gt; are **approximate**.]
+
+
+---
+
+# Model assumptions
+
+.pull-left[
+.box-inv-5.medium.sp-after[**Additivity and linearity**]
+.box-inv-5.medium.sp-after[**Independence**]
+]
+
+.pull-right[
+
+.box-inv-5.medium.sp-after[**Equal variance**]
+.box-inv-5.medium.sp-after[**Large sample size**]
+
+]
+
+---
+
+# Alternative representation
+
+Write `\(i\)`th observation of `\(k\)`th experimental group as
+
+`\begin{align*}
+\underset{\text{observation}\vphantom{gp}}{Y_{ik}\vphantom{\mu_k}} = \underset{\text{mean of group}}{\mu_k} + \underset{\text{error term}\vphantom{gp}}{\varepsilon_{ik}\vphantom{\mu_k}},
+\end{align*}`
+
+where, for `\(i=1, \ldots, n_k\)` and `\(k=1, \ldots, K\)`,
+
+- `\(\mathsf{E}(\varepsilon_{ik})=0\)` (mean zero) and
+- `\(\mathsf{Va}(\varepsilon_{ik})= \sigma^2\)` (equal variance)
+- errors are independent from one another.
+
+---
+
+# \# 1: Additivity
+
+Additive decomposition reads:
+
+`\begin{align*}
+\left(\begin{matrix} \text{quantity depending}\\
+ \text{on the treatment used}\end{matrix}\right) +
+ \left(\begin{matrix} \text{quantity depending only }\\
+\text{on the particular unit}
+\end{matrix}\right)
+\end{align*}`
+
+- each unit is unaffected by the treatment of the other units
+- average effect of the treatment is constant
+
+---
+
+# Diagnostic plots for additivity
+
+Plot group averages `\(\{\widehat{\mu}_k\}\)` against residuals `\(\{e_{ik}\}\)`, where `\(e_{ik} = y_{ik}-\widehat{\mu}_k\)`.
+
+
+&lt;img src="03-slides_files/figure-html/assumptions-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+.small[
+
+By construction, sample mean of `\(e_{ik}\)` is **always** zero.
+
+]
+
+---
+
+# Lack of additivity
+
+Less improvement for scores of stronger students.
+
+&lt;img src="03-slides_files/figure-html/multiplicative-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.small[Plot and context suggests multiplicative structure. Tempting to diagnose unequal variance.]
+
+???
+
+Reading diagnostic plots requires practice (and is analogous to reading tea leaves: leaves a lot to interpretation).
+
+---
+# Interpretation of residual plots
+
+.box-inv-5.large[
+
+Look for potential patterns&lt;br&gt;on the `\(y\)`-axis **only**!
+
+]
+
+---
+
+
+# Multiplicative structure
+
+Multiplicative data of the form
+`\begin{align*}
+\left(\begin{matrix} \text{quantity depending}\\
+ \text{on the treatment used}\end{matrix}\right) \times
+ \left(\begin{matrix} \text{quantity depending only }\\
+\text{on the particular unit}
+\end{matrix}\right)
+\end{align*}`
+tend to have higher variability when the response is larger.
+
+---
+
+# Fixes for multiplicative data
+
+A log-transformation of response makes the model **additive**.
+
+For responses bounded between `\(a\)` and `\(b\)`, reduce warping effects via
+`$$\ln\left\{\frac{x-a+\delta}{b+\delta-x}\right\}$$`
+
+Careful with transformations: 
+- lose interpretability
+- change of meaning (different scale/units).
+
+???
+
+If we consider a response on the log-scale, the test is for equality of the geometric mean!
+
+---
+
+# Interactions
+
+Plot residuals against other explanatories.
+
+&lt;img src="03-slides_files/figure-html/omittedlinearity-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+???
+
+Difference in average response; while the treatment seems to lead to a decrease in the response variable, a stratification by age group reveals this only occurs in less than 25 group, with a seemingly reversed effect for the adults. Thus, the marginal model implied by the one-way analysis of variance is misleading.
+
+---
+
+# A note about interactions
+
+An **interaction** occurs when the effect of experimental group depends on another variable.
+
+In principle, randomization ensures we capture the average marginal effect (even if misleading/useless).
+
+We could incorporate the interacting variable in the model capture it's effect (makes model more complex), e.g. using a two-way ANOVA.
+
+---
+
+# \# 2: Equal variance
+
+.box-inv-5.large.sp-after[
+Each observation &lt;br&gt;has the *same*&lt;br&gt; standard deviation `\(\sigma\)`.]
+
+.box-inv-5.medium.sp-after-half[
+ANOVA is quite sensitive to this assumption!
+]
+
+---
+
+# Graphical diagnostics
+
+Plot *standardized* (`rstandard`) or *studentized residuals* (`rstudent`) against fitted values.
+
+
+```r
+data(arithmetic, package = "hecedsm")
+model &lt;- lm(score ~ group, data = arithmetic)
+data &lt;- data.frame(
+  fitted = fitted(model),
+  residuals = rstudent(model))
+ggplot(data = data,
+       mapping = aes(x = fitted,
+                     y = residuals)) +
+    geom_point()
+```
+
+---
+
+# Test diagnostics
+
+Can use a statistical test for `\(\mathscr{H}_0: \sigma_1 = \cdots = \sigma_K\)`.
+
+- Bartlett's test (assumes normal data)
+- Levene's test: a one-way ANOVA for `\(|y_{ik} - \widehat{\mu}_k|\)`
+- .col-5[Brown–Forsythe test]: a one-way ANOVA for `\(|y_{ik} - \text{median}_k|\)` (**more robust**)
+- Fligner-Killeen test: based on ranks
+
+.box-inv-5.medium.sp-after-half[Different tests may yield different conclusions]
+
+???
+
+Bartlett is uniformly most powerful for normal data.
+
+Levene and BF are most commonly used in practice (so far of what I have seen)
+
+
+
+---
+
+# Example in **R**
+
+
+```r
+data(arithmetic, package = "hecedsm")
+model &lt;- aov(score ~ group, data = arithmetic)
+car::leveneTest(model) #Brown-Forsythe by default
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(&gt;F)
+## group  4  1.2072 0.3228
+##       40
+```
+
+.small[Fail to reject the null: no evidence of unequal variance]
+
+---
+
+# Box's take
+
+&gt; To make the preliminary test on variances is rather like putting to sea in a rowing boat to find out whether conditions are sufficiently calm for an ocean liner to leave port!
+
+.small[Box, G.E.P. (1953). *Non-Normality and Tests on Variances.* Biometrika 40 (**3**)-4: 318–335.]
+---
+
+# Solutions
+
+- In large sample, power is large so probably always reject `\(\mathscr{H}_0: \sigma_1 = \cdots = \sigma_K\)`.
+- If heterogeneity only per experimental condition, use **Welch's ANOVA** (`oneway.test` in **R**).
+- This statistic estimates the std. deviation of each group *separately*.
+- Could (should?) be the default when you have large number of observations, or enough to reliably estimate mean and std. deviation.
+
+---
+
+# What can go wrong? Spurious findings!
+
+&lt;img src="img/03/simuWelchnull.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.small[Reject null hypothesis more often even if no difference in mean!]
+
+
+???
+
+Histogram of the null distribution of p-values obtained through simulation using the classical analysis of variance F-test (left) and Welch's unequal variance alternative (right), based on 10 000 simulations. Each simulated sample consist of 50 observations from a standard normal distribution and 10 observations from centered normal with variance of 9. The uniform distribution would have 5% in each of the 20 bins used for the display.
+
+---
+
+# More complex heterogeneity patterns
+
+- Variance-stabilizing transformations (e.g., log for counts)
+- Explicit model for trend over time, etc. may be necessary in more complex design (repeated measure) where there is a learning effect.
+
+
+---
+
+# \# 3: Independence
+
+.footnote.small[As a Quebecer, I am not allowed to talk about this topic.]
+
+.box-inv-5.medium.sp-after-half[No visual diagnostic or test available.]
+
+.box-inv-5.large.sp-after-half[Rather, infer from **context**.]
+
+???
+
+Knowing the value of one observation tells us nothing about the value taken by the others.
+
+
+
+---
+
+# Checking independence
+
+
+- Repeated measures are **not independent**
+- Group structure (e.g., people performing experiment together and exchanging feedback)
+- Time dependence (time series, longitudinal data).
+- Dependence on instrumentation, experimenter, time of the day, etc.
+
+Observations close by tend to be more alike (correlated).
+---
+
+# \# 4: Sample size (normality?)
+
+.box-inv-5.medium.sp-after-half[
+
+Where does the `\(\mathsf{F}\)`-distribution come from?
+]
+
+.box-inv-5.medium.sp-after-half[Normality of **group average**]
+
+.box-inv-5.medium.sp-after-half[
+This holds (in great generality)&lt;br&gt;because of the&lt;br&gt;
+**central limit theorem**]
+
+---
+
+# Central limit theorem
+
+.small[In large samples, the mean is approximately normally distributed.]
+
+
+&lt;img src="03-slides_files/figure-html/clt-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# How large should my sample be?
+
+.box-inv-5.large.sp-after-half[Rule of thumb: 20 or 30 per group]
+
+.box-inv-5.large.sp-after-half[Gather sufficient number of observations.]
+
+---
+
+# Assessing approximate normality
+
+The closer data are to being normal, the better the large-sample distribution approximation is.
+
+Can check normality via quantile-quantile plot with standardized residuals `\(r_i\)`:
+
+- on the `\(x\)`-axis, the theoretical quantiles `\(\widehat{F}^{-1}\{\mathrm{rank}(r_i)/(n+1)\}\)` of the residuals, where `\(F^{-1}\)` is the normal quantile function.
+- on the `\(y\)`-axis, the empirical quantiles `\(r_i\)`
+
+ 
+
+.footnote.small[
+In **R**, use functions `qqnorm` or `car::qqPlot` to produce the plots.
+]
+
+---
+
+# More about quantile-quantile plots
+
+The ordered residuals should align on a straight line. 
+
+
+&lt;img src="03-slides_files/figure-html/diagrammeqq2-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+.small[Normal quantile-quantile plot (left) and Tukey's mean different QQ-plot (right).]
+
+
+---
+
+
+layout: true
+class: title title-1
+
+---
+
+# Recap 1
+.medium[
+
+- One-way analysis of variance compares **average** of experimental groups
+- Null hypothesis: all groups have the same average
+- Easier to detect when the null hypothesis is false if:
+  - large differences group average
+  - small variability
+  - large samples
+
+]
+
+---
+
+class: title title-1
+
+# Recap 2 
+
+.medium[
+
+- Model assumes independent observations, additive structure and equal variability in each group.
+- All statements are approximate, but if model assumptions are invalid, can lead to spurious results or lower power.
+
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

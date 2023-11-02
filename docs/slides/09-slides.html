@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Repeated measures</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-11-16" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Repeated measures and multivariate &lt;br&gt; analysis of variance
+
+.class-info[
+
+**Session 9**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+name: outline
+class: title title-inv-1
+
+# Outline
+--
+
+.box-8.large.sp-after-half[Repeated measures]
+
+--
+
+.box-5.large.sp-after-half[MANOVA]
+
+---
+
+
+layout: false
+name: repeated-measures
+class: center middle section-title section-title-8
+
+# Repeated measures ANOVA
+
+---
+
+layout: true
+class: title title-8
+
+---
+
+# Beyond between-designs
+
+Each subject (experimental unit) assigned to a single condition.
+
+- individuals (subjects) are **nested** within condition/treatment.
+
+
+In many instances, it may be possible to randomly assign multiple conditions to each experimental unit.
+
+---
+
+# Benefits of within-designs
+
+Assign (some or) all treatments to subjects and measure the response.
+
+Benefits: 
+
+- Each subject (experimental unit) serves as its own control (greater comparability among treatment conditions).
+- Filter out effect due to subject (like blocking):
+  - increased precision
+  - increased power (tests are based on within-subject variability)
+
+
+Impact: need smaller sample sizes than between-subjects designs
+
+---
+
+# Drawbacks of within-designs
+
+Potential sources of bias include
+  - Period effect (e.g., practice or fatigue).
+  - Carryover effects.
+  - Permanent change in the subject condition after a treatment assignment.
+  - Loss of subjects over time (attrition).
+
+---
+
+# Minimizing sources of bias
+
+- Randomize the order of treatment conditions among
+subjects 
+- or use a balanced crossover design and include the period and carryover effect in the statistical model (confounding or control variables to better isolate the treatment effect).
+- Allow enough time between treatment conditions to reduce or eliminate period or carryover effects.
+
+
+---
+
+
+# One-way ANOVA with a random effect
+
+As before, we have one experimental factor `\(A\)` with `\(n_a\)` levels, with
+
+`$$\begin{align*}\underset{\text{response}\vphantom{l}}{Y_{ij}} = \underset{\text{global mean}}{\mu_{\vphantom{j}}} + \underset{\text{mean difference}}{\alpha_j} + \underset{\text{random effect for subject}}{S_{i\vphantom{j}}} + \underset{\text{error}\vphantom{l}}{\varepsilon_{ij}}\end{align*}$$`
+
+where `\(S_i \sim \mathsf{No}(0, \sigma^2_s)\)` and `\(\varepsilon_{ij} \sim \mathsf{No}(0, \sigma^2_e)\)` are random variables.
+
+The errors and random effects are independent from one another.
+
+
+
+---
+
+
+# Variance components
+
+The model **parameters** are `\(\mu\)`, `\(\alpha_j\)`'s, `\(\sigma^2_s\)` and `\(\sigma^2_e\)`.
+
+
+- The global average is `\(\mu\)`.
+- The variance of the response `\(Y_{ij}\)` is `\(\sigma^2_s + \sigma^2_e\)`.
+- The **intra-class correlation** between observations in group `\(i\)` is `\(\sigma^2_s/(\sigma^2_s + \sigma^2_e)\)`.
+   - observations from the same subject are correlated
+   - observations from different subjects are independent
+   
+This dependence structure within group is termed **compound symmetry**.
+
+---
+
+# Example: happy fakes
+
+An experiment conducted in a graduate course at HEC gathered electroencephalography (EEG) data.
+
+The response variable is the amplitude of a brain signal measured at 170 ms after the participant has been exposed to different faces. 
+
+Repeated measures were collected on 12 participants, but we focus only on the average of the replications.
+
+---
+
+
+# Experimental conditions
+
+.pull-left-wide[
+The control (`real`) is a true image, whereas the other were generated using a generative adversarial network (GAN) so be slightly smiling (`GAN1`) or extremely smiling (`GAN2`, looks more fake).
+
+Research question: do the GAN image trigger different reactions (pairwise difference with control)?
+]
+.pull-right-narrow[
+
+![](img/10/face_real.jpg)
+![](img/10/face_GAN_S.jpg)
+![](img/10/face_GAN_E.jpg)
+
+]
+---
+
+
+# Models for repeated measures
+
+If we average, we have a balanced randomized blocked design with
+
+- `id` (blocking factor)
+- `stimulus` (experimental factor)
+
+This approach has a drawback: variance estimates can be negative...
+
+We use the `afex` package to model the within-subject structure.
+
+---
+.panelset[
+.panel[.panel-name[Load data]
+
+```r
+# Set sum-to-zero constraint for factors
+options(contrasts = c("contr.sum", "contr.poly"))
+data(AA21, package = "hecedsm")
+# Compute mean
+AA21_m &lt;- AA21 |&gt;
+  dplyr::group_by(id, stimulus) |&gt;
+  dplyr::summarize(latency = mean(latency))
+```
+]
+.panel[.panel-name[Graph]
+.pull-left[
+
+```r
+library(ggplot2)
+ggplot(data = AA21_m,
+       aes(x = id,
+           colour = stimulus,
+           y = latency)) +
+  geom_point()
+```
+]
+.pull-right[
+&lt;img src="09-slides_files/figure-html/graph2-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+.panel[.panel-name[ANOVA]
+
+.pull-left[
+.small[
+
+```r
+model &lt;- afex::aov_ez(
+  id = "id",           # subject id
+  dv = "latency",      # response
+  within = "stimulus", # within-subject
+  data = hecedsm::AA21,
+  fun_aggregate = mean)
+anova(model, # mixed ANOVA model
+      correction = "none", # sphericity
+      es = "none") # effect size
+```
+
+- No detectable difference between conditions.
+
+]
+]
+.pull-right[
+
+.small[
+```
+# Anova Table (Type 3 tests)
+# 
+# Response: latency
+#          num Df den Df   MSE     F Pr(&gt;F)
+# stimulus      2     22 1.955 0.496 0.6155
+```
+
+- Residual degrees of freedom: `\((n_a-1) \times (n_s-1)=22\)` for `\(n_s=12\)` subjects and `\(n_a=3\)` levels.
+
+]
+]
+]
+]
+---
+
+
+# Model assumptions
+
+The validity of the `\(F\)` null distribution relies on the model having the correct structure.
+
+- Same variance per observation
+- equal correlation between measurements of the same subject (*compound symmetry*)
+- normality of the random effect
+
+
+---
+
+# Sphericity
+
+
+Since we care only about differences in treatment, can get away with a weaker assumption than compound symmetry.
+
+
+**Sphericity**: variance of difference between treatment is constant.
+
+
+Typically, people test this assumption (using e.g., Mauchly's test of sphericity)
+   - if statistically significant, use a correction
+   - if no evidence, proceed with `\(F\)` tests as usual
+   
+---
+
+
+# Corrections for sphericity
+
+Box suggested to multiply both degrees of freedom of `\(F\)` statistic by `\(\epsilon &lt; 1\)`.
+
+- Three common correction factors `\(\epsilon\)`:
+   - Greenhouse-Geisser 
+   - Huynh-Feldt (more powerful, but can be larger than 1)
+   - lower bound with `\(\nu_1\)`, giving `\(\mathsf{F}(1, \nu_2/\nu_1)\)`.
+
+Another option is to go fully multivariate.
+
+---
+# Sphericity tests with `afex`
+
+
+
+```r
+summary(model)
+```
+
+```
+Mauchly Tests for Sphericity
+
+         Test statistic p-value
+stimulus        0.67814 0.14341
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+          GG eps Pr(&gt;F[GG])
+stimulus 0.75651     0.5667
+
+            HF eps Pr(&gt;F[HF])
+stimulus 0.8514944  0.5872648
+```
+
+---
+
+# Contrasts
+
+In within-subject designs, contrasts are obtained by computing the contrast for every subject. Make sure to check degrees of freedom!
+
+.small[
+
+```r
+# Set up contrast vector
+cont_vec &lt;- list("real vs GAN" = c(1, -0.5, -0.5))
+model |&gt; emmeans::emmeans(spec = "stimulus", contr = cont_vec)
+```
+
+```
+## $emmeans
+##  stimulus emmean    SE df lower.CL upper.CL
+##  real      -10.8 0.942 11    -12.8    -8.70
+##  GAN1      -10.8 0.651 11    -12.3    -9.40
+##  GAN2      -10.3 0.662 11    -11.8    -8.85
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast    estimate    SE df t.ratio p.value
+##  real vs GAN   -0.202 0.552 11  -0.366  0.7213
+```
+]
+
+---
+
+layout: false
+name: manova
+class: center middle section-title section-title-5
+
+# Multivariate analysis of variance
+
+---
+
+layout: true
+class: title title-5
+
+
+
+---
+# Motivational example
+
+From Anandarajan et al. (2002), Canadian Accounting Perspective
+
+
+&gt; This study questions whether the current or proposed Canadian standard of disclosing a going-concern contingency is viewed as equivalent to the standard adopted in the United States by financial statement users. We examined loan officers’ perceptions across three different formats
+
+
+---
+
+# Alternative going-concern reporting formats
+
+Bank loan officers were selected as the appropriate financial statement users for this study. 
+
+Experiment was conducted on the user’s interpretation of a
+going-concern contingency when it is provided in one of three
+disclosure formats:
+
+1. Integrated note (Canadian standard)
+2. Stand-alone note (Proposed standard)
+3. Stand-alone note plus modified report with explanatory
+paragraph (standard adopted in US and other countries)
+
+---
+# Multivariate response
+
+![](img/13/questionnaire.png)
+
+
+---
+
+# Why use MANOVA?
+
+1. Control experimentwise error
+  - do a single test, reduces type I error
+2. Detect differences in combination that would not be found with univariate tests
+3. Increase power (context dependent)
+
+---
+
+
+# Multivariate model
+Postulate the following model:
+`$$\boldsymbol{Y}_{ij} \sim \mathsf{No}_p(\boldsymbol{\mu}_j, \boldsymbol{\Sigma}), \qquad j = 1, \ldots J$$`
+
+Each response `\(\boldsymbol{Y}_{ij}\)` is `\(p\)`-dimensional.
+
+.small[
+
+We assume multivariate measurements are independent of one another, with
+
+- the same distribution
+- same covariance matrix `\(\boldsymbol{\Sigma}\)`
+- same mean vector `\(\boldsymbol{\mu}_j\)`  within each `\(j=1, \ldots, J\)` experimental groups.  
+   - (randomization)
+
+]
+
+The model is fitted using multivariate linear regression.
+
+---
+
+# Bivariate MANOVA
+
+.pull-left[
+&lt;img src="img/09/fig8.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+Confidence ellipses for bivariate MANOVA with discriminant analysis.
+
+The diagonal line is the best separating plane between the two.
+
+One-way analysis of variance would have lower power to detect differences.
+
+]
+
+---
+
+# Confidence intervals and confidence regions
+
+.pull-left[
+
+&lt;img src="img/09/fig5.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+Simultaneous confidence region (ellipse), marginal confidence intervals (blue) and Bonferroni-adjusted intervals (green). 
+
+The dashed lines show the univariate projections of the confidence ellipse.
+]
+
+---
+# Model assumptions
+
+.box-inv-5[The more complex the model, the more assumptions...]
+
+
+Same as ANOVA, with in addition
+
+
+- The data follow a multivariate normal distribution 
+  - Shapiro–Wilk test, univariate QQ-plots
+- The covariance matrix is the same for all subjects
+  - Box's `\(M\)` test is often used, but highly sensitive to departures from the null (other assumptions impact the test)
+
+Normality matters more in small samples.
+
+---
+# When to use MANOVA?
+
+In addition, for this model to make sense, you need just enough correlation (Goldilock principle)
+
+ - if correlation is weak, use univariate analyses 
+   - (no gain from multivariate approach)
+   - less power due to additional covariance parameter estimation
+ - if correlation is too strong, redundancy
+    - don't use Likert scales that measure a similar dimension
+
+.box-inv-5[Only combine elements that theoretically or conceptually make sense together.]
+
+---
+# Testing equality of mean vectors
+
+The null hypothesis is `\(\mathscr{H}_0: \boldsymbol{\mu}_1 = \cdots = \boldsymbol{\mu}_J\)` against the alternative that at least one vector is different from the rest. The null imposes `\((J-1) \times p\)` restrictions on the parameters.
+
+With `\(J=2\)` (bivariate), the MANOVA test finds the best composite score with weights for `\(Y_{i1}\)` and `\(Y_{i2}\)` that maximizes the value of the `\(t\)`-test.
+
+The null distribution is Hotelling's `\(T^2\)`, but a modification of the test statistic can be approximated by a `\(F\)` distribution.
+
+
+---
+# Choice of test statistic
+
+In higher dimensions, with `\(J \geq 3\)`, there are many statistics that can be used to test equality of mean.
+
+The statistics are constructed from within/between sum covariance matrices.
+
+These are
+
+- Roy's largest root (most powerful provided all assumptions hold)
+- Wilk's `\(\Lambda\)`: most powerful, most commonly used
+- **Pillai's trace**: most robust choice for departures from normality or equality of covariance matrices
+
+Most give similar conclusion, and they are all equivalent with `\(J=2\)`.
+
+
+---
+
+# Sample size for MANOVA
+
+The number of observations must be sufficiently large.
+
+You can use the software G*Power for power calculations.
+
+
+To achieve a power of 80%, need the following number of replicates **per group**.
+.small[
+
+&lt;table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4"&gt;&lt;div style="border-bottom: 1px solid #111111; margin-bottom: -1px; "&gt;3 groups&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4"&gt;&lt;div style="border-bottom: 1px solid #111111; margin-bottom: -1px; "&gt;4 groups&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4"&gt;&lt;div style="border-bottom: 1px solid #111111; margin-bottom: -1px; "&gt;5 groups&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; effect size \ p &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 4 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 6 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 8 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 4 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 6 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 8 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 4 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 6 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 8 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; very large &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; large &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 52 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 58 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; medium &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; small &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 98 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 125 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 145 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 115 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 145 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 165 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 185 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 135 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 170 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 230 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+.small[
+Laüter, J. (1978), Sample size requirements for the `\(T^2\)` test of MANOVA (tables for one-way classification). *Biometrical Journal*, **20**, 389-406.
+]
+
+???
+
+
+
+---
+
+# Post hoc testing
+
+Researchers often conduct *post hoc* univariate tests using univariate ANOVA.
+
+In **R**, Holm-Bonferonni's method is applied for marginal tests. You need to correct for multiple testing! 
+
+A better option is to proceed with descriptive discriminant analysis, a method that tries to find the linear combinations of the vector means to discriminate between groups.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": false,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

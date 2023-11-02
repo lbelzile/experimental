@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Experimental Designs and Statistical Methods - Three-way analysis of variance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Experimental Designs and Statistical Methods</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
+ <span class="menu-text">Evaluations</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../example/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a" rel="" target="">
+ <span class="menu-text">Notes</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://edsmf22.slack.com" rel="" target=""><i class="bi bi-slack" role="img" aria-label="Slack">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://lbelzile.github.io/hecedsm" rel="" target=""><i class="bi bi-box" role="img" aria-label="Datasets">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/threewayanova.html">Three-way ANOVA</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Installation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>R</strong> and RStudio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Examples</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/onewayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/twowayanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/threewayanova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Three-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/ancova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis of covariance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/effectsizepower.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Effect size and power</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/repeated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repeated measures ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/manova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/mixedmodel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear mixed models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/linearmediation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear causal mediation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/nonparametric.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonparametric tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/counts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Count data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#videos" id="toc-videos" class="nav-link active" data-scroll-target="#videos">Videos</a></li>
+  <li><a href="#notebook" id="toc-notebook" class="nav-link" data-scroll-target="#notebook">Notebook</a>
+  <ul class="collapse">
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data description</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#interaction-plot" id="toc-interaction-plot" class="nav-link" data-scroll-target="#interaction-plot">Interaction plot</a></li>
+  <li><a href="#main-effects-and-contrasts" id="toc-main-effects-and-contrasts" class="nav-link" data-scroll-target="#main-effects-and-contrasts">Main effects and contrasts</a>
+  <ul class="collapse">
+  <li><a href="#marginal-contrast" id="toc-marginal-contrast" class="nav-link" data-scroll-target="#marginal-contrast">Marginal contrast</a></li>
+  <li><a href="#simple-effects" id="toc-simple-effects" class="nav-link" data-scroll-target="#simple-effects">Simple effects</a></li>
+  <li><a href="#interaction-components" id="toc-interaction-components" class="nav-link" data-scroll-target="#interaction-components">Interaction components</a></li>
+  <li><a href="#three-factor-interaction" id="toc-three-factor-interaction" class="nav-link" data-scroll-target="#three-factor-interaction">Three factor interaction</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Three-way analysis of variance</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="videos" class="level1">
+<h1>Videos</h1>
+<p>The code created in the video <a href="../example/threewayanova.R">can be downloaded here</a>.</p>
+<div class="cell" data-hash="threewayanova_cache/html/show-youtube-list_b713a0f65dcf649ccf3dfe351d9d93bf">
+<p>There’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in <a href="https://www.youtube.com/playlist?list=PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY">one YouTube playlist</a>.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=SHhP_TfZGVM&amp;list=PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY">Introduction</a></li>
+<li><a href="https://www.youtube.com/watch?v=I63CNxonlow&amp;list=PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY">Interaction plots</a></li>
+<li><a href="https://www.youtube.com/watch?v=KLLBNQhD0rE&amp;list=PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY">Marginal contrast and simple effects</a></li>
+<li><a href="https://www.youtube.com/watch?v=WIoxZZ4pvlE&amp;list=PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY">More contrasts and interactions</a></li>
+</ul>
+<p>You can also watch the playlist (and skip around to different sections) here:</p>
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube.com/embed/playlist?list=PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</div>
+</div>
+</section>
+<section id="notebook" class="level1">
+<h1>Notebook</h1>
+<p>The purpose of this little demonstration is to reproduce the results from chapter 21 and 22 of <span class="citation" data-cites="Keppel/Wickens:2004">Keppel &amp; Wickens (<a href="#ref-Keppel/Wickens:2004" role="doc-biblioref">2004</a>)</span>, which were performed manually, using instead the <code>emmeans</code> package. Many of the manipulations are intricate.</p>
+<p>We consider fictional data from <span class="citation" data-cites="Keppel/Wickens:2004">Keppel &amp; Wickens (<a href="#ref-Keppel/Wickens:2004" role="doc-biblioref">2004</a>)</span> for a study on</p>
+<blockquote class="blockquote">
+<p>the effects of verbal feedback given during the acquisition of different types of learning material on memory tested one week later.</p>
+</blockquote>
+<section id="data-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-description">Data description</h2>
+<p>There are three factors: the first is <code>feedback</code>, which indicates the type of verbal feedback received by the participant: either <code>none</code> (<span class="math inline">\(a_1\)</span>) to serve as control group, <code>positive</code> (<span class="math inline">\(a_2\)</span>) or <code>negative</code> (<span class="math inline">\(a_3\)</span>) feedback. The second factor is related to the type of learning material, one of low-frequency words with low emotional content (<span class="math inline">\(b_1\)</span>), high-frequency words with low emotional content (<span class="math inline">\(b_2\)</span>) and finally high-frequency words with high emotional content (<span class="math inline">\(b_3\)</span>). The third factor is the target population: either fifth graders (<span class="math inline">\(c_1\)</span>) or high school seniors (<span class="math inline">\(c_2\)</span>). While most of the interest is in the first two factors, the three-way ANOVA is a more efficient design if we want to study both age groups.</p>
+<p>The response variable is the number of words remembered (<code>words</code>) after one week. The design is balanced: there are <span class="math inline">\(r=5\)</span> replications for each scenario, so <span class="math inline">\(n=3 \times 3 \times 2 \times 5\)</span> observations. If we fit the three-way model with all two ways and three way interactions, we need to estimate 19 parameters (18 means and one variance). We model each participant response assuming the measurements are independent and <span class="math inline">\(Y_{ijkr} \sim \mathsf{No}(\mu_{ijk}, \sigma^2)\)</span>: this indicates that each subgroup (<span class="math inline">\(a_i, b_j, c_k\)</span>) has a different (theoretical) average <span class="math inline">\(\mu_{ijk}\)</span> and a common variance <span class="math inline">\(\sigma^2\)</span>. The estimates <span class="math inline">\(\widehat{\mu}_{ijk}\)</span> are simply the sample averages of each group, whereas the pooled variance estimator, <span class="math display">\[\widehat{\sigma}^2 = \frac{1}{72}\sum_{i=1}^3 \sum_{j=1}^3 \sum_{k=1}^2 \sum_{r=1}^5 (y_{ijkr} - \widehat{\mu}_{ijk})^2,\]</span> is the sum of squared difference between replicate observations and their group average, divided by the residual degrees of freedom (total number of observations minus number of mean parameters).</p>
+<p>The model can be reparametrized in terms of main effects and interaction: overall average for each factor, average of residual affect after accounting for effects of row, columns and depth and finally residual affect for the three-way. This parametrization is <span class="math display">\[\begin{align*}\underset{\text{theoretical average}}{\mathsf{E}(Y_{ijkr})} &amp;= \quad \underset{\text{global mean}}{\mu} \\ &amp;\quad +\underset{\text{main effects}}{\alpha_i + \beta_j + \gamma_k}  \\ &amp; \quad + \underset{\text{two-way interactions}}{(\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk}} \\ &amp; \quad + \underset{\text{three-way interaction}}{(\alpha\beta\gamma)_{ijk}}\end{align*}\]</span></p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>What are comparisons of interest? We may be interested in the effect of feedback, for example comparing whether any form of feedback increases word retention. Thus, we could look at the marginal contrast <span class="math inline">\(\mu_{1..} = \frac{1}{2}(\mu_{2..} + \mu_{3..})\)</span>, in essence treating the whole model as a one-way ANOVA but using all the data to estimate the standard deviation <span class="math inline">\(\sigma\)</span>. For a balanced sample, the estimated average for example of the control group <code>none</code>, <span class="math inline">\(\widehat{\mu}_{1..}\)</span>, would be the sample average of the 30 participants assigned to this experimental condition.</p>
+<p>We can proceed similarly for the other factors. One could be interested in whether the type of learning material impacts retention (overall effect), or if there are difference between high and low emotional content for high-frequency occurrences (<span class="math inline">\(b_2\)</span> and <span class="math inline">\(b_3\)</span>); amounting to ignoring all observations for the low emotion low-frequency group.</p>
+<p>The first step is to load the data and the packages needed for the analysis.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-1_305e703d595d21d6df1e078a712a4a5e">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(words, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check balance</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>feedback <span class="sc">+</span> age <span class="sc">+</span> material, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> words)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>, , material = low freq/low emotion
+
+          age
+feedback   fifth grade senior
+  none               5      5
+  positive           5      5
+  negative           5      5
+
+, , material = high freq/low emotion
+
+          age
+feedback   fifth grade senior
+  none               5      5
+  positive           5      5
+  negative           5      5
+
+, , material = high freq/high emotion
+
+          age
+feedback   fifth grade senior
+  none               5      5
+  positive           5      5
+  negative           5      5</code></pre>
+</div>
+</div>
+<p>This is a 3 by 3 by 2 factorial design with <span class="math inline">\(r=5\)</span> replicates.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-2_1da35a69e127515bf84dfbc0b26784fa">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(words <span class="sc">~</span> feedback <span class="sc">*</span> material <span class="sc">*</span> age,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> words)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: words
+                      Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+feedback               2  26.867  13.433  7.1118  0.001519 ** 
+material               2  64.867  32.433 17.1706 7.993e-07 ***
+age                    1  14.400  14.400  7.6235  0.007304 ** 
+feedback:material      4  14.667   3.667  1.9412  0.112829    
+feedback:age           2   8.600   4.300  2.2765  0.109987    
+material:age           2  16.200   8.100  4.2882  0.017397 *  
+feedback:material:age  4  10.000   2.500  1.3235  0.269461    
+Residuals             72 136.000   1.889                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Since the data are balanced, we can use the <code>aov</code> function and look at the analysis of variance produced by <code>aov</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> To get all pairwise and the triplewise interaction, we use <code>response ~ factor1 * factor2 * factor3</code> notation. Since we have replications, the full model doesn’t fit the data exactly and there are residual observations to estimate the variability, but estimating reliably different variance in each of the 18 subgroup wouldn’t be possible with 5 observations. We can see that the three-way interaction isn’t significative, and the only two-way effect is for <code>material:age</code>.</p>
+</section>
+<section id="interaction-plot" class="level2">
+<h2 class="anchored" data-anchor-id="interaction-plot">Interaction plot</h2>
+<p>We can try to infer whether there is an interaction by looking at averages for each pair of variable at a time, and then at all three factors concurrently. These plots theoretically are used to demonstrate the impact of interactions, but in practice the sample estimates are noisy proxies of the true subgroup averages.</p>
+<p>We can confirm our findings by looking at the interaction plot, showing the group average for each combination of the factors.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-3_52fa44120ed3e5ecb46c47b8bc6de101">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(feedback, material, age) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanwords =</span> <span class="fu">mean</span>(words)) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> feedback,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> meanwords,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">group =</span> material,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> material)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># connect the dots</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>age) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean number of words remembered"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="threewayanova_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>These summary statistics hide the raw data: due to the discreteness of the response, which consists of counts, we can slightly perturb observations and jitter them.</p>
+<div class="cell" data-hash="threewayanova_cache/html/fig-raw-words_564b2625fc69531e158271485a0eb450">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> words,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> words,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> material,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> material)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.height =</span> <span class="fl">0.1</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">dodge.width =</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>feedback) <span class="sc">+</span> <span class="co"># wrap by third variable</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># change default theme</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span> <span class="co"># move caption</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean number of words remembered"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-raw-words" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="threewayanova_files/figure-html/fig-raw-words-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Individual results for an experiment on the impact of verbal feedback on retention of information.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The high frequency/high emotion group has significantly lower retention depending on feedback, with seemingly no difference with other material type when there is no verbal feedback, but a strong decrease for positive and even stronger for negative feedback. By contrasts, there is little to no effect with high school seniors, suggesting that the experimental manipulation has limited impact for these groups.</p>
+</section>
+<section id="main-effects-and-contrasts" class="level2">
+<h2 class="anchored" data-anchor-id="main-effects-and-contrasts">Main effects and contrasts</h2>
+<p>The whole purpose of Chapters 21 and 22 is to show how we can explore the three-way factorial design and extract information by treating it as a one-way ANOVA with 18 groups, a series of two-way ANOVA, etc.</p>
+<p>We look at the estimated marginal means and start by computing the marginal mean by averaging over levels of material and age, since there did not seem to be interaction between feedback and the other variables.</p>
+<p>As before with the <code>emmeans</code> package, we specify the variables we want to keep in <code>specs</code>, the other being ‘marginalized out’ by ignoring the counts. The package will print a warning since the model includes an interaction, indicating that the output is potentially misleading.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-5_aa4548e22ea99337eddd0bb78b654bf0">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>margA <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"feedback"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>margA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> feedback emmean    SE df lower.CL upper.CL
+ none       8.37 0.251 72     7.87     8.87
+ positive   7.30 0.251 72     6.80     7.80
+ negative   7.13 0.251 72     6.63     7.63
+
+Results are averaged over the levels of: material, age 
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<p>Since the data are balanced, this is simply the average words recalled per feedback group. We can check that this is indeed the mean of each word count by feedback by computing the summary statistics and comparing them with the output of <code>emmeans</code>:</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-6_a8e39bb61923105dc1f5a3202efe2771">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(feedback) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(words))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  feedback  mean
+  &lt;fct&gt;    &lt;dbl&gt;
+1 none      8.37
+2 positive  7.3 
+3 negative  7.13</code></pre>
+</div>
+</div>
+<section id="marginal-contrast" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-contrast">Marginal contrast</h3>
+<p>We next compute a marginal contrast by comparing between no-feedback and the average of positive and negative. This amounts to treating our data as a one-way ANOVA and computing contrasts as usual.</p>
+<p>The null hypothesis is <span class="math display">\[\mathscr{H}_0: \mu_{\text{none}..} = \frac{1}{2} \left(\mu_{\text{pos}..} + \mu_{\text{neg}..}\right)\]</span> which can be rexpressed in terms of contrast vector as <span class="math inline">\((1, -0.5, -0.5)\)</span> or any non-zero multiple of this solution.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-7_271969b528a95066feab7e00a57688bb">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="at">object =</span> margA,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="fu">list</span>(<span class="at">interaction =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast    estimate    SE df t.ratio p.value
+ interaction     1.15 0.307 72   3.742  0.0004
+
+Results are averaged over the levels of: material, age </code></pre>
+</div>
+</div>
+</section>
+<section id="simple-effects" class="level3">
+<h3 class="anchored" data-anchor-id="simple-effects">Simple effects</h3>
+<p>Since the two-way interaction between factors <code>material</code> and <code>age</code> is significant, we can test for differences between levels of <code>material</code> within each value of <code>age</code> (averaging over all levels of <code>feedback</code>).</p>
+<p>To do this with <code>emmeans</code>, we first marginalize out over feedback by keeping only the two other variables in <code>specs</code>, then perform an <span class="math inline">\(F\)</span> test for each value of <code>age</code> by using <code>joint_tests</code> and specifying the analysis is conditional on <code>age</code>.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-8_f78974b15e26a353bf795a40138bfb87">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>simpleBpC <span class="ot">&lt;-</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(model,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"material"</span>, <span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"age"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>simpleBpC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>age = fifth grade:
+ model term df1 df2 F.ratio p.value
+ material     2  72  19.306  &lt;.0001
+
+age = senior:
+ model term df1 df2 F.ratio p.value
+ material     2  72   2.153  0.1236</code></pre>
+</div>
+</div>
+<p>We could also look at <strong>simple contrasts</strong> by levels of age comparing the three material and looking at low versus high emotions. This amounts to reducing data to a two-way ANOVA in a first step, then taking each depth (age) group in turn and computing a contrast.</p>
+<p>Using the notation <span class="math inline">\(A \times B \times C\)</span> to denote the feedback, material and age groups, this compares</p>
+<p><span class="math display">\[\mathscr{H}_0: \frac{1}{2} \left(\mu_{.1k} + \mu_{.2k}\right) = \mu_{.3k}\]</span> for age group <span class="math inline">\(k\)</span>.</p>
+<p>In both cases, we get two sets of tests statistics and <span class="math inline">\(p\)</span>-values since there are two age groups.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-9_4f4d86a1121239091ff2c81a4c181f3f">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple contrasts</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>margBC <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"material"</span>, <span class="st">"age"</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">by =</span> <span class="st">"age"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(margBC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$material
+[1] "low freq/low emotion"   "high freq/low emotion"  "high freq/high emotion"
+
+$age
+[1] "fifth grade" "senior"     </code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>margBC <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(<span class="at">contrast =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>age = fifth grade:
+ contrast estimate    SE df t.ratio p.value
+ contrast     -2.7 0.435 72  -6.212  &lt;.0001
+
+age = senior:
+ contrast estimate    SE df t.ratio p.value
+ contrast     -0.9 0.435 72  -2.071  0.0420
+
+Results are averaged over the levels of: feedback </code></pre>
+</div>
+</div>
+<p>There is strong (unadjusted) differences between low and high emotion for fifth grades, but the effect for senior is smaller and quite uncertain.</p>
+</section>
+<section id="interaction-components" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-components">Interaction components</h3>
+<p>The next potential object of interest is the interaction components based on marginal means.</p>
+<p><span class="citation" data-cites="Keppel/Wickens:2004">Keppel &amp; Wickens (<a href="#ref-Keppel/Wickens:2004" role="doc-biblioref">2004</a>)</span> compare the average of <span class="math inline">\(b_2\)</span> and <span class="math inline">\(b_3\)</span> between age groups, fixing the frequency and varying only the emotional content.</p>
+<p>The first step with <code>emmeans</code> is to specify which variables to keep, then slice by age group. This gives us a set of 3 averages per age group. Next, we set up the contrast vector to compute for each age group. The last call, to <code>joint_tests()</code>, proceeds with comparing whether the average contrast results are the same in each age group by comparing the two. There is some evidence that high emotion words has a different impact, independent of feedback.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-10_a202e3b2dcfab6f850a433e10c073a42">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"material"</span>, <span class="st">"age"</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="st">"age"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(<span class="at">b2vsb3 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">joint_tests</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> model term df1 df2 F.ratio p.value
+ age          1  72   6.432  0.0134</code></pre>
+</div>
+</div>
+<p>We could also compute differences between feedback and material. Marginalizing over age yields a total of 9 cells: we treat the resulting two-way design as a one-way design with nine groups and simply compute the contrast vector, assigning weight zero for the low-frequency and low emotion group and then looking at none (weight <span class="math inline">\(1\)</span>) and the average of positive and negative feedback (weights of <span class="math inline">\(-0.5\)</span>). Since we want to compare this difference between <span class="math inline">\(b_2\)</span> and <span class="math inline">\(b_3\)</span>, we give similar weights for the last three groups, but instead of <span class="math inline">\((1, -0.5, -0.5)\)</span>, we flip the signs.</p>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-11_e45f8641dcaf7a5d9dbe21d3b46a87eb">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>emmAB <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"feedback"</span>, <span class="st">"material"</span>))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(emmAB)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$feedback
+[1] "none"     "positive" "negative"
+
+$material
+[1] "low freq/low emotion"   "high freq/low emotion"  "high freq/high emotion"</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>contr <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"none vs feedback for b2 vs b3"</span> <span class="ot">=</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>emmAB <span class="sc">|&gt;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> contr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast                      estimate    SE df t.ratio p.value
+ none vs feedback for b2 vs b3      1.4 0.753 72   1.860  0.0670
+
+Results are averaged over the levels of: age </code></pre>
+</div>
+</div>
+</section>
+<section id="three-factor-interaction" class="level3">
+<h3 class="anchored" data-anchor-id="three-factor-interaction">Three factor interaction</h3>
+<p>The most complicated type of comparison is the three factor interaction (which wasn’t deemed significant). We could look at a particular combination by looking at the difference of difference. This is the same as what we just computed, but this time we will compare this difference of difference between age groups to see if it is the same.</p>
+<ul>
+<li><span class="math inline">\(A\)</span> (<code>feedback</code>): no feedback vs feedback (<code>none</code> vs average of <code>pos</code> and <code>neg</code>),</li>
+<li><span class="math inline">\(B\)</span> (<code>material</code>): comparing low vs high emotional feedback (<code>b2</code> vs <code>b3</code>)</li>
+<li><span class="math inline">\(C\)</span>: fifth graders vs seniors</li>
+</ul>
+<div class="cell" data-hash="threewayanova_cache/html/unnamed-chunk-12_3a8b4d94496f7e002c33db5b255785e7">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>threewaycontrast <span class="ot">&lt;-</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(model, </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"feedback"</span>, <span class="st">"material"</span>,<span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">contrast =</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>)))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(threewaycontrast, </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">adjust =</span> <span class="st">"scheffe"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">scheffe.rank =</span> <span class="dv">17</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast estimate   SE df t.ratio p.value
+ contrast        3 1.51 72   1.993  0.9992
+
+P value adjustment: scheffe method with rank 17 </code></pre>
+</div>
+</div>
+<p>We can adjust for multiplicity by using Scheffé’s method, but we need to set up the rank of the test: for general contrasts in a two-way slice, this would be the number of groups minus one, so 8 if we look at feedback and material, 2 if we look only at the feedback type, etc.</p>
+<p>There is no evidence here that this setup comparison for looking at differences for feedback among high frequency groups is any different between age groups.</p>
+
+
+<!-- -->
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Keppel/Wickens:2004" class="csl-entry" role="listitem">
+Keppel, G., &amp; Wickens, T. D. (2004). <em>Design and analysis: A researcher’s handbook</em>. Pearson Prentice Hall.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>With unbalanced data, we would need to fit the model using <code>lm</code> and use <code>car::Anova</code> to get type 2 or 3 effects.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb27" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Three-way analysis of variance"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="an">linktitle:</span><span class="co"> "Three-way ANOVA"</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="an">type:</span><span class="co"> docs</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">  fig-align: 'center'</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">  out-width: '80%'</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r slides-videos, echo=FALSE, include=FALSE}</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"youtube-playlist.R"</span>))</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>playlist_id <span class="ot">&lt;-</span> <span class="st">"PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY"</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>slide_details <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span>title, <span class="sc">~</span>youtube_id,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="st">"Introduction"</span>, <span class="st">"SHhP_TfZGVM"</span>,</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="st">"Interaction plots"</span>, <span class="st">"I63CNxonlow"</span>,</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="st">"Marginal contrast and simple effects"</span>, <span class="st">"KLLBNQhD0rE"</span>,</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="st">"More contrasts and interactions"</span>, <span class="st">"WIoxZZ4pvlE"</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Videos</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>The code created in the video <span class="co">[</span><span class="ot">can be downloaded here</span><span class="co">](/example/threewayanova.R)</span>.</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show-youtube-list, echo=FALSE, results="asis"}</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="fu">youtube_list</span>(slide_details, playlist_id, <span class="at">example =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="fu"># Notebook</span></span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>The purpose of this little demonstration is to reproduce the results from chapter 21 and 22 of @Keppel/Wickens:2004, which were performed manually, using instead the <span class="in">`emmeans`</span> package. Many of the manipulations are intricate.</span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>We consider fictional data from @Keppel/Wickens:2004 for a study on </span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; the effects of verbal feedback given during the acquisition of different types of learning material on memory tested one week later.</span></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data description</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>There are three factors: the first is <span class="in">`feedback`</span>, which indicates the type of verbal feedback received by the participant: either <span class="in">`none`</span> ($a_1$) to serve as control group, <span class="in">`positive`</span> ($a_2$) or <span class="in">`negative`</span> ($a_3$) feedback. The second factor is related to the type of learning material, one of low-frequency words with low emotional content ($b_1$), high-frequency words with low emotional content ($b_2$) and finally high-frequency words with high emotional content ($b_3$). The third factor is the target population: either fifth graders ($c_1$) or high school seniors ($c_2$). While most of the interest is in the first two factors, the three-way ANOVA is a more efficient design if we want to study both age groups.</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>The response variable is the number of words remembered (<span class="in">`words`</span>) after one week. The design is balanced: there are $r=5$ replications for each scenario, so $n=3 \times 3 \times 2 \times 5$ observations. If we fit the three-way model with all two ways and three way interactions, we need to estimate 19 parameters (18 means and one variance). We model each participant response assuming the measurements are independent and $Y_{ijkr} \sim \mathsf{No}(\mu_{ijk}, \sigma^2)$: this indicates that each subgroup ($a_i, b_j, c_k$) has a different (theoretical) average $\mu_{ijk}$ and a common variance $\sigma^2$. The estimates $\widehat{\mu}_{ijk}$ are simply the sample averages of each group, whereas the pooled variance estimator, $$\widehat{\sigma}^2 = \frac{1}{72}\sum_{i=1}^3 \sum_{j=1}^3 \sum_{k=1}^2 \sum_{r=1}^5 (y_{ijkr} - \widehat{\mu}_{ijk})^2,$$</span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>is the sum of squared difference between replicate observations and their group average, divided by the residual degrees of freedom (total number of observations minus number of mean parameters).</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>The model can be reparametrized in terms of main effects and interaction: overall average for each factor, average of residual affect after accounting for effects of row, columns and depth and finally residual affect for the three-way. This parametrization is </span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>$$\begin{align*}\underset{\text{theoretical average}}{\mathsf{E}(Y_{ijkr})} &amp;= \quad \underset{\text{global mean}}{\mu} \\ &amp;\quad +\underset{\text{main effects}}{\alpha_i + \beta_j + \gamma_k}  \\ &amp; \quad + \underset{\text{two-way interactions}}{(\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk}} \\ &amp; \quad + \underset{\text{three-way interaction}}{(\alpha\beta\gamma)_{ijk}}\end{align*}$$</span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setup</span></span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>What are comparisons of interest? We may be interested in the effect of feedback, for example comparing whether any form of feedback increases word retention. Thus, we could look at the marginal contrast $\mu_{1..} = \frac{1}{2}(\mu_{2..} + \mu_{3..})$, in essence treating the whole model as a one-way ANOVA but using all the data to estimate the standard deviation $\sigma$. For a balanced sample, the estimated average for example of the control group <span class="in">`none`</span>, $\widehat{\mu}_{1..}$, would be the sample average of the 30 participants assigned to this experimental condition.</span>
+<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>We can proceed similarly for the other factors. One could be interested in whether the type of learning material impacts retention (overall effect), or if there are difference between high and low emotional content for high-frequency occurrences ($b_2$ and $b_3$); amounting to ignoring all observations for the low emotion low-frequency group. </span>
+<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a>The first step is to load the data and the packages needed for the analysis.</span>
+<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(words, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
+<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Check balance</span></span>
+<span id="cb27-76"><a href="#cb27-76" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>feedback <span class="sc">+</span> age <span class="sc">+</span> material, </span>
+<span id="cb27-77"><a href="#cb27-77" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> words)</span>
+<span id="cb27-78"><a href="#cb27-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-79"><a href="#cb27-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-80"><a href="#cb27-80" aria-hidden="true" tabindex="-1"></a>This is a 3 by 3 by 2 factorial design with $r=5$ replicates.</span>
+<span id="cb27-83"><a href="#cb27-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-84"><a href="#cb27-84" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(words <span class="sc">~</span> feedback <span class="sc">*</span> material <span class="sc">*</span> age,</span>
+<span id="cb27-85"><a href="#cb27-85" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> words)</span>
+<span id="cb27-86"><a href="#cb27-86" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span>
+<span id="cb27-87"><a href="#cb27-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-88"><a href="#cb27-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-89"><a href="#cb27-89" aria-hidden="true" tabindex="-1"></a>Since the data are balanced, we can use the <span class="in">`aov`</span> function and look at the analysis of variance produced by <span class="in">`aov`</span>.^<span class="co">[</span><span class="ot">With unbalanced data, we would need to fit the model using `lm` and use `car::Anova` to get type 2 or 3 effects.</span><span class="co">]</span> To get all pairwise and the triplewise interaction, we use <span class="in">`response ~ factor1 * factor2 * factor3`</span> notation. Since we have replications, the full model doesn't fit the data exactly and there are residual observations to estimate the variability, but estimating reliably different variance in each of the 18 subgroup wouldn't be possible with 5 observations. We can see that the three-way interaction isn't significative, and the only two-way effect is for <span class="in">`material:age`</span>.</span>
+<span id="cb27-90"><a href="#cb27-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-91"><a href="#cb27-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interaction plot </span></span>
+<span id="cb27-92"><a href="#cb27-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-93"><a href="#cb27-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-94"><a href="#cb27-94" aria-hidden="true" tabindex="-1"></a>We can try to infer whether there is an interaction by looking at averages for each pair of variable at a time, and then at all three factors concurrently. These plots theoretically are used to demonstrate the impact of interactions, but in practice the sample estimates are noisy proxies of the true subgroup averages.</span>
+<span id="cb27-95"><a href="#cb27-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-96"><a href="#cb27-96" aria-hidden="true" tabindex="-1"></a>We can confirm our findings by looking at the interaction plot, showing the group average for each combination of the factors.</span>
+<span id="cb27-97"><a href="#cb27-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-100"><a href="#cb27-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-101"><a href="#cb27-101" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb27-102"><a href="#cb27-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(feedback, material, age) <span class="sc">|&gt;</span></span>
+<span id="cb27-103"><a href="#cb27-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanwords =</span> <span class="fu">mean</span>(words)) <span class="sc">|&gt;</span></span>
+<span id="cb27-104"><a href="#cb27-104" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> feedback,</span>
+<span id="cb27-105"><a href="#cb27-105" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> meanwords,</span>
+<span id="cb27-106"><a href="#cb27-106" aria-hidden="true" tabindex="-1"></a>                     <span class="at">group =</span> material,</span>
+<span id="cb27-107"><a href="#cb27-107" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> material)) <span class="sc">+</span></span>
+<span id="cb27-108"><a href="#cb27-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># connect the dots</span></span>
+<span id="cb27-109"><a href="#cb27-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>age) <span class="sc">+</span></span>
+<span id="cb27-110"><a href="#cb27-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean number of words remembered"</span>,</span>
+<span id="cb27-111"><a href="#cb27-111" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb27-112"><a href="#cb27-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb27-113"><a href="#cb27-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb27-114"><a href="#cb27-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-115"><a href="#cb27-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-116"><a href="#cb27-116" aria-hidden="true" tabindex="-1"></a>These summary statistics hide the raw data: due to the discreteness of the response, which consists of counts, we can slightly perturb observations and jitter them. </span>
+<span id="cb27-117"><a href="#cb27-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-118"><a href="#cb27-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-121"><a href="#cb27-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-122"><a href="#cb27-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-raw-words</span></span>
+<span id="cb27-123"><a href="#cb27-123" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.cap: "Individual results for an experiment on the impact of verbal feedback on retention of information."</span></span>
+<span id="cb27-124"><a href="#cb27-124" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> words,</span>
+<span id="cb27-125"><a href="#cb27-125" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,</span>
+<span id="cb27-126"><a href="#cb27-126" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> words,</span>
+<span id="cb27-127"><a href="#cb27-127" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> material,</span>
+<span id="cb27-128"><a href="#cb27-128" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> material)) <span class="sc">+</span></span>
+<span id="cb27-129"><a href="#cb27-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.height =</span> <span class="fl">0.1</span>,</span>
+<span id="cb27-130"><a href="#cb27-130" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">dodge.width =</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
+<span id="cb27-131"><a href="#cb27-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>feedback) <span class="sc">+</span> <span class="co"># wrap by third variable</span></span>
+<span id="cb27-132"><a href="#cb27-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># change default theme</span></span>
+<span id="cb27-133"><a href="#cb27-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span> <span class="co"># move caption</span></span>
+<span id="cb27-134"><a href="#cb27-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean number of words remembered"</span>,</span>
+<span id="cb27-135"><a href="#cb27-135" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>)</span>
+<span id="cb27-136"><a href="#cb27-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-137"><a href="#cb27-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-138"><a href="#cb27-138" aria-hidden="true" tabindex="-1"></a>The high frequency/high emotion group has significantly lower retention depending on feedback, with seemingly no difference with other material type when there is no verbal feedback, but a strong decrease for positive and even stronger for negative feedback. By contrasts, there is little to no effect with high school seniors, suggesting that the experimental manipulation has limited impact for these groups.</span>
+<span id="cb27-139"><a href="#cb27-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-140"><a href="#cb27-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## Main effects and contrasts</span></span>
+<span id="cb27-141"><a href="#cb27-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-142"><a href="#cb27-142" aria-hidden="true" tabindex="-1"></a>The whole purpose of Chapters 21 and 22 is to show how we can explore the three-way factorial design and extract information by treating it as a one-way ANOVA with 18 groups, a series of two-way ANOVA, etc.</span>
+<span id="cb27-143"><a href="#cb27-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-144"><a href="#cb27-144" aria-hidden="true" tabindex="-1"></a>We look at the estimated marginal means and start by computing the marginal mean by averaging over levels of material and age, since there did not seem to be interaction between feedback and the other variables.</span>
+<span id="cb27-145"><a href="#cb27-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-146"><a href="#cb27-146" aria-hidden="true" tabindex="-1"></a>As before with the <span class="in">`emmeans`</span> package, we specify the variables we want to keep in <span class="in">`specs`</span>, the other being 'marginalized out' by ignoring the counts. The package will print a warning since the model includes an interaction, indicating that the output is potentially misleading.</span>
+<span id="cb27-147"><a href="#cb27-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-150"><a href="#cb27-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-151"><a href="#cb27-151" aria-hidden="true" tabindex="-1"></a>margA <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"feedback"</span>)</span>
+<span id="cb27-152"><a href="#cb27-152" aria-hidden="true" tabindex="-1"></a>margA</span>
+<span id="cb27-153"><a href="#cb27-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-154"><a href="#cb27-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-155"><a href="#cb27-155" aria-hidden="true" tabindex="-1"></a>Since the data are balanced, this is simply the average words recalled per feedback group. We can check that this is indeed the mean of each word count by feedback by computing the summary statistics and comparing them with the output of <span class="in">`emmeans`</span>:</span>
+<span id="cb27-156"><a href="#cb27-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-159"><a href="#cb27-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-160"><a href="#cb27-160" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb27-161"><a href="#cb27-161" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(feedback) <span class="sc">|&gt;</span></span>
+<span id="cb27-162"><a href="#cb27-162" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(words))</span>
+<span id="cb27-163"><a href="#cb27-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-164"><a href="#cb27-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-165"><a href="#cb27-165" aria-hidden="true" tabindex="-1"></a><span class="fu">### Marginal contrast</span></span>
+<span id="cb27-166"><a href="#cb27-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-167"><a href="#cb27-167" aria-hidden="true" tabindex="-1"></a>We next compute a marginal contrast by comparing between no-feedback and the average of positive and negative. This amounts to treating our data as a one-way ANOVA and computing contrasts as usual.</span>
+<span id="cb27-168"><a href="#cb27-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-169"><a href="#cb27-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-170"><a href="#cb27-170" aria-hidden="true" tabindex="-1"></a>The null hypothesis is </span>
+<span id="cb27-171"><a href="#cb27-171" aria-hidden="true" tabindex="-1"></a>$$\mathscr{H}_0: \mu_{\text{none}..} = \frac{1}{2} \left(\mu_{\text{pos}..} + \mu_{\text{neg}..}\right)$$ which can be rexpressed in terms of contrast vector as $(1, -0.5, -0.5)$ or any non-zero multiple of this solution.</span>
+<span id="cb27-172"><a href="#cb27-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-175"><a href="#cb27-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-176"><a href="#cb27-176" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="at">object =</span> margA,</span>
+<span id="cb27-177"><a href="#cb27-177" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="fu">list</span>(<span class="at">interaction =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)))</span>
+<span id="cb27-178"><a href="#cb27-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-179"><a href="#cb27-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-180"><a href="#cb27-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simple effects</span></span>
+<span id="cb27-181"><a href="#cb27-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-182"><a href="#cb27-182" aria-hidden="true" tabindex="-1"></a>Since the two-way interaction between factors <span class="in">`material`</span> and <span class="in">`age`</span> is significant, we can test for differences between levels of <span class="in">`material`</span> within each value of <span class="in">`age`</span> (averaging over all levels of <span class="in">`feedback`</span>).</span>
+<span id="cb27-183"><a href="#cb27-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-184"><a href="#cb27-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-185"><a href="#cb27-185" aria-hidden="true" tabindex="-1"></a>To do this with <span class="in">`emmeans`</span>, we first marginalize out over feedback by keeping only the two other variables in <span class="in">`specs`</span>, then perform an $F$ test for each value of <span class="in">`age`</span> by using <span class="in">`joint_tests`</span> and specifying the analysis is conditional on <span class="in">`age`</span>.</span>
+<span id="cb27-186"><a href="#cb27-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-189"><a href="#cb27-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-190"><a href="#cb27-190" aria-hidden="true" tabindex="-1"></a>simpleBpC <span class="ot">&lt;-</span></span>
+<span id="cb27-191"><a href="#cb27-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(model,</span>
+<span id="cb27-192"><a href="#cb27-192" aria-hidden="true" tabindex="-1"></a>          <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"material"</span>, <span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb27-193"><a href="#cb27-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">joint_tests</span>(<span class="at">by =</span> <span class="st">"age"</span>)</span>
+<span id="cb27-194"><a href="#cb27-194" aria-hidden="true" tabindex="-1"></a>simpleBpC</span>
+<span id="cb27-195"><a href="#cb27-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-196"><a href="#cb27-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-197"><a href="#cb27-197" aria-hidden="true" tabindex="-1"></a>We could also look at **simple contrasts** by levels of age comparing the three material and looking at low versus high emotions. This amounts to reducing data to a two-way ANOVA in a first step, then taking each depth (age) group in turn and computing a contrast.</span>
+<span id="cb27-198"><a href="#cb27-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-199"><a href="#cb27-199" aria-hidden="true" tabindex="-1"></a>Using the notation $A \times B \times C$ to denote the feedback, material and age groups, this compares</span>
+<span id="cb27-200"><a href="#cb27-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-201"><a href="#cb27-201" aria-hidden="true" tabindex="-1"></a>$$\mathscr{H}_0: \frac{1}{2} \left(\mu_{.1k} + \mu_{.2k}\right) = \mu_{.3k}$$</span>
+<span id="cb27-202"><a href="#cb27-202" aria-hidden="true" tabindex="-1"></a>for age group $k$. </span>
+<span id="cb27-203"><a href="#cb27-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-204"><a href="#cb27-204" aria-hidden="true" tabindex="-1"></a>In both cases, we get two sets of tests statistics and $p$-values since there are two age groups.</span>
+<span id="cb27-205"><a href="#cb27-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-208"><a href="#cb27-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-209"><a href="#cb27-209" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple contrasts</span></span>
+<span id="cb27-210"><a href="#cb27-210" aria-hidden="true" tabindex="-1"></a>margBC <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model,</span>
+<span id="cb27-211"><a href="#cb27-211" aria-hidden="true" tabindex="-1"></a>                  <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"material"</span>, <span class="st">"age"</span>),</span>
+<span id="cb27-212"><a href="#cb27-212" aria-hidden="true" tabindex="-1"></a>                  <span class="at">by =</span> <span class="st">"age"</span>)</span>
+<span id="cb27-213"><a href="#cb27-213" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(margBC)</span>
+<span id="cb27-214"><a href="#cb27-214" aria-hidden="true" tabindex="-1"></a>margBC <span class="sc">|&gt;</span></span>
+<span id="cb27-215"><a href="#cb27-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(<span class="at">contrast =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">1</span>)))</span>
+<span id="cb27-216"><a href="#cb27-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-217"><a href="#cb27-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-218"><a href="#cb27-218" aria-hidden="true" tabindex="-1"></a>There is strong (unadjusted) differences between low and high emotion for fifth grades, but the effect for senior is smaller and quite uncertain.</span>
+<span id="cb27-219"><a href="#cb27-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-220"><a href="#cb27-220" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interaction components</span></span>
+<span id="cb27-221"><a href="#cb27-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-222"><a href="#cb27-222" aria-hidden="true" tabindex="-1"></a>The next potential object of interest is the interaction components based on marginal means. </span>
+<span id="cb27-223"><a href="#cb27-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-224"><a href="#cb27-224" aria-hidden="true" tabindex="-1"></a>@Keppel/Wickens:2004 compare the average of $b_2$ and $b_3$ between age groups, fixing the frequency and varying only the emotional content. </span>
+<span id="cb27-225"><a href="#cb27-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-226"><a href="#cb27-226" aria-hidden="true" tabindex="-1"></a>The first step with <span class="in">`emmeans`</span> is to specify which variables to keep, then slice by age group. This gives us a set of 3 averages per age group. Next, we set up the contrast vector to compute for each age group. The last call, to <span class="in">`joint_tests()`</span>, proceeds with comparing whether the average contrast results are the same in each age group by comparing the two. There is some evidence that high emotion words has a different impact, independent of feedback. </span>
+<span id="cb27-227"><a href="#cb27-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-230"><a href="#cb27-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-231"><a href="#cb27-231" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model,</span>
+<span id="cb27-232"><a href="#cb27-232" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"material"</span>, <span class="st">"age"</span>),</span>
+<span id="cb27-233"><a href="#cb27-233" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="st">"age"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-234"><a href="#cb27-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(<span class="at">b2vsb3 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb27-235"><a href="#cb27-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">joint_tests</span>()</span>
+<span id="cb27-236"><a href="#cb27-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-237"><a href="#cb27-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-238"><a href="#cb27-238" aria-hidden="true" tabindex="-1"></a>We could also compute differences between feedback and material. Marginalizing over age yields a total of 9 cells: we treat the resulting two-way design as a one-way design with nine groups and simply compute the contrast vector, assigning weight zero for the low-frequency and low emotion group and then looking at none (weight $1$) and the average of positive and negative feedback (weights of $-0.5$). Since we want to compare this difference between $b_2$ and $b_3$, we give similar weights for the last three groups, but instead of $(1, -0.5, -0.5)$, we flip the signs.</span>
+<span id="cb27-239"><a href="#cb27-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-242"><a href="#cb27-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-243"><a href="#cb27-243" aria-hidden="true" tabindex="-1"></a>emmAB <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, </span>
+<span id="cb27-244"><a href="#cb27-244" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"feedback"</span>, <span class="st">"material"</span>))</span>
+<span id="cb27-245"><a href="#cb27-245" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(emmAB)</span>
+<span id="cb27-246"><a href="#cb27-246" aria-hidden="true" tabindex="-1"></a>contr <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"none vs feedback for b2 vs b3"</span> <span class="ot">=</span></span>
+<span id="cb27-247"><a href="#cb27-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb27-248"><a href="#cb27-248" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-249"><a href="#cb27-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-250"><a href="#cb27-250" aria-hidden="true" tabindex="-1"></a>emmAB <span class="sc">|&gt;</span></span>
+<span id="cb27-251"><a href="#cb27-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> contr)</span>
+<span id="cb27-252"><a href="#cb27-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-253"><a href="#cb27-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-254"><a href="#cb27-254" aria-hidden="true" tabindex="-1"></a><span class="fu">### Three factor interaction</span></span>
+<span id="cb27-255"><a href="#cb27-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-256"><a href="#cb27-256" aria-hidden="true" tabindex="-1"></a>The most complicated type of comparison is the three factor interaction (which wasn't deemed significant). We could look at a particular combination by looking at the difference of difference. This is the same as what we just computed, but this time we will compare this difference of difference between age groups to see if it is the same.</span>
+<span id="cb27-257"><a href="#cb27-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-258"><a href="#cb27-258" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$A$ (<span class="in">`feedback`</span>): no feedback vs feedback (<span class="in">`none`</span> vs average of <span class="in">`pos`</span> and <span class="in">`neg`</span>), </span>
+<span id="cb27-259"><a href="#cb27-259" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$B$ (<span class="in">`material`</span>): comparing low vs high emotional feedback (<span class="in">`b2`</span> vs <span class="in">`b3`</span>) </span>
+<span id="cb27-260"><a href="#cb27-260" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$C$: fifth graders vs seniors</span>
+<span id="cb27-261"><a href="#cb27-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-264"><a href="#cb27-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb27-265"><a href="#cb27-265" aria-hidden="true" tabindex="-1"></a>threewaycontrast <span class="ot">&lt;-</span> </span>
+<span id="cb27-266"><a href="#cb27-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(model, </span>
+<span id="cb27-267"><a href="#cb27-267" aria-hidden="true" tabindex="-1"></a>          <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"feedback"</span>, <span class="st">"material"</span>,<span class="st">"age"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb27-268"><a href="#cb27-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(</span>
+<span id="cb27-269"><a href="#cb27-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">contrast =</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>,</span>
+<span id="cb27-270"><a href="#cb27-270" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb27-271"><a href="#cb27-271" aria-hidden="true" tabindex="-1"></a>                <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>)))</span>
+<span id="cb27-272"><a href="#cb27-272" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(threewaycontrast, </span>
+<span id="cb27-273"><a href="#cb27-273" aria-hidden="true" tabindex="-1"></a>        <span class="at">adjust =</span> <span class="st">"scheffe"</span>,</span>
+<span id="cb27-274"><a href="#cb27-274" aria-hidden="true" tabindex="-1"></a>        <span class="at">scheffe.rank =</span> <span class="dv">17</span>)</span>
+<span id="cb27-275"><a href="#cb27-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb27-276"><a href="#cb27-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-277"><a href="#cb27-277" aria-hidden="true" tabindex="-1"></a>We can adjust for multiplicity by using Scheffé's method, but we need to set up the rank of the test: for general contrasts in a two-way slice, this would be the number of groups minus one, so 8 if we look at feedback and material, 2 if we look only at the feedback type, etc.</span>
+<span id="cb27-278"><a href="#cb27-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-279"><a href="#cb27-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-280"><a href="#cb27-280" aria-hidden="true" tabindex="-1"></a>There is no evidence here that this setup comparison for looking at differences for feedback among high frequency groups is any different between age groups.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2023 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a><br> Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

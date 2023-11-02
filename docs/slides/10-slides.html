@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to mixed models</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Léo Belzile" />
+    <meta name="date" content="2022-11-29" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
+    <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: center middle main-title section-title-1
+
+# Introduction to mixed models
+
+.class-info[
+
+**Session 10**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+HEC Montréal
+]
+
+]
+
+---
+
+layout: true
+class: title title-4
+
+---
+
+# Fixed effects
+
+All experiments so far treated factors as **fixed** effects.
+
+- We estimate a mean parameter for each factor (including blocking factors in repeated measures).
+
+.box-inv-4.large[Change of scenery]
+
+
+---
+
+# Change of scenery
+
+Assume that the levels of a factor form a random sample from a large population.
+
+We are interested in making inference about the **variability** of the factor.
+
+- measures of performance of employees
+- results from different labs in an experiment
+- subjects in repeated measures
+
+We treat the factor as a **random** effect.
+
+---
+
+# Fixed vs random effects
+
+There is no consensual definition, but Gelman (2005) lists a handful, of which:
+
+&gt; When a sample exhausts the population, the corresponding variable is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random [Green and Tukey (1960)].
+
+&gt; Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population (e.g., Searle, Casella and McCulloch [(1992), Section 1.4])
+
+---
+
+# Random effect model
+
+Consider a one-way model
+
+`$$\underset{\text{response}}{Y_{ij}} =  \underset{\text{global mean}}{\mu} + \underset{\text{random effect}}{\alpha_j} + \underset{\text{error term}}{\varepsilon_{ij}}.$$`
+
+where 
+
+- `\(\alpha_j \sim \mathsf{No}(0, \sigma^2_\alpha)\)` is normal with mean zero and variance `\(\sigma^2_\alpha\)`.
+- `\(\varepsilon_{ij}\)` are independent `\(\mathsf{No}(0, \sigma^2_\varepsilon)\)`
+
+
+---
+
+# Fictional example
+
+Consider the weekly number of hours spent by staff members at HEC since September. 
+
+We collect a random sample of 40 employees and ask them to measure the number of hours they work from school for 8 consecutive weeks.
+
+---
+# Fitting mixed models in **R**
+
+
+We use the `lme4` package in **R** to fit the models.
+
+The `lmerTest` package provides additional functionalities for testing.
+
+- `lmer` function fits linear mixed effect regression
+
+Random effects are specified using the notation `(1 | factor)`.
+
+
+---
+
+# Model fit
+
+
+
+```r
+library(lmerTest) # also loads lme4
+rmod &lt;- lmer(time ~ (1 | id), data = hecedsm::workhours)
+summary_rmod &lt;- summary(rmod)
+```
+
+```
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ id       (Intercept) 38.63    6.215   
+ Residual              5.68    2.383   
+Number of obs: 320, groups:  id, 40
+
+Fixed effects:
+            Estimate Std. Error      df t value Pr(&gt;|t|)    
+(Intercept)  23.3016     0.9917 39.0000    23.5   &lt;2e-16 ***
+```
+
+
+.tiny[Note that std. dev is square root of variance]
+
+---
+
+# Intra-class correlation
+
+
+We are interested in the variance of the **random effect**, `\(\sigma^2_\alpha\)`.
+
+
+Measurements from the same individuals are correlated. The intra-class correlation between measurements `\(Y_{ij}\)` and `\(Y_{ik}\)` from subject `\(i\)` at times `\(j\neq k\)` is
+
+`$$\rho = \frac{\sigma^2_\alpha}{\sigma^2_\alpha + \sigma^2_\varepsilon}.$$`
+
+In the example, `\(\widehat{\sigma}^2_\alpha=38.63\)`, `\(\widehat{\sigma}^2_\varepsilon = 5.68\)` and `\(\widehat{\rho} = 0.87\)`.
+
+The mean number of working hours on the premises is `\(\widehat{\mu}=23.3\)` hours.
+
+---
+# Confidence intervals
+
+We can use confidence intervals for the parameters.
+
+Those are based on profile likelihood methods (asymmetric).
+
+
+```r
+(conf &lt;- confint(rmod, oldNames = FALSE))
+```
+
+```
+##                       2.5 %    97.5 %
+## sd_(Intercept)|id  4.978127  7.799018
+## sigma              2.198813  2.595272
+## (Intercept)       21.335343 25.267782
+```
+
+The variability of the measurements and between employees is very different from zero.
+
+
+
+
+
+???
+
+Even with old school, we can get confidence intervals but only in simple designs like this one-way.
+
+
+---
+# Mixed models
+
+Mixed models include both fixed effects and random effects.
+
+- Fixed effects for experimental manipulations
+- Random effects for subject, lab factors
+
+Mixed models make it easier to 
+
+- handle correlations between measurements and 
+- account for more complex designs.
+
+---
+
+# Theory
+
+Full coverage of linear mixed models and general designs is beyond the scope of the course, but note
+
+- Estimation is performed via restricted maximum likelihood (REML)
+- Testing results may differ from repeated measure ANOVA
+- Different approximations for `\(F\)` degrees of freedom (either Kenward-Roger (costly) or Satterthwaite approximation)
+
+---
+# Structure of the design
+
+It is important to understand how data were gathered. 
+
+Oelhert (2010) guidelines
+
+1. Identify sources of variation
+2. Identify whether factors are crossed or nested
+3. Determine whether factors should be fixed or random
+4. Figure out which interactions can exist and whether they can be fitted.
+
+---
+# Crossed vs nested effects
+
+.pull-left-wide[
+Nested effects if a factor appears only within a particular level of another factor.
+
+Crossed is for everything else (typically combinations of factors are possible).
+]
+.pull-right-narrow[
+![Russian dolls](img/10/matroshka.jpg)
+]
+
+.small[
+
+Example of nested random effects: class nested within schools 
+- class 1 is not the same in school 1 than in school 2
+&lt;img src="img/10/nested.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+???
+
+Matroschka from Wikimedia Commons CC-BY-SA 3.0
+https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent.png
+
+
+---
+
+# Formulae in **R**
+
+**R** uses the following notation 
+
+- `group1/group2` means `group2` is nested within `group1`. 
+
+The formula expands to `group1 + group1:group2`.
+
+- `group1*group2` means `group` and `group2` are **crossed**
+
+The formula is a shorthand for `group1 + group2 + group1:group2`.
+
+.small[
+To fit the model, identifiers of subjects must be declared as factors (categorical variables).
+]
+
+---
+
+# Specifying interactions
+
+Consider factors `\(A\)`, `\(B\)` and `\(C\)`.
+
+- If factor `\(A\)` is treated as random, interactions with `\(A\)` must be random too.
+- There must be repeated measurements to estimate variability of those interactions.
+- Testing relies on the variance components.
+
+???
+
+Mixed models vs repeated measures
+
+- In repeated measure ANOVA, repetitions over each sub-condition are averaged across subject.
+- Treat subject identifier as a blocking factor (fixed effect).
+- Impose sum-to-zero for coefficients.
+
+---
+
+# Data structure
+
+
+&lt;img src="img/11/Hasse_diagram.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Example: Curley et al. (2022)
+
+.small[
+
+&gt; Two variables were manipulated within participants: (a) evidence anchor (strong-first versus weak-first); (b) verdict system (two- versus three-verdict systems). Total pre-trial bias score was used as a covariate in the analysis (this score is based on the PJAQ and is explained further in the Materials section). Participants were also given two vignettes (Vignette 1 and Vignette 2); thus, the vignette variable was included in the data analysis [...]
+
+&gt; The dependent variable was the final belief of guilt score, which was measured on an accumulated scale from 0–14, with 0 representing no belief of guilt and 14 representing a total belief that the person is guilty
+
+]
+
+---
+
+# Example: chocolate rating
+
+
+Example from L. Meier, adapted from Oehlert (2010)
+
+&gt; A group of 10 rural and 10 urban raters rated 4 different chocolate types. Every rater got to eat two samples from the same chocolate type in random order.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": false,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
