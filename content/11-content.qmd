@@ -1,6 +1,5 @@
 ---
 title: "Introduction to causal inference"
-date: "2022-11-18"
 ---
 
 ## Content

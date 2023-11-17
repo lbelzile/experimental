@@ -1,6 +1,5 @@
 ---
 title: "Intro to mixed models"
-date: "2022-11-11"
 ---
 
 ## Content

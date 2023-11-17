@@ -53,6 +53,8 @@ You will sometimes encounter the double colon syntax `package::function`: normal
 The data used in the course has been preprocessed and cleaned and can be directly adressed by name using the command
 
 ```{r}
+#| eval: false
+#| echo: true
 data(databasename, package = 'hecedsm')
 ```
 
@@ -60,7 +62,7 @@ where `databasename` is replaced by [the name of one of the datasets](https://lb
 
 In more general settings, however, the first task you need to undertake is to download and manipulate the data in a format that is amenable to conducing statistical analysis. This can take many forms: data sets can be found directly in **R** packages, downloaded directly given a web address (URL) or else downloaded into a data folder and loaded into the environment.
 
-It is good practice **not** to manipulate the raw data using a spreadsheet software like Microsoft Excel, which is infamous for it's awkward manipulation (the French version Office doesn't recognize or save `.csv` files as being comma-separated values, [strings are converted to dates and numerical values ](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7), [oftentimes inconsistantly](https://rohanalexander.com/posts/2020-04-14-tidying-the-2019-kenyan-census/), [the number of columns is limited](https://theconversation.com/why-you-should-never-use-microsoft-excel-to-count-coronavirus-cases-147681), etc. Rather, keep a copy of the raw data, a script in which you manipulate it and, if necessary, a clean and tidy version in another database. This ensures that you do not mistakenly change records and can easily modify your data analysis if you realize that the data were incorrect at some stage due to manipulation or incorrect interpretation.
+It is good practice **not** to manipulate the raw data using a spreadsheet software like Microsoft Excel, which is infamous for it's awkward manipulation (the French version Office doesn't recognize or save `.csv` files as being comma-separated values, [strings are converted to dates and numerical values ](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7), [oftentimes inconsistently](https://rohanalexander.com/posts/2020-04-14-tidying-the-2019-kenyan-census/), [the number of columns is limited](https://theconversation.com/why-you-should-never-use-microsoft-excel-to-count-coronavirus-cases-147681), etc. Rather, keep a copy of the raw data, a script in which you manipulate it and, if necessary, a clean and tidy copy in the database. This ensures that you do not mistakenly change records and can easily modify your data analysis if you realize that the data were incorrect at some stage due to manipulation or incorrect interpretation.
 
 Depending on the format (particularly if you have SAS, SPSS or Stata formatted datasets, there may be hidden labels that contain information about the variables. The `haven` package, part of the tidyverse, imports the metadata alongside with the observations.
 

@@ -1,6 +1,5 @@
 ---
 title: "Complete factorial designs"
-date: "2022-09-30"
 ---
 
 ```{r}

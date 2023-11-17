@@ -15,19 +15,21 @@ $black:    #000 !default;
 /* HEC color palette */
 $red:      #EA002A !default;
 $yellow:   #FFD200 !default;
-$violet:   #AD1AAC !default;
+/* $violet:   #AD1AAC !default; */
+$violet:   #eb6fbd !default;
 $magenta:  #D40F7D !default;
 $orange:   #FF8400 !default;
 $yellow:   #FB9E07 !default;
 $cyan:     #00BCB5 !default;
-$lavender: #9678D3 !default;
+/* $lavender: #9678D3 !default; */
+$pink: #eab8e4 !default;
 
-$primary:       $lavender !default;
+$primary:       $violet !default;
 $secondary:     $gray-500 !default;
 $success:       $violet !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
-$danger:        $lavender !default;
+$danger:        $pink !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
 
@@ -48,10 +50,18 @@ $toc-font-size: 1.1rem;
 $sidebar-font-size: 1.1rem;
 $sidebar-font-size-section: 0.9rem;
 
-$link-color: $violet;
-$link-hover-color: $lavender;
+$link-hover-color: #eab8e4;
+$link-color: #eb6fbd;
 
 $monokai-bg: #2e3440;
+
+
+$callout-color-note: #0072ce;
+$callout-color-important: #00aec7;
+$callout-color-tip: #00aec7;
+$callout-color-caution: #f3d03e;
+$callout-color-warning: #ff585d;
+$callout-color-frame: #acacac;
 
 
 /*-- scss:rules --*/
@@ -129,7 +139,7 @@ ol {
 .schedule-page h3 {
   text-align: center;
   margin-top: 3rem;
-  border-bottom: 3px solid $magenta;
+  border-bottom: 3px solid $violet;
   padding-bottom: 0.5rem;
 }
 
@@ -141,7 +151,7 @@ ol {
 }
 
 .bg-content {
-  background-color: $lavender;
+  background-color: $pink;
 }
 
 .bg-assignment {
@@ -236,3 +246,8 @@ pre.text, pre.sourceCode, .cell-output pre {
 pre.text {
   color: #000;
 }
+
+.btn-danger {
+    font-weight: bold;  
+    
+}   

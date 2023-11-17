@@ -13,8 +13,7 @@ Comment on the methodology, the statistical analyses and the report of the stati
 You should focus on the following elements in your review:
 
 - Strengths and weaknesses of the methodology used to test the research hypotheses.
-- Appropriateness of experimental design and the choice of dependent variables, control variables, treatment
-conditions.
+- Appropriateness of experimental design and the choice of dependent variables, control variables, treatment conditions.
 - Appropriateness of statistical analyses.
 - Presentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)
 - Discussion of the limits of the study

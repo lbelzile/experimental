@@ -1,6 +1,5 @@
 ---
 title: "Designs to reduce the error"
-date: "2022-10-14"
 ---
 
 ## Content

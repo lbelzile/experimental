@@ -28,7 +28,7 @@ website:
 
   navbar:
     pinned: true
-    background: "#ad1aac"
+    background: "#eb6fbd"
     right:
       - syllabus.qmd
       - schedule.qmd
@@ -40,9 +40,6 @@ website:
         file: example/index.qmd
       - text: "Notes"
         href: "https://lbelzile.github.io/math80667a"
-      - icon: slack
-        href: "https://edsmf22.slack.com"
-        aria-label: Slack
       - icon: box
         href: "https://lbelzile.github.io/hecedsm"
         aria-label: Datasets
@@ -51,7 +48,7 @@ website:
     - title: "Content"
       style: "docked"
       search: false
-      foreground: "#ad1aac"
+      foreground: "#eb6fbd"
       contents:
         - section: "Overview"
           contents:
@@ -87,7 +84,7 @@ website:
     - title: "Evaluations"
       style: "docked"
       search: false
-      foreground: "#ad1aac"
+      foreground: "#eb6fbd"
       contents:
         - section: "Overview"
           contents:
@@ -100,20 +97,20 @@ website:
           contents:
             - evaluations/01-problem-set.qmd
             - evaluations/02-problem-set.qmd
-            - evaluations/03-problem-set.qmd
-            - evaluations/04-problem-set.qmd
-            - evaluations/05-problem-set.qmd
-            - evaluations/06-problem-set.qmd
-            - evaluations/07-problem-set.qmd
-            - evaluations/08-problem-set.qmd
-            - evaluations/09-problem-set.qmd
-            - evaluations/10-problem-set.qmd
-            - evaluations/11-problem-set.qmd
-            - evaluations/12-problem-set.qmd
+           # - evaluations/03-problem-set.qmd
+           # - evaluations/04-problem-set.qmd
+           # - evaluations/05-problem-set.qmd
+           # - evaluations/06-problem-set.qmd
+           # - evaluations/07-problem-set.qmd
+           # - evaluations/08-problem-set.qmd
+           # - evaluations/09-problem-set.qmd
+           # - evaluations/10-problem-set.qmd
+           # - evaluations/11-problem-set.qmd
+           # - evaluations/12-problem-set.qmd
     - title: "Examples"
       style: "docked"
       search: false
-      foreground: "#ad1aac"
+      foreground: "#eb6fbd"
       contents:
         - section: "Overview"
           contents:

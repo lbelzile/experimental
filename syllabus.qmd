@@ -53,7 +53,7 @@ The course is designed for non-specialists, but a college/freshman/undergraduate
 
 What we cover, notably analysis of variance, could appear in an undergraduate level course. However, the course is calibrated for PhD students needs (how to write a statistical analysis in a paper, how to assess the statistical methodology of a paper as a peer-reviewer, how to avoid statistical fallacies that could invalidate your work, etc.)
 
-If you want to brush up, I can recommend the free ressource [Advanced High School Statistics by Open Intro](https://www.openintro.org/book/ahss/) or @OpenIntro4 --- the material is pretty comprehensive and well structured. I expect many students will have at least this level of knowledge.
+If you want to brush up, I can recommend the free resource [Advanced High School Statistics by Open Intro](https://www.openintro.org/book/ahss/) or @OpenIntro4 --- the material is pretty comprehensive and well structured. I expect many students will have at least this level of knowledge.
 
 # Programming
 
@@ -78,24 +78,19 @@ I will provide slides and videos. In addition to those, there will be assigned r
 
 ## Textbooks
 
-Course notes for the class can be found [online](https://lbelzile.github.io/math80667a)
+Course notes for the class can be found [online](https://lbelzile.github.io/math80667a).
 
-I will also assign readings from @Meier:2022
+A comprehensive reference is @Maxwell.Delaney.Kelley:2017, which is available via HEC's library [online](http://proxy2.hec.ca/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=nlebk&AN=1554041&lang=fr&site=ehost-live). I will also assign readings from @Meier:2022
 [ANOVA and Mixed Models: A Short Intro Using R](https://stat.ethz.ch/~meier/teaching/anova/), which is available online for free reading.
 
 ## Other references
 
-There will occasionally be additional articles to read; links to these other resources will be included on the content page for that session.
-
-Other good references for (some or most of) the content we will cover includes
-
 - @Keppel/Wickens:2004: out of print; comprehensive reference with a focus on effect size and marginal effects, all calculations are done by hand.
 - @Cox:1958: out of print, but beautifully written and nontechnical.
-- @Dean:2017: comprehensive and freely available via Springer link; students last year found it too dry and technical.
-- @Box/Hunter:1978.
+<!--
 - @Vanderweele:2015.
 - @Pearl:2016.
-
+-->
 
 # Course content
 
@@ -172,7 +167,7 @@ Below is a tentative schedule for the semester.
 
 ## Student hours
 
-I am available Friday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.
+I am available Monday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.
 
 Please watch this video:
 
@@ -182,7 +177,7 @@ Student hours are set times dedicated to all of you (most professors call these 
 
 ## Late work
 
-Problem sets and weekly check-ins are due by Thursday the week after class. Strictly speaking, there is no deadline, but timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign penalties, but will gently nudge you to stay on track.
+Problem sets and weekly check-ins are due by Sunday. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track.
 
 
 ## Intellectual integrity
@@ -224,7 +219,7 @@ Your final grade will be based on weekly assignments and feedback, a methodologi
 assignments <- tibble::tribble(
   ~Points,  ~Assignment,
   12 * 0.5 , "Weekly check-in (12 × 0.5 pt)",
-  11 * 4 ,   "Problem set (11 x 4 pt)",
+  11 * 4 ,   "Problem sets (11 x 4 pt)",
   10      , "Paper review (10 pt)",
   40      , "Final examination (40 pt)",
 )

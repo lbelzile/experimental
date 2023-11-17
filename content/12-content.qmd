@@ -1,6 +1,5 @@
 ---
 title: "Mediation and moderation"
-date: "2022-11-25"
 ---
 
 ## Content

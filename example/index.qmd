@@ -16,8 +16,15 @@ Useful resources for learning **R**, the `tidyverse` and Rmarkdown basics includ
 
 To install all **R** packages used throughout the course, use the command
 ```{r, eval=FALSE, echo=TRUE}
-lib <- c("afex", "car", "emmeans", "effectsize", 
-         "lme4", "lmerTest", "mediate", "nlme", 
-         "pwr", "tidyverse", "tidymodels", "WebPower")
-install.packages(lib)
+libs <- c("afex", "car", "dplyr", "emmeans", "effectsize", 
+         "ggplot2", "lme4", "lmerTest", "mediation", "nlme", 
+         "patchwork", "pwr", "remotes", "tidyr", "WebPower")
+for(lib in libs){
+  if(!lib %in% installed.packages()[,"Package"]){
+   install.packages(lib)
+  }
+}
+# Load package containing databases
+remotes::install_github("lbelzile/hecedsm")
+
 ```

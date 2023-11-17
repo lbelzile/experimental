@@ -8,16 +8,16 @@ instructor:
   github: lbelzile
   office: "4.850, Côte-Sainte-Catherine"
   contact_policy: >-
-    I am best reached by email or Slack.
+    I am best reached by email.
 
 course:
   number: "MATH 80667A"
-  semester: "Winter 2023"
+  semester: "Winter 2024"
   days: "Monday"
   time: "8:30-11:30"
   location: "TBA"
   github: "https://www.github.com/lbelzile/experimental"
-  copyright_year: "2021-2023"
+  copyright_year: "2021-2024"
 
 university:
   name: "HEC Montréal"

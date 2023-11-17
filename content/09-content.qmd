@@ -1,6 +1,5 @@
 ---
 title: "Repeated measures and multivariate ANOVA"
-date: "2022-11-04"
 ---
 
 ## Content

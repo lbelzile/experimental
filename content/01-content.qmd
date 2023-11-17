@@ -1,6 +1,5 @@
 ---
 title: "Introduction"
-date: "2022-09-02"
 ---
 
 ```{r}
