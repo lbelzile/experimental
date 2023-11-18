@@ -10,6 +10,7 @@ format:
   html:
     template-partials:
       - html/home/title-block.html
+course-logo: /files/img/edsm2.png
 ---
 
 
