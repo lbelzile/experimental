@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -439,13 +439,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>In our example, the interaction plot shows a large main effect for <code>magnitude</code>, a smaller one for <code>anchor</code> and no evidence of interaction — despite the uncertainty associated with the estimation, the lines are very close to being parallel. Overlaying the jitter observations shows there is quite a bit of spread, but with limited overlap. Despite the graphical evidence hinting that the interaction isn’t significant, we will fit the two-way analysis of variance model with the interaction unless we invalidate our statistical inference.</p>
 <p>The <code>emmip</code> function allows one to return a plot automagically.</p>
-<div class="cell" data-hash="twowayanova_cache/html/unnamed-chunk-4_9c2b91f4594de0b157144e0200fa9a63">
+<div class="cell" data-hash="twowayanova_cache/html/unnamed-chunk-4_0edcb481605aa23a2f403fc7b6c25a7c">
 <details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emmip</span>(mod, </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               magnitude <span class="sc">~</span> anchor, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">CIs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">CIs =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="twowayanova_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -592,15 +593,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>With 30 observations per group and no appearance of outlier, we need rather to worry about additivity and possibly heterogeneity arising from the treatment. Independence is plausible based on the context.</p>
 <p>The Tukey-Anscombe plot of residuals against fitted values (the group means) indicate no deviation, but the variance appears to be larger for the two groups with a large adjustment. Because the response takes negative values, we can simply proceed with fitting a two-way analysis in which each of the subgroups has mean <span class="math inline">\(\mu_{ij}\)</span> and standard deviation <span class="math inline">\(\sigma_{ij}\)</span>: in other words, only the data for each subgroup (<code>anchor</code>, <code>magnitude</code>) are used to estimate the summary statistics of that group.</p>
-<div class="cell" data-hash="twowayanova_cache/html/unnamed-chunk-8_287f161e1a4350ac4227453106d67c86">
+<div class="cell" data-hash="twowayanova_cache/html/unnamed-chunk-8_9442d9c39341a3174b053b18eff91e0c">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evidence of unequal variance (multiplicative?)</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evidence of unequal variance</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">residuals =</span> <span class="fu">resid</span>(mod),</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fitted =</span> <span class="fu">fitted</span>(mod)),</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fitted,</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> residuals)) <span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.03</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="twowayanova_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
@@ -1330,14 +1332,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
 <span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
 <span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co">  fig-align: 'center'</span></span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="co">  out-width: '80%'</span></span>
-<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co">  </span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="co">  fig-align: 'center'</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="co">  out-width: '80%'</span></span>
 <span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study 1 - balanced data</span></span>
@@ -1415,321 +1417,322 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb55-98"><a href="#cb55-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
 <span id="cb55-99"><a href="#cb55-99" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emmip</span>(mod, </span>
 <span id="cb55-100"><a href="#cb55-100" aria-hidden="true" tabindex="-1"></a>               magnitude <span class="sc">~</span> anchor, </span>
-<span id="cb55-101"><a href="#cb55-101" aria-hidden="true" tabindex="-1"></a>               <span class="at">CIs =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb55-102"><a href="#cb55-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-103"><a href="#cb55-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-104"><a href="#cb55-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimated marginal means</span></span>
-<span id="cb55-105"><a href="#cb55-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-106"><a href="#cb55-106" aria-hidden="true" tabindex="-1"></a>Because our dataset is balanced, the marginal means (the summary statistics obtained by grouping the data for a single factor) and the marginal effects (obtained by calculating the average cell means by either row or column) will coincide. There are multiple functions that allow one to obtain estimates means for cells, rows or columns, including functionalities, notably <span class="in">`emmeans`</span> from the eponymous package and <span class="in">`model.tables`</span></span>
-<span id="cb55-107"><a href="#cb55-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-110"><a href="#cb55-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-111"><a href="#cb55-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Get grand mean, cell means, etc.</span></span>
-<span id="cb55-112"><a href="#cb55-112" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(mod, <span class="at">type =</span> <span class="st">"means"</span>)</span>
-<span id="cb55-113"><a href="#cb55-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-114"><a href="#cb55-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Cell means</span></span>
-<span id="cb55-115"><a href="#cb55-115" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod, </span>
-<span id="cb55-116"><a href="#cb55-116" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"anchor"</span>, <span class="st">"magnitude"</span>),</span>
-<span id="cb55-117"><a href="#cb55-117" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb55-118"><a href="#cb55-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Marginal means</span></span>
-<span id="cb55-119"><a href="#cb55-119" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod, </span>
-<span id="cb55-120"><a href="#cb55-120" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"anchor"</span>, </span>
-<span id="cb55-121"><a href="#cb55-121" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb55-122"><a href="#cb55-122" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod, </span>
-<span id="cb55-123"><a href="#cb55-123" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"anchor"</span>, </span>
-<span id="cb55-124"><a href="#cb55-124" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb55-125"><a href="#cb55-125" aria-hidden="true" tabindex="-1"></a><span class="co"># These match summary statistics</span></span>
-<span id="cb55-126"><a href="#cb55-126" aria-hidden="true" tabindex="-1"></a>C16 <span class="sc">|&gt;</span></span>
-<span id="cb55-127"><a href="#cb55-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(magnitude) <span class="sc">|&gt;</span></span>
-<span id="cb55-128"><a href="#cb55-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">margmean =</span> <span class="fu">mean</span>(madjust))</span>
-<span id="cb55-129"><a href="#cb55-129" aria-hidden="true" tabindex="-1"></a>C16 <span class="sc">|&gt;</span></span>
-<span id="cb55-130"><a href="#cb55-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anchor) <span class="sc">|&gt;</span></span>
-<span id="cb55-131"><a href="#cb55-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">margmean =</span> <span class="fu">mean</span>(madjust))</span>
-<span id="cb55-132"><a href="#cb55-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-133"><a href="#cb55-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-134"><a href="#cb55-134" aria-hidden="true" tabindex="-1"></a>Since the data are balanced, we can look at the (default) analysis of variance table produced using</span>
-<span id="cb55-135"><a href="#cb55-135" aria-hidden="true" tabindex="-1"></a><span class="in">`anova`</span> function^<span class="co">[</span><span class="ot">In general, for unbalanced data, one would use `car::Anova` with `type = 2` or `type = 3` effects.</span><span class="co">]</span></span>
-<span id="cb55-136"><a href="#cb55-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-139"><a href="#cb55-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-140"><a href="#cb55-140" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span>
-<span id="cb55-141"><a href="#cb55-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-142"><a href="#cb55-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-143"><a href="#cb55-143" aria-hidden="true" tabindex="-1"></a>The output confirms our intuition that there is not much different from zero, with a strong effect for magnitude of adjustment and a significant, albeit smaller one, for anchor type.</span>
-<span id="cb55-144"><a href="#cb55-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-145"><a href="#cb55-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model assumptions</span></span>
-<span id="cb55-146"><a href="#cb55-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-147"><a href="#cb55-147" aria-hidden="true" tabindex="-1"></a>While the conclusions are probably unambiguous due to the large evidence, it would be useful to check the model assumptions. </span>
-<span id="cb55-148"><a href="#cb55-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-149"><a href="#cb55-149" aria-hidden="true" tabindex="-1"></a>The sample size is just enough to forego normality checks, but the quantile-quantile plot can be useful to detect outliers and extremes. Outside of one potential value much lower than it's group mean, there is no cause for concern.</span>
-<span id="cb55-150"><a href="#cb55-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-153"><a href="#cb55-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-154"><a href="#cb55-154" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(mod, <span class="at">id =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb55-155"><a href="#cb55-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-156"><a href="#cb55-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-157"><a href="#cb55-157" aria-hidden="true" tabindex="-1"></a>With 30 observations per group and no appearance of outlier, we need rather to worry about additivity and possibly heterogeneity arising from the treatment. Independence is plausible based on the context.</span>
-<span id="cb55-158"><a href="#cb55-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-159"><a href="#cb55-159" aria-hidden="true" tabindex="-1"></a>The Tukey-Anscombe plot of residuals against fitted values (the group means) indicate no deviation, but the variance appears to be larger for the two groups with a large adjustment. Because the response takes negative values, we can simply proceed with fitting a two-way analysis in which each of the subgroups has mean $\mu_{ij}$ and standard deviation $\sigma_{ij}$: in other words, only the data for each subgroup (<span class="in">`anchor`</span>, <span class="in">`magnitude`</span>) are used to estimate the summary statistics of that group. </span>
-<span id="cb55-160"><a href="#cb55-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-163"><a href="#cb55-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-164"><a href="#cb55-164" aria-hidden="true" tabindex="-1"></a><span class="co"># Evidence of unequal variance (multiplicative?)</span></span>
-<span id="cb55-165"><a href="#cb55-165" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">residuals =</span> <span class="fu">resid</span>(mod),</span>
-<span id="cb55-166"><a href="#cb55-166" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fitted =</span> <span class="fu">fitted</span>(mod)),</span>
-<span id="cb55-167"><a href="#cb55-167" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fitted,</span>
-<span id="cb55-168"><a href="#cb55-168" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> residuals)) <span class="sc">+</span></span>
-<span id="cb55-169"><a href="#cb55-169" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>()</span>
-<span id="cb55-170"><a href="#cb55-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Equality of variance - Brown-Forsythe</span></span>
-<span id="cb55-171"><a href="#cb55-171" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(mod) </span>
-<span id="cb55-172"><a href="#cb55-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-173"><a href="#cb55-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-174"><a href="#cb55-174" aria-hidden="true" tabindex="-1"></a>Given the Brown-Forsythe test output, we can </span>
-<span id="cb55-175"><a href="#cb55-175" aria-hidden="true" tabindex="-1"></a>try fitting a different variance in each group, as there are enough observations for this. The function <span class="in">`gls`</span> in the <span class="in">`nlme`</span> package fits such models; the weight argument being setup with a constant variance (<span class="in">`~1`</span>) per each combination of the crossed factors <span class="in">`anchor * magnitude`</span>.</span>
-<span id="cb55-176"><a href="#cb55-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-179"><a href="#cb55-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-180"><a href="#cb55-180" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a variance per group</span></span>
-<span id="cb55-181"><a href="#cb55-181" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(</span>
-<span id="cb55-182"><a href="#cb55-182" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> madjust <span class="sc">~</span> anchor <span class="sc">*</span> magnitude,</span>
-<span id="cb55-183"><a href="#cb55-183" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> C16,</span>
-<span id="cb55-184"><a href="#cb55-184" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> nlme<span class="sc">::</span><span class="fu">varIdent</span>(</span>
-<span id="cb55-185"><a href="#cb55-185" aria-hidden="true" tabindex="-1"></a>    <span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> anchor <span class="sc">*</span> magnitude))</span>
-<span id="cb55-186"><a href="#cb55-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-187"><a href="#cb55-187" aria-hidden="true" tabindex="-1"></a><span class="co"># Different ANOVA - we use type II here</span></span>
-<span id="cb55-188"><a href="#cb55-188" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(mod2, <span class="at">type =</span> <span class="dv">2</span>)</span>
-<span id="cb55-189"><a href="#cb55-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-190"><a href="#cb55-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-191"><a href="#cb55-191" aria-hidden="true" tabindex="-1"></a>We can see the unequal std. deviation per group when passing the model with unequal variance and unequal means and computing the estimated marginal means. The package <span class="in">`emmeans`</span> automatically adjusts for these changes.</span>
-<span id="cb55-192"><a href="#cb55-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-195"><a href="#cb55-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-196"><a href="#cb55-196" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod2, </span>
-<span id="cb55-197"><a href="#cb55-197" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"anchor"</span>, <span class="st">"magnitude"</span>))</span>
-<span id="cb55-198"><a href="#cb55-198" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute pairwise difference for anchor</span></span>
-<span id="cb55-199"><a href="#cb55-199" aria-hidden="true" tabindex="-1"></a>marg_effect <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(<span class="at">object =</span> mod2, </span>
-<span id="cb55-200"><a href="#cb55-200" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"anchor"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb55-201"><a href="#cb55-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>()</span>
-<span id="cb55-202"><a href="#cb55-202" aria-hidden="true" tabindex="-1"></a>marg_effect</span>
-<span id="cb55-203"><a href="#cb55-203" aria-hidden="true" tabindex="-1"></a><span class="co"># To get a data frame with data</span></span>
-<span id="cb55-204"><a href="#cb55-204" aria-hidden="true" tabindex="-1"></a><span class="co"># broom::tidy(marg_effect)</span></span>
-<span id="cb55-205"><a href="#cb55-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-206"><a href="#cb55-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-101"><a href="#cb55-101" aria-hidden="true" tabindex="-1"></a>               <span class="at">CIs =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb55-102"><a href="#cb55-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb55-103"><a href="#cb55-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-104"><a href="#cb55-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-105"><a href="#cb55-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimated marginal means</span></span>
+<span id="cb55-106"><a href="#cb55-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-107"><a href="#cb55-107" aria-hidden="true" tabindex="-1"></a>Because our dataset is balanced, the marginal means (the summary statistics obtained by grouping the data for a single factor) and the marginal effects (obtained by calculating the average cell means by either row or column) will coincide. There are multiple functions that allow one to obtain estimates means for cells, rows or columns, including functionalities, notably <span class="in">`emmeans`</span> from the eponymous package and <span class="in">`model.tables`</span></span>
+<span id="cb55-108"><a href="#cb55-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-111"><a href="#cb55-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-112"><a href="#cb55-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Get grand mean, cell means, etc.</span></span>
+<span id="cb55-113"><a href="#cb55-113" aria-hidden="true" tabindex="-1"></a><span class="fu">model.tables</span>(mod, <span class="at">type =</span> <span class="st">"means"</span>)</span>
+<span id="cb55-114"><a href="#cb55-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-115"><a href="#cb55-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Cell means</span></span>
+<span id="cb55-116"><a href="#cb55-116" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod, </span>
+<span id="cb55-117"><a href="#cb55-117" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"anchor"</span>, <span class="st">"magnitude"</span>),</span>
+<span id="cb55-118"><a href="#cb55-118" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb55-119"><a href="#cb55-119" aria-hidden="true" tabindex="-1"></a><span class="co"># Marginal means</span></span>
+<span id="cb55-120"><a href="#cb55-120" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod, </span>
+<span id="cb55-121"><a href="#cb55-121" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"anchor"</span>, </span>
+<span id="cb55-122"><a href="#cb55-122" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb55-123"><a href="#cb55-123" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod, </span>
+<span id="cb55-124"><a href="#cb55-124" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"anchor"</span>, </span>
+<span id="cb55-125"><a href="#cb55-125" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb55-126"><a href="#cb55-126" aria-hidden="true" tabindex="-1"></a><span class="co"># These match summary statistics</span></span>
+<span id="cb55-127"><a href="#cb55-127" aria-hidden="true" tabindex="-1"></a>C16 <span class="sc">|&gt;</span></span>
+<span id="cb55-128"><a href="#cb55-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(magnitude) <span class="sc">|&gt;</span></span>
+<span id="cb55-129"><a href="#cb55-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">margmean =</span> <span class="fu">mean</span>(madjust))</span>
+<span id="cb55-130"><a href="#cb55-130" aria-hidden="true" tabindex="-1"></a>C16 <span class="sc">|&gt;</span></span>
+<span id="cb55-131"><a href="#cb55-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anchor) <span class="sc">|&gt;</span></span>
+<span id="cb55-132"><a href="#cb55-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">margmean =</span> <span class="fu">mean</span>(madjust))</span>
+<span id="cb55-133"><a href="#cb55-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-134"><a href="#cb55-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-135"><a href="#cb55-135" aria-hidden="true" tabindex="-1"></a>Since the data are balanced, we can look at the (default) analysis of variance table produced using</span>
+<span id="cb55-136"><a href="#cb55-136" aria-hidden="true" tabindex="-1"></a><span class="in">`anova`</span> function^<span class="co">[</span><span class="ot">In general, for unbalanced data, one would use `car::Anova` with `type = 2` or `type = 3` effects.</span><span class="co">]</span></span>
+<span id="cb55-137"><a href="#cb55-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-140"><a href="#cb55-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-141"><a href="#cb55-141" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span>
+<span id="cb55-142"><a href="#cb55-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-143"><a href="#cb55-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-144"><a href="#cb55-144" aria-hidden="true" tabindex="-1"></a>The output confirms our intuition that there is not much different from zero, with a strong effect for magnitude of adjustment and a significant, albeit smaller one, for anchor type.</span>
+<span id="cb55-145"><a href="#cb55-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-146"><a href="#cb55-146" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model assumptions</span></span>
+<span id="cb55-147"><a href="#cb55-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-148"><a href="#cb55-148" aria-hidden="true" tabindex="-1"></a>While the conclusions are probably unambiguous due to the large evidence, it would be useful to check the model assumptions. </span>
+<span id="cb55-149"><a href="#cb55-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-150"><a href="#cb55-150" aria-hidden="true" tabindex="-1"></a>The sample size is just enough to forego normality checks, but the quantile-quantile plot can be useful to detect outliers and extremes. Outside of one potential value much lower than it's group mean, there is no cause for concern.</span>
+<span id="cb55-151"><a href="#cb55-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-154"><a href="#cb55-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-155"><a href="#cb55-155" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(mod, <span class="at">id =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb55-156"><a href="#cb55-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-157"><a href="#cb55-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-158"><a href="#cb55-158" aria-hidden="true" tabindex="-1"></a>With 30 observations per group and no appearance of outlier, we need rather to worry about additivity and possibly heterogeneity arising from the treatment. Independence is plausible based on the context.</span>
+<span id="cb55-159"><a href="#cb55-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-160"><a href="#cb55-160" aria-hidden="true" tabindex="-1"></a>The Tukey-Anscombe plot of residuals against fitted values (the group means) indicate no deviation, but the variance appears to be larger for the two groups with a large adjustment. Because the response takes negative values, we can simply proceed with fitting a two-way analysis in which each of the subgroups has mean $\mu_{ij}$ and standard deviation $\sigma_{ij}$: in other words, only the data for each subgroup (<span class="in">`anchor`</span>, <span class="in">`magnitude`</span>) are used to estimate the summary statistics of that group. </span>
+<span id="cb55-161"><a href="#cb55-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-164"><a href="#cb55-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-165"><a href="#cb55-165" aria-hidden="true" tabindex="-1"></a><span class="co"># Evidence of unequal variance</span></span>
+<span id="cb55-166"><a href="#cb55-166" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">residuals =</span> <span class="fu">resid</span>(mod),</span>
+<span id="cb55-167"><a href="#cb55-167" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fitted =</span> <span class="fu">fitted</span>(mod)),</span>
+<span id="cb55-168"><a href="#cb55-168" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fitted,</span>
+<span id="cb55-169"><a href="#cb55-169" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> residuals)) <span class="sc">+</span></span>
+<span id="cb55-170"><a href="#cb55-170" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.03</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb55-171"><a href="#cb55-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb55-172"><a href="#cb55-172" aria-hidden="true" tabindex="-1"></a><span class="co"># Equality of variance - Brown-Forsythe</span></span>
+<span id="cb55-173"><a href="#cb55-173" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(mod) </span>
+<span id="cb55-174"><a href="#cb55-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-175"><a href="#cb55-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-176"><a href="#cb55-176" aria-hidden="true" tabindex="-1"></a>Given the Brown-Forsythe test output, we can try fitting a different variance in each group, as there are enough observations for this. The function <span class="in">`gls`</span> in the <span class="in">`nlme`</span> package fits such models; the weight argument being setup with a constant variance (<span class="in">`~1`</span>) per each combination of the crossed factors <span class="in">`anchor * magnitude`</span>.</span>
+<span id="cb55-177"><a href="#cb55-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-180"><a href="#cb55-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-181"><a href="#cb55-181" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a variance per group</span></span>
+<span id="cb55-182"><a href="#cb55-182" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(</span>
+<span id="cb55-183"><a href="#cb55-183" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> madjust <span class="sc">~</span> anchor <span class="sc">*</span> magnitude,</span>
+<span id="cb55-184"><a href="#cb55-184" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> C16,</span>
+<span id="cb55-185"><a href="#cb55-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> nlme<span class="sc">::</span><span class="fu">varIdent</span>(</span>
+<span id="cb55-186"><a href="#cb55-186" aria-hidden="true" tabindex="-1"></a>    <span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> anchor <span class="sc">*</span> magnitude))</span>
+<span id="cb55-187"><a href="#cb55-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-188"><a href="#cb55-188" aria-hidden="true" tabindex="-1"></a><span class="co"># Different ANOVA - we use type II here</span></span>
+<span id="cb55-189"><a href="#cb55-189" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(mod2, <span class="at">type =</span> <span class="dv">2</span>)</span>
+<span id="cb55-190"><a href="#cb55-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-191"><a href="#cb55-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-192"><a href="#cb55-192" aria-hidden="true" tabindex="-1"></a>We can see the unequal std. deviation per group when passing the model with unequal variance and unequal means and computing the estimated marginal means. The package <span class="in">`emmeans`</span> automatically adjusts for these changes.</span>
+<span id="cb55-193"><a href="#cb55-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-196"><a href="#cb55-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-197"><a href="#cb55-197" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod2, </span>
+<span id="cb55-198"><a href="#cb55-198" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"anchor"</span>, <span class="st">"magnitude"</span>))</span>
+<span id="cb55-199"><a href="#cb55-199" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute pairwise difference for anchor</span></span>
+<span id="cb55-200"><a href="#cb55-200" aria-hidden="true" tabindex="-1"></a>marg_effect <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(<span class="at">object =</span> mod2, </span>
+<span id="cb55-201"><a href="#cb55-201" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="st">"anchor"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb55-202"><a href="#cb55-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>()</span>
+<span id="cb55-203"><a href="#cb55-203" aria-hidden="true" tabindex="-1"></a>marg_effect</span>
+<span id="cb55-204"><a href="#cb55-204" aria-hidden="true" tabindex="-1"></a><span class="co"># To get a data frame with data</span></span>
+<span id="cb55-205"><a href="#cb55-205" aria-hidden="true" tabindex="-1"></a><span class="co"># broom::tidy(marg_effect)</span></span>
+<span id="cb55-206"><a href="#cb55-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb55-207"><a href="#cb55-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-208"><a href="#cb55-208" aria-hidden="true" tabindex="-1"></a>We can then pass the output to <span class="in">`car::Anova`</span> to print the analysis of variance table. The $p$-value for the main effect of <span class="in">`anchor`</span> is <span class="in">`r round(anova(mod)[1,5], 3)`</span> in the equal variance model. With unequal variance, different tests give different values: the $p$-value is <span class="in">`r round(car::Anova(mod2, type = 2)[1,3], 3)`</span> if we use type II effects (the correct choice here), <span class="in">`r round(car::Anova(mod2, type = 3)[2,3], 3)`</span> with type III effects^<span class="co">[</span><span class="ot">The type 3 effects compare the model with interactions and main effects to one that includes the interaction, but removes the main effects. Not of interest in the present context.</span><span class="co">]</span> and the <span class="in">`emmeans`</span> package returns Welch's test for the pairwise difference with Satterwaite's degree of freedom approximation if we average over <span class="in">`magnitude`</span> to account for the difference in variance, this time with a $p$-value of <span class="in">`r round(broom::tidy(marg_effect)$p.value, 3)`</span>. These differences in output are somewhat notable: with *borderline statistical significance*, they may lead to different conclusions if one blindly dichotomize the results. Clearly stating which test and how the results are obtained is crucial for transparent reporting, as is providing the code and data. Let your readers make their own mind by reporting $p$-values.</span>
-<span id="cb55-209"><a href="#cb55-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-208"><a href="#cb55-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-209"><a href="#cb55-209" aria-hidden="true" tabindex="-1"></a>We can then pass the output to <span class="in">`car::Anova`</span> to print the analysis of variance table. The $p$-value for the main effect of <span class="in">`anchor`</span> is <span class="in">`r round(anova(mod)[1,5], 3)`</span> in the equal variance model. With unequal variance, different tests give different values: the $p$-value is <span class="in">`r round(car::Anova(mod2, type = 2)[1,3], 3)`</span> if we use type II effects (the correct choice here), <span class="in">`r round(car::Anova(mod2, type = 3)[2,3], 3)`</span> with type III effects^<span class="co">[</span><span class="ot">The type 3 effects compare the model with interactions and main effects to one that includes the interaction, but removes the main effects. Not of interest in the present context.</span><span class="co">]</span> and the <span class="in">`emmeans`</span> package returns Welch's test for the pairwise difference with Satterwaite's degree of freedom approximation if we average over <span class="in">`magnitude`</span> to account for the difference in variance, this time with a $p$-value of <span class="in">`r round(broom::tidy(marg_effect)$p.value, 3)`</span>. These differences in output are somewhat notable: with *borderline statistical significance*, they may lead to different conclusions if one blindly dichotomize the results. Clearly stating which test and how the results are obtained is crucial for transparent reporting, as is providing the code and data. Let your readers make their own mind by reporting $p$-values.</span>
 <span id="cb55-210"><a href="#cb55-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-211"><a href="#cb55-211" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reporting</span></span>
-<span id="cb55-212"><a href="#cb55-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-213"><a href="#cb55-213" aria-hidden="true" tabindex="-1"></a>Regardless of the model, it should be clearly stated that there is some evidence of hetegeneity. We should also report sample size per group, mention the repartition ($n=30$ per group).</span>
-<span id="cb55-214"><a href="#cb55-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-215"><a href="#cb55-215" aria-hidden="true" tabindex="-1"></a>In the present case, we can give information about the main effects and stop here, but giving an indication about the size of the adjustment (by reporting estimated marginal means) is useful. Note that <span class="in">`emmeans`</span> gives a (here spurious) warning about the main effects (row or column average) since there is a potential interaction --- as we all but ruled out the latter, we proceed nevertheless.</span>
-<span id="cb55-216"><a href="#cb55-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-219"><a href="#cb55-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-220"><a href="#cb55-220" aria-hidden="true" tabindex="-1"></a>emm_marg <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
-<span id="cb55-221"><a href="#cb55-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> mod2,</span>
-<span id="cb55-222"><a href="#cb55-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">specs =</span> <span class="st">"anchor"</span></span>
-<span id="cb55-223"><a href="#cb55-223" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-224"><a href="#cb55-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-225"><a href="#cb55-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-226"><a href="#cb55-226" aria-hidden="true" tabindex="-1"></a>There are many different options to get the same results with <span class="in">`emmeans`</span>. The <span class="in">`specs`</span> indicates the list of factors which we want to keep, whereas <span class="in">`by`</span> gives the one we want to have separate analysis for. In formula, we could get the simple effects for <span class="in">`anchor`</span> by level of <span class="in">`magnitude`</span> using <span class="in">`~ anchor | magnitude`</span>, or set <span class="in">`specs = anchor`</span> and <span class="in">`by = magnitude`</span>. We can  pass the result to <span class="in">`pairs`</span> to obtain pairwise differences.</span>
-<span id="cb55-227"><a href="#cb55-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-230"><a href="#cb55-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-231"><a href="#cb55-231" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple effects for anchor</span></span>
-<span id="cb55-232"><a href="#cb55-232" aria-hidden="true" tabindex="-1"></a>emm_simple <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
-<span id="cb55-233"><a href="#cb55-233" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> mod,</span>
-<span id="cb55-234"><a href="#cb55-234" aria-hidden="true" tabindex="-1"></a>  <span class="at">specs =</span> <span class="st">"anchor"</span>,</span>
-<span id="cb55-235"><a href="#cb55-235" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"magnitude"</span></span>
-<span id="cb55-236"><a href="#cb55-236" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-237"><a href="#cb55-237" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute pairwise differences within each magnitude</span></span>
-<span id="cb55-238"><a href="#cb55-238" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_simple)</span>
-<span id="cb55-239"><a href="#cb55-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-240"><a href="#cb55-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-241"><a href="#cb55-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiplicity adjustment</span></span>
-<span id="cb55-242"><a href="#cb55-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-243"><a href="#cb55-243" aria-hidden="true" tabindex="-1"></a>By default, <span class="in">`emmeans`</span> will compute adjustments for pairwise difference using Tukey's honest significant difference method if there are more than one pairwise comparison. The software cannot easily guess the degrees of freedom, the number of tests, etc.</span>
-<span id="cb55-244"><a href="#cb55-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-245"><a href="#cb55-245" aria-hidden="true" tabindex="-1"></a>There are also tests which are not of interest: for example, one probably wouldn't want to compute the difference between the adjustment for (small magnitude and round) versus (large magnitude and precise).</span>
-<span id="cb55-246"><a href="#cb55-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-247"><a href="#cb55-247" aria-hidden="true" tabindex="-1"></a>If we were interested in looking at all pairwise differences, we could keep all of the cells means.</span>
-<span id="cb55-248"><a href="#cb55-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-251"><a href="#cb55-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-252"><a href="#cb55-252" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod2, </span>
-<span id="cb55-253"><a href="#cb55-253" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"magnitude"</span>, <span class="st">"anchor"</span>), </span>
-<span id="cb55-254"><a href="#cb55-254" aria-hidden="true" tabindex="-1"></a>        <span class="at">contr =</span> <span class="st">"pairwise"</span>)</span>
-<span id="cb55-255"><a href="#cb55-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-256"><a href="#cb55-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-257"><a href="#cb55-257" aria-hidden="true" tabindex="-1"></a>Notice now the mention about Tukey's effect. When there is heterogeneity of variance or unbalanced effects, the actual method employed is called **Games-Howell** correction.</span>
-<span id="cb55-258"><a href="#cb55-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-211"><a href="#cb55-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-212"><a href="#cb55-212" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reporting</span></span>
+<span id="cb55-213"><a href="#cb55-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-214"><a href="#cb55-214" aria-hidden="true" tabindex="-1"></a>Regardless of the model, it should be clearly stated that there is some evidence of hetegeneity. We should also report sample size per group, mention the repartition ($n=30$ per group).</span>
+<span id="cb55-215"><a href="#cb55-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-216"><a href="#cb55-216" aria-hidden="true" tabindex="-1"></a>In the present case, we can give information about the main effects and stop here, but giving an indication about the size of the adjustment (by reporting estimated marginal means) is useful. Note that <span class="in">`emmeans`</span> gives a (here spurious) warning about the main effects (row or column average) since there is a potential interaction --- as we all but ruled out the latter, we proceed nevertheless.</span>
+<span id="cb55-217"><a href="#cb55-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-220"><a href="#cb55-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-221"><a href="#cb55-221" aria-hidden="true" tabindex="-1"></a>emm_marg <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
+<span id="cb55-222"><a href="#cb55-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> mod2,</span>
+<span id="cb55-223"><a href="#cb55-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">specs =</span> <span class="st">"anchor"</span></span>
+<span id="cb55-224"><a href="#cb55-224" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-225"><a href="#cb55-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-226"><a href="#cb55-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-227"><a href="#cb55-227" aria-hidden="true" tabindex="-1"></a>There are many different options to get the same results with <span class="in">`emmeans`</span>. The <span class="in">`specs`</span> indicates the list of factors which we want to keep, whereas <span class="in">`by`</span> gives the one we want to have separate analysis for. In formula, we could get the simple effects for <span class="in">`anchor`</span> by level of <span class="in">`magnitude`</span> using <span class="in">`~ anchor | magnitude`</span>, or set <span class="in">`specs = anchor`</span> and <span class="in">`by = magnitude`</span>. We can  pass the result to <span class="in">`pairs`</span> to obtain pairwise differences.</span>
+<span id="cb55-228"><a href="#cb55-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-231"><a href="#cb55-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-232"><a href="#cb55-232" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple effects for anchor</span></span>
+<span id="cb55-233"><a href="#cb55-233" aria-hidden="true" tabindex="-1"></a>emm_simple <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
+<span id="cb55-234"><a href="#cb55-234" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> mod,</span>
+<span id="cb55-235"><a href="#cb55-235" aria-hidden="true" tabindex="-1"></a>  <span class="at">specs =</span> <span class="st">"anchor"</span>,</span>
+<span id="cb55-236"><a href="#cb55-236" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"magnitude"</span></span>
+<span id="cb55-237"><a href="#cb55-237" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-238"><a href="#cb55-238" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute pairwise differences within each magnitude</span></span>
+<span id="cb55-239"><a href="#cb55-239" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(emm_simple)</span>
+<span id="cb55-240"><a href="#cb55-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-241"><a href="#cb55-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-242"><a href="#cb55-242" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiplicity adjustment</span></span>
+<span id="cb55-243"><a href="#cb55-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-244"><a href="#cb55-244" aria-hidden="true" tabindex="-1"></a>By default, <span class="in">`emmeans`</span> will compute adjustments for pairwise difference using Tukey's honest significant difference method if there are more than one pairwise comparison. The software cannot easily guess the degrees of freedom, the number of tests, etc.</span>
+<span id="cb55-245"><a href="#cb55-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-246"><a href="#cb55-246" aria-hidden="true" tabindex="-1"></a>There are also tests which are not of interest: for example, one probably wouldn't want to compute the difference between the adjustment for (small magnitude and round) versus (large magnitude and precise).</span>
+<span id="cb55-247"><a href="#cb55-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-248"><a href="#cb55-248" aria-hidden="true" tabindex="-1"></a>If we were interested in looking at all pairwise differences, we could keep all of the cells means.</span>
+<span id="cb55-249"><a href="#cb55-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-252"><a href="#cb55-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-253"><a href="#cb55-253" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(<span class="at">object =</span> mod2, </span>
+<span id="cb55-254"><a href="#cb55-254" aria-hidden="true" tabindex="-1"></a>        <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"magnitude"</span>, <span class="st">"anchor"</span>), </span>
+<span id="cb55-255"><a href="#cb55-255" aria-hidden="true" tabindex="-1"></a>        <span class="at">contr =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb55-256"><a href="#cb55-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-257"><a href="#cb55-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-258"><a href="#cb55-258" aria-hidden="true" tabindex="-1"></a>Notice now the mention about Tukey's effect. When there is heterogeneity of variance or unbalanced effects, the actual method employed is called **Games-Howell** correction.</span>
 <span id="cb55-259"><a href="#cb55-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-260"><a href="#cb55-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study 2 - unbalanced data</span></span>
-<span id="cb55-261"><a href="#cb55-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-260"><a href="#cb55-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-261"><a href="#cb55-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study 2 - unbalanced data</span></span>
 <span id="cb55-262"><a href="#cb55-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-263"><a href="#cb55-263" aria-hidden="true" tabindex="-1"></a>We now reproduce the results of Study 1 of @Maglio/Polman:2014. Data were obtained from the Open Science Foundation and are available in the <span class="in">`MP14_S1`</span> dataset in package <span class="in">`hecedsm`</span>.</span>
-<span id="cb55-264"><a href="#cb55-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-265"><a href="#cb55-265" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings.</span></span>
-<span id="cb55-266"><a href="#cb55-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-269"><a href="#cb55-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-270"><a href="#cb55-270" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb55-271"><a href="#cb55-271" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> direction <span class="sc">+</span> station, <span class="at">data =</span> MP14_S1)</span>
-<span id="cb55-272"><a href="#cb55-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-273"><a href="#cb55-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-274"><a href="#cb55-274" aria-hidden="true" tabindex="-1"></a>The counts are not balanced, but not far from being equal in each group.</span>
-<span id="cb55-275"><a href="#cb55-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-276"><a href="#cb55-276" aria-hidden="true" tabindex="-1"></a>Based on the actual study, it is quite clear we expect there will be an interaction if there is an actual effect. Lack of interaction would entail that subjective distance is perceived the same way regardless of the direction of travel. </span>
-<span id="cb55-277"><a href="#cb55-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-278"><a href="#cb55-278" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model assumptions</span></span>
-<span id="cb55-279"><a href="#cb55-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-280"><a href="#cb55-280" aria-hidden="true" tabindex="-1"></a>Since the data are unbalanced, we can fit the model using <span class="in">`lm`</span>. The default parametrization of the linear model uses the first alphanumerical value for the factor as reference category and coefficients encode differences relative to this particular average. We can obtain the sum-to-zero by setting the option <span class="in">`contr.sum`</span>^<span class="co">[</span><span class="ot">The second term specifies the default option for continuous variables.</span><span class="co">]</span></span>
-<span id="cb55-281"><a href="#cb55-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-284"><a href="#cb55-284" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-285"><a href="#cb55-285" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
-<span id="cb55-286"><a href="#cb55-286" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(MP14_S1) <span class="co"># look at data</span></span>
-<span id="cb55-287"><a href="#cb55-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-288"><a href="#cb55-288" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up contrasts</span></span>
-<span id="cb55-289"><a href="#cb55-289" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb55-290"><a href="#cb55-290" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> station<span class="sc">*</span>direction, </span>
-<span id="cb55-291"><a href="#cb55-291" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> MP14_S1)</span>
-<span id="cb55-292"><a href="#cb55-292" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model) <span class="co"># the coefficients are global mean</span></span>
-<span id="cb55-293"><a href="#cb55-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-294"><a href="#cb55-294" aria-hidden="true" tabindex="-1"></a><span class="co"># Test only the interaction</span></span>
-<span id="cb55-295"><a href="#cb55-295" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(model, <span class="at">type =</span> <span class="dv">3</span>) </span>
-<span id="cb55-296"><a href="#cb55-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-297"><a href="#cb55-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-298"><a href="#cb55-298" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model assumptions</span></span>
-<span id="cb55-299"><a href="#cb55-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-300"><a href="#cb55-300" aria-hidden="true" tabindex="-1"></a>We can use type II or type III tests: here, because the interaction term is significant, we could look at simple effects but these are not of scientific interest. Rather, we compute the cell averages and proceed with our contrast setup.</span>
-<span id="cb55-301"><a href="#cb55-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-302"><a href="#cb55-302" aria-hidden="true" tabindex="-1"></a>Because of the discreteness of the data (a Likert scale ranging from 1 to 5), there is limited potential for outlyingness. If you look at the normal quantile-quantile plot, you should see a marked staircase pattern due to the ties. Brown--Forsythe's test gives no evidence of unequal variance per group, so we proceed with the model.</span>
-<span id="cb55-303"><a href="#cb55-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-304"><a href="#cb55-304" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interaction plot</span></span>
-<span id="cb55-305"><a href="#cb55-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-306"><a href="#cb55-306" aria-hidden="true" tabindex="-1"></a>While we can do plots ourselves, the <span class="in">`emmip`</span> function allows us to return a nice looking profile plot with <span class="in">`ggplot2`</span>.</span>
-<span id="cb55-307"><a href="#cb55-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-310"><a href="#cb55-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-311"><a href="#cb55-311" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="at">object =</span> model, </span>
-<span id="cb55-312"><a href="#cb55-312" aria-hidden="true" tabindex="-1"></a>               <span class="co"># trace.factor ~ x.factor</span></span>
-<span id="cb55-313"><a href="#cb55-313" aria-hidden="true" tabindex="-1"></a>               <span class="at">formula =</span> direction <span class="sc">~</span> station,</span>
-<span id="cb55-314"><a href="#cb55-314" aria-hidden="true" tabindex="-1"></a>               <span class="at">CIs =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb55-315"><a href="#cb55-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb55-316"><a href="#cb55-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-317"><a href="#cb55-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-320"><a href="#cb55-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-321"><a href="#cb55-321" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot </span></span>
-<span id="cb55-322"><a href="#cb55-322" aria-hidden="true" tabindex="-1"></a><span class="co"># average of each subgroup, with +/- 1 std. error</span></span>
-<span id="cb55-323"><a href="#cb55-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-324"><a href="#cb55-324" aria-hidden="true" tabindex="-1"></a>MP14_S1 <span class="sc">|&gt;</span></span>
-<span id="cb55-325"><a href="#cb55-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(direction, station) <span class="sc">|&gt;</span></span>
-<span id="cb55-326"><a href="#cb55-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(distance),</span>
-<span id="cb55-327"><a href="#cb55-327" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="fu">sigma</span>(model) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
-<span id="cb55-328"><a href="#cb55-328" aria-hidden="true" tabindex="-1"></a>            <span class="at">lower =</span> mean <span class="sc">-</span> se,</span>
-<span id="cb55-329"><a href="#cb55-329" aria-hidden="true" tabindex="-1"></a>            <span class="at">upper =</span> mean <span class="sc">+</span> se) <span class="sc">|&gt;</span></span>
-<span id="cb55-330"><a href="#cb55-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> station,</span>
-<span id="cb55-331"><a href="#cb55-331" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> mean, </span>
-<span id="cb55-332"><a href="#cb55-332" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> direction,</span>
-<span id="cb55-333"><a href="#cb55-333" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> direction)) <span class="sc">+</span> </span>
-<span id="cb55-334"><a href="#cb55-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb55-335"><a href="#cb55-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, </span>
-<span id="cb55-336"><a href="#cb55-336" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> upper),</span>
-<span id="cb55-337"><a href="#cb55-337" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb55-338"><a href="#cb55-338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb55-339"><a href="#cb55-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_grey</span>() <span class="sc">+</span></span>
-<span id="cb55-340"><a href="#cb55-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"subjective distance"</span>,</span>
-<span id="cb55-341"><a href="#cb55-341" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"mean (1 std. error)"</span>,</span>
-<span id="cb55-342"><a href="#cb55-342" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"subway station"</span>,</span>
-<span id="cb55-343"><a href="#cb55-343" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb55-344"><a href="#cb55-344" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"stations are ordered from west to east"</span>) <span class="sc">+</span></span>
-<span id="cb55-345"><a href="#cb55-345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb55-346"><a href="#cb55-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb55-347"><a href="#cb55-347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-348"><a href="#cb55-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-263"><a href="#cb55-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-264"><a href="#cb55-264" aria-hidden="true" tabindex="-1"></a>We now reproduce the results of Study 1 of @Maglio/Polman:2014. Data were obtained from the Open Science Foundation and are available in the <span class="in">`MP14_S1`</span> dataset in package <span class="in">`hecedsm`</span>.</span>
+<span id="cb55-265"><a href="#cb55-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-266"><a href="#cb55-266" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings.</span></span>
+<span id="cb55-267"><a href="#cb55-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-270"><a href="#cb55-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-271"><a href="#cb55-271" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb55-272"><a href="#cb55-272" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> direction <span class="sc">+</span> station, <span class="at">data =</span> MP14_S1)</span>
+<span id="cb55-273"><a href="#cb55-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-274"><a href="#cb55-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-275"><a href="#cb55-275" aria-hidden="true" tabindex="-1"></a>The counts are not balanced, but not far from being equal in each group.</span>
+<span id="cb55-276"><a href="#cb55-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-277"><a href="#cb55-277" aria-hidden="true" tabindex="-1"></a>Based on the actual study, it is quite clear we expect there will be an interaction if there is an actual effect. Lack of interaction would entail that subjective distance is perceived the same way regardless of the direction of travel. </span>
+<span id="cb55-278"><a href="#cb55-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-279"><a href="#cb55-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model assumptions</span></span>
+<span id="cb55-280"><a href="#cb55-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-281"><a href="#cb55-281" aria-hidden="true" tabindex="-1"></a>Since the data are unbalanced, we can fit the model using <span class="in">`lm`</span>. The default parametrization of the linear model uses the first alphanumerical value for the factor as reference category and coefficients encode differences relative to this particular average. We can obtain the sum-to-zero by setting the option <span class="in">`contr.sum`</span>^<span class="co">[</span><span class="ot">The second term specifies the default option for continuous variables.</span><span class="co">]</span></span>
+<span id="cb55-282"><a href="#cb55-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-285"><a href="#cb55-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-286"><a href="#cb55-286" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
+<span id="cb55-287"><a href="#cb55-287" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(MP14_S1) <span class="co"># look at data</span></span>
+<span id="cb55-288"><a href="#cb55-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-289"><a href="#cb55-289" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up contrasts</span></span>
+<span id="cb55-290"><a href="#cb55-290" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb55-291"><a href="#cb55-291" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> station<span class="sc">*</span>direction, </span>
+<span id="cb55-292"><a href="#cb55-292" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> MP14_S1)</span>
+<span id="cb55-293"><a href="#cb55-293" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model) <span class="co"># the coefficients are global mean</span></span>
+<span id="cb55-294"><a href="#cb55-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-295"><a href="#cb55-295" aria-hidden="true" tabindex="-1"></a><span class="co"># Test only the interaction</span></span>
+<span id="cb55-296"><a href="#cb55-296" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(model, <span class="at">type =</span> <span class="dv">3</span>) </span>
+<span id="cb55-297"><a href="#cb55-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-298"><a href="#cb55-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-299"><a href="#cb55-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model assumptions</span></span>
+<span id="cb55-300"><a href="#cb55-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-301"><a href="#cb55-301" aria-hidden="true" tabindex="-1"></a>We can use type II or type III tests: here, because the interaction term is significant, we could look at simple effects but these are not of scientific interest. Rather, we compute the cell averages and proceed with our contrast setup.</span>
+<span id="cb55-302"><a href="#cb55-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-303"><a href="#cb55-303" aria-hidden="true" tabindex="-1"></a>Because of the discreteness of the data (a Likert scale ranging from 1 to 5), there is limited potential for outlyingness. If you look at the normal quantile-quantile plot, you should see a marked staircase pattern due to the ties. Brown--Forsythe's test gives no evidence of unequal variance per group, so we proceed with the model.</span>
+<span id="cb55-304"><a href="#cb55-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-305"><a href="#cb55-305" aria-hidden="true" tabindex="-1"></a><span class="fu">### Interaction plot</span></span>
+<span id="cb55-306"><a href="#cb55-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-307"><a href="#cb55-307" aria-hidden="true" tabindex="-1"></a>While we can do plots ourselves, the <span class="in">`emmip`</span> function allows us to return a nice looking profile plot with <span class="in">`ggplot2`</span>.</span>
+<span id="cb55-308"><a href="#cb55-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-311"><a href="#cb55-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-312"><a href="#cb55-312" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="at">object =</span> model, </span>
+<span id="cb55-313"><a href="#cb55-313" aria-hidden="true" tabindex="-1"></a>               <span class="co"># trace.factor ~ x.factor</span></span>
+<span id="cb55-314"><a href="#cb55-314" aria-hidden="true" tabindex="-1"></a>               <span class="at">formula =</span> direction <span class="sc">~</span> station,</span>
+<span id="cb55-315"><a href="#cb55-315" aria-hidden="true" tabindex="-1"></a>               <span class="at">CIs =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb55-316"><a href="#cb55-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb55-317"><a href="#cb55-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-318"><a href="#cb55-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-321"><a href="#cb55-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-322"><a href="#cb55-322" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot </span></span>
+<span id="cb55-323"><a href="#cb55-323" aria-hidden="true" tabindex="-1"></a><span class="co"># average of each subgroup, with +/- 1 std. error</span></span>
+<span id="cb55-324"><a href="#cb55-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-325"><a href="#cb55-325" aria-hidden="true" tabindex="-1"></a>MP14_S1 <span class="sc">|&gt;</span></span>
+<span id="cb55-326"><a href="#cb55-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(direction, station) <span class="sc">|&gt;</span></span>
+<span id="cb55-327"><a href="#cb55-327" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(distance),</span>
+<span id="cb55-328"><a href="#cb55-328" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="fu">sigma</span>(model) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb55-329"><a href="#cb55-329" aria-hidden="true" tabindex="-1"></a>            <span class="at">lower =</span> mean <span class="sc">-</span> se,</span>
+<span id="cb55-330"><a href="#cb55-330" aria-hidden="true" tabindex="-1"></a>            <span class="at">upper =</span> mean <span class="sc">+</span> se) <span class="sc">|&gt;</span></span>
+<span id="cb55-331"><a href="#cb55-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> station,</span>
+<span id="cb55-332"><a href="#cb55-332" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> mean, </span>
+<span id="cb55-333"><a href="#cb55-333" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> direction,</span>
+<span id="cb55-334"><a href="#cb55-334" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> direction)) <span class="sc">+</span> </span>
+<span id="cb55-335"><a href="#cb55-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb55-336"><a href="#cb55-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, </span>
+<span id="cb55-337"><a href="#cb55-337" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> upper),</span>
+<span id="cb55-338"><a href="#cb55-338" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb55-339"><a href="#cb55-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb55-340"><a href="#cb55-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_grey</span>() <span class="sc">+</span></span>
+<span id="cb55-341"><a href="#cb55-341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"subjective distance"</span>,</span>
+<span id="cb55-342"><a href="#cb55-342" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"mean (1 std. error)"</span>,</span>
+<span id="cb55-343"><a href="#cb55-343" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"subway station"</span>,</span>
+<span id="cb55-344"><a href="#cb55-344" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb55-345"><a href="#cb55-345" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"stations are ordered from west to east"</span>) <span class="sc">+</span></span>
+<span id="cb55-346"><a href="#cb55-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb55-347"><a href="#cb55-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb55-348"><a href="#cb55-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb55-349"><a href="#cb55-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-350"><a href="#cb55-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### Contrasts</span></span>
-<span id="cb55-351"><a href="#cb55-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-352"><a href="#cb55-352" aria-hidden="true" tabindex="-1"></a>If the data lend some support for this claim, we could consider the following follow-up questions:</span>
-<span id="cb55-353"><a href="#cb55-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-354"><a href="#cb55-354" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>symmetry</span>
-<span id="cb55-355"><a href="#cb55-355" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>whether the average perceived distance for St. George (east) and Bloor--Yonge (west) is the same as vice-versa (both one station away from Bay).</span>
-<span id="cb55-356"><a href="#cb55-356" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>same, but for Spadina and Sherbourne which are two stations away from Bay.</span>
-<span id="cb55-357"><a href="#cb55-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>if the perceived distance for stations Spadina or Sherbourne, which are two away from Bay, are viewed as being twice as distance as St. George and Bloor--Yonge.</span>
-<span id="cb55-358"><a href="#cb55-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-359"><a href="#cb55-359" aria-hidden="true" tabindex="-1"></a>For the experiment to make sense, we should check that travel time or distance is indeed roughly the same between each station. The limited range of the Likert scale shows</span>
-<span id="cb55-360"><a href="#cb55-360" aria-hidden="true" tabindex="-1"></a>These hypotheses can be expressed in terms of contrasts.</span>
-<span id="cb55-361"><a href="#cb55-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-362"><a href="#cb55-362" aria-hidden="true" tabindex="-1"></a>In <span class="in">`emmeans`</span>, we keep both factors in the model and begin by computing the cell means and looking at the order of the factors and ordering of the levels to properly set our contrast vectors.</span>
-<span id="cb55-363"><a href="#cb55-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-350"><a href="#cb55-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-351"><a href="#cb55-351" aria-hidden="true" tabindex="-1"></a><span class="fu">### Contrasts</span></span>
+<span id="cb55-352"><a href="#cb55-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-353"><a href="#cb55-353" aria-hidden="true" tabindex="-1"></a>If the data lend some support for this claim, we could consider the following follow-up questions:</span>
+<span id="cb55-354"><a href="#cb55-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-355"><a href="#cb55-355" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>symmetry</span>
+<span id="cb55-356"><a href="#cb55-356" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>whether the average perceived distance for St. George (east) and Bloor--Yonge (west) is the same as vice-versa (both one station away from Bay).</span>
+<span id="cb55-357"><a href="#cb55-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>same, but for Spadina and Sherbourne which are two stations away from Bay.</span>
+<span id="cb55-358"><a href="#cb55-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>if the perceived distance for stations Spadina or Sherbourne, which are two away from Bay, are viewed as being twice as distance as St. George and Bloor--Yonge.</span>
+<span id="cb55-359"><a href="#cb55-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-360"><a href="#cb55-360" aria-hidden="true" tabindex="-1"></a>For the experiment to make sense, we should check that travel time or distance is indeed roughly the same between each station. The limited range of the Likert scale shows</span>
+<span id="cb55-361"><a href="#cb55-361" aria-hidden="true" tabindex="-1"></a>These hypotheses can be expressed in terms of contrasts.</span>
+<span id="cb55-362"><a href="#cb55-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-363"><a href="#cb55-363" aria-hidden="true" tabindex="-1"></a>In <span class="in">`emmeans`</span>, we keep both factors in the model and begin by computing the cell means and looking at the order of the factors and ordering of the levels to properly set our contrast vectors.</span>
 <span id="cb55-364"><a href="#cb55-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-365"><a href="#cb55-365" aria-hidden="true" tabindex="-1"></a>The hypothesis of symmetry is slightly complicated, as we want to test a model which has the same perceived distance for distance, but comparing stations one apart and two apart in the same direction of travel. This leads to four contrast vectors, but we set up the hypothesis test to look at them simultaneously using an $F$-test. If we impose same mean perceived distance for each station with the symmetry, we would have four average instead of the eight cells: the null distribution for the mean comparison will be a Fisher distribution with $\nu_1=8-4=4$ degrees of freedom.</span>
-<span id="cb55-366"><a href="#cb55-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-365"><a href="#cb55-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-366"><a href="#cb55-366" aria-hidden="true" tabindex="-1"></a>The hypothesis of symmetry is slightly complicated, as we want to test a model which has the same perceived distance for distance, but comparing stations one apart and two apart in the same direction of travel. This leads to four contrast vectors, but we set up the hypothesis test to look at them simultaneously using an $F$-test. If we impose same mean perceived distance for each station with the symmetry, we would have four average instead of the eight cells: the null distribution for the mean comparison will be a Fisher distribution with $\nu_1=8-4=4$ degrees of freedom.</span>
 <span id="cb55-367"><a href="#cb55-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-370"><a href="#cb55-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-371"><a href="#cb55-371" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, </span>
-<span id="cb55-372"><a href="#cb55-372" aria-hidden="true" tabindex="-1"></a>               <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"direction"</span>, <span class="st">"station"</span>))</span>
-<span id="cb55-373"><a href="#cb55-373" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(emm)</span>
-<span id="cb55-374"><a href="#cb55-374" aria-hidden="true" tabindex="-1"></a>contrast_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb55-375"><a href="#cb55-375" aria-hidden="true" tabindex="-1"></a> <span class="st">"2 station (opposite)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
-<span id="cb55-376"><a href="#cb55-376" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 station (opposite)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb55-377"><a href="#cb55-377" aria-hidden="true" tabindex="-1"></a> <span class="st">"2 station (travel)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb55-378"><a href="#cb55-378" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 station (travel)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb55-379"><a href="#cb55-379" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-380"><a href="#cb55-380" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothesis test (symmetry)</span></span>
-<span id="cb55-381"><a href="#cb55-381" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span> </span>
-<span id="cb55-382"><a href="#cb55-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> contrast_list) <span class="sc">|&gt;</span> </span>
-<span id="cb55-383"><a href="#cb55-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">test</span>(<span class="at">joint =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb55-384"><a href="#cb55-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-385"><a href="#cb55-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-386"><a href="#cb55-386" aria-hidden="true" tabindex="-1"></a>Perhaps unsurprisingly, there is not much difference and we cannot detect departure from symmetry.</span>
-<span id="cb55-387"><a href="#cb55-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-388"><a href="#cb55-388" aria-hidden="true" tabindex="-1"></a>The other hypothesis tests, which look at perceived differences one direction or another, quantify the difference in subjective distance depending on whether the station is in the direction of travel or opposite.</span>
-<span id="cb55-389"><a href="#cb55-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-390"><a href="#cb55-390" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
-<span id="cb55-391"><a href="#cb55-391" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{01} &amp;: \mu_{\text{E, SG}} + \mu_{\text{W, BY}} = \mu_{\text{W, SG}} +\mu_{\text{E, BY}} <span class="sc">\\</span></span>
-<span id="cb55-392"><a href="#cb55-392" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{02} &amp;: \mu_{\text{E, Sp}} +\mu_{\text{W, Sh}} = \mu_{\text{W, Sp}} + \mu_{\text{E, Sh}} <span class="sc">\\</span></span>
-<span id="cb55-393"><a href="#cb55-393" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{03} &amp;: 2(\mu_{\text{E, SG}} + \mu_{\text{W, BY}}) = \mu_{\text{E, Sp}} + \mu_{\text{W, Sh}} <span class="sc">\\</span></span>
-<span id="cb55-394"><a href="#cb55-394" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{04} &amp;: 2(\mu_{\text{W, SG}} + \mu_{\text{E, BY}}) = \mu_{\text{W, Sp}} + \mu_{\text{E, Sh}} </span>
-<span id="cb55-395"><a href="#cb55-395" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
-<span id="cb55-396"><a href="#cb55-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-397"><a href="#cb55-397" aria-hidden="true" tabindex="-1"></a>Hypotheses 3 and 4 could be tested jointly, using the same trick we employed for symmetry to impose the linear restrictions on the parameters. We will consider only the pairwise differences in the sequel.</span>
-<span id="cb55-398"><a href="#cb55-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-399"><a href="#cb55-399" aria-hidden="true" tabindex="-1"></a>Since we consider arbitrary contrasts between the means of the eight cells, we can account for multiple testing within the family by using Scheffé's method. In <span class="in">`emmeans`</span>, the <span class="in">`adjust = "scheffe"`</span> argument sets up the contrasts, but the output will be incorrect unless we specify the number of groups (for main effects, $n_a-1$, for all cells, $n_an_b-1$) through <span class="in">`scheffe.rank`</span>.</span>
-<span id="cb55-400"><a href="#cb55-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-401"><a href="#cb55-401" aria-hidden="true" tabindex="-1"></a>To account for the other tests, we can also reduce the level to decrease the probability of making a type I error.</span>
-<span id="cb55-402"><a href="#cb55-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-405"><a href="#cb55-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-406"><a href="#cb55-406" aria-hidden="true" tabindex="-1"></a>custom_contrasts <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb55-407"><a href="#cb55-407" aria-hidden="true" tabindex="-1"></a> <span class="st">"2 station, opposite vs same"</span> <span class="ot">=</span> </span>
-<span id="cb55-408"><a href="#cb55-408" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb55-409"><a href="#cb55-409" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 station, opposite vs same"</span> <span class="ot">=</span> </span>
-<span id="cb55-410"><a href="#cb55-410" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb55-411"><a href="#cb55-411" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 vs 2 station (opposite)"</span> <span class="ot">=</span> </span>
-<span id="cb55-412"><a href="#cb55-412" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
-<span id="cb55-413"><a href="#cb55-413" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 vs 2 station (same)"</span> <span class="ot">=</span> </span>
-<span id="cb55-414"><a href="#cb55-414" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb55-415"><a href="#cb55-415" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-416"><a href="#cb55-416" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up contrasts with correction</span></span>
-<span id="cb55-417"><a href="#cb55-417" aria-hidden="true" tabindex="-1"></a>cont_emm <span class="ot">&lt;-</span> <span class="fu">contrast</span>(</span>
-<span id="cb55-418"><a href="#cb55-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> emm, </span>
-<span id="cb55-419"><a href="#cb55-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> custom_contrasts,</span>
-<span id="cb55-420"><a href="#cb55-420" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust =</span> <span class="st">"scheffe"</span>)</span>
-<span id="cb55-421"><a href="#cb55-421" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests and p-values</span></span>
-<span id="cb55-422"><a href="#cb55-422" aria-hidden="true" tabindex="-1"></a>cont_emm <span class="sc">|&gt;</span></span>
-<span id="cb55-423"><a href="#cb55-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">test</span>(<span class="at">scheffe.rank =</span> <span class="dv">7</span>)</span>
-<span id="cb55-424"><a href="#cb55-424" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests with confidence intervals</span></span>
-<span id="cb55-425"><a href="#cb55-425" aria-hidden="true" tabindex="-1"></a>cont_emm <span class="sc">|&gt;</span></span>
-<span id="cb55-426"><a href="#cb55-426" aria-hidden="true" tabindex="-1"></a>  <span class="fu">confint</span>(<span class="at">scheffe.rank =</span> <span class="dv">7</span>,</span>
-<span id="cb55-427"><a href="#cb55-427" aria-hidden="true" tabindex="-1"></a>          <span class="at">level =</span> <span class="fl">0.99</span>)</span>
-<span id="cb55-428"><a href="#cb55-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-429"><a href="#cb55-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-430"><a href="#cb55-430" aria-hidden="true" tabindex="-1"></a>Even with a correction for multiple testing, there is strong difference in perceived distance for one station away (direction of travel vs opposite) and similarly for two stations. There is mild evidence that, in one direction, the perceived distance between stations is not equal. A potential criticism, in addition to the design of the scale, would be about real distance between stations may not be the same.</span>
-<span id="cb55-431"><a href="#cb55-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-434"><a href="#cb55-434" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-435"><a href="#cb55-435" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb55-436"><a href="#cb55-436" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb55-437"><a href="#cb55-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| out.width: '40%'</span></span>
-<span id="cb55-438"><a href="#cb55-438" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"/figures/Toronto_subway.png"</span>)</span>
-<span id="cb55-439"><a href="#cb55-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-440"><a href="#cb55-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-441"><a href="#cb55-441" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb55-368"><a href="#cb55-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-371"><a href="#cb55-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-372"><a href="#cb55-372" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, </span>
+<span id="cb55-373"><a href="#cb55-373" aria-hidden="true" tabindex="-1"></a>               <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"direction"</span>, <span class="st">"station"</span>))</span>
+<span id="cb55-374"><a href="#cb55-374" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(emm)</span>
+<span id="cb55-375"><a href="#cb55-375" aria-hidden="true" tabindex="-1"></a>contrast_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb55-376"><a href="#cb55-376" aria-hidden="true" tabindex="-1"></a> <span class="st">"2 station (opposite)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb55-377"><a href="#cb55-377" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 station (opposite)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb55-378"><a href="#cb55-378" aria-hidden="true" tabindex="-1"></a> <span class="st">"2 station (travel)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb55-379"><a href="#cb55-379" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 station (travel)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb55-380"><a href="#cb55-380" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-381"><a href="#cb55-381" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothesis test (symmetry)</span></span>
+<span id="cb55-382"><a href="#cb55-382" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span> </span>
+<span id="cb55-383"><a href="#cb55-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="at">method =</span> contrast_list) <span class="sc">|&gt;</span> </span>
+<span id="cb55-384"><a href="#cb55-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">test</span>(<span class="at">joint =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb55-385"><a href="#cb55-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-386"><a href="#cb55-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-387"><a href="#cb55-387" aria-hidden="true" tabindex="-1"></a>Perhaps unsurprisingly, there is not much difference and we cannot detect departure from symmetry.</span>
+<span id="cb55-388"><a href="#cb55-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-389"><a href="#cb55-389" aria-hidden="true" tabindex="-1"></a>The other hypothesis tests, which look at perceived differences one direction or another, quantify the difference in subjective distance depending on whether the station is in the direction of travel or opposite.</span>
+<span id="cb55-390"><a href="#cb55-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-391"><a href="#cb55-391" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb55-392"><a href="#cb55-392" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{01} &amp;: \mu_{\text{E, SG}} + \mu_{\text{W, BY}} = \mu_{\text{W, SG}} +\mu_{\text{E, BY}} <span class="sc">\\</span></span>
+<span id="cb55-393"><a href="#cb55-393" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{02} &amp;: \mu_{\text{E, Sp}} +\mu_{\text{W, Sh}} = \mu_{\text{W, Sp}} + \mu_{\text{E, Sh}} <span class="sc">\\</span></span>
+<span id="cb55-394"><a href="#cb55-394" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{03} &amp;: 2(\mu_{\text{E, SG}} + \mu_{\text{W, BY}}) = \mu_{\text{E, Sp}} + \mu_{\text{W, Sh}} <span class="sc">\\</span></span>
+<span id="cb55-395"><a href="#cb55-395" aria-hidden="true" tabindex="-1"></a>\mathscr{H}_{04} &amp;: 2(\mu_{\text{W, SG}} + \mu_{\text{E, BY}}) = \mu_{\text{W, Sp}} + \mu_{\text{E, Sh}} </span>
+<span id="cb55-396"><a href="#cb55-396" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb55-397"><a href="#cb55-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-398"><a href="#cb55-398" aria-hidden="true" tabindex="-1"></a>Hypotheses 3 and 4 could be tested jointly, using the same trick we employed for symmetry to impose the linear restrictions on the parameters. We will consider only the pairwise differences in the sequel.</span>
+<span id="cb55-399"><a href="#cb55-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-400"><a href="#cb55-400" aria-hidden="true" tabindex="-1"></a>Since we consider arbitrary contrasts between the means of the eight cells, we can account for multiple testing within the family by using Scheffé's method. In <span class="in">`emmeans`</span>, the <span class="in">`adjust = "scheffe"`</span> argument sets up the contrasts, but the output will be incorrect unless we specify the number of groups (for main effects, $n_a-1$, for all cells, $n_an_b-1$) through <span class="in">`scheffe.rank`</span>.</span>
+<span id="cb55-401"><a href="#cb55-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-402"><a href="#cb55-402" aria-hidden="true" tabindex="-1"></a>To account for the other tests, we can also reduce the level to decrease the probability of making a type I error.</span>
+<span id="cb55-403"><a href="#cb55-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-406"><a href="#cb55-406" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-407"><a href="#cb55-407" aria-hidden="true" tabindex="-1"></a>custom_contrasts <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb55-408"><a href="#cb55-408" aria-hidden="true" tabindex="-1"></a> <span class="st">"2 station, opposite vs same"</span> <span class="ot">=</span> </span>
+<span id="cb55-409"><a href="#cb55-409" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb55-410"><a href="#cb55-410" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 station, opposite vs same"</span> <span class="ot">=</span> </span>
+<span id="cb55-411"><a href="#cb55-411" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb55-412"><a href="#cb55-412" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 vs 2 station (opposite)"</span> <span class="ot">=</span> </span>
+<span id="cb55-413"><a href="#cb55-413" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb55-414"><a href="#cb55-414" aria-hidden="true" tabindex="-1"></a> <span class="st">"1 vs 2 station (same)"</span> <span class="ot">=</span> </span>
+<span id="cb55-415"><a href="#cb55-415" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb55-416"><a href="#cb55-416" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-417"><a href="#cb55-417" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up contrasts with correction</span></span>
+<span id="cb55-418"><a href="#cb55-418" aria-hidden="true" tabindex="-1"></a>cont_emm <span class="ot">&lt;-</span> <span class="fu">contrast</span>(</span>
+<span id="cb55-419"><a href="#cb55-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> emm, </span>
+<span id="cb55-420"><a href="#cb55-420" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> custom_contrasts,</span>
+<span id="cb55-421"><a href="#cb55-421" aria-hidden="true" tabindex="-1"></a>  <span class="at">adjust =</span> <span class="st">"scheffe"</span>)</span>
+<span id="cb55-422"><a href="#cb55-422" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests and p-values</span></span>
+<span id="cb55-423"><a href="#cb55-423" aria-hidden="true" tabindex="-1"></a>cont_emm <span class="sc">|&gt;</span></span>
+<span id="cb55-424"><a href="#cb55-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">test</span>(<span class="at">scheffe.rank =</span> <span class="dv">7</span>)</span>
+<span id="cb55-425"><a href="#cb55-425" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests with confidence intervals</span></span>
+<span id="cb55-426"><a href="#cb55-426" aria-hidden="true" tabindex="-1"></a>cont_emm <span class="sc">|&gt;</span></span>
+<span id="cb55-427"><a href="#cb55-427" aria-hidden="true" tabindex="-1"></a>  <span class="fu">confint</span>(<span class="at">scheffe.rank =</span> <span class="dv">7</span>,</span>
+<span id="cb55-428"><a href="#cb55-428" aria-hidden="true" tabindex="-1"></a>          <span class="at">level =</span> <span class="fl">0.99</span>)</span>
+<span id="cb55-429"><a href="#cb55-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-430"><a href="#cb55-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-431"><a href="#cb55-431" aria-hidden="true" tabindex="-1"></a>Even with a correction for multiple testing, there is strong difference in perceived distance for one station away (direction of travel vs opposite) and similarly for two stations. There is mild evidence that, in one direction, the perceived distance between stations is not equal. A potential criticism, in addition to the design of the scale, would be about real distance between stations may not be the same.</span>
+<span id="cb55-432"><a href="#cb55-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-435"><a href="#cb55-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-436"><a href="#cb55-436" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb55-437"><a href="#cb55-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb55-438"><a href="#cb55-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| out.width: '40%'</span></span>
+<span id="cb55-439"><a href="#cb55-439" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"/figures/Toronto_subway.png"</span>)</span>
+<span id="cb55-440"><a href="#cb55-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-441"><a href="#cb55-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-442"><a href="#cb55-442" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a><br> Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>

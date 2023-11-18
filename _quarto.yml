@@ -28,7 +28,7 @@ website:
 
   navbar:
     pinned: true
-    background: "#eb6fbd"
+    background: "#eab8e4"
     right:
       - syllabus.qmd
       - schedule.qmd
@@ -48,7 +48,7 @@ website:
     - title: "Content"
       style: "docked"
       search: false
-      foreground: "#eb6fbd"
+      foreground: "#eab8e4"
       contents:
         - section: "Overview"
           contents:
@@ -84,7 +84,7 @@ website:
     - title: "Evaluations"
       style: "docked"
       search: false
-      foreground: "#eb6fbd"
+      foreground: "#eab8e4"
       contents:
         - section: "Overview"
           contents:
@@ -110,7 +110,7 @@ website:
     - title: "Examples"
       style: "docked"
       search: false
-      foreground: "#eb6fbd"
+      foreground: "#eab8e4"
       contents:
         - section: "Overview"
           contents:
@@ -150,7 +150,7 @@ website:
 
   page-footer:
     left: |
-      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}})<br>
+      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}), 
       Website template by [Dr. Andrew Heiss](https://www.andrewheiss.com/) under [MIT License](https://mit-license.org/)<br>
       All content licensed under a {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}

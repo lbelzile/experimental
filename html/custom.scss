@@ -1,37 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Sans+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/*-- scss:defaults --*/
-$white:    #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #ddd !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #868e96 !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
-$black:    #000 !default;
 /* HEC color palette */
-$red:      #EA002A !default;
-$yellow:   #FFD200 !default;
-/* $violet:   #AD1AAC !default; */
-$violet:   #eb6fbd !default;
-$magenta:  #D40F7D !default;
-$orange:   #FF8400 !default;
-$yellow:   #FB9E07 !default;
-$cyan:     #00BCB5 !default;
-/* $lavender: #9678D3 !default; */
-$pink: #eab8e4 !default;
+$noir:  #000000 !default;
+$blanc:  #FFFFFF !default;
+$bleuhec:  #002855 !default;
+$grisf: #888b8d !default;
+$grisp: #d9d9d6 !default;
+$bleuf: #0072ce !default;
+$bleup: #92c1e9 !default;
+$aquaf: #00aec7 !default;
+$aquap: #88dbdf !default;
+$vertf: #26d07c !default;
+$vertp: #8fe2b0 !default;
+$rougef:  #ff585d !default;
+$rougep:  #ffb1bb !default;
+$rosef: #eb6fbd !default;
+$rosep: #eab8e4 !default;
+$jaunef: #f3d03e !default;
+$jaunep: #f2f0a1 !default;
 
-$primary:       $violet !default;
-$secondary:     $gray-500 !default;
-$success:       $violet !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $pink !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
+$primary:       $rosep !default;
+$secondary:     $rosef !default;
+$success:       $rougef !default;
+$info:          $aquap !default;
+$warning:       $jaunef !default;
+$danger:        $rougef !default;
+$light:         $grisp !default;
+$dark:          $grisf !default;
 
 $font-family-sans-serif:      Fira Sans Condensed, sans-serif !default;
 $font-family-serif:           Barlow, serif !default;  /* Not actually a serif font but whatever */
@@ -46,15 +41,15 @@ $h4-font-size: $font-size-base * 1.2;
 $h5-font-size: $font-size-base * 1;
 $h6-font-size: $font-size-base * 0.8;
 
-$toc-font-size: 1.1rem;
+
+$toc-font-size: 0.95rem;
 $sidebar-font-size: 1.1rem;
-$sidebar-font-size-section: 0.9rem;
-
-$link-hover-color: #eab8e4;
-$link-color: #eb6fbd;
-
+$sidebar-font-size-section: 0.95rem;
+$footer-font-size: 0.95rem;
+$link-color: $grisf;
+$link-hover-color: darken($rosep, 0.8);
 $monokai-bg: #2e3440;
-
+$sidebar-fg: $noir;
 
 $callout-color-note: #0072ce;
 $callout-color-important: #00aec7;
@@ -139,7 +134,7 @@ ol {
 .schedule-page h3 {
   text-align: center;
   margin-top: 3rem;
-  border-bottom: 3px solid $violet;
+  border-bottom: 3px solid $rosep;
   padding-bottom: 0.5rem;
 }
 
@@ -155,7 +150,7 @@ ol {
 }
 
 .bg-assignment {
-  background-color: $violet;
+  background-color: $rosep;
 }
 
 // Slightly larger buttons
@@ -187,34 +182,9 @@ main {
   }
 }
 
-// Increase font size in sidebar
-.sidebar-navigation .sidebar-section .sidebar-item,
-.sidebar-navigation .sidebar-item{
-  line-height: 1.2;
-  padding-bottom: 0.4rem;
-}
-
-.sidebar-item .sidebar-item-toggle .bi {
-  // The dongle for opening and closing sections
-  font-size: 1.1rem;
-  text-align: center;
-}
-
-// Increase font size in TOC
-#TOC {
-  padding-bottom: 0.1em;
-  background-color: lighten($violet, 60%);
-}
-
 #toc-title {
   font-weight: 700;
 }
-
-.sidebar nav[role="doc-toc"] > ul li a {
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-}
-
 
 // Code stuff
 // Shrink blocks of code
@@ -227,6 +197,43 @@ pre.text, pre.sourceCode, .cell-output pre {
   margin: 0 0 1em;
 }
 
+// Slightly larger buttons
+p a.btn, .buttons span.btn {
+  font-size: 1.1rem;
+}
+
+.buttons .btn {
+  margin-bottom: 1rem;
+}
+
+
+.download-btn {
+  padding-top: 0.25rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+main {
+  // No space after lists-within-lists
+  ol ol,
+  ul ul,
+  ol ul,
+  ul ol {
+    margin-bottom: 0em;
+  }
+
+  // But yes space after lists-within-lists when paragraphs are involved
+  ol p + ol,
+  ul p + ul,
+  ol p + ul,
+  ul p + ol {
+    margin-bottom: 1em;
+  }
+}
+
+main.page-columns > header > h1.title, 
+main.page-columns > header > .title.h1 {
+  margin-bottom: 1rem;
+}
 
 // Remove margin on pre in output
 .cell-output pre {
@@ -251,3 +258,49 @@ pre.text {
     font-weight: bold;  
     
 }   
+
+
+// Active links in navbar and sidebar
+.navbar-dark .navbar-nav .show>.nav-link,
+.navbar-dark .navbar-nav .active>.nav-link,
+.navbar-dark .navbar-nav .nav-link.active,
+div.sidebar-item-container .active,
+div.sidebar-item-container .show>.nav-link,
+div.sidebar-item-container .sidebar-link>code{
+  color: $noir;
+  font-weight:bold
+
+}
+
+div.sidebar-item-container .active,
+div.sidebar-item-container .show>.nav-link,
+div.sidebar-item-container .sidebar-link>code{
+  color: $noir;
+  font-weight: bold;
+}
+
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-brand:hover {
+  color: $noir;
+  font-weight: bold;
+}
+
+
+// Footer stuff
+.nav-footer-left {
+  text-align: left;
+}
+
+.nav-footer-right {
+  text-align: right;
+}
+
+// Temporarily hide the middle div since it has unmodifiable GitHub links as of Quarto 1.3.something: https://github.com/quarto-dev/quarto-cli/issues/5283
+.nav-footer-center {
+  display: none;
+}
+
+.nav-footer-left {
+  flex-grow: 3;
+}

@@ -3,12 +3,11 @@ author: Léo Belzile
 instructor:
   name: Dr. Léo Belzile
   name_no_title: Léo Belzile
-  email: leo.belzile@hec.ca
+  email: "leo.belzile@hec.ca"
   url: "https://www.lbelzile.bitbucket.io"
   github: lbelzile
   office: "4.850, Côte-Sainte-Catherine"
-  contact_policy: >-
-    I am best reached by email.
+  contact_policy: "I am best reached by email."
 
 course:
   number: "MATH 80667A"

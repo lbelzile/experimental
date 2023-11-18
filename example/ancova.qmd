@@ -136,9 +136,9 @@ model1 <- lm(posttest2 ~ group + pretest2, data = BSJ92)
 
 # Only look for the difference between groups
 model2 <- lm(posttest2 ~ group, data = BSJ92)
-kable1 <- knitr::kable(generics::tidy(anova(model1))[,-4],
+kable1 <- knitr::kable(broom::tidy(anova(model1))[,-4],
                        col.names = c("term","df","sum of squares","F statistic","p-value"), digits = c(0,0,2,2,4))
-kable2 <- knitr::kable(generics::tidy(anova(model2))[,-4],
+kable2 <- knitr::kable(broom::tidy(anova(model2))[,-4],
                        col.names = c("term","df","sum of squares","F statistic","p-value"), digits = c(0,0,2,2,4))
 knitr::kables(x = list("Model 1" = kable1, 
                        "Model 2" = kable2),
@@ -184,10 +184,10 @@ cohen_d2 <- emmeans::eff_size(contrasts2,
                   method = "identity",
                   sigma = sigma(model2),
                   edf = df.residual(model2))
-kable3 <- knitr::kable(generics::tidy(contrasts1)[,-c(1,3)],
+kable3 <- knitr::kable(broom::tidy(contrasts1)[,-c(1,3)],
                        col.names = c("contrast","estimate","se","df","t statistic","p-value"), 
              digits = c(0,2,2,0, 2,4))
-kable4 <- knitr::kable(generics::tidy(contrasts2)[,-c(1,3)],
+kable4 <- knitr::kable(broom::tidy(contrasts2)[,-c(1,3)],
                        col.names = c("contrast","estimate","se","df","t statistic","p-value"), 
              digits = c(0,2,2,0, 2,4))
 knitr::kables(x = list("Model 1" = kable3, 

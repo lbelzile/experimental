@@ -2,7 +2,7 @@
 title: "Experimental Designs and Statistical Methods"
 subtitle: "Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs."
 details: |
-  MATH 80667A, Winter 2023<br>HEC Montréal
+  MATH 80667A, Winter 2024<br>HEC Montréal
 sidebar: false
 toc: false
 page-layout: full
@@ -10,8 +10,8 @@ format:
   html:
     template-partials:
       - html/home/title-block.html
-course-logo: /files/img/edsm.png
 ---
+
 
 ```{r set-dependencies, include=FALSE}
 withr::with_dir(here::here(), {
@@ -30,7 +30,7 @@ withr::with_dir(here::here(), {
 
 - {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
 - {{< fa university >}} &nbsp; {{< var instructor.office >}}
-- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
+- {{< fa envelope >}} &nbsp; <a href='mailto:{{< var instructor.email >}}'>{{< var instructor.email >}}</a>
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}

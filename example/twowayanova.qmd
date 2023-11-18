@@ -5,6 +5,7 @@ type: docs
 editor_options: 
   chunk_output_type: console
 execute:
+  
   echo: true
   eval: true
   message: false
@@ -12,7 +13,6 @@ execute:
   cache: true
   fig-align: 'center'
   out-width: '80%'
-  
 ---
 
 ## Study 1 - balanced data
@@ -90,7 +90,8 @@ The `emmip` function allows one to return a plot automagically.
 # Interaction plot
 emmeans::emmip(mod, 
                magnitude ~ anchor, 
-               CIs = TRUE)
+               CIs = TRUE) +
+  theme_minimal()
 ```
 
 ### Estimated marginal means
@@ -145,18 +146,18 @@ With 30 observations per group and no appearance of outlier, we need rather to w
 The Tukey-Anscombe plot of residuals against fitted values (the group means) indicate no deviation, but the variance appears to be larger for the two groups with a large adjustment. Because the response takes negative values, we can simply proceed with fitting a two-way analysis in which each of the subgroups has mean $\mu_{ij}$ and standard deviation $\sigma_{ij}$: in other words, only the data for each subgroup (`anchor`, `magnitude`) are used to estimate the summary statistics of that group. 
 
 ```{r}
-# Evidence of unequal variance (multiplicative?)
+# Evidence of unequal variance
 ggplot(data = data.frame(residuals = resid(mod),
                          fitted = fitted(mod)),
        mapping = aes(x = fitted,
                      y = residuals)) +
-   geom_point()
+   geom_jitter(width = 0.03, height = 0) +
+  theme_classic()
 # Equality of variance - Brown-Forsythe
 car::leveneTest(mod) 
 ```
 
-Given the Brown-Forsythe test output, we can 
-try fitting a different variance in each group, as there are enough observations for this. The function `gls` in the `nlme` package fits such models; the weight argument being setup with a constant variance (`~1`) per each combination of the crossed factors `anchor * magnitude`.
+Given the Brown-Forsythe test output, we can try fitting a different variance in each group, as there are enough observations for this. The function `gls` in the `nlme` package fits such models; the weight argument being setup with a constant variance (`~1`) per each combination of the crossed factors `anchor * magnitude`.
 
 ```{r}
 # Fit a variance per group
