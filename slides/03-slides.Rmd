@@ -137,14 +137,14 @@ F &= \frac{\text{between-group variability}}{\text{within-group variability}} \\
 set.seed(11234)
 nobs <- 5
 ng <- 3L
-dat <- tibble(x = 1:(nobs*ng),
+dat <- tibble::tibble(x = 1:(nobs*ng),
   observations = rnorm(ng*nobs, mean = 10, sd = 0.5),
   group = factor(x = rep(1:ng, each = nobs), 
                  labels = letters[1:ng]))
 dat$fitted <- fitted(lm(observations ~ group, data = dat))
-group_means <- dat %>%
-  group_by(group) %>%
-  summarise(gmean = mean(observations)) %>%
+group_means <- dat |>
+  group_by(group) |>
+  summarise(gmean = mean(observations)) |>
   mutate(x = 1 + (1:ng - 1)*nobs,
          xend = nobs + (1:ng - 1)*nobs)
 
@@ -155,9 +155,9 @@ dat2 <- tibble(x = 1:(nobs*ng),
   group = factor(x = rep(1:ng, each = nobs), 
                  labels = letters[1:ng]))
 dat2$fitted <- fitted(lm(observations ~ group, data = dat2))
-group_means2 <- dat2 %>%
-  group_by(group) %>%
-  summarise(gmean = mean(observations)) %>%
+group_means2 <- dat2 |>
+  group_by(group) |>
+  summarise(gmean = mean(observations)) |>
   mutate(x = 1 + (1:ng - 1)*nobs,
          xend = nobs + (1:ng - 1)*nobs)
 
@@ -361,7 +361,7 @@ Probability that a $\mathsf{F}(4,40)$ exceeds 15.27.
 ```{r, echo = FALSE, eval = TRUE, fig.width =4, fig.height=4,out.width = '90%'}
 
 ggplot() +
-  stat_function(fun = "pf",
+  stat_function(fun = pf,
                 xlim = c(0, 18),
                 n = 1001,
                 args = list(df1 = 4, 
@@ -379,8 +379,6 @@ ggplot() +
 
 ```
 ]
-
----
 
 
 ---
@@ -469,12 +467,12 @@ fake_data <- tibble::tibble(
   response = rnorm(100) +
              rep(rgamma(n = 5, shape = 10), each = 20),
   group = factor(rep(LETTERS[1:5], 
-              each = 20)),
-  resid =
-  resid(lm(response ~ group, data = fake_data)),
-  fitted =  fitted(lm(response ~ group, data = fake_data)))
-gmeans <- fake_data %>%
-  group_by(group) %>%
+              each = 20)))
+  fake_data$resid =
+  resid(lm(response ~ group, data = fake_data))
+  fake_data$fitted =  fitted(lm(response ~ group, data = fake_data))
+gmeans <- fake_data |>
+  group_by(group) |>
   summarize(mean = mean(response))
 g1 <-  ggplot(data = fake_data, 
               aes(x = group, 
@@ -534,8 +532,8 @@ fake_data <- tibble::tibble(
 fake_data$resid <-
   resid(lm(response ~ group, data = fake_data))
 fake_data$fitted <- fitted(lm(response ~ group, data = fake_data))
-gmeans <- fake_data %>%
-  group_by(group) %>%
+gmeans <- fake_data |>
+  group_by(group) |>
   summarize(mean = mean(response))
 g1 <-  ggplot(data = fake_data, 
               aes(x = group, 
@@ -637,11 +635,11 @@ data_fake <- tibble::tibble(
          rep(c("18 to 25","25 to 55","55+"), 
              each = nobsgroup), 
              length.out = ntotal), ordered = TRUE))
-summary_stats_whole <- data_fake %>%
-    group_by(treatment) %>%
+summary_stats_whole <- data_fake |>
+    group_by(treatment) |>
     summarize(mean = mean(resp))
-summary_stats_subgroup <- data_fake %>%
-    group_by(treatment, age) %>%
+summary_stats_subgroup <- data_fake |>
+    group_by(treatment, age) |>
     summarize(mean = mean(resp))
 
 g1 <- ggplot(data = data_fake,

@@ -626,7 +626,7 @@ ggplot(tibble(statistic = c(bootnull, stat)),
   geom_histogram(mapping = aes( y = ..density..),
                  bins = 50L, alpha = 0.2) +
   geom_vline(xintercept = c(-stat, stat), col = 2) +
-  stat_function(fun = "dt",
+  stat_function(fun = dt,
                 n = 1001, 
                 args = list(df = 40)) +
   theme_bw()
@@ -659,7 +659,7 @@ Null distributions are different, which makes comparisons uneasy.
 ```{r nulltopval, echo = FALSE, eval = TRUE, fig.width = 6, fig.height = 6}
 # g1 <- ggplot() +
 #   geom_vline(xintercept = stat, col = 2) + 
-#   stat_function(fun = "df",
+#   stat_function(fun = df,
 #                 n = 1001, 
 #                 xlim = c(0, 20),
 #                 args = list(df1 = 4, df2 = 40)) +
@@ -988,7 +988,7 @@ class: title title-1
 # Recap 1
 .medium[
 
-- Due to sampling variability, looking at differences between empirical measures (sample mean, etc.) is not enough.
+<!-- - Due to sampling variability, looking at differences between empirical measures (sample mean, etc.) is not enough. -->
 - Testing procedures factor in the uncertainty inherent to sampling.
 - Adopt particular viewpoint: null hypothesis (simpler model, e.g., no difference between group) is true. We consider the evidence under that optic.
 
