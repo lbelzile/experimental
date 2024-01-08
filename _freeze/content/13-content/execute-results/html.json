@@ -1,0 +1,18 @@
+{
+  "hash": "d71c06d32057737a168970aa53f8aa77",
+  "result": {
+    "markdown": "---\ntitle: \"Nonparametric tests and count data\"\n---\n\n\n## Content\n\n- Nonparametric tests\n- Models and tests for count data\n\n\n## Learning objectives\n\nAt the end of the session, students should be capable of\n\n- Understand the benefits and drawback of rank-based tests\n- Perform tests for count data (Fisher exact test, $\\chi^2$ tests) and correctly report their output with effect sizes\n\n\n\n## Readings\n\n- {{< fa book >}}[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019\n-  [Chapter 12](https://lbelzile.github.io/math80667a/nonparametric-tests.html) of the course notes\n\n\n## Slides\n\n\n\n\n\n<!--\n\n\n<p><a class=\"btn btn-primary\" target=\"_blank\" href=\"/slides/13-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-primary\" target=\"_blank\" href=\"/slides/13-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n::: {.cell}\n::: {.cell-output-display}\n```{=html}\n<div class=\"shareagain\" style=\"min-width:300px;margin:1em auto;\" data-exeternal=\"1\">\n<iframe src=\"/slides/13-slides.html\" width=\"1600\" height=\"900\" style=\"border:2px solid currentColor;\" loading=\"lazy\" allowfullscreen></iframe>\n<script>fitvids('.shareagain', {players: 'iframe'});</script>\n</div>\n```\n:::\n:::\n\n\n-->\n\n\n:::{.callout-tip}\n**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/fitvids-2.1.1/fitvids.min.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

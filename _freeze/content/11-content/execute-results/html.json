@@ -1,0 +1,18 @@
+{
+  "hash": "e80bd0d75e97ffd9f1203bc89f8998e2",
+  "result": {
+    "markdown": "---\ntitle: \"Introduction to causal inference\"\n---\n\n\n## Content\n\n- Introduction to causal inference\n\n\n## Learning objectives\n\nAt the end of the session, students should be capable of\n\n- understanding the importance of listing potential confounders\n- determining which variables to control for (confounders vs colliders)\n- drawing a directed acyclic graph describing the interrelation between variables\n- explaining the differences between experimental and observational studies for studying mediation\n\n\n## Readings\n\n- <i class=\"fas fa-book\"></i>Chapter 2 of @Vanderweele:2015\n\nAndrew Heiss' course notes on directed acyclic graphs (DAG) and types of association. \n\n- Causal models ([video](https://www.youtube.com/watch?v=kJQuH3nssfI&list=PLS6tnpTr39sFVrHdTifzlyS9dsJjhEhsF) and [slides](https://evalf21.classes.andrewheiss.com/slides/04-slides.html#causal-models))\n- Paths, doors, and adjustment ([video](https://www.youtube.com/watch?v=_qs_1B4ySWY) and [slides](https://evalf21.classes.andrewheiss.com/slides/04-slides.html#58))\n\nThe structural equation modelling (SEM) approach to mediation\n\n- Paper popularizing linear mediation [@Baron/Kenny:1986]\n- Limitations of the linear mediation model approach [@Bullock.Green.Ha:2010]\n\nThe causal inference approach\n\n- @Pearl:2014\n- @Imai:2010\n\n## Complementary readings\n\n- @Pearl:2016, Chapter 3\n- @Rohrer:2018\n\n\n## Slides\n\n\n\n\n<p><a class=\"btn btn-primary\" target=\"_blank\" href=\"/slides/11-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-primary\" target=\"_blank\" href=\"/slides/11-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n::: {.cell}\n::: {.cell-output-display}\n```{=html}\n<div class=\"shareagain\" style=\"min-width:300px;margin:1em auto;\" data-exeternal=\"1\">\n<iframe src=\"/slides/11-slides.html\" width=\"1600\" height=\"900\" style=\"border:2px solid currentColor;\" loading=\"lazy\" allowfullscreen></iframe>\n<script>fitvids('.shareagain', {players: 'iframe'});</script>\n</div>\n```\n:::\n:::\n\n\n:::{.callout-tip}\n**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/fitvids-2.1.1/fitvids.min.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

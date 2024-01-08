@@ -42,7 +42,7 @@ class: center middle main-title section-title-1
 
 **Session 8**
 
-.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>
 HEC Montréal
 ]
 
@@ -463,6 +463,125 @@ Journals and grant agencies oftentimes require an estimate of the sample size ne
 Same for replication studies: how many participants needed?
 
 ---
+
+
+# I cried power!
+
+.medium[
+- **Power** is the ability to detect when the null is false, for a given alternative
+- It is the *probability* of correctly rejecting the null hypothesis under an alternative.
+- The larger the power, the better.
+]
+
+---
+
+
+# Living in an alternative world
+
+How does the _F_-test behaves under an alternative?
+
+```{r, eval = TRUE, echo = FALSE, fig.width = 5.5, fig.height = 3, out.width = '80%'}
+library(ggplot2)
+library(patchwork)
+g1 <- ggplot() +
+  geom_vline(xintercept = qf(0.95, 4, 40), 
+             linetype = "dashed") + 
+  labs(y = "", x = "statistic") + 
+  stat_function(fun = df, 
+                args = list(df1 = 4, df2 = 40), 
+                xlim = c(0, qf(0.95, 
+                               df1 = 4, df2 = 40)),
+                geom = "area", 
+                fill = "blue", 
+                alpha = 0.2) +
+    stat_function(fun = df, 
+                args = list(df1 = 4, df2 = 40), 
+                xlim = c(qf(0.95, 
+                               df1 = 4, df2 = 40), 10),
+                geom = "area", 
+                fill = "red", 
+                alpha = 0.2) +
+  stat_function(fun = df, 
+                args = list(df1 = 4, df2 = 40),
+                xlim = c(0,10),
+                n = 1001) +
+  annotate("text", x = 3, hjust = 0, y = 0.5,
+           label = "null hypothesis is true") +
+  theme_classic() +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        legend.position = "none")
+g2 <- ggplot() +
+  geom_vline(xintercept = qf(0.95, 4, 40), 
+             linetype = "dashed") + 
+  labs(y = "", x = "statistic") + 
+  stat_function(fun = df, 
+                args = list(df1 = 4, df2 = 40, ncp = 4), 
+                xlim = c(0, qf(0.95, 
+                               df1 = 4, df2 = 40)),
+                geom = "area", 
+                fill = "blue", 
+                alpha = 0.2) +
+    stat_function(fun = df, 
+                args = list(df1 = 4, df2 = 40, ncp = 4), 
+                xlim = c(qf(0.95, 
+                               df1 = 4, df2 = 40), 10),
+                geom = "area", 
+                fill = "red", 
+                alpha = 0.2) +
+  stat_function(fun = df, 
+                args = list(df1 = 4, df2 = 40, ncp = 4),
+                xlim = c(0,10),
+                n = 1001) +
+  annotate("text", x = 3, hjust=0, y = 0.2, 
+           label = "alternative hypothesis is true") +
+  theme_classic() +
+  theme(legend.position = "none")
+g1 / g2
+```
+
+---
+
+# Thinking about power
+
+What do you think is the effect on **power** of an increase of the
+- group sample size $n_1, \ldots, n_K$.
+- variability $\sigma^2$.
+- true mean difference $\mu_j - \mu$.
+
+
+---
+
+# What happens under the alternative?
+
+The peak of the distribution shifts to the right.
+
+Why? on average, the numerator of the $F$-statistic is
+
+$$\begin{align*}
+\mathsf{E}(\text{between-group variability}) = \sigma^2+ \frac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{K-1}.
+\end{align*}$$
+
+
+Under the null hypothesis, $\mu_j=\mu$ for $j=1, \ldots, K$
+   - the rightmost term is 0.
+
+
+---
+
+# Noncentrality parameter and power
+
+The alternative distribution is $F(\nu_1, \nu_2, \Delta)$ distribution with degrees of freedom $\nu_1$ and $\nu_2$ and noncentrality parameter 
+$$\begin{align*}
+\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
+\end{align*}$$
+
+---
+
+
+
+
 
 # I cried power!
 

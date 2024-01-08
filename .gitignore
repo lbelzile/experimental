@@ -4,7 +4,6 @@
 .Ruserdata
 
 /.quarto/
-/_freeze/
 /_site/
 
 projects/*.zip

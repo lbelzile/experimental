@@ -12,7 +12,7 @@ We consider the hypothesis test performed by @Bastian:2014 with the [data](https
    a) Using the two-sample _t_-test, obtain a 95% and a 99% confidence interval for the mean difference score for perceived `bonding`. 
    b) Explain how the two methods (_p_-value and confidence intervals) are equivalent for performing an hypothesis test with a significance level of 5% and 1%, respectively. Report the conclusions of your procedure in each case.
    c) List an advantage of each over the other.
-4. Extract the degrees of freedom, the value of the $F$-statistic and the _p_-value, suitably rounded and report these. 
+4. Extract the degrees of freedom, the value of the $F$-statistic and the _p_-value, suitably rounded, and report these. 
 5. What can we reasonably conclude about the effect of bonding based on the output of the testing procedure? Is this reflected in the writing of the authors?
 6. Figure 1 of @Bastian:2014 shows a dynamite plot, i.e., a bar plot with 95% confidence intervals for each condition. Note that this is standard display, but overall it is poor graphical choice [(why?)](https://simplystatistics.org/posts/2019-02-21-dynamite-plots-must-die/). Briefly summarize the blog post.
 

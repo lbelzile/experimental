@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>One way ANOVA</title>
+    <title>One way ANOVA and model assumptions</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-09-18" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <meta name="date" content="2024-01-07" />
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -43,7 +43,7 @@ class: center middle main-title section-title-1
 
 **Session 3**
 
-.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;
 HEC Montréal
 ]
 
@@ -59,10 +59,6 @@ class: title title-inv-1
 
 
 .box-2.medium.sp-after-half[Hypothesis tests for ANOVA]
-
---
-
-.box-4.medium.sp-after-half[Power]
 
 --
 
@@ -246,108 +242,6 @@ Probability that a `\(\mathsf{F}(4,40)\)` exceeds 15.27.
 ]
 
 ---
-
-layout: false
-name: multiple-testing
-class: center middle section-title section-title-4 animated fadeIn
-
-# Power
-
----
-
-layout: true
-class: title title-4
-
----
-
-# I cried power!
-
-.medium[
-- **Power** is the ability to detect when the null is false, for a given alternative
-- It is the *probability* of correctly rejecting the null hypothesis under an alternative.
-- The larger the power, the better.
-]
-
----
-# Power of an alternative
-
-There are infinitely many alternatives...
-
-
-.pull-left[
-&lt;img src="03-slides_files/figure-html/powercurve1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-  .small.center[Null distribution (full) and given alternative distribution (dashed).]
-]
-.pull-right[
-&lt;img src="03-slides_files/figure-html/powercurve2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
- .small.center[Power is the area in white under the dashed curved, beyond the cutoff. ]
-]
-
-???
-  
-In which of the two figures is power the largest?
-
----
-
-# Living in an alternative world
-
-How does the _F_-test behaves under an alternative?
-
-&lt;img src="03-slides_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-
-# Thinking about power
-
-What do you think is the effect on **power** of an increase of the
-- group sample size `\(n_1, \ldots, n_K\)`.
-- variability `\(\sigma^2\)`.
-- true mean difference `\(\mu_j - \mu\)`.
-
-
----
-
-# What happens under the alternative?
-
-The peak of the distribution shifts to the right.
-
-Why? on average, the numerator of the `\(F\)`-statistic is
-
-`$$\begin{align*}
-\mathsf{E}(\text{between-group variability}) = \sigma^2+ \frac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{K-1}.
-\end{align*}$$`
-
-
-Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)`
-   - the rightmost term is 0.
-
-
----
-
-# Noncentrality parameter and power
-
-The alternative distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter 
-`$$\begin{align*}
-\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
-\end{align*}$$`
-
----
-
-
-# Impact of noncentrality parameter
-
-
-&lt;img src="03-slides_files/figure-html/power_curve-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-.small[
-`\(\mathsf{F}\)` distribution with `\(\Delta=0\)`  (solid line), `\(\Delta=3\)` (dashed) and `\(\Delta=6\)`  (dotted).
-]
-
-???
-
-For other tests, parameters vary but the story is the same.
-
-The plot shows the null and alternative distributions. The noncentral F is shifted to the right (mode = peak) and right skewed. The power is shaded in blue, the null distribution is shown in dashed lines.
-
 
 
 ---

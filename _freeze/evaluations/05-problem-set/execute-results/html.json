@@ -1,0 +1,14 @@
+{
+  "hash": "eb944232c2f66e30f186b63aa8b3ead7",
+  "result": {
+    "markdown": "---\ntitle: \"Problem set 5\"\n---\n\n\nComplete this task in teams of two or three students.\n\n**Submission information**: please submit on ZoneCours\n\n-   a PDF report\n-   your code\n\nWrite the name of the teammates on your report.\n\nWe consider a two-way analysis of variance using fictional data from Example 6.4 of @Berger:2018 on bank tellers: 100 tellers were offered one-on-one training with an experienced clerk for a certain number of weeks on the job, possibly in addition to formal training period. The goal of the study is to determine which **combination** is most efficient at reducing the monthly error in balance (in dollars). You can access these data directly from **R** from the `hecedsm` package or [download the SPSS data](/files/data/SPSS/teller.sav).\n\nDownload and answer the following questions. Write a report as if you were doing an analysis for a scientific publication.\n\n1.  Produce a plot of the monthly error per teller as a function of the number of weeks of one-on-one training.\n2.  Produce a quantile-quantile plot of the residuals and use Levene's test to check whether the variance in each subgroup is the same. Report on these preliminary checks.\n3.  Assess whether there an interaction between number of weeks of one-on-one training and the formal training using an hypothesis test.\n4.  Compute pairwise contrasts between weeks of one-on-one supervision for the case of people with formal training.\n5.  Compare the difference in errors between 8 and 4 weeks of one-to-one supervision, for people with and without formal training.\n\n*Hint*: to create a pretty interaction plot in **R**, try the following:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Redownload the package to get the data\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(teller, package = \"hecedsm\")\nlibrary(ggplot2)\nlibrary(dplyr)\n\nteller |> \n  group_by(course, nweeks) |>\n  summarize(merror = mean(error)) |>\n ggplot(aes(x = nweeks,\n            y = merror,\n            group = course,\n            color = course)) +\n  geom_line() +\n  theme_classic() + \n  theme(legend.position = \"bottom\") + \n  labs(y = \"\",\n       subtitle = \"average monthly error (USD)\",\n       x = \"number of weeks of 1-1 training\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

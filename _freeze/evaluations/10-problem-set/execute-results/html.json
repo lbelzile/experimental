@@ -1,0 +1,14 @@
+{
+  "hash": "68ae167c1a66c9c55af3efab23c6d725",
+  "result": {
+    "markdown": "---\ntitle: \"Problem set 10\"\n---\n\n\nComplete this task individually or in teams of up to three students.\n\n**Submission information**: please submit on ZoneCours\n\n-   a PDF report\n-   your code\n\n\n\nRead the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#example-chocolate-data) and some of the [examples](/example/mixedmodel.html) from the course notes.\n\n\nConsider the model of @Hatano:2022 for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using @Oehlert:2010 approach\n\n1. Identify sources of variation\n2. Identify whether factors are crossed or nested\n3. Determine whether factors should be fixed or random\n4. Figure out which interactions can exist and whether they can be fitted.\n\n\nNow, fit the linear mixed model using the following code\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(lmerTest)\ndata(HOSM22_E4, package = \"hecedsm\")\nmixmod <- lmer(imscore ~ #TODO add covariates, etc.\n               data = HOSM22_E4)\nsummary(mixmod) # coefficients\nanova(mixmod) # type III analysis of variance table\n```\n:::\n\n\n5. Report the results for the interaction test: is the interaction significative at level 5%? If not, compute estimated marginal means for rating type.\n6. Compute the correlation between measurements from the same students.\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

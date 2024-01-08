@@ -49,7 +49,7 @@ class: center middle main-title section-title-1
 
 **Session 6**
 
-.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>
 HEC Montréal
 ]
 
@@ -272,10 +272,10 @@ class: title title-5
 
 Statistical tests contrast competing **nested** models:
 
-- an alternative (full) model
-- a null model, which imposes restrictions (a simplification of the alternative models)
+- an alternative model, sometimes termed "full model"
+- a null model, which imposes restrictions (a simplification of the alternative model)
 
-The numerator of the $F$-statistic compares the sum of square of a model with (given) main effect, etc. to a model without.
+The numerator of the $F$-statistic compares the sum of square of a model with (given) main effect, etc., to a model without.
 
 ---
 class: title title-5

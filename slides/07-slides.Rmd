@@ -52,7 +52,7 @@ class: center middle main-title section-title-1
 
 **Session 7**
 
-.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>
 HEC Montréal
 ]
 
@@ -519,7 +519,7 @@ car::Anova(model2, type = 3)
 .panel[.panel-name[ANOVA]
 .pull-left.small[
 ```{r ancova3b, echo = FALSE, eval = TRUE}
-kableExtra::kable(jtools::tidy(car::Anova(model1, type = 3)), 
+kableExtra::kable(broom::tidy(car::Anova(model1, type = 3)), 
 		 col.names = c("term",
 			 "sum of squares",
 			 "df",
@@ -531,7 +531,7 @@ kableExtra::row_spec(2, bold = TRUE, color = "black", background = "yellow")
 ]
 .pull-right.small[
 ```{r ancova3c, echo = FALSE, eval = TRUE}
-kableExtra::kable(jtools::tidy(car::Anova(model2, type = 3)), 
+kableExtra::kable(broom::tidy(car::Anova(model2, type = 3)), 
 		 col.names = c("term",
 			 "sum of squares",
 			 "df",
@@ -624,14 +624,14 @@ car::Anova(lm(post ~ condition * prior,
            model1, type = 3)
 ```
 
-Levene's test of equality of variance: _F_ (`r jtools::tidy(levene)$df`, `r jtools::tidy(levene)$df.residual`) = `r round(jtools::tidy(levene)$statistic, 2)` with a $p$-value of `r format.pval(jtools::tidy(levene)$p.value,digits = 3)`.
+Levene's test of equality of variance: _F_ (`r broom::tidy(levene)$df`, `r broom::tidy(levene)$df.residual`) = `r round(broom::tidy(levene)$statistic, 2)` with a $p$-value of `r format.pval(broom::tidy(levene)$p.value,digits = 3)`.
 ]
 .pull-right.small[
 
 
 ```{r kableEqSlope, eval = TRUE, echo = FALSE, cache = TRUE}
-kableExtra::kable(jtools::tidy(car::Anova(lm(post ~ condition * prior, 
-		 data = SSVB21_S2), model1, type = 3)), 
+kableExtra::kable(broom::tidy(car::Anova(lm(post ~ condition * prior, 
+		 data = hecedsm::SSVB21_S2), model1, type = 3)), 
 		 col.names = c("term",
 			 "sum of squares",
 			 "df",

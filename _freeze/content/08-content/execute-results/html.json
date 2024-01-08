@@ -1,0 +1,18 @@
+{
+  "hash": "c699acc2c01cc445ddb77ffc28309056",
+  "result": {
+    "markdown": "---\ntitle: \"Effect size and power\"\n---\n\n\n## Content\n\n- Measures of effect size\n- Power calculations\n- Interplay between sample size, effect and power\n\n\n## Learning objectives\n\nAt the end of the session, students should be capable of\n\n- correctly report effect size for common statistics in analysis of variance models\n- deduce the sample size necessary to replicate a study at a given power\n- explain the interplay between sample size, power and effect size.\n\n## Readings\n\n-  {{< fa book >}}  [Chapter 7](https://lbelzile.github.io/math80667a/effect-sizes-and-power.html) of the course notes\n- {{< fa book-open-reader >}} [Effect size and power example](/example/effectsizepower.html)\n\n## Complementary readings\n\n- {{< fa file >}} @Lakens:2013\n- {{< fa file >}} @Steiger:2004\n- {{< fa file >}} @Kelley/Preacher:2012\n\n## Slides\n\n\n\n\n<p><a class=\"btn btn-primary\" target=\"_blank\" href=\"/slides/08-slides.html\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> View all slides in new window</a> <a class=\"btn btn-primary\" target=\"_blank\" href=\"/slides/08-slides.pdf\" role=\"button\"><i class=\"fa-solid fa-file-pdf\"></i> Download PDF of all slides</a></p>\n\n::: {.cell}\n::: {.cell-output-display}\n```{=html}\n<div class=\"shareagain\" style=\"min-width:300px;margin:1em auto;\" data-exeternal=\"1\">\n<iframe src=\"/slides/08-slides.html\" width=\"1600\" height=\"900\" style=\"border:2px solid currentColor;\" loading=\"lazy\" allowfullscreen></iframe>\n<script>fitvids('.shareagain', {players: 'iframe'});</script>\n</div>\n```\n:::\n:::\n\n\n:::{.callout-tip}\n**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../site_libs/fitvids-2.1.1/fitvids.min.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

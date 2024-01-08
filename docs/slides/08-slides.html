@@ -4,8 +4,8 @@
     <title>Effect size and power</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2022-11-16" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <meta name="date" content="2024-01-07" />
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -39,7 +39,7 @@ class: center middle main-title section-title-1
 
 **Session 8**
 
-.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;for Quantitative Research in Management &lt;br&gt;
+.light[MATH 80667A: Experimental Design and Statistical Methods &lt;br&gt;
 HEC Montréal
 ]
 
@@ -400,6 +400,66 @@ Journals and grant agencies oftentimes require an estimate of the sample size ne
 Same for replication studies: how many participants needed?
 
 ---
+
+
+# I cried power!
+
+.medium[
+- **Power** is the ability to detect when the null is false, for a given alternative
+- It is the *probability* of correctly rejecting the null hypothesis under an alternative.
+- The larger the power, the better.
+]
+
+---
+
+
+# Living in an alternative world
+
+How does the _F_-test behaves under an alternative?
+
+&lt;img src="08-slides_files/figure-html/unnamed-chunk-1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Thinking about power
+
+What do you think is the effect on **power** of an increase of the
+- group sample size `\(n_1, \ldots, n_K\)`.
+- variability `\(\sigma^2\)`.
+- true mean difference `\(\mu_j - \mu\)`.
+
+
+---
+
+# What happens under the alternative?
+
+The peak of the distribution shifts to the right.
+
+Why? on average, the numerator of the `\(F\)`-statistic is
+
+`$$\begin{align*}
+\mathsf{E}(\text{between-group variability}) = \sigma^2+ \frac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{K-1}.
+\end{align*}$$`
+
+
+Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)`
+   - the rightmost term is 0.
+
+
+---
+
+# Noncentrality parameter and power
+
+The alternative distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter 
+`$$\begin{align*}
+\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
+\end{align*}$$`
+
+---
+
+
+
+
 
 # I cried power!
 

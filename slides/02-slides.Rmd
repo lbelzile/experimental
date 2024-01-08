@@ -43,7 +43,7 @@ class: center middle main-title section-title-1
 
 **Session 2**
 
-.light[MATH 80667A: Experimental Design and Statistical Methods <br>for Quantitative Research in Management <br>
+.light[MATH 80667A: Experimental Design and Statistical Methods<br>
 HEC Montréal
 ]
 
@@ -758,9 +758,10 @@ class: title title-5
 The pairwise differences (_p_-values) and confidence intervals for groups $j$ and $k$ are based on the _t_-statistic:
 
 \begin{align*}
-t = \frac{\text{estimated} - \text{postulated difference}}{\text{uncertainty}}= \frac{(\widehat{\mu}_j - \widehat{\mu}_k) - (\mu_j - \mu_k)}{\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)}
+t = \frac{\text{estimated} - \text{postulated difference}}{\text{uncertainty}}= \frac{(\widehat{\mu}_j - \widehat{\mu}_k) - (\mu_j - \mu_k)}{\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)}.
 \end{align*}
-which has a Student-_t_ null distribution, denoted $\mathsf{St}(n-K)$.
+
+In large sample, this statistic behaves like a Student-_t_ variable with $n-K$ degrees of freedom, denoted $\mathsf{St}(n-K)$ hereafter.
 
 .small[
 
@@ -796,20 +797,20 @@ The $p$-value is $p = 1- \Pr(-|t| \leq T \leq |t|)$ for $T \sim \mathsf{St}_{n-K
    - probability of statistic being more extreme than $t$
 
 
-The larger the values of the statistic $t$ (positive or negative), the more evidence against the null hypothesis.
+Recall: the larger the values of the statistic $t$ (either positive or negative), the more evidence against the null hypothesis.
 
 ---
 
 # Critical values
 
-For a test at level $\alpha$ (two-sided), fail to reject null hypothesis for all values of the test statistic $t$ that are in interval
+For a test at level $\alpha$ (two-sided), we fail to reject null hypothesis for all values of the test statistic $t$ that are in the interval
 
 $$\mathfrak{t}_{n-K}(\alpha/2) \leq t \leq \mathfrak{t}_{n-K}(1-\alpha/2)$$
 
-Because of symmetry around zero, $\mathfrak{t}_{n-K}(1-\alpha/2) = -\mathfrak{t}_{n-K}(\alpha/2)$.
+Because of the symmetry around zero, $\mathfrak{t}_{n-K}(1-\alpha/2) = -\mathfrak{t}_{n-K}(\alpha/2)$.
 
 - We call $\mathfrak{t}_{n-K}(1-\alpha/2)$ a **critical value**. 
-- in **R**, `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups (computed automatically by software).
+- in **R**, the quantiles of the Student-$t$ distribution are obtained from `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups.
 
 ---
 
@@ -989,7 +990,7 @@ class: title title-1
 
 - Due to sampling variability, looking at differences between empirical measures (sample mean, etc.) is not enough.
 - Testing procedures factor in the uncertainty inherent to sampling.
-- Adopt particular viewpoint: null hypothesis (simpler model, e.g. no difference between group) is true and view evidence under that optic.
+- Adopt particular viewpoint: null hypothesis (simpler model, e.g., no difference between group) is true. We consider the evidence under that optic.
 
 ]
 
@@ -1000,9 +1001,11 @@ class: title title-1
 .medium[
 
 - _p_-values  measures compatibility with the null model (relative to an alternative)
-- Tests are standardized, output _p_-value or CI
+- Tests are standardized values,
+
+The output is either a _p_-value or a confidence interval
    - confidence interval: on scale of data (meaningful interpretation)
-   - _p_-values: uniform on [0,1]
+   - _p_-values: uniform on [0,1] if the null hypothesis is true
    
 ]
 ---
