@@ -212,7 +212,7 @@ You can find descriptions for all the assignments on the [evaluations](/evaluati
 
 
 
-Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Tuesday, December 13th, 2022, from 13:30--16:30. 
+Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Saturday, April 20th, from 13:30--16:30. 
 
 
 ```{r assignments-grades, include=FALSE}
@@ -220,8 +220,8 @@ assignments <- tibble::tribble(
   ~Points,  ~Assignment,
   12 * 0.5 , "Weekly check-in (12 × 0.5 pt)",
   11 * 4 ,   "Problem sets (11 x 4 pt)",
-  10      , "Paper review (10 pt)",
-  40      , "Final examination (40 pt)",
+  10      ,  "Paper review (10 pt)",
+  40      ,  "Final examination (40 pt)",
 )
 
 grading <- tibble::tribble(
@@ -232,6 +232,8 @@ grading <- tibble::tribble(
   "B+",  "75-80%",  "F",  "<60%"
 )
 ```
+
+Team work counts towards your final grade only if you score more than 50% on individual evaluations.
 
 <div class="centered-table">
 
