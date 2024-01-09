@@ -25,7 +25,6 @@ slide_details <- tibble::tribble(
 ## Content
 
 - ANOVA and _F_-test statistic
-- Power of the _F_-test
 - Model assumptions
 
 
@@ -34,7 +33,6 @@ slide_details <- tibble::tribble(
 At the end of the session, students should be capable of
 
 - carry-out a one-way analysis of variance test
-- list and explain which factors impact the power of the _F_-test
 - check model assumptions using hypothesis tests and graphics.
 
 
