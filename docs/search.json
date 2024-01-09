@@ -511,6 +511,13 @@
     "text": "Readings\n\nChapter 6 Random and Mixed-Effects Models of Lukas Meier’s ANOVA and Mixed Models: A Short Intro Using R]\n Chapter 10 of the course notes"
   },
   {
+    "objectID": "content/10-content.html#complementary-readings",
+    "href": "content/10-content.html#complementary-readings",
+    "title": "Intro to mixed models",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapters 10 and 15 of Maxwell et al. (2017)."
+  },
+  {
     "objectID": "content/10-content.html#slides",
     "href": "content/10-content.html#slides",
     "title": "Intro to mixed models",
@@ -550,7 +557,7 @@
     "href": "content/08-content.html#complementary-readings",
     "title": "Effect size and power",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)"
+    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)"
   },
   {
     "objectID": "content/08-content.html#slides",
@@ -592,7 +599,7 @@
     "href": "content/06-content.html#complementary-readings",
     "title": "Multiway factorial designs",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 21-22 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 8 of Maxwell et al. (2017).\n Chapters 21-22 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/06-content.html#videos",
@@ -634,14 +641,14 @@
     "href": "content/04-content.html#readings",
     "title": "Contrasts and multiple testing",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 3 of Meier (2022)\n One-way ANOVA example"
+    "text": "Readings\n\n Chapter 4 of the course notes\n Chapter 3 of Meier (2022)\n One-way ANOVA example"
   },
   {
     "objectID": "content/04-content.html#complementary-readings",
     "href": "content/04-content.html#complementary-readings",
     "title": "Contrasts and multiple testing",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 4 and 6 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 5 of Maxwell et al. (2017).\n Chapters 4 and 6 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/04-content.html#slides",
@@ -683,7 +690,7 @@
     "href": "content/02-content.html#complementary-readings",
     "title": "Hypothesis testing",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 3 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 2 of Maxwell et al. (2017)\n Chapter 3 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/02-content.html#slides",
@@ -753,7 +760,7 @@
     "href": "content/01-content.html#case-study",
     "title": "Introduction",
     "section": "Case study",
-    "text": "Case study\nWe will discuss the summary of Abaluck et al. (2022) “The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh” in class.\nDuring the activity, you will be asked to identify in teams the following:\n\nthe objective of the study\nthe target population (which findings generalize?)\nthe sampling scheme\nthe observational and experimental units\nthe treatments\nthe outcome variable(s)"
+    "text": "Case study\nWe will discuss the summary of Abaluck et al. (2022) “The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh” (pdf) in class.\nDuring the activity, you will be asked to identify in teams the following:\n\nthe objective of the study\nthe target population (which findings generalize?)\nthe sampling scheme\nthe observational and experimental units\nthe treatments\nthe outcome variable(s)"
   },
   {
     "objectID": "content/03-content.html",
@@ -788,7 +795,7 @@
     "href": "content/03-content.html#complementary-readings",
     "title": "Analysis of variance",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 2 of Meier (2022)\n Chapter 3 and 7 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 3 of Maxwell et al. (2017) (up to page 113).\n Chapter 2 of Meier (2022)\n Chapter 3 and 7 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/03-content.html#slides",
@@ -830,7 +837,7 @@
     "href": "content/05-content.html#complementary-readings",
     "title": "Complete factorial designs",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 10-13 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10-13 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/05-content.html#slides",
@@ -872,7 +879,7 @@
     "href": "content/07-content.html#complementary-readings",
     "title": "Designs to reduce the error",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 4 of Cox (1958)."
+    "text": "Complementary readings\n\n Chapter 9 of Maxwell et al. (2017).\n Chapter 4 of Cox (1958)."
   },
   {
     "objectID": "content/07-content.html#videos",
@@ -921,7 +928,7 @@
     "href": "content/09-content.html#complementary-readings",
     "title": "Repeated measures and multivariate ANOVA",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n\n Chapter 5.2 of Price et al. (2017)\n Chapter 16 to 18 of Keppel & Wickens (2004)"
+    "text": "Complementary readings\n\n\n Chapters 11–13 of Maxwell et al. (2017).\n Chapter 5.2 of Price et al. (2017)\n Chapter 16 to 18 of Keppel & Wickens (2004)"
   },
   {
     "objectID": "content/09-content.html#slides",

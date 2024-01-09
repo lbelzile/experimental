@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -130,6 +149,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
+  <li><a href="#complementary-readings" id="toc-complementary-readings" class="nav-link" data-scroll-target="#complementary-readings">Complementary readings</a></li>
   <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
@@ -161,7 +181,13 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
 <ul>
 <li><i class="fas fa-book"></i><a href="https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html">Chapter 6 Random and Mixed-Effects Models</a> of Lukas Meier’s ANOVA and Mixed Models: A Short Intro Using R]</li>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/introduction-to-mixed-models.html">Chapter 10</a> of the course notes</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/10-mixed.html">Chapter 10</a> of the course notes</li>
+</ul>
+</section>
+<section id="complementary-readings" class="level2">
+<h2 class="anchored" data-anchor-id="complementary-readings">Complementary readings</h2>
+<ul>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapters 10 and 15 of <span class="citation" data-cites="Maxwell.Delaney.Kelley:2017">Maxwell et al. (<a href="#ref-Maxwell.Delaney.Kelley:2017" role="doc-biblioref">2017</a>)</span>.</li>
 </ul>
 </section>
 <section id="slides" class="level2">
@@ -192,9 +218,14 @@ Tip
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Maxwell.Delaney.Kelley:2017" class="csl-entry" role="listitem">
+Maxwell, S. E., Delaney, H. D., &amp; Kelley, K. (2017). <em>Designing experiments and analyzing data: A model comparison perspective</em> (3rd ed.). routledge. <a href="https://doi.org/10.4324/9781315642956">https://doi.org/10.4324/9781315642956</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -86,7 +86,7 @@ data(BSJ92, package = 'hecedsm')
 glimpse(BSJ92)
 ```
 
-In **R**, [categorical variables](https://lbelzile.github.io/math80667a/introduction.html#review-of-basic-concepts) are stored as objects of type `factor` and numerical values as `<dbl>`, which stands for double.
+In **R**, [categorical variables](https://lbelzile.github.io/math80667a/01-introduction.html#review-of-basic-concepts) are stored as objects of type `factor` and numerical values as `<dbl>`, which stands for double.
 
 
 We are now ready to proceed with the data analysis.

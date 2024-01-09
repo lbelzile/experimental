@@ -40,11 +40,12 @@ At the end of the session, students should be capable of
 
 ## Readings
 
-- {{< fa book >}} Chapter 3 of the [Course notes](https://lbelzile.github.io/math80667a/CRT.html)
+- {{< fa book >}} Chapter 3 of the [Course notes](https://lbelzile.github.io/math80667a/03-completely_randomized_trials.html)
 
 
 ## Complementary readings
 
+- {{< fa book >}}  Chapter 3 of @Maxwell.Delaney.Kelley:2017 (up to page 113).
 - {{< fa book >}}  [Chapter 2](https://stat.ethz.ch/~meier/teaching/anova/completely-randomized-designs.html) of @Meier:2022
 - {{< fa book >}}  Chapter 3 and 7 of @Keppel/Wickens:2004.
 

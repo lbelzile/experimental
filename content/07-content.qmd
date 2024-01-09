@@ -18,12 +18,12 @@ At the end of the session, students should be capable of
 
 ## Readings
 
--  {{< fa book >}}  [Chapter 6](https://lbelzile.github.io/math80667a/designs-to-reduce-the-error.html) of the course notes
+- {{< fa book >}} [Chapter 6](https://lbelzile.github.io/math80667a/06-blocking_ancova.html) of the course notes
 - {{< fa book >}} Chapter 5 ([Complete Block Designs](https://stat.ethz.ch/~meier/teaching/anova/block-designs.html)) of @Meier:2022 (5.1-5.2)
 
 ## Complementary readings
 
-
+- {{< fa book >}}  Chapter 9 of @Maxwell.Delaney.Kelley:2017.
 - {{< fa book >}}  Chapter 4 of @Cox:1958.
 
 ## Videos

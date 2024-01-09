@@ -51,7 +51,7 @@ slide_details <- tibble::tribble(
 These readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies --- the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.
 :::
 
-- {{< fa book >}} Chapter 1 of the [Course notes](https://lbelzile.github.io/math80667a/introduction.html)
+- {{< fa book >}} Chapter 1 of the [Course notes](https://lbelzile.github.io/math80667a/01-introduction.html)
 - {{< fa book >}} Chapter 2 of [*Introduction to Modern Statistics*](https://openintro-ims.netlify.app/data-design.html)
 
 Feel free to inform me in the weekly check-in of your take on these references.
@@ -88,7 +88,7 @@ xaringanExtra::embed_xaringan(
 
 ## Case study
 
-We will discuss the summary of @Mask:2022 ["The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh"](https://www.poverty-action.org/printpdf/47486) in class.
+We will discuss the summary of @Mask:2022 ["The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh"](https://www.povertyactionlab.org/evaluation/impact-mask-distribution-and-promotion-mask-uptake-and-covid-19-bangladesh) ([pdf](https://web.archive.org/web/20221126024634/https://www.poverty-action.org/printpdf/47486)) in class.
 
 During the activity, you will be asked to identify in teams the following:
 

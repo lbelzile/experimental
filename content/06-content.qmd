@@ -22,13 +22,13 @@ At the end of the session, students should be capable of
 
 ## Readings
 
--  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/complete-factorial-designs.html) of the course notes
+-  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/05-interactions_multiway.html) of the course notes
 - {{< fa book-open-reader >}} [Two-way ANOVA example](/example/twowayanova.html)
 - {{< fa book-open-reader >}} [Three-way ANOVA example](/example/threewayanova.html)
 
 ## Complementary readings
 
-
+- {{< fa book >}}  Chapter 8 of @Maxwell.Delaney.Kelley:2017.
 - {{< fa book >}}  Chapters 21-22 of @Keppel/Wickens:2004.
 
 ## Videos

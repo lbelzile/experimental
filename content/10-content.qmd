@@ -19,9 +19,13 @@ At the end of the session, students should be capable of
 ## Readings
 
 - <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
--  {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/introduction-to-mixed-models.html) of the course notes
+-  {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/10-mixed.html) of the course notes
 
 
+## Complementary readings
+
+
+- {{< fa book >}}  Chapters 10 and 15 of @Maxwell.Delaney.Kelley:2017.
 
 ## Slides
 

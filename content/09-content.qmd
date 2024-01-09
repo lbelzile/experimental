@@ -20,7 +20,7 @@ At the end of the session, students should be capable of
 
 ## Readings
 
--  {{< fa book >}}  [Chapter 9](https://lbelzile.github.io/math80667a/repeated-measures-and-multivariate-models.html) of the course notes
+-  {{< fa book >}}  [Chapter 9](https://lbelzile.github.io/math80667a/09-repeated.html) of the course notes
 
 
 ## Complementary readings
@@ -30,6 +30,7 @@ At the end of the session, students should be capable of
 - [Chapter 11 of @Oehlert:2010 ](http://users.stat.umn.edu/~gary/book/fcdae.pdf)
 
 -->
+- {{< fa book >}}  Chapters 11--13 of @Maxwell.Delaney.Kelley:2017.
 - <i class="fas fa-book"></i> [Chapter 5.2 ](https://opentext.wsu.edu/carriecuttler/chapter/experimental-design/) of @Price:2017
 - <i class="fas fa-book"></i> Chapter 16 to 18 of @Keppel/Wickens:2004
 

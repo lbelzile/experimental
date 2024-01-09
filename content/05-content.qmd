@@ -35,12 +35,12 @@ At the end of the session, students should be capable of
 ## Readings
 
 - {{< fa book >}}  [Chapter 4](https://stat.ethz.ch/~meier/teaching/anova/factorial-treatment-structure.html) of @Meier:2022
--  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/complete-factorial-designs.html) of the course notes
+-  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/05-interactions_multiway.html) of the course notes
 
 
 ## Complementary readings
 
-
+- {{< fa book >}}  Chapter 7 of @Maxwell.Delaney.Kelley:2017.
 - {{< fa book >}}  Chapters 10-13 of @Keppel/Wickens:2004.
 
 

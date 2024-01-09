@@ -20,7 +20,7 @@ At the end of the session, students should be capable of
 ## Readings
 
 - {{< fa book >}}[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019
--  [Chapter 12](https://lbelzile.github.io/math80667a/nonparametric-tests.html) of the course notes
+-  [Chapter 12](https://lbelzile.github.io/math80667a/12-nonparametric.html) of the course notes
 
 
 ## Slides
