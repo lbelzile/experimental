@@ -8,6 +8,7 @@ project:
     - "files/"
     - "projects/"
     - "slides/*.html"
+    - "slides/*.png"
     - "slides/*.pdf"
     - "slides/img/"
     - "slides/libs/"
