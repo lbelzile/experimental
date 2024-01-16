@@ -4,7 +4,7 @@
     <title>Hypothesis tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-01-15" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -302,8 +302,7 @@ From Davison (2008), Example 9.2
 
 
 ```r
-data(arithmetic, 
-     package = "hecedsm")
+data(arithmetic, package = "hecedsm")
 # categorical variable = factor
 
 # Look up data
@@ -358,10 +357,10 @@ knitr::kable(summary_stat,
 # Boxplot with jittered data
 ggplot(data = arithmetic,
        aes(x = group,
-           y = score, 
-           color = group)) +
+           y = score)) +
   geom_boxplot() +
-  geom_jitter(width = 0.3) +
+  geom_jitter(width = 0.3, 
+              height = 0) +
   theme_bw()
 ```
 ]
@@ -417,7 +416,7 @@ Could it have happened by chance if there was no difference between groups?
 .medium[
 - The same number can have different meanings
     - units matter!
-- Meaningful comparisons require some reference
+- Meaningful comparisons require some reference.
 ]
 ]
 
@@ -453,7 +452,7 @@ Oftentimes, the null distribution comes with the test statistic
 Alternatives include
 
 - Large sample behaviour (asymptotic distribution)
-- Resampling/bootstrap/permutation
+- Resampling/bootstrap/permutation.
 
 
 ---
@@ -598,7 +597,7 @@ For a test at level `\(\alpha\)` (two-sided), we fail to reject null hypothesis 
 Because of the symmetry around zero, `\(\mathfrak{t}_{n-K}(1-\alpha/2) = -\mathfrak{t}_{n-K}(\alpha/2)\)`.
 
 - We call `\(\mathfrak{t}_{n-K}(1-\alpha/2)\)` a **critical value**. 
-- in **R**, the quantiles of the Student-$t$ distribution are obtained from `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups.
+- in **R**, the quantiles of the Student _t_ distribution are obtained from `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups.
 
 ---
 

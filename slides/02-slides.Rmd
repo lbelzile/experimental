@@ -267,7 +267,7 @@ ggplot(data = samp,
   transition_states(
     rep,
     transition_length = 2,
-    state_length = 8
+    state_length = 10
   )
 ```
 
@@ -462,8 +462,7 @@ From Davison (2008), Example 9.2
 
 
 ```{r panel-chunk-1b, eval = FALSE, echo = TRUE}
-data(arithmetic, 
-     package = "hecedsm")
+data(arithmetic, package = "hecedsm")
 # categorical variable = factor
 
 # Look up data
@@ -511,10 +510,10 @@ knitr::kable(summary_stat,
 # Boxplot with jittered data
 ggplot(data = arithmetic,
        aes(x = group,
-           y = score, 
-           color = group)) +
+           y = score)) +
   geom_boxplot() +
-  geom_jitter(width = 0.3) +
+  geom_jitter(width = 0.3, 
+              height = 0) +
   theme_bw()
 ```
 ]
@@ -526,12 +525,13 @@ ggplot(data = arithmetic,
                      y = score, 
                      color = group)) +
   geom_boxplot() +
-  geom_jitter(width = 0.3) +
-  theme_bw() + 
-  theme(legend.position = "none") +
+  geom_jitter(width = 0.3, 
+              height = 0) +
   labs(subtitle = "score on arithmetic test",
        title = "Impact of encouragement on learning outcomes",
-       y = "") # empty label
+       y = "") + # empty label
+  theme_bw() + 
+  theme(legend.position = "none") 
 ```
 
 ]
@@ -582,7 +582,7 @@ Could it have happened by chance if there was no difference between groups?
 .medium[
 - The same number can have different meanings
     - units matter!
-- Meaningful comparisons require some reference
+- Meaningful comparisons require some reference.
 ]
 ]
 
@@ -642,7 +642,7 @@ Oftentimes, the null distribution comes with the test statistic
 Alternatives include
 
 - Large sample behaviour (asymptotic distribution)
-- Resampling/bootstrap/permutation
+- Resampling/bootstrap/permutation.
 
 
 ---
@@ -810,7 +810,7 @@ $$\mathfrak{t}_{n-K}(\alpha/2) \leq t \leq \mathfrak{t}_{n-K}(1-\alpha/2)$$
 Because of the symmetry around zero, $\mathfrak{t}_{n-K}(1-\alpha/2) = -\mathfrak{t}_{n-K}(\alpha/2)$.
 
 - We call $\mathfrak{t}_{n-K}(1-\alpha/2)$ a **critical value**. 
-- in **R**, the quantiles of the Student-$t$ distribution are obtained from `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups.
+- in **R**, the quantiles of the Student _t_ distribution are obtained from `qt(1-alpha/2, df = n - K)` where `n` is the number of observations and `K` the number of groups.
 
 ---
 
