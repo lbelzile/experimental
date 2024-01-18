@@ -74,5 +74,13 @@ We will look at the way authors report the conclusion of their statistical tests
 - @Brucks.Levav:2022
 - @Liu.Rim.Min.Min:2022, Experiment 1
 
+## Code
+
+The following code reproduces the applications in the course slides and the case study
+
+- [R script](/content/MATH80667A-02-content.R)
+- [SAS scripts](/content/MATH80667A-02-content-SPSS.zip)
+- [Python script](/content/MATH80667A-02-content.py) for the case study
+
 
 ## References
