@@ -832,7 +832,7 @@ This holds (in great generality)<br>because of the<br>
 
 # Central limit theorem
 
-.small[In large samples, the mean is approximately normally distributed.]
+.small[In large samples, the sample mean is approximately normally distributed.]
 
 
 ```{r clt, echo = FALSE, fig.width=8, fig.height=4, out.width = '70%'}
@@ -852,12 +852,14 @@ p0 <- ggplot() +
    0.5*dgamma(x = x, shape = 3)+
       0.5*dgamma(x = x, shape = 10, scale =2) 
   }, n = 1001, xlim = c(0,40)) + 
-  labs(y = "density")+
+  labs(y = "", subtitle = "population density")+
   theme_classic()
 p1 <- ggplot(data = df20, aes(x = x)) + 
   geom_bar() +
   geom_vline(xintercept = mean(df20$x), col = "red") +
-  labs(x = "", y = "frequency") +
+  labs(x = "", y = "", 
+       subtitle = "frequency for a random sample of 20 obs.",
+       caption = "red line indicates sample mean") +
   theme_classic()
 
 p2 <- ggplot(data = moy5) +
@@ -870,8 +872,7 @@ p2 <- ggplot(data = moy5) +
                             sd = sqrt(varfake/5)),
                 n = 1000,
                 xlim = c(0,40))  +
-  xlab("") +
-  ylab("density") +
+  labs(x = "", y = "", subtitle = "density of sample mean of 30 obs.") +
   coord_cartesian(xlim = c(0, 25), 
                   ylim = c(0, 0.5), 
                   expand = FALSE) +
@@ -885,8 +886,7 @@ p3 <- ggplot(data = moy20) +
                 args = list(mean = meanfake, 
                             sd = sqrt(varfake/20)),
                             n = 1000) +
-  xlab("") +
-  ylab("density") +
+  labs(x = "", y = "", subtitle = "density of sample mean of 50 obs.") +
   coord_cartesian(xlim = c(0, 25), 
                   ylim = c(0, 0.5), 
                   expand = FALSE) +
@@ -894,6 +894,12 @@ p3 <- ggplot(data = moy20) +
 
 (p0 + p1)/(p2 + p3)
 ```
+
+.small[
+
+Top row shows data generating mechanism and a sample, bottom row shows the distribution of the sample mean of $n=30$ and $n=50$ observations.
+
+]
 
 ---
 
