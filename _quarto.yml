@@ -98,8 +98,8 @@ website:
           contents:
             - evaluations/01-problem-set.qmd
             - evaluations/02-problem-set.qmd
-           # - evaluations/03-problem-set.qmd
-           # - evaluations/04-problem-set.qmd
+            - evaluations/03-problem-set.qmd
+            - evaluations/04-problem-set.qmd
            # - evaluations/05-problem-set.qmd
            # - evaluations/06-problem-set.qmd
            # - evaluations/07-problem-set.qmd
@@ -116,7 +116,7 @@ website:
         - section: "Overview"
           contents:
             - example/index.qmd
-        - section: "Installation"
+        - section: "Programming"
           contents:
             - text: "**R** and RStudio"
               file: example/installation.qmd
@@ -153,7 +153,7 @@ website:
 
   page-footer:
     left: |
-      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}), 
+      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}),
       Website template by [Dr. Andrew Heiss](https://www.andrewheiss.com/) under [MIT License](https://mit-license.org/)<br>
       All content licensed under a {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
@@ -168,7 +168,7 @@ preview:
   browser: true
   watch-inputs: true
   navigate: true
-  
+
 format:
   html:
     theme:

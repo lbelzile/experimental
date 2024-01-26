@@ -11,6 +11,8 @@ following the naming convention `PS3-studentid.extension` where `studentid` is r
 
 **Instructions**: We consider data collected for Study 3 of @Grossman:2014 (click the links to download [the paper](https://journals.sagepub.com/stoken/default+domain/vIg5KBmaiJHKTXfUpXZK/full) and the [Supplementary material](https://journals.sagepub.com/doi/suppl/10.1177/0956797614535400/suppl_file/DS_10.11770956797614535400_SupplementalMethodandResults.pdf)). You can access these data directly from **R** from the `hecedsm` package or [download the SPSS data](/files/data/SPSS/GK14_S3.sav).
 
+If you work with **R**, check out this [helper code](/evaluations/03-problem-set.R)
+
 Have a quick look at the paper and fit the one way analysis of variance model to responses for young adults (20 to 40 years) only.
 
 1. Report the test statistic, the null distribution and the p-value.

@@ -119,7 +119,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -149,7 +149,7 @@ div.csl-indent {
  <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
+    <a class="nav-link active" href="../evaluations/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Evaluations</span></a>
   </li>  
   <li class="nav-item">
@@ -171,10 +171,97 @@ div.csl-indent {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/01-problem-set.html">Problem sets</a></li><li class="breadcrumb-item"><a href="../evaluations/03-problem-set.html">Problem set 3</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/paper-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paper review</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/final-exam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final examination</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Problem sets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/01-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/02-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/03-problem-set.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Problem set 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/04-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -194,6 +281,7 @@ div.csl-indent {
 </ul>
 <p>following the naming convention <code>PS3-studentid.extension</code> where <code>studentid</code> is replaced with your student ID and <code>extension</code> is the file extension (e.g., <code>.pdf</code>, <code>.R</code>, <code>.Rmd</code>, <code>.sps</code>)</p>
 <p><strong>Instructions</strong>: We consider data collected for Study 3 of <span class="citation" data-cites="Grossman:2014">Grossmann &amp; Kross (<a href="#ref-Grossman:2014" role="doc-biblioref">2014</a>)</span> (click the links to download <a href="https://journals.sagepub.com/stoken/default+domain/vIg5KBmaiJHKTXfUpXZK/full">the paper</a> and the <a href="https://journals.sagepub.com/doi/suppl/10.1177/0956797614535400/suppl_file/DS_10.11770956797614535400_SupplementalMethodandResults.pdf">Supplementary material</a>). You can access these data directly from <strong>R</strong> from the <code>hecedsm</code> package or <a href="../files/data/SPSS/GK14_S3.sav">download the SPSS data</a>.</p>
+<p>If you work with <strong>R</strong>, check out this <a href="../evaluations/03-problem-set.R">helper code</a></p>
 <p>Have a quick look at the paper and fit the one way analysis of variance model to responses for young adults (20 to 40 years) only.</p>
 <ol type="1">
 <li>Report the test statistic, the null distribution and the p-value.</li>
