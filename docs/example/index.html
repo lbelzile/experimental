@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><strong>R</strong> and RStudio</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/SPSS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SPSS</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -320,8 +326,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>the notebook <a href="https://rladiessydney.org/courses/ryouwithme/"><strong>RYouWithMe</strong> from R-Ladies Sydney</a></li>
 <li>the book <a href="https://r4ds.had.co.nz/index.html"><strong>R</strong> for Data Science</a>, which adheres to the <code>tidyverse</code> principles.</li>
 <li>the <strong>R</strong> package <a href="https://dosstoolkit.com/">DoSStoolkit</a>, developped at the University of Toronto.</li>
-<li>the <a href="https://spielmanlab.github.io/introverse/articles/introverse_online.html"><code>introverse</code></a> documentation.</li>
+<li>the <a href="https://sjspielman.github.io/introverse/"><code>introverse</code></a> documentation.</li>
 <li>the <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio cheatsheets</a>, also available from RStudio menu in Help &gt; Cheat Sheets</li>
+<li>Norman Matloff’s <a href="https://github.com/matloff/fasteR"><em>Fast Lane to Learning R!</em></a></li>
 </ul>
 <p>To install all <strong>R</strong> packages used throughout the course, use the command</p>
 <div class="cell">
@@ -642,23 +649,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the notebook <span class="co">[</span><span class="ot">**RYouWithMe** from R-Ladies Sydney</span><span class="co">](https://rladiessydney.org/courses/ryouwithme/)</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the book <span class="co">[</span><span class="ot">**R** for Data Science</span><span class="co">](https://r4ds.had.co.nz/index.html)</span>, which adheres to the <span class="in">`tidyverse`</span> principles.</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the **R** package <span class="co">[</span><span class="ot">DoSStoolkit</span><span class="co">](https://dosstoolkit.com/)</span>, developped at the University of Toronto.</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the <span class="co">[</span><span class="ot">`introverse`</span><span class="co">](https://spielmanlab.github.io/introverse/articles/introverse_online.html)</span> documentation.</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the <span class="co">[</span><span class="ot">`introverse`</span><span class="co">](https://sjspielman.github.io/introverse/)</span> documentation.</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the <span class="co">[</span><span class="ot">RStudio cheatsheets</span><span class="co">](https://www.rstudio.com/resources/cheatsheets/)</span>, also available from RStudio menu in Help &gt; Cheat Sheets</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>To install all **R** packages used throughout the course, use the command</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE, echo=TRUE}</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>libs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"afex"</span>, <span class="st">"car"</span>, <span class="st">"dplyr"</span>, <span class="st">"emmeans"</span>, <span class="st">"effectsize"</span>, </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">"ggplot2"</span>, <span class="st">"lme4"</span>, <span class="st">"lmerTest"</span>, <span class="st">"mediation"</span>, <span class="st">"nlme"</span>, </span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         <span class="st">"patchwork"</span>, <span class="st">"pwr"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyr"</span>, <span class="st">"WebPower"</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(lib <span class="cf">in</span> libs){</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span>lib <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="st">"Package"</span>]){</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>   <span class="fu">install.packages</span>(lib)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package containing databases</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"lbelzile/hecedsm"</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Norman Matloff's <span class="co">[</span><span class="ot">*Fast Lane to Learning R!*</span><span class="co">](https://github.com/matloff/fasteR)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>To install all **R** packages used throughout the course, use the command</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE, echo=TRUE}</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>libs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"afex"</span>, <span class="st">"car"</span>, <span class="st">"dplyr"</span>, <span class="st">"emmeans"</span>, <span class="st">"effectsize"</span>, </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         <span class="st">"ggplot2"</span>, <span class="st">"lme4"</span>, <span class="st">"lmerTest"</span>, <span class="st">"mediation"</span>, <span class="st">"nlme"</span>, </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">"patchwork"</span>, <span class="st">"pwr"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyr"</span>, <span class="st">"WebPower"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(lib <span class="cf">in</span> libs){</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span>lib <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="st">"Package"</span>]){</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>   <span class="fu">install.packages</span>(lib)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package containing databases</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"lbelzile/hecedsm"</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

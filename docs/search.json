@@ -277,7 +277,7 @@
     "href": "example/index.html",
     "title": "Examples",
     "section": "",
-    "text": "This section will contain annotated R code along with worked out examples. If time permits, I will also include videos of me life-coding, so you can see me making programming mistakes in real time!\nUseful resources for learning R, the tidyverse and Rmarkdown basics include\n\nThe Introduction to R and RStudio by Open Intro Stat\nTeacups, giraffes & statistics: basic statistical concepts and programming\nthe notebook RYouWithMe from R-Ladies Sydney\nthe book R for Data Science, which adheres to the tidyverse principles.\nthe R package DoSStoolkit, developped at the University of Toronto.\nthe introverse documentation.\nthe RStudio cheatsheets, also available from RStudio menu in Help &gt; Cheat Sheets\n\nTo install all R packages used throughout the course, use the command\n\n\nCode\nlibs &lt;- c(\"afex\", \"car\", \"dplyr\", \"emmeans\", \"effectsize\", \n         \"ggplot2\", \"lme4\", \"lmerTest\", \"mediation\", \"nlme\", \n         \"patchwork\", \"pwr\", \"remotes\", \"tidyr\", \"WebPower\")\nfor(lib in libs){\n  if(!lib %in% installed.packages()[,\"Package\"]){\n   install.packages(lib)\n  }\n}\n# Load package containing databases\nremotes::install_github(\"lbelzile/hecedsm\")"
+    "text": "This section will contain annotated R code along with worked out examples. If time permits, I will also include videos of me life-coding, so you can see me making programming mistakes in real time!\nUseful resources for learning R, the tidyverse and Rmarkdown basics include\n\nThe Introduction to R and RStudio by Open Intro Stat\nTeacups, giraffes & statistics: basic statistical concepts and programming\nthe notebook RYouWithMe from R-Ladies Sydney\nthe book R for Data Science, which adheres to the tidyverse principles.\nthe R package DoSStoolkit, developped at the University of Toronto.\nthe introverse documentation.\nthe RStudio cheatsheets, also available from RStudio menu in Help &gt; Cheat Sheets\nNorman Matloff’s Fast Lane to Learning R!\n\nTo install all R packages used throughout the course, use the command\n\n\nCode\nlibs &lt;- c(\"afex\", \"car\", \"dplyr\", \"emmeans\", \"effectsize\", \n         \"ggplot2\", \"lme4\", \"lmerTest\", \"mediation\", \"nlme\", \n         \"patchwork\", \"pwr\", \"remotes\", \"tidyr\", \"WebPower\")\nfor(lib in libs){\n  if(!lib %in% installed.packages()[,\"Package\"]){\n   install.packages(lib)\n  }\n}\n# Load package containing databases\nremotes::install_github(\"lbelzile/hecedsm\")"
   },
   {
     "objectID": "example/counts.html",
@@ -308,410 +308,375 @@
     "text": "Study 2 - Bertrand and Mullainathan (2004)\nWhile by far the most common, there are more specialized hypothesis that can be considered with design. The following example showcases a test of symmetry for a square contingency table.\nWe consider a study from Bertrand & Mullainathan (2004), who study racial discrimination in hiring based on the consonance of applicants names. The authors created curriculum vitae for four applicants and randomly allocated them a name, either one typical of a white person or a black person. The response is a count indicating how many of the applicants were called back (out of two black and two white) depending on their origin.\nIf there was no racial discrimination (null hypothesis), we would expect the average number of times a white applicant was called back (but no black applicant) to be the same as a single black applicant (but no white). Only the entries for different numbers of call-back (either 0 vs 2, 0 vs 1 or 1 vs 2 for either race) are instructive about our question of interest. The data are reported in Table 2.\n\n\n\n\nTable 2: Contingency table for the racial discrimination in labor market.\n\n\n\nno\n1W\n2W\n\n\n\n\nno\n1103\n74\n19\n\n\n1B\n33\n46\n18\n\n\n2B\n6\n7\n17\n\n\n\n\n\n\nThe hypothesis of symmetry postulates that the proportion on either side of the diagonal are the same, so \\(p_{ij}=p_{ji}\\). Under the null hypothesis model, our best estimate of the proportion is thus \\((n_{ij} + n_{ji})/2\\), which is the sample average of those cells. The statistic is analogous to Fisher’s goodness of fit test, except that the expected counts are estimated here. There are \\(J^2\\) entries and we have \\(J(J-1)/2\\) constraints (the degrees of freedom).\nThe test statistic reduces to \\[X^2 = \\sum_{i,j} \\frac{(E_{ij}-O_{ij})^2}{E_{ij}} = \\sum_{j=1}^J \\frac{(n_{ij} - n_{ji})^2}{n_{ij}+n_{ji}}.\\] The statistic is 27.31, to be compared with a \\(\\chi^2_3\\) benchmark (three off-diagonal entries). The \\(p\\)-value is \\(5\\times 10^{-6}\\), highly suggestive of racial discrimination."
   },
   {
-    "objectID": "evaluations/weekly-check-in.html",
-    "href": "evaluations/weekly-check-in.html",
-    "title": "Questions",
+    "objectID": "example/SPSS.html",
+    "href": "example/SPSS.html",
+    "title": "Programming with SPSS",
     "section": "",
-    "text": "Every week, after you finish working through the content, I want to hear about what you learned and what questions you still have. To facilitate this, and to encourage engagement with the course content, you’ll need to fill out a short questionnaire. This should be ~150 words.\nYou should answer the following three questions each week:\n\nWhat was the most exciting thing you learned from the session? Why?\nWhat was the muddiest thing from the session this week? What are you still wondering about?\n\nWhich activity did you find the most useful? What could have been skipped?"
+    "text": "Videos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nLoading data and two-sample t-test\nPairwise contrasts\nOne-way ANOVA\nLogical filters\n\nYou can also watch the playlist (and skip around to different sections) here:"
   },
   {
-    "objectID": "evaluations/index.html",
-    "href": "evaluations/index.html",
-    "title": "Evaluations",
+    "objectID": "evaluations/paper-review.html",
+    "href": "evaluations/paper-review.html",
+    "title": "Paper review",
     "section": "",
-    "text": "The main goals of this class are to help you understand the steps require to design and analyse the results of an experiment."
+    "text": "You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.\nComment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice of dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review."
   },
   {
-    "objectID": "evaluations/index.html#weekly-check-in",
-    "href": "evaluations/index.html#weekly-check-in",
-    "title": "Evaluations",
-    "section": "Weekly check-in",
-    "text": "Weekly check-in\nI want to hear back from you regarding the course material, activities and learning material.\nI will grade these check-ins using a check system:\n\n110%: Response shows phenomenal thought and engagement with the course content. I will not assign these often.\n100%: Response is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance.\n50%: Response is hastily composed, too short, and/or only cursorily engages with the course content. This grade signals that you need to improve next time. I will hopefully not assign these often.\n\nNotice that is essentially a pass/fail or completion-based system. I’m not grading your writing ability, I’m not counting the exact number of words you’re writing, and I’m not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I’m looking for thoughtful engagement, that’s all. Do good work and you’ll get a ✔.\nYou will submit these responses via ZoneCours."
-  },
-  {
-    "objectID": "evaluations/index.html#problem-sets",
-    "href": "evaluations/index.html#problem-sets",
-    "title": "Evaluations",
-    "section": "Problem sets",
-    "text": "Problem sets\nThere are 12 problem sets on the schedule. I will keep the highest grades for 11 of them. I will drop the lowest score - this means you can skip one of the problem sets. You need to show that you made a good faith effort to work each question. I will not grade these in detail. The problem sets will be graded using a check system:\n\n110%: Assignment is 100% completed. Every question was attempted and answered, and all answers are correct. Document is clean and easy to follow. Work is exceptional. I will not assign these often.\n100%: Assignment is complete. Every question was attempted and answered, and most answers are correct. This is the expected level of performance.\n75%: Assignment is mostly complete and most answers are correct.\n50%: Assignment is less than 50% complete and/or most answers are incorrect. This indicates that you need to improve next time. I will hopefully not assign these often.\n\nYou may (and should!) work together on the problem sets, but you must turn in your own answers. You cannot work in groups of more than three people, and you must note who participated in the group in your assignment."
-  },
-  {
-    "objectID": "evaluations/index.html#final-project",
-    "href": "evaluations/index.html#final-project",
-    "title": "Evaluations",
-    "section": "Final project",
-    "text": "Final project\nFor your final project, you will perform a critical review of a peer-reviewed paper from a list containing an experiment and which uses one of the statistical techniques covered in class. You will pay particular attention to reproducibility, readability and the correctness of the analysis, discussing points of improvement, statistical fallacies. This will help you develop skills for efficient peer-review of the statistical methodology section."
-  },
-  {
-    "objectID": "evaluations/index.html#final-examination",
-    "href": "evaluations/index.html#final-examination",
-    "title": "Evaluations",
-    "section": "Final examination",
-    "text": "Final examination\nThere will be a closed-book final exam covering the content of the whole semester. Most of the questions will relate to the tasks you performed in problem set and to discussions we had in class. The exam will be in-person (see the Syllabus for details)."
-  },
-  {
-    "objectID": "evaluations/12-problem-set.html",
-    "href": "evaluations/12-problem-set.html",
-    "title": "Problem set 12",
+    "objectID": "evaluations/paper-review.html#description-of-the-task",
+    "href": "evaluations/paper-review.html#description-of-the-task",
+    "title": "Paper review",
     "section": "",
-    "text": "Complete this task individually.\nSubmission information: please submit on ZoneCours\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. The data containing the counts of the number of verbalization across all labs are given in the FBC66_T1 and MULTI21_D1 datasets.\nThe data from Table 1 of Flavell et al. (1966) is the number of children who verbalized without prompting overall in the first two experimental conditions (immediate recall and delayed recall subtasks).1\nFor the \\(\\chi^2\\) test to be valid, we need the expected number of counts to be at least five in each subcondition (otherwise the large sample approximation breaks down and is unreliable).\nThe number of students for each grade (kindergarden, second and fifth) is 20. The rows of the table are the ordered number of instances of verbalization.\n# Reinstall package\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(FBC66_T1, package = \"hecedsm\")\nchisq.test(xtabs(count ~ grade + frequency, data = FBC66_T1))\n\n\n    Pearson's Chi-squared test\n\ndata:  xtabs(count ~ grade + frequency, data = FBC66_T1)\nX-squared = 28.358, df = 4, p-value = 1.055e-05"
+    "text": "You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.\nComment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice of dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review."
   },
   {
-    "objectID": "evaluations/12-problem-set.html#footnotes",
-    "href": "evaluations/12-problem-set.html#footnotes",
-    "title": "Problem set 12",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nThe last task, point-and-name, is not considered because it specifically instructed students to speak out loud.↩︎\nIf the expected number is less than 5, the asymptotic \\(\\chi^2\\) approximation is dubious. We could resort to permutation and simulation to assess the accuracy of the \\(\\chi^2\\) benchmark. The row sum for the counts (per grade) is fixed to 20, but the columns are allowed to vary.↩︎"
+    "objectID": "evaluations/paper-review.html#deliverables",
+    "href": "evaluations/paper-review.html#deliverables",
+    "title": "Paper review",
+    "section": "Deliverables",
+    "text": "Deliverables\nA portable document file (PDF) of your critique (maximum 3 pages, excluding bibliography)"
   },
   {
-    "objectID": "evaluations/10-problem-set.html",
-    "href": "evaluations/10-problem-set.html",
-    "title": "Problem set 10",
+    "objectID": "evaluations/paper-review.html#grading-rubric",
+    "href": "evaluations/paper-review.html#grading-rubric",
+    "title": "Paper review",
+    "section": "Grading rubric",
+    "text": "Grading rubric\n\nIdentification of strength and weaknesses: 10\nCorrectness of the interpretation of statistical results: 10\nScope: 10\nClarity of report: 10\nUsefulness of suggestions: 5\nWriting and referencing: 5"
+  },
+  {
+    "objectID": "evaluations/final-exam.html",
+    "href": "evaluations/final-exam.html",
+    "title": "Final examination",
     "section": "",
-    "text": "Complete this task individually or in teams of up to three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nRead the chocolate example from Meier (2022) and some of the examples from the course notes.\nConsider the model of Hatano et al. (2022) for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using Oehlert (2000) approach\n\nIdentify sources of variation\nIdentify whether factors are crossed or nested\nDetermine whether factors should be fixed or random\nFigure out which interactions can exist and whether they can be fitted.\n\nNow, fit the linear mixed model using the following code\n\nlibrary(lmerTest)\ndata(HOSM22_E4, package = \"hecedsm\")\nmixmod &lt;- lmer(imscore ~ #TODO add covariates, etc.\n               data = HOSM22_E4)\nsummary(mixmod) # coefficients\nanova(mixmod) # type III analysis of variance table\n\n\nReport the results for the interaction test: is the interaction significative at level 5%? If not, compute estimated marginal means for rating type.\nCompute the correlation between measurements from the same students.\n\n\n\n\n\nReferences\n\nHatano, A., Ogulmus, C., Shigemasu, H., & Murayama, K. (2022). Thinking about thinking: People underestimate how enjoyable and engaging just waiting is. Journal of Experimental Psychology: General, 151(12), 3213–3229. https://doi.org/https://doi.org/10.1037/xge0001255\n\n\nMeier, L. (2022). ANOVA and mixed models: A short introduction using R (Chapman & Hall/CRC, Eds.). https://doi.org/10.1201/9781003146216\n\n\nOehlert, G. (2000). A first course in design and analysis of experiments. W. H. Freeman. http://users.stat.umn.edu/~gary/Book.html"
+    "text": "The final is a 180 minutes closed-book examination covering all of the material from class.\nThe exam format is as follows:\n\nOne question on the fundamentals of experimental designs (blocking, randomization, etc.)\nOne question on reproducibility/replication crisis\nOne question on key concepts (power, effect size, multiple testing).\nOne question on advanced topics (mixed models, causal inference and mediation analysis, etc.)\nTwo data analysis questions, using completely randomized or blocked designs (between-subjects or within-subject) with multi-way analysis of variance, ANCOVA, mixed model, with specific questions on various aspects including\n\nparametrization of ANOVA\nadequate setup of model\ninteraction plots\nuse of different tests and methods\ncalculation of degrees of freedom of the model / sample size\nconclusions related to output of tests\ninterpretation of effect sizes\ncontrasts and pairwise comparisons\ntests for model assumptions and diagnostic plots\n\n\nA practice final can be downloaded here"
   },
   {
-    "objectID": "evaluations/08-problem-set.html",
-    "href": "evaluations/08-problem-set.html",
-    "title": "Problem set 8",
+    "objectID": "evaluations/11-problem-set.html",
+    "href": "evaluations/11-problem-set.html",
+    "title": "Problem set 11",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy."
+    "text": "Complete this task in teams of up to three students.\nSubmission information: please submit on ZoneCours"
   },
   {
-    "objectID": "evaluations/08-problem-set.html#footnotes",
-    "href": "evaluations/08-problem-set.html#footnotes",
-    "title": "Problem set 8",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nIn R, check out the function F_to_omega2 from the effectsize package. You can also use the formula presented in the slides.↩︎\nHint: are the original effect size in line with the replications or not?↩︎"
-  },
-  {
-    "objectID": "evaluations/06-problem-set.html",
-    "href": "evaluations/06-problem-set.html",
-    "title": "Problem set 6",
-    "section": "",
-    "text": "Submission information: please submit on ZoneCours"
-  },
-  {
-    "objectID": "evaluations/06-problem-set.html#task-1",
-    "href": "evaluations/06-problem-set.html#task-1",
-    "title": "Problem set 6",
+    "objectID": "evaluations/11-problem-set.html#task-1",
+    "href": "evaluations/11-problem-set.html#task-1",
+    "title": "Problem set 11",
     "section": "Task 1",
-    "text": "Task 1\nRead Wilkinson (1999)’s guidelines for reporting statistical analyses.\nNext, look at one of the experiments conducted in Stekelenburg et al. (2021). Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors."
+    "text": "Task 1\nRead Rohrer et al. (2022) and write down a summary"
   },
   {
-    "objectID": "evaluations/06-problem-set.html#task-2",
-    "href": "evaluations/06-problem-set.html#task-2",
-    "title": "Problem set 6",
+    "objectID": "evaluations/11-problem-set.html#task-2",
+    "href": "evaluations/11-problem-set.html#task-2",
+    "title": "Problem set 11",
     "section": "Task 2",
-    "text": "Task 2\nRead Nosek et al. (2018) and list three benefits of preregistration. Reflect on the practical aspects and on the impact.1\nWe will organize a discussion in the near future in class on preregistration and the replication crisis."
+    "text": "Task 2\nLiu et al. (2022+) postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from LRMM22_S5b.\n\nFit the linear mediation model using the PROCESS macro or mediate function from the mediation package\n\n\nuse the nonparametric bootstrap with the percentile method\ncompare the coefficients with those of Figure 1 from the paper.\n\n\nIdentify the type of mediation (complementary, competitive or indirect only) based on coefficients.\nThe paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by Liu et al. (2022+)."
   },
   {
-    "objectID": "evaluations/06-problem-set.html#footnotes",
-    "href": "evaluations/06-problem-set.html#footnotes",
-    "title": "Problem set 6",
+    "objectID": "evaluations/11-problem-set.html#task-3",
+    "href": "evaluations/11-problem-set.html#task-3",
+    "title": "Problem set 11",
+    "section": "Task 3",
+    "text": "Task 3\nStudy 4 of Risen & Gilovich (2008) (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the Baron & Kenny (1986) methodology.\n\nRead the description and comment on the following aspects:\n\nuse of the Baron and Kenny original testing procedure1\nthe plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.\n\nUsing the summary statistics and coefficients estimates reported, recompute Sobel’s statistic2 and the p-value and compare them with the values reported. .3\nList the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?\nCan the authors successfully claim mediation considering the study uses an experimental design and randomly allocates condition? Why or why not?"
+  },
+  {
+    "objectID": "evaluations/11-problem-set.html#footnotes",
+    "href": "evaluations/11-problem-set.html#footnotes",
+    "title": "Problem set 11",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nFeel free to discuss field-specific issues.↩︎"
+    "text": "Footnotes\n\n\nThe latter is said to be suboptimal; explain why in your words.↩︎\nSome authors may be excluding the \\(\\mathsf{Va}(\\widehat{\\gamma})\\mathsf{Va}(\\widehat{\\alpha})\\) term from the equation.↩︎\nIn R, the \\(p\\)-value for the two-sided test can be computed via 2*pnorm(abs(stat), lower.tail = FALSE), where stat is Sobel’s statistic.↩︎"
   },
   {
-    "objectID": "evaluations/04-problem-set.html",
-    "href": "evaluations/04-problem-set.html",
-    "title": "Problem set 4",
+    "objectID": "evaluations/09-problem-set.html",
+    "href": "evaluations/09-problem-set.html",
+    "title": "Problem set 9",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours\nfollowing the naming convention PS4-studentid.extension where studentid is replaced with your student ID and extension is the file extension (e.g., .pdf, .R, .Rmd, .sps)\nInstructions: We consider data collected for Study 3 of Grossmann & Kross (2014) (click the links to download the paper and the Supplementary material). You can access these data directly from R from the hecedsm package or download the SPSS data.\nThe purpose of the exercise is to reproduce part of Table S4 of the Supplementary material. We will compute linear contrasts and adjust the resulting comparisons to account for multiple testing.1\nWe will fit one-way ANOVA model for each of the four response (compr,limits,persp and change) and for each age group separately. Thus, we will have four contrasts for each of the eight models (one per outcome and age group). The size of the family, assuming the global \\(F\\)-tests are not of interest, is thus \\(m=32\\).\nUse the helper code provided. Don’t be intimidated: this task will involve a lot of copy-pasting. Fill the helper file code by replacing the #TODO statements and reach out for help if you are stuck."
+    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\nWe consider Study 2 of Bobak et al. (2019), who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). Bobak et al. (2019) report that\nPerform a repeated measure one-way ANOVA with color as within-factor and pcorr as response with the BMH19_S2 data, which can be found in the R package hecedsm."
   },
   {
-    "objectID": "evaluations/04-problem-set.html#footnotes",
-    "href": "evaluations/04-problem-set.html#footnotes",
-    "title": "Problem set 4",
+    "objectID": "evaluations/09-problem-set.html#footnotes",
+    "href": "evaluations/09-problem-set.html#footnotes",
+    "title": "Problem set 9",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nTechnical aside: there are four correlated outcome variables, so this is technically a multivariate problem. ↩︎\nThe sign may be different from the paper depending on how you set up the contrasts, but the conclusion is the same.↩︎\nHint: Bonferroni’s method amounts to making the tests at level \\(\\alpha/m\\). Try modifying the level in the code for the confidence intervals to see which is largest.↩︎"
+    "text": "Footnotes\n\n\nIf you fit the model with afex package functions aov_ez, the output contains a slot $Anova with the value of this test.↩︎"
   },
   {
-    "objectID": "evaluations/02-problem-set.html",
-    "href": "evaluations/02-problem-set.html",
-    "title": "Problem set 2",
+    "objectID": "evaluations/07-problem-set.html",
+    "href": "evaluations/07-problem-set.html",
+    "title": "Problem set 7",
     "section": "",
-    "text": "We consider the hypothesis test performed by Bastian et al. (2014) with the data they collected in their Experiment 1. The R and SPSS files containing code for performing the testing procedures and extracting the output are provided. You can also download the SPSS data file and the paper via OpenStats Lab.\n\nBriefly comment on the generalisability of the study in light of the sample composition and data collection.\nThe authors used a two-sample t-test to assess the hypothesis that people in the pain condition felt more threatened by the tasks (a manipulation check). One criticism of using such a test statistic is that it assumes that observations in both group have potentially different group average, but similar standard deviation.1 An alternative test which doesn’t assume equal variance in each experimental condition is Welch’s t-test. Use the latter instead to model the manipulation check for threat and report the output. Do the conclusions change?\nThe authors report results based on a one-way analysis of variance, a testing procedure that compares the mean of \\(m\\) different groups. The latter is equivalent to a two-sample t-test when there are only \\(m=2\\) groups.\n\nUsing the two-sample t-test, obtain a 95% and a 99% confidence interval for the mean difference score for perceived bonding.\nExplain how the two methods (p-value and confidence intervals) are equivalent for performing an hypothesis test with a significance level of 5% and 1%, respectively. Report the conclusions of your procedure in each case.\nList an advantage of each over the other.\n\nExtract the degrees of freedom, the value of the \\(F\\)-statistic and the p-value, suitably rounded, and report these.\nWhat can we reasonably conclude about the effect of bonding based on the output of the testing procedure? Is this reflected in the writing of the authors?\nFigure 1 of Bastian et al. (2014) shows a dynamite plot, i.e., a bar plot with 95% confidence intervals for each condition. Note that this is standard display, but overall it is poor graphical choice (why?). Briefly summarize the blog post."
+    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nLook at the ANCOVA example; this should be helpful in completing the problem set.\nWe consider Experiment 3 of Stekelenburg et al. (2021); (download the paper). The database can be found in SSVB21_S3 in the hecedsm package.\n\nHave a quick look at the exclusion guidelines in the preregistration. Do they make sense? think about other potential criteria that could have been listed.\nWrite down potential improvement points related to statistics and experimental setup that you could raise if you were assigned to peer-review the paper.\nThe author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the script). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?\nTest the assumptions of\n\nequal variance per experimental condition with the ANCOVA\nproper randomization based only on Prior scores\nequality of slopes\n\nIf the variance are unequal, fit the model with unequal variances per group (see the ANCOVA example) — otherwise proceed as usual.\n\nLook at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.\nDoes the conclusion of the test change relative to that reported in the paper?\n\n\n\n\n\n\nReferences\n\nStekelenburg, A. van, Schaap, G., Veling, H., & Buijzen, M. (2021). Boosting understanding and identification of scientific consensus can help to correct false beliefs. Psychological Science, 32(10), 1549–1565. https://doi.org/10.1177/09567976211007788"
   },
   {
-    "objectID": "evaluations/02-problem-set.html#footnotes",
-    "href": "evaluations/02-problem-set.html#footnotes",
-    "title": "Problem set 2",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nWe will see modelling assumptions in Week 3, take my word on it for now.↩︎"
-  },
-  {
-    "objectID": "content/index.html",
-    "href": "content/index.html",
-    "title": "Readings, lectures, and videos",
+    "objectID": "evaluations/05-problem-set.html",
+    "href": "evaluations/05-problem-set.html",
+    "title": "Problem set 5",
     "section": "",
-    "text": "Each class session has a set of required readings that you should complete before watching the lecture.\nEvery class session also has a YouTube playlist of short recorded videos for each of the lecture sections. The lecture slides are special HTML files made with the R package xaringan . On each class session page you’ll see buttons for opening the presentation in a new tab or for downloading a PDF of the slides in case you want to print them or store them on your computer:\n\n View all slides in new window  Download PDF of all slides\n\nThe slides are also embedded on each page. You can click in the slides and navigate through them with ← and →. If you type ? (or shift + /) while viewing the slides you can see a list of slide-specific commands (like f for fullscreen or p for presenter mode if you want to see my notes)."
+    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nWrite the name of the teammates on your report.\nWe consider a two-way analysis of variance using fictional data from Example 6.4 of Berger et al. (2018) on bank tellers: 100 tellers were offered one-on-one training with an experienced clerk for a certain number of weeks on the job, possibly in addition to formal training period. The goal of the study is to determine which combination is most efficient at reducing the monthly error in balance (in dollars). You can access these data directly from R from the hecedsm package or download the SPSS data.\nDownload and answer the following questions. Write a report as if you were doing an analysis for a scientific publication.\n\nProduce a plot of the monthly error per teller as a function of the number of weeks of one-on-one training.\nProduce a quantile-quantile plot of the residuals and use Levene’s test to check whether the variance in each subgroup is the same. Report on these preliminary checks.\nAssess whether there an interaction between number of weeks of one-on-one training and the formal training using an hypothesis test.\nCompute pairwise contrasts between weeks of one-on-one supervision for the case of people with formal training.\nCompare the difference in errors between 8 and 4 weeks of one-to-one supervision, for people with and without formal training.\n\nHint: to create a pretty interaction plot in R, try the following:\n\n# Redownload the package to get the data\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(teller, package = \"hecedsm\")\nlibrary(ggplot2)\nlibrary(dplyr)\n\nteller |&gt; \n  group_by(course, nweeks) |&gt;\n  summarize(merror = mean(error)) |&gt;\n ggplot(aes(x = nweeks,\n            y = merror,\n            group = course,\n            color = course)) +\n  geom_line() +\n  theme_classic() + \n  theme(legend.position = \"bottom\") + \n  labs(y = \"\",\n       subtitle = \"average monthly error (USD)\",\n       x = \"number of weeks of 1-1 training\")\n\n\n\n\n\nReferences\n\nBerger, P. D., Maurer, R. E., & Celli, G. B. (2018). Experimental design with applications in management, engineering, and the sciences (2nd ed.). Springer. https://doi.org/10.1007/978-3-319-64583-4"
   },
   {
-    "objectID": "content/12-content.html",
-    "href": "content/12-content.html",
-    "title": "Mediation and moderation",
+    "objectID": "evaluations/03-problem-set.html",
+    "href": "evaluations/03-problem-set.html",
+    "title": "Problem set 3",
     "section": "",
-    "text": "Linear mediation model\nModeration"
+    "text": "Submission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nfollowing the naming convention PS3-studentid.extension where studentid is replaced with your student ID and extension is the file extension (e.g., .pdf, .R, .Rmd, .sps)\nInstructions: We consider data collected for Study 3 of Grossmann & Kross (2014) (click the links to download the paper and the Supplementary material). You can access these data directly from R from the hecedsm package or download the SPSS data.\nHave a quick look at the paper and fit the one way analysis of variance model to responses for young adults (20 to 40 years) only.\n\nReport the test statistic, the null distribution and the p-value.\nProvide a conclusion in the context of the study.\nThere are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?\n\nWe next look at model assumptions\n\nIs the independence assumption plausible in the context?\nHow many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition and forego normality checks?\nProduce a normal quantile-quantile plot and comment on the distribution of the residuals (check out this response on CrossValidated first).\nCheck the equality of variance assumption using a suitable test statistic and report the results.\nUse Welch’s one-way analysis of variance model (oneway.test() in R) and compare the output and the conclusion with that of the usual \\(F\\)-test.\n\nHints and R snippets\nTo subset the data, you can use the following commands:\n\ndata(GK14_S3, package = \"hecedsm\")\ndb &lt;- GK14_S3 |&gt;\n    dplyr::filter(\n      !is.na(persp), # exclude missing values\n      age == \"young\") # only young adults\n\nThe following code filters out missing values for persp for young adults and shows the counts for each condition:\n\nGK14_S3 |&gt;\n  dplyr::filter(is.na(persp),      \n                age == \"young\") |&gt; \n  dplyr::group_by(condition) |&gt; \n  dplyr::summarize(count = dplyr::n()) \n\n# A tibble: 4 × 2\n  condition       count\n  &lt;fct&gt;           &lt;int&gt;\n1 self immersed       3\n2 self distanced      3\n3 other immersed      3\n4 other distanced     2\n\n\nand finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.\n\nlibrary(ggplot2) # grammar of graphics\nggplot(data = db,\n       mapping = aes(x = condition,\n                     y = persp,\n                     color = condition)) +\n  geom_boxplot() +\n  geom_jitter()\n\n\n\n\n\n\n\n\nReferences\n\nGrossmann, I., & Kross, E. (2014). Exploring Solomon’s paradox: Self-distancing eliminates the self-other asymmetry in wise reasoning about close relationships in younger and older adults. Psychological Science, 25(8), 1571–1580. https://doi.org/10.1177/0956797614535400"
   },
   {
-    "objectID": "content/12-content.html#content",
-    "href": "content/12-content.html#content",
-    "title": "Mediation and moderation",
+    "objectID": "evaluations/01-problem-set.html",
+    "href": "evaluations/01-problem-set.html",
+    "title": "Problem set 1",
     "section": "",
-    "text": "Linear mediation model\nModeration"
+    "text": "Task 1: Identifying information.\nClayton (2018) considers measures of implicit bias for multiple participants from an “in-field implicit association tests”. The codebook contains a description of the data.\n\nWhat is the population under study?\nIdentify the type of sampling.\nWhat are the observational and experimental units? How many observations are there for each in the sample?\nComment on the quality of the sample and the generalizability of the findings.\nIdentify the response variable, the factor and the treatment levels.\n\nConsider next the first field experiment of Goldstein et al. (2008):\n\nBriefly describe the experimental setup\nWhat is the population of interest?\nIdentify the experimental units and the sample size.\n\n\n\nTask 2: Getting started with programming\nStarting from next week, you will need to perform statistical analyses using a suitable software of your choosing.\nYour job is to install a software of your liking. Tell me which one you chose and report back on your success! Also go through tutorials to get started with loading data, producing basic plots and computing simple descriptive statistics.\n\n\n\n\n\n\nReferences\n\nClayton, A. (2018). Do gender quotas really reduce bias? Evidence from a policy experiment in Southern Africa. Journal of Experimental Political Science, 5(3), 182--194. https://doi.org/10.1017/XPS.2018.8\n\n\nGoldstein, N. J., Cialdini, R. B., & Griskevicius, V. (2008). A room with a viewpoint: Using social norms to motivate environmental conservation in hotels. Journal of Consumer Research, 35(3), 472–482. https://doi.org/10.1086/586910"
   },
   {
-    "objectID": "content/12-content.html#learning-objectives",
-    "href": "content/12-content.html#learning-objectives",
-    "title": "Mediation and moderation",
+    "objectID": "content/13-content.html",
+    "href": "content/13-content.html",
+    "title": "Nonparametric tests and count data",
+    "section": "",
+    "text": "Nonparametric tests\nModels and tests for count data"
+  },
+  {
+    "objectID": "content/13-content.html#content",
+    "href": "content/13-content.html#content",
+    "title": "Nonparametric tests and count data",
+    "section": "",
+    "text": "Nonparametric tests\nModels and tests for count data"
+  },
+  {
+    "objectID": "content/13-content.html#learning-objectives",
+    "href": "content/13-content.html#learning-objectives",
+    "title": "Nonparametric tests and count data",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUsing the linear mediation model\ndiscussing limitations of the linear mediation model\ntesting for moderating variables (interactions)"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUnderstand the benefits and drawback of rank-based tests\nPerform tests for count data (Fisher exact test, \\(\\chi^2\\) tests) and correctly report their output with effect sizes"
   },
   {
-    "objectID": "content/12-content.html#readings",
-    "href": "content/12-content.html#readings",
-    "title": "Mediation and moderation",
+    "objectID": "content/13-content.html#readings",
+    "href": "content/13-content.html#readings",
+    "title": "Nonparametric tests and count data",
     "section": "Readings",
-    "text": "Readings\n\nChapter 11 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions Imai et al. (2010)"
+    "text": "Readings\n\nChapter 12 Categorical data analysis of Navarro (2019)\nChapter 12 of the course notes"
   },
   {
-    "objectID": "content/12-content.html#slides",
-    "href": "content/12-content.html#slides",
-    "title": "Mediation and moderation",
+    "objectID": "content/13-content.html#slides",
+    "href": "content/13-content.html#slides",
+    "title": "Nonparametric tests and count data",
+    "section": "Slides",
+    "text": "Slides\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+  },
+  {
+    "objectID": "content/11-content.html",
+    "href": "content/11-content.html",
+    "title": "Introduction to causal inference",
+    "section": "",
+    "text": "Introduction to causal inference"
+  },
+  {
+    "objectID": "content/11-content.html#content",
+    "href": "content/11-content.html#content",
+    "title": "Introduction to causal inference",
+    "section": "",
+    "text": "Introduction to causal inference"
+  },
+  {
+    "objectID": "content/11-content.html#learning-objectives",
+    "href": "content/11-content.html#learning-objectives",
+    "title": "Introduction to causal inference",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the importance of listing potential confounders\ndetermining which variables to control for (confounders vs colliders)\ndrawing a directed acyclic graph describing the interrelation between variables\nexplaining the differences between experimental and observational studies for studying mediation"
+  },
+  {
+    "objectID": "content/11-content.html#readings",
+    "href": "content/11-content.html#readings",
+    "title": "Introduction to causal inference",
+    "section": "Readings",
+    "text": "Readings\n\nChapter 2 of VanderWeele (2015)\n\nAndrew Heiss’ course notes on directed acyclic graphs (DAG) and types of association.\n\nCausal models (video and slides)\nPaths, doors, and adjustment (video and slides)\n\nThe structural equation modelling (SEM) approach to mediation\n\nPaper popularizing linear mediation (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\n\nThe causal inference approach\n\nPearl (2014)\nImai et al. (2010)"
+  },
+  {
+    "objectID": "content/11-content.html#complementary-readings",
+    "href": "content/11-content.html#complementary-readings",
+    "title": "Introduction to causal inference",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\nPearl et al. (2016), Chapter 3\nRohrer (2018)"
+  },
+  {
+    "objectID": "content/11-content.html#slides",
+    "href": "content/11-content.html#slides",
+    "title": "Introduction to causal inference",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/10-content.html",
-    "href": "content/10-content.html",
-    "title": "Intro to mixed models",
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
+    "title": "Repeated measures and multivariate ANOVA",
     "section": "",
-    "text": "Introduction to mixed models"
+    "text": "Analysis of within-subject designs\nRepeated measures and test of sphericity\nMultivariate analysis of variance"
   },
   {
-    "objectID": "content/10-content.html#content",
-    "href": "content/10-content.html#content",
-    "title": "Intro to mixed models",
+    "objectID": "content/09-content.html#content",
+    "href": "content/09-content.html#content",
+    "title": "Repeated measures and multivariate ANOVA",
     "section": "",
-    "text": "Introduction to mixed models"
+    "text": "Analysis of within-subject designs\nRepeated measures and test of sphericity\nMultivariate analysis of variance"
   },
   {
-    "objectID": "content/10-content.html#learning-objectives",
-    "href": "content/10-content.html#learning-objectives",
-    "title": "Intro to mixed models",
+    "objectID": "content/09-content.html#learning-objectives",
+    "href": "content/09-content.html#learning-objectives",
+    "title": "Repeated measures and multivariate ANOVA",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ndetermining the structure of an experimental design with random and fixed effects\ncorrectly determining whether effects are crossed or nested\nsetting up a linear mixed model"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nadequately modelling repeated measures\ncorrectly interpreting tests of sphericity using software\nexplaining the benefits and disadvantages of repeated-measure designs\ntesting model assumptions in multivariate model"
   },
   {
-    "objectID": "content/10-content.html#readings",
-    "href": "content/10-content.html#readings",
-    "title": "Intro to mixed models",
+    "objectID": "content/09-content.html#readings",
+    "href": "content/09-content.html#readings",
+    "title": "Repeated measures and multivariate ANOVA",
     "section": "Readings",
-    "text": "Readings\n\nChapter 6 Random and Mixed-Effects Models of Lukas Meier’s ANOVA and Mixed Models: A Short Intro Using R]\n Chapter 10 of the course notes"
+    "text": "Readings\n\n Chapter 9 of the course notes"
   },
   {
-    "objectID": "content/10-content.html#complementary-readings",
-    "href": "content/10-content.html#complementary-readings",
-    "title": "Intro to mixed models",
+    "objectID": "content/09-content.html#complementary-readings",
+    "href": "content/09-content.html#complementary-readings",
+    "title": "Repeated measures and multivariate ANOVA",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 10 and 15 of Maxwell et al. (2017)."
+    "text": "Complementary readings\n\n\n Chapters 11–13 of Maxwell et al. (2017).\n Chapter 5.2 of Price et al. (2017)\n Chapter 16 to 18 of Keppel & Wickens (2004)"
   },
   {
-    "objectID": "content/10-content.html#slides",
-    "href": "content/10-content.html#slides",
-    "title": "Intro to mixed models",
+    "objectID": "content/09-content.html#slides",
+    "href": "content/09-content.html#slides",
+    "title": "Repeated measures and multivariate ANOVA",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/08-content.html",
-    "href": "content/08-content.html",
-    "title": "Effect size and power",
+    "objectID": "content/07-content.html",
+    "href": "content/07-content.html",
+    "title": "Designs to reduce the error",
     "section": "",
-    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
+    "text": "Blocking\nAnalysis of covariance"
   },
   {
-    "objectID": "content/08-content.html#content",
-    "href": "content/08-content.html#content",
-    "title": "Effect size and power",
+    "objectID": "content/07-content.html#content",
+    "href": "content/07-content.html#content",
+    "title": "Designs to reduce the error",
     "section": "",
-    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
+    "text": "Blocking\nAnalysis of covariance"
   },
   {
-    "objectID": "content/08-content.html#learning-objectives",
-    "href": "content/08-content.html#learning-objectives",
-    "title": "Effect size and power",
+    "objectID": "content/07-content.html#learning-objectives",
+    "href": "content/07-content.html#learning-objectives",
+    "title": "Designs to reduce the error",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncorrectly report effect size for common statistics in analysis of variance models\ndeduce the sample size necessary to replicate a study at a given power\nexplain the interplay between sample size, power and effect size."
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits of blocked design and ANCOVA over completely randomized designs\nusing control covariates or blocking factors\ntesting equality of slopes"
   },
   {
-    "objectID": "content/08-content.html#readings",
-    "href": "content/08-content.html#readings",
-    "title": "Effect size and power",
+    "objectID": "content/07-content.html#readings",
+    "href": "content/07-content.html#readings",
+    "title": "Designs to reduce the error",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 7 of the course notes\n Effect size and power example"
+    "text": "Readings\n\n Chapter 6 of the course notes\n Chapter 5 (Complete Block Designs) of Meier (2022) (5.1-5.2)"
   },
   {
-    "objectID": "content/08-content.html#complementary-readings",
-    "href": "content/08-content.html#complementary-readings",
-    "title": "Effect size and power",
+    "objectID": "content/07-content.html#complementary-readings",
+    "href": "content/07-content.html#complementary-readings",
+    "title": "Designs to reduce the error",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)"
+    "text": "Complementary readings\n\n Chapter 9 of Maxwell et al. (2017).\n Chapter 4 of Cox (1958)."
   },
   {
-    "objectID": "content/08-content.html#slides",
-    "href": "content/08-content.html#slides",
-    "title": "Effect size and power",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
-  },
-  {
-    "objectID": "content/06-content.html",
-    "href": "content/06-content.html",
-    "title": "Multiway factorial designs",
-    "section": "",
-    "text": "Unbalanced designs\nMultiway factorial designs"
-  },
-  {
-    "objectID": "content/06-content.html#content",
-    "href": "content/06-content.html#content",
-    "title": "Multiway factorial designs",
-    "section": "",
-    "text": "Unbalanced designs\nMultiway factorial designs"
-  },
-  {
-    "objectID": "content/06-content.html#learning-objectives",
-    "href": "content/06-content.html#learning-objectives",
-    "title": "Multiway factorial designs",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of balanced designs\ncorrectly interpreting analysis of variance table\nspecifying and calculating custom contrasts in multiway factorial designs\ncorrecting for multiple testing"
-  },
-  {
-    "objectID": "content/06-content.html#readings",
-    "href": "content/06-content.html#readings",
-    "title": "Multiway factorial designs",
-    "section": "Readings",
-    "text": "Readings\n\n Chapter 5 of the course notes\n Two-way ANOVA example\n Three-way ANOVA example"
-  },
-  {
-    "objectID": "content/06-content.html#complementary-readings",
-    "href": "content/06-content.html#complementary-readings",
-    "title": "Multiway factorial designs",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 8 of Maxwell et al. (2017).\n Chapters 21-22 of Keppel & Wickens (2004)."
-  },
-  {
-    "objectID": "content/06-content.html#videos",
-    "href": "content/06-content.html#videos",
-    "title": "Multiway factorial designs",
+    "objectID": "content/07-content.html#videos",
+    "href": "content/07-content.html#videos",
+    "title": "Designs to reduce the error",
     "section": "Videos",
     "text": "Videos"
   },
   {
-    "objectID": "content/06-content.html#slides",
-    "href": "content/06-content.html#slides",
-    "title": "Multiway factorial designs",
+    "objectID": "content/07-content.html#slides",
+    "href": "content/07-content.html#slides",
+    "title": "Designs to reduce the error",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/04-content.html",
-    "href": "content/04-content.html",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/05-content.html",
+    "href": "content/05-content.html",
+    "title": "Complete factorial designs",
     "section": "",
-    "text": "Contrasts\nMultiple testing"
+    "text": "Benefits of factorial designs\nInteractions\nSimple, marginal and interaction contrasts"
   },
   {
-    "objectID": "content/04-content.html#content",
-    "href": "content/04-content.html#content",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/05-content.html#content",
+    "href": "content/05-content.html#content",
+    "title": "Complete factorial designs",
     "section": "",
-    "text": "Contrasts\nMultiple testing"
+    "text": "Benefits of factorial designs\nInteractions\nSimple, marginal and interaction contrasts"
   },
   {
-    "objectID": "content/04-content.html#learning-objectives",
-    "href": "content/04-content.html#learning-objectives",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/05-content.html#learning-objectives",
+    "href": "content/05-content.html#learning-objectives",
+    "title": "Complete factorial designs",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nspecifying and calculating custom contrasts in factorial designs\ndetermining the number of tests in a family that need to be corrected for\nunderstanding how to correct p-values to account for multiple testing\nlisting multiplicity testing methods suitable depending on context"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of factorial designs\ninterpreting an interaction plot and being aware of it’s limitation\ninterpreting model effects in sum-to-zero parametrization\nreporting results from a two-way analysis of variance\ndetermining whether or not simple or main effects are most suitable"
   },
   {
-    "objectID": "content/04-content.html#readings",
-    "href": "content/04-content.html#readings",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/05-content.html#readings",
+    "href": "content/05-content.html#readings",
+    "title": "Complete factorial designs",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 4 of the course notes\n Chapter 3 of Meier (2022)\n One-way ANOVA example"
+    "text": "Readings\n\n Chapter 4 of Meier (2022)\n Chapter 5 of the course notes"
   },
   {
-    "objectID": "content/04-content.html#complementary-readings",
-    "href": "content/04-content.html#complementary-readings",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/05-content.html#complementary-readings",
+    "href": "content/05-content.html#complementary-readings",
+    "title": "Complete factorial designs",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 5 of Maxwell et al. (2017).\n Chapters 4 and 6 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10-13 of Keppel & Wickens (2004)."
   },
   {
-    "objectID": "content/04-content.html#slides",
-    "href": "content/04-content.html#slides",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/05-content.html#slides",
+    "href": "content/05-content.html#slides",
+    "title": "Complete factorial designs",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/02-content.html",
-    "href": "content/02-content.html",
-    "title": "Hypothesis testing",
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "Analysis of variance",
     "section": "",
-    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons"
+    "text": "ANOVA and F-test statistic\nModel assumptions"
   },
   {
-    "objectID": "content/02-content.html#content",
-    "href": "content/02-content.html#content",
-    "title": "Hypothesis testing",
+    "objectID": "content/03-content.html#content",
+    "href": "content/03-content.html#content",
+    "title": "Analysis of variance",
     "section": "",
-    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons"
+    "text": "ANOVA and F-test statistic\nModel assumptions"
   },
   {
-    "objectID": "content/02-content.html#learning-objectives",
-    "href": "content/02-content.html#learning-objectives",
-    "title": "Hypothesis testing",
+    "objectID": "content/03-content.html#learning-objectives",
+    "href": "content/03-content.html#learning-objectives",
+    "title": "Analysis of variance",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the mechanics behind generic hypothesis tests\ninterpreting the output of generic tests\ncorrectly reporting the output of a testing procedure"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncarry-out a one-way analysis of variance test\ncheck model assumptions using hypothesis tests and graphics."
   },
   {
-    "objectID": "content/02-content.html#readings",
-    "href": "content/02-content.html#readings",
-    "title": "Hypothesis testing",
+    "objectID": "content/03-content.html#readings",
+    "href": "content/03-content.html#readings",
+    "title": "Analysis of variance",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 5 (Foundations for inference) of Matthew Crump’s course notes. These notes are non-technical, but do a good job at explaining the notion of sampling variability and chance. If you find them too basic, skip directly to the next item.\n Chapter 2 of the Course notes\n The permutation test by Jared Wilson"
+    "text": "Readings\n\n Chapter 3 of the Course notes"
   },
   {
-    "objectID": "content/02-content.html#complementary-readings",
-    "href": "content/02-content.html#complementary-readings",
-    "title": "Hypothesis testing",
+    "objectID": "content/03-content.html#complementary-readings",
+    "href": "content/03-content.html#complementary-readings",
+    "title": "Analysis of variance",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 2 of Maxwell et al. (2017)\n Chapter 3 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 3 of Maxwell et al. (2017) (up to page 113).\n Chapter 2 of Meier (2022)\n Chapter 3 and 7 of Keppel & Wickens (2004)."
   },
   {
-    "objectID": "content/02-content.html#slides",
-    "href": "content/02-content.html#slides",
-    "title": "Hypothesis testing",
+    "objectID": "content/03-content.html#slides",
+    "href": "content/03-content.html#slides",
+    "title": "Analysis of variance",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
-  },
-  {
-    "objectID": "content/02-content.html#case-study",
-    "href": "content/02-content.html#case-study",
-    "title": "Hypothesis testing",
-    "section": "Case study",
-    "text": "Case study\nWe will look at the way authors report the conclusion of their statistical tests with\n\nRosen & Jerdee (1974)\nBrucks & Levav (2022)\nLiu et al. (2022+), Experiment 1"
-  },
-  {
-    "objectID": "content/02-content.html#code",
-    "href": "content/02-content.html#code",
-    "title": "Hypothesis testing",
-    "section": "Code",
-    "text": "Code\nThe following code reproduces the applications in the course slides and the case study\n\nR script\nSAS scripts\nPython script for the case study"
   },
   {
     "objectID": "content/01-content.html",
@@ -770,368 +735,410 @@
     "text": "Case study\nWe will discuss the summary of Abaluck et al. (2022) “The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh” (pdf) in class.\nDuring the activity, you will be asked to identify in teams the following:\n\nthe objective of the study\nthe target population (which findings generalize?)\nthe sampling scheme\nthe observational and experimental units\nthe treatments\nthe outcome variable(s)"
   },
   {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
-    "title": "Analysis of variance",
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Hypothesis testing",
     "section": "",
-    "text": "ANOVA and F-test statistic\nModel assumptions"
+    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons"
   },
   {
-    "objectID": "content/03-content.html#content",
-    "href": "content/03-content.html#content",
-    "title": "Analysis of variance",
+    "objectID": "content/02-content.html#content",
+    "href": "content/02-content.html#content",
+    "title": "Hypothesis testing",
     "section": "",
-    "text": "ANOVA and F-test statistic\nModel assumptions"
+    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons"
   },
   {
-    "objectID": "content/03-content.html#learning-objectives",
-    "href": "content/03-content.html#learning-objectives",
-    "title": "Analysis of variance",
+    "objectID": "content/02-content.html#learning-objectives",
+    "href": "content/02-content.html#learning-objectives",
+    "title": "Hypothesis testing",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncarry-out a one-way analysis of variance test\ncheck model assumptions using hypothesis tests and graphics."
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the mechanics behind generic hypothesis tests\ninterpreting the output of generic tests\ncorrectly reporting the output of a testing procedure"
   },
   {
-    "objectID": "content/03-content.html#readings",
-    "href": "content/03-content.html#readings",
-    "title": "Analysis of variance",
+    "objectID": "content/02-content.html#readings",
+    "href": "content/02-content.html#readings",
+    "title": "Hypothesis testing",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 3 of the Course notes"
+    "text": "Readings\n\n Chapter 5 (Foundations for inference) of Matthew Crump’s course notes. These notes are non-technical, but do a good job at explaining the notion of sampling variability and chance. If you find them too basic, skip directly to the next item.\n Chapter 2 of the Course notes\n The permutation test by Jared Wilson"
   },
   {
-    "objectID": "content/03-content.html#complementary-readings",
-    "href": "content/03-content.html#complementary-readings",
-    "title": "Analysis of variance",
+    "objectID": "content/02-content.html#complementary-readings",
+    "href": "content/02-content.html#complementary-readings",
+    "title": "Hypothesis testing",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 3 of Maxwell et al. (2017) (up to page 113).\n Chapter 2 of Meier (2022)\n Chapter 3 and 7 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 2 of Maxwell et al. (2017)\n Chapter 3 of Keppel & Wickens (2004)."
   },
   {
-    "objectID": "content/03-content.html#slides",
-    "href": "content/03-content.html#slides",
-    "title": "Analysis of variance",
+    "objectID": "content/02-content.html#slides",
+    "href": "content/02-content.html#slides",
+    "title": "Hypothesis testing",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/05-content.html",
-    "href": "content/05-content.html",
-    "title": "Complete factorial designs",
-    "section": "",
-    "text": "Benefits of factorial designs\nInteractions\nSimple, marginal and interaction contrasts"
+    "objectID": "content/02-content.html#case-study",
+    "href": "content/02-content.html#case-study",
+    "title": "Hypothesis testing",
+    "section": "Case study",
+    "text": "Case study\nWe will look at the way authors report the conclusion of their statistical tests with\n\nRosen & Jerdee (1974)\nBrucks & Levav (2022)\nLiu et al. (2022+), Experiment 1"
   },
   {
-    "objectID": "content/05-content.html#content",
-    "href": "content/05-content.html#content",
-    "title": "Complete factorial designs",
-    "section": "",
-    "text": "Benefits of factorial designs\nInteractions\nSimple, marginal and interaction contrasts"
+    "objectID": "content/02-content.html#code",
+    "href": "content/02-content.html#code",
+    "title": "Hypothesis testing",
+    "section": "Code",
+    "text": "Code\nThe following code reproduces the applications in the course slides and the case study\n\nR script\nSAS scripts\nPython script for the case study"
   },
   {
-    "objectID": "content/05-content.html#learning-objectives",
-    "href": "content/05-content.html#learning-objectives",
-    "title": "Complete factorial designs",
+    "objectID": "content/04-content.html",
+    "href": "content/04-content.html",
+    "title": "Contrasts and multiple testing",
+    "section": "",
+    "text": "Contrasts\nMultiple testing"
+  },
+  {
+    "objectID": "content/04-content.html#content",
+    "href": "content/04-content.html#content",
+    "title": "Contrasts and multiple testing",
+    "section": "",
+    "text": "Contrasts\nMultiple testing"
+  },
+  {
+    "objectID": "content/04-content.html#learning-objectives",
+    "href": "content/04-content.html#learning-objectives",
+    "title": "Contrasts and multiple testing",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of factorial designs\ninterpreting an interaction plot and being aware of it’s limitation\ninterpreting model effects in sum-to-zero parametrization\nreporting results from a two-way analysis of variance\ndetermining whether or not simple or main effects are most suitable"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nspecifying and calculating custom contrasts in factorial designs\ndetermining the number of tests in a family that need to be corrected for\nunderstanding how to correct p-values to account for multiple testing\nlisting multiplicity testing methods suitable depending on context"
   },
   {
-    "objectID": "content/05-content.html#readings",
-    "href": "content/05-content.html#readings",
-    "title": "Complete factorial designs",
+    "objectID": "content/04-content.html#readings",
+    "href": "content/04-content.html#readings",
+    "title": "Contrasts and multiple testing",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 4 of Meier (2022)\n Chapter 5 of the course notes"
+    "text": "Readings\n\n Chapter 4 of the course notes\n Chapter 3 of Meier (2022)\n One-way ANOVA example"
   },
   {
-    "objectID": "content/05-content.html#complementary-readings",
-    "href": "content/05-content.html#complementary-readings",
-    "title": "Complete factorial designs",
+    "objectID": "content/04-content.html#complementary-readings",
+    "href": "content/04-content.html#complementary-readings",
+    "title": "Contrasts and multiple testing",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10-13 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 5 of Maxwell et al. (2017).\n Chapters 4 and 6 of Keppel & Wickens (2004)."
   },
   {
-    "objectID": "content/05-content.html#slides",
-    "href": "content/05-content.html#slides",
-    "title": "Complete factorial designs",
+    "objectID": "content/04-content.html#slides",
+    "href": "content/04-content.html#slides",
+    "title": "Contrasts and multiple testing",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/07-content.html",
-    "href": "content/07-content.html",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
+    "title": "Multiway factorial designs",
     "section": "",
-    "text": "Blocking\nAnalysis of covariance"
+    "text": "Unbalanced designs\nMultiway factorial designs"
   },
   {
-    "objectID": "content/07-content.html#content",
-    "href": "content/07-content.html#content",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html#content",
+    "href": "content/06-content.html#content",
+    "title": "Multiway factorial designs",
     "section": "",
-    "text": "Blocking\nAnalysis of covariance"
+    "text": "Unbalanced designs\nMultiway factorial designs"
   },
   {
-    "objectID": "content/07-content.html#learning-objectives",
-    "href": "content/07-content.html#learning-objectives",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html#learning-objectives",
+    "href": "content/06-content.html#learning-objectives",
+    "title": "Multiway factorial designs",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits of blocked design and ANCOVA over completely randomized designs\nusing control covariates or blocking factors\ntesting equality of slopes"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of balanced designs\ncorrectly interpreting analysis of variance table\nspecifying and calculating custom contrasts in multiway factorial designs\ncorrecting for multiple testing"
   },
   {
-    "objectID": "content/07-content.html#readings",
-    "href": "content/07-content.html#readings",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html#readings",
+    "href": "content/06-content.html#readings",
+    "title": "Multiway factorial designs",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 6 of the course notes\n Chapter 5 (Complete Block Designs) of Meier (2022) (5.1-5.2)"
+    "text": "Readings\n\n Chapter 5 of the course notes\n Two-way ANOVA example\n Three-way ANOVA example"
   },
   {
-    "objectID": "content/07-content.html#complementary-readings",
-    "href": "content/07-content.html#complementary-readings",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html#complementary-readings",
+    "href": "content/06-content.html#complementary-readings",
+    "title": "Multiway factorial designs",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 9 of Maxwell et al. (2017).\n Chapter 4 of Cox (1958)."
+    "text": "Complementary readings\n\n Chapter 8 of Maxwell et al. (2017).\n Chapters 21-22 of Keppel & Wickens (2004)."
   },
   {
-    "objectID": "content/07-content.html#videos",
-    "href": "content/07-content.html#videos",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html#videos",
+    "href": "content/06-content.html#videos",
+    "title": "Multiway factorial designs",
     "section": "Videos",
     "text": "Videos"
   },
   {
-    "objectID": "content/07-content.html#slides",
-    "href": "content/07-content.html#slides",
-    "title": "Designs to reduce the error",
+    "objectID": "content/06-content.html#slides",
+    "href": "content/06-content.html#slides",
+    "title": "Multiway factorial designs",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/09-content.html",
-    "href": "content/09-content.html",
-    "title": "Repeated measures and multivariate ANOVA",
+    "objectID": "content/08-content.html",
+    "href": "content/08-content.html",
+    "title": "Effect size and power",
     "section": "",
-    "text": "Analysis of within-subject designs\nRepeated measures and test of sphericity\nMultivariate analysis of variance"
+    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
   },
   {
-    "objectID": "content/09-content.html#content",
-    "href": "content/09-content.html#content",
-    "title": "Repeated measures and multivariate ANOVA",
+    "objectID": "content/08-content.html#content",
+    "href": "content/08-content.html#content",
+    "title": "Effect size and power",
     "section": "",
-    "text": "Analysis of within-subject designs\nRepeated measures and test of sphericity\nMultivariate analysis of variance"
+    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
   },
   {
-    "objectID": "content/09-content.html#learning-objectives",
-    "href": "content/09-content.html#learning-objectives",
-    "title": "Repeated measures and multivariate ANOVA",
+    "objectID": "content/08-content.html#learning-objectives",
+    "href": "content/08-content.html#learning-objectives",
+    "title": "Effect size and power",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nadequately modelling repeated measures\ncorrectly interpreting tests of sphericity using software\nexplaining the benefits and disadvantages of repeated-measure designs\ntesting model assumptions in multivariate model"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncorrectly report effect size for common statistics in analysis of variance models\ndeduce the sample size necessary to replicate a study at a given power\nexplain the interplay between sample size, power and effect size."
   },
   {
-    "objectID": "content/09-content.html#readings",
-    "href": "content/09-content.html#readings",
-    "title": "Repeated measures and multivariate ANOVA",
+    "objectID": "content/08-content.html#readings",
+    "href": "content/08-content.html#readings",
+    "title": "Effect size and power",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 9 of the course notes"
+    "text": "Readings\n\n Chapter 7 of the course notes\n Effect size and power example"
   },
   {
-    "objectID": "content/09-content.html#complementary-readings",
-    "href": "content/09-content.html#complementary-readings",
-    "title": "Repeated measures and multivariate ANOVA",
+    "objectID": "content/08-content.html#complementary-readings",
+    "href": "content/08-content.html#complementary-readings",
+    "title": "Effect size and power",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n\n Chapters 11–13 of Maxwell et al. (2017).\n Chapter 5.2 of Price et al. (2017)\n Chapter 16 to 18 of Keppel & Wickens (2004)"
+    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)"
   },
   {
-    "objectID": "content/09-content.html#slides",
-    "href": "content/09-content.html#slides",
-    "title": "Repeated measures and multivariate ANOVA",
+    "objectID": "content/08-content.html#slides",
+    "href": "content/08-content.html#slides",
+    "title": "Effect size and power",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/11-content.html",
-    "href": "content/11-content.html",
-    "title": "Introduction to causal inference",
+    "objectID": "content/10-content.html",
+    "href": "content/10-content.html",
+    "title": "Intro to mixed models",
     "section": "",
-    "text": "Introduction to causal inference"
+    "text": "Introduction to mixed models"
   },
   {
-    "objectID": "content/11-content.html#content",
-    "href": "content/11-content.html#content",
-    "title": "Introduction to causal inference",
+    "objectID": "content/10-content.html#content",
+    "href": "content/10-content.html#content",
+    "title": "Intro to mixed models",
     "section": "",
-    "text": "Introduction to causal inference"
+    "text": "Introduction to mixed models"
   },
   {
-    "objectID": "content/11-content.html#learning-objectives",
-    "href": "content/11-content.html#learning-objectives",
-    "title": "Introduction to causal inference",
+    "objectID": "content/10-content.html#learning-objectives",
+    "href": "content/10-content.html#learning-objectives",
+    "title": "Intro to mixed models",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the importance of listing potential confounders\ndetermining which variables to control for (confounders vs colliders)\ndrawing a directed acyclic graph describing the interrelation between variables\nexplaining the differences between experimental and observational studies for studying mediation"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ndetermining the structure of an experimental design with random and fixed effects\ncorrectly determining whether effects are crossed or nested\nsetting up a linear mixed model"
   },
   {
-    "objectID": "content/11-content.html#readings",
-    "href": "content/11-content.html#readings",
-    "title": "Introduction to causal inference",
+    "objectID": "content/10-content.html#readings",
+    "href": "content/10-content.html#readings",
+    "title": "Intro to mixed models",
     "section": "Readings",
-    "text": "Readings\n\nChapter 2 of VanderWeele (2015)\n\nAndrew Heiss’ course notes on directed acyclic graphs (DAG) and types of association.\n\nCausal models (video and slides)\nPaths, doors, and adjustment (video and slides)\n\nThe structural equation modelling (SEM) approach to mediation\n\nPaper popularizing linear mediation (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\n\nThe causal inference approach\n\nPearl (2014)\nImai et al. (2010)"
+    "text": "Readings\n\nChapter 6 Random and Mixed-Effects Models of Lukas Meier’s ANOVA and Mixed Models: A Short Intro Using R]\n Chapter 10 of the course notes"
   },
   {
-    "objectID": "content/11-content.html#complementary-readings",
-    "href": "content/11-content.html#complementary-readings",
-    "title": "Introduction to causal inference",
+    "objectID": "content/10-content.html#complementary-readings",
+    "href": "content/10-content.html#complementary-readings",
+    "title": "Intro to mixed models",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\nPearl et al. (2016), Chapter 3\nRohrer (2018)"
+    "text": "Complementary readings\n\n Chapters 10 and 15 of Maxwell et al. (2017)."
   },
   {
-    "objectID": "content/11-content.html#slides",
-    "href": "content/11-content.html#slides",
-    "title": "Introduction to causal inference",
+    "objectID": "content/10-content.html#slides",
+    "href": "content/10-content.html#slides",
+    "title": "Intro to mixed models",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "content/13-content.html",
-    "href": "content/13-content.html",
-    "title": "Nonparametric tests and count data",
+    "objectID": "content/12-content.html",
+    "href": "content/12-content.html",
+    "title": "Mediation and moderation",
     "section": "",
-    "text": "Nonparametric tests\nModels and tests for count data"
+    "text": "Linear mediation model\nModeration"
   },
   {
-    "objectID": "content/13-content.html#content",
-    "href": "content/13-content.html#content",
-    "title": "Nonparametric tests and count data",
+    "objectID": "content/12-content.html#content",
+    "href": "content/12-content.html#content",
+    "title": "Mediation and moderation",
     "section": "",
-    "text": "Nonparametric tests\nModels and tests for count data"
+    "text": "Linear mediation model\nModeration"
   },
   {
-    "objectID": "content/13-content.html#learning-objectives",
-    "href": "content/13-content.html#learning-objectives",
-    "title": "Nonparametric tests and count data",
+    "objectID": "content/12-content.html#learning-objectives",
+    "href": "content/12-content.html#learning-objectives",
+    "title": "Mediation and moderation",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUnderstand the benefits and drawback of rank-based tests\nPerform tests for count data (Fisher exact test, \\(\\chi^2\\) tests) and correctly report their output with effect sizes"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUsing the linear mediation model\ndiscussing limitations of the linear mediation model\ntesting for moderating variables (interactions)"
   },
   {
-    "objectID": "content/13-content.html#readings",
-    "href": "content/13-content.html#readings",
-    "title": "Nonparametric tests and count data",
+    "objectID": "content/12-content.html#readings",
+    "href": "content/12-content.html#readings",
+    "title": "Mediation and moderation",
     "section": "Readings",
-    "text": "Readings\n\nChapter 12 Categorical data analysis of Navarro (2019)\nChapter 12 of the course notes"
+    "text": "Readings\n\nChapter 11 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions Imai et al. (2010)"
   },
   {
-    "objectID": "content/13-content.html#slides",
-    "href": "content/13-content.html#slides",
-    "title": "Nonparametric tests and count data",
+    "objectID": "content/12-content.html#slides",
+    "href": "content/12-content.html#slides",
+    "title": "Mediation and moderation",
     "section": "Slides",
-    "text": "Slides\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
-    "objectID": "evaluations/01-problem-set.html",
-    "href": "evaluations/01-problem-set.html",
-    "title": "Problem set 1",
+    "objectID": "content/index.html",
+    "href": "content/index.html",
+    "title": "Readings, lectures, and videos",
     "section": "",
-    "text": "Task 1: Identifying information.\nClayton (2018) considers measures of implicit bias for multiple participants from an “in-field implicit association tests”. The codebook contains a description of the data.\n\nWhat is the population under study?\nIdentify the type of sampling.\nWhat are the observational and experimental units? How many observations are there for each in the sample?\nComment on the quality of the sample and the generalizability of the findings.\nIdentify the response variable, the factor and the treatment levels.\n\nConsider next the first field experiment of Goldstein et al. (2008):\n\nBriefly describe the experimental setup\nWhat is the population of interest?\nIdentify the experimental units and the sample size.\n\n\n\nTask 2: Getting started with programming\nStarting from next week, you will need to perform statistical analyses using a suitable software of your choosing.\nYour job is to install a software of your liking. Tell me which one you chose and report back on your success! Also go through tutorials to get started with loading data, producing basic plots and computing simple descriptive statistics.\n\n\n\n\n\n\nReferences\n\nClayton, A. (2018). Do gender quotas really reduce bias? Evidence from a policy experiment in Southern Africa. Journal of Experimental Political Science, 5(3), 182--194. https://doi.org/10.1017/XPS.2018.8\n\n\nGoldstein, N. J., Cialdini, R. B., & Griskevicius, V. (2008). A room with a viewpoint: Using social norms to motivate environmental conservation in hotels. Journal of Consumer Research, 35(3), 472–482. https://doi.org/10.1086/586910"
+    "text": "Each class session has a set of required readings that you should complete before watching the lecture.\nEvery class session also has a YouTube playlist of short recorded videos for each of the lecture sections. The lecture slides are special HTML files made with the R package xaringan . On each class session page you’ll see buttons for opening the presentation in a new tab or for downloading a PDF of the slides in case you want to print them or store them on your computer:\n\n View all slides in new window  Download PDF of all slides\n\nThe slides are also embedded on each page. You can click in the slides and navigate through them with ← and →. If you type ? (or shift + /) while viewing the slides you can see a list of slide-specific commands (like f for fullscreen or p for presenter mode if you want to see my notes)."
   },
   {
-    "objectID": "evaluations/03-problem-set.html",
-    "href": "evaluations/03-problem-set.html",
-    "title": "Problem set 3",
+    "objectID": "evaluations/02-problem-set.html",
+    "href": "evaluations/02-problem-set.html",
+    "title": "Problem set 2",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nfollowing the naming convention PS3-studentid.extension where studentid is replaced with your student ID and extension is the file extension (e.g., .pdf, .R, .Rmd, .sps)\nInstructions: We consider data collected for Study 3 of Grossmann & Kross (2014) (click the links to download the paper and the Supplementary material). You can access these data directly from R from the hecedsm package or download the SPSS data.\nHave a quick look at the paper and fit the one way analysis of variance model to responses for young adults (20 to 40 years) only.\n\nReport the test statistic, the null distribution and the p-value.\nProvide a conclusion in the context of the study.\nThere are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?\n\nWe next look at model assumptions\n\nIs the independence assumption plausible in the context?\nHow many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition and forego normality checks?\nProduce a normal quantile-quantile plot and comment on the distribution of the residuals (check out this response on CrossValidated first).\nCheck the equality of variance assumption using a suitable test statistic and report the results.\nUse Welch’s one-way analysis of variance model (oneway.test() in R) and compare the output and the conclusion with that of the usual \\(F\\)-test.\n\nHints and R snippets\nTo subset the data, you can use the following commands:\n\ndata(GK14_S3, package = \"hecedsm\")\ndb &lt;- GK14_S3 |&gt;\n    dplyr::filter(\n      !is.na(persp), # exclude missing values\n      age == \"young\") # only young adults\n\nThe following code filters out missing values for persp for young adults and shows the counts for each condition:\n\nGK14_S3 |&gt;\n  dplyr::filter(is.na(persp),      \n                age == \"young\") |&gt; \n  dplyr::group_by(condition) |&gt; \n  dplyr::summarize(count = dplyr::n()) \n\n# A tibble: 4 × 2\n  condition       count\n  &lt;fct&gt;           &lt;int&gt;\n1 self immersed       3\n2 self distanced      3\n3 other immersed      3\n4 other distanced     2\n\n\nand finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.\n\nlibrary(ggplot2) # grammar of graphics\nggplot(data = db,\n       mapping = aes(x = condition,\n                     y = persp,\n                     color = condition)) +\n  geom_boxplot() +\n  geom_jitter()\n\n\n\n\n\n\n\n\nReferences\n\nGrossmann, I., & Kross, E. (2014). Exploring Solomon’s paradox: Self-distancing eliminates the self-other asymmetry in wise reasoning about close relationships in younger and older adults. Psychological Science, 25(8), 1571–1580. https://doi.org/10.1177/0956797614535400"
+    "text": "We consider the hypothesis test performed by Bastian et al. (2014) with the data they collected in their Experiment 1. The R and SPSS files containing code for performing the testing procedures and extracting the output are provided. You can also download the SPSS data file and the paper via OpenStats Lab.\n\nBriefly comment on the generalisability of the study in light of the sample composition and data collection.\nThe authors used a two-sample t-test to assess the hypothesis that people in the pain condition felt more threatened by the tasks (a manipulation check). One criticism of using such a test statistic is that it assumes that observations in both group have potentially different group average, but similar standard deviation.1 An alternative test which doesn’t assume equal variance in each experimental condition is Welch’s t-test. Use the latter instead to model the manipulation check for threat and report the output. Do the conclusions change?\nThe authors report results based on a one-way analysis of variance, a testing procedure that compares the mean of \\(m\\) different groups. The latter is equivalent to a two-sample t-test when there are only \\(m=2\\) groups.\n\nUsing the two-sample t-test, obtain a 95% and a 99% confidence interval for the mean difference score for perceived bonding.\nExplain how the two methods (p-value and confidence intervals) are equivalent for performing an hypothesis test with a significance level of 5% and 1%, respectively. Report the conclusions of your procedure in each case.\nList an advantage of each over the other.\n\nExtract the degrees of freedom, the value of the \\(F\\)-statistic and the p-value, suitably rounded, and report these.\nWhat can we reasonably conclude about the effect of bonding based on the output of the testing procedure? Is this reflected in the writing of the authors?\nFigure 1 of Bastian et al. (2014) shows a dynamite plot, i.e., a bar plot with 95% confidence intervals for each condition. Note that this is standard display, but overall it is poor graphical choice (why?). Briefly summarize the blog post."
   },
   {
-    "objectID": "evaluations/05-problem-set.html",
-    "href": "evaluations/05-problem-set.html",
-    "title": "Problem set 5",
-    "section": "",
-    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nWrite the name of the teammates on your report.\nWe consider a two-way analysis of variance using fictional data from Example 6.4 of Berger et al. (2018) on bank tellers: 100 tellers were offered one-on-one training with an experienced clerk for a certain number of weeks on the job, possibly in addition to formal training period. The goal of the study is to determine which combination is most efficient at reducing the monthly error in balance (in dollars). You can access these data directly from R from the hecedsm package or download the SPSS data.\nDownload and answer the following questions. Write a report as if you were doing an analysis for a scientific publication.\n\nProduce a plot of the monthly error per teller as a function of the number of weeks of one-on-one training.\nProduce a quantile-quantile plot of the residuals and use Levene’s test to check whether the variance in each subgroup is the same. Report on these preliminary checks.\nAssess whether there an interaction between number of weeks of one-on-one training and the formal training using an hypothesis test.\nCompute pairwise contrasts between weeks of one-on-one supervision for the case of people with formal training.\nCompare the difference in errors between 8 and 4 weeks of one-to-one supervision, for people with and without formal training.\n\nHint: to create a pretty interaction plot in R, try the following:\n\n# Redownload the package to get the data\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(teller, package = \"hecedsm\")\nlibrary(ggplot2)\nlibrary(dplyr)\n\nteller |&gt; \n  group_by(course, nweeks) |&gt;\n  summarize(merror = mean(error)) |&gt;\n ggplot(aes(x = nweeks,\n            y = merror,\n            group = course,\n            color = course)) +\n  geom_line() +\n  theme_classic() + \n  theme(legend.position = \"bottom\") + \n  labs(y = \"\",\n       subtitle = \"average monthly error (USD)\",\n       x = \"number of weeks of 1-1 training\")\n\n\n\n\n\nReferences\n\nBerger, P. D., Maurer, R. E., & Celli, G. B. (2018). Experimental design with applications in management, engineering, and the sciences (2nd ed.). Springer. https://doi.org/10.1007/978-3-319-64583-4"
-  },
-  {
-    "objectID": "evaluations/07-problem-set.html",
-    "href": "evaluations/07-problem-set.html",
-    "title": "Problem set 7",
-    "section": "",
-    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nLook at the ANCOVA example; this should be helpful in completing the problem set.\nWe consider Experiment 3 of Stekelenburg et al. (2021); (download the paper). The database can be found in SSVB21_S3 in the hecedsm package.\n\nHave a quick look at the exclusion guidelines in the preregistration. Do they make sense? think about other potential criteria that could have been listed.\nWrite down potential improvement points related to statistics and experimental setup that you could raise if you were assigned to peer-review the paper.\nThe author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the script). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?\nTest the assumptions of\n\nequal variance per experimental condition with the ANCOVA\nproper randomization based only on Prior scores\nequality of slopes\n\nIf the variance are unequal, fit the model with unequal variances per group (see the ANCOVA example) — otherwise proceed as usual.\n\nLook at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.\nDoes the conclusion of the test change relative to that reported in the paper?\n\n\n\n\n\n\nReferences\n\nStekelenburg, A. van, Schaap, G., Veling, H., & Buijzen, M. (2021). Boosting understanding and identification of scientific consensus can help to correct false beliefs. Psychological Science, 32(10), 1549–1565. https://doi.org/10.1177/09567976211007788"
-  },
-  {
-    "objectID": "evaluations/09-problem-set.html",
-    "href": "evaluations/09-problem-set.html",
-    "title": "Problem set 9",
-    "section": "",
-    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\nWe consider Study 2 of Bobak et al. (2019), who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). Bobak et al. (2019) report that\nPerform a repeated measure one-way ANOVA with color as within-factor and pcorr as response with the BMH19_S2 data, which can be found in the R package hecedsm."
-  },
-  {
-    "objectID": "evaluations/09-problem-set.html#footnotes",
-    "href": "evaluations/09-problem-set.html#footnotes",
-    "title": "Problem set 9",
+    "objectID": "evaluations/02-problem-set.html#footnotes",
+    "href": "evaluations/02-problem-set.html#footnotes",
+    "title": "Problem set 2",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nIf you fit the model with afex package functions aov_ez, the output contains a slot $Anova with the value of this test.↩︎"
+    "text": "Footnotes\n\n\nWe will see modelling assumptions in Week 3, take my word on it for now.↩︎"
   },
   {
-    "objectID": "evaluations/11-problem-set.html",
-    "href": "evaluations/11-problem-set.html",
-    "title": "Problem set 11",
+    "objectID": "evaluations/04-problem-set.html",
+    "href": "evaluations/04-problem-set.html",
+    "title": "Problem set 4",
     "section": "",
-    "text": "Complete this task in teams of up to three students.\nSubmission information: please submit on ZoneCours"
+    "text": "Submission information: please submit on ZoneCours\nfollowing the naming convention PS4-studentid.extension where studentid is replaced with your student ID and extension is the file extension (e.g., .pdf, .R, .Rmd, .sps)\nInstructions: We consider data collected for Study 3 of Grossmann & Kross (2014) (click the links to download the paper and the Supplementary material). You can access these data directly from R from the hecedsm package or download the SPSS data.\nThe purpose of the exercise is to reproduce part of Table S4 of the Supplementary material. We will compute linear contrasts and adjust the resulting comparisons to account for multiple testing.1\nWe will fit one-way ANOVA model for each of the four response (compr,limits,persp and change) and for each age group separately. Thus, we will have four contrasts for each of the eight models (one per outcome and age group). The size of the family, assuming the global \\(F\\)-tests are not of interest, is thus \\(m=32\\).\nUse the helper code provided. Don’t be intimidated: this task will involve a lot of copy-pasting. Fill the helper file code by replacing the #TODO statements and reach out for help if you are stuck."
   },
   {
-    "objectID": "evaluations/11-problem-set.html#task-1",
-    "href": "evaluations/11-problem-set.html#task-1",
-    "title": "Problem set 11",
+    "objectID": "evaluations/04-problem-set.html#footnotes",
+    "href": "evaluations/04-problem-set.html#footnotes",
+    "title": "Problem set 4",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nTechnical aside: there are four correlated outcome variables, so this is technically a multivariate problem. ↩︎\nThe sign may be different from the paper depending on how you set up the contrasts, but the conclusion is the same.↩︎\nHint: Bonferroni’s method amounts to making the tests at level \\(\\alpha/m\\). Try modifying the level in the code for the confidence intervals to see which is largest.↩︎"
+  },
+  {
+    "objectID": "evaluations/06-problem-set.html",
+    "href": "evaluations/06-problem-set.html",
+    "title": "Problem set 6",
+    "section": "",
+    "text": "Submission information: please submit on ZoneCours"
+  },
+  {
+    "objectID": "evaluations/06-problem-set.html#task-1",
+    "href": "evaluations/06-problem-set.html#task-1",
+    "title": "Problem set 6",
     "section": "Task 1",
-    "text": "Task 1\nRead Rohrer et al. (2022) and write down a summary"
+    "text": "Task 1\nRead Wilkinson (1999)’s guidelines for reporting statistical analyses.\nNext, look at one of the experiments conducted in Stekelenburg et al. (2021). Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors."
   },
   {
-    "objectID": "evaluations/11-problem-set.html#task-2",
-    "href": "evaluations/11-problem-set.html#task-2",
-    "title": "Problem set 11",
+    "objectID": "evaluations/06-problem-set.html#task-2",
+    "href": "evaluations/06-problem-set.html#task-2",
+    "title": "Problem set 6",
     "section": "Task 2",
-    "text": "Task 2\nLiu et al. (2022+) postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from LRMM22_S5b.\n\nFit the linear mediation model using the PROCESS macro or mediate function from the mediation package\n\n\nuse the nonparametric bootstrap with the percentile method\ncompare the coefficients with those of Figure 1 from the paper.\n\n\nIdentify the type of mediation (complementary, competitive or indirect only) based on coefficients.\nThe paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by Liu et al. (2022+)."
+    "text": "Task 2\nRead Nosek et al. (2018) and list three benefits of preregistration. Reflect on the practical aspects and on the impact.1\nWe will organize a discussion in the near future in class on preregistration and the replication crisis."
   },
   {
-    "objectID": "evaluations/11-problem-set.html#task-3",
-    "href": "evaluations/11-problem-set.html#task-3",
-    "title": "Problem set 11",
-    "section": "Task 3",
-    "text": "Task 3\nStudy 4 of Risen & Gilovich (2008) (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the Baron & Kenny (1986) methodology.\n\nRead the description and comment on the following aspects:\n\nuse of the Baron and Kenny original testing procedure1\nthe plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.\n\nUsing the summary statistics and coefficients estimates reported, recompute Sobel’s statistic2 and the p-value and compare them with the values reported. .3\nList the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?\nCan the authors successfully claim mediation considering the study uses an experimental design and randomly allocates condition? Why or why not?"
-  },
-  {
-    "objectID": "evaluations/11-problem-set.html#footnotes",
-    "href": "evaluations/11-problem-set.html#footnotes",
-    "title": "Problem set 11",
+    "objectID": "evaluations/06-problem-set.html#footnotes",
+    "href": "evaluations/06-problem-set.html#footnotes",
+    "title": "Problem set 6",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nThe latter is said to be suboptimal; explain why in your words.↩︎\nSome authors may be excluding the \\(\\mathsf{Va}(\\widehat{\\gamma})\\mathsf{Va}(\\widehat{\\alpha})\\) term from the equation.↩︎\nIn R, the \\(p\\)-value for the two-sided test can be computed via 2*pnorm(abs(stat), lower.tail = FALSE), where stat is Sobel’s statistic.↩︎"
+    "text": "Footnotes\n\n\nFeel free to discuss field-specific issues.↩︎"
   },
   {
-    "objectID": "evaluations/final-exam.html",
-    "href": "evaluations/final-exam.html",
-    "title": "Final examination",
+    "objectID": "evaluations/08-problem-set.html",
+    "href": "evaluations/08-problem-set.html",
+    "title": "Problem set 8",
     "section": "",
-    "text": "The final is a 180 minutes closed-book examination covering all of the material from class.\nThe exam format is as follows:\n\nOne question on the fundamentals of experimental designs (blocking, randomization, etc.)\nOne question on reproducibility/replication crisis\nOne question on key concepts (power, effect size, multiple testing).\nOne question on advanced topics (mixed models, causal inference and mediation analysis, etc.)\nTwo data analysis questions, using completely randomized or blocked designs (between-subjects or within-subject) with multi-way analysis of variance, ANCOVA, mixed model, with specific questions on various aspects including\n\nparametrization of ANOVA\nadequate setup of model\ninteraction plots\nuse of different tests and methods\ncalculation of degrees of freedom of the model / sample size\nconclusions related to output of tests\ninterpretation of effect sizes\ncontrasts and pairwise comparisons\ntests for model assumptions and diagnostic plots\n\n\nA practice final can be downloaded here"
+    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy."
   },
   {
-    "objectID": "evaluations/paper-review.html",
-    "href": "evaluations/paper-review.html",
-    "title": "Paper review",
+    "objectID": "evaluations/08-problem-set.html#footnotes",
+    "href": "evaluations/08-problem-set.html#footnotes",
+    "title": "Problem set 8",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIn R, check out the function F_to_omega2 from the effectsize package. You can also use the formula presented in the slides.↩︎\nHint: are the original effect size in line with the replications or not?↩︎"
+  },
+  {
+    "objectID": "evaluations/10-problem-set.html",
+    "href": "evaluations/10-problem-set.html",
+    "title": "Problem set 10",
     "section": "",
-    "text": "You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.\nComment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice of dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review."
+    "text": "Complete this task individually or in teams of up to three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nRead the chocolate example from Meier (2022) and some of the examples from the course notes.\nConsider the model of Hatano et al. (2022) for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using Oehlert (2000) approach\n\nIdentify sources of variation\nIdentify whether factors are crossed or nested\nDetermine whether factors should be fixed or random\nFigure out which interactions can exist and whether they can be fitted.\n\nNow, fit the linear mixed model using the following code\n\nlibrary(lmerTest)\ndata(HOSM22_E4, package = \"hecedsm\")\nmixmod &lt;- lmer(imscore ~ #TODO add covariates, etc.\n               data = HOSM22_E4)\nsummary(mixmod) # coefficients\nanova(mixmod) # type III analysis of variance table\n\n\nReport the results for the interaction test: is the interaction significative at level 5%? If not, compute estimated marginal means for rating type.\nCompute the correlation between measurements from the same students.\n\n\n\n\n\nReferences\n\nHatano, A., Ogulmus, C., Shigemasu, H., & Murayama, K. (2022). Thinking about thinking: People underestimate how enjoyable and engaging just waiting is. Journal of Experimental Psychology: General, 151(12), 3213–3229. https://doi.org/https://doi.org/10.1037/xge0001255\n\n\nMeier, L. (2022). ANOVA and mixed models: A short introduction using R (Chapman & Hall/CRC, Eds.). https://doi.org/10.1201/9781003146216\n\n\nOehlert, G. (2000). A first course in design and analysis of experiments. W. H. Freeman. http://users.stat.umn.edu/~gary/Book.html"
   },
   {
-    "objectID": "evaluations/paper-review.html#description-of-the-task",
-    "href": "evaluations/paper-review.html#description-of-the-task",
-    "title": "Paper review",
+    "objectID": "evaluations/12-problem-set.html",
+    "href": "evaluations/12-problem-set.html",
+    "title": "Problem set 12",
     "section": "",
-    "text": "You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.\nComment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.\nYou should focus on the following elements in your review:\n\nStrengths and weaknesses of the methodology used to test the research hypotheses.\nAppropriateness of experimental design and the choice of dependent variables, control variables, treatment conditions.\nAppropriateness of statistical analyses.\nPresentation and discussion of the results (e.g., descriptive statistics, estimation of effect sizes, power calculations, etc.)\nDiscussion of the limits of the study\nPossible sources of bias\nPre-registration, reproducibility and transparency of the study. Assessment of the potential for replicability.\n\nIn addition to the material seen in class, see Wilkinson (1999) and Campion (1993) to inform your review."
+    "text": "Complete this task individually.\nSubmission information: please submit on ZoneCours\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. The data containing the counts of the number of verbalization across all labs are given in the FBC66_T1 and MULTI21_D1 datasets.\nThe data from Table 1 of Flavell et al. (1966) is the number of children who verbalized without prompting overall in the first two experimental conditions (immediate recall and delayed recall subtasks).1\nFor the \\(\\chi^2\\) test to be valid, we need the expected number of counts to be at least five in each subcondition (otherwise the large sample approximation breaks down and is unreliable).\nThe number of students for each grade (kindergarden, second and fifth) is 20. The rows of the table are the ordered number of instances of verbalization.\n# Reinstall package\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(FBC66_T1, package = \"hecedsm\")\nchisq.test(xtabs(count ~ grade + frequency, data = FBC66_T1))\n\n\n    Pearson's Chi-squared test\n\ndata:  xtabs(count ~ grade + frequency, data = FBC66_T1)\nX-squared = 28.358, df = 4, p-value = 1.055e-05"
   },
   {
-    "objectID": "evaluations/paper-review.html#deliverables",
-    "href": "evaluations/paper-review.html#deliverables",
-    "title": "Paper review",
-    "section": "Deliverables",
-    "text": "Deliverables\nA portable document file (PDF) of your critique (maximum 3 pages, excluding bibliography)"
+    "objectID": "evaluations/12-problem-set.html#footnotes",
+    "href": "evaluations/12-problem-set.html#footnotes",
+    "title": "Problem set 12",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThe last task, point-and-name, is not considered because it specifically instructed students to speak out loud.↩︎\nIf the expected number is less than 5, the asymptotic \\(\\chi^2\\) approximation is dubious. We could resort to permutation and simulation to assess the accuracy of the \\(\\chi^2\\) benchmark. The row sum for the counts (per grade) is fixed to 20, but the columns are allowed to vary.↩︎"
   },
   {
-    "objectID": "evaluations/paper-review.html#grading-rubric",
-    "href": "evaluations/paper-review.html#grading-rubric",
-    "title": "Paper review",
-    "section": "Grading rubric",
-    "text": "Grading rubric\n\nIdentification of strength and weaknesses: 10\nCorrectness of the interpretation of statistical results: 10\nScope: 10\nClarity of report: 10\nUsefulness of suggestions: 5\nWriting and referencing: 5"
+    "objectID": "evaluations/index.html",
+    "href": "evaluations/index.html",
+    "title": "Evaluations",
+    "section": "",
+    "text": "The main goals of this class are to help you understand the steps require to design and analyse the results of an experiment."
+  },
+  {
+    "objectID": "evaluations/index.html#weekly-check-in",
+    "href": "evaluations/index.html#weekly-check-in",
+    "title": "Evaluations",
+    "section": "Weekly check-in",
+    "text": "Weekly check-in\nI want to hear back from you regarding the course material, activities and learning material.\nI will grade these check-ins using a check system:\n\n110%: Response shows phenomenal thought and engagement with the course content. I will not assign these often.\n100%: Response is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance.\n50%: Response is hastily composed, too short, and/or only cursorily engages with the course content. This grade signals that you need to improve next time. I will hopefully not assign these often.\n\nNotice that is essentially a pass/fail or completion-based system. I’m not grading your writing ability, I’m not counting the exact number of words you’re writing, and I’m not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I’m looking for thoughtful engagement, that’s all. Do good work and you’ll get a ✔.\nYou will submit these responses via ZoneCours."
+  },
+  {
+    "objectID": "evaluations/index.html#problem-sets",
+    "href": "evaluations/index.html#problem-sets",
+    "title": "Evaluations",
+    "section": "Problem sets",
+    "text": "Problem sets\nThere are 12 problem sets on the schedule. I will keep the highest grades for 11 of them. I will drop the lowest score - this means you can skip one of the problem sets. You need to show that you made a good faith effort to work each question. I will not grade these in detail. The problem sets will be graded using a check system:\n\n110%: Assignment is 100% completed. Every question was attempted and answered, and all answers are correct. Document is clean and easy to follow. Work is exceptional. I will not assign these often.\n100%: Assignment is complete. Every question was attempted and answered, and most answers are correct. This is the expected level of performance.\n75%: Assignment is mostly complete and most answers are correct.\n50%: Assignment is less than 50% complete and/or most answers are incorrect. This indicates that you need to improve next time. I will hopefully not assign these often.\n\nYou may (and should!) work together on the problem sets, but you must turn in your own answers. You cannot work in groups of more than three people, and you must note who participated in the group in your assignment."
+  },
+  {
+    "objectID": "evaluations/index.html#final-project",
+    "href": "evaluations/index.html#final-project",
+    "title": "Evaluations",
+    "section": "Final project",
+    "text": "Final project\nFor your final project, you will perform a critical review of a peer-reviewed paper from a list containing an experiment and which uses one of the statistical techniques covered in class. You will pay particular attention to reproducibility, readability and the correctness of the analysis, discussing points of improvement, statistical fallacies. This will help you develop skills for efficient peer-review of the statistical methodology section."
+  },
+  {
+    "objectID": "evaluations/index.html#final-examination",
+    "href": "evaluations/index.html#final-examination",
+    "title": "Evaluations",
+    "section": "Final examination",
+    "text": "Final examination\nThere will be a closed-book final exam covering the content of the whole semester. Most of the questions will relate to the tasks you performed in problem set and to discussions we had in class. The exam will be in-person (see the Syllabus for details)."
+  },
+  {
+    "objectID": "evaluations/weekly-check-in.html",
+    "href": "evaluations/weekly-check-in.html",
+    "title": "Questions",
+    "section": "",
+    "text": "Every week, after you finish working through the content, I want to hear about what you learned and what questions you still have. To facilitate this, and to encourage engagement with the course content, you’ll need to fill out a short questionnaire. This should be ~150 words.\nYou should answer the following three questions each week:\n\nWhat was the most exciting thing you learned from the session? Why?\nWhat was the muddiest thing from the session this week? What are you still wondering about?\n\nWhich activity did you find the most useful? What could have been skipped?"
   },
   {
     "objectID": "example/ancova.html",

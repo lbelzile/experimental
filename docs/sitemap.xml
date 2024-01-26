@@ -2,194 +2,198 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://edsm.rbind.io/syllabus.html</loc>
-    <lastmod>2024-01-20T20:02:09.673Z</lastmod>
+    <lastmod>2024-01-26T03:00:58.891Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/index.html</loc>
-    <lastmod>2024-01-20T20:02:04.713Z</lastmod>
+    <lastmod>2024-01-26T03:00:54.627Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/threewayanova.html</loc>
-    <lastmod>2024-01-20T20:02:01.749Z</lastmod>
+    <lastmod>2024-01-26T03:00:51.327Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/onewayanova.html</loc>
-    <lastmod>2024-01-20T20:01:58.597Z</lastmod>
+    <lastmod>2024-01-26T03:00:47.891Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/moderatedmediation.html</loc>
-    <lastmod>2024-01-20T20:01:55.225Z</lastmod>
+    <lastmod>2024-01-26T03:00:43.903Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/manova.html</loc>
-    <lastmod>2024-01-20T20:01:51.569Z</lastmod>
+    <lastmod>2024-01-26T03:00:40.343Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/introduction.html</loc>
-    <lastmod>2024-01-20T20:01:48.857Z</lastmod>
+    <lastmod>2024-01-26T03:00:37.623Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/index.html</loc>
-    <lastmod>2024-01-20T20:01:46.537Z</lastmod>
+    <lastmod>2024-01-26T03:00:35.003Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/counts.html</loc>
-    <lastmod>2024-01-20T20:01:43.793Z</lastmod>
+    <lastmod>2024-01-26T03:00:31.135Z</lastmod>
   </url>
   <url>
-    <loc>https://edsm.rbind.io/evaluations/weekly-check-in.html</loc>
-    <lastmod>2024-01-20T20:01:39.565Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/index.html</loc>
-    <lastmod>2024-01-20T20:01:38.533Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/12-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:37.453Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/10-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:35.981Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/08-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:34.657Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/06-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:33.517Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/04-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:32.125Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/02-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:30.732Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/index.html</loc>
-    <lastmod>2024-01-20T20:01:29.560Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/12-content.html</loc>
-    <lastmod>2024-01-20T20:01:28.560Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/10-content.html</loc>
-    <lastmod>2024-01-20T20:01:27.316Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/08-content.html</loc>
-    <lastmod>2024-01-20T20:01:26.180Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/06-content.html</loc>
-    <lastmod>2024-01-20T20:01:24.920Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/04-content.html</loc>
-    <lastmod>2024-01-20T20:01:23.684Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/02-content.html</loc>
-    <lastmod>2024-01-20T20:01:22.392Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/01-content.html</loc>
-    <lastmod>2024-01-20T20:01:21.624Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/03-content.html</loc>
-    <lastmod>2024-01-20T20:01:23.016Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/05-content.html</loc>
-    <lastmod>2024-01-20T20:01:24.316Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/07-content.html</loc>
-    <lastmod>2024-01-20T20:01:25.544Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/09-content.html</loc>
-    <lastmod>2024-01-20T20:01:26.788Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/11-content.html</loc>
-    <lastmod>2024-01-20T20:01:27.972Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/content/13-content.html</loc>
-    <lastmod>2024-01-20T20:01:29.060Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/01-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:30.100Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/03-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:31.589Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/05-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:32.977Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/07-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:34.049Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/09-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:35.189Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/11-problem-set.html</loc>
-    <lastmod>2024-01-20T20:01:36.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edsm.rbind.io/evaluations/final-exam.html</loc>
-    <lastmod>2024-01-20T20:01:37.945Z</lastmod>
+    <loc>https://edsm.rbind.io/example/SPSS.html</loc>
+    <lastmod>2024-01-26T03:00:27.167Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/evaluations/paper-review.html</loc>
-    <lastmod>2024-01-20T20:01:39.101Z</lastmod>
+    <lastmod>2024-01-26T03:00:24.563Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/final-exam.html</loc>
+    <lastmod>2024-01-26T03:00:23.407Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/11-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:21.743Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/09-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:19.555Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/07-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:17.911Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/05-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:16.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/03-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:15.291Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/01-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:13.739Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/13-content.html</loc>
+    <lastmod>2024-01-26T03:00:12.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/11-content.html</loc>
+    <lastmod>2024-01-26T03:00:10.911Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/09-content.html</loc>
+    <lastmod>2024-01-26T03:00:09.711Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/07-content.html</loc>
+    <lastmod>2024-01-26T03:00:08.479Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/05-content.html</loc>
+    <lastmod>2024-01-26T03:00:07.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/03-content.html</loc>
+    <lastmod>2024-01-26T03:00:05.227Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/01-content.html</loc>
+    <lastmod>2024-01-26T03:00:03.671Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/02-content.html</loc>
+    <lastmod>2024-01-26T03:00:04.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/04-content.html</loc>
+    <lastmod>2024-01-26T03:00:06.003Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/06-content.html</loc>
+    <lastmod>2024-01-26T03:00:07.859Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/08-content.html</loc>
+    <lastmod>2024-01-26T03:00:09.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/10-content.html</loc>
+    <lastmod>2024-01-26T03:00:10.255Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/12-content.html</loc>
+    <lastmod>2024-01-26T03:00:11.963Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/content/index.html</loc>
+    <lastmod>2024-01-26T03:00:13.143Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/02-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:14.407Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/04-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:15.903Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/06-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:17.339Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/08-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:18.611Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/10-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:20.759Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/12-problem-set.html</loc>
+    <lastmod>2024-01-26T03:00:22.815Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/index.html</loc>
+    <lastmod>2024-01-26T03:00:23.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edsm.rbind.io/evaluations/weekly-check-in.html</loc>
+    <lastmod>2024-01-26T03:00:25.187Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/ancova.html</loc>
-    <lastmod>2024-01-20T20:01:42.009Z</lastmod>
+    <lastmod>2024-01-26T03:00:29.427Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/effectsizepower.html</loc>
-    <lastmod>2024-01-20T20:01:45.705Z</lastmod>
+    <lastmod>2024-01-26T03:00:33.343Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/installation.html</loc>
-    <lastmod>2024-01-20T20:01:47.377Z</lastmod>
+    <lastmod>2024-01-26T03:00:35.975Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/linearmediation.html</loc>
-    <lastmod>2024-01-20T20:01:50.365Z</lastmod>
+    <lastmod>2024-01-26T03:00:39.155Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/mixedmodel.html</loc>
-    <lastmod>2024-01-20T20:01:54.133Z</lastmod>
+    <lastmod>2024-01-26T03:00:42.843Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/nonparametric.html</loc>
-    <lastmod>2024-01-20T20:01:56.433Z</lastmod>
+    <lastmod>2024-01-26T03:00:45.263Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/repeated.html</loc>
-    <lastmod>2024-01-20T20:01:59.849Z</lastmod>
+    <lastmod>2024-01-26T03:00:49.327Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/example/twowayanova.html</loc>
-    <lastmod>2024-01-20T20:02:04.185Z</lastmod>
+    <lastmod>2024-01-26T03:00:53.971Z</lastmod>
   </url>
   <url>
     <loc>https://edsm.rbind.io/schedule.html</loc>
-    <lastmod>2024-01-20T20:02:07.069Z</lastmod>
+    <lastmod>2024-01-26T03:00:57.387Z</lastmod>
   </url>
 </urlset>

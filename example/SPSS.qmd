@@ -1,0 +1,29 @@
+---
+title: Programming with SPSS
+type: docs
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "youtube-playlist.R"))
+playlist_id <- "PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62"
+slide_details <- tibble::tribble(
+~title, ~youtube_id,
+"Loading data and two-sample t-test", "zZI2Oq1a2Og",
+"Pairwise contrasts", "AT6RsM6-EdU",
+"One-way ANOVA", "7LLJWscsJrc",
+"Logical filters", "_So7PRQkHo4")
+
+```
+
+# Videos
+
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id, example = TRUE)
+```
+
+
+
