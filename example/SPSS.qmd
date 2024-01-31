@@ -14,7 +14,8 @@ slide_details <- tibble::tribble(
 "Loading data and two-sample t-test", "zZI2Oq1a2Og",
 "Pairwise contrasts", "AT6RsM6-EdU",
 "One-way ANOVA", "7LLJWscsJrc",
-"Logical filters", "_So7PRQkHo4")
+"Logical filters", "_So7PRQkHo4",
+"Contrasts and post-hoc comparisons", "jb2nftHBgsA")
 
 ```
 

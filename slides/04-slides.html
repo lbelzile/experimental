@@ -4,7 +4,7 @@
     <title>Contrasts and multiple testing</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-01-30" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -676,12 +676,10 @@ where `\(F\)` is the `\((1-\alpha)\)` quantile &lt;br&gt;of the `\(\mathsf{F}(K-
 # Adjustment for one-way ANOVA
 
 **Take home message**: 
- - same as Wald-based confidence intervals, only with different **critical values**
- - larger cutoffs if procedure accounts for more tests
+ - same as usual, only with different **critical values**
+ - larger cutoffs for `\(p\)`-values when procedure accounts for more tests
 
 Everything is obtained using software.
-
-Proceed only if there is a significant difference between groups, i.e., if we reject global null.
 
 
 ---

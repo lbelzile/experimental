@@ -39,6 +39,7 @@ At the end of the session, students should be capable of
 
 ## Complementary readings
 
+- @Gelman.Carlin:2014
 - {{< fa book >}}  Chapter 5 of @Maxwell.Delaney.Kelley:2017.
 - {{< fa book >}}  Chapters 4 and 6 of @Keppel/Wickens:2004.
 

@@ -13,9 +13,9 @@ following the naming convention `PS3-studentid.extension` where `studentid` is r
 
 If you work with **R**, check out this [helper code](/evaluations/03-problem-set.R)
 
-Have a quick look at the paper and fit the one way analysis of variance model to responses for young adults (20 to 40 years) only.
+Have a quick look at the paper and fit the one way analysis of variance model for the consideration of other's perspective (`persp`) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years).
 
-1. Report the test statistic, the null distribution and the p-value.
+1. Report the $F$-test statistic, the null distribution and the $p$-value.
 2. Provide a conclusion in the context of the study.
 3. There are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?
 

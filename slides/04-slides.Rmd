@@ -771,12 +771,10 @@ where $F$ is the $(1-\alpha)$ quantile <br>of the $\mathsf{F}(K-1, n-K)$ distrib
 # Adjustment for one-way ANOVA
 
 **Take home message**: 
- - same as Wald-based confidence intervals, only with different **critical values**
- - larger cutoffs if procedure accounts for more tests
+ - same as usual, only with different **critical values**
+ - larger cutoffs for $p$-values when procedure accounts for more tests
 
 Everything is obtained using software.
-
-Proceed only if there is a significant difference between groups, i.e., if we reject global null.
 
 
 ---
