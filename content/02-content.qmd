@@ -72,7 +72,7 @@ We will look at the way authors report the conclusion of their statistical tests
 
 - @Rosen:1974
 - @Brucks.Levav:2022
-- @Liu.Rim.Min.Min:2022, Experiment 1
+- @Liu.Rim.Min.Min:2023, Experiment 1
 
 ## Code
 

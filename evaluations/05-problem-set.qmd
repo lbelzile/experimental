@@ -2,47 +2,43 @@
 title: "Problem set 5"
 ---
 
-Complete this task in teams of two or three students.
+Complete this task individually
 
 **Submission information**: please submit on ZoneCours
 
--   a PDF report
--   your code
+- a PDF report
+- your code
 
-Write the name of the teammates on your report.
 
-We consider a two-way analysis of variance using fictional data from Example 6.4 of @Berger:2018 on bank tellers: 100 tellers were offered one-on-one training with an experienced clerk for a certain number of weeks on the job, possibly in addition to formal training period. The goal of the study is to determine which **combination** is most efficient at reducing the monthly error in balance (in dollars). You can access these data directly from **R** from the `hecedsm` package or [download the SPSS data](/files/data/SPSS/teller.sav).
 
-Download and answer the following questions. Write a report as if you were doing an analysis for a scientific publication.
+We consider data from Experiment 2 of @Jordan:2022, who measured the confidence of participants on their ability to land successfully a plane if the pilot was incapacited, after they were exposed to a trivially uninformative 3 minute video of a pilot landing a plane, but filmed in such a way that it was utterly useless. The authors pre-registered a comparison between experimental conditions `video` vs `no video`, and found that people watching the video answered higher for the question "How confident are you that you would be able to land the plane without dying", but there was no discernable effect for "How confident are you that you would be able to successfully land the plane as well as a pilot could", contrary to expectations. They found that the order in which the questions were asked (`order`, either pilot first, or dying first) changed the response.
 
-1.  Produce a plot of the monthly error per teller as a function of the number of weeks of one-on-one training.
-2.  Produce a quantile-quantile plot of the residuals and use Levene's test to check whether the variance in each subgroup is the same. Report on these preliminary checks.
-3.  Assess whether there an interaction between number of weeks of one-on-one training and the formal training using an hypothesis test.
-4.  Compute pairwise contrasts between weeks of one-on-one supervision for the case of people with formal training.
-5.  Compare the difference in errors between 8 and 4 weeks of one-to-one supervision, for people with and without formal training.
+The database in package `hecedsm` in **R** is labelled `JZBJG22_E2`. You can also download the [SPSS database via this link](/files/data/SPSS/JZBJG22_E2.sav).
 
-*Hint*: to create a pretty interaction plot in **R**, try the following:
+
+1. A dataset is said to be *balanced* if there are the same number of people in each experimental condition. Are the data balanced over `condition` and `order`? Justify your answer.
+2. Plot the response variables using a suitable graph (e.g., half-violin or density plot), for each of the four conditions. Comment on the repartition of the scores along the scale.
+3. Using Levene's test, check whether the variance in each subgroup is the same.
+4. Perform the two-way analysis of variance for both `conf_dying` and `conf_pilot` and report the null and alternative hypotheses, the test statistic, the $P$-value and the conclusion of the test. 
+5. If the interaction is significant, compute simple effects and 95% confidence intervals for the difference in score for `video` conditions. Otherwise, compute marginal effects.
+
+
+*Hint*: to create a pretty plot in **R**, try the following:
 
 ```{r}
-#| eval: false
+#| eval: true
 #| echo: true
-# Redownload the package to get the data
+# install.packages(c("ggplot2","ggdist"))
 # remotes::install_github("lbelzile/hecedsm")
-data(teller, package = "hecedsm")
+data(JZBJG22_E2, package = "hecedsm")
 library(ggplot2)
-library(dplyr)
+library(ggdist)
 
-teller |> 
-  group_by(course, nweeks) |>
-  summarize(merror = mean(error)) |>
- ggplot(aes(x = nweeks,
-            y = merror,
-            group = course,
-            color = course)) +
-  geom_line() +
-  theme_classic() + 
-  theme(legend.position = "bottom") + 
-  labs(y = "",
-       subtitle = "average monthly error (USD)",
-       x = "number of weeks of 1-1 training")
+ggplot(data = JZBJG22_E2, 
+       mapping = aes(x = condition, group = order, y = conf_dying)) + 
+  ggdist::stat_halfeye(adjust = .5, width = .3, .width = c(0.5, 1)) + 
+  ggdist::stat_dots(side = "left", dotsize = .4, justification = 1.05, binwidth = .1) +
+  facet_grid(~order) + 
+  labs(y = "", subtitle = "confidence in landing without dying") +
+  theme_classic()
 ```

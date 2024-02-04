@@ -34,7 +34,7 @@ result = model.fit()
 print(result.summary())
 
 # Third example: Liu et al.
-url = 'https://raw.githubusercontent.com/lbelzile/hecedsm/main/data-raw/csv/LRMM22_S1.csv'
+url = 'https://raw.githubusercontent.com/lbelzile/hecedsm/main/data-raw/csv/LRMM23_S1.csv'
 df3 = pd.read_csv(url)
 
 stats.ttest_ind(df3['appreciation'][df3["role"] == "responder"], df3['appreciation'][df3["role"] == "initiator"], equal_var= False)

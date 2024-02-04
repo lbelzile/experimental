@@ -15,7 +15,7 @@ Read @Rohrer:2022 and write down a summary
 
 ## Task 2
 
-@Liu.Rim.Min.Min:2022 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM22_S5b`.
+@Liu.Rim.Min.Min:2023 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM23_S5b`.
 
 1. Fit the linear mediation model using the PROCESS macro or `mediate` function from the `mediation` package
   - use the nonparametric bootstrap with the percentile method
@@ -27,11 +27,11 @@ Read @Rohrer:2022 and write down a summary
 ```{r}
 #| eval: false
 #| echo: false
-data(LRMM22_S5b, package = "hecedsm")
+data(LRMM23_S5b, package = "hecedsm")
 model1 <- lm(surprise ~ condition,
-                 data = LRMM22_S5b)
+                 data = LRMM23_S5b)
 model2 <- lm(appreciation ~ surprise + condition,
-             data = LRMM22_S5b)
+             data = LRMM23_S5b)
 linmedmod <- mediation::mediate(
   model.m = model1, 
    model.y = model2,

@@ -99,32 +99,32 @@ pval <- null_dist %>%
 
 ## Example 2 Liu et al.
 ##
-data(LRMM22_S1, package = 'hecedsm')
+data(LRMM23_S1, package = 'hecedsm')
 # Summary statistics per gender and role
-tab1 <- LRMM22_S1 |>
+tab1 <- LRMM23_S1 |>
   dplyr::group_by(gender) |>
   dplyr::summarize(min = min(age),
                    max = max(age),
                    mean = mean(age),
                    n = dplyr::n())
-tab2 <- LRMM22_S1  |>
+tab2 <- LRMM23_S1  |>
   dplyr::group_by(role) |>
   dplyr::summarize(mean = mean(appreciation),
                    sd = sd(appreciation),
                    n = dplyr::n())
 # Welch t-test
 ttest <- t.test(appreciation ~ role,
-                data = LRMM22_S1,
+                data = LRMM23_S1,
                 var.equal = FALSE)
 # Standardize output in a table
 broom::tidy(ttest)
 # Two-sample t-test
 t.test(appreciation ~ role,
-       data = LRMM22_S1, var.equal = TRUE) |>
+       data = LRMM23_S1, var.equal = TRUE) |>
   broom::tidy()
 # Wilcoxon signed rank test
 coin::wilcox_test(appreciation ~ role,
-                  data = LRMM22_S1) |>
+                  data = LRMM23_S1) |>
   broom::tidy()
 
 ## Example 3

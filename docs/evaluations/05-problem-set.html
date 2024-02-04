@@ -114,10 +114,12 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -147,7 +149,7 @@ div.csl-indent {
  <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
+    <a class="nav-link active" href="../evaluations/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Evaluations</span></a>
   </li>  
   <li class="nav-item">
@@ -169,10 +171,103 @@ div.csl-indent {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/01-problem-set.html">Problem sets</a></li><li class="breadcrumb-item"><a href="../evaluations/05-problem-set.html">Problem set 5</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/weekly-check-in.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Weekly check-in</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/paper-review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paper review</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/final-exam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final examination</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Problem sets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/01-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/02-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/03-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/04-problem-set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Problem set 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../evaluations/05-problem-set.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Problem set 5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
@@ -185,51 +280,47 @@ div.csl-indent {
 
 </header>
 
-<p>Complete this task in teams of two or three students.</p>
+<p>Complete this task individually</p>
 <p><strong>Submission information</strong>: please submit on ZoneCours</p>
 <ul>
 <li>a PDF report</li>
 <li>your code</li>
 </ul>
-<p>Write the name of the teammates on your report.</p>
-<p>We consider a two-way analysis of variance using fictional data from Example 6.4 of <span class="citation" data-cites="Berger:2018">Berger et al. (<a href="#ref-Berger:2018" role="doc-biblioref">2018</a>)</span> on bank tellers: 100 tellers were offered one-on-one training with an experienced clerk for a certain number of weeks on the job, possibly in addition to formal training period. The goal of the study is to determine which <strong>combination</strong> is most efficient at reducing the monthly error in balance (in dollars). You can access these data directly from <strong>R</strong> from the <code>hecedsm</code> package or <a href="../files/data/SPSS/teller.sav">download the SPSS data</a>.</p>
-<p>Download and answer the following questions. Write a report as if you were doing an analysis for a scientific publication.</p>
+<p>We consider data from Experiment 2 of <span class="citation" data-cites="Jordan:2022">Jordan et al. (<a href="#ref-Jordan:2022" role="doc-biblioref">2022</a>)</span>, who measured the confidence of participants on their ability to land successfully a plane if the pilot was incapacited, after they were exposed to a trivially uninformative 3 minute video of a pilot landing a plane, but filmed in such a way that it was utterly useless. The authors pre-registered a comparison between experimental conditions <code>video</code> vs <code>no video</code>, and found that people watching the video answered higher for the question “How confident are you that you would be able to land the plane without dying”, but there was no discernable effect for “How confident are you that you would be able to successfully land the plane as well as a pilot could”, contrary to expectations. They found that the order in which the questions were asked (<code>order</code>, either pilot first, or dying first) changed the response.</p>
+<p>The database in package <code>hecedsm</code> in <strong>R</strong> is labelled <code>JZBJG22_E2</code>. You can also download the <a href="../files/data/SPSS/JZBJG22_E2.sav">SPSS database via this link</a>.</p>
 <ol type="1">
-<li>Produce a plot of the monthly error per teller as a function of the number of weeks of one-on-one training.</li>
-<li>Produce a quantile-quantile plot of the residuals and use Levene’s test to check whether the variance in each subgroup is the same. Report on these preliminary checks.</li>
-<li>Assess whether there an interaction between number of weeks of one-on-one training and the formal training using an hypothesis test.</li>
-<li>Compute pairwise contrasts between weeks of one-on-one supervision for the case of people with formal training.</li>
-<li>Compare the difference in errors between 8 and 4 weeks of one-to-one supervision, for people with and without formal training.</li>
+<li>A dataset is said to be <em>balanced</em> if there are the same number of people in each experimental condition. Are the data balanced over <code>condition</code> and <code>order</code>? Justify your answer.</li>
+<li>Plot the response variables using a suitable graph (e.g., half-violin or density plot), for each of the four conditions. Comment on the repartition of the scores along the scale.</li>
+<li>Using Levene’s test, check whether the variance in each subgroup is the same.</li>
+<li>Perform the two-way analysis of variance for both <code>conf_dying</code> and <code>conf_pilot</code> and report the null and alternative hypotheses, the test statistic, the <span class="math inline">\(P\)</span>-value and the conclusion of the test.</li>
+<li>If the interaction is significant, compute simple effects and 95% confidence intervals for the difference in score for <code>video</code> conditions. Otherwise, compute marginal effects.</li>
 </ol>
-<p><em>Hint</em>: to create a pretty interaction plot in <strong>R</strong>, try the following:</p>
+<p><em>Hint</em>: to create a pretty plot in <strong>R</strong>, try the following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Redownload the package to get the data</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("ggplot2","ggdist"))</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github("lbelzile/hecedsm")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(teller, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(JZBJG22_E2, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>teller <span class="sc">|&gt;</span> </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(course, nweeks) <span class="sc">|&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">merror =</span> <span class="fu">mean</span>(error)) <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nweeks,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> merror,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">group =</span> course,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> course)) <span class="sc">+</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"average monthly error (USD)"</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"number of weeks of 1-1 training"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> JZBJG22_E2, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">group =</span> order, <span class="at">y =</span> conf_dying)) <span class="sc">+</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="at">adjust =</span> .<span class="dv">5</span>, <span class="at">width =</span> .<span class="dv">3</span>, <span class="at">.width =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_dots</span>(<span class="at">side =</span> <span class="st">"left"</span>, <span class="at">dotsize =</span> .<span class="dv">4</span>, <span class="at">justification =</span> <span class="fl">1.05</span>, <span class="at">binwidth =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>order) <span class="sc">+</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">subtitle =</span> <span class="st">"confidence in landing without dying"</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="05-problem-set_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 
 
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-Berger:2018" class="csl-entry" role="listitem">
-Berger, P. D., Maurer, R. E., &amp; Celli, G. B. (2018). <em>Experimental design with applications in management, engineering, and the sciences</em> (2nd ed.). Springer. <a href="https://doi.org/10.1007/978-3-319-64583-4">https://doi.org/10.1007/978-3-319-64583-4</a>
+<div id="ref-Jordan:2022" class="csl-entry" role="listitem">
+Jordan, K., Zajac, R., Bernstein, D., Joshi, C., &amp; Garry, M. (2022). Trivially informative semantic context inflates people’s confidence they can perform a highly complex skill. <em>Royal Society Open Science</em>, <em>9</em>(3), 211977. <a href="https://doi.org/10.1098/rsos.211977">https://doi.org/10.1098/rsos.211977</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
