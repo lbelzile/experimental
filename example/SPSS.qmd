@@ -15,7 +15,9 @@ slide_details <- tibble::tribble(
 "Pairwise contrasts", "AT6RsM6-EdU",
 "One-way ANOVA", "7LLJWscsJrc",
 "Logical filters", "_So7PRQkHo4",
-"Contrasts and post-hoc comparisons", "jb2nftHBgsA")
+"Contrasts and post-hoc comparisons", "jb2nftHBgsA",
+"Creating categorical variables with if-else statements", "8ba_EkcbIjw",
+"Two-way ANOVA", "7Z21rYuKMp0")
 
 ```
 
