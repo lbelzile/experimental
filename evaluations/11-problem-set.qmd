@@ -21,7 +21,7 @@ Read @Rohrer:2022 and write down a summary
   - use the nonparametric bootstrap with the percentile method
   - compare the coefficients with those of Figure 1 from the paper.
 2. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.
-3. The paper does not discuss any of the model assumptions.  List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by @Liu.Rim.Min.Min:2022.
+3. The paper does not discuss any of the model assumptions.  List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by @Liu.Rim.Min.Min:2023.
 
 
 ```{r}

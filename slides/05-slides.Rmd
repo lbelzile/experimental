@@ -68,7 +68,7 @@ class: title title-inv-1
 
 
 
-.box-5.medium.sp-after-half[Model formulation]
+.box-5.medium.sp-after-half[Tests for two-way ANOVA]
 
 
 
@@ -165,8 +165,9 @@ list(
               table.font.size = 40)
 ```
 
+???
 
-.box-inv-4[Factors are crossed]
+These factors are crossed, meaning that you can have participants in each subconditions.
 
 
 ---
@@ -209,7 +210,7 @@ $\neq$
 
 ---
 
-# Interaction: lines are not parallel
+# Interaction plots and parallel lines
 
 ```{r}
 #| label: "interaction_plots2"
@@ -221,7 +222,7 @@ $\neq$
 set.seed(1234)
 data_fake <- tibble::tibble(
   "ending" = factor(rep(c("happy", "sad"), each = 3)),
-  "complexity" = factor(rep(c("complicated", "average", "easy"), 
+  "complexity" = ordered(rep(c("complicated", "average", "easy"), 
                             length.out = 6)),
                 
          mean = 10 + rnorm(n = 6))
@@ -252,26 +253,13 @@ g2 <- ggplot(data = data_fake,
   geom_line(size = 1.2) +
   geom_point(size = 2.6, shape = 15) +
   theme_classic() +
+  labs(subtitle = "interaction") +
   theme(legend.position = "bottom")
 
-g1 + g2
-```
-
----
-
-# No interaction: parallel lines
-
-```{r}
-#| label: "interaction_plots1"
-#| echo: false
-#| eval: true
-#| out.width: '80%'
-#| fig.width: 8
-#| fig.height: 3
 set.seed(1234)
 data_fake <- tibble::tibble(
   "ending" = factor(rep(c("happy", "sad"), each = 3)),
-  "complexity" = factor(rep(c("complicated", "average", "easy"), 
+  "complexity" = ordered(rep(c("complicated", "average", "easy"), 
                             length.out = 6))) |>
   # purrr::cross_df()  |>
   mutate(
@@ -282,7 +270,7 @@ data_fake <- tibble::tibble(
 )
 
 
-g1 <- ggplot(data = data_fake,
+g3 <- ggplot(data = data_fake,
              aes(x = complexity, y = mean)) +
   geom_line(aes(group = ending, 
                 linetype = ending),
@@ -295,7 +283,7 @@ g1 <- ggplot(data = data_fake,
   theme_classic() +
   theme(legend.position = "bottom") +
   labs(title = "Lines are parallel = no interaction")
-g2 <- ggplot(data = data_fake,
+g4 <- ggplot(data = data_fake,
              aes(
                x = ending,
                y = mean,
@@ -305,19 +293,20 @@ g2 <- ggplot(data = data_fake,
   scale_color_manual(values = c("#ffdfba", "#ffb3ba", "#bae1ff")) +
   geom_line(size = 1.2) +
   geom_point(size = 2.6, shape = 15) +
+  labs(subtitle = "no interaction") +
   theme_classic() +
   theme(legend.position = "bottom")
 
-g1 + g2
+g2 + g4
 ```
 
 
 ---
 
-# Interaction plot for 2 by 2 design
+# Interaction plots for 2 by 2 designs
 
 ```{r}
-#| label: 2by2-interaction
+#| label: 2by2-interaction-plot
 #| eval: true
 #| echo: false
 #| fig.width: 8
@@ -363,8 +352,9 @@ p8 <- data.frame(
   factorB = c("b1", "b2", "b1", "b2"),
   means = c(10, 18, 5, 7)
 )
-
 all_22s <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
+#table object to beincluded with ggplot
+
 type <- factor(rep(1:8, each = 4), 
                labels = c("no effect",
                           "main effect of A only",
@@ -372,8 +362,7 @@ type <- factor(rep(1:8, each = 4),
                           "both main effects",
                           "interaction only",
                           "main effect of A and interaction",
-                           "main effect of B and interaction",
-                          
+                          "main effect of B and interaction",
                           "both main effects and interaction" ))
 all_22s <- cbind(all_22s, type)
 options(ggplot2.discrete.colour= MetBrewer::met.brewer(name = "Hiroshige", 2))
@@ -395,6 +384,40 @@ ggplot(all_22s,
 ```
 
 
+---
+
+
+# Cell means for 2 by 2 designs
+
+```{r}
+#| label: 2by2-interaction
+#| eval: true
+#| echo: false
+#| fig.width: 8
+#| fig.height: 3
+#| out.width: "70%"
+m1 <- matrix(p1$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab1 <- gridExtra::tableGrob(m1,rows = c("a1","a2"),)
+m2 <- matrix(p2$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab2 <- gridExtra::tableGrob(m2)
+m3 <- matrix(p3$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab3 <- gridExtra::tableGrob(m3)
+m4 <- matrix(p4$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab4 <- gridExtra::tableGrob(m4)
+m5 <- matrix(p5$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab5 <- gridExtra::tableGrob(m5)
+m6 <- matrix(p6$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab6 <- gridExtra::tableGrob(m6)
+m7 <- matrix(p7$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab7 <- gridExtra::tableGrob(m7)
+m8 <- matrix(p8$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab8 <- gridExtra::tableGrob(m8)
+gridExtra::grid.arrange(tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, nrow = 2)
+```
+
+
+
+
 ???
 
 Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
@@ -405,7 +428,7 @@ layout: false
 name: formulation
 class: center middle section-title section-title-5 animated fadeIn
 
-# Model formulation
+# Tests for two-way ANOVA
 
 ---
 
@@ -413,21 +436,30 @@ layout: true
 class: title title-5
 
 ---
+# Analysis of variance = regression
+
+An analysis of variance model is simply a **linear regression** with categorical covariate(s).
+
+- Typically, the parametrization is chosen so that parameters reflect differences to the global mean (sum-to-zero parametrization).
+- The full model includes interactions between all factors (so we consider all combinations of factors, as subcategories).
+
+---
 
 # Formulation of the two-way ANOVA
 
-Two factors: $A$ (complexity) and $B$ (ending) with $n_a$ and $n_b$ levels.
+Two factors: $A$ (complexity) and $B$ (ending) with $n_a=3$ and $n_b=2$ levels, and their interaction.
 
 Write the average response $Y_{ijr}$ of the $r$th measurement in group $(a_i, b_j)$ as
 \begin{align*}
-\underset{\text{response}\vphantom{b}}{Y_{ijr}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijr}}
+\underset{\text{average response}\vphantom{b}}{\mathsf{E}(Y_{ijr})} = \underset{\text{subgroup mean}}{\mu_{ij}}
 \end{align*}
-where 
+where $Y_{ijr}$ are independent observations with a common std. deviation $\sigma$.
 
-- $Y_{ijr}$ is the $r$th replicate for $i$th level of factor $A$ and $j$th level of factor $B$
-- $\varepsilon_{ijr}$ are independent error terms with mean zero and variance $\sigma^2$.
+- We estimate $\mu_{ij}$ by the sample mean of the subgroup $(i,j)$, say $\widehat{\mu}_{ij}$.
+- The fitted values are $\widehat{y}_{ijr} = \widehat{\mu}_{ij}$.
 
 ---
+
 # One average for each subgroup
 
 | $\qquad B$ `ending`<br> $A$ `complexity` $\qquad$ | $b_1$ (`happy`) | $b_2$ (`sad`)| *row mean* |
@@ -452,38 +484,34 @@ $$\mu_{.j} = \frac{\mu_{1j} + \cdots + \mu_{n_aj}}{n_a}$$
 
 ]
 .pull-right[
-- Overall average (overall all rows and columns):
+- Overall average:
 $$\mu = \frac{\sum_{i=1}^{n_a} \sum_{j=1}^{n_b} \mu_{ij}}{n_an_b}$$
 
+.small[
+- Row, column and overall averages are **equiweighted** combinations of the cell means $\mu_{ij}$.
+- Estimates are obtained by replacing $\mu_{ij}$ in formulas by subgroup sample mean.
+]
 ]
 
 ---
 
 
 # Vocabulary of effects
-.pull-left[
-.box-5[Definitions]
+
+
 - .color-5[**simple effects**]: difference between levels of one in a fixed combination of others (change in difficulty for happy ending)
 - .color-5[**main effects**]: differences relative to average for each condition of a factor (happy vs sad ending)
 - .color-5[**interaction effects**]: when simple effects differ depending on levels of another factor
-]
-.pull-right[
-.box-5[What it means relative to the table]
 
-- .color-5[**simple effects**] are comparisons between cell averages within a given row or column
-
-
-- .color-5[**main effects**] are comparisons between row or column averages
-
-
-- .color-5[**interaction effects**] are difference relative to the row or column average
-
-]
 ---
 
-# Marginal effects
+# Main effects
 
 .pull-left[
+
+
+.color-5[**Main effects**] are comparisons between row or column averages
+
 
 ```{r, echo=FALSE, warning=FALSE, cache = TRUE}
 path_figure <- list("img/05/icons8-smiling-100.png",
@@ -498,6 +526,7 @@ data.frame("X" = c("column means"),
               table.font.size = 40) |>
   cols_label(X = " ")
 ```
+
 
 ]
 
@@ -539,13 +568,17 @@ data.frame(complexity = c("complicated", "average", "easy"),
 
 .pull-left[
 
+
+.color-5[**Simple effects**] are comparisons between cell averages within a given row or column
+
+
 ```{r, echo=FALSE, warning=FALSE, cache = TRUE}
 path_figure <- list("img/05/icons8-smiling-100.png",
                     "img/05/icons8-disappointed-100.png")
 # making table with gt
 data.frame("X" = c("means (easy)"),
-           "happy" = c("$$\\mu_{1.}$$"),
-           "sad" = c("$$\\mu_{2.}$$")) |>
+           "happy" = c("$$\\mu_{13}$$"),
+           "sad" = c("$$\\mu_{23}$$")) |>
   gt() |>
   data_color(columns = c("happy","sad"),
     colors = scales::col_factor(
@@ -561,6 +594,7 @@ data.frame("X" = c("means (easy)"),
               table.font.size = 40) |>
   cols_label(X = " ")
 ```
+
 
 ]
 
@@ -594,6 +628,20 @@ data.frame(complexity = c("complicated", "average", "easy"),
 
 # Contrasts
 
+We collapse categories to obtain a one-way ANOVA with categories $A$ (complexity) and $B$ (ending).
+
+Q: How would you write the weights for contrasts for testing the 
+
+- main effect of $A$: complicated vs average, or complicated vs easy.
+- main effect of $B$: happy vs sad.
+- interaction $A$ and $B$: difference between complicated and average, for happy versus sad?
+
+The order of the categories is $(a_1, b1)$, $(a_1, b_2)$, $\ldots$, $(a_3, b_2)$.
+
+---
+
+# Contrasts
+
 Suppose the order of the coefficients is factor $A$ (complexity, 3 levels, complicated/average/easy) and factor $B$ (ending, 2 levels, happy/sad).
 
 | test | $\mu_{11}$ | $\mu_{12}$ | $\mu_{21}$ | $\mu_{22}$ | $\mu_{31}$ | $\mu_{32}$ |
@@ -606,163 +654,90 @@ Suppose the order of the coefficients is factor $A$ (complexity, 3 levels, compl
 
 ---
 
-# Hypothesis tests for main effects
+# Global hypothesis tests
 
-Generally, need to compare multiple effects at once
-.box-inv-5.sp-after-half[
+<!-- Generally, need to compare multiple effects at once -->
+.box-inv-5[
 Main effect of factor $A$
 ]
 
 $\mathscr{H}_0$: $\mu_{1.} = \cdots = \mu_{n_a.}$ vs $\mathscr{H}_a$: at least two marginal means of $A$ are different
-.box-inv-5.sp-after-half[
+.box-inv-5[
 Main effect of factor $B$
 ]
 
-$\mathscr{H}_0$: $\mu_{.1} = \cdots = \mu_{.n_b}$ vs $\mathscr{H}_a$: at least two marginal means of $B$ are different.
-
----
-# Equivalent formulation of the two-way ANOVA
-
-Write the model for a response variable $Y$ in terms of two factors $a_i$, $b_j$.
-
-$$Y_{ijr} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijr}$$
-
-where 
-- $\alpha_i = \mu_{i.} - \mu$
-    - mean of level $a_i$ minus overall mean.
-- $\beta_j  = \mu_{.j} - \mu$
-    - mean of level $b_j$ minus overall mean.
-- $(\alpha\beta)_{ij} = \mu_{ij} - \mu_{i.} - \mu_{.j} + \mu$
-    - the interaction term for $a_i$ and $b_j$.
-
----
-
-# One average for each subgroup
-
-.small[
-
-| $\qquad B$ `ending`<br> $A$ `complexity` $\qquad$ | $b_1$ (`happy`) | $b_2$ (`sad`)| *row mean* |
-|------------|:----------:|:-----:|:-----:|
-| $a_1$ (`complicated`) | $\mu + \alpha_1 + \beta_1 + (\alpha\beta)_{11}$ | $\mu + \alpha_1 + \beta_2 + (\alpha\beta)_{12}$ | $\mu + \alpha_1$ |
-|  $a_2$ (`average`)  | $\mu + \alpha_2 + \beta_1 + (\alpha\beta)_{21}$ | $\mu + \alpha_2 + \beta_2 + (\alpha\beta)_{22}$ | $\mu + \alpha_2$ |
-| $a_3$ (`easy`) |  $\mu + \alpha_3 + \beta_1 + (\alpha\beta)_{31}$ | $\mu + \alpha_3 + \beta_2 + (\alpha\beta)_{32}$ | $\mu + \alpha_3$ |
-|*column mean* | $\mu + \beta_1$ | $\mu + \beta_2$ | $\mu$ |
-
-]
-
-
-.box-inv-5[More parameters than data cells!]
-
-The model in terms of $\alpha$, $\beta$ and $(\alpha\beta)$ is overparametrized.
-
-
----
-
-
-# Sum-to-zero parametrization
-
-.box-inv-5[Too many parameters!]
-
-
-Impose sum to zero constraints
-
-$$\sum_{i=1}^{n_a} \alpha_i=0, \quad \sum_{j=1}^{n_b} \beta_j=0, \quad  \sum_{j=1}^{n_b} (\alpha\beta)_{ij}=0, \quad \sum_{i=1}^{n_a} (\alpha\beta)_{ij}=0.$$
-
-which imposes $1 +  n_a + n_b$ constraints.
-
----
-
-# Why use the sum to zero parametrization?
-
-- Testing for main effect of $A$: $$\mathscr{H}_0: \alpha_1 = \cdots = \alpha_{n_a} = 0$$
-- Testing for main effect of $B$: $$\mathscr{H}_0: \beta_1 = \cdots = \beta_{n_b} = 0$$ 
-- Testing for interaction between $A$ and $B$: $$\mathscr{H}_0: (\alpha\beta)_{11} = \cdots = (\alpha\beta)_{n_an_b} = 0$$
-
-In all cases, alternative is that at least two coefficients are different.
-
----
-
-# Seeking balance
-
-.box-inv-5.sp-after.medium[
-**Balanced sample**<br>
-(equal nb of obs per group)
-
-]
-
+$\mathscr{H}_0$: $\mu_{.1} = \cdots = \mu_{.n_b}$ vs $\mathscr{H}_a$: at least two marginal means of $B$ are different
 .box-inv-5[
-With $n_r$ replications per subgroup,<br>total sample size is $n = n_an_bn_r$.
+Interaction
 ]
 
----
+$\mathscr{H}_0$: $\mu_{ij} = \mu_{i \cdot} + \mu_{\cdot j}$ (sum of main effects) vs $\mathscr{H}_a$: effect is not a combination of row/column effect.
 
-# Why balanced design?
-
-With equal variance, this is the optimal allocation of treatment unit.
-
-.box-inv-5.sp-after.medium[maximize power]
-
-Estimated means for main and total effects correspond to marginal averages.
-
-.box-inv-5.sp-after.medium[equiweighting]
-
-Unambiguous decomposition of effects of $A$, $B$ and interaction.
-
-.box-inv-5.sp-after.medium[orthogonality]
 
 ---
 
-# Rewriting observations
+# Comparing nested models
 
+Rather than present the specifics of ANOVA, we consider a general hypothesis testing framework which is more widely applicable.
+
+We compare two competing models
+
+- the alternative or full model $\mathscr{H}_a$
+- the simpler null model $\mathscr{H}_0$, which imposes $\nu$ restrictions on the full model
+
+???
+
+The same holds for analysis of deviance for generalized linear models. The latter use likelihood ratio tests (which are equivalent to F-tests for linear models), with a $\chi^2_{\nu}$ null distribution.
+
+---
+
+# Intuition behind $F$-test for ANOVA
+
+The more complex fits better (it is necessarily more flexible), but requires estimation of more parameters.
+
+- Test compares the goodness-of-fit and attempts to determine what is the improvement that would occur by chance, if the null model was correct, given $\nu$ additional parameters.
+
+---
+
+# Testing linear restrictions in linear models
+
+If the alternative model has $p$ parameters for the mean, and we impose $\nu$ linear restrictions under the null hypothesis to the model estimated based on $n$ independent observations, the test statistic is
 
 \begin{align*}
-\underset{\text{obs vs grand mean  (total)}}{(y_{ijr} - \widehat{\mu})} 
-&= \underset{\text{row mean vs grand mean} (A)}{(\widehat{\mu}_{i.} - \widehat{\mu})} \\& +\underset{\text{col mean vs grand mean} (B)}{(\widehat{\mu}_{.j} - \widehat{\mu})} 
-\\&+\underset{\text{cell mean vs additive effect} (AB)}{(\widehat{\mu}_{ij} - \widehat{\mu}_{i.} - \widehat{\mu}_{.j}+ \widehat{\mu})} 
-\\&+ \underset{\text{obs vs cell mean (resid)}}{(y_{ijr} - \widehat{\mu}_{ij})}
+F = \frac{(\mathsf{RSS}_0 - \mathsf{RSS}_a)/\nu}{\mathsf{RSS}_a/(n-p)}
 \end{align*}
 
----
-
-# Decomposing variability
-
-Constructing statistics as before by decomposing variability into blocks.
-
-We can square both sides and sum over all observations.
-
-With balanced design, all cross terms cancel, leaving us with the .color-5[**sum of square**] decomposition
-
-$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$
+- The numerator is the difference in residuals sum of squares, denoted $\mathsf{RSS}$, from models fitted under $\mathscr{H}_0$ and $\mathscr{H}_a$, divided by degrees of freedom $\nu$.
+- The denominator is an estimator of the variance, obtained under $\mathscr{H}_a$ (termed mean squared error of residuals)
+- The benchmark for tests in linear models is Fisher's $\mathsf{F}(\nu, n-p)$.
 
 ---
 
-# Sum of square decomposition
+# Analysis of deviance
 
-The sum of square decomposition
+For other generalized linear models with parameters $\boldsymbol{\theta}$, we proceed similarly, but we use the log *likelihood* function, $\ell(\boldsymbol{\theta})$ as goodness-of-fit measure.
 
-$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$
-is an estimator of the population variance decomposition
-$$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_{B} + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$
-where $\sigma^2_A = n_a^{-1}\sum_{i=1}^{n_a} \alpha_i^2$, $\sigma^2_{AB} = (n_an_b)^{-1} \sum_{i=1}^{n_a} \sum_{j=1}^{n_b} (\alpha\beta)^2_{ij}$, etc.
-
-
-Take ratio of variability (effect relative to residual) and standardize numerator and denominator to build an $F$ statistic.
-
+- The higher the (log) likelihood, the better the fit.
+- Obtain parameter estimates  $\widehat{\boldsymbol{\theta}}_0$ under the null hypothesis and 
+ $\widehat{\boldsymbol{\theta}}_a$ under the alternative by maximum likelihood estimation.
+- Consider the likelihood ratio statistic  $$R = 2\{\ell(\widehat{\boldsymbol{\theta}}_a) - \ell(\widehat{\boldsymbol{\theta}}_0)\}$$
+- Under regularity conditions, we compare $R$ to a chi-square distribution with $\nu$ degrees of freedom, $\chi^2_{\nu}$.
 
 ---
+
 # Analysis of variance table
 
 
 .small[
-
+  
 | term | degrees of freedom | mean square | $F$ | 
 |------|--------|------|--------|
 | $A$  | $n_a-1$   | $\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)$ | $\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}$ |
 | $B$  | $n_b-1$   | $\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)$ | $\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}$ |
 | $AB$ | $(n_a-1)(n_b-1)$ | $\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}$ | $\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}$ |
-| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{resid}}=\mathsf{SS}_{\text{res}}/ (n-ab)$ | |
+| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-ab)$ | |
 | total | $n-1$ | | 
-
+    
 ]
 
 Read the table backward (starting with the interaction).
@@ -771,6 +746,13 @@ Read the table backward (starting with the interaction).
 ---
 
 # Intuition behind degrees of freedom
+.small[
+
+The model always includes an overall average $\mu$.  There are
+
+- $n_a-1$ free row means since $n_a\mu = \mu_{1.} + \cdots + \mu_{n_a.}$ 
+- $n_b-1$ free column means as $n_b\mu = \mu_{.1} + \cdots + \mu_{.n_b}$
+- $n_an_b-(n_a-1)-(n_b-1)-1$ interaction terms
 
 | $\qquad B$ `ending`<br> $A$ `complexity` $\qquad$ | $b_1$ (`happy`) | $b_2$ (`sad`)| *row mean* |
 |------------|:----------:|:-----:|:-----:|
@@ -778,33 +760,7 @@ Read the table backward (starting with the interaction).
 |  $a_2$ (`average`)  | $\mu_{21}$ | $\mathsf{X}$  | $\mu_{2.}$ |
 | $a_3$ (`easy`) |  $\mathsf{X}$  | $\mathsf{X}$  | $\mathsf{X}$ |
 |*column mean* | $\mu_{.1}$ | $\mathsf{X}$ | $\mu$ |
-
-.small[ 
+ 
 Terms with $\mathsf{X}$ are fully determined by row/column/total averages
 
 ]
-
----
-
-# Multiplicity correction
-
-With equal sample size and equal variance, usual recipes for ANOVA hold.
-
-Correction depends on the effect: e.g., for factor $A$, the critical values are
-
-- Bonferroni: $1-\alpha/(2m)$ quantile of $\mathsf{St}(n-n_an_b)$
-- Tukey: Studentized range (`qtukey`)
-   - level $1-\alpha/2$, $n_a$ groups, $n-n_an_b$ degrees of freedom.
-- Scheffé: critical value is $\{(n_a-1) \mathfrak{f}_{1-\alpha}\}^{1/2}$
-   - $\mathfrak{f}_{1-\alpha}$ is $1-\alpha$ quantile of $\mathsf{F}(\nu_1 = n_a-1, \nu_2 = n-n_an_b)$.
-
-Software implementations available in `emmeans` in **R**.
-
----
-
-
-layout: false
-name: factorial-designs
-class: center middle section-title section-title-5 animated fadeIn
-
-# Numerical example

@@ -62,6 +62,10 @@ xaringanExtra::embed_xaringan(
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
 :::
 
+## Code
+
+
+- [R script](/content/MATH80667A-05-content.R)
 
 
 ## References

@@ -4,7 +4,7 @@
     <title>Complete factorial designs</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-02-06" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -62,7 +62,7 @@ class: title title-inv-1
 
 
 
-.box-5.medium.sp-after-half[Model formulation]
+.box-5.medium.sp-after-half[Tests for two-way ANOVA]
 
 
 
@@ -555,8 +555,9 @@ class: title title-4
 </table>
 </div>
 
+???
 
-.box-inv-4[Factors are crossed]
+These factors are crossed, meaning that you can have participants in each subconditions.
 
 
 ---
@@ -599,22 +600,26 @@ Effect together&lt;br&gt;
 
 ---
 
-# Interaction: lines are not parallel
+# Interaction plots and parallel lines
 
 &lt;img src="05-slides_files/figure-html/interaction_plots2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
----
-
-# No interaction: parallel lines
-
-&lt;img src="05-slides_files/figure-html/interaction_plots1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
 
 ---
 
-# Interaction plot for 2 by 2 design
+# Interaction plots for 2 by 2 designs
+
+&lt;img src="05-slides_files/figure-html/2by2-interaction-plot-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+# Cell means for 2 by 2 designs
 
 &lt;img src="05-slides_files/figure-html/2by2-interaction-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
 
 
 ???
@@ -627,7 +632,7 @@ layout: false
 name: formulation
 class: center middle section-title section-title-5 animated fadeIn
 
-# Model formulation
+# Tests for two-way ANOVA
 
 ---
 
@@ -635,21 +640,30 @@ layout: true
 class: title title-5
 
 ---
+# Analysis of variance = regression
+
+An analysis of variance model is simply a **linear regression** with categorical covariate(s).
+
+- Typically, the parametrization is chosen so that parameters reflect differences to the global mean (sum-to-zero parametrization).
+- The full model includes interactions between all factors (so we consider all combinations of factors, as subcategories).
+
+---
 
 # Formulation of the two-way ANOVA
 
-Two factors: `\(A\)` (complexity) and `\(B\)` (ending) with `\(n_a\)` and `\(n_b\)` levels.
+Two factors: `\(A\)` (complexity) and `\(B\)` (ending) with `\(n_a=3\)` and `\(n_b=2\)` levels, and their interaction.
 
 Write the average response `\(Y_{ijr}\)` of the `\(r\)`th measurement in group `\((a_i, b_j)\)` as
 `\begin{align*}
-\underset{\text{response}\vphantom{b}}{Y_{ijr}} = \underset{\text{subgroup mean}}{\mu_{ij}} + \underset{\text{error term}}{\varepsilon_{ijr}}
+\underset{\text{average response}\vphantom{b}}{\mathsf{E}(Y_{ijr})} = \underset{\text{subgroup mean}}{\mu_{ij}}
 \end{align*}`
-where 
+where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\(\sigma\)`.
 
-- `\(Y_{ijr}\)` is the `\(r\)`th replicate for `\(i\)`th level of factor `\(A\)` and `\(j\)`th level of factor `\(B\)`
-- `\(\varepsilon_{ijr}\)` are independent error terms with mean zero and variance `\(\sigma^2\)`.
+- We estimate `\(\mu_{ij}\)` by the sample mean of the subgroup `\((i,j)\)`, say `\(\widehat{\mu}_{ij}\)`.
+- The fitted values are `\(\widehat{y}_{ijr} = \widehat{\mu}_{ij}\)`.
 
 ---
+
 # One average for each subgroup
 
 | `\(\qquad B\)` `ending`&lt;br&gt; `\(A\)` `complexity` `\(\qquad\)` | `\(b_1\)` (`happy`) | `\(b_2\)` (`sad`)| *row mean* |
@@ -674,38 +688,34 @@ where
 
 ]
 .pull-right[
-- Overall average (overall all rows and columns):
+- Overall average:
 `$$\mu = \frac{\sum_{i=1}^{n_a} \sum_{j=1}^{n_b} \mu_{ij}}{n_an_b}$$`
 
+.small[
+- Row, column and overall averages are **equiweighted** combinations of the cell means `\(\mu_{ij}\)`.
+- Estimates are obtained by replacing `\(\mu_{ij}\)` in formulas by subgroup sample mean.
+]
 ]
 
 ---
 
 
 # Vocabulary of effects
-.pull-left[
-.box-5[Definitions]
+
+
 - .color-5[**simple effects**]: difference between levels of one in a fixed combination of others (change in difficulty for happy ending)
 - .color-5[**main effects**]: differences relative to average for each condition of a factor (happy vs sad ending)
 - .color-5[**interaction effects**]: when simple effects differ depending on levels of another factor
-]
-.pull-right[
-.box-5[What it means relative to the table]
 
-- .color-5[**simple effects**] are comparisons between cell averages within a given row or column
-
-
-- .color-5[**main effects**] are comparisons between row or column averages
-
-
-- .color-5[**interaction effects**] are difference relative to the row or column average
-
-]
 ---
 
-# Marginal effects
+# Main effects
 
 .pull-left[
+
+
+.color-5[**Main effects**] are comparisons between row or column averages
+
 
 <div id="dbgvzfontn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
@@ -1142,6 +1152,7 @@ where
   
 </table>
 </div>
+
 
 ]
 
@@ -1592,14 +1603,30 @@ where
 
 .pull-left[
 
-<div id="ebohtplcwi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+
+.color-5[**Simple effects**] are comparisons between cell averages within a given row or column
+
+
+<div id="bohtplcwis" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bohtplcwis table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#ebohtplcwi .gt_table {
+#bohtplcwis thead, #bohtplcwis tbody, #bohtplcwis tfoot, #bohtplcwis tr, #bohtplcwis td, #bohtplcwis th {
+  border-style: none;
+}
+
+#bohtplcwis p {
+  margin: 0;
+  padding: 0;
+}
+
+#bohtplcwis .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -1622,19 +1649,12 @@ where
   border-left-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#bohtplcwis .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#ebohtplcwi .gt_title {
+#bohtplcwis .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1646,25 +1666,37 @@ where
   border-bottom-width: 0;
 }
 
-#ebohtplcwi .gt_subtitle {
+#bohtplcwis .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#ebohtplcwi .gt_bottom_border {
+#bohtplcwis .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bohtplcwis .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_col_headings {
+#bohtplcwis .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1679,7 +1711,7 @@ where
   border-right-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_col_heading {
+#bohtplcwis .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -1699,7 +1731,7 @@ where
   overflow-x: hidden;
 }
 
-#ebohtplcwi .gt_column_spanner_outer {
+#bohtplcwis .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -1711,15 +1743,15 @@ where
   padding-right: 4px;
 }
 
-#ebohtplcwi .gt_column_spanner_outer:first-child {
+#bohtplcwis .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ebohtplcwi .gt_column_spanner_outer:last-child {
+#bohtplcwis .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ebohtplcwi .gt_column_spanner {
+#bohtplcwis .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1731,7 +1763,11 @@ where
   width: 100%;
 }
 
-#ebohtplcwi .gt_group_heading {
+#bohtplcwis .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bohtplcwis .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1754,9 +1790,10 @@ where
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#ebohtplcwi .gt_empty_group_heading {
+#bohtplcwis .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1771,15 +1808,15 @@ where
   vertical-align: middle;
 }
 
-#ebohtplcwi .gt_from_md > :first-child {
+#bohtplcwis .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ebohtplcwi .gt_from_md > :last-child {
+#bohtplcwis .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ebohtplcwi .gt_row {
+#bohtplcwis .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1798,7 +1835,7 @@ where
   overflow-x: hidden;
 }
 
-#ebohtplcwi .gt_stub {
+#bohtplcwis .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1811,7 +1848,7 @@ where
   padding-right: 5px;
 }
 
-#ebohtplcwi .gt_stub_row_group {
+#bohtplcwis .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1825,11 +1862,15 @@ where
   vertical-align: top;
 }
 
-#ebohtplcwi .gt_row_group_first td {
+#bohtplcwis .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ebohtplcwi .gt_summary_row {
+#bohtplcwis .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bohtplcwis .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1839,16 +1880,16 @@ where
   padding-right: 5px;
 }
 
-#ebohtplcwi .gt_first_summary_row {
+#bohtplcwis .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_first_summary_row.thick {
+#bohtplcwis .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ebohtplcwi .gt_last_summary_row {
+#bohtplcwis .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1858,7 +1899,7 @@ where
   border-bottom-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_grand_summary_row {
+#bohtplcwis .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1868,7 +1909,7 @@ where
   padding-right: 5px;
 }
 
-#ebohtplcwi .gt_first_grand_summary_row {
+#bohtplcwis .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1878,11 +1919,21 @@ where
   border-top-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_striped {
+#bohtplcwis .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bohtplcwis .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ebohtplcwi .gt_table_body {
+#bohtplcwis .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1891,7 +1942,7 @@ where
   border-bottom-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_footnotes {
+#bohtplcwis .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1905,30 +1956,8 @@ where
   border-right-color: #D3D3D3;
 }
 
-#ebohtplcwi .gt_footnote {
+#bohtplcwis .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ebohtplcwi .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ebohtplcwi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1936,97 +1965,112 @@ where
   padding-right: 5px;
 }
 
-#ebohtplcwi .gt_left {
+#bohtplcwis .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bohtplcwis .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bohtplcwis .gt_left {
   text-align: left;
 }
 
-#ebohtplcwi .gt_center {
+#bohtplcwis .gt_center {
   text-align: center;
 }
 
-#ebohtplcwi .gt_right {
+#bohtplcwis .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ebohtplcwi .gt_font_normal {
+#bohtplcwis .gt_font_normal {
   font-weight: normal;
 }
 
-#ebohtplcwi .gt_font_bold {
+#bohtplcwis .gt_font_bold {
   font-weight: bold;
 }
 
-#ebohtplcwi .gt_font_italic {
+#bohtplcwis .gt_font_italic {
   font-style: italic;
 }
 
-#ebohtplcwi .gt_super {
+#bohtplcwis .gt_super {
   font-size: 65%;
 }
 
-#ebohtplcwi .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#ebohtplcwi .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#bohtplcwis .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#ebohtplcwi .gt_asterisk {
+#bohtplcwis .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ebohtplcwi .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#bohtplcwis .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#ebohtplcwi .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#bohtplcwis .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#ebohtplcwi .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#bohtplcwis .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bohtplcwis .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bohtplcwis .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table" style="table-layout: fixed;">
+<table class="gt_table" style="table-layout: fixed;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <colgroup>
     <col/>
     <col style="width:120px;"/>
     <col style="width:120px;"/>
   </colgroup>
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"> </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">happy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">sad</th>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="happy">happy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="sad">sad</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">means (easy)</td>
-<td class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{1.}$$</td>
-<td class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{2.}$$</td></tr>
+    <tr><td headers="X" class="gt_row gt_left">means (easy)</td>
+<td headers="happy" class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{13}$$</td>
+<td headers="sad" class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{23}$$</td></tr>
   </tbody>
   
   
 </table>
 </div>
+
 
 ]
 
@@ -2475,6 +2519,20 @@ where
 
 # Contrasts
 
+We collapse categories to obtain a one-way ANOVA with categories `\(A\)` (complexity) and `\(B\)` (ending).
+
+Q: How would you write the weights for contrasts for testing the 
+
+- main effect of `\(A\)`: complicated vs average, or complicated vs easy.
+- main effect of `\(B\)`: happy vs sad.
+- interaction `\(A\)` and `\(B\)`: difference between complicated and average, for happy versus sad?
+
+The order of the categories is `\((a_1, b1)\)`, `\((a_1, b_2)\)`, `\(\ldots\)`, `\((a_3, b_2)\)`.
+
+---
+
+# Contrasts
+
 Suppose the order of the coefficients is factor `\(A\)` (complexity, 3 levels, complicated/average/easy) and factor `\(B\)` (ending, 2 levels, happy/sad).
 
 | test | `\(\mu_{11}\)` | `\(\mu_{12}\)` | `\(\mu_{21}\)` | `\(\mu_{22}\)` | `\(\mu_{31}\)` | `\(\mu_{32}\)` |
@@ -2487,163 +2545,90 @@ Suppose the order of the coefficients is factor `\(A\)` (complexity, 3 levels, c
 
 ---
 
-# Hypothesis tests for main effects
+# Global hypothesis tests
 
-Generally, need to compare multiple effects at once
-.box-inv-5.sp-after-half[
+&lt;!-- Generally, need to compare multiple effects at once --&gt;
+.box-inv-5[
 Main effect of factor `\(A\)`
 ]
 
 `\(\mathscr{H}_0\)`: `\(\mu_{1.} = \cdots = \mu_{n_a.}\)` vs `\(\mathscr{H}_a\)`: at least two marginal means of `\(A\)` are different
-.box-inv-5.sp-after-half[
+.box-inv-5[
 Main effect of factor `\(B\)`
 ]
 
-`\(\mathscr{H}_0\)`: `\(\mu_{.1} = \cdots = \mu_{.n_b}\)` vs `\(\mathscr{H}_a\)`: at least two marginal means of `\(B\)` are different.
-
----
-# Equivalent formulation of the two-way ANOVA
-
-Write the model for a response variable `\(Y\)` in terms of two factors `\(a_i\)`, `\(b_j\)`.
-
-`$$Y_{ijr} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijr}$$`
-
-where 
-- `\(\alpha_i = \mu_{i.} - \mu\)`
-    - mean of level `\(a_i\)` minus overall mean.
-- `\(\beta_j  = \mu_{.j} - \mu\)`
-    - mean of level `\(b_j\)` minus overall mean.
-- `\((\alpha\beta)_{ij} = \mu_{ij} - \mu_{i.} - \mu_{.j} + \mu\)`
-    - the interaction term for `\(a_i\)` and `\(b_j\)`.
-
----
-
-# One average for each subgroup
-
-.small[
-
-| `\(\qquad B\)` `ending`&lt;br&gt; `\(A\)` `complexity` `\(\qquad\)` | `\(b_1\)` (`happy`) | `\(b_2\)` (`sad`)| *row mean* |
-|------------|:----------:|:-----:|:-----:|
-| `\(a_1\)` (`complicated`) | `\(\mu + \alpha_1 + \beta_1 + (\alpha\beta)_{11}\)` | `\(\mu + \alpha_1 + \beta_2 + (\alpha\beta)_{12}\)` | `\(\mu + \alpha_1\)` |
-|  `\(a_2\)` (`average`)  | `\(\mu + \alpha_2 + \beta_1 + (\alpha\beta)_{21}\)` | `\(\mu + \alpha_2 + \beta_2 + (\alpha\beta)_{22}\)` | `\(\mu + \alpha_2\)` |
-| `\(a_3\)` (`easy`) |  `\(\mu + \alpha_3 + \beta_1 + (\alpha\beta)_{31}\)` | `\(\mu + \alpha_3 + \beta_2 + (\alpha\beta)_{32}\)` | `\(\mu + \alpha_3\)` |
-|*column mean* | `\(\mu + \beta_1\)` | `\(\mu + \beta_2\)` | `\(\mu\)` |
-
-]
-
-
-.box-inv-5[More parameters than data cells!]
-
-The model in terms of `\(\alpha\)`, `\(\beta\)` and `\((\alpha\beta)\)` is overparametrized.
-
-
----
-
-
-# Sum-to-zero parametrization
-
-.box-inv-5[Too many parameters!]
-
-
-Impose sum to zero constraints
-
-`$$\sum_{i=1}^{n_a} \alpha_i=0, \quad \sum_{j=1}^{n_b} \beta_j=0, \quad  \sum_{j=1}^{n_b} (\alpha\beta)_{ij}=0, \quad \sum_{i=1}^{n_a} (\alpha\beta)_{ij}=0.$$`
-
-which imposes `\(1 +  n_a + n_b\)` constraints.
-
----
-
-# Why use the sum to zero parametrization?
-
-- Testing for main effect of `\(A\)`: `$$\mathscr{H}_0: \alpha_1 = \cdots = \alpha_{n_a} = 0$$`
-- Testing for main effect of `\(B\)`: `$$\mathscr{H}_0: \beta_1 = \cdots = \beta_{n_b} = 0$$` 
-- Testing for interaction between `\(A\)` and `\(B\)`: `$$\mathscr{H}_0: (\alpha\beta)_{11} = \cdots = (\alpha\beta)_{n_an_b} = 0$$`
-
-In all cases, alternative is that at least two coefficients are different.
-
----
-
-# Seeking balance
-
-.box-inv-5.sp-after.medium[
-**Balanced sample**&lt;br&gt;
-(equal nb of obs per group)
-
-]
-
+`\(\mathscr{H}_0\)`: `\(\mu_{.1} = \cdots = \mu_{.n_b}\)` vs `\(\mathscr{H}_a\)`: at least two marginal means of `\(B\)` are different
 .box-inv-5[
-With `\(n_r\)` replications per subgroup,&lt;br&gt;total sample size is `\(n = n_an_bn_r\)`.
+Interaction
 ]
 
----
+`\(\mathscr{H}_0\)`: `\(\mu_{ij} = \mu_{i \cdot} + \mu_{\cdot j}\)` (sum of main effects) vs `\(\mathscr{H}_a\)`: effect is not a combination of row/column effect.
 
-# Why balanced design?
-
-With equal variance, this is the optimal allocation of treatment unit.
-
-.box-inv-5.sp-after.medium[maximize power]
-
-Estimated means for main and total effects correspond to marginal averages.
-
-.box-inv-5.sp-after.medium[equiweighting]
-
-Unambiguous decomposition of effects of `\(A\)`, `\(B\)` and interaction.
-
-.box-inv-5.sp-after.medium[orthogonality]
 
 ---
 
-# Rewriting observations
+# Comparing nested models
 
+Rather than present the specifics of ANOVA, we consider a general hypothesis testing framework which is more widely applicable.
+
+We compare two competing models
+
+- the alternative or full model `\(\mathscr{H}_a\)`
+- the simpler null model `\(\mathscr{H}_0\)`, which imposes `\(\nu\)` restrictions on the full model
+
+???
+
+The same holds for analysis of deviance for generalized linear models. The latter use likelihood ratio tests (which are equivalent to F-tests for linear models), with a `\(\chi^2_{\nu}\)` null distribution.
+
+---
+
+# Intuition behind `\(F\)`-test for ANOVA
+
+The more complex fits better (it is necessarily more flexible), but requires estimation of more parameters.
+
+- Test compares the goodness-of-fit and attempts to determine what is the improvement that would occur by chance, if the null model was correct, given `\(\nu\)` additional parameters.
+
+---
+
+# Testing linear restrictions in linear models
+
+If the alternative model has `\(p\)` parameters for the mean, and we impose `\(\nu\)` linear restrictions under the null hypothesis to the model estimated based on `\(n\)` independent observations, the test statistic is
 
 `\begin{align*}
-\underset{\text{obs vs grand mean  (total)}}{(y_{ijr} - \widehat{\mu})} 
-&amp;= \underset{\text{row mean vs grand mean} (A)}{(\widehat{\mu}_{i.} - \widehat{\mu})} \\&amp; +\underset{\text{col mean vs grand mean} (B)}{(\widehat{\mu}_{.j} - \widehat{\mu})} 
-\\&amp;+\underset{\text{cell mean vs additive effect} (AB)}{(\widehat{\mu}_{ij} - \widehat{\mu}_{i.} - \widehat{\mu}_{.j}+ \widehat{\mu})} 
-\\&amp;+ \underset{\text{obs vs cell mean (resid)}}{(y_{ijr} - \widehat{\mu}_{ij})}
+F = \frac{(\mathsf{RSS}_0 - \mathsf{RSS}_a)/\nu}{\mathsf{RSS}_a/(n-p)}
 \end{align*}`
 
----
-
-# Decomposing variability
-
-Constructing statistics as before by decomposing variability into blocks.
-
-We can square both sides and sum over all observations.
-
-With balanced design, all cross terms cancel, leaving us with the .color-5[**sum of square**] decomposition
-
-`$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$`
+- The numerator is the difference in residuals sum of squares, denoted `\(\mathsf{RSS}\)`, from models fitted under `\(\mathscr{H}_0\)` and `\(\mathscr{H}_a\)`, divided by degrees of freedom `\(\nu\)`.
+- The denominator is an estimator of the variance, obtained under `\(\mathscr{H}_a\)` (termed mean squared error of residuals)
+- The benchmark for tests in linear models is Fisher's `\(\mathsf{F}(\nu, n-p)\)`.
 
 ---
 
-# Sum of square decomposition
+# Analysis of deviance
 
-The sum of square decomposition
+For other generalized linear models with parameters `\(\boldsymbol{\theta}\)`, we proceed similarly, but we use the log *likelihood* function, `\(\ell(\boldsymbol{\theta})\)` as goodness-of-fit measure.
 
-`$$\mathsf{SS}_{\text{total}} = \mathsf{SS}_A + \mathsf{SS}_B + \mathsf{SS}_{AB} + \mathsf{SS}_{\text{resid}}.$$`
-is an estimator of the population variance decomposition
-`$$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_{B} + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$`
-where `\(\sigma^2_A = n_a^{-1}\sum_{i=1}^{n_a} \alpha_i^2\)`, `\(\sigma^2_{AB} = (n_an_b)^{-1} \sum_{i=1}^{n_a} \sum_{j=1}^{n_b} (\alpha\beta)^2_{ij}\)`, etc.
-
-
-Take ratio of variability (effect relative to residual) and standardize numerator and denominator to build an `\(F\)` statistic.
-
+- The higher the (log) likelihood, the better the fit.
+- Obtain parameter estimates  `\(\widehat{\boldsymbol{\theta}}_0\)` under the null hypothesis and 
+ `\(\widehat{\boldsymbol{\theta}}_a\)` under the alternative by maximum likelihood estimation.
+- Consider the likelihood ratio statistic  `$$R = 2\{\ell(\widehat{\boldsymbol{\theta}}_a) - \ell(\widehat{\boldsymbol{\theta}}_0)\}$$`
+- Under regularity conditions, we compare `\(R\)` to a chi-square distribution with `\(\nu\)` degrees of freedom, `\(\chi^2_{\nu}\)`.
 
 ---
+
 # Analysis of variance table
 
 
 .small[
-
+  
 | term | degrees of freedom | mean square | `\(F\)` | 
 |------|--------|------|--------|
 | `\(A\)`  | `\(n_a-1\)`   | `\(\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)\)` | `\(\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}\)` |
 | `\(B\)`  | `\(n_b-1\)`   | `\(\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)\)` | `\(\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}\)` |
 | `\(AB\)` | `\((n_a-1)(n_b-1)\)` | `\(\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}\)` | `\(\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}\)` |
-| residuals | `\(n-n_an_b\)` | `\(\mathsf{MS}_{\text{resid}}=\mathsf{SS}_{\text{res}}/ (n-ab)\)` | |
+| residuals | `\(n-n_an_b\)` | `\(\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-ab)\)` | |
 | total | `\(n-1\)` | | 
-
+    
 ]
 
 Read the table backward (starting with the interaction).
@@ -2652,6 +2637,13 @@ Read the table backward (starting with the interaction).
 ---
 
 # Intuition behind degrees of freedom
+.small[
+
+The model always includes an overall average `\(\mu\)`.  There are
+
+- `\(n_a-1\)` free row means since `\(n_a\mu = \mu_{1.} + \cdots + \mu_{n_a.}\)` 
+- `\(n_b-1\)` free column means as `\(n_b\mu = \mu_{.1} + \cdots + \mu_{.n_b}\)`
+- `\(n_an_b-(n_a-1)-(n_b-1)-1\)` interaction terms
 
 | `\(\qquad B\)` `ending`&lt;br&gt; `\(A\)` `complexity` `\(\qquad\)` | `\(b_1\)` (`happy`) | `\(b_2\)` (`sad`)| *row mean* |
 |------------|:----------:|:-----:|:-----:|
@@ -2659,36 +2651,10 @@ Read the table backward (starting with the interaction).
 |  `\(a_2\)` (`average`)  | `\(\mu_{21}\)` | `\(\mathsf{X}\)`  | `\(\mu_{2.}\)` |
 | `\(a_3\)` (`easy`) |  `\(\mathsf{X}\)`  | `\(\mathsf{X}\)`  | `\(\mathsf{X}\)` |
 |*column mean* | `\(\mu_{.1}\)` | `\(\mathsf{X}\)` | `\(\mu\)` |
-
-.small[ 
+ 
 Terms with `\(\mathsf{X}\)` are fully determined by row/column/total averages
 
 ]
-
----
-
-# Multiplicity correction
-
-With equal sample size and equal variance, usual recipes for ANOVA hold.
-
-Correction depends on the effect: e.g., for factor `\(A\)`, the critical values are
-
-- Bonferroni: `\(1-\alpha/(2m)\)` quantile of `\(\mathsf{St}(n-n_an_b)\)`
-- Tukey: Studentized range (`qtukey`)
-   - level `\(1-\alpha/2\)`, `\(n_a\)` groups, `\(n-n_an_b\)` degrees of freedom.
-- Scheffé: critical value is `\(\{(n_a-1) \mathfrak{f}_{1-\alpha}\}^{1/2}\)`
-   - `\(\mathfrak{f}_{1-\alpha}\)` is `\(1-\alpha\)` quantile of `\(\mathsf{F}(\nu_1 = n_a-1, \nu_2 = n-n_an_b)\)`.
-
-Software implementations available in `emmeans` in **R**.
-
----
-
-
-layout: false
-name: factorial-designs
-class: center middle section-title section-title-5 animated fadeIn
-
-# Numerical example
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
