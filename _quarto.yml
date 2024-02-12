@@ -101,8 +101,8 @@ website:
             - evaluations/03-problem-set.qmd
             - evaluations/04-problem-set.qmd
             - evaluations/05-problem-set.qmd
-           # - evaluations/06-problem-set.qmd
-           # - evaluations/07-problem-set.qmd
+            - evaluations/06-problem-set.qmd
+            - evaluations/07-problem-set.qmd
            # - evaluations/08-problem-set.qmd
            # - evaluations/09-problem-set.qmd
            # - evaluations/10-problem-set.qmd
