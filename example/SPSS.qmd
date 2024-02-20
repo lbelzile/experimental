@@ -5,6 +5,7 @@ editor_options:
   chunk_output_type: console
 ---
 
+The databases for SPSS can be downloaded [through this link](/files/data/SPSS/MATH80667A_SPSS_datasets.zip).
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
 source(here::here("R", "youtube-playlist.R"))
@@ -28,5 +29,9 @@ slide_details <- tibble::tribble(
 youtube_list(slide_details, playlist_id, example = TRUE)
 ```
 
+# Code
 
-
+- [One-way analysis of variance](/example/oneway.sps)
+- [Two-way analysis of variance](/example/twoway.sps)
+- [Three-way analysis of variance](/example/threeway.sps)
+- [Analysis of covariance](/example/ancova.sps)

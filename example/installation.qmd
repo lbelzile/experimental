@@ -10,6 +10,8 @@ library(knitr)
 You will do all of your work in this class with the open source (and free!) [**R**](https://cran.r-project.org/) programming language. You will use [RStudio](https://www.rstudio.com/) as the main program to access **R**. Think of **R** as an engine and RStudio as a car dashboard—**R** handles all the calculations and the actual statistics, while RStudio provides a nice interface for running **R** code.
 
 
+
+
 ### Install **R**
 
 First you need to install the *latest* version of **R** itself (the engine), currently `r paste0(R.Version()$major,".", R.Version()$minor, " (", R.Version()$nickname,")")`.
@@ -89,4 +91,12 @@ To install **tinytex**:
 2. Run `tinytex::install_tinytex()` in the console.
 3. Wait for a bit while **R** downloads and installs everything you need.
 4. You should now be able to knit to PDF.
+
+
+
+## Learning **R**
+
+Searching for help with **R** on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot").
+
+Check out [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the tidyverse).
 

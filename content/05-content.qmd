@@ -66,6 +66,7 @@ xaringanExtra::embed_xaringan(
 
 
 - [R script](/content/MATH80667A-05-content.R)
+- [SPSS script](/content/MATH80667A-05-content.sps)
 
 
 ## References

@@ -64,3 +64,12 @@ xaringanExtra::embed_xaringan(
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
 :::
+
+
+## Code
+
+
+- [R script](/content/MATH80667A-06-content.R)
+- [SPSS script](/content/MATH80667A-06-content.sps)
+
+

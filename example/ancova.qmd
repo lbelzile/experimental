@@ -28,7 +28,7 @@ youtube_list(slide_details, playlist_id, example = TRUE)
 ```
 -->
 
-The code [can be downloaded here](/example/ancova-video.R).
+The **R** code [can be downloaded here](/example/ancova-video.R) and the [SPSS script here](/example/ancova.sps).
 
 # Notebook
 

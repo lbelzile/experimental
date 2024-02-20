@@ -59,18 +59,11 @@ If you want to brush up, I can recommend the free resource [Advanced High School
 
  Most programming language with dedicated statistics module can be used to perform the analyses we will cover in class^[The ability to compute custom contrasts and fit linear mixed models are deal breakers.]
 
-Property software options include [IBM SPSS Statistics](https://www.ibm.com/products/spss-statistics) (Windows and Mac only) and SAS (Windows only). HEC Montréal provides download for [SPSS](https://hecmontreal.atlassian.net/wiki/spaces/DTIKB/pages/1952252037) and SAS, but the latter can be freely accessed using the cloud-based version [SAS OnDemand for Academics](https://www.sas.com/en_us/software/on-demand-for-academics.html).^[This is the easiest way to set up SAS and does not require a virtual machine with Windows alongside a Unix operating system.] The database for SPSS can be downloaded [through this link](/files/MATH80667A_SPSS_datasets.zip).
+Property software options include [IBM SPSS Statistics](https://www.ibm.com/products/spss-statistics) (Windows and Mac only) and SAS (Windows only). HEC Montréal provides download for [SPSS](https://hecmontreal.atlassian.net/wiki/spaces/DTIKB/pages/1952252037) and SAS, but the latter can be freely accessed using the cloud-based version [SAS OnDemand for Academics](https://www.sas.com/en_us/software/on-demand-for-academics.html).^[This is the easiest way to set up SAS and does not require a virtual machine with Windows alongside a Unix operating system.] 
 
 I am a strong advocate of [**R**](https://cran.r-project.org/) and will provide code and material for the latter. There is a steep learning curve, but the user community is vibrant, so most routines of interest have been contributed by other users and you can get support through help forums. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/example/installation/)
 
-If you are more comfortable with click-and-drop menus, [JAMOVI](https://www.jamovi.org/), [PSPP](https://www.gnu.org/software/pspp/) and [JASP](https://jasp-stats.org/) are suitable open-access options.
-
-
-## Learning **R**
-
-Searching for help with **R** on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot").
-
-Check out [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the tidyverse).
+If you are more comfortable with click-and-drop menus, [JAMOVI](https://www.jamovi.org/), [PSPP](https://www.gnu.org/software/pspp/) and [JASP](https://jasp-stats.org/) are suitable open-access options but are limited.
 
 # Course materials
 

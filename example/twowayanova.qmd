@@ -10,10 +10,15 @@ execute:
   eval: true
   message: false
   warning: false
-  cache: true
+  cache: false
   fig-align: 'center'
   out-width: '80%'
 ---
+
+# Videos
+
+The **R** code [can be downloaded here](/example/twowayanova.R) and the [SPSS code here](/example/twoway.sps).
+
 
 ## Study 1 - balanced data
 
@@ -34,6 +39,7 @@ The experiment is a 2 by 2 factorial design (two-way ANOVA) with `anchor` (eithe
 library(dplyr)   # data manipulation
 library(ggplot2) # graphics
 library(emmeans) # contrasts, etc.
+library(car) # companion to applied regression
 # Example of two-way ANOVA with balanced design
 data(C16, package = "hecedsm")
 # Check for balance
@@ -191,7 +197,7 @@ We can then pass the output to `car::Anova` to print the analysis of variance ta
 
 ### Reporting
 
-Regardless of the model, it should be clearly stated that there is some evidence of hetegeneity. We should also report sample size per group, mention the repartition ($n=30$ per group).
+Regardless of the model, it should be clearly stated that there is some evidence of heterogeneity. We should also report sample size per group, mention the repartition ($n=30$ per group).
 
 In the present case, we can give information about the main effects and stop here, but giving an indication about the size of the adjustment (by reporting estimated marginal means) is useful. Note that `emmeans` gives a (here spurious) warning about the main effects (row or column average) since there is a potential interaction --- as we all but ruled out the latter, we proceed nevertheless.
 
@@ -253,7 +259,6 @@ Based on the actual study, it is quite clear we expect there will be an interact
 Since the data are unbalanced, we can fit the model using `lm`. The default parametrization of the linear model uses the first alphanumerical value for the factor as reference category and coefficients encode differences relative to this particular average. We can obtain the sum-to-zero by setting the option `contr.sum`^[The second term specifies the default option for continuous variables.]
 
 ```{r}
-data(MP14_S1, package = 'hecedsm')
 str(MP14_S1) # look at data
 
 # Set up contrasts
@@ -323,8 +328,7 @@ If the data lend some support for this claim, we could consider the following fo
 - same, but for Spadina and Sherbourne which are two stations away from Bay.
 - if the perceived distance for stations Spadina or Sherbourne, which are two away from Bay, are viewed as being twice as distance as St. George and Bloor--Yonge.
 
-For the experiment to make sense, we should check that travel time or distance is indeed roughly the same between each station. The limited range of the Likert scale shows
-These hypotheses can be expressed in terms of contrasts.
+For the experiment to make sense, we should check that travel time or distance is indeed roughly the same between each station. These hypotheses can be expressed in terms of contrasts.
 
 In `emmeans`, we keep both factors in the model and begin by computing the cell means and looking at the order of the factors and ordering of the levels to properly set our contrast vectors.
 
