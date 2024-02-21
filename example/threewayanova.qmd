@@ -23,7 +23,8 @@ slide_details <- tibble::tribble(
 "Introduction", "SHhP_TfZGVM",
 "Interaction plots", "I63CNxonlow",
 "Marginal contrast and simple effects", "KLLBNQhD0rE",
-"More contrasts and interactions", "WIoxZZ4pvlE"
+"More contrasts and interactions", "WIoxZZ4pvlE",
+"SPSS walkthrough", "_imWUkEQVo8"
 )
 
 ```

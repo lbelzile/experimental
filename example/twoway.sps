@@ -39,8 +39,6 @@ UNIANOVA distance BY treatment
    /CONTRAST(treatment) SPECIAL(0 0 2 -1 -1 2 0 0) /* H4
    /LMATRIX = "Joint test of symmetry" treatment 1 0 0 0 0 0 0 -1 ; treatment 0 0 1 0 0 -1 0 0; treatment 0 1 0 0 0 0 -1 0; treatment 0 0 0 1 -1 0 0 0
    /LMATRIX = "H1" treatment  0 1 -1 0 0 -1 1 0
-   /LMATRIX = "H2" treatment 1 0 0 -1 -1 0 0 1
-   /LMATRIX = "H2" treatment 0 0 2 -1 -1 2 0 0
-   .
+   /LMATRIX = "H2" treatment 1 0 0 -1 -1 0 0 1.
 
 DATASET CLOSE MP14S1.

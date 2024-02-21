@@ -15,10 +15,27 @@ execute:
   out-width: '80%'
 ---
 
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "youtube-playlist.R"))
+playlist_id <- "PLUB8VZzxA8ItJKq70HCdYrRcsDUsJYKhb"
+slide_details <- tibble::tribble(
+~title, ~youtube_id,
+"ANOVA table", "pxQgRTWwITI",
+"Interaction plot", "rYudu_vns6I",
+"Contrasts and marginal means", "0ifni3rNOss",
+"Effect size and power", "jcqpe3Z-YNs",
+"SPSS walkthrough", "lxVJAzaBHyY"
+)
+
+```
+
 # Videos
 
 The **R** code [can be downloaded here](/example/twowayanova.R) and the [SPSS code here](/example/twoway.sps).
 
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id, example = TRUE)
+```
 
 ## Study 1 - balanced data
 
