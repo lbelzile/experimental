@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.21">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods - Effect size and power</title>
+<title>Experimental Designs and Statistical Methods – Effect size and power</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,7 +100,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -108,6 +115,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -117,15 +125,42 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Experimental Designs and Statistical Methods</span>
     </a>
@@ -137,55 +172,55 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus.html" rel="" target="">
- <span class="menu-text">Syllabus</span></a>
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule.html" rel="" target="">
- <span class="menu-text">Schedule</span></a>
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html" rel="" target="">
- <span class="menu-text">Content</span></a>
+    <a class="nav-link" href="../content/index.html"> 
+<span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
- <span class="menu-text">Evaluations</span></a>
+    <a class="nav-link" href="../evaluations/index.html"> 
+<span class="menu-text">Evaluations</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../example/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Examples</span></a>
+    <a class="nav-link active" href="../example/index.html" aria-current="page"> 
+<span class="menu-text">Examples</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://lbelzile.github.io/math80667a" rel="" target="">
- <span class="menu-text">Notes</span></a>
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a"> 
+<span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://lbelzile.github.io/hecedsm" rel="" target=""><i class="bi bi-box" role="img" aria-label="Datasets">
+    <a class="nav-link" href="https://lbelzile.github.io/hecedsm"> <i class="bi bi-box" role="img" aria-label="Datasets">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/effectsizepower.html">Effect size and power</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/effectsizepower.html">Effect size and power</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -314,7 +349,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -334,7 +369,7 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/effectsizepower.html">Effect size and power</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Effect size and power</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
@@ -349,7 +384,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <section id="notebook" class="level1">
 <h1>Notebook</h1>
@@ -373,464 +410,40 @@ div.csl-indent {
 <section id="example-1---one-way-anova" class="level2">
 <h2 class="anchored" data-anchor-id="example-1---one-way-anova">Example 1 - one-way ANOVA</h2>
 <p>We begin with the result of our <a href="../example/onewayanova.html">Example on one-way ANOVA</a> in <span class="citation" data-cites="Baumann:1992">Baumann et al. (<a href="#ref-Baumann:1992" role="doc-biblioref">1992</a>)</span>. If we consider the global <span class="math inline">\(F\)</span>-test of equality in means, we can report as corresponding effect size the percentage of variance that is explained by the experimental condition, <code>group</code>.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-1_cdc71e6eabfdc03b2182c5d174811c1f">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BSJ92, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(posttest2 <span class="sc">-</span> pretest2 <span class="sc">~</span> group,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BSJ92)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">omega_squared</span>(<span class="fu">anova</span>(mod), <span class="at">partial =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print_md</span>(<span class="fu">omega_squared</span>(<span class="fu">anova</span>(mod), <span class="at">partial =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-</div>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-2_cb7e0b7d80d981c887c2babf37d6d22b">
 <div class="cell-output-display">
-
-<div id="iefhletlbk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-:where(#iefhletlbk) .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-:where(#iefhletlbk) .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-:where(#iefhletlbk) .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-:where(#iefhletlbk) .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-:where(#iefhletlbk) .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-:where(#iefhletlbk) .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-:where(#iefhletlbk) .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-:where(#iefhletlbk) .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-:where(#iefhletlbk) .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-:where(#iefhletlbk) .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-:where(#iefhletlbk) .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-:where(#iefhletlbk) .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-:where(#iefhletlbk) .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#iefhletlbk) .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-:where(#iefhletlbk) .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-:where(#iefhletlbk) .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#iefhletlbk) .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-:where(#iefhletlbk) .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#iefhletlbk) .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-:where(#iefhletlbk) .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#iefhletlbk) .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#iefhletlbk) .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#iefhletlbk) .gt_left {
-  text-align: left;
-}
-
-:where(#iefhletlbk) .gt_center {
-  text-align: center;
-}
-
-:where(#iefhletlbk) .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-:where(#iefhletlbk) .gt_font_normal {
-  font-weight: normal;
-}
-
-:where(#iefhletlbk) .gt_font_bold {
-  font-weight: bold;
-}
-
-:where(#iefhletlbk) .gt_font_italic {
-  font-style: italic;
-}
-
-:where(#iefhletlbk) .gt_super {
-  font-size: 65%;
-}
-
-:where(#iefhletlbk) .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-:where(#iefhletlbk) .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-:where(#iefhletlbk) .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-:where(#iefhletlbk) .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-:where(#iefhletlbk) .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-:where(#iefhletlbk) .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Effect Size for ANOVA (Type I)</th>
-    </tr>
-    
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Omega2</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">95% CI</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">group</td>
-<td class="gt_row gt_center">0.16</td>
-<td class="gt_row gt_center">[0.03, 1.00]</td></tr>
-  </tbody>
-  <tfoot class="gt_sourcenotes">
-    <tr>
-      <td class="gt_sourcenote" colspan="3">One-sided CIs: upper bound fixed at [1.00].</td>
-    </tr>
-  </tfoot>
-  
+<table class="table table-sm table-striped small">
+<caption>Effect Size for ANOVA (Type I)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: right;">Omega2</th>
+<th style="text-align: left;">95% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">group</td>
+<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">[0.03, 1.00]</td>
+</tr>
+</tbody>
 </table>
-</div>
+<p>One-sided CIs: upper bound fixed at [1.00].</p>
 </div>
 </div>
 <p>The estimator employed is <span class="math inline">\(\widehat{\omega}^2\)</span> and could be obtained directly using the formula provided in the slides. For a proportion of variance, the number is medium according to <span class="citation" data-cites="Cohen:1988">Cohen (<a href="#ref-Cohen:1988" role="doc-biblioref">1988</a>)</span> definition. Using <span class="math inline">\(\widehat{R}^2 \equiv \widehat{\eta}^2\)</span> as estimator instead would give an estimated proportion of variance of 0.188, a slightly higher number.</p>
 <p>Having found a significant difference in mean between groups, one could be interested in computing estimated marginal means and contrasts based on the latter. The <code>emmeans</code> function has a method for computing effect size (Cohen’s <span class="math inline">\(d\)</span>) for pairwise differences if provided with the denominator standard deviation <span class="math inline">\(\sigma\)</span> and the degrees of freedom associated with the latter (i.e., how many observations were left from the total sample size after subtracting the number of subgroup means).</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-3_4a6c9edc018f7191b53965c0c0b32208">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pair_diff <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
@@ -853,8 +466,8 @@ d_{\text{DRTA}- \text{TA}} = \frac{\mu_{\text{DRTA}}- \mu_{\text{TA}}}{\sigma},
 <p>In Experiment 2, the critical test of the cleanliness manipulation on ratings of morality was significant, <span class="math inline">\(F(1, 41) = 7.81\)</span>, <span class="math inline">\(p=0.01\)</span>, <span class="math inline">\(d=0.87\)</span>, <span class="math inline">\(N=44\)</span>. Assuming <span class="math inline">\(\alpha=0.05\)</span>, the achieved power in this experiment was <span class="math inline">\(0.80\)</span>. Our proposed research will attempt to replicate this experiment with a level of power = <span class="math inline">\(0.99\)</span>. This will require a minimum of 100 participants (assuming equal sized groups with <span class="math inline">\(d=0.87\)</span>) so we will collect data from 115 participants to ensure a properly powered sample in case of errors.</p>
 </blockquote>
 <p>The first step is to try and compute the effect size, here Cohen’s <span class="math inline">\(d\)</span>, from the reported <span class="math inline">\(F\)</span> statistic to make sure it matches the quoted value.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-4_1aca2cd94d6ba794ae371ba8c696dfb3">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dhat <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">F_to_d</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> <span class="fl">7.81</span>,</span>
@@ -863,8 +476,8 @@ d_{\text{DRTA}- \text{TA}} = \frac{\mu_{\text{DRTA}}- \mu_{\text{TA}}}{\sigma},
 </details>
 </div>
 <p>This indeed coincides with the value reported for Cohen’s <span class="math inline">\(d\)</span> estimator. We can then plug-in this value in the power function with the desired power level <span class="math inline">\(0.99\)</span> to find out a minimal number of 50 participants in each group, for a total of 100 if we do a pairwise comparison using a two-sample <span class="math inline">\(t\)</span>-test.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-5_c27936445878984287e78258a6e689a1">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.t</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fl">0.87</span>,</span>
@@ -892,8 +505,8 @@ URL: http://psychstat.org/ttest</code></pre>
 </ul>
 <p>Consider next the <a href="../example/twowayanova.html">unbalanced two-way ANOVA example</a> with Study 1 of <span class="citation" data-cites="Maglio/Polman:2014">Maglio &amp; Polman (<a href="#ref-Maglio/Polman:2014" role="doc-biblioref">2014</a>)</span>.</p>
 <p>We pass here directly the output of the model. We use the <code>lm</code> function with the mean-to-zero parametrization, since we have unbalanced data.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-6_cb95784d9aacc812a2f296d2b70090b0">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Force mean-to-zero parametrization</span></span>
@@ -906,460 +519,11 @@ URL: http://psychstat.org/ttest</code></pre>
 </details>
 </div>
 <p>By default, the variance terms for each factor and interaction are estimated using the <code>anova</code> call. When the data aren’t balanced and you have multiple factors in the mean equation, these are the sequential sum of square estimates (type I). This means that the resulting effect size would depend on the order in which you specify the terms, an unappealing feature. The model can alternatively take as argument the analysis of variance table produced by the <code>Anova</code> function in package <code>car</code>, e.g., <code>car::Anova(..., type = 3)</code>. Note that it is of paramount importance to pass the correct arguments and to use the mean-to-zero parametrization in order to get sensible results. The package warns user about this.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-7_aa311699459b47449180c0a8d5aab974">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>omsq <span class="ot">&lt;-</span> <span class="fu">omega_squared</span>(out)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print_html</span>(omsq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>omsq <span class="ot">&lt;-</span> <span class="fu">omega_squared</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-
-<div id="gwfsvjsutq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-:where(#gwfsvjsutq) .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-:where(#gwfsvjsutq) .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-:where(#gwfsvjsutq) .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-:where(#gwfsvjsutq) .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-:where(#gwfsvjsutq) .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-:where(#gwfsvjsutq) .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-:where(#gwfsvjsutq) .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-:where(#gwfsvjsutq) .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-:where(#gwfsvjsutq) .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-:where(#gwfsvjsutq) .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-:where(#gwfsvjsutq) .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-:where(#gwfsvjsutq) .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-:where(#gwfsvjsutq) .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#gwfsvjsutq) .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-:where(#gwfsvjsutq) .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-:where(#gwfsvjsutq) .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#gwfsvjsutq) .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-:where(#gwfsvjsutq) .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#gwfsvjsutq) .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-:where(#gwfsvjsutq) .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#gwfsvjsutq) .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-:where(#gwfsvjsutq) .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-:where(#gwfsvjsutq) .gt_left {
-  text-align: left;
-}
-
-:where(#gwfsvjsutq) .gt_center {
-  text-align: center;
-}
-
-:where(#gwfsvjsutq) .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-:where(#gwfsvjsutq) .gt_font_normal {
-  font-weight: normal;
-}
-
-:where(#gwfsvjsutq) .gt_font_bold {
-  font-weight: bold;
-}
-
-:where(#gwfsvjsutq) .gt_font_italic {
-  font-style: italic;
-}
-
-:where(#gwfsvjsutq) .gt_super {
-  font-size: 65%;
-}
-
-:where(#gwfsvjsutq) .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-:where(#gwfsvjsutq) .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-:where(#gwfsvjsutq) .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-:where(#gwfsvjsutq) .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
-}
-
-:where(#gwfsvjsutq) .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
-}
-
-:where(#gwfsvjsutq) .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Effect Size for ANOVA (Type III)</th>
-    </tr>
-    
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Parameter</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Omega2 (partial)</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">95% CI</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">station</td>
-<td class="gt_row gt_center">0.26</td>
-<td class="gt_row gt_center">[0.17, 1.00]</td></tr>
-    <tr><td class="gt_row gt_left">direction</td>
-<td class="gt_row gt_center">-3.39e-03</td>
-<td class="gt_row gt_center">[0.00, 1.00]</td></tr>
-    <tr><td class="gt_row gt_left">station:direction</td>
-<td class="gt_row gt_center">0.18</td>
-<td class="gt_row gt_center">[0.10, 1.00]</td></tr>
-  </tbody>
-  <tfoot class="gt_sourcenotes">
-    <tr>
-      <td class="gt_sourcenote" colspan="3">One-sided CIs: upper bound fixed at [1.00].</td>
-    </tr>
-  </tfoot>
-  
-</table>
-</div>
-</div>
 </div>
 <p>The estimated effect size for the main effect of <code>direction</code> is negative with <span class="math inline">\(\widehat{\omega}^2_{\langle \text{direction}\rangle}\)</span>: either reporting a negative value or zero. This reflects that the estimated effect is very insignificant.</p>
 <p>Equipped with the estimated effect size, we can now transform our partial <span class="math inline">\(\widehat{\omega}^2_{\langle\text{AB}\rangle}\)</span> measure into an estimated Cohen’s <span class="math inline">\(f\)</span> via <span class="math display">\[\widetilde{f} = \left( \frac{\widehat{\omega}^2}{1-\widehat{\omega}^2}\right)^{1/2},\]</span> which is then fed into <code>WebPower</code> package functionality to compute the <em>post-hoc</em> power. Since we are dealing with a two-way ANOVA with 8 subgroups, we set <code>ng=8</code> and then <code>ndf</code> corresponding to the degrees of freedom of the estimated interaction (here <span class="math inline">\((n_a-1)\times (n_b-1)=3\)</span>, the number of coefficients needed to capture the interaction).</p>
@@ -1371,8 +535,8 @@ URL: http://psychstat.org/ttest</code></pre>
 <li>the sample size,</li>
 </ol>
 <p>it is possible to deduce the last one assuming a balanced sample. Below, we use the information to compute the so-called <em>post-hoc</em> power. Such terminology is misleading because there is no guarantee that we are under the alternative, and effect sizes are really noisy proxy so the range of potential values for the missing ingredient is oftentimes quite large. Because studies in the literature have inflated effect size, the power measures are more often than not misleading.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-8_c5b79042ab25678ffe140450f0bab786">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Power calculations</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert omega-squared to Cohen's f</span></span>
@@ -1396,8 +560,8 @@ URL: http://psychstat.org/kanova</code></pre>
 </div>
 <p>Here, the interaction is unusually strong (a fifth of the variance is explained by it!) and we have an extremely large <em>post-hoc</em> power estimate. This is rather unsurprising given the way the experiment was set up.</p>
 <p>We can use the same function to determine how many observations the study would need to minimally achieve a certain power, below of 99% — the number reported must be rounded up to the nearest integer. Depending on the design or function, this number may be the overall sample size or the sample size per group.</p>
-<div class="cell" data-hash="effectsizepower_cache/html/unnamed-chunk-9_da28262df3fa89d5d213d91616e3840c">
-<details open="">
+<div class="cell">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size calculations</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cohensf2 <span class="ot">&lt;-</span> <span class="fu">cohens_f</span>(out)<span class="sc">$</span>Cohens_f_partial[<span class="dv">3</span>]</span>
@@ -1416,7 +580,7 @@ URL: http://psychstat.org/kanova</code></pre>
 NOTE: Sample size is the total sample size
 URL: http://psychstat.org/kanova</code></pre>
 </div>
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, </span>
@@ -1444,7 +608,7 @@ URL: http://psychstat.org/kanova</code></pre>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-Baumann:1992" class="csl-entry" role="listitem">
 Baumann, J. F., Seifert-Kessell, N., &amp; Jones, L. A. (1992). Effect of think-aloud instruction on elementary students’ comprehension monitoring abilities. <em>Journal of Reading Behavior</em>, <em>24</em>(2), 143–172. <a href="https://doi.org/10.1080/10862969209547770">https://doi.org/10.1080/10862969209547770</a>
 </div>
@@ -1600,10 +764,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/edsm\.rbind\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1613,8 +794,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1626,7 +816,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1670,6 +983,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1695,6 +1009,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1805,165 +1145,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>We begin with the result of our <span class="co">[</span><span class="ot">Example on one-way ANOVA</span><span class="co">](/example/onewayanova.html)</span> in @Baumann:1992. If we consider the global $F$-test of equality in means, we can report as corresponding effect size the percentage of variance that is explained by the experimental condition, <span class="in">`group`</span>.</span>
 <span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BSJ92, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(posttest2 <span class="sc">-</span> pretest2 <span class="sc">~</span> group,</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BSJ92)</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="fu">omega_squared</span>(<span class="fu">anova</span>(mod), <span class="at">partial =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BSJ92, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(posttest2 <span class="sc">-</span> pretest2 <span class="sc">~</span> group,</span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BSJ92)</span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="fu">print_html</span>(<span class="fu">omega_squared</span>(<span class="fu">anova</span>(mod), <span class="at">partial =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>The estimator employed is $\widehat{\omega}^2$ and could be obtained directly using the formula provided in the slides. For a proportion of variance, the number is medium according to @Cohen:1988 definition. Using $\widehat{R}^2 \equiv \widehat{\eta}^2$ as estimator instead would give an estimated proportion of variance of <span class="in">`r round(effectsize::eta_squared(anova(mod), partial = FALSE)$Eta2, 3)`</span>, a slightly higher number.</span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>Having found a significant difference in mean between groups, one could be interested in computing estimated marginal means and contrasts based on the latter. The <span class="in">`emmeans`</span> function has a method for computing effect size (Cohen's $d$) for pairwise differences if provided with the denominator standard deviation $\sigma$ and the degrees of freedom associated with the latter (i.e., how many observations were left from the total sample size after subtracting the number of subgroup means). </span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BSJ92, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(posttest2 <span class="sc">-</span> pretest2 <span class="sc">~</span> group,</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BSJ92)</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="fu">print_md</span>(<span class="fu">omega_squared</span>(<span class="fu">anova</span>(mod), <span class="at">partial =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>The estimator employed is $\widehat{\omega}^2$ and could be obtained directly using the formula provided in the slides. For a proportion of variance, the number is medium according to @Cohen:1988 definition. Using $\widehat{R}^2 \equiv \widehat{\eta}^2$ as estimator instead would give an estimated proportion of variance of <span class="in">`r round(effectsize::eta_squared(anova(mod), partial = FALSE)$Eta2, 3)`</span>, a slightly higher number.</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>Having found a significant difference in mean between groups, one could be interested in computing estimated marginal means and contrasts based on the latter. The <span class="in">`emmeans`</span> function has a method for computing effect size (Cohen's $d$) for pairwise differences if provided with the denominator standard deviation $\sigma$ and the degrees of freedom associated with the latter (i.e., how many observations were left from the total sample size after subtracting the number of subgroup means). </span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>pair_diff <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>  mod, <span class="at">spec =</span> <span class="st">"group"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eff_size</span>(<span class="at">sigma =</span> <span class="fu">sigma</span>(mod), </span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">edf =</span> <span class="fu">df.residual</span>(mod))</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>pair_diff <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(</span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>  mod, <span class="at">spec =</span> <span class="st">"group"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eff_size</span>(<span class="at">sigma =</span> <span class="fu">sigma</span>(mod), </span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>           <span class="at">edf =</span> <span class="fu">df.residual</span>(mod))</span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>The confidence intervals reported by <span class="in">`emmeans`</span> for $t$-tests are symmetric and different in nature from the one obtained previously.</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>Technical aside: while it is possible to create a $t$-statistic for a constrast by dividing the contrast estimator by it's standard error, the construction of Cohen's $d$ here for the contrast consisting of, e.g., the pairwise difference between <span class="in">`DRTA`</span> and <span class="in">`TA`</span> would take the form</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>d_{\text{DRTA}- \text{TA}} = \frac{\mu_{\text{DRTA}}- \mu_{\text{TA}}}{\sigma},</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>where the denominator stands for the standard deviation of the observations.^<span class="co">[</span><span class="ot">It isn't always obvious when marginalizing out a one-way ANOVA from a complex design or when we have random effects or blocking factor what the estimated standard deviation should be, so it is left to the user to specify the correct quantity.</span><span class="co">]</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>The confidence intervals reported by <span class="in">`emmeans`</span> for $t$-tests are symmetric and different in nature from the one obtained previously.</span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 2: Sample size for replication studies</span></span>
 <span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>Technical aside: while it is possible to create a $t$-statistic for a constrast by dividing the contrast estimator by it's standard error, the construction of Cohen's $d$ here for the contrast consisting of, e.g., the pairwise difference between <span class="in">`DRTA`</span> and <span class="in">`TA`</span> would take the form</span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>d_{\text{DRTA}- \text{TA}} = \frac{\mu_{\text{DRTA}}- \mu_{\text{TA}}}{\sigma},</span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>where the denominator stands for the standard deviation of the observations.^<span class="co">[</span><span class="ot">It isn't always obvious when marginalizing out a one-way ANOVA from a complex design or when we have random effects or blocking factor what the estimated standard deviation should be, so it is left to the user to specify the correct quantity.</span><span class="co">]</span></span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>Armed with effect sizes and a desired level of power, it is possible to determine the minimum number of observations that would yield such effect.</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>@Johnson:2014 performs a replication study of Schnall, Benton, and Harvey (2008) who conjectured that physical cleanliness reduces the severity of moral judgments.</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>The following excerpt from the paper explain how sample size for the replication were calculated.</span>
 <span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 2: Sample size for replication studies</span></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In Experiment 2, the critical test of the cleanliness manipulation on ratings of morality was significant, $F(1, 41) = 7.81$, $p=0.01$, $d=0.87$, $N=44$. Assuming $\alpha=0.05$, the achieved power in this experiment was $0.80$. Our proposed research will attempt to replicate this experiment with a level of power = $0.99$. This will require a minimum of 100 participants (assuming equal sized groups with $d=0.87$) so we will collect data from 115 participants to ensure a properly powered sample in case of errors.</span></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>Armed with effect sizes and a desired level of power, it is possible to determine the minimum number of observations that would yield such effect.</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>The first step is to try and compute the effect size, here Cohen's $d$, from the reported $F$ statistic to make sure it matches the quoted value.</span>
 <span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>@Johnson:2014 performs a replication study of Schnall, Benton, and Harvey (2008) who conjectured that physical cleanliness reduces the severity of moral judgments.</span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>The following excerpt from the paper explain how sample size for the replication were calculated.</span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In Experiment 2, the critical test of the cleanliness manipulation on ratings of morality was significant, $F(1, 41) = 7.81$, $p=0.01$, $d=0.87$, $N=44$. Assuming $\alpha=0.05$, the achieved power in this experiment was $0.80$. Our proposed research will attempt to replicate this experiment with a level of power = $0.99$. This will require a minimum of 100 participants (assuming equal sized groups with $d=0.87$) so we will collect data from 115 participants to ensure a properly powered sample in case of errors.</span></span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>The first step is to try and compute the effect size, here Cohen's $d$, from the reported $F$ statistic to make sure it matches the quoted value.</span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>dhat <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">F_to_d</span>(</span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> <span class="fl">7.81</span>,</span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="dv">1</span>, </span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">df_error =</span> <span class="dv">41</span>)</span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>This indeed coincides with the value reported for Cohen's $d$ estimator. We can then plug-in this value in the power function with the desired power level $0.99$ to find out a minimal number of 50 participants in each group, for a total of 100 if we do a pairwise comparison using a two-sample $t$-test.</span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.t</span>(</span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fl">0.87</span>,</span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.99</span>,</span>
-<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>)</span>
-<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>The <span class="in">`effectsize`</span> package includes many functions to convert $F$ and $t$ statistics to effect sizes.^<span class="co">[</span><span class="ot">As the example of @Baumann:1992 showed, however, not all statistics can be meaningfully converted to effect size.</span><span class="co">]</span></span>
-<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 3: two-way ANOVA with unbalanced data</span></span>
-<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a>While software can easily compute effect sizes, the user should not blindly rely on the output, but rather think about various elements using the following guiding principles:</span>
-<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>we are interested in partial effects when there are multiple factors</span>
-<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the denominator should consist of the variance of the effect of interest (say factor $A$), the variance of blocking factors and random effects and that of all interactions associated with them.</span>
-<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>Consider next the <span class="co">[</span><span class="ot">unbalanced two-way ANOVA example</span><span class="co">](/example/twowayanova.html)</span> with Study 1 of @Maglio/Polman:2014.</span>
-<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>We pass here directly the output of the model. We use the <span class="in">`lm`</span> function with the mean-to-zero parametrization, since we have unbalanced data.</span>
-<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
-<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Force mean-to-zero parametrization</span></span>
-<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate two-way ANOVA with interaction</span></span>
-<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> station<span class="sc">*</span>direction, </span>
-<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> MP14_S1)</span>
-<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="co"># Test only the interaction</span></span>
-<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">Anova</span>(model, <span class="at">type =</span> <span class="dv">3</span>)</span>
-<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>dhat <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">F_to_d</span>(</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> <span class="fl">7.81</span>,</span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="dv">1</span>, </span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>  <span class="at">df_error =</span> <span class="dv">41</span>)</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>This indeed coincides with the value reported for Cohen's $d$ estimator. We can then plug-in this value in the power function with the desired power level $0.99$ to find out a minimal number of 50 participants in each group, for a total of 100 if we do a pairwise comparison using a two-sample $t$-test.</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.t</span>(</span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fl">0.87</span>,</span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.99</span>,</span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>)</span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>The <span class="in">`effectsize`</span> package includes many functions to convert $F$ and $t$ statistics to effect sizes.^<span class="co">[</span><span class="ot">As the example of @Baumann:1992 showed, however, not all statistics can be meaningfully converted to effect size.</span><span class="co">]</span></span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 3: two-way ANOVA with unbalanced data</span></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>While software can easily compute effect sizes, the user should not blindly rely on the output, but rather think about various elements using the following guiding principles:</span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>we are interested in partial effects when there are multiple factors</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the denominator should consist of the variance of the effect of interest (say factor $A$), the variance of blocking factors and random effects and that of all interactions associated with them.</span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>Consider next the <span class="co">[</span><span class="ot">unbalanced two-way ANOVA example</span><span class="co">](/example/twowayanova.html)</span> with Study 1 of @Maglio/Polman:2014.</span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>We pass here directly the output of the model. We use the <span class="in">`lm`</span> function with the mean-to-zero parametrization, since we have unbalanced data.</span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(MP14_S1, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Force mean-to-zero parametrization</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate two-way ANOVA with interaction</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(distance <span class="sc">~</span> station<span class="sc">*</span>direction, </span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> MP14_S1)</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Test only the interaction</span></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">Anova</span>(model, <span class="at">type =</span> <span class="dv">3</span>)</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>By default, the variance terms for each factor and interaction are estimated using the <span class="in">`anova`</span> call. When the data aren't balanced and you have multiple factors in the mean equation, these are the sequential sum of square estimates (type I). This means that the resulting effect size would depend on the order in which you specify the terms, an unappealing feature. The model can alternatively take as argument the analysis of variance table produced by the <span class="in">`Anova`</span> function in package <span class="in">`car`</span>, e.g., <span class="in">`car::Anova(..., type = 3)`</span>. Note that it is of paramount importance to pass the correct arguments and to use the mean-to-zero parametrization in order to get sensible results. The package warns user about this.</span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>omsq <span class="ot">&lt;-</span> <span class="fu">omega_squared</span>(out)</span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>The estimated effect size for the main effect of <span class="in">`direction`</span> is negative with $\widehat{\omega}^2_{\langle \text{direction}\rangle}$: either reporting a negative value or zero. This reflects that the estimated effect is very insignificant.</span>
 <span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>By default, the variance terms for each factor and interaction are estimated using the <span class="in">`anova`</span> call. When the data aren't balanced and you have multiple factors in the mean equation, these are the sequential sum of square estimates (type I). This means that the resulting effect size would depend on the order in which you specify the terms, an unappealing feature. The model can alternatively take as argument the analysis of variance table produced by the <span class="in">`Anova`</span> function in package <span class="in">`car`</span>, e.g., <span class="in">`car::Anova(..., type = 3)`</span>. Note that it is of paramount importance to pass the correct arguments and to use the mean-to-zero parametrization in order to get sensible results. The package warns user about this.</span>
-<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>omsq <span class="ot">&lt;-</span> <span class="fu">omega_squared</span>(out)</span>
-<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="fu">print_html</span>(omsq)</span>
-<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>The estimated effect size for the main effect of <span class="in">`direction`</span> is negative with $\widehat{\omega}^2_{\langle \text{direction}\rangle}$: either reporting a negative value or zero. This reflects that the estimated effect is very insignificant.</span>
-<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>Equipped with the estimated effect size, we can now transform our partial $\widehat{\omega}^2_{\langle\text{AB}\rangle}$ measure into an estimated Cohen's $f$ via </span>
-<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>$$\widetilde{f} = \left( \frac{\widehat{\omega}^2}{1-\widehat{\omega}^2}\right)^{1/2},$$ which is then fed into <span class="in">`WebPower`</span> package functionality to compute the *post-hoc* power. Since we are dealing with a two-way ANOVA with 8 subgroups, we set <span class="in">`ng=8`</span> and then <span class="in">`ndf`</span> corresponding to the degrees of freedom of the estimated interaction (here $(n_a-1)\times (n_b-1)=3$, the number of coefficients needed to capture the interaction).</span>
-<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>Given all but one of the following collection </span>
-<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>the power,</span>
-<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>the number of groups and degrees of freedom from the design,</span>
-<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>the effect size and</span>
-<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>the sample size,</span>
-<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a>it is possible to deduce the last one assuming a balanced sample. Below, we use the information to compute the so-called *post-hoc* power. Such terminology is misleading because there is no guarantee that we are under the alternative, and effect sizes are really noisy proxy so the range of potential values for the missing ingredient is oftentimes quite large. Because studies in the literature have inflated effect size, the power measures are more often than not misleading.</span>
-<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a><span class="co"># Power calculations</span></span>
-<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert omega-squared to Cohen's f</span></span>
-<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>cohensf1 <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">eta2_to_f</span>(</span>
-<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>  omsq<span class="sc">$</span>Omega2_partial[<span class="dv">3</span>])</span>
-<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
-<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">202</span>, <span class="co"># sample size, assumed *balanced*</span></span>
-<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, <span class="co"># degrees of freedom</span></span>
-<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> cohensf1, <span class="co"># Cohen's f estimate</span></span>
-<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>  <span class="at">ng =</span> <span class="dv">8</span>) <span class="co"># number of subgroups of ANOVA</span></span>
-<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a>Here, the interaction is unusually strong (a fifth of the variance is explained by it!) and we have an extremely large *post-hoc* power estimate. This is rather unsurprising given the way the experiment was set up.</span>
-<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>We can use the same function to determine how many observations the study would need to minimally achieve a certain power, below of 99% --- the number reported must be rounded up to the nearest integer. Depending on the design or function, this number may be the overall sample size or the sample size per group.</span>
-<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size calculations</span></span>
-<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>cohensf2 <span class="ot">&lt;-</span> <span class="fu">cohens_f</span>(out)<span class="sc">$</span>Cohens_f_partial[<span class="dv">3</span>]</span>
-<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
-<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, </span>
-<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> cohensf1, </span>
-<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a>  <span class="at">ng =</span> <span class="dv">8</span>, </span>
-<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.99</span>)</span>
-<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
-<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, </span>
-<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> cohensf2, </span>
-<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">ng =</span> <span class="dv">8</span>,</span>
-<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.99</span>)</span>
-<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a>The total sample size using $\widehat{\omega}^2$ is 108, whereas using the biased estimator $\widehat{f}$ directly (itself obtained from $\widehat{\eta}^2$) gives 98: this difference of 10 individuals can have practical implications.</span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>Equipped with the estimated effect size, we can now transform our partial $\widehat{\omega}^2_{\langle\text{AB}\rangle}$ measure into an estimated Cohen's $f$ via </span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>$$\widetilde{f} = \left( \frac{\widehat{\omega}^2}{1-\widehat{\omega}^2}\right)^{1/2},$$ which is then fed into <span class="in">`WebPower`</span> package functionality to compute the *post-hoc* power. Since we are dealing with a two-way ANOVA with 8 subgroups, we set <span class="in">`ng=8`</span> and then <span class="in">`ndf`</span> corresponding to the degrees of freedom of the estimated interaction (here $(n_a-1)\times (n_b-1)=3$, the number of coefficients needed to capture the interaction).</span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>Given all but one of the following collection </span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>the power,</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>the number of groups and degrees of freedom from the design,</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>the effect size and</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>the sample size,</span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>it is possible to deduce the last one assuming a balanced sample. Below, we use the information to compute the so-called *post-hoc* power. Such terminology is misleading because there is no guarantee that we are under the alternative, and effect sizes are really noisy proxy so the range of potential values for the missing ingredient is oftentimes quite large. Because studies in the literature have inflated effect size, the power measures are more often than not misleading.</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a><span class="co"># Power calculations</span></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert omega-squared to Cohen's f</span></span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a>cohensf1 <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">eta2_to_f</span>(</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a>  omsq<span class="sc">$</span>Omega2_partial[<span class="dv">3</span>])</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">202</span>, <span class="co"># sample size, assumed *balanced*</span></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, <span class="co"># degrees of freedom</span></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> cohensf1, <span class="co"># Cohen's f estimate</span></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a>  <span class="at">ng =</span> <span class="dv">8</span>) <span class="co"># number of subgroups of ANOVA</span></span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>Here, the interaction is unusually strong (a fifth of the variance is explained by it!) and we have an extremely large *post-hoc* power estimate. This is rather unsurprising given the way the experiment was set up.</span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>We can use the same function to determine how many observations the study would need to minimally achieve a certain power, below of 99% --- the number reported must be rounded up to the nearest integer. Depending on the design or function, this number may be the overall sample size or the sample size per group.</span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample size calculations</span></span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>cohensf2 <span class="ot">&lt;-</span> <span class="fu">cohens_f</span>(out)<span class="sc">$</span>Cohens_f_partial[<span class="dv">3</span>]</span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, </span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> cohensf1, </span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a>  <span class="at">ng =</span> <span class="dv">8</span>, </span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.99</span>)</span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>WebPower<span class="sc">::</span><span class="fu">wp.kanova</span>(</span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>  <span class="at">ndf =</span> <span class="dv">3</span>, </span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>  <span class="at">f =</span> cohensf2, </span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>  <span class="at">ng =</span> <span class="dv">8</span>,</span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.99</span>)</span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>The total sample size using $\widehat{\omega}^2$ is 108, whereas using the biased estimator $\widehat{f}$ directly (itself obtained from $\widehat{\eta}^2$) gives 98: this difference of 10 individuals can have practical implications.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-left">
+<p>Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></p>
+</div>
   </div>
 </footer>
+
 
 
 

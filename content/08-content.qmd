@@ -58,3 +58,10 @@ xaringanExtra::embed_xaringan(
 ## Exercise
 
 - [Power calculations](/example/power.html)
+
+## Code
+
+
+- [R script](/content/MATH80667A-08-content.R)
+- [Exercise solution](/exercise/power.R)
+

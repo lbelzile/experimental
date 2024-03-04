@@ -49,21 +49,13 @@ In general, confidence intervals for effect sizes are very wide, including a lar
 We begin with the result of our [Example on one-way ANOVA](/example/onewayanova.html) in @Baumann:1992. If we consider the global $F$-test of equality in means, we can report as corresponding effect size the percentage of variance that is explained by the experimental condition, `group`.
 
 ```{r}
-#| eval: false
+#| eval: true
+#| echo: true
 library(effectsize)
 data(BSJ92, package = "hecedsm")
 mod <- aov(posttest2 - pretest2 ~ group,
            data = BSJ92)
-omega_squared(anova(mod), partial = FALSE)
-```
-
-```{r}
-#| echo: false
-library(effectsize)
-data(BSJ92, package = "hecedsm")
-mod <- aov(posttest2 - pretest2 ~ group,
-           data = BSJ92)
-print_html(omega_squared(anova(mod), partial = FALSE))
+print_md(omega_squared(anova(mod), partial = FALSE))
 ```
 
 The estimator employed is $\widehat{\omega}^2$ and could be obtained directly using the formula provided in the slides. For a proportion of variance, the number is medium according to @Cohen:1988 definition. Using $\widehat{R}^2 \equiv \widehat{\eta}^2$ as estimator instead would give an estimated proportion of variance of `r round(effectsize::eta_squared(anova(mod), partial = FALSE)$Eta2, 3)`, a slightly higher number.
@@ -147,7 +139,6 @@ By default, the variance terms for each factor and interaction are estimated usi
 
 ```{r}
 omsq <- omega_squared(out)
-print_html(omsq)
 ```
 
 The estimated effect size for the main effect of `direction` is negative with $\widehat{\omega}^2_{\langle \text{direction}\rangle}$: either reporting a negative value or zero. This reflects that the estimated effect is very insignificant.
