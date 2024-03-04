@@ -1,0 +1,38 @@
+---
+title: "Power calculations"
+type: docs
+editor_options: 
+  chunk_output_type: console
+---
+
+
+You can download [G*Power](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower) to perform these calculations.
+
+The following quotes are taken from the [Reproducibility Project: Psychology](https://osf.io/ezcuj/)
+
+1. Extract of [Chandler's replication](https://osf.io/sd4uv/) of Study 4b by @Janiszewski/Uy:2008
+
+> In Study 4a there are two effects of theoretical interest, a substantial main effect of anchor precision that replicates the first three studies and a small interaction (between precision and motivation within which people can adjust) that is not central to the paper. The main effect of anchor precision (effect size  $\eta^2_p=0.55$) would require a sample size of $10$ for $80$% power, $12$ for $90$% power, and $14$ for $95$% power. The interaction (effect size $\eta^2_p=0.11$) would require a sample size of $65$ for $80$% power, $87$ for $90$% power, and $107$ for $95$% power. There was also a theoretically uninteresting main effect of motivation (people adjust more when told to adjust more). 
+
+2. 
+> The result that is object of this replication is the interaction between item strength (massed vs. spaced presentation) and condition (directed forgetting vs. control). The dependent variable is the proportion of correctly remembered items from the stimulus set (List 1). "(..) The interaction was significant, $F(1,94)=4.97$, $p <.05$, $\mathrm{MSE} =0.029$, $\eta^2=0.05$, (...)". (p. 412). Power analysis (G*Power (Version 3.1): ANOVA: Repeated measures, within-between interaction with a zero correlation between the repeated measures) indicated that sample sizes for $80$%, $90$% and $95$% power were respectively $78$, $102$ and $126$.
+
+3. 
+> In Experiment 2, the critical test of the cleanliness manipulation on ratings of morality was significant, $F(1, 41)=7.81$, $p= 0.01$, $d=0.87$, $N=44$. Assuming $\alpha=0.05$, the achieved power in this experiment was $80$%. Our proposed research will attempt to replicate this experiment with
+a level of power of $99$%. This will require a minimum of $100$ participants (assuming equal sized groups with $d=0.87$) so we will collect data from $115$ participants to ensure a properly powered sample in case of errors.
+
+4. 
+> Our study will directly replicate both experiments from Schall and colleagues (2008a). In Experiment 1, the critical test of the cleanliness prime on ratings of morality was marginally significant, $F(1, 38)=3.63$, $p=0.06$, $d=61$, $N=40$. Assuming $\alpha=0.05$, the achieved power in this experiment was 46%. Our research will replicate this experiment with a level of power of $99$%. This will require a minimum of $200$ participants (assuming equal sized groups with $d=0.61$).
+
+5.
+> We aim at testing the two main effects of prediction 1 and prediction 3. Given the 2 x 3 within factors design for both main effects, we calculated $\eta^2_p$ based on $F$-Values and degrees of freedom. This procedure resulted in $\eta^2_p=0.427$ and $\eta^2_p=0.389$ for the effect of prediction 1 ($F(1, 36)=22.88$) and prediction 3 ($F(1, 36)=26.88$), respectively. Accordingly, G*Power (Version 3.1) indicates that a power of $80$%, $90$%, and $95$% is achieved with sample sizes of $3$, $4$, and $4$ participants, respectively, for both effects (assuming a correlation of $r=0.5$ between repeated measures in all power calculations).
+
+6. 
+> The original effect size for the one-sample t-test that tested the primary prediction was Cohen's $d=0.93$, $95$% Cl $[0.72, 1.14]$. A power analysis using G*Power to determine the sample sizes necessary to achieve $80$%, $90$%, $95$% power to detect the effect size indicates that samples with $12$, $15$, and $18$ total participants are necessary. 
+
+7.
+> The target finding for replication was revealed by a “repeated measures ANOVA with condition (coherent vs. incoherent) and story prompt (tree vs. house. vs. car) produced a significant linear trend for the interaction of Condition $\times$ Story, $F(1, 131)=5.79$, $p <.02$, $\eta^2 =0.04$” (Centerbar et al., 2008, p. 573). [...] The original effect size was $f=0.20$. To detect that effect size, samples requisite to achieve $80$%, $90$%, and $95$% power are $N=64$, $N=86$, $N=104$, respectively.
+
+8. 
+> The effect size for the finding that has been targeted for replication is a Cohen's $d$ of $0.451$, which was the effect size found in the original study (the Reproducibility Project: Psychology guidelines specify using the original effect size when computing power). Consistent with the original study, a two-tailed test with an alpha of $0.05$ will be used.  Assuming an equal number of participants in each group, a sample size of $158$ participants are needed to achieve a power of $80$% to detect an effect this large or larger. For $90$%
+power, $210$ participants would be necessary, and for $95$% power, $258$ participants would be necessary. 

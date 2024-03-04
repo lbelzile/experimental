@@ -4,7 +4,7 @@
     <title>Effect size and power</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-03-02" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -96,11 +96,13 @@ Replication report of Fischer, Greitemeyer, and Frey (2008, JPSP, Study 2) by E.
 
 # Does it matter?
 
-.box-inv-1.medium[
-Statistical significance `\(\neq\)` practical relevance
-]
 
 With large enough sample size, **any** sized difference between treatments becomes statistically significant.
+
+
+.box-inv-1.medium.sp-before-half[
+Statistical significance `\(\neq\)` practical relevance
+]
 
 But whether this is important depends on the scientific question.
 
@@ -148,7 +150,7 @@ Estimators popularized in the handbook
 &lt;img src="08-slides_files/figure-html/effectsize-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 .tiny[
-The plot shows null (thick) and true sampling distributions (dashed) for sample mean with small (left) and large (right) samples.
+The plot shows null (thick) and true sampling distributions (dashed) for the same difference in sample mean with small (left) and large (right) samples.
 ]
 ---
 
@@ -190,10 +192,9 @@ $$
 d = \frac{\mu_i - \mu_j}{\sigma}
 $$
 
-- Cohen's `\(d\)`'s usual estimator `\(\widehat{d}\)` uses sample average of groups and the pooled variance estimator `\(\widehat{\sigma}\)`.
-- Hedge's `\(g\)` includes a finite sample correction and is less biased (*prefered in practice*)
+- Usual estimator of Cohen's `\(d\)`, `\(\widehat{d}\)`, uses sample average of groups and the pooled variance estimator `\(\widehat{\sigma}\)`.
 
-Cohen's classification of effect sizes: small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_).
+Cohen's classification: small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_) effect size.
 
 ???
 
@@ -292,7 +293,7 @@ In **R**, use `effectsize::omega_squared(model, partial = TRUE)`.
 ---
 # Partial effects and variance decomposition
 
-Consider a completely randomized balanced design with two factors `\(A\)`, `\(B\)` and their interaction `\(AB\)`. We can decompose the total variance as
+Consider a completely randomized balanced design with two factors `\(A\)`, `\(B\)` and their interaction `\(AB\)`. In a balanced design, we can decompose the total variance as
 
 `$$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$`
 
@@ -324,7 +325,7 @@ Effect size are often reported in terms of variability via the ratio
 
 # Estimation of partial `\(\omega^2\)`
 
-Similar formulae as the one-way case for between-subject experiments, with 
+Similar formulas as the one-way case for between-subject experiments, with 
 
 `$$\widehat{\omega}^2_{\langle \text{effect} \rangle} = \frac{\text{df}_{\text{effect}}(F_{\text{effect}}-1)}{\text{df}_{\text{effect}}(F_{\text{effect}}-1) + n},$$`
 where `\(n\)` is the overall sample size.
@@ -371,6 +372,7 @@ In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "b
 - Effect sizes can be recovered using information found in the ANOVA table.
 - Multiple estimators for the same quantity
    - report the one used along with confidence or tolerance intervals.
+   - some estimators are prefered (less biased): this matters for power studies
 - The correct measure may depend on the design
    - partial vs total effects,
    - different formulas for within-subjects (repeated measures) designs!
@@ -657,14 +659,14 @@ Otherwise, you risk being in this situation:
 Sometimes, the estimated values of the effect size, etc. are used as plug-in.
 
 - The (estimated) effect size in studies are noisy! 
-- The post-hoc power estimate is also noisy and typically overoptimistic.
+- Post-hoc power estimates are also noisy and typically overoptimistic.
 - Not recommended, but useful pointer if the observed difference seems important (large), but there isn't enough evidence (too low signal-to-noise).
 
 .box-inv-3[Statistical fallacy]
 
 Because we reject a null doesn't mean the alternative is true!
 
-
+We either correctly reject the null or we don't (0/1): we observe this decision.
 
 ???
 
