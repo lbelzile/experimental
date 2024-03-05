@@ -98,7 +98,7 @@ ggplot(data = reading_long,
   stat_summary(aes(group = group),
                fun = "mean",
                geom = "line",
-               size = 1.2) +
+               linewidth = 1.2) +
   # Reduce space left-right of pre-post
   scale_x_discrete(expand = c(0, 0.1)) +
   theme(legend.position = "bottom")

@@ -14,13 +14,32 @@ execute:
   out-width: '80%'
 ---
 
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "youtube-playlist.R"))
+playlist_id <- "PLUB8VZzxA8IuWyHUHnVzSjQ0-aAHAmUvr"
+slide_details <- tibble::tribble(
+~title, ~youtube_id,
+"Effect size and power", "https://youtu.be/2U8j19mKrWQ",
+"Calculations using G*Power", "https://youtu.be/3f4ZCCVzkbY"
+)
+```
+
+
 # Notebook
 
 This example is devoted to correct calculation and reporting of effect sizes across a variety of experimental designs, including multi-way analysis of variance with and without blocking factors. We make use of the comprehensive `effectsize` package throughout.^[There are many other alternatives.]
 
 We also showcase how effect sizes can be recovered from the output of an analysis of variance table or from the reported test statistics and degrees of freedom, thus highlighting the impact of accurately reporting the latter.
 
-We finally consider calculation of power in various replication studies using `WebPower` and G*Power.
+We finally consider calculation of power in various replication studies using `WebPower` and G*Power; the latter considers the setup from [the Power exercise series](/example/power.html).
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id, example = TRUE)
+```
+
+
+
 
 ## Effect sizes
 
