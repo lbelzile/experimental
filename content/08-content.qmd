@@ -63,5 +63,5 @@ xaringanExtra::embed_xaringan(
 
 
 - [R script](/content/MATH80667A-08-content.R)
-- [Exercise solution](/exercise/power.R)
+- [Exercise solution](/example/power.R)
 
