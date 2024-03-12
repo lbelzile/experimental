@@ -13,6 +13,7 @@ Complete this task individually or in teams of up to three students.
 
 Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#example-chocolate-data) and some of the [examples](/example/mixedmodel.html) from the course notes.
 
+The `HOSM22_E4` data set can be found in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/HOSM22_E4.sav).
 
 Consider the model of @Hatano:2022 for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using @Oehlert:2010 approach
 

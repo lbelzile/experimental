@@ -11,11 +11,11 @@ Complete this task in teams of up to three students.
 
 ## Task 1
 
-Read @Rohrer:2022 and write down a summary
+Read @Rohrer:2022 and write a summary.
 
 ## Task 2
 
-@Liu.Rim.Min.Min:2023 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM23_S5b`.
+@Liu.Rim.Min.Min:2023 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM23_S5b` in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/LRMM23_S5b.sav).
 
 1. Fit the linear mediation model using the PROCESS macro or `mediate` function from the `mediation` package
   - use the nonparametric bootstrap with the percentile method

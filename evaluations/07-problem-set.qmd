@@ -11,7 +11,7 @@ Complete this task in teams of two or three students.
 
 Look at the [ANCOVA example](/example/ancova.html); this should be helpful in completing the problem set.
 
-We consider Experiment 3 of @vanStekelenburg:2021; ([download the paper](https://doi.org/10.1177/09567976211007788)). The database can be found in `SSVB21_S3` in the `hecedsm` package.
+We consider Experiment 3 of @vanStekelenburg:2021; ([download the paper](https://doi.org/10.1177/09567976211007788)). The database can be found in `SSVB21_S3` in the `hecedsm` package. You can also download the [SPSS database via this link](/files/data/SPSS/SSVB21_S3.sav).
 
 1. Have a quick look at the exclusion guidelines in the [preregistration](https://osf.io/4w9tq). Do they make sense? think about other potential criteria that could have been listed.
 2. Write down potential improvement points related to **statistics and experimental setup** that you could raise if you were assigned to peer-review the paper.
