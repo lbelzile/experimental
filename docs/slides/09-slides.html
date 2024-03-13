@@ -4,7 +4,7 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-03-11" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -25,8 +25,6 @@
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
     <script src="libs/kePrint-0.0.1/kePrint.js"></script>
     <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-    <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-    <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
     <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -137,7 +135,7 @@ As before, we have one experimental factor `\(A\)` with `\(n_a\)` levels, with
 
 `$$\begin{align*}\underset{\text{response}\vphantom{l}}{Y_{ij}} = \underset{\text{global mean}}{\mu_{\vphantom{j}}} + \underset{\text{mean difference}}{\alpha_j} + \underset{\text{random effect for subject}}{S_{i\vphantom{j}}} + \underset{\text{error}\vphantom{l}}{\varepsilon_{ij}}\end{align*}$$`
 
-where `\(S_i \sim \mathsf{No}(0, \sigma^2_s)\)` and `\(\varepsilon_{ij} \sim \mathsf{No}(0, \sigma^2_e)\)` are random variables.
+where `\(S_i \sim \mathsf{Normal}(0, \sigma^2_s)\)` and `\(\varepsilon_{ij} \sim \mathsf{Normal}(0, \sigma^2_e)\)` are random variables.
 
 The errors and random effects are independent from one another.
 
@@ -148,12 +146,11 @@ The errors and random effects are independent from one another.
 
 # Variance components
 
-The model **parameters** are `\(\mu\)`, `\(\alpha_j\)`'s, `\(\sigma^2_s\)` and `\(\sigma^2_e\)`.
+The model **parameters** includes two measures of variability `\(\sigma^2_s\)` and `\(\sigma^2_e\)`.
 
 
-- The global average is `\(\mu\)`.
 - The variance of the response `\(Y_{ij}\)` is `\(\sigma^2_s + \sigma^2_e\)`.
-- The **intra-class correlation** between observations in group `\(i\)` is `\(\sigma^2_s/(\sigma^2_s + \sigma^2_e)\)`.
+- The **intra-class correlation** between observations in group `\(i\)` is `\(\rho = \sigma^2_s/(\sigma^2_s + \sigma^2_e)\)`.
    - observations from the same subject are correlated
    - observations from different subjects are independent
    
@@ -195,8 +192,6 @@ If we average, we have a balanced randomized blocked design with
 
 - `id` (blocking factor)
 - `stimulus` (experimental factor)
-
-This approach has a drawback: variance estimates can be negative...
 
 We use the `afex` package to model the within-subject structure.
 
@@ -292,31 +287,18 @@ Since we care only about differences in treatment, can get away with a weaker as
 **Sphericity**: variance of difference between treatment is constant.
 
 
-Typically, people test this assumption (using e.g., Mauchly's test of sphericity)
-   - if statistically significant, use a correction
-   - if no evidence, proceed with `\(F\)` tests as usual
+Typically, Mauchly's test of sphericity is used to test this assumption
+   - if statistically significant, use a correction (later)
+   - if no evidence, proceed with `\(F\)` tests as usual with `\(\mathsf{F}(\nu_1, \nu_2)\)` benchmark distribution.
    
 ---
 
-
-# Corrections for sphericity
-
-Box suggested to multiply both degrees of freedom of `\(F\)` statistic by `\(\epsilon &lt; 1\)`.
-
-- Three common correction factors `\(\epsilon\)`:
-   - Greenhouse-Geisser 
-   - Huynh-Feldt (more powerful, but can be larger than 1)
-   - lower bound with `\(\nu_1\)`, giving `\(\mathsf{F}(1, \nu_2/\nu_1)\)`.
-
-Another option is to go fully multivariate.
-
----
 # Sphericity tests with `afex`
 
 
 
 ```r
-summary(model)
+summary(model) #truncated output
 ```
 
 ```
@@ -324,7 +306,44 @@ Mauchly Tests for Sphericity
 
          Test statistic p-value
 stimulus        0.67814 0.14341
+```
 
+.small[
+
+- `\(p\)`-value for Mauchly's test is large, no evidence that sphericity is violated.
+
+- Report the `\(p\)`-value of the `\(F\)`-test: `\(F(2, 22) = 0.6155\)`.
+
+]
+---
+
+# Corrections for sphericity
+
+If we reject the hypothesis of sphericity (small `\(p\)`-value for Mauchly's test), we need to change our reference distribution.
+
+
+Box suggested to multiply both degrees of freedom of `\(F\)` statistic by `\(\epsilon &lt; 1\)` and compare to `\(\mathsf{F}(\epsilon \nu_1, \epsilon \nu_2)\)` distribution instead
+
+- Three common correction factors `\(\epsilon\)`:
+   - Greenhouse‒Geisser 
+   - Huynh‒Feldt (more powerful)
+   - take `\(\epsilon=1/\nu_1\)`, giving `\(\mathsf{F}(1, \nu_2/\nu_1)\)`.
+
+Another option is to go fully multivariate (MANOVA tests).
+
+---
+
+# Corrections for sphericity tests with `afex`
+
+
+The estimated corrections `\(\widehat{\epsilon}\)` are reported by default with `\(p\)`-values. Use only if sphericity fails to hold, or to check robustness.
+
+
+```r
+summary(model) # truncated output
+```
+
+```
 Greenhouse-Geisser and Huynh-Feldt Corrections
  for Departure from Sphericity
 
@@ -334,6 +353,12 @@ stimulus 0.75651     0.5667
             HF eps Pr(&gt;F[HF])
 stimulus 0.8514944  0.5872648
 ```
+
+.tiny[
+
+Note: `\(\widehat{\epsilon}\)` can be larger than 1, replace by the upper bound 1 if it happens
+
+]
 
 ---
 
@@ -414,7 +439,7 @@ paragraph (standard adopted in US and other countries)
 # Why use MANOVA?
 
 1. Control experimentwise error
-  - do a single test, reduces type I error
+  - do a single test instead of `\(J\)` univariate ANOVAs, thereby reducing the type I error
 2. Detect differences in combination that would not be found with univariate tests
 3. Increase power (context dependent)
 
@@ -423,7 +448,7 @@ paragraph (standard adopted in US and other countries)
 
 # Multivariate model
 Postulate the following model:
-`$$\boldsymbol{Y}_{ij} \sim \mathsf{No}_p(\boldsymbol{\mu}_j, \boldsymbol{\Sigma}), \qquad j = 1, \ldots J$$`
+`$$\boldsymbol{Y}_{ij} \sim \mathsf{Normal}_p(\boldsymbol{\mu}_j, \boldsymbol{\Sigma}), \qquad j = 1, \ldots J$$`
 
 Each response `\(\boldsymbol{Y}_{ij}\)` is `\(p\)`-dimensional.
 
@@ -431,14 +456,28 @@ Each response `\(\boldsymbol{Y}_{ij}\)` is `\(p\)`-dimensional.
 
 We assume multivariate measurements are independent of one another, with
 
-- the same distribution
-- same covariance matrix `\(\boldsymbol{\Sigma}\)`
-- same mean vector `\(\boldsymbol{\mu}_j\)`  within each `\(j=1, \ldots, J\)` experimental groups.  
-   - (randomization)
+- the same multivariate normal distribution
+- same covariance matrix `\(\boldsymbol{\Sigma}\)` (each measurement can have different variance)
+- same mean vector `\(\boldsymbol{\mu}_j\)`  within each `\(j=1, \ldots, J\)` experimental groups.
 
 ]
 
 The model is fitted using multivariate linear regression.
+
+---
+
+In **R**, we fit a model binding the different vectors of response in a matrix with `\(p\)` columns
+
+
+```r
+data(AVC02, package = "hecedsm")
+# Fit the model binding variables with cbind
+# on left of tilde (~) symbol
+modMANOVA &lt;- manova(
+  cbind(prime, debt, profitability) ~ format, 
+  data = AVC02)
+```
+
 
 ---
 
@@ -450,9 +489,8 @@ The model is fitted using multivariate linear regression.
 .pull-right[
 Confidence ellipses for bivariate MANOVA with discriminant analysis.
 
-The diagonal line is the best separating plane between the two.
-
-One-way analysis of variance would have lower power to detect differences.
+We use the correlation between the `\(p\)` measurements to find better discriminant 
+(the diagonal line is the best separating plane between the two variables).
 
 ]
 
@@ -480,34 +518,40 @@ The dashed lines show the univariate projections of the confidence ellipse.
 Same as ANOVA, with in addition
 
 
-- The data follow a multivariate normal distribution 
-  - Shapiro–Wilk test, univariate QQ-plots
+- The response follow a multivariate normal distribution 
+  - Shapiro–Wilk test, univariate Q-Q plots 
 - The covariance matrix is the same for all subjects
   - Box's `\(M\)` test is often used, but highly sensitive to departures from the null (other assumptions impact the test)
 
-Normality matters more in small samples.
+.small[
 
+Normality matters more in small samples (but tests will often lead to rejection, notably because of rounded measurements or Likert scales)
+
+]
 ---
 # When to use MANOVA?
 
 In addition, for this model to make sense, you need just enough correlation (Goldilock principle)
 
  - if correlation is weak, use univariate analyses 
-   - (no gain from multivariate approach)
+   - (no gain from multivariate approach relative to one-way ANOVAs)
    - less power due to additional covariance parameter estimation
  - if correlation is too strong, redundancy
-    - don't use Likert scales that measure a similar dimension
+    - don't use Likert scales that measure a similar dimension (rather, consider PLS or factor analysis)
 
 .box-inv-5[Only combine elements that theoretically or conceptually make sense together.]
 
 ---
 # Testing equality of mean vectors
 
-The null hypothesis is `\(\mathscr{H}_0: \boldsymbol{\mu}_1 = \cdots = \boldsymbol{\mu}_J\)` against the alternative that at least one vector is different from the rest. The null imposes `\((J-1) \times p\)` restrictions on the parameters.
+The null hypothesis is that the `\(J\)` groups have the same mean
 
-With `\(J=2\)` (bivariate), the MANOVA test finds the best composite score with weights for `\(Y_{i1}\)` and `\(Y_{i2}\)` that maximizes the value of the `\(t\)`-test.
+- `\(\mathscr{H}_0: \boldsymbol{\mu}_1 = \cdots = \boldsymbol{\mu}_J\)` against the alternative that at least one vector is different from the rest. 
 
-The null distribution is Hotelling's `\(T^2\)`, but a modification of the test statistic can be approximated by a `\(F\)` distribution.
+- The null imposes `\((J-1) \times p\)` restrictions on the parameters.
+
+
+The test statistic is Hotelling's `\(T^2\)` (with associated null distribution), but we can compute using an `\(\mathsf{F}\)` distribution.
 
 
 ---
@@ -525,6 +569,97 @@ These are
 
 Most give similar conclusion, and they are all equivalent with `\(J=2\)`.
 
+---
+
+# Results for MANOVA
+
+.small[
+
+
+```r
+summary(modMANOVA) # Pilai is default
+```
+
+```
+##            Df  Pillai approx F num Df den Df Pr(&gt;F)
+## format      2 0.02581  0.55782      6    256 0.7637
+## Residuals 129
+```
+
+```r
+summary(modMANOVA, test = "Wilks")
+```
+
+```
+##            Df   Wilks approx F num Df den Df Pr(&gt;F)
+## format      2 0.97424   0.5561      6    254  0.765
+## Residuals 129
+```
+
+```r
+summary(modMANOVA, test = "Hotelling-Lawley")
+```
+
+```
+##            Df Hotelling-Lawley approx F num Df den Df Pr(&gt;F)
+## format      2         0.026397  0.55434      6    252 0.7664
+## Residuals 129
+```
+
+```r
+summary(modMANOVA, test = "Roy") # not reliable here?
+```
+
+```
+##            Df      Roy approx F num Df den Df Pr(&gt;F)
+## format      2 0.024436   1.0426      3    128 0.3761
+## Residuals 129
+```
+
+]
+---
+
+# MANOVA for repeated measures
+
+We can also use MANOVA for repeated measures to get above hypothesis of equal variance per group or equal correlation
+
+
+```r
+model$Anova # for models fitted via 'afex'
+```
+
+```
+## 
+## Type III Repeated Measures MANOVA Tests: Pillai test statistic
+##             Df test stat approx F num Df den Df    Pr(&gt;F)    
+## (Intercept)  1   0.95592   238.56      1     11 8.373e-09 ***
+## stimulus     1   0.09419     0.52      2     10    0.6098    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+Less powerful than repeated measures ANOVA because we have to estimate more parameters...
+
+---
+
+# Follow-up analyses
+
+Researchers often conduct *post hoc* univariate tests using univariate ANOVA. In **R**, Holm-Bonferonni's method is applied for marginal tests (you need to correct for multiple testing!)
+
+
+```r
+# Results for univariate analysis of variance (as follow-up)
+summary.aov(modMANOVA)
+# Note the "rep.meas" as default name 
+# to get means of each variable separately
+emmeans::emmeans(modMANOVA, specs = c("format", "rep.meas"))
+```
+
+.tiny[
+
+A better option is to proceed with descriptive discriminant analysis, a method that tries to find the linear combinations of the vector means to discriminate between groups. Beyond the scope of the course.
+
+]
 
 ---
 
@@ -634,16 +769,6 @@ Laüter, J. (1978), Sample size requirements for the `\(T^2\)` test of MANOVA (t
 ???
 
 
-
----
-
-# Post hoc testing
-
-Researchers often conduct *post hoc* univariate tests using univariate ANOVA.
-
-In **R**, Holm-Bonferonni's method is applied for marginal tests. You need to correct for multiple testing! 
-
-A better option is to proceed with descriptive discriminant analysis, a method that tries to find the linear combinations of the vector means to discriminate between groups.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>

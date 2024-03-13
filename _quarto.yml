@@ -74,8 +74,8 @@ website:
               file: content/08-content.qmd
             - text: "9: Repeated measures"
               file: content/09-content.qmd
-            #- text: "10: Intro to mixed models"
-            #  file: content/10-content.qmd
+            - text: "10: Intro to mixed models"
+              file: content/10-content.qmd
             #- text: "11: Intro to causal inference"
             #  file: content/11-content.qmd
             #- text: "12: Linear mediation and moderation"

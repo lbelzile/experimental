@@ -25,11 +25,8 @@ At the end of the session, students should be capable of
 
 ## Complementary readings
 
-<!--
-- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
-- [Chapter 11 of @Oehlert:2010 ](http://users.stat.umn.edu/~gary/book/fcdae.pdf)
 
--->
+- {{< fa book >}} @WebPower, pages 143--148 [of the web manual](https://webpower.psychstat.org/wiki/_media/grant/webpower_manual_book.pdf) 
 - {{< fa book >}}  Chapters 11--13 of @Maxwell.Delaney.Kelley:2017.
 - <i class="fas fa-book"></i> [Chapter 5.2 ](https://opentext.wsu.edu/carriecuttler/chapter/experimental-design/) of @Price:2017
 - <i class="fas fa-book"></i> Chapter 16 to 18 of @Keppel/Wickens:2004
@@ -55,6 +52,11 @@ xaringanExtra::embed_xaringan(
   ratio = "16:9"
 )
 ```
+
+## Code
+
+- [R script](/content/MATH80667A-09-content.R)
+- [SPSS script](/content/MATH80667A-09-content.sps)
 
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.

@@ -15,7 +15,7 @@ We consider Study 2 of @Bobak:2019, who collected responses for 52 participants 
 > Participants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.
 
 
-Perform a repeated measure one-way ANOVA with `color` as within-factor and `pcorr` as response with the `BMH19_S2` data, which can be found in the **R** package `hecedsm`.
+Perform a repeated measure one-way ANOVA with `color` as within-factor and `pcorr` as response with the `BMH19_S2` data, which can be found in the **R** package `hecedsm`.  You can also download the [SPSS database via this link](/files/data/SPSS/BMH19_S2.sav).
 
 1. Explain in your own words the purpose of randomization and [counterbalancing](https://explorable.com/counterbalanced-measures-design) in a repeated measure experiment.
 2. Is there evidence against the hypothesis of sphericity? Report Mauchly's statistic and the conclusion of the hypothesis test.
