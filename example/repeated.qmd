@@ -32,15 +32,14 @@ fmod <- afex::aov_ez(id = "id",
                      between = "waiting",
                      within = "ratingtype",
                      data = HOSM22_E3)
-summary(fmod)
 anova(fmod)
 # MANOVA tests
-# fmod$Anova
+fmod$Anova
 ```
 
-The output includes the $F$-tests for the two main effects and the interaction and global effect sizes $\widehat{\eta}^2$ (`ges`). There is no output for tests of sphericity, since there are only two measurements per person and thus a single mean different within-subject (so the test to check equality doesn't make sense with a single number).
+The output includes the $F$-tests for the two main effects and the interaction and global effect sizes $\widehat{\eta}^2$ (`ges`). There is no output for tests of sphericity, since there are only two measurements per person and thus a single mean different within-subject (so the test to check equality doesn't make sense with a single number). We could however compare variance between groups using Levene's test
 
-The degrees of freedom for the denominator of the test are based on the number of participants, here `r length(unique(HOSM22_E3$id))`.
+Notice that the degrees of freedom for the denominator of the test are based on the number of participants, here `r length(unique(HOSM22_E3$id))`.
 
 
 # Example 2
@@ -51,6 +50,7 @@ Study 5 of @Halevy.Berson:2022 aimed to demonstrate that events in the distant f
 > 2 (current state: war vs. peace) by 2 (predicted outcome: war vs. peace) by 2 (temporal distance: next year vs. twenty years into the future) mixed design
 
 with current state and predicted outcome as between-subject factors and temporal distance as within-subject factor. The response is the estimated likelihood of each outcome on a 7-point Likert scale ranging from extremely unlikely (1) to extremely likely (7). Data are presented in long-format. The question asked was of the form 
+
 >There is currently [war/peace] between the two tribes in Velvetia. Thinking about [next year/in 20 years], how likely is it that there will be [war/peace] in Velvetia?
 
 
