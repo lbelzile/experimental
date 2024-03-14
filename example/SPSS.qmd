@@ -22,7 +22,9 @@ slide_details <- tibble::tribble(
 "Two-way ANOVA", "7Z21rYuKMp0",
 "Two-way ANOVA (website example)", "lxVJAzaBHyY",
 "Three-way ANOVA (website example)", "_imWUkEQVo8",
-"ANCOVA (website example)", "OuNr1en9i6Y"
+"ANCOVA (website example)", "OuNr1en9i6Y",
+"Repeated measures", "VPck9Z8m9hc",
+"MANOVA", "FsRcZRnoCj4"
 
 )
 
@@ -41,3 +43,5 @@ youtube_list(slide_details, playlist_id, example = TRUE)
 - [Two-way analysis of variance](/example/twoway.sps)
 - [Three-way analysis of variance](/example/threeway.sps)
 - [Analysis of covariance](/example/ancova.sps)
+- [Repeated measures](/example/repeated.sps)
+- [MANOVA](/example/manova.sps)

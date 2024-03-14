@@ -1,0 +1,12 @@
+GET 
+  FILE='C:\Users\11187439\Desktop\SPSS\AVC02.sav'. 
+DATASET NAME AVC02 WINDOW=FRONT. 
+ 
+GLM prime debt profitability BY format 
+  /METHOD=SSTYPE(3) 
+  /PRINT=DESCRIPTIVE HOMOGENEITY 
+  /CRITERIA=ALPHA(.05) 
+  /DESIGN=format.
+  
+ DATASET CLOSE AVC02.
+ 
