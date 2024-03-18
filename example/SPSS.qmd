@@ -5,7 +5,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-The databases for SPSS can be downloaded [through this link](/files/data/SPSS/MATH80667A_SPSS_datasets.zip).
+The databases for SPSS can be downloaded [through this link](/files/data/SPSS/MATH80667A_SPSS.zip).
 
 ```{r slides-videos, echo=FALSE, include=FALSE}
 source(here::here("R", "youtube-playlist.R"))
@@ -24,9 +24,8 @@ slide_details <- tibble::tribble(
 "Three-way ANOVA (website example)", "_imWUkEQVo8",
 "ANCOVA (website example)", "OuNr1en9i6Y",
 "Repeated measures", "VPck9Z8m9hc",
-"MANOVA", "FsRcZRnoCj4"
-
-)
+"Repeated measures (within-between design)", "1eVVFziSN_k",
+"MANOVA", "FsRcZRnoCj4")
 
 ```
 

@@ -13,6 +13,25 @@ Complete this task individually or in teams of up to three students.
 
 Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#example-chocolate-data) and some of the [examples](/example/mixedmodel.html) from the course notes.
 
+# 
+
+@Elliot:2021 attempt to replicate a study of @Flavell:1966 and study unprompted verbalization by children aged 5 to 10 in an experiment. Data `MULTI21_D2` from package `hecedsm` contains the data, including unique participant `id`, `lab`, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the [SPSS database via this link](/files/data/SPSS/MULTI21_D2.sav).
+
+1. Using @Oehlert:2010 approach
+    a. Identify sources of variation
+    b. Identify whether factors are crossed or nested
+    c. Determine whether factors should be fixed or random
+    d. Figure out which interactions can exist and whether they can be fitted.
+2. Fit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance: 
+    a. are there difference between recall task?
+    b. is the increase between 5 and 7 years the same as from 7 to 10?
+3. Report estimated marginal means  across age groups (separately for each `timing` if there is an interaction), with standard errors.
+4. Produce an interaction plot for mean memory span to mimic Figure 4 of Elliot.
+5. Report the lab-specific variability  and comment on regional differences, if any.
+6. Compute the correlation of measurements for different individuals in a given lab
+
+<!--
+
 The `HOSM22_E4` data set can be found in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/HOSM22_E4.sav).
 
 Consider the model of @Hatano:2022 for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, along with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using @Oehlert:2010 approach
@@ -36,6 +55,7 @@ summary(mixmod) # coefficients
 anova(mixmod) # type III analysis of variance table
 ```
 
-5. Report the results for the interaction test: is the interaction statistically significant at level 5%? If not, compute estimated marginal means for rating type, otherwise return estimated simple effects for these.
+5. Report the results for the interaction test: is the interaction statistically significant at level 5%? If not, compute estimated marginal means for rating type, otherwise return estimated differences at `irtime` of `0` (mean centered value), `-2` and `4`.
 6. Compute the correlation between measurements from the same students.
 
+-->

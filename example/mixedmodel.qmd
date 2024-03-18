@@ -12,7 +12,7 @@ options(knitr.kable.NA = '')
 ```
 
 
-The following examples serves to illustrate the structure of experimental designs with both crossed and nested effects. The models are fitted speciying both random and fixed effects. We use the **R** package `lme4` to estimate the coefficients of the resulting linear mixed effect model and `lmerTest` for additional testing features.
+The following examples serves to illustrate the structure of experimental designs with both crossed and nested effects. The models are fitted specifying both random and fixed effects. We use the **R** package `lme4` to estimate the coefficients of the resulting linear mixed effect model and `lmerTest` for additional testing features.
 
 A word of caution: correctly formulating mixed models for complex experimental designs is far from trivial, and the correct interpretation of the output requires subject-matter expertise. Thus, rather than see the following sections as a definitive guide to doing such calculations on your own, it should be viewed as a way to acquire some terminology and intuition for speaking with a statistical consultant and formulating your needs, and gain familiarity for peer-reviewing purposes.
 
@@ -210,7 +210,7 @@ with(C22, xtabs(~ anchor + id))
 
 For each individual we see each pair of anchor once, but people are assigned to a single vignette. With only two measurements, no interaction is possible within participants. Likewise, we cannot have interaction between subject-effect and with anchor and verdict system (why?)
 
-We thus include a single random effect, that for subject. @Curley:2021 fitted two models: one with all three way interactions between PJAQ, vignette and anchor, the other with additive effects. 
+We thus include a single random effect, that for subject. @Curley:2021 fitted two models: one with all three way interactions between PJAQ (`prior`), vignette and anchor, the other with additive effects. 
 
 Since PJAQ is a continuous covariate, the interaction with vignette and anchor means that we expect the slope for PJAQ to be different for each group. This isn't necessarily justified by any of the author's hypotheses. If any interaction with the total pre-trial bias (PJAQ) is present, we would need to perform comparisons for different values of PJAQ. 
 
@@ -220,7 +220,7 @@ We fit the model without the interaction with PJAQ. Note that, using `emmeans`, 
 
 ```{r}
 C22_c <- C22 |>
-  dplyr::mutate(pjaq = scale(pjaq, scale = FALSE),
+  dplyr::mutate(pjaq = scale(prior, scale = FALSE),
                 guilt = guilt / 10) 
 # scale from 0 to 14
 model1 <- lmer(
@@ -263,7 +263,7 @@ emmeans(model2, spec = "anchor") |>
 There is a strong correlation, `r round(330.0/(330.0 + 227.1), 2)` between the responses from the same individuals so failing to account for the subject-specific random effect would lead to misleading conclusions, as reported $p$-values would be much smaller than they should be.
 
 
-The correlation between pre-trial bias score (PJAQ) and the guilt score is `r round(with(C22, cor(pjaq,guilt)),2)`. The coefficient in the additive model is `r round(as.numeric(fixef(model2)['pjaq']), 2)` with a standard error of 0.19, indicating a strong positive effect of pre-trial bias on the guilt score.
+The correlation between pre-trial bias score (PJAQ) and the guilt score is `r round(with(C22, cor(prior,guilt)),2)`. The coefficient in the additive model is `r round(as.numeric(fixef(model2)['pjaq']), 2)` with a standard error of 0.19, indicating a strong positive effect of pre-trial bias on the guilt score.
 
 The anchor has a large impact, with the estimated difference weak-first vs strong-first of 5 points for the guilt score overall.
 

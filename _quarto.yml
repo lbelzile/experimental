@@ -105,9 +105,9 @@ website:
             - evaluations/07-problem-set.qmd
             - evaluations/08-problem-set.qmd
             - evaluations/09-problem-set.qmd
-           # - evaluations/10-problem-set.qmd
-           # - evaluations/11-problem-set.qmd
-           # - evaluations/12-problem-set.qmd
+            - evaluations/10-problem-set.qmd
+            - evaluations/11-problem-set.qmd
+            - evaluations/12-problem-set.qmd
     - title: "Examples"
       style: "docked"
       search: false
