@@ -1853,7 +1853,7 @@
     "href": "content/10-content.html#slides",
     "title": "Intro to mixed models",
     "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -2289,6 +2289,18 @@
     "crumbs": [
       "Examples",
       "Two-way ANOVA"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#code",
+    "href": "content/10-content.html#code",
+    "title": "Intro to mixed models",
+    "section": "Code",
+    "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
     ]
   }
 ]
