@@ -193,7 +193,7 @@ div.csl-indent {
 </ul>
 <p>Read the <a href="https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#example-chocolate-data">chocolate example from <span class="citation" data-cites="Meier:2022">Meier (<span>2022</span>)</span></a> and some of the <a href="../example/mixedmodel.html">examples</a> from the course notes.</p>
 <p>The <code>HOSM22_E4</code> data set can be found in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/HOSM22_E4.sav">SPSS database via this link</a>.</p>
-<p>Consider the model of <span class="citation" data-cites="Hatano:2022">Hatano et al. (<a href="#ref-Hatano:2022" role="doc-biblioref">2022</a>)</span> for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using <span class="citation" data-cites="Oehlert:2010">Oehlert (<a href="#ref-Oehlert:2010" role="doc-biblioref">2000</a>)</span> approach</p>
+<p>Consider the model of <span class="citation" data-cites="Hatano:2022">Hatano et al. (<a href="#ref-Hatano:2022" role="doc-biblioref">2022</a>)</span> for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, along with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using <span class="citation" data-cites="Oehlert:2010">Oehlert (<a href="#ref-Oehlert:2010" role="doc-biblioref">2000</a>)</span> approach</p>
 <ol type="1">
 <li>Identify sources of variation</li>
 <li>Identify whether factors are crossed or nested</li>
@@ -210,7 +210,7 @@ div.csl-indent {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mixmod) <span class="co"># type III analysis of variance table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
-<li>Report the results for the interaction test: is the interaction significative at level 5%? If not, compute estimated marginal means for rating type.</li>
+<li>Report the results for the interaction test: is the interaction statistically significant at level 5%? If not, compute estimated marginal means for rating type, otherwise return estimated simple effects for these.</li>
 <li>Compute the correlation between measurements from the same students.</li>
 </ol>
 
@@ -219,7 +219,7 @@ div.csl-indent {
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-Hatano:2022" class="csl-entry" role="listitem">
-Hatano, A., Ogulmus, C., Shigemasu, H., &amp; Murayama, K. (2022). Thinking about thinking: People underestimate how enjoyable and engaging just waiting is. <em>Journal of Experimental Psychology: General</em>, <em>151</em>(12), 3213–3229. https://doi.org/<a href="https://doi.org/10.1037/xge0001255">https://doi.org/10.1037/xge0001255</a>
+Hatano, A., Ogulmus, C., Shigemasu, H., &amp; Murayama, K. (2022). Thinking about thinking: People underestimate how enjoyable and engaging just waiting is. <em>Journal of Experimental Psychology: General</em>, <em>151</em>(12), 3213–3229. <a href="https://doi.org/10.1037/xge0001255">https://doi.org/10.1037/xge0001255</a>
 </div>
 <div id="ref-Meier:2022" class="csl-entry" role="listitem">
 Meier, L. (2022). <em><span>ANOVA</span> and mixed models: A short introduction using <span>R</span></em> (Chapman &amp; Hall/CRC, Eds.). <a href="https://doi.org/10.1201/9781003146216">https://doi.org/10.1201/9781003146216</a>

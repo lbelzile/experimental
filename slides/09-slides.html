@@ -4,7 +4,7 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-03-11" />
+    <meta name="date" content="2024-03-17" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -23,8 +23,6 @@
     <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
-    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
     <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -39,7 +37,7 @@
 
 class: center middle main-title section-title-1
 
-# Repeated measures and multivariate &lt;br&gt; analysis of variance
+# Repeated measures and MANOVA
 
 .class-info[
 
@@ -196,8 +194,8 @@ If we average, we have a balanced randomized blocked design with
 We use the `afex` package to model the within-subject structure.
 
 ---
-.panelset[
-.panel[.panel-name[Load data]
+# Load data
+
 
 ```r
 # Set sum-to-zero constraint for factors
@@ -208,8 +206,11 @@ AA21_m &lt;- AA21 |&gt;
   dplyr::group_by(id, stimulus) |&gt;
   dplyr::summarize(latency = mean(latency))
 ```
-]
-.panel[.panel-name[Graph]
+
+---
+
+# Graph
+
 .pull-left[
 
 ```r
@@ -223,10 +224,10 @@ ggplot(data = AA21_m,
 ]
 .pull-right[
 &lt;img src="09-slides_files/figure-html/graph2-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+]
+---
 
-]
-]
-.panel[.panel-name[ANOVA]
+# ANOVA
 
 .pull-left[
 .small[
@@ -262,8 +263,7 @@ anova(model, # mixed ANOVA model
 
 ]
 ]
-]
-]
+
 ---
 
 
@@ -621,7 +621,7 @@ summary(modMANOVA, test = "Roy") # not reliable here?
 
 # MANOVA for repeated measures
 
-We can also use MANOVA for repeated measures to get above hypothesis of equal variance per group or equal correlation
+We can also use MANOVA for repeated measures to get  away from the hypothesis of equal variance per group or equal correlation
 
 
 ```r
@@ -638,7 +638,11 @@ model$Anova # for models fitted via 'afex'
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Less powerful than repeated measures ANOVA because we have to estimate more parameters...
+.small[
+
+Less powerful than repeated measures ANOVA because we have to estimate more parameters. Still assumes that the covariance structure is the same for each experimental group.
+
+]
 
 ---
 
@@ -660,115 +664,6 @@ emmeans::emmeans(modMANOVA, specs = c("format", "rep.meas"))
 A better option is to proceed with descriptive discriminant analysis, a method that tries to find the linear combinations of the vector means to discriminate between groups. Beyond the scope of the course.
 
 ]
-
----
-
-# Sample size for MANOVA
-
-The number of observations must be sufficiently large.
-
-You can use the software G*Power for power calculations.
-
-
-To achieve a power of 80%, need the following number of replicates **per group**.
-.small[
-
-&lt;table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'&gt;
- &lt;thead&gt;
-&lt;tr&gt;
-&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
-&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4"&gt;&lt;div style="border-bottom: 1px solid #111111; margin-bottom: -1px; "&gt;3 groups&lt;/div&gt;&lt;/th&gt;
-&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4"&gt;&lt;div style="border-bottom: 1px solid #111111; margin-bottom: -1px; "&gt;4 groups&lt;/div&gt;&lt;/th&gt;
-&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4"&gt;&lt;div style="border-bottom: 1px solid #111111; margin-bottom: -1px; "&gt;5 groups&lt;/div&gt;&lt;/th&gt;
-&lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; effect size \ p &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 2 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 4 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 6 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 8 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 2 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 4 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 6 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 8 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 2 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 4 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 6 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; 8 &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; very large &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 18 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 18 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 23 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; large &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 38 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 29 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 37 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 34 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 52 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 58 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; medium &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 56 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 50 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 64 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 84 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 60 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 76 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 90 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 100 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; small &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 98 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 125 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 145 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 115 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 145 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 165 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 185 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 135 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 170 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 230 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-]
-.small[
-Laüter, J. (1978), Sample size requirements for the `\(T^2\)` test of MANOVA (tables for one-way classification). *Biometrical Journal*, **20**, 389-406.
-]
-
-???
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>

@@ -43,7 +43,7 @@ xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipbo
 
 class: center middle main-title section-title-1
 
-# Repeated measures and multivariate <br> analysis of variance
+# Repeated measures and MANOVA
 
 .class-info[
 
@@ -200,8 +200,8 @@ If we average, we have a balanced randomized blocked design with
 We use the `afex` package to model the within-subject structure.
 
 ---
-.panelset[
-.panel[.panel-name[Load data]
+# Load data
+
 ```{r interaction, echo = TRUE, eval = TRUE, cache = TRUE}
 # Set sum-to-zero constraint for factors
 options(contrasts = c("contr.sum", "contr.poly"))
@@ -211,8 +211,11 @@ AA21_m <- AA21 |>
   dplyr::group_by(id, stimulus) |>
   dplyr::summarize(latency = mean(latency))
 ```
-]
-.panel[.panel-name[Graph]
+
+---
+
+# Graph
+
 .pull-left[
 ```{r graph, echo = TRUE, eval = FALSE}
 library(ggplot2)
@@ -237,10 +240,10 @@ ggplot(data = AA21_m,
        x = "participant identifier") + 
   theme(legend.position = "bottom")
 ```
+]
+---
 
-]
-]
-.panel[.panel-name[ANOVA]
+# ANOVA
 
 .pull-left[
 .small[
@@ -282,8 +285,7 @@ model <- afex::aov_ez(
 
 ]
 ]
-]
-]
+
 ---
 
 
@@ -603,13 +605,17 @@ summary(modMANOVA, test = "Roy") # not reliable here?
 
 # MANOVA for repeated measures
 
-We can also use MANOVA for repeated measures to get above hypothesis of equal variance per group or equal correlation
+We can also use MANOVA for repeated measures to get  away from the hypothesis of equal variance per group or equal correlation
 
 ```{r}
 model$Anova # for models fitted via 'afex'
 ```
 
-Less powerful than repeated measures ANOVA because we have to estimate more parameters...
+.small[
+
+Less powerful than repeated measures ANOVA because we have to estimate more parameters. Still assumes that the covariance structure is the same for each experimental group.
+
+]
 
 ---
 
@@ -632,42 +638,3 @@ emmeans::emmeans(modMANOVA, specs = c("format", "rep.meas"))
 A better option is to proceed with descriptive discriminant analysis, a method that tries to find the linear combinations of the vector means to discriminate between groups. Beyond the scope of the course.
 
 ]
-
----
-
-# Sample size for MANOVA
-
-The number of observations must be sufficiently large.
-
-You can use the software G*Power for power calculations.
-
-
-To achieve a power of 80%, need the following number of replicates **per group**.
-.small[
-
-```{r tablepowersamplesize, echo = FALSE, eval = TRUE, output = "asis"}
-library(tidyverse)
-tab <- data.frame(
-n = c(13,16,18,21,26,33,38,42,44,56,66,72,98,125,145,160,14,18,21,23,29,37,44,48,50,64,74,84,115,145,165,185,16,21,24,27,34,44,52,58,60,76,90,100,135,170,200,230),
-ngroups = factor(rep(3:5, each = 16)),
-ndep = factor(rep(c(2L,4L,6L,8L), length.out = 3*16)),
-effects = factor(rep(rep(c("very large", "large", "medium", "small"), each = 4), length.out = 3*16))
-)
-
-tab_pivot <- tab %>% pivot_wider(values_from = "n", 
-                    names_from = c("ndep","ngroups"))
-library(kableExtra)
-kbl(tab_pivot,
-    col.names = c("effect size \\ p",rep(c("2","4","6","8"), length.out = 12))) %>%
-  kable_classic() %>%
-  add_header_above(c(" " = 1, "3 groups" = 4, "4 groups" = 4, "5 groups" = 4))
-```
-
-]
-.small[
-Laüter, J. (1978), Sample size requirements for the $T^2$ test of MANOVA (tables for one-way classification). *Biometrical Journal*, **20**, 389-406.
-]
-
-???
-
-

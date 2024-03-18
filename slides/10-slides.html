@@ -4,7 +4,7 @@
     <title>Introduction to mixed models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-03-17" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -75,9 +75,9 @@ We are interested in making inference about the **variability** of the factor.
 
 - measures of performance of employees
 - results from different labs in an experiment
-- subjects in repeated measures
+- **subjects in repeated measures**
 
-We treat the factor as a **random** effect.
+We treat these factors as **random** effects.
 
 ---
 
@@ -99,8 +99,8 @@ Consider a one-way model
 
 where 
 
-- `\(\alpha_j \sim \mathsf{No}(0, \sigma^2_\alpha)\)` is normal with mean zero and variance `\(\sigma^2_\alpha\)`.
-- `\(\varepsilon_{ij}\)` are independent `\(\mathsf{No}(0, \sigma^2_\varepsilon)\)`
+- `\(\alpha_j \sim \mathsf{Normal}(0, \sigma^2_\alpha)\)` is normal with mean zero and variance `\(\sigma^2_\alpha\)`.
+- `\(\varepsilon_{ij}\)` are independent `\(\mathsf{Normal}(0, \sigma^2_\varepsilon)\)`
 
 
 ---
@@ -109,13 +109,13 @@ where
 
 Consider the weekly number of hours spent by staff members at HEC since September. 
 
-We collect a random sample of 40 employees and ask them to measure the number of hours they work from school for 8 consecutive weeks.
+We collect a random sample of 40 employees and ask them to measure the number of hours they work from school (as opposed to remotely) for eight consecutive weeks.
 
 ---
 # Fitting mixed models in **R**
 
 
-We use the `lme4` package in **R** to fit the models.
+We use the `lme4` package in **R** to fit mixed models.
 
 The `lmerTest` package provides additional functionalities for testing.
 
@@ -186,12 +186,15 @@ Those are based on profile likelihood methods (asymmetric).
 ## (Intercept)       21.335343 25.267782
 ```
 
-The variability of the measurements and between employees is very different from zero.
+The variability of the measurements and the week-to-week correlation of employee measures are different from zero.
 
+---
 
+# Shrinkage
 
+&lt;img src="10-slides_files/figure-html/unnamed-chunk-3-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
-
+.tiny[Predictions of random effects are shrunk towards global mean, more so for larger values and when there are fewer measurements.]
 ???
 
 Even with old school, we can get confidence intervals but only in simple designs like this one-way.
@@ -212,13 +215,84 @@ Mixed models make it easier to
 
 ---
 
+# Repeated measures ANOVA using mixed model
+
+Data need to be in long format, i.e., one response per line with an id column.
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/10/original-dfs-tidy.png" alt="Illustration by Garrick Adden-Buie" width="50%" /&gt;
+&lt;p class="caption"&gt;Illustration by Garrick Adden-Buie&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Example: two-way ANOVA
+
+We consider a repeated measure ANOVA (2 by 2 design, within-between) from [Hatano et al. (2022)](https://doi.org/10.1037/xge0001255).
+
+
+```r
+data(HOSM22_E3, package = "hecedsm")
+fmod &lt;- afex::aov_ez(
+  id = "id", 
+  dv = "imscore", 
+  between = "waiting",
+  within = "ratingtype",
+  data = HOSM22_E3)
+anova(fmod)
+```
+
+---
+
+
+
+```
+## Anova Table (Type 3 tests)
+## 
+## Response: imscore
+##                    num Df den Df     MSE       F      ges    Pr(&gt;F)    
+## waiting                 1     61 2.48926 11.2551 0.126246   0.00137 ** 
+## ratingtype              1     61 0.68953 38.4330 0.120236 5.388e-08 ***
+## waiting:ratingtype      1     61 0.68953  0.0819 0.000291   0.77575    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+# Repeated measures with linear mixed models
+
+Results are the same as for repeated measures ANOVA if the correlation estimate between observations of the same id are nonnegative.
+
+
+```r
+mixmod &lt;- lmerTest::lmer(
+  imscore ~ waiting*ratingtype +
+    (1 | id), # random intercept per id
+  data = HOSM22_E3)
+anova(mixmod, type = 3)
+```
+
+```
+## Type III Analysis of Variance Table with Satterthwaite's method
+##                     Sum Sq Mean Sq NumDF DenDF F value    Pr(&gt;F)    
+## waiting             7.7608  7.7608     1    61 11.2551   0.00137 ** 
+## ratingtype         26.5009 26.5009     1    61 38.4330 5.388e-08 ***
+## waiting:ratingtype  0.0565  0.0565     1    61  0.0819   0.77575    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
 # Theory
 
 Full coverage of linear mixed models and general designs is beyond the scope of the course, but note
 
 - Estimation is performed via restricted maximum likelihood (REML)
 - Testing results may differ from repeated measure ANOVA
-- Different approximations for `\(F\)` degrees of freedom (either Kenward-Roger (costly) or Satterthwaite approximation)
+- Different approximations for `\(F\)` degrees of freedom, either
+   - Kenward–Roger (costly) or
+   - Satterthwaite's approximation
 
 ---
 # Structure of the design
@@ -296,6 +370,42 @@ Mixed models vs repeated measures
 
 ---
 
+# Example: happy fakes
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="10-slides_files/figure-html/fig-aafulldat-1.png" alt="Jittered scatterplot of measurements per participant and stimulus type." width="60%" /&gt;
+&lt;p class="caption"&gt;Jittered scatterplot of measurements per participant and stimulus type.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Interaction with random and fixed effect
+
+Add student `id` as random effect, `stimulus` as fixed effect and their interaction as random effect (since one parent is random)
+
+
+```r
+data(AA21, package = "hecedsm")
+anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
+  lmerTest::lmer(
+    data = AA21 |&gt; dplyr::filter(latency &gt; -40), 
+    latency ~ stimulus + (1|id) + (1|id:stimulus)))
+```
+
+```
+## Type III Analysis of Variance Table with Kenward-Roger's method
+##          Sum Sq Mean Sq NumDF  DenDF F value Pr(&gt;F)
+## stimulus 65.573  32.786     2 21.878  0.8465 0.4425
+```
+
+```r
+# Approximately 22 degrees of freedom (as for repeated measures)
+```
+
+
+---
+
+
 # Data structure
 
 
@@ -317,7 +427,6 @@ Mixed models vs repeated measures
 ---
 
 # Example: chocolate rating
-
 
 Example from L. Meier, adapted from Oehlert (2010)
 

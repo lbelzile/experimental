@@ -5,6 +5,9 @@ editor_options:
   chunk_output_type: console
 ---
 
+The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the [**R** code](/example/repeated.R). Such models can also be fitted using linear mixed models, see [this code](/example/repeatedwmixedmodels.R) for a demonstration.
+
+
 # Example 1
 
 We consider Experiment 3 from @Hatano:2022. The data consist in a two by two mixed analysis of variance. The authors studied engagement and enjoyment from waiting tasks, and "potential effects of time interval on the underestimation of task motivation by manipulating the time for the waiting task". The waiting time was randomly assigned to either short (3 minutes) or long (20 minutes) with equal probability, but participants were either told that there was a 70% chance of being assigned to the short session, or 30% chance.
@@ -95,3 +98,6 @@ emmip(emm,
 The interaction plot suggest quite strongly that the difference in the reaction is much more pronounced score-wise for short-term horizon predictions than for the long-run. The authors commented this finding by stating
 
 > when the current state is characterized by war (intergroup conflict), peace is seen as significantly more likely in the distant future than in the near future. In contrast, when the current state is characterized by peace, war is seen as significantly more likely in the distant future than in the near future.
+
+
+

@@ -81,9 +81,9 @@ We are interested in making inference about the **variability** of the factor.
 
 - measures of performance of employees
 - results from different labs in an experiment
-- subjects in repeated measures
+- **subjects in repeated measures**
 
-We treat the factor as a **random** effect.
+We treat these factors as **random** effects.
 
 ---
 
@@ -105,8 +105,8 @@ $$\underset{\text{response}}{Y_{ij}} =  \underset{\text{global mean}}{\mu} + \un
 
 where 
 
-- $\alpha_j \sim \mathsf{No}(0, \sigma^2_\alpha)$ is normal with mean zero and variance $\sigma^2_\alpha$.
-- $\varepsilon_{ij}$ are independent $\mathsf{No}(0, \sigma^2_\varepsilon)$
+- $\alpha_j \sim \mathsf{Normal}(0, \sigma^2_\alpha)$ is normal with mean zero and variance $\sigma^2_\alpha$.
+- $\varepsilon_{ij}$ are independent $\mathsf{Normal}(0, \sigma^2_\varepsilon)$
 
 
 ---
@@ -115,13 +115,13 @@ where
 
 Consider the weekly number of hours spent by staff members at HEC since September. 
 
-We collect a random sample of 40 employees and ask them to measure the number of hours they work from school for 8 consecutive weeks.
+We collect a random sample of 40 employees and ask them to measure the number of hours they work from school (as opposed to remotely) for eight consecutive weeks.
 
 ---
 # Fitting mixed models in **R**
 
 
-We use the `lme4` package in **R** to fit the models.
+We use the `lme4` package in **R** to fit mixed models.
 
 The `lmerTest` package provides additional functionalities for testing.
 
@@ -185,12 +185,14 @@ Those are based on profile likelihood methods (asymmetric).
 (conf <- confint(rmod, oldNames = FALSE))
 ```
 
-The variability of the measurements and between employees is very different from zero.
+The variability of the measurements and the week-to-week correlation of employee measures are different from zero.
 
+---
 
+# Shrinkage
 
 ```{r}
-#| eval: false
+#| eval: true
 #| echo: false
 #| fig-align: 'center'
 #| out-width: '60%'
@@ -198,7 +200,7 @@ The variability of the measurements and between employees is very different from
 #| fig-height: 2.5
 small <- hecedsm::workhours |>
   dplyr::group_by(id) |>
-  dplyr::slice_sample(n = 4) |>
+  dplyr::slice_sample(n = 2) |>
   dplyr::ungroup()
 rmods <- lme4::lmer(time ~ (1 | id), 
                    data = small)
@@ -206,7 +208,7 @@ fmods <- lm(time ~ -1 + id,
            data = small)
 fixedef <- fmods$coefficients 
 randef <- unlist(ranef(rmods)$id) + fixef(rmods)
-
+library(ggplot2)
 ggplot(data = data.frame(
   fixed = as.numeric(fixedef),
   random = as.numeric(randef),
@@ -219,11 +221,12 @@ ggplot(data = data.frame(
     geom_segment(arrow = arrow(length = unit(0.1,"cm"))) + 
   labs(x = "number of work hours",
        y = "",
-       title = "Fixed vs random effects",
-       subtitle = "predictions of random effects are shrunk towards global mean, more so for larger values.") + 
+       title = "Fixed versus random effects",
+       subtitle = "") + 
   theme_classic()
 ```
 
+.tiny[Predictions of random effects are shrunk towards global mean, more so for larger values and when there are fewer measurements.]
 ???
 
 Even with old school, we can get confidence intervals but only in simple designs like this one-way.
@@ -244,13 +247,80 @@ Mixed models make it easier to
 
 ---
 
+# Repeated measures ANOVA using mixed model
+
+Data need to be in long format, i.e., one response per line with an id column.
+
+```{r}
+#| echo: false
+#| eval: true
+#| label: fig-widevslong
+#| out-width: '50%'
+#| fig-cap: "Illustration by Garrick Adden-Buie"
+knitr::include_graphics("img/10/original-dfs-tidy.png")
+```
+
+---
+
+# Example: two-way ANOVA
+
+We consider a repeated measure ANOVA (2 by 2 design, within-between) from [Hatano et al. (2022)](https://doi.org/10.1037/xge0001255).
+
+```{r}
+#| eval: false
+#| echo: true
+data(HOSM22_E3, package = "hecedsm")
+fmod <- afex::aov_ez(
+  id = "id", 
+  dv = "imscore", 
+  between = "waiting",
+  within = "ratingtype",
+  data = HOSM22_E3)
+anova(fmod)
+```
+
+---
+
+
+```{r}
+#| eval: true
+#| echo: false
+data(HOSM22_E3, package = "hecedsm")
+fmod <- afex::aov_ez(
+  id = "id", 
+  dv = "imscore", 
+  between = "waiting",
+  within = "ratingtype",
+  data = HOSM22_E3)
+anova(fmod)
+```
+
+---
+# Repeated measures with linear mixed models
+
+Results are the same as for repeated measures ANOVA if the correlation estimate between observations of the same id are nonnegative.
+
+```{r}
+#| eval: true
+#| echo: true
+mixmod <- lmerTest::lmer(
+  imscore ~ waiting*ratingtype +
+    (1 | id), # random intercept per id
+  data = HOSM22_E3)
+anova(mixmod, type = 3)
+```
+
+---
+
 # Theory
 
 Full coverage of linear mixed models and general designs is beyond the scope of the course, but note
 
 - Estimation is performed via restricted maximum likelihood (REML)
 - Testing results may differ from repeated measure ANOVA
-- Different approximations for $F$ degrees of freedom (either Kenward-Roger (costly) or Satterthwaite approximation)
+- Different approximations for $F$ degrees of freedom, either
+   - Kenward–Roger (costly) or
+   - Satterthwaite's approximation
 
 ---
 # Structure of the design
@@ -330,6 +400,45 @@ Mixed models vs repeated measures
 
 ---
 
+# Example: happy fakes
+
+```{r}
+#| label: fig-aafulldat
+#| fig-cap: "Jittered scatterplot of measurements per participant and stimulus type."
+#| eval: true
+#| out-width: '60%'
+#| echo: false
+library(ggplot2)
+ggplot(data = hecedsm::AA21 |> dplyr::filter(latency > -40),
+       aes(x = id,
+           group = stimulus,
+           colour = stimulus,
+           y = latency)) +
+    geom_point(position = "jitter") +
+  scale_color_viridis_d() + 
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+
+---
+
+# Interaction with random and fixed effect
+
+Add student `id` as random effect, `stimulus` as fixed effect and their interaction as random effect (since one parent is random)
+
+```{r}
+data(AA21, package = "hecedsm")
+anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
+  lmerTest::lmer(
+    data = AA21 |> dplyr::filter(latency > -40), 
+    latency ~ stimulus + (1|id) + (1|id:stimulus)))
+# Approximately 22 degrees of freedom (as for repeated measures)
+```
+
+
+---
+
+
 # Data structure
 
 
@@ -353,7 +462,6 @@ knitr::include_graphics("img/11/Hasse_diagram.png")
 ---
 
 # Example: chocolate rating
-
 
 Example from L. Meier, adapted from Oehlert (2010)
 

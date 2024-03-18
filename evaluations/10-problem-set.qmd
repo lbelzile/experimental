@@ -15,7 +15,7 @@ Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teachi
 
 The `HOSM22_E4` data set can be found in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/HOSM22_E4.sav).
 
-Consider the model of @Hatano:2022 for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, a scale, with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using @Oehlert:2010 approach
+Consider the model of @Hatano:2022 for Experiment 4. The authors fitted a linear mixed model for the intrinsic motivation score, along with a continuous covariate (interim rating time) and the rating type (either predicted pre-experiment, or the true rating post-experiment). The rating time was centered. Using @Oehlert:2010 approach
 
 1. Identify sources of variation
 2. Identify whether factors are crossed or nested
@@ -36,6 +36,6 @@ summary(mixmod) # coefficients
 anova(mixmod) # type III analysis of variance table
 ```
 
-5. Report the results for the interaction test: is the interaction significative at level 5%? If not, compute estimated marginal means for rating type.
+5. Report the results for the interaction test: is the interaction statistically significant at level 5%? If not, compute estimated marginal means for rating type, otherwise return estimated simple effects for these.
 6. Compute the correlation between measurements from the same students.
 
