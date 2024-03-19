@@ -5,7 +5,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the [**R** code](/example/repeated.R). Such models can also be fitted using linear mixed models, see [this code](/example/repeatedwmixedmodels.R) for a demonstration.
+The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the [**R** code](/example/repeated.R) or the [SPSS code](/example/repeated.sps). Such models can also be fitted using linear mixed models, see the [**R** code](/example/repeatedwmixedmodels.R) or the [SPSS code](/example/repeatedwmixedmodels.sps) for a demonstration.
 
 
 # Example 1

@@ -455,7 +455,7 @@
     "href": "example/repeated.html",
     "title": "Repeated measure ANOVA",
     "section": "",
-    "text": "The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the R code. Such models can also be fitted using linear mixed models, see this code for a demonstration.",
+    "text": "The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the R code or the SPSS code. Such models can also be fitted using linear mixed models, see the R code or the SPSS code for a demonstration.",
     "crumbs": [
       "Examples",
       "Repeated measures ANOVA"
@@ -1045,7 +1045,7 @@
     "href": "example/SPSS.html",
     "title": "Programming with SPSS",
     "section": "",
-    "text": "The databases for SPSS can be downloaded through this link.\n\nVideos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nLoading data and two-sample t-test\nPairwise contrasts\nOne-way ANOVA\nOne-way ANOVA (website example)\nLogical filters\nContrasts and post-hoc comparisons\nCreating categorical variables with if-else statements\nTwo-way ANOVA\nTwo-way ANOVA (website example)\nThree-way ANOVA (website example)\nANCOVA (website example)\nRepeated measures\nRepeated measures (within-between design)\nMANOVA\n\nYou can also watch the playlist (and skip around to different sections) here:\n\n\n\n\n\n\nCode\n\nOne-way analysis of variance\nTwo-way analysis of variance\nThree-way analysis of variance\nAnalysis of covariance\nRepeated measures\nMANOVA",
+    "text": "The databases for SPSS can be downloaded through this link.\n\nVideos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nLoading data and two-sample t-test\nPairwise contrasts\nOne-way ANOVA\nOne-way ANOVA (website example)\nLogical filters\nContrasts and post-hoc comparisons\nCreating categorical variables with if-else statements\nTwo-way ANOVA\nTwo-way ANOVA (website example)\nThree-way ANOVA (website example)\nANCOVA (website example)\nRepeated measures\nRepeated measures (within-between design)\nMANOVA\nRepeated measures using linear mixed model (Syntax)\nRepeated measures using linear mixed model (Menus)\nIncomplete mixed design\nNested random effects\n\nYou can also watch the playlist (and skip around to different sections) here:\n\n\n\n\n\n\nCode\n\nOne-way analysis of variance\nTwo-way analysis of variance\nThree-way analysis of variance\nAnalysis of covariance\nRepeated measures\nMANOVA\nRepeated measures using mixed models\nMixed models",
     "crumbs": [
       "Examples",
       "Programming",
@@ -1861,6 +1861,18 @@
     ]
   },
   {
+    "objectID": "content/10-content.html#code",
+    "href": "content/10-content.html#code",
+    "title": "Intro to mixed models",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
     "objectID": "content/12-content.html",
     "href": "content/12-content.html",
     "title": "Mediation and moderation",
@@ -1960,7 +1972,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   &lt;a href=“mailto:leo.belzile@hec.ca”&gt;leo.belzile@hec.ca\n\n\n\n\n\n   Winter 2024\n   Monday\n   8:30-11:30\n   C-Ste-Cath, Caracas"
+    "text": "Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\n\n\n   Winter 2024\n   Monday\n   8:30-11:30\n   C-Ste-Cath, Caracas"
   },
   {
     "objectID": "syllabus.html#textbooks",
@@ -2002,7 +2014,7 @@
     "href": "syllabus.html#student-services",
     "title": "Syllabus",
     "section": "Student services",
-    "text": "Student services\nStudents with special needs should feel free to approach me so we can best discuss accommodations. Do check out HEC Montréal’s disabled students and [psychological] (https://www.hec.ca/en/students/support-resources/psychological-support/index.html) support services."
+    "text": "Student services\nStudents with special needs should feel free to approach me so we can best discuss accommodations. Do check out HEC Montréal’s disabled students and psychological support services."
   },
   {
     "objectID": "syllabus.html#harassment-and-sexual-violence",
@@ -2016,7 +2028,7 @@
     "href": "syllabus.html#family-policy",
     "title": "Syllabus",
     "section": "Family policy",
-    "text": "Family policy\nHEC does not have an official family policy, so the following guidelines reflect my own beliefs and commitments towards parent students4\n\nBabies are welcome in class as often as necessary for support feeding relationship.\nYou are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.\nIf you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child."
+    "text": "Family policy\nHEC has an official family policy, but the following guidelines reflect my own beliefs and commitments towards parent students4\n\nBabies are welcome in class as often as necessary for support feeding relationship.\nYou are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.\nIf you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child."
   },
   {
     "objectID": "syllabus.html#footnotes",
@@ -2289,18 +2301,6 @@
     "crumbs": [
       "Examples",
       "Two-way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#code",
-    "href": "content/10-content.html#code",
-    "title": "Intro to mixed models",
-    "section": "Code",
-    "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
     ]
   }
 ]

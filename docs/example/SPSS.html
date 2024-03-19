@@ -353,6 +353,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://www.youtube.com/watch?v=VPck9Z8m9hc&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Repeated measures</a></li>
 <li><a href="https://www.youtube.com/watch?v=1eVVFziSN_k&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Repeated measures (within-between design)</a></li>
 <li><a href="https://www.youtube.com/watch?v=FsRcZRnoCj4&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">MANOVA</a></li>
+<li><a href="https://www.youtube.com/watch?v=17-Ikn9MTpg&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Repeated measures using linear mixed model (Syntax)</a></li>
+<li><a href="https://www.youtube.com/watch?v=niNZcLYdxvg&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Repeated measures using linear mixed model (Menus)</a></li>
+<li><a href="https://www.youtube.com/watch?v=lx9WpPKXWlA&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Incomplete mixed design</a></li>
+<li><a href="https://www.youtube.com/watch?v=Ww2R1dNF6DM&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Nested random effects</a></li>
 </ul>
 <p>You can also watch the playlist (and skip around to different sections) here:</p>
 <div class="ratio ratio-16x9">
@@ -369,6 +373,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="../example/ancova.sps">Analysis of covariance</a></li>
 <li><a href="../example/repeated.sps">Repeated measures</a></li>
 <li><a href="../example/manova.sps">MANOVA</a></li>
+<li><a href="../example/repeatedwmixedmodels.sps">Repeated measures using mixed models</a></li>
+<li><a href="../content/MATH80667A-10-content.sps">Mixed models</a></li>
 </ul>
 
 
@@ -864,25 +870,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="in">"ANCOVA (website example)", "OuNr1en9i6Y",</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="in">"Repeated measures", "VPck9Z8m9hc",</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="in">"Repeated measures (within-between design)", "1eVVFziSN_k",</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="in">"MANOVA", "FsRcZRnoCj4")</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># Videos</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="in">"MANOVA", "FsRcZRnoCj4",</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="in">"Repeated measures using linear mixed model (Syntax)", "17-Ikn9MTpg",</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="in">"Repeated measures using linear mixed model (Menus)", "niNZcLYdxvg",</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="in">"Incomplete mixed design", "lx9WpPKXWlA",</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="in">"Nested random effects","Ww2R1dNF6DM")</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show-youtube-list, echo=FALSE, results="asis"}</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="in">youtube_list(slide_details, playlist_id, example = TRUE)</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu"># Code</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">One-way analysis of variance</span><span class="co">](/example/oneway.sps)</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Two-way analysis of variance</span><span class="co">](/example/twoway.sps)</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Three-way analysis of variance</span><span class="co">](/example/threeway.sps)</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Analysis of covariance</span><span class="co">](/example/ancova.sps)</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Repeated measures</span><span class="co">](/example/repeated.sps)</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">MANOVA</span><span class="co">](/example/manova.sps)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu"># Videos</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show-youtube-list, echo=FALSE, results="asis"}</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="in">youtube_list(slide_details, playlist_id, example = TRUE)</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu"># Code</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">One-way analysis of variance</span><span class="co">](/example/oneway.sps)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Two-way analysis of variance</span><span class="co">](/example/twoway.sps)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Three-way analysis of variance</span><span class="co">](/example/threeway.sps)</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Analysis of covariance</span><span class="co">](/example/ancova.sps)</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Repeated measures</span><span class="co">](/example/repeated.sps)</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">MANOVA</span><span class="co">](/example/manova.sps)</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Repeated measures using mixed models</span><span class="co">](/example/repeatedwmixedmodels.sps)</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Mixed models</span><span class="co">](/content/MATH80667A-10-content.sps)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

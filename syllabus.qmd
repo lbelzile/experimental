@@ -15,7 +15,7 @@ library(pander)
 
 - {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
 - {{< fa university >}} &nbsp; {{< var instructor.office >}}
-- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
+- {{< fa envelope >}} &nbsp; <a href='mailto:{{< var instructor.email >}}'>{{< var instructor.email >}}</a>
 
 :::
 
@@ -179,7 +179,7 @@ Please don't cheat! The [official policy](https://www.hec.ca/direction_services/
 
 ## Student services
 
-Students with special needs should feel free to approach me so we can best discuss accommodations. Do check out [HEC Montréal's disabled students](https://www.hec.ca/en/students/support-resources/support-disabled-students/index.html) and [psychological] (https://www.hec.ca/en/students/support-resources/psychological-support/index.html) support services.
+Students with special needs should feel free to approach me so we can best discuss accommodations. Do check out [HEC Montréal's disabled students](https://www.hec.ca/en/students/support-resources/support-disabled-students/index.html) and [psychological](https://www.hec.ca/en/students/support-resources/psychological-support/index.html) support services.
 
 ## Harassment and sexual violence
 
@@ -191,7 +191,7 @@ If you are in an emergency situation or fear for your safety, call emergency ser
 
 ## Family policy
 
-HEC does not have an official family policy, so the following guidelines reflect my own beliefs and commitments towards parent students^[Shamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander]
+HEC has an [official family policy](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/DIR_parents-etudes.pdf), but the following guidelines reflect my own beliefs and commitments towards parent students^[Shamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander]
 
 1. Babies are welcome in class as often as necessary for support feeding relationship.
 2. You are welcome to bring your child to class in order to cover unforeseeable gaps in childcare. 

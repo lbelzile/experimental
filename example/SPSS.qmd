@@ -25,8 +25,11 @@ slide_details <- tibble::tribble(
 "ANCOVA (website example)", "OuNr1en9i6Y",
 "Repeated measures", "VPck9Z8m9hc",
 "Repeated measures (within-between design)", "1eVVFziSN_k",
-"MANOVA", "FsRcZRnoCj4")
-
+"MANOVA", "FsRcZRnoCj4",
+"Repeated measures using linear mixed model (Syntax)", "17-Ikn9MTpg",
+"Repeated measures using linear mixed model (Menus)", "niNZcLYdxvg",
+"Incomplete mixed design", "lx9WpPKXWlA",
+"Nested random effects","Ww2R1dNF6DM")
 ```
 
 # Videos
@@ -44,3 +47,5 @@ youtube_list(slide_details, playlist_id, example = TRUE)
 - [Analysis of covariance](/example/ancova.sps)
 - [Repeated measures](/example/repeated.sps)
 - [MANOVA](/example/manova.sps)
+- [Repeated measures using mixed models](/example/repeatedwmixedmodels.sps)
+- [Mixed models](/content/MATH80667A-10-content.sps)
