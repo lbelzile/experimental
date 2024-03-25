@@ -76,8 +76,8 @@ website:
               file: content/09-content.qmd
             - text: "10: Intro to mixed models"
               file: content/10-content.qmd
-            #- text: "11: Intro to causal inference"
-            #  file: content/11-content.qmd
+            - text: "11: Intro to causal inference"
+              file: content/11-content.qmd
             #- text: "12: Linear mediation and moderation"
             #  file: content/12-content.qmd
             #- text: "13: Nonparametric tests and count data"

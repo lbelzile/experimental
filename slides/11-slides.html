@@ -4,7 +4,7 @@
     <title>Introduction to causal inference</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-07" />
+    <meta name="date" content="2024-03-24" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -56,12 +56,160 @@ class: title title-inv-1
 # Outline
 --
 
+.box-1.large.sp-after-half[Basics of causal inference]
+--
 .box-2.large.sp-after-half[Directed acyclic graphs]
 
 --
 .box-3.large.sp-after-half[Causal mediation]
 
 ---
+
+layout: false
+name: basicscausal
+class: center middle section-title section-title-1
+
+---
+
+layout: true
+class: title title-1
+
+---
+# Causal inference
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/11/xkcd552_correlation.png" alt="xkcd comic 552 by Randall Munroe, CC BY-NC 2.5 license. Alt text: Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'." width="55%" /&gt;
+&lt;p class="caption"&gt;xkcd comic 552 by Randall Munroe, CC BY-NC 2.5 license. Alt text: Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'.&lt;/p&gt;
+&lt;/div&gt;
+---
+
+# Correlation is not causation
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/11/5920_per-capita-consumption-of-margarine_correlates-with_the-divorce-rate-in-maine.png" alt="Spurious correlation by Tyler Vigen, licensed under CC BY 4.0" width="60%" /&gt;
+&lt;p class="caption"&gt;Spurious correlation by Tyler Vigen, licensed under CC BY 4.0&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Correlation vs causation
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/11/correlation_causation.jpg" alt="Illustration by Andrew Heiss, licensed under CC BY 4.0" width="60%" /&gt;
+&lt;p class="caption"&gt;Illustration by Andrew Heiss, licensed under CC BY 4.0&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Potential outcomes
+
+For individual `\(i\)`, we postulate the existence of a potential outcomes 
+
+- `\(Y_i(1)\)` (response for treatment `\(X=1\)`) and 
+- `\(Y_i(0)\)` (response for control `\(X=0\)`).
+
+
+Both are possible, but only one will be realized.
+
+.box-1.medium[Observe outcome for a single treatment]
+
+- Result `\(Y(X)\)` of your test given that you either party ( `\(X=1\)` ) or study ( `\(X=0\)` ) the night before your exam.
+
+
+---
+
+# Fundamental problem of causal inference
+
+
+
+
+&lt;!-- With binary treatment `\(X_i\)`, I observed either `\(Y_i \mid \text{do}(X_i=1)\)` or `\(Y_i \mid \text{do}(X_i=0)\)` given intervention **do**. --&gt;
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; i &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; X &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Y(0) &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Y(1) &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Y(1)-Y(0) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Causal assumptions?
+
+Since we can't estimate individual treatment, we consider the **average** treatment effect (average over population) `\(\mathsf{E}\{Y(1) - Y(0)\}\)`.
+
+The latter can be estimated as
+
+`\begin{align*}
+\textsf{ATE} = \underset{\substack{\text{expected response among}\\\text{treatment group}}}{\mathsf{E}(Y \mid X=1)} - \underset{\substack{\text{expected response among}\\\text{control group}}}{\mathsf{E}(Y \mid X=0)}
+\end{align*}`
+
+When is this a valid causal effect?
+
+---
+
+# (Untestable) assumptions
+
+For the ATE to be equivalent to `\(\mathsf{E}\{Y(1) - Y(0)\}\)`, we need:
+
+1. conditional *ignorability*, which states that potential outcomes are independent (denoted with the `\({\perp\mkern-10mu\perp}\)` symbol) of assignment to treatment given a set of explanatories `\(\boldsymbol{Z}\)`. In notation `\(\{Y(0), Y(1)\} {\perp\mkern-10mu\perp} X \mid \boldsymbol{Z}\)`
+2. lack of interference: the outcome of any participant is unaffected by the treatment assignment of other participants.
+3. consistency: given a treatment `\(X\)` taking level `\(j\)`, the observed value for the response `\(Y \mid X=j\)` is equal to the corresponding potential outcome `\(Y(j)\)`.
+
+
+---
+
 
 layout: false
 name: dag
@@ -111,6 +259,8 @@ class: title title-2
 
 .box-2.SMALL[**Acyclic**: You can't cycle back to a node (and arrows only have one direction)]
 
+.box-2.SMALL[**Graph**: A set of nodes (variables) and vertices (arrows indicating interdependence)]
+
 
 ]
 
@@ -131,8 +281,6 @@ class: title title-2
 .box-2.SMALL[Graphical model of the process that generates the data]
 
 .box-2.SMALL[Maps your philosophical model]
-
-.box-2.SMALL[Fancy math ("*do*-calculus") tells you what to control for to isolate and identify causation]
 
 ]
 
@@ -393,13 +541,7 @@ class: title title-2
 ---
 
 # How to adjust
-.box-inv-2.medium[Include term in regression]
-$$
-`\begin{aligned}
-\text{Win margin} =&amp; \beta_0 + \beta_1 \text{Campaign money} +\\
-&amp; \beta_2 \text{Candidate quality} + \varepsilon
-\end{aligned}`
-$$
+.box-inv-2.medium.sp-after-half[Include covariate in regression]
 .center.float-left[
 .box-inv-2.medium[Matching] .box-inv-2.medium[Stratifying]
 .box-inv-2.medium.sp-before-half[Inverse probability weighting]
@@ -455,7 +597,7 @@ $$
 .box-inv-2[You can test the implications of the model to see if they're right in your data]
 
 $$
-X \perp Y\ |\ Z
+X {\perp\mkern-10mu\perp} Y\ |\ Z
 $$
 
 .box-2.small[X is independent of Y, given Z]
@@ -544,28 +686,33 @@ layout: false
 
 ---
 
+layout: true
 class: title title-2
+
+---
+
+
 # Colliders and selection bias
 
 &lt;img src="11-slides_files/figure-html/nba-dag-1.png" width="65%" style="display: block; margin: auto;" /&gt;
 
 ---
+# Conditioning on colliders
 
-# Life is inherently complex
+- [Omnipresent in the literature](https://doi.org/10.1146/annurev-soc-071913-043455)
 
-&lt;img src="img/12/dagitty-model.png" width="50%" style="display: block; margin: auto;" /&gt;
+- [Example: When and how does the number of children affect marital satisfaction? An international survey](https://doi.org/10.1371/journal.pone.0249516)
+- [Example: The Predictive Validity of the GRE Across Graduate Outcomes](https://doi.org/10.1080/00221546.2023.2187177)
 
- .small[
- Postulated DAG for the effect of smoking on fetal alcohol spectrum disorders (FASD)
- ]
 ???
 
-Source: Andrew Heiss (?), likely from 
+A new collider bias teaching example. Sample selects on marriage (not divorced) so: satisfaction ––&gt; [not divorced] &lt;–– children (Richard McElreath, Apr 26, 2021 on Twitter)
 
-McQuire, C., Daniel, R., Hurt, L. et al. The causal web of foetal alcohol spectrum disorders: a review and causal diagram. Eur Child Adolesc Psychiatry 29, 575–594 (2020). https://doi.org/10.1007/s00787-018-1264-3
+Example of confounder: 
+https://doi.org/10.1177/109467051454314
 
 ---
-class: title title-2
+
 # Three types of associations
 
 .pull-left-3[
@@ -587,6 +734,21 @@ class: title title-2
 .box-inv-2.small.sp-after-half[Selection /&lt;br&gt;endogeneity]
 .box-inv-2.small[inverted fork **X** →  **Z** ← **Y**]
 ]
+
+---
+
+# Life is inherently complex
+
+&lt;img src="img/12/dagitty-model.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+.small[
+ Postulated DAG for the effect of smoking on fetal alcohol spectrum disorders (FASD)
+ ]
+???
+
+Source: Andrew Heiss (?), likely from
+
+McQuire, C., Daniel, R., Hurt, L. et al. The causal web of foetal alcohol spectrum disorders: a review and causal diagram. Eur Child Adolesc Psychiatry 29, 575–594 (2020). https://doi.org/10.1007/s00787-018-1264-3
 
 ---
 
@@ -619,49 +781,27 @@ Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Co
 - [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
 - Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
 --&gt;
+
 ---
 
-# Fundamental problem of causal inference 
-
-
-.box-3.medium[Observe outcome for a single treatment]
-
-With binary treatment `\(X_i\)`, I observed either `\(Y_i \mid \text{do}(X_i=1)\)` or `\(Y_i \mid \text{do}(X_i=0)\)` given intervention **do**.
-
-.box-3.medium[Thus define causal effect as an **average** treatment]
-
-`$$\mathsf{E}[Y_i \mid \text{do}(X_i=1)] - \mathsf{E}[Y_i \mid \text{do}(X_i=0)]$$`
-
-
-
-.small[
-Effect cannot be estimated directly in general, even with randomized experiments.
-]
----
 
 # Sequential ignorability assumption
 
-Define 
-
-- treatment of individual `\(i\)` as `\(X_i\)`, 
-- potential mediation given treatment `\(x\)` as `\(M_i(x)\)` and 
+- potential mediation given treatment `\(x\)` as `\(M_i(x)\)` and
 - potential outcome for treatment `\(x\)` and mediator `\(m\)` as `\(Y_i(x, m)\)`.
 
-Given pre-treatment covariates `\(W\)`, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
-$$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid W_i = w$$
+Given pre-treatment covariates `\(\boldsymbol{Z}\)`, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
+$$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid \boldsymbol{Z}_i = \boldsymbol{z}$$
 Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
-$$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, W_i = w$$
-
-Formulation in terms of potential outcomes (what if?) with intervention.
+$$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \boldsymbol{z}$$
 
 ---
+
 # Total effect
 
 **Total effect**: overall impact of `\(X\)` (both through `\(M\)` and directly)
 
 `$$\begin{align*}\mathsf{TE}(x, x^*) = \mathsf{E}[ Y \mid \text{do}(X=x)] - \mathsf{E}[ Y \mid \text{do}(X=x^*)]\end{align*}$$`
-
-This can be generalized for continuous `\(X\)` to any pair of values `\((x_1, x_2)\)`.
 
 .pull-left[
 .box-inv-3[
@@ -671,14 +811,19 @@ This can be generalized for continuous `\(X\)` to any pair of values `\((x_1, x_
 .pull-right[
 &lt;img src="11-slides_files/figure-html/moderation-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 ]
+
 ---
+
 # Average controlled direct effect
 
-`$$\begin{align*}\textsf{CDE}(m, x, x^*) &amp;= \mathsf{E}[Y \mid \text{do}(X=x, m=m)] - \mathsf{E}[Y \mid \text{do}(X=x^*, m=m) \\&amp;= \mathsf{E}\{Y(x, m) - Y(x^*, m)\} 
+`$$\begin{align*}\textsf{CDE}(m, x, x^*) &amp;= \mathsf{E}[Y \mid \text{do}(X=x, m=m)] - \mathsf{E}[Y \mid \text{do}(X=x^*, m=m) \\&amp;= \mathsf{E}\{Y(x, m) - Y(x^*, m)\}
 \end{align*}$$`
 Expected population change in response when the experimental factor changes from `\(x\)` to `\(x^*\)` and the mediator is set to a fixed value `\(m\)`.
 
+Problem: this forces manipulation of the mediator, and only gives outcome for a fixed value `\(m\)`.
+
 ---
+
 # Direct and indirect effects
 
 **Natural direct effect**: `\(\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}]\)`    
@@ -694,6 +839,7 @@ Counterfactual conditioning reflects a physical intervention, not mere (probabil
 Total effect is `\(\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x)\)`
 ???
 
+---
 
 
 # Necessary and sufficiency of mediation
@@ -703,7 +849,7 @@ From Pearl (2014):
 &gt; The difference `\(\textsf{TE}-\textsf{NDE}\)` quantifies the extent to which the response of `\(Y\)` is owed to mediation, while `\(\textsf{NIE}\)` quantifies the extent to which it is explained by mediation. These two components of mediation, the necessary and the sufficient, coincide into one in models void of interactions (e.g., linear) but differ substantially under moderation
 
 
-- In linear systems, changing the order og arguments amounts to flipping signs
+- In linear systems, changing the order of arguments amounts to flipping signs
 - This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
 
     </textarea>

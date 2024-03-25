@@ -17,7 +17,7 @@ Read @Rohrer:2022 and write a summary.
 
 @Liu.Rim.Min.Min:2023 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM23_S5b` in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/LRMM23_S5b.sav).
 
-1. Fit the linear mediation model using the PROCESS macro or `mediate` function from the `mediation` package
+1. Fit the linear mediation model using the PROCESS macro or the `mediate` function from the `mediation` **R** package
   - use the nonparametric bootstrap with the percentile method to get confidence intervals
   - compare the coefficients with those of Figure 1 from the paper.
 2. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.
