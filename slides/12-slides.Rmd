@@ -44,10 +44,10 @@ class: title title-inv-1
 
 .box-4.large.sp-after-half[Linear mediation model]
 
--- 
-
+ 
 
 .box-6.large.sp-after-half[Interactions and moderation]
+
 
 ---
 
@@ -86,75 +86,96 @@ library(ggdag)
 xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
 ```
 
-# Three types of associations
+# Reminder: three types of causal associations
 
 .pull-left-3[
-.box-2.medium[Confounding]
+.box-4.medium[Confounding]
 
 ![](`r knitr::fig_chunk("confounding-dag", "png")`)
-.box-inv-2.small.sp-after-half[Common cause]
-.box-inv-2.small[Causal forks **X** ← **Z** → **Y**]
+.box-inv-4.small.sp-after-half[Common cause]
+.box-inv-4.small[Causal forks **X** ← **Z** → **Y**]
 ]
 .pull-middle-3[
-.box-2.medium[Causation]
+.box-4.medium[Causation]
 ![](`r knitr::fig_chunk("mediation-dag", "png")`)
-.box-inv-2.small.sp-after-half[Mediation]
-.box-inv-2.small[Causal chain **X** → **Z** → **Y**]
+.box-inv-4.small.sp-after-half[Mediation]
+.box-inv-4.small[Causal chain **X** → **Z** → **Y**]
 ]
 .pull-right-3[
-.box-2.medium[Collision]
+.box-4.medium[Collision]
 ![](`r knitr::fig_chunk("collision-dag", "png")`)
-.box-inv-2.small.sp-after-half[Selection /<br>endogeneity]
-.box-inv-2.small[inverted fork **X** →  **Z** ← **Y**]
+.box-inv-4.small.sp-after-half[Selection /<br>endogeneity]
+.box-inv-4.small[inverted fork **X** →  **Z** ← **Y**]
 ]
+
+We are interested in **mediation**.
 
 ---
 
-# Key references
+# Notation
 
-- Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
-- Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
-- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-3514.51.6.1173), *Journal of Personality and Social Psychology*
 
-Limitations: 
+Define
 
-- Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
-- Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
+- treatment of individual $i$ as $X_i$, typically binary with $X_i \in \{0,1\}$ and
+   - $X=0$ (control), else $X=x_0$
+   - $X=1$ (treatment)
+- potential mediation given treatment $x$ as $M_i(x)$ and
+- potential outcome for treatment $x$ and mediator $m$ as $Y_i(x, m)$.
 
-<!--
-- Zhao, Lynch and Chen (2010), [Reconsidering Baron and Kenny: Myths and
-Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Consumer Research*
-- [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
-- Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
--->
 ---
 
 # Sequential ignorability assumption
 
-Define 
+1. Given pre-treatment covariates $\boldsymbol{Z}$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
+$$ Y_i(x', m), M_i(x)\ {\perp\mkern-10mu\perp}\ X_i \mid \boldsymbol{Z}_i = \boldsymbol{z}$$
+2. Given pre-treatment covariates $\boldsymbol{Z}$ and observed treatment $x$, potential outcomes for the response are independent of mediation.
+$$ Y_i(x', m)\ \perp\mkern-10mu\perp\  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \boldsymbol{z}$$
 
-- treatment of individual $i$ as $X_i$, 
-- potential mediation given treatment $x$ as $M_i(x)$ and 
-- potential outcome for treatment $x$ and mediator $m$ as $Y_i(x, m)$.
-
-Given pre-treatment covariates $W$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
-$$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid W_i = w$$
-Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
-$$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, W_i = w$$
-
-Formulation in terms of potential outcomes (what if?) with intervention.
+- Assumption 1 holds under randomization of treatment.
+- Assumption 2 implies there is no confounder affecting both $Y_i, M_i$.
 
 ---
+
+# Directed acyclic graph
+
+```{tikz}
+#| echo: false
+#| cache: false
+#| label: fig-dag-linearmed
+#| fig-cap: "Directed acyclic graph of the linear mediation model"
+#| fig-align: 'center'
+#| fig-ext: "png"
+#| fig-dpi: 300
+#| out-width: '60%'
+\usetikzlibrary{positioning}
+\begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]
+\node [draw,circle] (X) at (-2,0) {$X$};
+\node [draw,circle] (Y) at (2,0) {$Y$};
+\node [draw,circle] (M) at (0,1) {$M$};
+\node [draw, rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};
+\node [draw,rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};
+\draw [-latex] (X) edge (Y);
+\draw [-latex] (M) edge (Y);
+\draw [-latex] (X) edge (M);
+\draw [-latex] (Zy) edge (Y);
+\draw [-latex] (Zm) edge (M);
+\end{tikzpicture}
+```
+
+
+---
+
 # Total effect
 
 **Total effect**: overall impact of $X$ (both through $M$ and directly)
 
-$$\begin{align*}\mathsf{TE}(x, x^*) = \mathsf{E}[ Y \mid \text{do}(X=x)] - \mathsf{E}[ Y \mid \text{do}(X=x^*)]\end{align*}$$
+$$\begin{align*}\mathsf{TE}(x, x_0) = \mathsf{E}[ Y \mid \text{do}(X=x)] - \mathsf{E}[ Y \mid \text{do}(X=x_0)]\end{align*}$$
 
 This can be generalized for continuous $X$ to any pair of values $(x_1, x_2)$.
 
 .pull-left[
-.box-inv-3[
+.box-inv-4[
 **X** → **M** → **Y** <br>plus <br>**X** → **Y**
 ]
 ]
@@ -180,30 +201,44 @@ dagify(
   theme_dag()
 ```
 ]
+
 ---
+
 # Average controlled direct effect
-
-$$\begin{align*}\textsf{CDE}(m, x, x^*) &= \mathsf{E}[Y \mid \text{do}(X=x, m=m)] - \mathsf{E}[Y \mid \text{do}(X=x^*, m=m) \\&= \mathsf{E}\{Y(x, m) - Y(x^*, m)\} 
-\end{align*}$$
-Expected population change in response when the experimental factor changes from $x$ to $x^*$ and the mediator is set to a fixed value $m$.
-
----
-# Direct and indirect effects
-
-**Natural direct effect**: $\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}]$    
-   - expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x^*$
-
-**Natural indirect effect**: $\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}]$  
-   - expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$
-
 .small[
-Counterfactual conditioning reflects a physical intervention, not mere (probabilistic) conditioning.
+
+\begin{align*}
+\textsf{ACDE}(m, x, x_0) &= \mathsf{E}\{Y_i(x, m) - Y_i(x_0, m)\}
+\\&= \mathsf{E}\{Y \mid \text{do}(X=x, m=m)\} - \mathsf{E}\{Y \mid \text{do}(X=x_0, m=m)\} 
+\end{align*}
+
 ]
 
-Total effect is $\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x)$
-???
+The average controlled direct effect (ACDE) is the expected change in response for the population when 
+
+- the experimental factor changes from $x$ to $x_0$ and 
+- the mediator is set to a fixed value $m$
+
+This typically requires experimental manipulation of both variables.
+
+---
+
+# Direct and indirect effects
+
+**Natural direct effect**: the expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x_0$
+
+$$\textsf{NDE}(x, x_0) = \mathsf{E}[Y\{x, M(x_0)\} - Y\{x_0,  M({x_0})\}]$$
+
+**Natural indirect effect**: the expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$
+
+$$\textsf{NIE}(x, x_0) = \mathsf{E}[Y\{x_0, M(x)\} - Y\{x_0,  M(x_0)\}]$$
 
 
+.small[
+Counterfactual conditioning reflects a physical intervention (experimentation), not mere conditioning.
+]
+
+---
 
 # Necessary and sufficiency of mediation
 
@@ -212,109 +247,44 @@ From Pearl (2014):
 > The difference $\textsf{TE}-\textsf{NDE}$ quantifies the extent to which the response of $Y$ is owed to mediation, while $\textsf{NIE}$ quantifies the extent to which it is explained by mediation. These two components of mediation, the necessary and the sufficient, coincide into one in models void of interactions (e.g., linear) but differ substantially under moderation
 
 
-- In linear systems, changing the order og arguments amounts to flipping signs
-- This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
+
+???
+
+This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not). In linear systems, changing the order of arguments amounts to flipping signs
 
 ---
 
+# The Baron−Kenny linear mediation model
 
-layout: false
-name: linear-sem
-class: center middle section-title section-title-4
+Consider the following two linear regression models with a binary treatment $X \in \{0,1\}$ and $M$ binary or continuous:
 
-# Linear structural equation modelling and mediation
-
----
-
-layout: true
-class: title title-4
-
----
-
-# The Baron−Kenny model
-
-Given **uncorrelated** unobserved noise variables $U_M$ and $U_Y$, consider linear regression models
 $$\begin{align}
-M &= c_M + \alpha x + U_M\\
-Y &=  c_Y + \beta x + \gamma m + U_Y
-\end{align}$$
-Plugging the first equation in the second, we get the marginal model for $Y$ given treatment $X$,
-$$\begin{align}
-\mathsf{E}_{U_M}(Y \mid x) &= \underset{\text{intercept}}{(c_Y + \gamma c_M)} + \underset{\text{total effect}}{(\beta + \alpha\gamma)}\cdot x + \underset{\text{error}}{(\gamma U_M + U_Y)}\\
-&= c_Y' + \tau X + U_Y'
+\underset{\text{mediator}}{M} &= \underset{\text{intercept}}{c_M} + \alpha X  + \underset{\text{error term}}{\varepsilon_M}\\
+\underset{\text{response}}{Y} &=  \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M    + \underset{\text{error term}}{\varepsilon_Y}
 \end{align}$$
 
+We assume that zero-mean error terms $\varepsilon_M$ and $\varepsilon_Y$ are **uncorrelated**.
+
+- This is tied to the *no confounders* assumption.
+
+
 
 ---
 
-# The old method
-Baron and Kenny recommended running regressions and estimating the three models with
+# Total effect decomposition
 
-1. whether $\mathscr{H}_0: \alpha=0$
-2. whether $\mathscr{H}_0: \tau=0$ (total effect)
-3. whether $\mathscr{H}_0: \gamma=0$
+Plugging the first equation in the second, we get the marginal model for $Y$ given treatment $X$
+$$\begin{align}
+\mathsf{E}(Y \mid X=x) &= \underset{\text{intercept}}{(c_Y + \gamma c_M)} + \underset{\text{total effect}}{(\beta + \alpha\gamma)}\cdot x 
+\end{align}$$
 
-The conditional indirect effect $\alpha\gamma$ and we can check whether it's zero using Sobel's test statistic.
+In an experiment, we can obtain the total effect via the ANOVA model, with $\tau= \mathrm{E}\{Y \mid \mathrm{do}(X=1)\} - \mathrm{E}\{Y \mid \mathrm{do}(X=0)\}$ the average treatment effect since
 
-Problems?
-???
-
-- Type I errors
-- The total effect can be zero because $\alpha\gamma = - \beta$
-- The method has lower power for small mediation effect
----
-# Sobel's test
-
-Based on estimators $\widehat{\alpha}$ and $\widehat{\gamma}$, construct a Wald-test
-$$S  = \frac{\widehat{\alpha}\widehat{\gamma}-0}{\sqrt{\widehat{\gamma}^2\mathsf{Va}(\widehat{\alpha}) + \widehat{\alpha}^2\mathsf{Va}(\widehat{\gamma}) + \mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})}} \stackrel{\cdot}{\sim}\mathsf{No}(0,1)$$ 
-where the point estimate $\widehat{\alpha}$ and its variance $\mathsf{Va}(\widehat{\alpha})$ can be estimated via SEM, or more typically linear regression (ordinary least squares).
-
-???
-
-Without interaction/accounting for confounders, $\alpha\gamma = \tau - \beta$ and with OLS we get exactly the same point estimates. The derivation of the variance is then relatively straightforward using the delta method.
-
+$$
+Y = \underset{\text{average of control}}{\nu} + \underset{\text{total effect}}{\tau X} + \underset{\text{error term}}{\varepsilon_{Y'}}
+$$
 ---
 
-# Null distribution for the test
-
-The large-sample normal approximation is poor in small samples.
-
-The popular way to estimate the _p_-value and the confidence interval is through the nonparametric **bootstrap** with the percentile method.
-
-Repeat $B$ times, say $B=10\ 000$
-1. sample **with replacement** $n$ observations from the database 
- - tuples $(Y_i, X_i, M_i)$
-2. recalculate estimates $\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}$
-
-
----
-# Boostrap _p_-values and confidence intervals
-.pull-left[
-.box-inv-3[Confidence interval]
-
-Percentile-based method: for a equi-tailed $1-\alpha$ interval and the collection
-$$\{\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}\}_{b=1}^B,$$
-compute the $\alpha/2$ and $1-\alpha/2$ empirical quantiles.
-
-
-]
-.pull-right[
-.box-inv-3[Two-sided _p_-value]
-
-Compute the sample proportion of bootstrap statistics $S^{(1)}, \ldots, S^{(B)}$ that are larger/smaller than zero. 
-
-If $S^{(M)} < 0 \leq S^{(M+1)}$ for $1 \leq M \leq B$.
-
-$$p = 2\min\{M/B, 1-M/B\}$$
-
-and zero otherwise
-]
-
-
-???
-Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (basic, studentized, bias corrected and accelerated
-
----
 # Example from Preacher and Hayes (2004)
 
 .small[
@@ -336,13 +306,94 @@ satisfaction is mediated by the positivity of their causal
 attributions of negative experiences. ”
 
 ]
+
 ---
+
+# Old method 
+
+This approach has been discontinued, but still appears in papers.
+
+Baron and Kenny recommended running the three linear regressions and testing
+
+1. whether $\mathscr{H}_0: \alpha=0$
+2. whether $\mathscr{H}_0: \tau=0$ (total effect)
+3. whether $\mathscr{H}_0: \gamma=0$
+
+The average conditional mediation effect (ACME) in the linear mediation model is $\alpha\gamma$ and we can check whether it's zero using Sobel's test statistic.
+
+---
+
+# Problems with Baron--Kenny approach
+
+- We conduct three tests, so this inflates the Type I error.
+- The total effect can be zero because $\alpha\gamma = - \beta$, even if there is mediation.
+- The method has lower power to detect mediation when effect sizes are small.
+
+---
+
+# Sobel's test
+
+Based on estimators of coefficients $\widehat{\alpha}$ and $\widehat{\gamma}$, construct a test statistic
+$$
+S  = \frac{\widehat{\alpha}\widehat{\gamma}-0}{\mathsf{se}(\widehat{\alpha}\widehat{\gamma})}
+$$
+
+The coefficient and variance estimates can be extracted from the output of the regression model.
+
+
+
+???
+
+Without interaction/accounting for confounders, $\alpha\gamma = \tau - \beta$ and with OLS we get exactly the same point estimates. The derivation of the variance is then relatively straightforward using the delta method.
+
+---
+
+# Null distribution for the test
+
+In large sample, $S \stackrel{\cdot}{\sim}\mathsf{No}(0,1)$, but this approximation is poor in small samples.
+
+A popular way to estimate the _p_-value and the confidence interval is through the nonparametric **bootstrap** with the percentile method, popularized by @Preacher.Hayes:2004
+
+Repeat $B$ times, say $B=10\ 000$
+1. sample $n$ tuples tuples $(Y_i, X_i, M_i)$ from the database **with replacement** to obtain a new sample.
+2. recalculate estimates $\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}$ for each bootstrap dataset
+
+
+---
+# Boostrap _p_-values and confidence intervals
+.pull-left[
+.box-inv-4[Confidence interval]
+
+Percentile-based method: for a equitailed $1-\alpha$ interval and the collection
+$$\{\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}\}_{b=1}^B,$$
+compute the $\alpha/2$ and $1-\alpha/2$ empirical quantiles.
+
+
+]
+.pull-right[
+.box-inv-4[Two-sided _p_-value]
+
+Compute the sample proportion of bootstrap statistics $S^{(1)}, \ldots, S^{(B)}$ that are larger/smaller than zero. 
+
+If $S^{(M)} < 0 \leq S^{(M+1)}$ for $1 \leq M \leq B$.
+
+$$p = 2\min\{M/B, 1-M/B\}$$
+
+and zero otherwise
+]
+
+
+???
+Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (basic, studentized, bias corrected and accelerated
+
+---
+
 # Defaults of linear SEM
 
 .pull-left-wide[
 
 - Definitions contingent on model 
-   - (causal quantities have a meaning regardless of estimation method)
+   - (even if causal quantities have a meaning regardless of estimation method)
 - Linearity assumption not generalizable.
    - effect constant over individuals/levels
 
@@ -360,9 +411,28 @@ Additional untestable assumption of uncorrelated disturbances (no unmeasured con
 Need assumptions to hold (and correct model!) to derive causal statements
 
 - Potential confounding can be accounted for with explanatories.
-- Careful with what is included (colliders)! 
+- Careful with variables included in models (colliders)! 
  - *as-if* randomization assumption
  
-- Generalizations to interactions, multiple mediators, etc. should require careful acknowledgement of confounding.
+- Generalizations to interactions, multiple mediators, etc. requires careful acknowledgement of confounding.
 
 
+# Key references
+
+- Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
+- Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
+- Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
+- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-4514.51.6.1173), *Journal of Personality and Social Psychology*
+
+Limitations:
+
+- Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
+- Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
+
+<!--
+- Zhao, Lynch and Chen (2010), [Reconsidering Baron and Kenny: Myths and
+Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Consumer Research*
+- [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
+
+-->
+---

@@ -78,10 +78,10 @@ website:
               file: content/10-content.qmd
             - text: "11: Intro to causal inference"
               file: content/11-content.qmd
-            #- text: "12: Linear mediation and moderation"
-            #  file: content/12-content.qmd
-            #- text: "13: Nonparametric tests and count data"
-            #  file: content/13-content.qmd
+            - text: "12: Linear mediation and moderation"
+              file: content/12-content.qmd
+            - text: "13: Nonparametric tests and count data"
+              file: content/13-content.qmd
     - title: "Evaluations"
       style: "docked"
       search: false

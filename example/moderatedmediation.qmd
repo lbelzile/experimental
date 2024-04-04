@@ -7,9 +7,9 @@ editor_options:
 
 This example from @Roczniewska.Higgins:2019 is an instance of moderated mediation model with two postulated mediators. While such models can be fitted with the PROCESS macros [@Hayes:2022], we illustrate below the postulated causal diagram, the nonparametric bootstrap. We pay particular attention to verification of the linear model assumptions.
 
-The context of the research is a natural experiment (or quasi-experiment), whereby changes in the schooling system leads to the manipulation under study
+The context of the research is a natural experiment (or quasi-experiment): the authors study changes in behaviour due to modifications in the schooling system.
 
-The statistical model in @Roczniewska.Higgins:2019 can be implicitly deduced from Table 2: the manipulated variable is the message framing and there are three postulated mediators (message fluency, message engagement, process fairness), the latter of which interacts or moderate with the change in outcome.and two moderators assumed to impact both mediators through linear interactions, termed promotion focus and prevention focus.
+The statistical model in @Roczniewska.Higgins:2019 can be implicitly deduced from Table 2: the manipulated variable is the message framing and there are three postulated mediators (message fluency, message engagement, process fairness), the latter of which interacts or moderate with the change in outcome, and two moderators assumed to impact both mediators through linear interactions, termed promotion focus and prevention focus.
 
 The mean response from the linear models are 
 

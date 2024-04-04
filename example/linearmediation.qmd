@@ -5,45 +5,58 @@ editor_options:
   chunk_output_type: console
 ---
 
-Consider linear regression models in a system where some response $Y$ depends on a mediator is $M$ and an experimental factor is $X$.
-We consider estimation of linear mediation models of the form
-\begin{align*}
-M \mid X, \boldsymbol{Z}_M &= c_M + \alpha X + \boldsymbol{Z}_M^\top\boldsymbol{\delta} + \varepsilon_M\\
-Y \mid M, X, \boldsymbol{Z}_Y&= c_Y + \beta X + \gamma M + \boldsymbol{Z}_Y^\top\boldsymbol{\omega} + \varepsilon_Y,
-\end{align*}
-where $\boldsymbol{Z}_M$ (respectively $\boldsymbol{Z}_Y$) are explanatory variables for the mediator $M$ (response $Y$). 
+Consider linear regression models in a system where some response variable $Y$ depends on a mediator, $M$, and an experimental factor, $X \in \{0,1\}$.
+The mediator model has expected value
+$$
+M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{\boldsymbol{Z}_M^\top\boldsymbol{\delta}} + \underset{\text{error term}}{\varepsilon_M}
+$$ {#eq-mediator-model}
+while we have for the response
+$$
+Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M + \underset{\text{control variates}}{\boldsymbol{Z}_Y^\top\boldsymbol{\omega}}  + \underset{\text{error term}}{\varepsilon_Y}, \label{eq-responsemodel}
+$$ {#eq-response-model}
+The explanatory variables $\boldsymbol{Z}_M$ for the mediator model of @eq-mediator-model, and $\boldsymbol{Z}_Y$ for the response model @eq-response-model are control covariates to account for confounders, and need not be the same in both models (but could be). In a randomized experiment where we manipulate the mediator, there is no need to include any control in @eq-mediator-model lest we mistakenly create correlation by including colliders. The error terms $\varepsilon_Y$ and $\varepsilon_M$ are assumed to be independent mean-zero with common variance.
 
 ```{tikz}
 #| echo: false
-#| cache: true
+#| cache: false
 #| label: fig-dag-linearmed
-#| fig-cap: "Directed acyclic graph for linear mediation model."
+#| fig-cap: "Directed acyclic graph for the linear mediation model."
 #| fig-align: 'center'
 #| fig-ext: "png"
 #| fig-dpi: 300
+#| out-width: '60%'
 \usetikzlibrary{positioning}
-\begin{tikzpicture}[every node/.append style={draw, minimum size=0.5cm}]
-\node [circle,fill=blue] (X) at (-2,0) {$X$};
-\node [circle] (Y) at (2,0) {$Y$};
-\node [circle] (M) at (0,1) {$M$};
-\node [rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};
-\node [rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};
-\path [-latex] (X) edge (Y);
+\begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]
+\node [draw,circle] (X) at (-2,0) {$X$};
+\node [draw,circle] (Y) at (2,0) {$Y$};
+\node [draw,circle] (M) at (0,1) {$M$};
+\node [draw, rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};
+\node [draw,rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};
+\draw [-latex] (X) edge (Y);
 \draw [-latex] (M) edge (Y);
 \draw [-latex] (X) edge (M);
+\node [fill=white,line width=0pt] (beta) at (0,-0.1) {$\beta$};
+\node [fill=white,line width=0pt](gamma) at (1,0.5) {$\gamma$};
+\node [fill=white,line width=0pt](beta) at (-1,0.5) {$\alpha$};
 \draw [-latex] (Zy) edge (Y);
 \draw [-latex] (Zm) edge (M);
 \end{tikzpicture}
 ```
 
-The total effect of $X$ on $Y$ is $\beta + \alpha \gamma$.
+In the linear mediation model defined above and represented in @fig-dag-linearmed, the total effect of $X$ on $Y$ is $\beta + \alpha \gamma$ (the average treatment effect, looking at the difference in response between treatment $X=1$ and control $X=0$).
 
-The average causal mediation effect (ACME) or natural indirect effect for treatment at level $t$ is obtained by changing the potential outcome for the mediator while fixing the treatment level, so 
+The average causal mediation effect (ACME) or natural indirect effect for treatment at level $x$ is obtained by changing the potential outcome $Y_i\{X, M_i(X)\}$ of individual $i$ for the mediator $M_i(X)$ while fixing the treatment level $X$ to $x$, so 
 \begin{align*}
-\mathsf{E}[Y_i\{t, M_i(1)\} - Y_i\{t, M_i(0)\}].
+\mathsf{ACME} = \mathsf{E}[Y_i\{x, M_i(1)\} - Y_i\{x, M_i(0)\}].
 \end{align*}
+In the linear mediation model, we get subtituting the value of $M$ from equation @eq-mediator-model into @eq-response-model
+$$\begin{align*}
+\mathsf{E}[Y_i\{x, M_i(1)\}]  &= \underset{\text{intercept}}{c_Y + \gamma c_M} + \underset{\text{ACME}}{\alpha\gamma} + \beta x+ \underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}\\
+\mathsf{E}[Y_i\{x, M_i(0)\}]  &=\underset{\text{intercept}}{c_Y + \gamma c_M} + \beta x +\underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}\\
+\end{align*}
+$$
+so the average difference between the two equations is $\mathsf{ACME} = \alpha\gamma$.
 
-The set of control covariates for the first model $\boldsymbol{Z}_M$ and $\boldsymbol{Z}_Y$, need not be the same. In a randomized experiment, there is no need to include any control lest we mistakenly create correlation by including colliders.
 
 # Example 1
 
@@ -65,38 +78,45 @@ We use the `mediation` package [@mediationR] for the model; the package certainl
 library(mediation, quietly = TRUE)
 data(BJF14_S1, package = "hecedsm")
 
-MsX <- lm(threat ~ condition +
-            gender + groupsize + age, 
+MsX <- lm(threat ~ condition + gender + groupsize + age, 
           data = BJF14_S1)
-YsXM <- lm(bonding ~ threat + 
-             gender + groupsize + age +
-             condition,
+YsXM <- lm(bonding ~ condition + threat + gender + groupsize + age,
            data = BJF14_S1)
 ```
+
+::: {#tbl-panel layout-ncol=2}
 
 ```{r}
 #| eval: true
 #| echo: false
-#| label: tbl-mediationcoefs
-#| tbl-cap: "Coefficients of the mediation (left) and outcome (right) models."
-#| layout-ncol: 2
-coefs1 <- summary(YsXM) |> broom::tidy() 
-coefs1$term[2:3] <- c("condition [pain]", "gender [female]")
-coefs2 <- summary(MsX) |> broom::tidy()
-coefs2$term[2] <- c("consistency")
+#| label: tbl-responsecoefs
+#| tbl-cap: "outcome model"
+coefs1 <- summary(MsX) |> broom::tidy() 
+coefs1$term[2:4] <- c("condition [pain]", "gender [female]", "group size")
+coefs2 <- summary(YsXM) |> broom::tidy()
+coefs2$term[c(2,4,5)] <- c("condition [pain]", "gender [female]", "group size")
 kab1 <- knitr::kable(coefs1[,1:3], digits = 2, format = "html")
 kab2 <- knitr::kable(coefs2[,1:3], digits = 2, format = "html")
-# kab2 |> kableExtra::kable_styling()
-# kab1 |> kableExtra::kable_styling()
-knitr::kables(x = list(kab2, kab1)) |>
- kableExtra::kable_styling()
+kab2 |> kableExtra::kable_styling()
 ```
 
+```{r}
+#| tbl-cap: "mediation model"
+#| label: tbl-mediationcoefs
+#| eval: true
+#| echo: false
+kab1 |> kableExtra::kable_styling()
+# knitr::kables(x = list(kab2, kab1)) |>
+#  kableExtra::kable_styling()
+```
+
+Coefficients of the regression models
+:::
 
 Both of the `threat` and `bonding` measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.
 
 ```{r}
-#| eval: true
+#| eval: false
 #| echo: true
 #| cache: true
 #| message: false
@@ -104,25 +124,58 @@ set.seed(80667)
 linmed <- mediate(
   model.m = MsX,
   model.y = YsXM,
-  sims = 1000L, # number of bootstrap sim
+  sims = 1000L, # number of bootstrap simulations
   boot = TRUE, # use bootstrap
-  boot.ci.type = "perc", #percentile bootstrap
-  mediator = "threat", #name of mediator
-  treat = "condition", #name of treatment
-  control.value = "Control", # name of control level
-  treat.value = "Pain")
+  boot.ci.type = "perc", # type of bootstrap: percentile
+  mediator = "threat", # name of mediator
+  treat = "condition", # name of treatment
+  control.value = "Control", # name of control (level of 'condition')
+  treat.value = "Pain") # name of treatment (level of 'condition')
 summary(linmed)
 ```
 
+```{r}
+#| label: tbl-mediation
+#| eval: true
+#| echo: false
+#| cache: true
+#| message: false
+#| tbl-cap: "Linear causal mediation analysis: parameter estimates, nonparametric bootstrap 95% confidence intervals and p-values with the percentile method based on 5000 bootstrap samples."
+set.seed(80667)
+linmed <- mediate(
+  model.m = MsX,
+  model.y = YsXM,
+  sims = 1000L, # number of bootstrap simulations
+  boot = TRUE, # use bootstrap
+  boot.ci.type = "perc", # type of bootstrap: percentile
+  mediator = "threat", # name of mediator
+  treat = "condition", # name of treatment
+  control.value = "Control", # name of control (level of 'condition')
+  treat.value = "Pain") # name of treatment (level of 'condition')
+x <- summary(linmed)
+smat <- c(x$d1, x$d1.ci, x$d1.p)
+smat <- rbind(smat, c(x$z0, x$z0.ci, x$z0.p))
+smat <- rbind(smat, c(x$tau.coef, x$tau.ci, x$tau.p))
+smat <- rbind(smat, c(x$n0, x$n0.ci, x$n0.p))
+rownames(smat) <- c("ACME", "ADE", "total effect", "prop. mediated")
+clp <- 100 * x$conf.level
+colnames(smat) <- c("estimate", paste0("lower ", clp, "% CI", 
+        sep = ""), paste0("upper ", clp, "% CI", sep = ""), "p-value")
+knitr::kable(smat, 
+             digits = 3,
+             booktabs = TRUE) |>
+  kableExtra::kable_styling()
 
-The first line gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect and the third the total effect. The point estimate for the indirect effect is $\alpha\gamma$ or `r `coef(YsXM)['threat'] * coef(MsX)['conditionPain']` which is `r round(coef(YsXM)['threat'] * coef(MsX)['conditionPain'], 2)`.
-The bootstrap sampling distribution is skewed to the left, which is reflected in the asymmetry of the percentile confidence interval.
+```
+
+The first line of @tbl-mediation gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect (ADE) and the third the total effect (ADE + ACME). The point estimate for ACME, $\alpha\gamma$ is $\widehat{\alpha}\widehat{\gamma} = `r round(coef(YsXM)['threat'] * coef(MsX)['conditionPain'], 2)`$.
+The bootstrap sampling distribution is skewed to the left, a fact reflected by the asymmetric percentile confidence interval.
 
 ```{r}
 #| eval: true
 #| echo: false
 #| label: fig-densityACME
-#| fig-cap: "Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect $\\alpha\\gamma$."
+#| fig-cap: "Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect $\\alpha\\gamma$, with point estimate and 95% percentile bootstrap confidence intervals (vertical dashed lines)."
 library(ggplot2)
 ggplot(data = data.frame(x = linmed$d1.sims),
        aes(x = x)) + 
@@ -134,12 +187,12 @@ ggplot(data = data.frame(x = linmed$d1.sims),
   scale_y_continuous(limits = c(0,6), expand = c(0,0)) +
   theme_classic() + 
   labs(y = "", x = "ACME",
-       subtitle = "Density of bootstrap replicates")
+       subtitle = "")
 ```
 
 
 
-The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the (least square) coefficient $\widehat{\gamma}$ is $\gamma + \mathsf{Co}(\varepsilon_1, \varepsilon_3)/\mathsf{Va}(\varepsilon_1)$ [@Bullock.Green.Ha:2010]. The variance of the error of the mediation can be estimated and we can vary the correlation due to confounding.
+The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the coefficient $\widehat{\gamma}$ is $\gamma + \mathsf{Cov}(\varepsilon_M, \varepsilon_Y)/\mathsf{Va}(\varepsilon_M)$; the second component is a bias term that does not vanish, even when the sample size grows [@Bullock.Green.Ha:2010]. The variance of the error of the mediation and response models can be estimated, and we can vary the correlation coefficient, $\rho=\mathsf{Cor}(\varepsilon_M, \varepsilon_Y)$, to assess the sensitivity of our conclusions if there was confounding.
 
 ```{r}
 #| eval: true
@@ -149,9 +202,7 @@ summary(linmed_sensitivity)
 plot(linmed_sensitivity)
 ```
 
-The `medsens` function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments.
-
-We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in [-0.4, 0.4]$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation would be needed for this effect to be an artefact of correlation and vanish.
+The `medsens` function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in [-0.4, 0.4]$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artefact of correlation and vanish.
 
 According to the documentation of the `medsens` function (`?medsens`), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, `R^2_M~R^2_Y`) or residual (starred, `R^2_M*R^2_Y*`) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. 
 
