@@ -373,13 +373,15 @@ compute the $\alpha/2$ and $1-\alpha/2$ empirical quantiles.
 .pull-right[
 .box-inv-4[Two-sided _p_-value]
 
-Compute the sample proportion of bootstrap statistics $S^{(1)}, \ldots, S^{(B)}$ that are larger/smaller than zero. 
+Compute the sample proportion of bootstrap statistics that are larger/smaller than zero.
 
-If $S^{(M)} < 0 \leq S^{(M+1)}$ for $1 \leq M \leq B$.
+Order bootstrap statistics $S^{(1)} \leq \cdots \leq S^{(B)}$ and find $M$ ($1 \leq M \leq B$) such that
+If $S^{(M)} < 0 \leq S^{(M+1)}$ for $1 \leq M \leq B$. The $p$-value is then
 
 $$p = 2\min\{M/B, 1-M/B\}$$
 
-and zero otherwise
+and zero if all values lie on either side of $0$.
+
 ]
 
 
