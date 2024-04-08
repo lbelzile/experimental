@@ -89,26 +89,27 @@ xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipbo
 # Reminder: three types of causal associations
 
 .pull-left-3[
-.box-4.medium[Confounding]
-
-![](`r knitr::fig_chunk("confounding-dag", "png")`)
+.box-4.medium.sp-after-half[Confounding]
 .box-inv-4.small.sp-after-half[Common cause]
 .box-inv-4.small[Causal forks **X** ← **Z** → **Y**]
 ]
 .pull-middle-3[
-.box-4.medium[Causation]
-![](`r knitr::fig_chunk("mediation-dag", "png")`)
+.box-4.medium.sp-after-half[Causation]
 .box-inv-4.small.sp-after-half[Mediation]
 .box-inv-4.small[Causal chain **X** → **Z** → **Y**]
 ]
 .pull-right-3[
-.box-4.medium[Collision]
-![](`r knitr::fig_chunk("collision-dag", "png")`)
+.box-4.medium.sp-after-half[Collision]
 .box-inv-4.small.sp-after-half[Selection /<br>endogeneity]
 .box-inv-4.small[inverted fork **X** →  **Z** ← **Y**]
 ]
 
-We are interested in **mediation**.
+```{r}
+#| eval: true
+#| echo: false
+knitr::include_graphics("img/12/causal_dag_aheiss.jpg")
+```
+
 
 ---
 
@@ -165,7 +166,11 @@ $$ Y_i(x', m)\ \perp\mkern-10mu\perp\  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \b
 \end{tikzpicture}
 ```
 
+.small[
 
+$\boldsymbol{Z}_M$ and $\boldsymbol{Z}_Y$ are controls for confounders, may or not be present in the model.
+
+]
 ---
 
 # Total effect
@@ -357,7 +362,7 @@ Without interaction/accounting for confounders, $\alpha\gamma = \tau - \beta$ an
 
 # Other test statistics
 
-Sobel's test is not the only test. Alternatives are discussed in 
+Sobel's test is not the only test. Alternative statistics are discussed in 
 
 > MacKinnon, D. P., Lockwood, C. M., Hoffman, J. M., West, S. G., & Sheets, V. (2002). A comparison of methods to test mediation and other intervening variable effects. Psychological Methods, 7(1), 83–104. https://doi.org/10.1037/1082-989X.7.1.83
 
@@ -373,7 +378,7 @@ Nonparametric bootstrap: repeat $B$ times, say $B=10\ 000$
 
 
 ---
-# Boostrap confidence intervals
+# Bootstrap confidence intervals
 
 **Percentile-based method**: for a equitailed $1-\alpha$ interval
 
@@ -421,7 +426,7 @@ Assuming that $X$ is randomized, we need
 
 - Lack of interaction between $X$ and $M$
   - can be added to model, then use NID definition
-- Causal direction: $M \to Y$ — $M$ is an antecedent cause
+- Causal direction: $M \to Y$, so $M$ must be an antecedent cause
   - $M$ must be measured before $Y$
 - Reliability of $M$ (no measurement error)
 - No confounding between $X$ and $M$
@@ -519,29 +524,35 @@ A **moderator** $W$ modifies the direction or strength of the effect of an expla
 \end{tikzpicture}
 ```
 
+.small[
+Interactions are not limited to experimental factors: we can also have interactions with confounders, explanatories, mediators, etc.
+]
+
 ---
 
-# Mediators in a linear regression model
+# Moderation in a linear regression model
 
 In a regression model, we simply include an **interaction** term to the model between $W$ and $X$.
 
 For example, if $X$ is categorical with $K$ levels and $W$ is binary or continuous, imposing sum-to-zero constraints for $\alpha_1, \ldots, \alpha_K$ and $\beta_1, \ldots, \beta_K$ gives
 $$
-\underset{\text{average response of group $k$ at $w$}}{\mathrm{E}(Y \mid X=k, W=w)} = \underset{\text{intercept of group $k$}}{\alpha_0 +\alpha_k} + \underset{\text{slope of group $k$}}{(\beta_0 + \beta_k)} 
+\underset{\text{average response of group $k$ at $w$}}{\mathrm{E}(Y \mid X=k, W=w)} = \underset{\text{intercept of group $k$}}{\alpha_0 +\alpha_k} + \underset{\text{slope of group $k$}}{(\beta_0 + \beta_k)} w
 $$
 
 ---
 
 # Testing for the interaction
 
-Test jointly whether coefficients associated to $XW$, $\beta_1 = \cdots = \beta_K$ are zero. 
+Test jointly whether coefficients associated to $XW$ are zero, i.e., $$\beta_1 = \cdots = \beta_K=0.$$
 
-The mediator $W$ can be continuous or categorical with $M \geq 2$ levels
+The moderator $W$ can be continuous or categorical with $L \geq 2$ levels
 
-The $F$ test has 
+The degrees of freedom (additional parameters for the interaction) in the $F$ test are
 
-- $K-1$ (continuous $W$ — are slopes parallel?)
-- $(K-1) \times (M-1)$ (categorical $W$ — are all subgroup averages the same?)
+- $K-1$ for continuous $W$
+   - are slopes parallel?
+- $(K-1) \times (L-1)$ for categorical $W$
+   - are all subgroup averages the same?
 
 ---
 
@@ -557,12 +568,12 @@ The authors manipulated the decision of the participant, with choices:
 - a request to reconsider based on abilities of women (collective). 
 
 ]
-The postulated mediator variable is `sexism`, which assesses pervasiveness of gender discrimination.
+The postulated moderator variable is `sexism`, which assesses pervasiveness of gender discrimination.
 
 ---
 # Model fit
 
-We fit the linear model with the interaction and display the observed slopes
+We fit the linear model with the interaction.
 
 ```{r}
 #| eval: false
@@ -649,20 +660,15 @@ emmeans(lin_moder,
 
 .small[
 
-With mediating *factors*, give weights to each sub-mean corresponding to the frequency of the mediator rather than equal-weight to each category (`weights = "prop"`).
+With moderating *factors*, give weights to each sub-mean corresponding to the frequency of the moderator rather than equal-weight to each category (`weights = "prop"`).
 
 ]
 ---
 
 # Sensitivity analysis
 
-The Johnson and Neyman (1936) method looks at the range of values of mediator $W$ for which difference between treatments (binary $X$) is not statistically significant.
+The [Johnson and Neyman (1936)](https://doi.org/10.1007/bf02288864) method looks at the range of values of moderator $W$ for which difference between treatments (binary $X$) is not statistically significant.
 
-.tiny[
-
-> Johnson, P. O., & Fay, L. C. (1950). The Johnson-Neyman technique, its theory and application. Psychometrika, 15(4), 349–367. doi:10.1007/bf02288864 
-
-]
 
 ```{r}
 #| eval: false
@@ -719,17 +725,3 @@ jn <- interactions::johnson_neyman(
   mod.range = range(GSBE10$sexism)) # range of values for sexism
 jn$plot
 ```
-
----
-
-layout: true
-class: title title-6
-
----
-
-# Model assumptions and extensions
-
-Interactions are not limited to experimental factors: we can also have interactions with confounders, explanatories, mediators, etc.
-
-- Linearity assumption implies model is correctly specified. Need this to hold for inference to be approximately valid.
-- The case where interactions between $XW \to M$ and/or $MW \to Y$ in a mediation analysis is called ``moderated mediation''.

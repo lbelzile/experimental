@@ -8,11 +8,45 @@ source(unz(temp, "PROCESS v4.3 for R/process.R"))
 # Remove temp directory
 unlink(temp)
 
+set.seed(80667) # fix seed to ensure reproducibility
+
+
+library(ggplot2)
+library(emmeans)
+library(mediation)
 
 # Example 1: mediation
 data(L22_E4, package = "hecedsm")
 L22_E4 <- L22_E4 |>
+  # dichotomize social
   dplyr::mutate(socialbin = as.integer(I(social != "alone")))
+
+# Compare response model with collapsed social categories (3 vs 2)
+L22_E4_long <- L22_E4 |>
+  dplyr::mutate(id = dplyr::row_number()) |> # add unique identifier
+  tidyr::pivot_longer(cols = c(cutfreq, cutintensity),
+                       values_to = "cut",
+                       names_prefix = "cut",
+                       names_to = "type")
+# Model fits suggest there is zero correlation between observations (or negative correlation)
+# Since we compare different models for the mean, the models must be fitted via maximum likelihood
+modY1 <- nlme::gls(cut ~ type*social,
+                   correlation = nlme::corCompSymm(form = ~ id),
+                   data = L22_E4_long,
+                   method = "ML")
+modY0 <- nlme::gls(cut ~ type*socialbin,
+                   correlation = nlme::corCompSymm(form = ~ id),
+                   data = L22_E4_long,
+                   method = "ML")
+# Comparing the two nested models
+anova(modY1, modY0)
+# Alternatively, run two regressions
+anova(lm(data = L22_E4, cutfreq ~ socialbin + enjoyother + enjoyamount),
+      lm(data = L22_E4, cutfreq ~ social + enjoyother + enjoyamount))
+anova(lm(data = L22_E4, cutintensity ~ socialbin + enjoyother + enjoyamount),
+      lm(data = L22_E4, cutintensity ~ social + enjoyother + enjoyamount))
+
+
 
 # Function to calculate Sobel's statistic for binary treatment
 sobel <- function(alpha, gamma, alpha_var, gamma_var){
@@ -74,7 +108,7 @@ process(
   data = L22_E4, # dataset
   y = 'cutfreq', # response variable
   x = 'socialbin', # experimental factor
-  m = c('enjoyamount','enjoyother'), # mediator
+  m = c('enjoyamount','enjoyother'), # mediators
   boot = 1e4L, # number of bootstrap replications
   model = 4, # parallel mediation
   seed = 80667,
@@ -86,6 +120,12 @@ process(
 
 # Using the 'mediation' package
 # to get the same syntax as PROCESS, use the 'bruceR' package
+#
+# 'mediation' is more general in that you can decide what is in the model
+modResp1 <- lm(data = L22_E4,
+               cutfreq ~ socialbin + enjoyother + enjoyamount)
+modMediator1 <- lm(enjoyamount ~ socialbin, data = L22_E4)
+
 med11 <- mediation::mediate(
   model.m = modMediator1, # mediator model
   model.y = modResp1, # response model
@@ -94,9 +134,10 @@ med11 <- mediation::mediate(
   treat = "socialbin", # name of treatment variable
   mediator = "enjoyamount") # name of mediator
 summary(med11)
-# Sensitivity diagnostics - effect would vanish if there was a confounder giving 20% correlation
+# Sensitivity diagnostics - effect would vanish if there was a confounder giving +20% correlation
 sensitivity <- mediation::medsens(med11)
 summary(sensitivity)
+# Add plot of sensitivity diagnostic, varying the correlation
 plot(sensitivity)
 
 
@@ -133,34 +174,37 @@ bootFn <- function(data, statfn, B = 1e4L, alpha = 0.05){
   data.frame(pval = pval, lower = confints[1,], upper = confints[2,])
 }
 
-# Example of moderation and moderated mediation [sic]
+###############################################################################
+# Example 2 -  moderation and mediated moderation
 
 data(GSBE10, package = "hecedsm")
 lin_moder <- lm(respeval ~ protest*sexism,
                 data = GSBE10)
-summary(linmoder) # coefficients
-car::Anova(lin_moder, type = 3)
+summary(lin_moder) # coefficients
+car::Anova(lin_moder, type = 3) #if significant, look at simple effects
 
+# Plot response as a function of sexism (the continuous variable)
 ggplot(data = GSBE10,
        aes(x = sexism,
            y = respeval,
-           color = protest,
-           group = protest)) +
+           color = protest)) +
   geom_point() +
-  geom_smooth(se = FALSE, method = "lm", formula = y ~ x) +
+  geom_smooth(se = TRUE, method = "lm", formula = y ~ x) +
   labs(subtitle = "evaluation of response",
        y = "",
        color = "experimental condition") +
   theme_classic() +
   theme(legend.position = "bottom")
 
+# Compute quartiles of sexism and return the estimated marginal means
+# for each subgroup
 quart <-  quantile(GSBE10$sexism, probs = c(0.25, 0.5, 0.75))
 emmeans(lin_moder,
         specs = "protest",
         by = "sexism",
         at = list("sexism" = quart))
 
-
+# Consider again a simpler version with both pooled
 lin_moder2 <- lm(
   respeval ~ protest*sexism,
   data = GSBE10 |>
@@ -183,21 +227,22 @@ jn$plot
 process(data = GSBE10 |>
           dplyr::mutate(protestind = as.integer(protest)),
         y = "respeval",  # response variable
-        w = "sexism", # postulated mediator (continuous)
+        w = "sexism", # postulated moderator (continuous)
         x = "protestind", # experimental factor
-        model = 1, # number of model in Hayes (simple mediation)
+        model = 1, # number of model in Hayes (simple moderation)
         plot = TRUE, # add plot
         moments = TRUE, # probe at mean +/- std. error;
         # for different values, use argument "wmodval"
         jn = TRUE)
 
 
-# Example of moderated mediation
+# Example of mediated moderation
 # Model 8 assumes that W impacts both
 # X -> M, so this model now reads M ~ X + W + X*W
 # and X -> Y, so the model Y ~ X + W + X*W + M
-process(data = GSBE10 |>
-          dplyr::mutate(protestind = as.integer(protest)),
+GSBE10 <- GSBE10 |>
+  dplyr::mutate(protestind = as.integer(protest))
+process(data = GSBE10,
         y = 'likeability', # response
         x = 'protestind', # experimental factor
         w = 'sexism', # moderator
@@ -206,15 +251,22 @@ process(data = GSBE10 |>
         moments = TRUE,
         boot = 1e4L,
         seed = 80667)
+# These are the regression models fitted by the software
+modY <- lm(likeability ~ protestind*sexism + respeval, data = GSBE10)
+modM <- lm(respeval ~ protestind*sexism, data = GSBE10)
 
-
+#################################################################################
 
 
 # Third example, with PROCESS macro, of moderation analysis
 # This time, the factor of interest is continuous
 # and the moderator is categorical (M=3)
+data(LWSH23_S3, package = "hecedsm")
 mod <- lm(data = LWSH23_S3, needsatis ~ needclosure * cond)
-anova(mod)
+anova(mod) # interaction is significant
+# Compute estimated marginal means, but with global weights equal to relative weight of each variable
+emmeans(mod, specs = "needclosure", by = "cond", weights = "prop")
+# All values are reported for the average of needclosure
 
 # Process only understand numeric values for factors...
 process(data = LWSH23_S3 |>
@@ -225,6 +277,3 @@ process(data = LWSH23_S3 |>
         mcw = 1, # dummy coding for moderator w (so compare to base level, here 'included')
         model = 1, # number of model in Hayes (simple)
         plot = TRUE) # add plot, doesn't seem to work...
-
-
-
