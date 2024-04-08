@@ -5,6 +5,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+Download the [**R** code](/example/linearmediation.R) and the [SPSS code](/example/linearmediation.sps).
+
 Consider linear regression models in a system where some response variable $Y$ depends on a mediator, $M$, and an experimental factor, $X \in \{0,1\}$.
 The mediator model has expected value
 $$

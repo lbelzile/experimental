@@ -123,8 +123,6 @@ div.csl-indent {
 }</script>
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="../site_libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet">
-<script src="../site_libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -386,6 +384,7 @@ window.Quarto = {
 </header>
 
 
+<p>Download the <a href="../example/linearmediation.R"><strong>R</strong> code</a> and the <a href="../example/linearmediation.sps">SPSS code</a>.</p>
 <p>Consider linear regression models in a system where some response variable <span class="math inline">\(Y\)</span> depends on a mediator, <span class="math inline">\(M\)</span>, and an experimental factor, <span class="math inline">\(X \in \{0,1\}\)</span>. The mediator model has expected value <span id="eq-mediator-model"><span class="math display">\[
 M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{\boldsymbol{Z}_M^\top\boldsymbol{\delta}} + \underset{\text{error term}}{\varepsilon_M}
 \tag{1}\]</span></span> while we have for the response <span id="eq-response-model"><span class="math display">\[
@@ -557,7 +556,7 @@ Table&nbsp;1: Coefficients of the regression models
 </figure>
 </div>
 <p>Both of the <code>threat</code> and <code>bonding</code> measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.</p>
-<div class="cell" data-hash="linearmediation_cache/html/unnamed-chunk-5_e140c2417d7070525c16b487dd070335">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
@@ -574,8 +573,8 @@ Table&nbsp;1: Coefficients of the regression models
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="linearmediation_cache/html/tbl-mediation_74e3f0c748a183bcb4ef2a8c04fd67df">
-<div id="tbl-mediation" class="cell quarto-float anchored" data-hash="linearmediation_cache/html/tbl-mediation_74e3f0c748a183bcb4ef2a8c04fd67df">
+<div class="cell">
+<div id="tbl-mediation" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mediation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Linear causal mediation analysis: parameter estimates, nonparametric bootstrap 95% confidence intervals and p-values with the percentile method based on 5000 bootstrap samples.
@@ -1186,207 +1185,209 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Consider linear regression models in a system where some response variable $Y$ depends on a mediator, $M$, and an experimental factor, $X \in <span class="sc">\{</span>0,1<span class="sc">\}</span>$.</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>The mediator model has expected value</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{\boldsymbol{Z}_M^\top\boldsymbol{\delta}} + \underset{\text{error term}}{\varepsilon_M}</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>$$ {#eq-mediator-model}</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>while we have for the response</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M + \underset{\text{control variates}}{\boldsymbol{Z}_Y^\top\boldsymbol{\omega}}  + \underset{\text{error term}}{\varepsilon_Y}, \label{eq-responsemodel}</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>$$ {#eq-response-model}</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>The explanatory variables $\boldsymbol{Z}_M$ for the mediator model of @eq-mediator-model, and $\boldsymbol{Z}_Y$ for the response model @eq-response-model are control covariates to account for confounders, and need not be the same in both models (but could be). In a randomized experiment where we manipulate the mediator, there is no need to include any control in @eq-mediator-model lest we mistakenly create correlation by including colliders. The error terms $\varepsilon_Y$ and $\varepsilon_M$ are assumed to be independent mean-zero with common variance.</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{tikz}</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: false</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-dag-linearmed</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Directed acyclic graph for the linear mediation model."</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-align: 'center'</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-ext: "png"</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-dpi: 300</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">#| out-width: '60%'</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">\usetikzlibrary{positioning}</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,circle] (X) at (-2,0) {$X$};</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,circle] (Y) at (2,0) {$Y$};</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,circle] (M) at (0,1) {$M$};</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw, rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (X) edge (Y);</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (M) edge (Y);</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (X) edge (M);</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">\node [fill=white,line width=0pt] (beta) at (0,-0.1) {$\beta$};</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">\node [fill=white,line width=0pt](gamma) at (1,0.5) {$\gamma$};</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">\node [fill=white,line width=0pt](beta) at (-1,0.5) {$\alpha$};</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (Zy) edge (Y);</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (Zm) edge (M);</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">\end{tikzpicture}</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>In the linear mediation model defined above and represented in @fig-dag-linearmed, the total effect of $X$ on $Y$ is $\beta + \alpha \gamma$ (the average treatment effect, looking at the difference in response between treatment $X=1$ and control $X=0$).</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Download the <span class="co">[</span><span class="ot">**R** code</span><span class="co">](/example/linearmediation.R)</span> and the <span class="co">[</span><span class="ot">SPSS code</span><span class="co">](/example/linearmediation.sps)</span>.</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>Consider linear regression models in a system where some response variable $Y$ depends on a mediator, $M$, and an experimental factor, $X \in <span class="sc">\{</span>0,1<span class="sc">\}</span>$.</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>The mediator model has expected value</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{\boldsymbol{Z}_M^\top\boldsymbol{\delta}} + \underset{\text{error term}}{\varepsilon_M}</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>$$ {#eq-mediator-model}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>while we have for the response</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M + \underset{\text{control variates}}{\boldsymbol{Z}_Y^\top\boldsymbol{\omega}}  + \underset{\text{error term}}{\varepsilon_Y}, \label{eq-responsemodel}</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>$$ {#eq-response-model}</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>The explanatory variables $\boldsymbol{Z}_M$ for the mediator model of @eq-mediator-model, and $\boldsymbol{Z}_Y$ for the response model @eq-response-model are control covariates to account for confounders, and need not be the same in both models (but could be). In a randomized experiment where we manipulate the mediator, there is no need to include any control in @eq-mediator-model lest we mistakenly create correlation by including colliders. The error terms $\varepsilon_Y$ and $\varepsilon_M$ are assumed to be independent mean-zero with common variance.</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{tikz}</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: false</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-dag-linearmed</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Directed acyclic graph for the linear mediation model."</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-align: 'center'</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-ext: "png"</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-dpi: 300</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">#| out-width: '60%'</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">\usetikzlibrary{positioning}</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,circle] (X) at (-2,0) {$X$};</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,circle] (Y) at (2,0) {$Y$};</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,circle] (M) at (0,1) {$M$};</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw, rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">\node [draw,rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (X) edge (Y);</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (M) edge (Y);</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (X) edge (M);</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">\node [fill=white,line width=0pt] (beta) at (0,-0.1) {$\beta$};</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">\node [fill=white,line width=0pt](gamma) at (1,0.5) {$\gamma$};</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">\node [fill=white,line width=0pt](beta) at (-1,0.5) {$\alpha$};</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (Zy) edge (Y);</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="in">\draw [-latex] (Zm) edge (M);</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">\end{tikzpicture}</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>The average causal mediation effect (ACME) or natural indirect effect for treatment at level $x$ is obtained by changing the potential outcome $Y_i<span class="sc">\{</span>X, M_i(X)<span class="sc">\}</span>$ of individual $i$ for the mediator $M_i(X)$ while fixing the treatment level $X$ to $x$, so </span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>\mathsf{ACME} = \mathsf{E}<span class="co">[</span><span class="ot">Y_i\{x, M_i(1)\} - Y_i\{x, M_i(0)\}</span><span class="co">]</span>.</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>In the linear mediation model, we get subtituting the value of $M$ from equation @eq-mediator-model into @eq-response-model</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>$$\begin{align*}</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>\mathsf{E}<span class="co">[</span><span class="ot">Y_i\{x, M_i(1)\}</span><span class="co">]</span>  &amp;= \underset{\text{intercept}}{c_Y + \gamma c_M} + \underset{\text{ACME}}{\alpha\gamma} + \beta x+ \underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}<span class="sc">\\</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>\mathsf{E}<span class="co">[</span><span class="ot">Y_i\{x, M_i(0)\}</span><span class="co">]</span>  &amp;=\underset{\text{intercept}}{c_Y + \gamma c_M} + \beta x +\underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}<span class="sc">\\</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>so the average difference between the two equations is $\mathsf{ACME} = \alpha\gamma$.</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 1</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>In the linear mediation model defined above and represented in @fig-dag-linearmed, the total effect of $X$ on $Y$ is $\beta + \alpha \gamma$ (the average treatment effect, looking at the difference in response between treatment $X=1$ and control $X=0$).</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>The average causal mediation effect (ACME) or natural indirect effect for treatment at level $x$ is obtained by changing the potential outcome $Y_i<span class="sc">\{</span>X, M_i(X)<span class="sc">\}</span>$ of individual $i$ for the mediator $M_i(X)$ while fixing the treatment level $X$ to $x$, so </span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>\mathsf{ACME} = \mathsf{E}<span class="co">[</span><span class="ot">Y_i\{x, M_i(1)\} - Y_i\{x, M_i(0)\}</span><span class="co">]</span>.</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>In the linear mediation model, we get subtituting the value of $M$ from equation @eq-mediator-model into @eq-response-model</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>$$\begin{align*}</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>\mathsf{E}<span class="co">[</span><span class="ot">Y_i\{x, M_i(1)\}</span><span class="co">]</span>  &amp;= \underset{\text{intercept}}{c_Y + \gamma c_M} + \underset{\text{ACME}}{\alpha\gamma} + \beta x+ \underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}<span class="sc">\\</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>\mathsf{E}<span class="co">[</span><span class="ot">Y_i\{x, M_i(0)\}</span><span class="co">]</span>  &amp;=\underset{\text{intercept}}{c_Y + \gamma c_M} + \beta x +\underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}<span class="sc">\\</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>so the average difference between the two equations is $\mathsf{ACME} = \alpha\gamma$.</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>We consider an example from Experiment 1 of @Bastian:2014, who experienced the effect of the effect of shared pain (through a manipulation) on bonding.</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 1</span></span>
 <span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This effect of pain remained when controlling for age (p = .048), gender (p = .052), and group size (p = .050). None of these variables were significantly correlated with experimental condition (ps &gt; .136) or perceived bonding (ps &gt; .925). To determine whether the marginal tendency for the pain tasks to be viewed as more threatening than the control tasks mediated the effect of pain on perceived bonding, we conducted a bootstrap analysis (Preacher &amp; Hayes, 2008) using 5,000 resamples. The results of this analysis revealed that threat was not a significant mediator, indirect effect = −0.11, SE = 0.09, 95% CI = </span><span class="co">[</span><span class="ot">−0.34, 0.03</span><span class="co">]</span><span class="at">.</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>We consider an example from Experiment 1 of @Bastian:2014, who experienced the effect of the effect of shared pain (through a manipulation) on bonding.</span>
 <span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>There are several problems with the description: while it seems</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>that some covariate (age, gender, group size) were added to regression models, it is unclear whether they could be confounders, whether their effect is linear and in which (if any model they are included). Stating "bootstrap analysis" is the equivalent of "running a statistical test": so vague it could mean anything, and the fact the output is random does not help with reproducibility.</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>The response variable $Y$ is <span class="in">`bonding`</span>, the experimental factor <span class="in">`condition`</span> and <span class="in">`threat`</span>, the average ALES subscale about the perception of the physical task, is the postulated mediator.</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This effect of pain remained when controlling for age (p = .048), gender (p = .052), and group size (p = .050). None of these variables were significantly correlated with experimental condition (ps &gt; .136) or perceived bonding (ps &gt; .925). To determine whether the marginal tendency for the pain tasks to be viewed as more threatening than the control tasks mediated the effect of pain on perceived bonding, we conducted a bootstrap analysis (Preacher &amp; Hayes, 2008) using 5,000 resamples. The results of this analysis revealed that threat was not a significant mediator, indirect effect = −0.11, SE = 0.09, 95% CI = </span><span class="co">[</span><span class="ot">−0.34, 0.03</span><span class="co">]</span><span class="at">.</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>There are several problems with the description: while it seems</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>that some covariate (age, gender, group size) were added to regression models, it is unclear whether they could be confounders, whether their effect is linear and in which (if any model they are included). Stating "bootstrap analysis" is the equivalent of "running a statistical test": so vague it could mean anything, and the fact the output is random does not help with reproducibility.</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`mediation`</span> package <span class="co">[</span><span class="ot">@mediationR</span><span class="co">]</span> for the model; the package certainly isn't needed (nor the PROCESS macros) to run the bootstrap, which we could obtain with a single for-loop. However, it has utilities, notably for checking model assumptions, that are convenient. </span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>The response variable $Y$ is <span class="in">`bonding`</span>, the experimental factor <span class="in">`condition`</span> and <span class="in">`threat`</span>, the average ALES subscale about the perception of the physical task, is the postulated mediator.</span>
 <span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mediation, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BJF14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>MsX <span class="ot">&lt;-</span> <span class="fu">lm</span>(threat <span class="sc">~</span> condition <span class="sc">+</span> gender <span class="sc">+</span> groupsize <span class="sc">+</span> age, </span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> BJF14_S1)</span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>YsXM <span class="ot">&lt;-</span> <span class="fu">lm</span>(bonding <span class="sc">~</span> condition <span class="sc">+</span> threat <span class="sc">+</span> gender <span class="sc">+</span> groupsize <span class="sc">+</span> age,</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BJF14_S1)</span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>::: {#tbl-panel layout-ncol=2}</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`mediation`</span> package <span class="co">[</span><span class="ot">@mediationR</span><span class="co">]</span> for the model; the package certainly isn't needed (nor the PROCESS macros) to run the bootstrap, which we could obtain with a single for-loop. However, it has utilities, notably for checking model assumptions, that are convenient. </span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mediation, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BJF14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>MsX <span class="ot">&lt;-</span> <span class="fu">lm</span>(threat <span class="sc">~</span> condition <span class="sc">+</span> gender <span class="sc">+</span> groupsize <span class="sc">+</span> age, </span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> BJF14_S1)</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>YsXM <span class="ot">&lt;-</span> <span class="fu">lm</span>(bonding <span class="sc">~</span> condition <span class="sc">+</span> threat <span class="sc">+</span> gender <span class="sc">+</span> groupsize <span class="sc">+</span> age,</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BJF14_S1)</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-responsecoefs</span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "outcome model"</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>coefs1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(MsX) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>() </span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>coefs1<span class="sc">$</span>term[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"condition [pain]"</span>, <span class="st">"gender [female]"</span>, <span class="st">"group size"</span>)</span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>coefs2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(YsXM) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>coefs2<span class="sc">$</span>term[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"condition [pain]"</span>, <span class="st">"gender [female]"</span>, <span class="st">"group size"</span>)</span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>kab1 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(coefs1[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>kab2 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(coefs2[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>kab2 <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "mediation model"</span></span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mediationcoefs</span></span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>kab1 <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::kables(x = list(kab2, kab1)) |&gt;</span></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="co">#  kableExtra::kable_styling()</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>Coefficients of the regression models</span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>Both of the <span class="in">`threat`</span> and <span class="in">`bonding`</span> measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>::: {#tbl-panel layout-ncol=2}</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-responsecoefs</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "outcome model"</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>coefs1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(MsX) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>() </span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>coefs1<span class="sc">$</span>term[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"condition [pain]"</span>, <span class="st">"gender [female]"</span>, <span class="st">"group size"</span>)</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>coefs2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(YsXM) <span class="sc">|&gt;</span> broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>coefs2<span class="sc">$</span>term[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"condition [pain]"</span>, <span class="st">"gender [female]"</span>, <span class="st">"group size"</span>)</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>kab1 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(coefs1[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>kab2 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(coefs2[,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>kab2 <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "mediation model"</span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mediationcoefs</span></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>kab1 <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::kables(x = list(kab2, kab1)) |&gt;</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="co">#  kableExtra::kable_styling()</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>Coefficients of the regression models</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
-<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
-<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat =</span> <span class="st">"condition"</span>, <span class="co"># name of treatment</span></span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>  <span class="at">control.value =</span> <span class="st">"Control"</span>, <span class="co"># name of control (level of 'condition')</span></span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat.value =</span> <span class="st">"Pain"</span>) <span class="co"># name of treatment (level of 'condition')</span></span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed)</span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mediation</span></span>
-<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Linear causal mediation analysis: parameter estimates, nonparametric bootstrap 95% confidence intervals and p-values with the percentile method based on 5000 bootstrap samples."</span></span>
-<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
-<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
-<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
-<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
-<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
-<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
-<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
-<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
-<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat =</span> <span class="st">"condition"</span>, <span class="co"># name of treatment</span></span>
-<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">control.value =</span> <span class="st">"Control"</span>, <span class="co"># name of control (level of 'condition')</span></span>
-<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat.value =</span> <span class="st">"Pain"</span>) <span class="co"># name of treatment (level of 'condition')</span></span>
-<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">summary</span>(linmed)</span>
-<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">c</span>(x<span class="sc">$</span>d1, x<span class="sc">$</span>d1.ci, x<span class="sc">$</span>d1.p)</span>
-<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(smat, <span class="fu">c</span>(x<span class="sc">$</span>z0, x<span class="sc">$</span>z0.ci, x<span class="sc">$</span>z0.p))</span>
-<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(smat, <span class="fu">c</span>(x<span class="sc">$</span>tau.coef, x<span class="sc">$</span>tau.ci, x<span class="sc">$</span>tau.p))</span>
-<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(smat, <span class="fu">c</span>(x<span class="sc">$</span>n0, x<span class="sc">$</span>n0.ci, x<span class="sc">$</span>n0.p))</span>
-<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(smat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ACME"</span>, <span class="st">"ADE"</span>, <span class="st">"total effect"</span>, <span class="st">"prop. mediated"</span>)</span>
-<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>clp <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> x<span class="sc">$</span>conf.level</span>
-<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(smat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="fu">paste0</span>(<span class="st">"lower "</span>, clp, <span class="st">"% CI"</span>, </span>
-<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">""</span>), <span class="fu">paste0</span>(<span class="st">"upper "</span>, clp, <span class="st">"% CI"</span>, <span class="at">sep =</span> <span class="st">""</span>), <span class="st">"p-value"</span>)</span>
-<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(smat, </span>
-<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">3</span>,</span>
-<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a>             <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
-<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>Both of the <span class="in">`threat`</span> and <span class="in">`bonding`</span> measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat =</span> <span class="st">"condition"</span>, <span class="co"># name of treatment</span></span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>  <span class="at">control.value =</span> <span class="st">"Control"</span>, <span class="co"># name of control (level of 'condition')</span></span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat.value =</span> <span class="st">"Pain"</span>) <span class="co"># name of treatment (level of 'condition')</span></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed)</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mediation</span></span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Linear causal mediation analysis: parameter estimates, nonparametric bootstrap 95% confidence intervals and p-values with the percentile method based on 5000 bootstrap samples."</span></span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat =</span> <span class="st">"condition"</span>, <span class="co"># name of treatment</span></span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a>  <span class="at">control.value =</span> <span class="st">"Control"</span>, <span class="co"># name of control (level of 'condition')</span></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>  <span class="at">treat.value =</span> <span class="st">"Pain"</span>) <span class="co"># name of treatment (level of 'condition')</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">summary</span>(linmed)</span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">c</span>(x<span class="sc">$</span>d1, x<span class="sc">$</span>d1.ci, x<span class="sc">$</span>d1.p)</span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(smat, <span class="fu">c</span>(x<span class="sc">$</span>z0, x<span class="sc">$</span>z0.ci, x<span class="sc">$</span>z0.p))</span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(smat, <span class="fu">c</span>(x<span class="sc">$</span>tau.coef, x<span class="sc">$</span>tau.ci, x<span class="sc">$</span>tau.p))</span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>smat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(smat, <span class="fu">c</span>(x<span class="sc">$</span>n0, x<span class="sc">$</span>n0.ci, x<span class="sc">$</span>n0.p))</span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(smat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ACME"</span>, <span class="st">"ADE"</span>, <span class="st">"total effect"</span>, <span class="st">"prop. mediated"</span>)</span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a>clp <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> x<span class="sc">$</span>conf.level</span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(smat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="fu">paste0</span>(<span class="st">"lower "</span>, clp, <span class="st">"% CI"</span>, </span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>        <span class="at">sep =</span> <span class="st">""</span>), <span class="fu">paste0</span>(<span class="st">"upper "</span>, clp, <span class="st">"% CI"</span>, <span class="at">sep =</span> <span class="st">""</span>), <span class="st">"p-value"</span>)</span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(smat, </span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="dv">3</span>,</span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a>             <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span>
 <span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a>The first line of @tbl-mediation gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect (ADE) and the third the total effect (ADE + ACME). The point estimate for ACME, $\alpha\gamma$ is $\widehat{\alpha}\widehat{\gamma} = <span class="in">`r round(coef(YsXM)['threat'] * coef(MsX)['conditionPain'], 2)`</span>$.</span>
-<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a>The bootstrap sampling distribution is skewed to the left, a fact reflected by the asymmetric percentile confidence interval.</span>
-<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-densityACME</span></span>
-<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect $\\alpha\\gamma$, with point estimate and 95% percentile bootstrap confidence intervals (vertical dashed lines)."</span></span>
-<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> linmed<span class="sc">$</span>d1.sims),</span>
-<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span> </span>
-<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> linmed<span class="sc">$</span>d1, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">quantile</span>(linmed<span class="sc">$</span>d1.sims, </span>
-<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)), </span>
-<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">6</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"ACME"</span>,</span>
-<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>)</span>
-<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a>The first line of @tbl-mediation gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect (ADE) and the third the total effect (ADE + ACME). The point estimate for ACME, $\alpha\gamma$ is $\widehat{\alpha}\widehat{\gamma} = <span class="in">`r round(coef(YsXM)['threat'] * coef(MsX)['conditionPain'], 2)`</span>$.</span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a>The bootstrap sampling distribution is skewed to the left, a fact reflected by the asymmetric percentile confidence interval.</span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-densityACME</span></span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect $\\alpha\\gamma$, with point estimate and 95% percentile bootstrap confidence intervals (vertical dashed lines)."</span></span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> linmed<span class="sc">$</span>d1.sims),</span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span> </span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> linmed<span class="sc">$</span>d1, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">quantile</span>(linmed<span class="sc">$</span>d1.sims, </span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)), </span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">6</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">"ACME"</span>,</span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>)</span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a>The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the coefficient $\widehat{\gamma}$ is $\gamma + \mathsf{Cov}(\varepsilon_M, \varepsilon_Y)/\mathsf{Va}(\varepsilon_M)$; the second component is a bias term that does not vanish, even when the sample size grows <span class="co">[</span><span class="ot">@Bullock.Green.Ha:2010</span><span class="co">]</span>. The variance of the error of the mediation and response models can be estimated, and we can vary the correlation coefficient, $\rho=\mathsf{Cor}(\varepsilon_M, \varepsilon_Y)$, to assess the sensitivity of our conclusions if there was confounding.</span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a>linmed_sensitivity <span class="ot">&lt;-</span> <span class="fu">medsens</span>(linmed)</span>
-<span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed_sensitivity)</span>
-<span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linmed_sensitivity)</span>
-<span id="cb6-219"><a href="#cb6-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-220"><a href="#cb6-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a>The <span class="in">`medsens`</span> function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in <span class="co">[</span><span class="ot">-0.4, 0.4</span><span class="co">]</span>$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artefact of correlation and vanish.</span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the coefficient $\widehat{\gamma}$ is $\gamma + \mathsf{Cov}(\varepsilon_M, \varepsilon_Y)/\mathsf{Va}(\varepsilon_M)$; the second component is a bias term that does not vanish, even when the sample size grows <span class="co">[</span><span class="ot">@Bullock.Green.Ha:2010</span><span class="co">]</span>. The variance of the error of the mediation and response models can be estimated, and we can vary the correlation coefficient, $\rho=\mathsf{Cor}(\varepsilon_M, \varepsilon_Y)$, to assess the sensitivity of our conclusions if there was confounding.</span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a>linmed_sensitivity <span class="ot">&lt;-</span> <span class="fu">medsens</span>(linmed)</span>
+<span id="cb6-219"><a href="#cb6-219" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed_sensitivity)</span>
+<span id="cb6-220"><a href="#cb6-220" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linmed_sensitivity)</span>
+<span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a>According to the documentation of the <span class="in">`medsens`</span> function (<span class="in">`?medsens`</span>), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, <span class="in">`R^2_M~R^2_Y`</span>) or residual (starred, <span class="in">`R^2_M*R^2_Y*`</span>) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. </span>
+<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a>The <span class="in">`medsens`</span> function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in <span class="co">[</span><span class="ot">-0.4, 0.4</span><span class="co">]</span>$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artefact of correlation and vanish.</span>
 <span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a>According to the documentation of the <span class="in">`medsens`</span> function (<span class="in">`?medsens`</span>), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, <span class="in">`R^2_M~R^2_Y`</span>) or residual (starred, <span class="in">`R^2_M*R^2_Y*`</span>) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. </span>
+<span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

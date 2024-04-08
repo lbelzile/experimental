@@ -29,7 +29,8 @@ slide_details <- tibble::tribble(
 "Repeated measures using linear mixed model (Syntax)", "17-Ikn9MTpg",
 "Repeated measures using linear mixed model (Menus)", "niNZcLYdxvg",
 "Incomplete mixed design", "lx9WpPKXWlA",
-"Nested random effects","Ww2R1dNF6DM")
+"Nested random effects","Ww2R1dNF6DM",
+"Linear mediation", "K17VesYVX9Y")
 ```
 
 # Videos
@@ -49,3 +50,4 @@ youtube_list(slide_details, playlist_id, example = TRUE)
 - [MANOVA](/example/manova.sps)
 - [Repeated measures using mixed models](/example/repeatedwmixedmodels.sps)
 - [Mixed models](/content/MATH80667A-10-content.sps)
+- [Linear mediation](/example/linearmediation.sps)
