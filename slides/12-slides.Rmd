@@ -46,7 +46,7 @@ class: title title-inv-1
 
  
 
-.box-6.large.sp-after-half[Interactions and moderation]
+.box-6.large.sp-after-half[Moderation]
 
 
 ---
@@ -147,6 +147,8 @@ $$ Y_i(x', m)\ \perp\mkern-10mu\perp\  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \b
 #| fig-align: 'center'
 #| fig-ext: "png"
 #| fig-dpi: 300
+#| fig-width: 8
+#| fig-height: 6
 #| out-width: '60%'
 \usetikzlibrary{positioning}
 \begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]
@@ -278,10 +280,13 @@ $$\begin{align}
 \mathsf{E}(Y \mid X=x) &= \underset{\text{intercept}}{(c_Y + \gamma c_M)} + \underset{\text{total effect}}{(\beta + \alpha\gamma)}\cdot x 
 \end{align}$$
 
-In an experiment, we can obtain the total effect via the ANOVA model, with $\tau= \mathrm{E}\{Y \mid \mathrm{do}(X=1)\} - \mathrm{E}\{Y \mid \mathrm{do}(X=0)\}$ the average treatment effect since
+In an experiment, we can obtain the total effect via the ANOVA model, with
 
 $$
-Y = \underset{\text{average of control}}{\nu} + \underset{\text{total effect}}{\tau X} + \underset{\text{error term}}{\varepsilon_{Y'}}
+\begin{align*}
+Y &= \underset{\text{average of control}}{\nu} + \underset{\text{total effect}}{\tau X} + \underset{\text{error term}}{\varepsilon_{Y'}} \\
+\tau&= \mathrm{E}\{Y \mid \mathrm{do}(X=1)\} - \mathrm{E}\{Y \mid \mathrm{do}(X=0)\}
+\end{align*}
 $$
 ---
 
@@ -311,9 +316,9 @@ attributions of negative experiences. ”
 
 # Old method 
 
-This approach has been discontinued, but still appears in papers.
+This approach has been discontinued, but still appears in older papers.
 
-Baron and Kenny recommended running the three linear regressions and testing
+Baron and Kenny recommended running three linear regressions and testing
 
 1. whether $\mathscr{H}_0: \alpha=0$
 2. whether $\mathscr{H}_0: \tau=0$ (total effect)
@@ -323,7 +328,7 @@ The average conditional mediation effect (ACME) in the linear mediation model is
 
 ---
 
-# Problems with Baron--Kenny approach
+# Problems with Baron–Kenny approach
 
 - We conduct three tests, so this inflates the Type I error.
 - The total effect can be zero because $\alpha\gamma = - \beta$, even if there is mediation.
@@ -341,6 +346,8 @@ $$
 The coefficient and variance estimates can be extracted from the output of the regression model.
 
 
+In large sample, $S \stackrel{\cdot}{\sim}\mathsf{No}(0,1)$, but this approximation may be poor in small samples.
+
 
 ???
 
@@ -348,58 +355,104 @@ Without interaction/accounting for confounders, $\alpha\gamma = \tau - \beta$ an
 
 ---
 
-# Null distribution for the test
+# Other test statistics
 
-In large sample, $S \stackrel{\cdot}{\sim}\mathsf{No}(0,1)$, but this approximation is poor in small samples.
+Sobel's test is not the only test. Alternatives are discussed in 
 
-A popular way to estimate the _p_-value and the confidence interval is through the nonparametric **bootstrap** with the percentile method, popularized by @Preacher.Hayes:2004
+> MacKinnon, D. P., Lockwood, C. M., Hoffman, J. M., West, S. G., & Sheets, V. (2002). A comparison of methods to test mediation and other intervening variable effects. Psychological Methods, 7(1), 83–104. https://doi.org/10.1037/1082-989X.7.1.83
 
-Repeat $B$ times, say $B=10\ 000$
-1. sample $n$ tuples tuples $(Y_i, X_i, M_i)$ from the database **with replacement** to obtain a new sample.
+---
+
+# Alternative 
+
+An alternative to estimate _p_-value and the confidence interval is through the nonparametric **bootstrap** with the percentile method, popularized by Preacher and Hayes (2004)
+
+Nonparametric bootstrap: repeat $B$ times, say $B=10\ 000$
+1. sample $n$ (same as original number of observations) tuples $(Y_i, X_i, M_i)$ from the database **with replacement** to obtain a new sample.
 2. recalculate estimates $\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}$ for each bootstrap dataset
 
 
 ---
-# Boostrap _p_-values and confidence intervals
-.pull-left[
-.box-inv-4[Confidence interval]
+# Boostrap confidence intervals
 
-Percentile-based method: for a equitailed $1-\alpha$ interval and the collection
-$$\{\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}\}_{b=1}^B,$$
-compute the $\alpha/2$ and $1-\alpha/2$ empirical quantiles.
+**Percentile-based method**: for a equitailed $1-\alpha$ interval
+
+1. Run the nonparametric bootstrap and obtain estimates $\widehat{\alpha}^{(b)}$ and $\widehat{\gamma}^{(b)}$ from the $b$th bootstrap sample.
+
+2. Compute the $\alpha/2$ and $1-\alpha/2$ empirical quantiles of 
+$$\{\widehat{\alpha}^{(b)}\widehat{\gamma}^{(b)}\}_{b=1}^B.$$
+---
 
 
-]
-.pull-right[
-.box-inv-4[Two-sided _p_-value]
+# Boostrap two-sided _p_-value
 
 Compute the sample proportion of bootstrap statistics that are larger/smaller than zero.
 
-Order bootstrap statistics $S^{(1)} \leq \cdots \leq S^{(B)}$ and find $M$ ($1 \leq M \leq B$) such that
-If $S^{(M)} < 0 \leq S^{(M+1)}$ for $1 \leq M \leq B$. The $p$-value is then
+1. Order bootstrap statistics $S^{(1)} \leq \cdots \leq S^{(B)}$ and let $S^{(0)} = -\infty$, $S^{(M+1)} = \infty$.
+2. Find $M$ ( $0 \leq M \leq B$ ) such that $S^{(M)} < 0 \leq S^{(M+1)}$ (if it exists)
+3. The $p$-value is
 
-$$p = 2\min\{M/B, 1-M/B\}$$
-
-and zero if all values lie on either side of $0$.
-
-]
+$$p = 2\min\{M/B, 1-M/B\}.$$
 
 
 ???
 Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (basic, studentized, bias corrected and accelerated
 
+
+---
+# Model assumptions
+
+Same assumptions as analysis of variance and linear models
+
+- Linearity of the mean model
+   - residual plots, fitted values $\widehat{y}$ against $m$ and $x$
+- Independent/uncorrelated errors
+   - no confounding, lack of serial correlation (e.g., cross-panels)
+- Equal variance of errors in each model (homoskedasticity)
+- Large samples
+
 ---
 
-# Defaults of linear SEM
+# Causal assumptions
+
+Conclusions about mediation are valid only when causal assumptions hold.
+
+Assuming that $X$ is randomized, we need
+
+- Lack of interaction between $X$ and $M$
+  - can be added to model, then use NID definition
+- Causal direction: $M \to Y$ — $M$ is an antecedent cause
+  - $M$ must be measured before $Y$
+- Reliability of $M$ (no measurement error)
+- No confounding between $X$ and $M$
+  - can be included, but not mediators/colliders + correct form
+- effect constant over individuals/levels
+
+---
+
+# Sensitivity analysis
+
+The no-unmeasured confounders assumption should be challenged.
+
+One way to assess the robustness of the conclusions to this is to consider correlation between errors, as (e.g., [Bullock, Green and Ha, 2010](https://doi.org/10.1037/a0018933))
+$$\mathsf{E}(\widehat{\gamma})= \gamma + \mathsf{Cov}(\varepsilon_M, \varepsilon_Y)/\mathsf{Va}(\varepsilon_M)$$ 
+
+- We vary $\rho=\mathsf{Cor}(\varepsilon_M, \varepsilon_Y)$ to assess the sensitivity of our conclusions to confounding.
+- The `medsens` function in the **R** package `mediation` implements the diagnostic of [Imai, Keele and Yamamoto (2010)](https://doi.org/10.1214/10-STS321) for the linear mediation model.
+
+
+---
+
+# Defaults of linear mediation models
 
 .pull-left-wide[
 
 - Definitions contingent on model 
    - (even if causal quantities have a meaning regardless of estimation method)
-- Linearity assumption not generalizable.
-   - effect constant over individuals/levels
+- It is possible to weaken assumptions (at the expense of more complicated models)
+- Most papers do not consider confounders, or even check for assumptions
+- Generalizations to interactions, multiple mediators, etc., requires care
 
-Additional untestable assumption of uncorrelated disturbances (no unmeasured confounders).
 ]
 .pull-right-narrow[
 ![](img/12/spherical_cow.png)
@@ -408,33 +461,275 @@ Additional untestable assumption of uncorrelated disturbances (no unmeasured con
 
 ---
 
-# Assumptions of causal mediation
-
-Need assumptions to hold (and correct model!) to derive causal statements
-
-- Potential confounding can be accounted for with explanatories.
-- Careful with variables included in models (colliders)! 
- - *as-if* randomization assumption
- 
-- Generalizations to interactions, multiple mediators, etc. requires careful acknowledgement of confounding.
-
-
 # Key references
 
+.small[
+
+- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-4514.51.6.1173), *Journal of Personality and Social Psychology*
 - Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
 - Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
 - Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
-- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-4514.51.6.1173), *Journal of Personality and Social Psychology*
-
-Limitations:
-
 - Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
 - Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
-
-<!--
-- Zhao, Lynch and Chen (2010), [Reconsidering Baron and Kenny: Myths and
-Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Consumer Research*
+- Preacher, K. J., and Hayes, A. F. (2004). [SPSS and SAS procedures for estimating indirect effects in simple mediation models](https://doi.org/10.3758/BF03206553). Behavior Research Methods, Instruments & Computers. 
 - [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
+]
 
--->
 ---
+
+
+layout: false
+name: linear-mediation
+class: center middle section-title section-title-6
+
+# Moderation
+
+---
+
+layout: true
+class: title title-6
+
+---
+
+
+# Moderator
+
+A **moderator** $W$ modifies the direction or strength of the effect of an explanatory variable $X$ on a response $Y$ (interaction term).
+
+
+
+```{tikz}
+#| echo: false
+#| cache: false
+#| label: fig-dag-moderation
+#| fig-cap: "Directed acyclic graph of moderation"
+#| fig-align: 'center'
+#| fig-ext: "png"
+#| fig-dpi: 300
+#| fig-width: 8
+#| fig-height: 6
+#| out-width: '50%'
+\usetikzlibrary{positioning}
+\begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]
+\node [draw,circle] (X) at (-2,0) {$X$};
+\node [draw,circle] (Y) at (2,0) {$Y$};
+\node [draw,circle] (W) at (0,1) {$W$};
+\draw [-latex] (X) edge (Y);
+\draw [-latex] (W) edge (0,0);
+\end{tikzpicture}
+```
+
+---
+
+# Mediators in a linear regression model
+
+In a regression model, we simply include an **interaction** term to the model between $W$ and $X$.
+
+For example, if $X$ is categorical with $K$ levels and $W$ is binary or continuous, imposing sum-to-zero constraints for $\alpha_1, \ldots, \alpha_K$ and $\beta_1, \ldots, \beta_K$ gives
+$$
+\underset{\text{average response of group $k$ at $w$}}{\mathrm{E}(Y \mid X=k, W=w)} = \underset{\text{intercept of group $k$}}{\alpha_0 +\alpha_k} + \underset{\text{slope of group $k$}}{(\beta_0 + \beta_k)} 
+$$
+
+---
+
+# Testing for the interaction
+
+Test jointly whether coefficients associated to $XW$, $\beta_1 = \cdots = \beta_K$ are zero. 
+
+The mediator $W$ can be continuous or categorical with $M \geq 2$ levels
+
+The $F$ test has 
+
+- $K-1$ (continuous $W$ — are slopes parallel?)
+- $(K-1) \times (M-1)$ (categorical $W$ — are all subgroup averages the same?)
+
+---
+
+# Example
+
+We consider data from [Garcia et al. (2010)](https://doi.org/10.1002/ejsp.644), a study on gender discrimination. Participants were given a fictional file where a women was turned down promotion in favour of male colleague despite her being clearly more experimented and qualified. 
+
+The authors manipulated the decision of the participant, with choices:
+.small[
+
+- not to challenge the decision (no protest), 
+- a request to reconsider based on individual qualities of the applicants (individual)
+- a request to reconsider based on abilities of women (collective). 
+
+]
+The postulated mediator variable is `sexism`, which assesses pervasiveness of gender discrimination.
+
+---
+# Model fit
+
+We fit the linear model with the interaction and display the observed slopes
+
+```{r}
+#| eval: false
+#| echo: true
+data(GSBE10, package = "hecedsm")
+lin_moder <- lm(respeval ~ protest*sexism, 
+               data = GSBE10)
+summary(lin_moder) # coefficients
+car::Anova(lin_moder, type = 3) # tests
+```
+
+---
+
+# ANOVA table
+
+```{r}
+#| label: tbl-testsmoder
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+#| tbl-cap: "Analysis of variance table for the linear moderation model."
+data(GSBE10, package = "hecedsm")
+lin_moder <- lm(respeval ~ protest*sexism, 
+               data = GSBE10)
+# summary(linmoder) # coefficients
+
+options(knitr.kable.NA = '')
+tab_anova <- broom::tidy(
+    car::Anova(lin_moder, type = 3)[-1,])
+tab_anova$p.value <- papaja::apa_p(tab_anova$p.value)
+knitr::kable(tab_anova,
+  booktabs = TRUE,
+  col.names = c("term", "sum of squares","df","stat","p-value"),
+  digits = c(0,2,1,2,3,3)) |>
+  kableExtra::kable_styling()
+```
+
+---
+
+# Effects
+
+```{r}
+#| eval: true
+#| echo: false
+#| warning: false
+#| message: false
+#| out-width: '65%'
+ggplot(data = GSBE10,
+       aes(x = sexism,
+           y = respeval,
+           color = protest,
+           group = protest)) + 
+  geom_point() +
+  geom_smooth(se = FALSE, method = "lm", formula = y ~ x) +
+  labs(subtitle = "evaluation of response",
+       y = "",
+       color = "experimental condition") +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+.small[
+
+Results won't necessarily be reliable outside of the range of observed values of sexism. 
+
+]
+---
+
+# Comparisons between groups
+
+Simple effects and comparisons must be done for a fixed value of sexism (since the slopes are not parallel).
+
+The default value in `emmeans` is the mean value of `sexism`, but we could query for averages at different values of sexism (below for empirical quartiles).
+
+```{r}
+#| echo: true
+#| eval: false
+quart <-  quantile(GSBE10$sexism, probs = c(0.25, 0.5, 0.75))
+emmeans(lin_moder, 
+        specs = "protest", 
+        by = "sexism",
+        at = list("sexism" = quart))
+```
+
+.small[
+
+With mediating *factors*, give weights to each sub-mean corresponding to the frequency of the mediator rather than equal-weight to each category (`weights = "prop"`).
+
+]
+---
+
+# Sensitivity analysis
+
+The Johnson and Neyman (1936) method looks at the range of values of mediator $W$ for which difference between treatments (binary $X$) is not statistically significant.
+
+.tiny[
+
+> Johnson, P. O., & Fay, L. C. (1950). The Johnson-Neyman technique, its theory and application. Psychometrika, 15(4), 349–367. doi:10.1007/bf02288864 
+
+]
+
+```{r}
+#| eval: false
+#| echo: true
+lin_moder2 <- lm(
+  respeval ~ protest*sexism, 
+  data = GSBE10 |> 
+  # We dichotomize the manipulation, pooling protests together
+  dplyr::mutate(protest = as.integer(protest != "no protest")))
+# Test for equality of slopes/intercept for two protest groups
+anova(lin_moder, lin_moder2)
+# p-value of 0.18: fail to reject individual = collective.
+```
+
+
+---
+# Syntax for plot
+
+```{r}
+#| eval: false
+#| echo: true
+jn <- interactions::johnson_neyman(
+  model = lin_moder2, # linear model
+  pred = protest, # binary experimental factor
+  modx = sexism, # moderator
+  control.fdr = TRUE, # control for false discovery rate
+  mod.range = range(GSBE10$sexism)) # range of values for sexism
+jn$plot
+
+```
+
+
+---
+
+layout: false
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-cap: "Johnson−Neyman plot for difference between protest and no protest as a function of sexism."
+#| label: fig-jn
+#| out-width: '70%'
+# Fit model with interaction (binary)
+lin_moder2 <- lm(
+  respeval ~ protest*sexism, 
+  data = GSBE10 |> 
+  dplyr::mutate(protest = as.integer(protest != "no protest")))
+# anova(lin_moder, lin_moder2)
+jn <- interactions::johnson_neyman(
+  model = lin_moder2, # linear model
+  pred = protest, # binary experimental factor
+  modx = sexism, # moderator
+  control.fdr = TRUE, # control for false discovery rate
+  mod.range = range(GSBE10$sexism)) # range of values for sexism
+jn$plot
+```
+
+---
+
+layout: true
+class: title title-6
+
+---
+
+# Model assumptions and extensions
+
+Interactions are not limited to experimental factors: we can also have interactions with confounders, explanatories, mediators, etc.
+
+- Linearity assumption implies model is correctly specified. Need this to hold for inference to be approximately valid.
+- The case where interactions between $XW \to M$ and/or $MW \to Y$ in a mediation analysis is called ``moderated mediation''.

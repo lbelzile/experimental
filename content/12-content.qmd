@@ -38,7 +38,7 @@ source(here::here("R", "slide-things.R"))
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/12-slides")
-# slide_tabs(slide_details, "/slides/11-slides.html")
+# slide_tabs(slide_details, "/slides/12-slides.html")
 ```
 
 ```{r show-slides-xaringan, echo=FALSE}
@@ -47,6 +47,13 @@ xaringanExtra::embed_xaringan(
   ratio = "16:9"
 )
 ```
+
+
+## Code
+
+- [R script](/content/MATH80667A-12-content.R)
+- [SPSS script](/content/MATH80667A-12-content.sps)
+
 
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.

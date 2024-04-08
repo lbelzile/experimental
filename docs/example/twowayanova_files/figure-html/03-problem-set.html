@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods - Problem set 11</title>
+<title>Experimental Designs and Statistical Methods - Problem set 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -142,7 +176,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/01-problem-set.html">Problem sets</a></li><li class="breadcrumb-item"><a href="../evaluations/11-problem-set.html">Problem set 11</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/01-problem-set.html">Problem sets</a></li><li class="breadcrumb-item"><a href="../evaluations/03-problem-set.html">Problem set 3</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -212,7 +246,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../evaluations/03-problem-set.html" class="sidebar-item-text sidebar-link">
+  <a href="../evaluations/03-problem-set.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem set 3</span></a>
   </div>
 </li>
@@ -260,7 +294,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../evaluations/11-problem-set.html" class="sidebar-item-text sidebar-link active">
+  <a href="../evaluations/11-problem-set.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem set 11</span></a>
   </div>
 </li>
@@ -278,89 +312,86 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#task-1" id="toc-task-1" class="nav-link active" data-scroll-target="#task-1">Task 1</a></li>
-  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a></li>
-  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3">Task 3</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Problem set 11</h1>
+<h1 class="title display-7">Problem set 3</h1>
 
 </header>
 
-<p>Complete this task in teams of up to three students.</p>
 <p><strong>Submission information</strong>: please submit on ZoneCours</p>
 <ul>
 <li>a PDF report</li>
 <li>your code</li>
 </ul>
-<section id="task-1" class="level2">
-<h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
-<p>Read <span class="citation" data-cites="Rohrer:2022">Rohrer et al. (<a href="#ref-Rohrer:2022" role="doc-biblioref">2022</a>)</span> and write a summary.</p>
-</section>
-<section id="task-2" class="level2">
-<h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
-<p><span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span> postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from <code>LRMM23_S5b</code> in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/LRMM23_S5b.sav">SPSS database via this link</a>.</p>
+<p>following the naming convention <code>PS3-studentid.extension</code> where <code>studentid</code> is replaced with your student ID and <code>extension</code> is the file extension (e.g., <code>.pdf</code>, <code>.R</code>, <code>.Rmd</code>, <code>.sps</code>)</p>
+<p><strong>Instructions</strong>: We consider data collected for Study 3 of <span class="citation" data-cites="Grossman:2014">Grossmann &amp; Kross (<a href="#ref-Grossman:2014" role="doc-biblioref">2014</a>)</span> (click the links to download <a href="https://journals.sagepub.com/stoken/default+domain/vIg5KBmaiJHKTXfUpXZK/full">the paper</a> and the <a href="https://journals.sagepub.com/doi/suppl/10.1177/0956797614535400/suppl_file/DS_10.11770956797614535400_SupplementalMethodandResults.pdf">Supplementary material</a>). You can access these data directly from <strong>R</strong> from the <code>hecedsm</code> package or <a href="../files/data/SPSS/GK14_S3.sav">download the SPSS data</a>.</p>
+<p>If you work with <strong>R</strong>, check out this <a href="../evaluations/03-problem-set.R">helper code</a></p>
+<p>Have a quick look at the paper and fit the one way analysis of variance model for the consideration of other’s perspective (<code>persp</code>) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years).</p>
 <ol type="1">
-<li>Fit the linear mediation model using the PROCESS macro or the <code>mediate</code> function from the <code>mediation</code> <strong>R</strong> package</li>
+<li>Report the <span class="math inline">\(F\)</span>-test statistic, the null distribution and the <span class="math inline">\(p\)</span>-value.</li>
+<li>Provide a conclusion in the context of the study.</li>
+<li>There are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?</li>
 </ol>
-<ul>
-<li>use the nonparametric bootstrap with the percentile method to get confidence intervals</li>
-<li>compare the coefficients with those of Figure 1 from the paper.</li>
-</ul>
-<ol start="2" type="1">
-<li>Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.</li>
-<li>The paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by <span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span>.</li>
+<p>We next look at model assumptions</p>
+<ol start="4" type="1">
+<li>Is the independence assumption plausible in the context?</li>
+<li>How many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition and forego normality checks?</li>
+<li>Produce a normal quantile-quantile plot and comment on the distribution of the residuals (check out <a href="https://stats.stackexchange.com/q/101290">this response on CrossValidated</a> first).</li>
+<li>Check the equality of variance assumption using a suitable test statistic and report the results.</li>
+<li>Use Welch’s one-way analysis of variance model (<code>oneway.test()</code> in <strong>R</strong>) and compare the output and the conclusion with that of the usual <span class="math inline">\(F\)</span>-test.</li>
 </ol>
-</section>
-<section id="task-3" class="level2">
-<h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
-<p>Study 4 of <span class="citation" data-cites="Risen/Gilovich:2008">Risen &amp; Gilovich (<a href="#ref-Risen/Gilovich:2008" role="doc-biblioref">2008</a>)</span> (pp.&nbsp;297-299) perform a mediation analysis with a two-way ANOVA using the <span class="citation" data-cites="Baron/Kenny:1986">Baron &amp; Kenny (<a href="#ref-Baron/Kenny:1986" role="doc-biblioref">1986</a>)</span> methodology.</p>
-<ol type="1">
-<li>Read the description and comment on the following aspects:
-<ol type="a">
-<li>use of the Baron and Kenny original testing procedure<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li>the plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.</li>
-</ol></li>
-<li>Using the summary statistics and coefficients estimates reported, recompute Sobel’s statistic<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and the <em>p</em>-value and compare them with the values reported.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
-<li>List the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?</li>
-<li>Can the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?</li>
-</ol>
+<p><strong>Hints and R snippets</strong></p>
+<p>To subset the data, you can use the following commands:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(GK14_S3, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span> GK14_S3 <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(persp), <span class="co"># exclude missing values</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      age <span class="sc">==</span> <span class="st">"young"</span>) <span class="co"># only young adults</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following code filters out missing values for <code>persp</code> for young adults and shows the counts for each condition:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>GK14_S3 <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(persp),      </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                age <span class="sc">==</span> <span class="st">"young"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">count =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  condition       count
+  &lt;fct&gt;           &lt;int&gt;
+1 self immersed       3
+2 self distanced      3
+3 other immersed      3
+4 other distanced     2</code></pre>
+</div>
+</div>
+<p>and finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># grammar of graphics</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> db,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condition,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> persp,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> condition)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-problem-set_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
-
-</section>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-Baron/Kenny:1986" class="csl-entry" role="listitem">
-Baron, R., &amp; Kenny, D. (1986). The moderator-mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. <em>Journal of Personality and Social Psychology</em>, <em>51</em>(6), 1173–1182. <a href="https://doi.org/10.1037/0022-3514.51.6.1173">https://doi.org/10.1037/0022-3514.51.6.1173</a>
+<div id="ref-Grossman:2014" class="csl-entry" role="listitem">
+Grossmann, I., &amp; Kross, E. (2014). Exploring <span>S</span>olomon’s paradox: Self-distancing eliminates the self-other asymmetry in wise reasoning about close relationships in younger and older adults. <em>Psychological Science</em>, <em>25</em>(8), 1571–1580. <a href="https://doi.org/10.1177/0956797614535400">https://doi.org/10.1177/0956797614535400</a>
 </div>
-<div id="ref-Liu.Rim.Min.Min:2023" class="csl-entry" role="listitem">
-Liu, P. J., Rim, S., Min, L., &amp; Min, K. E. (2023). The surprise of reaching out: Appreciated more than we think. <em>Journal of Personality and Social Psychology</em>, <em>124</em>(4), 754–771. <a href="https://doi.org/10.1037/pspi0000402">https://doi.org/10.1037/pspi0000402</a>
-</div>
-<div id="ref-Risen/Gilovich:2008" class="csl-entry" role="listitem">
-Risen, J. L., &amp; Gilovich, T. (2008). Why people are reluctant to tempt fate. <em>Journal of Personality and Social Psychology</em>, <em>95</em>(2), 293–307. <a href="https://doi.org/10.1037/0022-3514.95.2.293">https://doi.org/10.1037/0022-3514.95.2.293</a>
-</div>
-<div id="ref-Rohrer:2022" class="csl-entry" role="listitem">
-Rohrer, J. M., Hünermund, P., Arslan, R. C., &amp; Elson, M. (2022). That’s a lot to process! Pitfalls of popular path models. <em>Advances in Methods and Practices in Psychological Science</em>, <em>5</em>(2). <a href="https://doi.org/10.1177/25152459221095827">https://doi.org/10.1177/25152459221095827</a>
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>The latter is said to be suboptimal; explain why in your words.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Some authors may be excluding the <span class="math inline">\(\mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})\)</span> term from the equation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>In <strong>R</strong>, the <span class="math inline">\(p\)</span>-value for the two-sided test can be computed via <code>2*pnorm(abs(stat), lower.tail = FALSE)</code>, where <code>stat</code> is Sobel’s statistic.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

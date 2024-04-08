@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods - Problem set 11</title>
+<title>Experimental Designs and Statistical Methods - Mediation and moderation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -79,13 +79,12 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/fitvids-2.1.1/fitvids.min.js"></script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -115,7 +114,7 @@ div.csl-indent {
  <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../evaluations/index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
  <span class="menu-text">Evaluations</span></a>
   </li>  
   <li class="nav-item">
@@ -137,154 +136,20 @@ div.csl-indent {
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/01-problem-set.html">Problem sets</a></li><li class="breadcrumb-item"><a href="../evaluations/11-problem-set.html">Problem set 11</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Evaluations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/weekly-check-in.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Weekly check-in</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/paper-review.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Paper review</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/final-exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Final examination</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Problem sets</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/01-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 1</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/02-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/03-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 3</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/04-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 4</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/05-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/06-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 6</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/07-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 7</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/08-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 8</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/09-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 9</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/10-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 10</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/11-problem-set.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Problem set 11</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../evaluations/12-problem-set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem set 12</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#task-1" id="toc-task-1" class="nav-link active" data-scroll-target="#task-1">Task 1</a></li>
-  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a></li>
-  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3">Task 3</a></li>
+  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
     </div>
@@ -292,75 +157,84 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Problem set 11</h1>
+<h1 class="title display-7">Mediation and moderation</h1>
 
 </header>
 
-<p>Complete this task in teams of up to three students.</p>
-<p><strong>Submission information</strong>: please submit on ZoneCours</p>
+<section id="content" class="level2">
+<h2 class="anchored" data-anchor-id="content">Content</h2>
 <ul>
-<li>a PDF report</li>
-<li>your code</li>
+<li>Linear mediation model</li>
+<li>Moderation</li>
 </ul>
-<section id="task-1" class="level2">
-<h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
-<p>Read <span class="citation" data-cites="Rohrer:2022">Rohrer et al. (<a href="#ref-Rohrer:2022" role="doc-biblioref">2022</a>)</span> and write a summary.</p>
 </section>
-<section id="task-2" class="level2">
-<h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
-<p><span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span> postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from <code>LRMM23_S5b</code> in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/LRMM23_S5b.sav">SPSS database via this link</a>.</p>
-<ol type="1">
-<li>Fit the linear mediation model using the PROCESS macro or the <code>mediate</code> function from the <code>mediation</code> <strong>R</strong> package</li>
-</ol>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>At the end of the session, students should be capable of</p>
 <ul>
-<li>use the nonparametric bootstrap with the percentile method to get confidence intervals</li>
-<li>compare the coefficients with those of Figure 1 from the paper.</li>
+<li>Using the linear mediation model</li>
+<li>discussing limitations of the linear mediation model</li>
+<li>testing for moderating variables (interactions)</li>
 </ul>
-<ol start="2" type="1">
-<li>Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.</li>
-<li>The paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by <span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span>.</li>
-</ol>
 </section>
-<section id="task-3" class="level2">
-<h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
-<p>Study 4 of <span class="citation" data-cites="Risen/Gilovich:2008">Risen &amp; Gilovich (<a href="#ref-Risen/Gilovich:2008" role="doc-biblioref">2008</a>)</span> (pp.&nbsp;297-299) perform a mediation analysis with a two-way ANOVA using the <span class="citation" data-cites="Baron/Kenny:1986">Baron &amp; Kenny (<a href="#ref-Baron/Kenny:1986" role="doc-biblioref">1986</a>)</span> methodology.</p>
-<ol type="1">
-<li>Read the description and comment on the following aspects:
-<ol type="a">
-<li>use of the Baron and Kenny original testing procedure<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li>the plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.</li>
-</ol></li>
-<li>Using the summary statistics and coefficients estimates reported, recompute Sobel’s statistic<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and the <em>p</em>-value and compare them with the values reported.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
-<li>List the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?</li>
-<li>Can the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?</li>
-</ol>
+<section id="readings" class="level2">
+<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<ul>
+<li><p><i class="fas fa-book"></i>Chapter 11 of the <a href="https://lbelzile.github.io/math80667a/11-causal-inference.html">course notes</a></p></li>
+<li><p><i class="fas fa-book"></i>Chapter 11 of <span class="citation" data-cites="Vanderweele:2015">VanderWeele (<a href="#ref-Vanderweele:2015" role="doc-biblioref">2015</a>)</span></p></li>
+<li><p>Linear mediation model <span class="citation" data-cites="Baron/Kenny:1986">(<a href="#ref-Baron/Kenny:1986" role="doc-biblioref">Baron &amp; Kenny, 1986</a>)</span></p></li>
+<li><p>Limitations of the linear mediation model approach <span class="citation" data-cites="Bullock.Green.Ha:2010">(<a href="#ref-Bullock.Green.Ha:2010" role="doc-biblioref">Bullock et al., 2010</a>)</span></p></li>
+<li><p>Model assumptions <span class="citation" data-cites="Pearl:2014">Imai et al. (<a href="#ref-Imai:2010" role="doc-biblioref">2010</a>)</span></p></li>
+</ul>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<p>
+<a class="btn btn-primary" target="_blank" href="../slides/12-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-primary" target="_blank" href="../slides/12-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
+</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shareagain" style="min-width:300px;margin:1em auto;" data-exeternal="1">
+<iframe src="../slides/12-slides.html" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen=""></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Fun fact</strong>: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.</p>
+</div>
+</div>
 
 
 
 </section>
-
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-Baron/Kenny:1986" class="csl-entry" role="listitem">
 Baron, R., &amp; Kenny, D. (1986). The moderator-mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. <em>Journal of Personality and Social Psychology</em>, <em>51</em>(6), 1173–1182. <a href="https://doi.org/10.1037/0022-3514.51.6.1173">https://doi.org/10.1037/0022-3514.51.6.1173</a>
 </div>
-<div id="ref-Liu.Rim.Min.Min:2023" class="csl-entry" role="listitem">
-Liu, P. J., Rim, S., Min, L., &amp; Min, K. E. (2023). The surprise of reaching out: Appreciated more than we think. <em>Journal of Personality and Social Psychology</em>, <em>124</em>(4), 754–771. <a href="https://doi.org/10.1037/pspi0000402">https://doi.org/10.1037/pspi0000402</a>
+<div id="ref-Bullock.Green.Ha:2010" class="csl-entry" role="listitem">
+Bullock, J. G., Green, D. P., &amp; Ha, S. E. (2010). Yes, but what’s the mechanism? (Don’t expect an easy answer). <em>Journal of Personality and Social Psychology</em>, <em>98</em>(4), 550–558. <a href="https://doi.org/10.1037/a0018933">https://doi.org/10.1037/a0018933</a>
 </div>
-<div id="ref-Risen/Gilovich:2008" class="csl-entry" role="listitem">
-Risen, J. L., &amp; Gilovich, T. (2008). Why people are reluctant to tempt fate. <em>Journal of Personality and Social Psychology</em>, <em>95</em>(2), 293–307. <a href="https://doi.org/10.1037/0022-3514.95.2.293">https://doi.org/10.1037/0022-3514.95.2.293</a>
+<div id="ref-Imai:2010" class="csl-entry" role="listitem">
+Imai, K., Keele, L., &amp; Tingley, D. (2010). A general approach to causal mediation analysis. <em>Psychological Methods</em>, <em>15</em>(4), 309–334. <a href="https://doi.org/10.1037/a0020761">https://doi.org/10.1037/a0020761</a>
 </div>
-<div id="ref-Rohrer:2022" class="csl-entry" role="listitem">
-Rohrer, J. M., Hünermund, P., Arslan, R. C., &amp; Elson, M. (2022). That’s a lot to process! Pitfalls of popular path models. <em>Advances in Methods and Practices in Psychological Science</em>, <em>5</em>(2). <a href="https://doi.org/10.1177/25152459221095827">https://doi.org/10.1177/25152459221095827</a>
+<div id="ref-Pearl:2014" class="csl-entry" role="listitem">
+Pearl, J. (2014). Interpretation and identification of causal mediation. <em>Psychological Methods</em>, <em>19</em>(4), 459–481. <a href="https://doi.org/10.1037/a0036434">https://doi.org/10.1037/a0036434</a>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>The latter is said to be suboptimal; explain why in your words.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Some authors may be excluding the <span class="math inline">\(\mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})\)</span> term from the equation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>In <strong>R</strong>, the <span class="math inline">\(p\)</span>-value for the two-sided test can be computed via <code>2*pnorm(abs(stat), lower.tail = FALSE)</code>, where <code>stat</code> is Sobel’s statistic.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+<div id="ref-Vanderweele:2015" class="csl-entry" role="listitem">
+VanderWeele, T. (2015). <em>Explanation in causal inference: Methods for mediation and interaction</em>. Oxford University Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

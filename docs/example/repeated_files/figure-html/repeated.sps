@@ -1,0 +1,18 @@
+GET FILE='C:\Users\11187439\Desktop\SPSS\HOSM22_E3.sav'. 
+DATASET NAME HOSM22E3 WINDOW=FRONT. 
+SORT CASES BY id ratingtype. 
+CASESTOVARS 
+  /ID=id 
+  /INDEX=ratingtype 
+  /GROUPBY=VARIABLE.
+RENAME VARIABLES (=experience prediction)
+
+GLM experience prediction BY waiting 
+  /WSFACTOR=rating 2
+  /PLOT=PROFILE(waiting*rating) TYPE=LINE ERRORBAR=CI MEANREFERENCE=YES YAXIS=AUTO 
+  /EMMEANS=TABLES(rating) 
+  /EMMEANS=TABLES(waiting) 
+  /PRINT=DESCRIPTIVE ETASQ HOMOGENEITY 
+  /CRITERIA=ALPHA(.05) 
+  /WSDESIGN=rating 
+  /DESIGN=waiting.

@@ -515,7 +515,14 @@
     "href": "content/12-content.html#slides",
     "title": "Mediation and moderation",
     "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides"
+  },
+  {
+    "objectID": "content/12-content.html#code",
+    "href": "content/12-content.html#code",
+    "title": "Mediation and moderation",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
     "objectID": "content/10-content.html",
@@ -1180,7 +1187,7 @@
     "href": "evaluations/11-problem-set.html#task-3",
     "title": "Problem set 11",
     "section": "Task 3",
-    "text": "Task 3\nStudy 4 of Risen & Gilovich (2008) (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the Baron & Kenny (1986) methodology.\n\nRead the description and comment on the following aspects:\n\nuse of the Baron and Kenny original testing procedure1\nthe plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.\n\nUsing the summary statistics and coefficients estimates reported, recompute Sobel’s statistic2 and the p-value and compare them with the values reported. .3\nList the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?\nCan the authors successfully claim mediation considering the study uses an experimental design and randomly allocates condition? Why or why not?"
+    "text": "Task 3\nStudy 4 of Risen & Gilovich (2008) (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the Baron & Kenny (1986) methodology.\n\nRead the description and comment on the following aspects:\n\nuse of the Baron and Kenny original testing procedure1\nthe plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.\n\nUsing the summary statistics and coefficients estimates reported, recompute Sobel’s statistic2 and the p-value and compare them with the values reported.3\nList the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?\nCan the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?"
   },
   {
     "objectID": "evaluations/11-problem-set.html#footnotes",

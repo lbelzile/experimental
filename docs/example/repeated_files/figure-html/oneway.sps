@@ -1,0 +1,17 @@
+
+GET 
+  FILE='C:\Users\11187439\Documents\SPSS\BSJ92.sav'. 
+DATASET NAME BSJ92 WINDOW=FRONT.
+
+UNIANOVA pretest1 BY group
+ /DESIGN group.
+ 
+UNIANOVA posttest1 BY group
+ /DESIGN group
+ /EMMEANS=TABLES(group)
+ /CONTRAST(group)=SPECIAL(-2 1 1)
+ /CONTRAST(group)=SPECIAL(0 1 -1)
+ /PRINT HOMOGENEITY.
+
+
+DATASET CLOSE BSJ92.
