@@ -1,0 +1,210 @@
+---
+title: "Count data and nonparametric tests"
+author: "Léo Belzile"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    chakra: "libs/remark-latest.min.js"
+    css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
+    seal: false
+    anchor_sections: false
+    nature:
+      highlightStyle: github
+      highlightLines: false
+      countIncrementalSlides: false
+      ratio: "16:9"
+      navigation:
+        scroll: false
+editor_options: 
+  chunk_output_type: console
+---
+
+class: center middle main-title section-title-1
+
+# Count data and nonparametric tests
+
+.class-info[
+
+**Session 13**
+
+.light[MATH 80667A: Experimental Design and Statistical Methods <br>
+HEC Montréal
+]
+
+]
+
+---
+name: outline
+class: title title-inv-1
+
+# Outline
+--
+
+
+.box-2.large.sp-after-half[Count data]
+
+ 
+
+.box-3.large.sp-after-half[Nonparametric tests]
+
+
+---
+
+layout: false
+name: counts
+class: center middle section-title section-title-2
+
+# Count data
+
+---
+
+layout: true
+class: title title-2
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      fig.retina = 3, 
+                      fig.align = "center",
+                      fig.width = 10,
+                      fig.asp = 0.618,
+                      out.width = "70%")
+```
+```{r packages-data, echo = FALSE, include=FALSE}
+library(knitr)
+options(knitr.kable.NA = '')
+options(tidyverse.quiet = TRUE)
+options(knitr.table.format = "html")
+library(tidyverse)
+library(patchwork)
+library(ggdag)
+```
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
+```
+
+# Tabular data
+
+Aggregating binary responses gives .color-2[counts].
+
+.small[
+
+[Duke and Amir (2023)](https://doi.org/10.1287/mksc.2022.1364) investigated the impact  on sales of presenting customers with 
+
+- a sequential choice (first decide whether or not to buy, then pick quantity) versus
+- an integrated decision (choose not to buy, or one of different quantities).
+
+]
+
+```{r}
+#| eval: true
+#| echo: false
+data(DA23_E2, package = "hecedsm")
+tabs <- with(DA23_E2, table(purchased, format))
+rownames(tabs) <- c("did not purchase", "purchased")
+knitr::kable(tabs)
+```
+
+**Question**: does the selling format increases sales?
+
+---
+
+# Pearson chi-square test
+
+Consider an $I \times J$ **contingency table**.
+
+Denote the observed counts in the $(i,j)$th cell $O_{ij}$.
+
+We compare these with expected counts under the null hypothesis, $E_{ij}$'s.
+
+The test statistic is 
+$$P =\sum_{i=1}^I \sum_{j=1}^J \frac{(O_{ij}-E_{ij})^2}{E_{ij}}.$$
+
+.small[
+
+Yate's correction for  $2 \times 2$ tables involves subtract $1/2$ from the differences $O_{ij}-E_{ij}$.
+
+]
+---
+
+# Null distribution for Pearson chi-square test
+In large samples (if $\min_{i,j} E_{ij} > 5$), the statistic behaves like a chi-square distribution with $\nu$ degrees of freedom, denoted $P \stackrel{\cdot}{\sim} \chi^2_\nu$.
+
+The degrees of freedom are the difference between the number of cells $N=IJ$ and the number of parameters under $\mathscr{H}_0$.
+
+```{r}
+#| eval: true
+#| echo: true
+data(DA23_E2, package = "hecedsm")
+tabs <- with(DA23_E2, table(purchased, format))
+# Chi-square test for independence
+chisq <- chisq.test(tabs)
+```
+
+The test statistic is `r round(broom::tidy(chisq.test(tabs, correct = FALSE))$statistic, 2)`, with 1 degree of freedom. The $p$-value is less than $10^{-4}$, so strong evidence that there are differences between selling format.
+
+---
+
+# Effect size 
+
+Effect sizes for contingency tables range from 0 (no association) to 1 (perfect association).
+
+Measures include 
+
+- $\phi$ for $2 \times 2$ contingency tables, $\phi = \sqrt{P/n}$.
+- Cramér's $V$, which is a renormalization, $V = \phi/ \sqrt{\min(I-1, J-1)}$.
+
+Small sample (bias) corrections are often employed.
+
+We obtain $V=`r rcompanion::cramerV(x = tabs, bias.correct = TRUE)`$, a moderate effect size.
+
+---
+
+# Poisson regression models
+
+We cannot use ANOVA for counts, but analysis of deviance is similar.
+
+Assume $Y_{ij} \sim \mathsf{Poisson}(\mu_{ij})$ where the mean is nonnegative.
+
+For example, the main-effect model  is of the form
+
+\begin{align*}
+\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
+\end{align*}
+with sum-to-zero constraints for $\alpha_i$, $\beta_j$.
+---
+
+# Remarks
+
+- Compared to linear regression and ANOVA, the variance of the cells is solely determined by the mean counts
+- Each dimension of the contingency table (row, column, depth) is a factor
+- Each cell is a response value. There are as many observations, $N=IJ$, as cells.
+
+
+---
+
+# Tests for Poisson regression models
+
+
+We compare two nested models here in a two-way model: 
+
+- the .color-2[**satured model**], which has as many averages as cells (model with an interaction) and for which the averages are given by observed counts, $\widehat{\mu}_{ij} = o_{ij}$.
+- the .color-2[**main effect model**], with both main effects for factors
+
+There are $(I-1) \times (J-1)$ interaction terms (degrees of freedom) for the test.
+
+We can use a likelihood ratio test or score test (aka Pearson $\chi^2$ statistic!)
+
+---
+
+# Example
+
+
+We consider a  study from Bertrand and Mullainathan (2004), who study racial discrimination in hiring based on the consonance of applicants names.
+
+The authors created curriculum vitae for four applicants and randomly allocated them a name, either one typical of a white person or a black person. 
+
+The response is a count indicating how many of the applicants were called back (out of two black and two white) depending on their origin.
