@@ -4,23 +4,24 @@ title: "Nonparametric tests and count data"
 
 ## Content
 
-- Nonparametric tests
 - Models and tests for count data
+- Nonparametric tests
 
 
 ## Learning objectives
 
 At the end of the session, students should be capable of
 
-- Understand the benefits and drawback of rank-based tests
-- Perform tests for count data (Fisher exact test, $\chi^2$ tests) and correctly report their output with effect sizes
+- Understanding the benefits and drawback of rank-based tests.
+- Performing tests for count data and correctly report their output.
 
 
 
 ## Readings
 
 - {{< fa book >}}[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019
--  [Chapter 12](https://lbelzile.github.io/math80667a/12-nonparametric.html) of the course notes
+-  Chapters [12](https://lbelzile.github.io/math80667a/12-nonparametric.html) and [13](https://lbelzile.github.io/math80667a/13-count.html) of the course notes
+
 
 
 ## Slides
@@ -32,12 +33,10 @@ At the end of the session, students should be capable of
 source(here::here("R", "slide-things.R"))
 ```
 
-<!--
-
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/13-slides")
-# slide_tabs(slide_details, "/slides/11-slides.html")
 ```
+
 
 ```{r show-slides-xaringan, echo=FALSE}
 xaringanExtra::embed_xaringan(
@@ -46,7 +45,10 @@ xaringanExtra::embed_xaringan(
 )
 ```
 
--->
+
+## Code
+
+- [R script](/content/MATH80667A-13-content.R)
 
 
 :::{.callout-tip}
