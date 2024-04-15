@@ -370,8 +370,8 @@ Ranks are not affected by outliers (more robust)
 
 For paired data with differences $D_i=Y_{i2}-Y_{i1}$, we wish to know if the average rank is zero.
 
-- rank absolute values $R_i = \mathrm{rank}(|D_i|)$
 - remove zero differences
+- rank absolute values $R_i = \mathrm{rank}(|D_i|)$ of the remaining observations
 - compute the test statistic $T = \sum_{i=1}^n \mathrm{sign}(D_i)R_i$
 - compare with reference under hypothesis of symmetry of the distribution.
 
@@ -454,16 +454,23 @@ The response is the number of road safety violations conducted on the segment.
  
 ---
 
-# Quade test
+# Friedman and Quade tests
 
-We use Quade's test, which ranks responses of each participants $1, 2, 3, 4$, followed by a two-way ANOVA with `id` as blocking factor.
+We use Quade's test, which ranks responses of each participants $1, 2, 3, 4$ separately.
+
 
 ```{r}
 data(BRLS21_T3, package = "hecedsm")
+coin::friedman_test(nviolation ~ task | id,
+                 data = BRLS21_T3)
 coin::quade_test(nviolation ~ task | id,
                  data = BRLS21_T3)
 ```
 
+.tiny[
+
+The repeated measures must use a similar response (e.g., Likert scale).
+]
 ---
 
 # Pairwise differences

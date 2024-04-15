@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods - Linear mediation model</title>
+<title>Experimental Designs and Statistical Methods – Linear mediation model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,7 +100,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -108,17 +115,44 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -126,9 +160,9 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Experimental Designs and Statistical Methods</span>
     </a>
@@ -140,55 +174,55 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus.html" rel="" target="">
- <span class="menu-text">Syllabus</span></a>
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule.html" rel="" target="">
- <span class="menu-text">Schedule</span></a>
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html" rel="" target="">
- <span class="menu-text">Content</span></a>
+    <a class="nav-link" href="../content/index.html"> 
+<span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
- <span class="menu-text">Evaluations</span></a>
+    <a class="nav-link" href="../evaluations/index.html"> 
+<span class="menu-text">Evaluations</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../example/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Examples</span></a>
+    <a class="nav-link active" href="../example/index.html" aria-current="page"> 
+<span class="menu-text">Examples</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://lbelzile.github.io/math80667a" rel="" target="">
- <span class="menu-text">Notes</span></a>
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a"> 
+<span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://lbelzile.github.io/hecedsm" rel="" target=""><i class="bi bi-box" role="img" aria-label="Datasets">
+    <a class="nav-link" href="https://lbelzile.github.io/hecedsm"> <i class="bi bi-box" role="img" aria-label="Datasets">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/linearmediation.html">Linear causal mediation</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/linearmediation.html">Linear causal mediation</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -317,7 +351,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -331,7 +365,7 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/linearmediation.html">Linear causal mediation</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Linear mediation model</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
@@ -346,28 +380,34 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <p>Download the <a href="../example/linearmediation.R"><strong>R</strong> code</a> and the <a href="../example/linearmediation.sps">SPSS code</a>.</p>
 <p>Consider linear regression models in a system where some response variable <span class="math inline">\(Y\)</span> depends on a mediator, <span class="math inline">\(M\)</span>, and an experimental factor, <span class="math inline">\(X \in \{0,1\}\)</span>. The mediator model has expected value <span id="eq-mediator-model"><span class="math display">\[
 M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{\boldsymbol{Z}_M^\top\boldsymbol{\delta}} + \underset{\text{error term}}{\varepsilon_M}
 \tag{1}\]</span></span> while we have for the response <span id="eq-response-model"><span class="math display">\[
 Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M + \underset{\text{control variates}}{\boldsymbol{Z}_Y^\top\boldsymbol{\omega}}  + \underset{\text{error term}}{\varepsilon_Y}, \label{eq-responsemodel}
-\tag{2}\]</span></span> The explanatory variables <span class="math inline">\(\boldsymbol{Z}_M\)</span> for the mediator model of <a href="#eq-mediator-model">Equation&nbsp;1</a>, and <span class="math inline">\(\boldsymbol{Z}_Y\)</span> for the response model <a href="#eq-response-model">Equation&nbsp;2</a> are control covariates to account for confounders, and need not be the same in both models (but could be). In a randomized experiment where we manipulate the mediator, there is no need to include any control in <a href="#eq-mediator-model">Equation&nbsp;1</a> lest we mistakenly create correlation by including colliders. The error terms <span class="math inline">\(\varepsilon_Y\)</span> and <span class="math inline">\(\varepsilon_M\)</span> are assumed to be independent mean-zero with common variance.</p>
+\tag{2}\]</span></span> The explanatory variables <span class="math inline">\(\boldsymbol{Z}_M\)</span> for the mediator model of <a href="#eq-mediator-model" class="quarto-xref">Equation&nbsp;1</a>, and <span class="math inline">\(\boldsymbol{Z}_Y\)</span> for the response model <a href="#eq-response-model" class="quarto-xref">Equation&nbsp;2</a> are control covariates to account for confounders, and need not be the same in both models (but could be). In a randomized experiment where we manipulate the mediator, there is no need to include any control in <a href="#eq-mediator-model" class="quarto-xref">Equation&nbsp;1</a> lest we mistakenly create correlation by including colliders. The error terms <span class="math inline">\(\varepsilon_Y\)</span> and <span class="math inline">\(\varepsilon_M\)</span> are assumed to be independent mean-zero with common variance.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-dag-linearmed" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="linearmediation_files/figure-html/fig-dag-linearmed-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Directed acyclic graph for the linear mediation model.</figcaption>
+<div id="fig-dag-linearmed" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dag-linearmed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="linearmediation_files/figure-html/fig-dag-linearmed-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dag-linearmed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Directed acyclic graph for the linear mediation model.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In the linear mediation model defined above and represented in <a href="#fig-dag-linearmed">Figure&nbsp;1</a>, the total effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta + \alpha \gamma\)</span> (the average treatment effect, looking at the difference in response between treatment <span class="math inline">\(X=1\)</span> and control <span class="math inline">\(X=0\)</span>).</p>
+<p>In the linear mediation model defined above and represented in <a href="#fig-dag-linearmed" class="quarto-xref">Figure&nbsp;1</a>, the total effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta + \alpha \gamma\)</span> (the average treatment effect, looking at the difference in response between treatment <span class="math inline">\(X=1\)</span> and control <span class="math inline">\(X=0\)</span>).</p>
 <p>The average causal mediation effect (ACME) or natural indirect effect for treatment at level <span class="math inline">\(x\)</span> is obtained by changing the potential outcome <span class="math inline">\(Y_i\{X, M_i(X)\}\)</span> of individual <span class="math inline">\(i\)</span> for the mediator <span class="math inline">\(M_i(X)\)</span> while fixing the treatment level <span class="math inline">\(X\)</span> to <span class="math inline">\(x\)</span>, so <span class="math display">\[\begin{align*}
 \mathsf{ACME} = \mathsf{E}[Y_i\{x, M_i(1)\} - Y_i\{x, M_i(0)\}].
-\end{align*}\]</span> In the linear mediation model, we get subtituting the value of <span class="math inline">\(M\)</span> from equation <a href="#eq-mediator-model">Equation&nbsp;1</a> into <a href="#eq-response-model">Equation&nbsp;2</a> <span class="math display">\[\begin{align*}
+\end{align*}\]</span> In the linear mediation model, we get subtituting the value of <span class="math inline">\(M\)</span> from equation <a href="#eq-mediator-model" class="quarto-xref">Equation&nbsp;1</a> into <a href="#eq-response-model" class="quarto-xref">Equation&nbsp;2</a> <span class="math display">\[\begin{align*}
 \mathsf{E}[Y_i\{x, M_i(1)\}]  &amp;= \underset{\text{intercept}}{c_Y + \gamma c_M} + \underset{\text{ACME}}{\alpha\gamma} + \beta x+ \underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}\\
 \mathsf{E}[Y_i\{x, M_i(0)\}]  &amp;=\underset{\text{intercept}}{c_Y + \gamma c_M} + \beta x +\underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}\\
 \end{align*}
@@ -382,7 +422,7 @@ Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} 
 <p>The response variable <span class="math inline">\(Y\)</span> is <code>bonding</code>, the experimental factor <code>condition</code> and <code>threat</code>, the average ALES subscale about the perception of the physical task, is the postulated mediator.</p>
 <p>We use the <code>mediation</code> package <span class="citation" data-cites="mediationR">(<a href="#ref-mediationR" role="doc-biblioref">Tingley et al., 2014</a>)</span> for the model; the package certainly isn’t needed (nor the PROCESS macros) to run the bootstrap, which we could obtain with a single for-loop. However, it has utilities, notably for checking model assumptions, that are convenient.</p>
 <div class="cell">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mediation, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BJF14_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
@@ -393,16 +433,23 @@ Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} 
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> BJF14_S1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="tbl-panel" class="tbl-parent quarto-layout-panel anchored">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;1: Coefficients of the regression models</p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-panel" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-panel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Coefficients of the regression models
+</figcaption>
+<div aria-describedby="tbl-panel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-responsecoefs" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-responsecoefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) outcome model
+</figcaption>
+<div aria-describedby="tbl-responsecoefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-responsecoefs" data-ref-parent="tbl-panel" class="anchored">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>(a) outcome model</caption>
+<div>
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
@@ -443,16 +490,24 @@ Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} 
 </tr>
 </tbody>
 </table>
-</div>
 
 
 </div>
 </div>
-<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+</div>
+</figure>
+</div>
+</div>
+<div class="cell quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-mediationcoefs" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-mediationcoefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) mediation model
+</figcaption>
+<div aria-describedby="tbl-mediationcoefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-mediationcoefs" data-ref-parent="tbl-panel" class="anchored">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>(b) mediation model</caption>
+<div>
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
@@ -488,22 +543,27 @@ Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} 
 </tr>
 </tbody>
 </table>
-</div>
 
 
 </div>
 </div>
 </div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</figure>
 </div>
 <p>Both of the <code>threat</code> and <code>bonding</code> measures are average of Likert scales. We include the controls in the regression for the response to account for potential confounding between threat level and shared bonding: it is unclear whether the authors used the control covariates or whether these make sense.</p>
 <div class="cell">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">80667</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> 1000L, <span class="co"># number of bootstrap simulations</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
@@ -514,10 +574,15 @@ Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} 
 </details>
 </div>
 <div class="cell">
+<div id="tbl-mediation" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mediation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Linear causal mediation analysis: parameter estimates, nonparametric bootstrap 95% confidence intervals and p-values with the percentile method based on 5000 bootstrap samples.
+</figcaption>
+<div aria-describedby="tbl-mediation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-mediation" class="anchored">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>Table&nbsp;2: Linear causal mediation analysis: parameter estimates, nonparametric bootstrap 95% confidence intervals and p-values with the percentile method based on 5000 bootstrap samples.</caption>
+<div>
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -558,25 +623,32 @@ Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} 
 </tr>
 </tbody>
 </table>
-</div>
 
 
 </div>
 </div>
-<p>The first line of <a href="#tbl-mediation">Table&nbsp;2</a> gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect (ADE) and the third the total effect (ADE + ACME). The point estimate for ACME, <span class="math inline">\(\alpha\gamma\)</span> is <span class="math inline">\(\widehat{\alpha}\widehat{\gamma} = -0.07\)</span>. The bootstrap sampling distribution is skewed to the left, a fact reflected by the asymmetric percentile confidence interval.</p>
+</div>
+</figure>
+</div>
+</div>
+<p>The first line of <a href="#tbl-mediation" class="quarto-xref">Table&nbsp;2</a> gives the average reverse natural indirect effect or average conditional mediated effect (labelled ACME), the second the average direct effect (ADE) and the third the total effect (ADE + ACME). The point estimate for ACME, <span class="math inline">\(\alpha\gamma\)</span> is <span class="math inline">\(\widehat{\alpha}\widehat{\gamma} = -0.07\)</span>. The bootstrap sampling distribution is skewed to the left, a fact reflected by the asymmetric percentile confidence interval.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-densityACME" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="linearmediation_files/figure-html/fig-densityACME-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect <span class="math inline">\(\alpha\gamma\)</span>, with point estimate and 95% percentile bootstrap confidence intervals (vertical dashed lines).</figcaption>
+<div id="fig-densityACME" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-densityACME-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="linearmediation_files/figure-html/fig-densityACME-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-densityACME-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Density of the 1000 nonparametric bootstrap estimates of the average conditional mediation effect <span class="math inline">\(\alpha\gamma\)</span>, with point estimate and 95% percentile bootstrap confidence intervals (vertical dashed lines).
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The sequential ignorability assumption cannot be verified, but we can see what impacts violations would have on the coefficients: the expected value of the coefficient <span class="math inline">\(\widehat{\gamma}\)</span> is <span class="math inline">\(\gamma + \mathsf{Cov}(\varepsilon_M, \varepsilon_Y)/\mathsf{Va}(\varepsilon_M)\)</span>; the second component is a bias term that does not vanish, even when the sample size grows <span class="citation" data-cites="Bullock.Green.Ha:2010">(<a href="#ref-Bullock.Green.Ha:2010" role="doc-biblioref">Bullock et al., 2010</a>)</span>. The variance of the error of the mediation and response models can be estimated, and we can vary the correlation coefficient, <span class="math inline">\(\rho=\mathsf{Cor}(\varepsilon_M, \varepsilon_Y)\)</span>, to assess the sensitivity of our conclusions if there was confounding.</p>
 <div class="cell">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>linmed_sensitivity <span class="ot">&lt;-</span> <span class="fu">medsens</span>(linmed)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linmed_sensitivity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -600,12 +672,16 @@ Rho at which ACME = 0: -0.1
 R^2_M*R^2_Y* at which ACME = 0: 0.01
 R^2_M~R^2_Y~ at which ACME = 0: 0.0072 </code></pre>
 </div>
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linmed_sensitivity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="linearmediation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="linearmediation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The <code>medsens</code> function implements the sensitivity diagnostic presented in Section 5.1 of <span class="citation" data-cites="Imai.Keele.Yamamoto:2010">Imai et al. (<a href="#ref-Imai.Keele.Yamamoto:2010" role="doc-biblioref">2010</a>)</span> for the linear mediation model. By default, the correlation <span class="math inline">\(\rho\)</span> varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from <span class="math inline">\(0.2\)</span> to <span class="math inline">\(-0.288\)</span> for correlations in the range <span class="math inline">\(\rho \in [-0.4, 0.4]\)</span>. In this example, nearly any correlation in this range would lead to “insignificant results”, mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artefact of correlation and vanish.</p>
@@ -617,7 +693,7 @@ R^2_M~R^2_Y~ at which ACME = 0: 0.0072 </code></pre>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-Bastian:2014" class="csl-entry" role="listitem">
 Bastian, B., Jetten, J., &amp; Ferris, L. J. (2014). Pain as social glue: Shared pain increases cooperation. <em>Psychological Science</em>, <em>25</em>(11), 2079–2085. <a href="https://doi.org/10.1177/0956797614545886">https://doi.org/10.1177/0956797614545886</a>
 </div>
@@ -666,18 +742,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -709,7 +774,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -761,10 +848,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/edsm\.rbind\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -774,8 +878,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -787,7 +900,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -831,6 +1067,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -856,6 +1093,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1043,7 +1306,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
 <span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
 <span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> 1000L, <span class="co"># number of bootstrap simulations</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
 <span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
 <span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
 <span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
@@ -1064,7 +1327,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>linmed <span class="ot">&lt;-</span> <span class="fu">mediate</span>(</span>
 <span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.m =</span> MsX,</span>
 <span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">model.y =</span> YsXM,</span>
-<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> 1000L, <span class="co"># number of bootstrap simulations</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span>L, <span class="co"># number of bootstrap simulations</span></span>
 <span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot =</span> <span class="cn">TRUE</span>, <span class="co"># use bootstrap</span></span>
 <span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">boot.ci.type =</span> <span class="st">"perc"</span>, <span class="co"># type of bootstrap: percentile</span></span>
 <span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediator =</span> <span class="st">"threat"</span>, <span class="co"># name of mediator</span></span>
@@ -1125,18 +1388,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a>According to the documentation of the <span class="in">`medsens`</span> function (<span class="in">`?medsens`</span>), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, <span class="in">`R^2_M~R^2_Y`</span>) or residual (starred, <span class="in">`R^2_M*R^2_Y*`</span>) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. </span>
 <span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a></span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-left">
+<p>Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></p>
+</div>
   </div>
 </footer>
+
 
 
 
