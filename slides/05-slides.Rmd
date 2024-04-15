@@ -36,6 +36,7 @@ options(tidyverse.quiet = TRUE)
 options(knitr.table.format = "html")
 library(tidyverse)
 library(patchwork)
+library(emmeans)
 ```
 ```{r xaringanExtra, echo=FALSE}
 xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipboard","broadcast"))
@@ -423,6 +424,73 @@ gridExtra::grid.arrange(tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, nrow = 2
 Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
 
 ---
+ 
+# Example 1 : loans versus credit
+
+.pull-left[
+[Sharma, Tully, and Cryder (2021)](https://doi.org/10.1177/0022243721993816) Supplementary study 5 consists of a $2 \times 2$ between-subject ANOVA with factors
+
+- debt type (`debttype`), either "loan" or "credit"
+- `purchase` type, either `discretionary` or not (`need`)
+
+]
+
+.pull-right[
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+#| fig-width: 5
+#| fig-height: 4
+options(contrasts = c("contr.sum","contr.poly"))
+data(STC21_SS5, package = "hecedsm")
+mod1 <- lm(likelihood ~ purchase * debttype, data = STC21_SS5)
+emm <- emmeans::emmeans(
+  mod1,
+  specs = c("debttype","purchase"))
+emmeans::emmip(emm,  debttype ~ purchase, CIs = TRUE) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+No evidence of interaction
+
+]
+---
+
+
+# Example 2 - psychological distance
+
+.pull-left[
+[Maglio and Polman (2014)](https://doi.org/10.1177/0956797614530571) Study 1 uses a $4 \times 2$ between-subject ANOVA with factors
+
+- subway `station`, one of Spadina, St. George, Bloor-Yonge and Sherbourne
+- `direction` of travel, either east or west
+
+]
+
+.pull-right[
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+#| fig-width: 5
+#| fig-height: 4
+data(MP14_S1, package = "hecedsm")
+mod2 <- lm(distance ~ station * direction, data = MP14_S1)
+emm <- emmeans::emmeans(
+  mod2,
+  specs = c("station","direction"))
+emmeans::emmip(emm,   direction ~ station, CIs = TRUE) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+Clear evidence of interaction (symmetry?)
+
+]
+
+---
 
 layout: false
 name: formulation
@@ -441,7 +509,9 @@ class: title title-5
 An analysis of variance model is simply a **linear regression** with categorical covariate(s).
 
 - Typically, the parametrization is chosen so that parameters reflect differences to the global mean (sum-to-zero parametrization).
-- The full model includes interactions between all factors (so we consider all combinations of factors, as subcategories).
+- The full model includes interactions between all combinations of factors
+   - one average for each subcategory
+   - one-way ANOVA!
 
 ---
 
@@ -512,6 +582,9 @@ $$\mu = \frac{\sum_{i=1}^{n_a} \sum_{j=1}^{n_b} \mu_{ij}}{n_an_b}$$
 
 .color-5[**Main effects**] are comparisons between row or column averages
 
+Obtained by *marginalization*, i.e., averaging over the other dimension.
+
+Main effects are not of interest if there is an interaction.
 
 ```{r, echo=FALSE, warning=FALSE, cache = TRUE}
 path_figure <- list("img/05/icons8-smiling-100.png",
@@ -762,5 +835,155 @@ The model always includes an overall average $\mu$.  There are
 |*column mean* | $\mu_{.1}$ | $\mathsf{X}$ | $\mu$ |
  
 Terms with $\mathsf{X}$ are fully determined by row/column/total averages
+
+]
+
+---
+
+# Example 1
+
+The interaction plot suggested that the two-way interaction wasn't significant. The $F$ test confirms this.
+
+There is a significant main effect of both `purchase` and `debttype`.
+
+```{r}
+#| eval: true
+#| echo: false
+broom::tidy(car::Anova(mod1, type = 2)) |>
+  kable(col.names = c("term","SS","df","F stat","p-value"),
+               digits = c(0,1,0,2,3))
+```
+
+
+---
+
+# Example 2
+
+There is a significant interaction between `station` and `direction`, so follow-up by looking at simple effects or contrasts.
+
+The tests for the main effects are not of interest! Disregard other entries of the ANOVA table
+
+```{r}
+#| eval: true
+#| echo: false
+broom::tidy(car::Anova(mod2, type = 2)) |>
+  kable(col.names = c("term","SS","df","F stat","p-value"),
+               digits = c(0,1,0,2,3))
+```
+
+---
+
+# Main effects for Example 1
+
+We consider differences between debt type labels. 
+
+Participants are more likely to consider the offer if it is branded as `credit` than loan. The difference is roughly 0.5 (on a Likert scale from 1 to 9).
+.small[
+
+```{r}
+#| eval: true
+#| echo: false
+emmeans::emmeans(mod1, 
+                 specs = "debttype",
+                 contr = "pairwise")
+```
+]
+---
+
+# Toronto subway station
+
+```{r}
+#| eval: true
+#| echo: false
+#| label: fig-Torontosubway
+#| fig-cap: "Simplified depiction of the Toronto metro stations used in the experiment, based on work by Craftwerker on Wikipedia, distributed under CC-BY-SA 4.0."
+knitr::include_graphics("img/05/Toronto_subway.png")
+```
+
+---
+# Reparametrization for Example 2
+
+Set `stdist` as $-2$, $-1$, $+1$, $+2$ to indicate station distance, with negative signs indicating stations in opposite direction of travel
+
+```{r}
+#| eval: true
+#| echo: false
+MP14_S1 <- MP14_S1 |>
+  dplyr::mutate(stdist = factor(dplyr::case_when(
+    station == "Spadina" & direction == "east" ~ "-2",
+    station == "Spadina" & direction == "west" ~ "+2",
+    station == "St. George" & direction == "east" ~ "-1",
+    station == "St. George" & direction == "west" ~ "+1",
+    station == "Bloor-Yonge" & direction == "east" ~ "+1",
+    station == "Bloor-Yonge" & direction == "west" ~ "-1",
+    station == "Sherbourne" & direction == "east" ~ "+2",
+    station == "Sherbourne" & direction == "west" ~ "-2"))) |>
+  dplyr::mutate(stdist = relevel(stdist, ref = "-2"))
+
+```
+
+The ANOVA table for the reparametrized models shows no evidence against the null of symmetry (interaction).
+
+```{r}
+#| eval: true
+#| echo: false
+# Set up parametrization to sum-to-zero for categorical factors
+options(contrasts = c("contr.sum", "contr.poly"))
+mod3 <- lm(distance ~ stdist * direction, data = MP14_S1) 
+broom::tidy(car::Anova(mod3, type = 2)) |>
+  kable(col.names = c("term","SS","df","F stat","p-value"),
+               digits = c(0,1,0,2,3))
+```
+
+---
+# Interaction plot for reformated data
+
+```{r}
+#| eval: true
+#| echo: false
+emm <- emmeans(mod3, specs = c("stdist","direction"))
+emmip(emm, formula = ~ stdist | direction,
+               CIs = TRUE) +
+  labs(x = "station distance") + 
+  theme_classic()
+```
+---
+
+# Custom contrasts for Example 2
+
+We are interested in testing the perception of distance, by looking at $\mathscr{H}_0: \mu_{-1} = \mu_{+1}, \mu_{-2} = \mu_{+2}$.
+
+
+```{r}
+#| eval: false
+#| echo: true
+mod3 <- lm(distance ~ stdist * direction, data = MP14_S1) 
+(emm <- emmeans(mod3, specs = "stdist"))
+  # order is -2, -1, 1, 2
+contrasts <- emm |> contrast(
+  list("two dist" = c(-1, 0, 0, 1), 
+        "one dist" = c(0, -1, 1, 0)))
+contrasts # print pairwise contrasts
+test(contrasts, joint = TRUE)
+```
+---
+
+# Estimated marginal means and contrasts
+
+.small[
+Strong evidence ofifferences in perceived distance depending on direction of travel.
+
+
+```{r}
+#| eval: true
+#| echo: false
+mod3 <- lm(distance ~ stdist * direction, data = MP14_S1) 
+(emm <- emmeans(mod3, specs = "stdist"))
+  # order is -2, -1, 1, 2
+contrasts <- emm |>  contrast(list("two dist" = c(-1, 0, 0, 1), 
+                "one dist" = c(0, -1, 1, 0)))
+contrasts
+test(contrasts, joint = TRUE)
+```
 
 ]

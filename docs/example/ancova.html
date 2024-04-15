@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.25">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods – Analysis of covariance</title>
+<title>Experimental Designs and Statistical Methods - Analysis of covariance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,7 +58,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -100,13 +99,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -115,42 +108,14 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -158,9 +123,9 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Experimental Designs and Statistical Methods</span>
     </a>
@@ -172,55 +137,55 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../syllabus.html"> 
-<span class="menu-text">Syllabus</span></a>
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule.html"> 
-<span class="menu-text">Schedule</span></a>
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html"> 
-<span class="menu-text">Content</span></a>
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../evaluations/index.html"> 
-<span class="menu-text">Evaluations</span></a>
+    <a class="nav-link" href="../evaluations/index.html" rel="" target="">
+ <span class="menu-text">Evaluations</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../example/index.html" aria-current="page"> 
-<span class="menu-text">Examples</span></a>
+    <a class="nav-link active" href="../example/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Examples</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://lbelzile.github.io/math80667a"> 
-<span class="menu-text">Notes</span></a>
+    <a class="nav-link" href="https://lbelzile.github.io/math80667a" rel="" target="">
+ <span class="menu-text">Notes</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://lbelzile.github.io/hecedsm"> <i class="bi bi-box" role="img" aria-label="Datasets">
+    <a class="nav-link" href="https://lbelzile.github.io/hecedsm" rel="" target=""><i class="bi bi-box" role="img" aria-label="Datasets">
 </i> 
-<span class="menu-text"></span></a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/ancova.html">Analysis of covariance</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/ancova.html">Analysis of covariance</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
@@ -349,7 +314,7 @@ window.Quarto = {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -375,7 +340,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../example/introduction.html">Examples</a></li><li class="breadcrumb-item"><a href="../example/ancova.html">Analysis of covariance</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Analysis of covariance</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
@@ -390,9 +355,7 @@ window.Quarto = {
   </div>
   
 
-
 </header>
-
 
 <!--
 # Videos
@@ -427,7 +390,7 @@ You can also watch the playlist (and skip around to different sections) here:
 </blockquote>
 <p>In this demonstration, we simply focus on <code>posttest2</code> as a function of <code>pretest2</code> and the <code>group</code> indicator.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Load packages and set global options</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
@@ -449,7 +412,7 @@ $ posttest1 &lt;int&gt; 5, 9, 5, 8, 10, 9, 12, 5, 8, 7, 12, 4, 4, 8, 6, 9, 3, 5,
 $ posttest2 &lt;int&gt; 4, 5, 3, 5, 9, 8, 5, 5, 7, 7, 4, 4, 6, 8, 4, 10, 3, 5, 5, 3,…
 $ posttest3 &lt;int&gt; 41, 41, 43, 46, 46, 45, 45, 32, 33, 39, 42, 45, 39, 44, 36, …</code></pre>
 </div>
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check whether data are balanced</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>group, <span class="at">data =</span> BSJ92)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -464,7 +427,7 @@ $ posttest3 &lt;int&gt; 41, 41, 43, 46, 46, 45, 45, 32, 33, 39, 42, 45, 39, 44, 
 <h2 class="anchored" data-anchor-id="graphical-representation">Graphical representation</h2>
 <p>This section can be omitted upon first reading. We may want to compare the scores prior and post-intervention graphically to get a sense of the improvement for groups and check that the randomization was properly conducted. One way to look at the data is a longitudinal measurement (time ordered). Thus, we could draw line segments joining <code>pre</code> and <code>post</code> scores, with a different color for each group. To do this, we first combine the data in long format (one response per line) by making <code>prior</code> and <code>posts</code> into a single column labelled <code>score</code>. Then, we map the two categorical variables (<code>time</code> and <code>group</code>) to the <span class="math inline">\(x\)</span>-axis and colour, respectively. Since the scores are discrete, points are jittered horizontally and vertically to avoid overlay.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>reading_long <span class="ot">&lt;-</span> BSJ92 <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep only useful columns</span></span>
@@ -509,11 +472,7 @@ $ posttest3 &lt;int&gt; 41, 41, 43, 46, 46, 45, 45, 32, 33, 39, 42, 45, 39, 44, 
 <span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ancova_files/figure-html/scatterplot-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="ancova_files/figure-html/scatterplot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The graphical display indicates a larger increase for the teaching aloud (<code>TA</code>) group, but the two other (directed reading and the hybrid method) seem on par. There is no discernible difference in strength between experimental condition prior to the experiment, but not the two strong grades in the DR group (who do worse).</p>
@@ -523,7 +482,7 @@ $ posttest3 &lt;int&gt; 41, 41, 43, 46, 46, 45, 45, 32, 33, 39, 42, 45, 39, 44, 
 <p>In this simple setting, we begin by comparing the drop in variability (leading to an increase in power) for the analysis of covariance. We thus set up a linear model with</p>
 <p><span class="math display">\[\mathsf{E}(\texttt{post}_{ir}) = \mu + \alpha_i + \beta \texttt{pre}_{ir}\]</span> with <span class="math inline">\(\mathsf{Va}(\texttt{post}_{ir})=\sigma^2\)</span>. We can view this model as a one-way analysis of variance for <span class="math inline">\(\texttt{post}_{ir} - \beta \texttt{pre}_{ir}\)</span>, with the difference that we estimate the coefficient <span class="math inline">\(\beta\)</span> based on the data. Under our usual sum-to-zero constraint, <span class="math inline">\(\mu\)</span> is the global average of the residual scores and <span class="math inline">\(\alpha_i\)</span> is the difference between group <span class="math inline">\(i\)</span> and this average, with the constraint <span class="math inline">\(\alpha_{\texttt{DR}} + \alpha_{\texttt{DRTA}} + \alpha_{\texttt{TA}}=0\)</span>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model the scores on tests 2</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2, <span class="at">data =</span> BSJ92)</span>
@@ -539,6 +498,7 @@ $ posttest3 &lt;int&gt; 41, 41, 43, 46, 46, 45, 45, 32, 33, 39, 42, 45, 39, 44, 
 <p>As in many instances, there is strong correlation between prior and posterior scores and this helps reduce the leftover unexplained variability, thus increasing power to detect differences between groups. One may also consider directly modelling the improvement in scores, by setting <code>posttest2 - pretest2</code> as response variable. While the interpretation would be clear, it is clear we can do better by including <code>pretest2</code> as a covariate instead: the model for the difference in score is equivalent to fixing the parameter <span class="math inline">\(\beta\)</span> associated to <code>pretest2</code> to 1.</p>
 <div class="cell">
 <div class="cell-output-display">
+
 <table class="kable_wrapper">
 <caption>
 Analysis of variance tables for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right).
@@ -612,6 +572,7 @@ Analysis of variance tables for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right
 </td>
 </tr>
 </tbody>
+
 </table>
 </div>
 </div>
@@ -623,7 +584,7 @@ Analysis of variance tables for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right
 <p>Because we assume the difference post vs pre is the same on average (the slope between groups is the same), the difference between group is the same regardless of the score on the pre-test. The marginal means are computed at the average of <code>prettest2</code> score.</p>
 <p>The two contrasts we have correspond to <span class="math inline">\(\mathscr{H}_{01}: \mu_{\texttt{DR}} = (\mu_{\texttt{DRTA}} + \mu_{\texttt{TA}})/2\)</span> and <span class="math inline">\(\mathscr{H}_{02}: \mu_{\texttt{DRTA}} = \mu_{\texttt{TA}}\)</span>, which can be rewritten with weights <span class="math inline">\((2, -1, -1)\)</span> and <span class="math inline">\((0, 1, -1)\)</span> assuming that the groups are ordered in alphabetical order. The two contrasts are orthogonal so use disjoint bits of information thanks to the conditioning. We proceed below with Holm–Bonferroni’s correction (for two tests), but we would normally need to filter out these <span class="math inline">\(p\)</span>-values and perform the corrections with all other tests. The effect size for the contrasts are obtained by dividing by the estimated variance for the residuals, <span class="math inline">\(\widehat{\sigma}^2\)</span>, which is smaller for the ANCOVA model since part of the variability is explained by students strength, captured through <code>prettest2</code>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Marginal means and planned contrasts</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Groups are in alphabetical order, so (DR, DRTA, TA)</span></span>
@@ -643,6 +604,7 @@ Analysis of variance tables for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right
 </div>
 <div class="cell">
 <div class="cell-output-display">
+
 <table class="kable_wrapper">
 <caption>
 Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <code>c1</code> denotes the comparison between control (<code>DR</code>) and average of other methods, while <code>c2</code> is the pairwise comparison between <code>DRTA</code> and <code>TA</code>.
@@ -715,6 +677,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 </td>
 </tr>
 </tbody>
+
 </table>
 </div>
 </div>
@@ -736,7 +699,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <h3 class="anchored" data-anchor-id="linearity-effect-of-covariate-is-linear">Linearity: effect of covariate is linear</h3>
 <p>The analysis of covariance is a linear model, so inherits a set of assumptions. The first assumption is linearity, which means here that the relationship between pre- and post-tests is well described by a straight line. We can produce a scatterplot of the data to check this, but usually one looks at the residuals from the model (the difference between the observation and its estimated average, or fitted value <span class="math inline">\(e_i=\texttt{posttest2}_i - \widehat{\texttt{posttest2}}_i\)</span>. These are uncorrelated with <span class="math inline">\(\texttt{pretest2}_i\)</span>, so the plot should show no pattern (trends, cycles, quadratic trend, etc.)</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork) <span class="co"># combine plots</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> BSJ92, </span>
@@ -762,11 +725,11 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="ancova_files/figure-html/anovamodelslin-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Scatterplot of pre and post intervention tests (left) and scatterplot of ordinary residuals against covariate pre-test2, with LOESS curve (right).</figcaption>
+<figcaption class="figure-caption">Scatterplot of pre and post intervention tests (left) and scatterplot of ordinary residuals against covariate pre-test2, with LOESS curve (right).</figcaption>
 </figure>
 </div>
 </div>
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save for a publication</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave("scatterplot.pdf", plot = g1, width = 5, height = 5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -778,7 +741,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="ancova_files/figure-html/nullabor-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Panels with 20 replicate datasets obtained by permuting residuals. The true data is in position 16.</figcaption>
+<figcaption class="figure-caption">Panels with 20 replicate datasets obtained by permuting residuals. The true data is in position 16.</figcaption>
 </figure>
 </div>
 </div>
@@ -788,7 +751,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <h3 class="anchored" data-anchor-id="linearity-are-the-slopes-the-same">Linearity: are the slopes the same?</h3>
 <p>The second part of the linearity assumption lies in the assumption that the linear trend for pre-test and post-test is the same for each group. If they were different, we would have an interaction (between a categorical and a continuous variable). We can use the <span class="math inline">\(F\)</span> test to compare the model with and without interaction</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group<span class="sc">*</span>pretest2, <span class="at">data =</span> BSJ92)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1, model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -802,7 +765,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <p>If we move away from equal variance, what is the alternative? For one, we could simply estimate a different variance for each level of the experimental factors. For one-way designs, it’s pretty clear how this could be modelled, but there is more choice in complex factorial designs: should we have a different variance per row? or by column? or let each cell have its own variance? The more variance we estimate, the more we need to have observations per cell. Moving away from equal variance has also some consequences: when we talked about effect size, we looked at proportion of variance relative to the variance of the residual (which now depends on the group) or for Cohen’s <span class="math inline">\(d\)</span> at standardized mean difference (which have no analog).</p>
 <p>If we want to check that the variance are equal, we can use Levene’s test. There is a catch: normally, Levene’s test is just a one-way ANOVA where for (sub)group <span class="math inline">\(i\)</span> and replication <span class="math inline">\(r\)</span>, we use as response the absolute value of the centered observations, <span class="math inline">\(|Y_{ir} - \widehat{\mu}_i|\)</span>, as input to the model. With continuous covariates included, an alternative is to instead perform a test but with the detrended values, or use the absolute value of the ordinary residuals <span class="math inline">\(|Y_{ir} - \widehat{Y}_{ir}|\)</span>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(<span class="fu">resid</span>(model1) <span class="sc">~</span> group,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> BSJ92,</span>
@@ -839,7 +802,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 </div>
 <p>Fitting a variance per group and doing a comparison between group mean is oftentimes referred to as Welch’s ANOVA. If we are only interested in the global null, the function <code>oneway.test()</code> does this assuming by default unequal variance. This only returns the <span class="math inline">\(F\)</span> statistic for the global null hypothesis <span class="math inline">\(\mu_{\texttt{DR}} = \mu_{\texttt{DRTA}} = \mu_{\texttt{TA}}\)</span>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lm_detrend <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> pretest2, </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> BSJ92)</span>
@@ -853,7 +816,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <h2 class="anchored" data-anchor-id="models-with-different-variance-per-group">Models with different variance per group</h2>
 <p>If we wanted to do pairwise comparisons or look at custom contrasts, we need rather a more explicit model in which the mean and variance differ by group, using the <code>nlme</code> package. The argument <code>weights</code> is used to specify the variance.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model_samevar <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2,</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> BSJ92)</span>
@@ -865,7 +828,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <p>The syntax <code>nlme::varIdent(form =  ~ 1 | group)</code> specifies that the variance is constant (<code>~ 1</code>) for observations within a group, but changes from one experimental <code>group</code> to the next.</p>
 <p>The first benefit of this approach is that we get another test of equality of variance; this is a likelihood ratio test, where we are using the normality assumption to fit the model and make comparisons. Comparison of two nested models (think Russian dolls) that have the same specification for the mean can be done using the function <code>anova</code>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute likelihood ratio test</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_diffvar, model_samevar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -874,7 +837,7 @@ Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); <cod
 <p>In large samples and under normality, the likelihood ratio statistic follows a <span class="math inline">\(\chi^2_{g-1}\)</span> distribution, where <span class="math inline">\(g\)</span> is the number of groups.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> From the table, we can extract the value of the test statistic (<code>L.Ratio</code>), which is 4.65. We compare this to the null <span class="math inline">\(\chi^2_2\)</span> distribution, giving a tail probability of 0.098; there is weak evidence of heterogeneity.</p>
 <p>The benefit of using this framework is that <code>emmeans</code> will recognize the unequal variance and use them accordingly for computing contrasts. The <span class="math inline">\(t\)</span>-test values for the contrasts have non-integer degrees of freedom, since the null distribution is intractable; however, the Student-<span class="math inline">\(t\)</span> distribution provides a reasonable approximation if we evaluate it at a particular value for the degrees of freedom, a method know as Satterthwaite’s approximation. See this mention in the output of the method.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(model_diffvar, <span class="at">specs =</span> <span class="st">"group"</span>),</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> planned_contrasts,</span>
@@ -897,7 +860,7 @@ Degrees-of-freedom method: satterthwaite </code></pre>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-Baumann:1992" class="csl-entry" role="listitem">
 Baumann, J. F., Seifert-Kessell, N., &amp; Jones, L. A. (1992). Effect of think-aloud instruction on elementary students’ comprehension monitoring abilities. <em>Journal of Reading Behavior</em>, <em>24</em>(2), 143–172. <a href="https://doi.org/10.1080/10862969209547770">https://doi.org/10.1080/10862969209547770</a>
 </div>
@@ -942,7 +905,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -974,29 +948,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -1048,27 +1000,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/edsm\.rbind\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1078,17 +1013,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1100,130 +1026,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -1267,7 +1070,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1293,32 +1095,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1387,16 +1163,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r slides-videos, echo=FALSE, include=FALSE}</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="in">source(here::here("R", "youtube-playlist.R"))</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="in">playlist_id &lt;- "PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY"</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="in">slide_details &lt;- tibble::tribble(</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="in">~title, ~youtube_id,</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="in">"Introduction", "SHhP_TfZGVM",</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="in">"Interaction plots", "I63CNxonlow",</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="in">"Marginal contrast and simple effects", "KLLBNQhD0rE",</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="in">"More contrasts and interactions", "WIoxZZ4pvlE"</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="in">options(knitr.kable.NA = '')</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"youtube-playlist.R"</span>))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>playlist_id <span class="ot">&lt;-</span> <span class="st">"PLUB8VZzxA8IvjcV7Yl-OW_9KI6f_2K5HY"</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>slide_details <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span>title, <span class="sc">~</span>youtube_id,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="st">"Introduction"</span>, <span class="st">"SHhP_TfZGVM"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="st">"Interaction plots"</span>, <span class="st">"I63CNxonlow"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="st">"Marginal contrast and simple effects"</span>, <span class="st">"KLLBNQhD0rE"</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="st">"More contrasts and interactions"</span>, <span class="st">"WIoxZZ4pvlE"</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">''</span>)</span>
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Videos</span></span>
@@ -1423,17 +1199,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>In this demonstration, we simply focus on <span class="in">`posttest2`</span> as a function of <span class="in">`pretest2`</span> and the <span class="in">`group`</span> indicator.</span>
 <span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r loadpackages, eval = TRUE, echo = TRUE}</span></span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="in">## Load packages and set global options</span></span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="in">suppressPackageStartupMessages(library(tidyverse))</span></span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="in">library(emmeans)</span></span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="in">options(contrasts = c("contr.sum", "contr.poly"))</span></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="in">theme_set(theme_classic()) # set theme globally for ggplot</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="in">## Load data</span></span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="in">data(BSJ92, package = "hecedsm")</span></span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="in"># Check the data</span></span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="in">glimpse(BSJ92)</span></span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="in"># Check whether data are balanced</span></span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="in">xtabs(~group, data = BSJ92)</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="do">## Load packages and set global options</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) <span class="co"># set theme globally for ggplot</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Load data</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BSJ92, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the data</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(BSJ92)</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Check whether data are balanced</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>group, <span class="at">data =</span> BSJ92)</span>
 <span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Graphical representation</span></span>
@@ -1441,47 +1217,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>This section can be omitted upon first reading. We may want to compare the scores prior and post-intervention graphically to get a sense of the improvement for groups and check that the randomization was properly conducted. One way to look at the data is a longitudinal measurement (time ordered). Thus, we could draw line segments joining <span class="in">`pre`</span> and <span class="in">`post`</span> scores, with a different color for each group. To do this, we first combine the data in long format (one response per line) by making <span class="in">`prior`</span> and <span class="in">`posts`</span> into a single column labelled <span class="in">`score`</span>. Then, we map the two categorical variables (<span class="in">`time`</span> and <span class="in">`group`</span>) to the $x$-axis and colour, respectively. Since the scores are discrete, points are jittered horizontally and vertically to avoid overlay.  </span>
 <span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r scatterplot, echo = TRUE, eval = TRUE}</span></span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="in">reading_long &lt;- BSJ92 |&gt;</span></span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="in">  # keep only useful columns</span></span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="in">  select(group, posttest2, pretest2) |&gt; </span></span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="in">  # add a new column with id for person</span></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="in">  rowid_to_column("id") |&gt; </span></span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="in">  # rename response</span></span>
-<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="in">  rename(post = posttest2, </span></span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="in">         pre = pretest2) |&gt;</span></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="in">  # pivot data (response in score, columns to labels)</span></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="in">  pivot_longer(cols = c("pre","post"),</span></span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="in">               values_to = "score",</span></span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="in">               names_to = "time") |&gt;</span></span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="in">  # Make new labels to factor</span></span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(time = relevel(factor(time), ref = "pre"))</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>reading_long <span class="ot">&lt;-</span> BSJ92 <span class="sc">|&gt;</span></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep only useful columns</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, posttest2, pretest2) <span class="sc">|&gt;</span> </span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add a new column with id for person</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>(<span class="st">"id"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename response</span></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">post =</span> posttest2, </span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>         <span class="at">pre =</span> pretest2) <span class="sc">|&gt;</span></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pivot data (response in score, columns to labels)</span></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"pre"</span>,<span class="st">"post"</span>),</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"score"</span>,</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"time"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make new labels to factor</span></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(time), <span class="at">ref =</span> <span class="st">"pre"</span>))</span>
 <span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="in"># Spaghetti plot</span></span>
-<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(data = reading_long,</span></span>
-<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a><span class="in">       mapping = aes(x = time,</span></span>
-<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a><span class="in">                     color = group,</span></span>
-<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a><span class="in">                     group = id,</span></span>
-<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="in">                     y = score)) +</span></span>
-<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a><span class="in">  # Add point for observation with small jittering</span></span>
-<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point(size = 0.5,</span></span>
-<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="in">             position = position_jitter(width = 0.02, </span></span>
-<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="in">                                        height = 0.25, </span></span>
-<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a><span class="in">                                        seed = 123)) + </span></span>
-<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a><span class="in">  # The values were selected after trial and error</span></span>
-<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a><span class="in">  # set seed so that ponts and segments are moved by same amount</span></span>
-<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a><span class="in">  # Draw a line between pre and post scores</span></span>
-<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_line(alpha = 0.2,</span></span>
-<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a><span class="in">            position = position_jitter(width = 0.02, </span></span>
-<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a><span class="in">                                       height = 0.25, </span></span>
-<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a><span class="in">                                       seed = 123)) +</span></span>
-<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a><span class="in">  # Add average per group (pre/post) and draw lines</span></span>
-<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a><span class="in">  stat_summary(aes(group = group),</span></span>
-<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a><span class="in">               fun = "mean",</span></span>
-<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a><span class="in">               geom = "line",</span></span>
-<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a><span class="in">               linewidth = 1.2) +</span></span>
-<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a><span class="in">  # Reduce space left-right of pre-post</span></span>
-<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_x_discrete(expand = c(0, 0.1)) +</span></span>
-<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a><span class="in">  theme(legend.position = "bottom")</span></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Spaghetti plot</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> reading_long,</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> time,</span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> group,</span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>                     <span class="at">group =</span> id,</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> score)) <span class="sc">+</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add point for observation with small jittering</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.02</span>, </span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">height =</span> <span class="fl">0.25</span>, </span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">seed =</span> <span class="dv">123</span>)) <span class="sc">+</span> </span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The values were selected after trial and error</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set seed so that ponts and segments are moved by same amount</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Draw a line between pre and post scores</span></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>,</span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.02</span>, </span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">height =</span> <span class="fl">0.25</span>, </span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">seed =</span> <span class="dv">123</span>)) <span class="sc">+</span></span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add average per group (pre/post) and draw lines</span></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="fu">aes</span>(<span class="at">group =</span> group),</span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>,</span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Reduce space left-right of pre-post</span></span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
 <span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>The graphical display indicates a larger increase for the teaching aloud (<span class="in">`TA`</span>) group, but the two other (directed reading and the hybrid method) seem on par. There is no discernible difference in strength between experimental condition prior to the experiment, but not the two strong grades in the DR group (who do worse).</span>
@@ -1494,15 +1270,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>with $\mathsf{Va}(\texttt{post}_{ir})=\sigma^2$. We can view this model as a one-way analysis of variance for $\texttt{post}_{ir} - \beta \texttt{pre}_{ir}$,  with the difference that we estimate the coefficient $\beta$ based on the data. Under our usual sum-to-zero constraint, $\mu$ is the global average of the residual scores and $\alpha_i$ is the difference between group $i$ and this average, with the constraint $\alpha_{\texttt{DR}} + \alpha_{\texttt{DRTA}} + \alpha_{\texttt{TA}}=0$.</span>
 <span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fitmodels, eval = FALSE, echo = TRUE}</span></span>
-<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="in"># Model the scores on tests 2</span></span>
-<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a><span class="in">model1 &lt;- lm(posttest2 ~ group + pretest2, data = BSJ92)</span></span>
-<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a><span class="in"># Model assumes parallel slopes with equal differences</span></span>
-<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a><span class="in">anova(model1)</span></span>
-<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a><span class="in"># Only look for the difference between groups</span></span>
-<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a><span class="in">model2 &lt;- lm(posttest2 ~ group, data = BSJ92)</span></span>
-<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a><span class="in">anova(model2)</span></span>
-<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a><span class="in"># Compare the mean squared residuals</span></span>
-<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="in"># and the p-value for group</span></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="co"># Model the scores on tests 2</span></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2, <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a><span class="co"># Model assumes parallel slopes with equal differences</span></span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1)</span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a><span class="co"># Only look for the difference between groups</span></span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group, <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model2)</span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the mean squared residuals</span></span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="co"># and the p-value for group</span></span>
 <span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a>As in many instances, there is strong correlation between prior and posterior scores and this helps reduce the leftover unexplained variability, thus increasing power to detect differences between groups.</span>
@@ -1510,19 +1286,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a><span class="in">`pretest2`</span> as a covariate instead: the model for the difference in score is equivalent to fixing the parameter $\beta$ associated to <span class="in">`pretest2`</span> to 1.</span>
 <span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fitmodels2, eval = TRUE, echo = FALSE}</span></span>
-<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a><span class="in"># Model the scores on tests 2</span></span>
-<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a><span class="in">model1 &lt;- lm(posttest2 ~ group + pretest2, data = BSJ92)</span></span>
-<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a><span class="in"># Model assumes parallel slopes with equal differences</span></span>
+<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a><span class="co"># Model the scores on tests 2</span></span>
+<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2, <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Model assumes parallel slopes with equal differences</span></span>
 <span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a><span class="in"># Only look for the difference between groups</span></span>
-<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a><span class="in">model2 &lt;- lm(posttest2 ~ group, data = BSJ92)</span></span>
-<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a><span class="in">kable1 &lt;- knitr::kable(broom::tidy(anova(model1))[,-4],</span></span>
-<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a><span class="in">                       col.names = c("term","df","sum of squares","F statistic","p-value"), digits = c(0,0,2,2,4))</span></span>
-<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a><span class="in">kable2 &lt;- knitr::kable(broom::tidy(anova(model2))[,-4],</span></span>
-<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a><span class="in">                       col.names = c("term","df","sum of squares","F statistic","p-value"), digits = c(0,0,2,2,4))</span></span>
-<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::kables(x = list("Model 1" = kable1, </span></span>
-<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a><span class="in">                       "Model 2" = kable2),</span></span>
-<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a><span class="in">              caption = "Analysis of variance tables for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right).")</span></span>
+<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a><span class="co"># Only look for the difference between groups</span></span>
+<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group, <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a>kable1 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">anova</span>(model1))[,<span class="sc">-</span><span class="dv">4</span>],</span>
+<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"term"</span>,<span class="st">"df"</span>,<span class="st">"sum of squares"</span>,<span class="st">"F statistic"</span>,<span class="st">"p-value"</span>), <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>))</span>
+<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a>kable2 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">anova</span>(model2))[,<span class="sc">-</span><span class="dv">4</span>],</span>
+<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"term"</span>,<span class="st">"df"</span>,<span class="st">"sum of squares"</span>,<span class="st">"F statistic"</span>,<span class="st">"p-value"</span>), <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">4</span>))</span>
+<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kables</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="st">"Model 1"</span> <span class="ot">=</span> kable1, </span>
+<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"Model 2"</span> <span class="ot">=</span> kable2),</span>
+<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a>              <span class="at">caption =</span> <span class="st">"Analysis of variance tables for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right)."</span>)</span>
 <span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a>We can compare the one-way ANOVA model (Model 1) with the analysis of covariance (Model 2). In the present context, either are valid but one measures the average, the other some form of improvement between two time periods. About one fifth of the explained variability is due to pretest. Here, the impact of group is significant and so the inclusion of a covariate made no difference as to the findings of a difference, but strengthened our conclusions. </span>
@@ -1538,52 +1314,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a>The effect size for the contrasts are obtained by dividing by the estimated variance for the residuals, $\widehat{\sigma}^2$, which is smaller for the ANCOVA model since part of the variability is explained by students strength, captured through <span class="in">`prettest2`</span>.</span>
 <span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r contrasts, echo = TRUE, eval = TRUE}</span></span>
-<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a><span class="in"># Marginal means and planned contrasts</span></span>
-<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="in"># Groups are in alphabetical order, so (DR, DRTA, TA)</span></span>
-<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a><span class="in">planned_contrasts &lt;-</span></span>
-<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a><span class="in">  list(c1 = c(2, -1, -1), #H0: DR = average(DRTA, TA)</span></span>
-<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a><span class="in">       c2 = c(0, 1, -1))  #H0: DRTA = TA</span></span>
-<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a><span class="in">contrasts1 &lt;- </span></span>
-<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a><span class="in">  contrast(emmeans(model1, specs = "group"),</span></span>
-<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a><span class="in">         method = planned_contrasts,</span></span>
-<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a><span class="in">         p.adjust = "holm")</span></span>
-<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a><span class="in"># Measure of effect size</span></span>
-<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a><span class="in">cohens_d &lt;- emmeans::eff_size(contrasts1,</span></span>
-<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a><span class="in">                  method = "identity",</span></span>
-<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a><span class="in">                  sigma = sigma(model1),</span></span>
-<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a><span class="in">                  edf = df.residual(model1))</span></span>
+<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Marginal means and planned contrasts</span></span>
+<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="co"># Groups are in alphabetical order, so (DR, DRTA, TA)</span></span>
+<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a>planned_contrasts <span class="ot">&lt;-</span></span>
+<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">c1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="co">#H0: DR = average(DRTA, TA)</span></span>
+<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a>       <span class="at">c2 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))  <span class="co">#H0: DRTA = TA</span></span>
+<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a>contrasts1 <span class="ot">&lt;-</span> </span>
+<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="fu">emmeans</span>(model1, <span class="at">specs =</span> <span class="st">"group"</span>),</span>
+<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> planned_contrasts,</span>
+<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.adjust =</span> <span class="st">"holm"</span>)</span>
+<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Measure of effect size</span></span>
+<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a>cohens_d <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">eff_size</span>(contrasts1,</span>
+<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"identity"</span>,</span>
+<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sigma =</span> <span class="fu">sigma</span>(model1),</span>
+<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a>                  <span class="at">edf =</span> <span class="fu">df.residual</span>(model1))</span>
 <span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tables2, echo = FALSE, eval = TRUE}</span></span>
-<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a><span class="in">contrasts2 &lt;- </span></span>
-<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a><span class="in">  contrast(emmeans(model2, specs = "group"),</span></span>
-<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a><span class="in">         method = planned_contrasts,</span></span>
-<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a><span class="in">         p.adjust = "holm")</span></span>
-<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="in"># Measure of effect size</span></span>
-<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a><span class="in">cohen_d2 &lt;- emmeans::eff_size(contrasts2,</span></span>
-<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a><span class="in">                  method = "identity",</span></span>
-<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a><span class="in">                  sigma = sigma(model2),</span></span>
-<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a><span class="in">                  edf = df.residual(model2))</span></span>
-<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a><span class="in">kable3 &lt;- knitr::kable(broom::tidy(contrasts1)[,-c(1,3)],</span></span>
-<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a><span class="in">                       col.names = c("contrast","estimate","se","df","t statistic","p-value"), </span></span>
-<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a><span class="in">             digits = c(0,2,2,0, 2,4))</span></span>
-<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a><span class="in">kable4 &lt;- knitr::kable(broom::tidy(contrasts2)[,-c(1,3)],</span></span>
-<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a><span class="in">                       col.names = c("contrast","estimate","se","df","t statistic","p-value"), </span></span>
-<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a><span class="in">             digits = c(0,2,2,0, 2,4))</span></span>
-<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::kables(x = list("Model 1" = kable3, </span></span>
-<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a><span class="in">                       "Model 2" = kable4),</span></span>
-<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a><span class="in">              caption = "Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); `c1` denotes the comparison between control (`DR`) and average of other methods, while `c2` is the pairwise comparison between `DRTA` and `TA`.")</span></span>
-<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a><span class="in"># Because lines are parallel, the difference between group</span></span>
-<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a><span class="in"># is the same regardless of the score on the pre-test</span></span>
-<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a><span class="in"># The two contrasts are orthogonal so</span></span>
-<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a><span class="in"># use disjoint bits of information thanks to the conditioning</span></span>
+<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a>contrasts2 <span class="ot">&lt;-</span> </span>
+<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrast</span>(<span class="fu">emmeans</span>(model2, <span class="at">specs =</span> <span class="st">"group"</span>),</span>
+<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> planned_contrasts,</span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.adjust =</span> <span class="st">"holm"</span>)</span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="co"># Measure of effect size</span></span>
+<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a>cohen_d2 <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">eff_size</span>(contrasts2,</span>
+<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"identity"</span>,</span>
+<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sigma =</span> <span class="fu">sigma</span>(model2),</span>
+<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a>                  <span class="at">edf =</span> <span class="fu">df.residual</span>(model2))</span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a>kable3 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(contrasts1)[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)],</span>
+<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"contrast"</span>,<span class="st">"estimate"</span>,<span class="st">"se"</span>,<span class="st">"df"</span>,<span class="st">"t statistic"</span>,<span class="st">"p-value"</span>), </span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>, <span class="dv">2</span>,<span class="dv">4</span>))</span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a>kable4 <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">kable</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(contrasts2)[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)],</span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"contrast"</span>,<span class="st">"estimate"</span>,<span class="st">"se"</span>,<span class="st">"df"</span>,<span class="st">"t statistic"</span>,<span class="st">"p-value"</span>), </span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a>             <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>, <span class="dv">2</span>,<span class="dv">4</span>))</span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kables</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="st">"Model 1"</span> <span class="ot">=</span> kable3, </span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"Model 2"</span> <span class="ot">=</span> kable4),</span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a>              <span class="at">caption =</span> <span class="st">"Preplanned contrasts for Model 1 (ANCOVA, left) and Model 2 (ANOVA, right); `c1` denotes the comparison between control (`DR`) and average of other methods, while `c2` is the pairwise comparison between `DRTA` and `TA`."</span>)</span>
+<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a><span class="co"># Because lines are parallel, the difference between group</span></span>
+<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a><span class="co"># is the same regardless of the score on the pre-test</span></span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a><span class="co"># The two contrasts are orthogonal so</span></span>
+<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a><span class="co"># use disjoint bits of information thanks to the conditioning</span></span>
 <span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a><span class="in"># Cohen's d for the ANCOVA</span></span>
-<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a><span class="in">cohens_d2 &lt;- emmeans::eff_size(contrast(emmeans(model2, specs = "group"),</span></span>
-<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a><span class="in">                           method = planned_contrasts),</span></span>
-<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a><span class="in">                  method = "identity",</span></span>
-<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a><span class="in">                  sigma = sigma(model2),</span></span>
-<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a><span class="in">                  edf = df.residual(model2))</span></span>
+<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a><span class="co"># Cohen's d for the ANCOVA</span></span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a>cohens_d2 <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">eff_size</span>(<span class="fu">contrast</span>(<span class="fu">emmeans</span>(model2, <span class="at">specs =</span> <span class="st">"group"</span>),</span>
+<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> planned_contrasts),</span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"identity"</span>,</span>
+<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sigma =</span> <span class="fu">sigma</span>(model2),</span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a>                  <span class="at">edf =</span> <span class="fu">df.residual</span>(model2))</span>
 <span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a>The values for the contrasts show that $p$-values have been reduced by 30% to 40%, so while there are clear differences in treatment, it could help increase the power in more borderline cases. The estimated Cohen's $d$ measure for contrast 1 is <span class="in">`r round(summary(cohens_d)$effect[1], 2)`</span> (95% CI: <span class="in">`r round(summary(cohens_d)$lower.CL[1], 2)`</span>, <span class="in">`r round(summary(cohens_d)$upper.CL[1], 2)`</span>) for Model 1 (ANCOVA), versus <span class="in">`r round(summary(cohens_d2)$effect[1], 2)`</span> (95% CI: <span class="in">`r round(summary(cohens_d2)$lower.CL[1], 2)`</span>, <span class="in">`r round(summary(cohens_d2)$upper.CL[1], 2)`</span>) for Model 2 (ANOVA). These confidence interval are unadjusted, but are narrower with the added covariate. The estimated effect size is large, and the upper bounds for the effect imply a medium-sized effect at the very least.</span>
@@ -1612,46 +1388,46 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a>The analysis of covariance is a linear model, so inherits a set of assumptions. The first assumption is linearity, which means here that the relationship between pre- and post-tests is well described by a straight line. We can produce a scatterplot of the data to check this, but usually one looks at the residuals from the model (the difference between the observation and its estimated average, or fitted value $e_i=\texttt{posttest2}_i - \widehat{\texttt{posttest2}}_i$. These are uncorrelated with $\texttt{pretest2}_i$, so the plot should show no pattern (trends, cycles, quadratic trend, etc.) </span>
 <span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r anovamodelslin, echo = TRUE, eval = TRUE, fig.cap = "Scatterplot of pre and post intervention tests (left) and scatterplot of ordinary residuals against covariate pre-test2, with LOESS curve (right).", message = FALSE}</span></span>
-<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a><span class="in">library(patchwork) # combine plots</span></span>
-<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a><span class="in">g1 &lt;- ggplot(data = BSJ92, </span></span>
-<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a><span class="in">       mapping = aes(x = pretest2, y = posttest2)) + </span></span>
-<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point(position = position_jitter(width = 0.1, </span></span>
-<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a><span class="in">                                        height = 0.1, </span></span>
-<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a><span class="in">                                        seed = 80667)) + </span></span>
-<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_smooth(method = "lm", se = FALSE)</span></span>
-<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a><span class="in">reading_aug &lt;- BSJ92 |&gt;</span></span>
-<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(.resid = resid(model1), # observation minus fitted</span></span>
-<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a><span class="in">         .rstudent = rstudent(model1), </span></span>
-<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a><span class="in">         # studentized resid. (equal variance)</span></span>
-<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a><span class="in">         .fitted = fitted(model1)) # fitted values yhat</span></span>
-<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a><span class="in">g2 &lt;- ggplot(data = reading_aug,</span></span>
-<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a><span class="in">             aes(x = pretest2,</span></span>
-<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a><span class="in">                 y = .resid)) + </span></span>
-<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point() +</span></span>
-<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_smooth() + # Fit local trend to detect patterns</span></span>
-<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(x = 'ordinary residuals')</span></span>
-<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a><span class="in">g1 + g2</span></span>
-<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a><span class="in"># To save for a publication</span></span>
-<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a><span class="in"># ggsave("scatterplot.pdf", plot = g1, width = 5, height = 5)</span></span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork) <span class="co"># combine plots</span></span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> BSJ92, </span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> pretest2, <span class="at">y =</span> posttest2)) <span class="sc">+</span> </span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, </span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">height =</span> <span class="fl">0.1</span>, </span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">seed =</span> <span class="dv">80667</span>)) <span class="sc">+</span> </span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a>reading_aug <span class="ot">&lt;-</span> BSJ92 <span class="sc">|&gt;</span></span>
+<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">.resid =</span> <span class="fu">resid</span>(model1), <span class="co"># observation minus fitted</span></span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a>         <span class="at">.rstudent =</span> <span class="fu">rstudent</span>(model1), </span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a>         <span class="co"># studentized resid. (equal variance)</span></span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>         <span class="at">.fitted =</span> <span class="fu">fitted</span>(model1)) <span class="co"># fitted values yhat</span></span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> reading_aug,</span>
+<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> pretest2,</span>
+<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> .resid)) <span class="sc">+</span> </span>
+<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span> <span class="co"># Fit local trend to detect patterns</span></span>
+<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'ordinary residuals'</span>)</span>
+<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">+</span> g2</span>
+<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a><span class="co"># To save for a publication</span></span>
+<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave("scatterplot.pdf", plot = g1, width = 5, height = 5)</span></span>
 <span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a>Since the measurements are discrete and scarce, it is hard to see much but this assumption is reasonable. An added line (local fit, LOESS) is added to help detect departures from linearity but be careful not to over-interpret the graphs. Another way to see this is to create replicate data by permuting residuals (a form of graphical test); if we can easily detect the dataset from the list, then there may be residual structure (otherwise the patterns are due to sampling variability). For example, could you spot the true residuals from the 20 panels?</span>
 <span id="cb17-259"><a href="#cb17-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r nullabor, echo = FALSE, eval = TRUE, fig.cap = "Panels with 20 replicate datasets obtained by permuting residuals. The true data is in position 16.", cache = TRUE}</span></span>
-<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a><span class="in">library(nullabor)</span></span>
-<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(1324)</span></span>
-<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(lineup(null_lm(posttest2 ~ group + pretest2, </span></span>
-<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a><span class="in">        method = 'boot'), reading_aug, pos = 16)) +</span></span>
-<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_point(aes(x = pretest2, y = .resid)) +</span></span>
-<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a><span class="in">  facet_wrap(~ .sample) +</span></span>
-<span id="cb17-266"><a href="#cb17-266" aria-hidden="true" tabindex="-1"></a><span class="in">  labs(x = "pre-test", y = "residuals")</span></span>
+<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nullabor)</span>
+<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1324</span>)</span>
+<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">lineup</span>(<span class="fu">null_lm</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2, </span>
+<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a>        <span class="at">method =</span> <span class="st">'boot'</span>), reading_aug, <span class="at">pos =</span> <span class="dv">16</span>)) <span class="sc">+</span></span>
+<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> pretest2, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> .sample) <span class="sc">+</span></span>
+<span id="cb17-266"><a href="#cb17-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"pre-test"</span>, <span class="at">y =</span> <span class="st">"residuals"</span>)</span>
 <span id="cb17-267"><a href="#cb17-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a><span class="fu">###  Linearity: are the slopes the same?</span></span>
 <span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a>The second part of the linearity assumption lies in the assumption that the linear trend for pre-test and post-test is the same for each group. If they were different, we would have an interaction (between a categorical and a continuous variable). We can use the $F$ test to compare the model with and without interaction </span>
 <span id="cb17-272"><a href="#cb17-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval = FALSE, echo = TRUE}</span></span>
-<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a><span class="in">model3 &lt;- lm(posttest2 ~ group*pretest2, data = BSJ92)</span></span>
-<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a><span class="in">anova(model1, model3)</span></span>
+<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> group<span class="sc">*</span>pretest2, <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1, model3)</span>
 <span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-276"><a href="#cb17-276" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-277"><a href="#cb17-277" aria-hidden="true" tabindex="-1"></a>The $p$-value is <span class="in">`r round(anova(model1, lm(posttest2 ~ group*pretest2, data = BSJ92))[2,6],2)`</span>, so there is no evidence that the slopes are not parallel.</span>
@@ -1665,25 +1441,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-285"><a href="#cb17-285" aria-hidden="true" tabindex="-1"></a>If we want to check that the variance are equal, we can use Levene's test. There is a catch: normally, Levene's test is just a one-way ANOVA where for (sub)group $i$ and replication $r$, we use as response the absolute value of the centered observations,  $|Y_{ir} - \widehat{\mu}_i|$, as input to the model. With continuous covariates included, an alternative is to instead perform a test but with the detrended values, or use the absolute value of the ordinary residuals $|Y_{ir} - \widehat{Y}_{ir}|$.</span>
 <span id="cb17-286"><a href="#cb17-286" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-287"><a href="#cb17-287" aria-hidden="true" tabindex="-1"></a><span class="in">```{r leveneTest, eval = FALSE, echo = TRUE}</span></span>
-<span id="cb17-288"><a href="#cb17-288" aria-hidden="true" tabindex="-1"></a><span class="in">car::leveneTest(resid(model1) ~ group,</span></span>
-<span id="cb17-289"><a href="#cb17-289" aria-hidden="true" tabindex="-1"></a><span class="in">                data = BSJ92,</span></span>
-<span id="cb17-290"><a href="#cb17-290" aria-hidden="true" tabindex="-1"></a><span class="in">                center = mean)</span></span>
+<span id="cb17-288"><a href="#cb17-288" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(<span class="fu">resid</span>(model1) <span class="sc">~</span> group,</span>
+<span id="cb17-289"><a href="#cb17-289" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> BSJ92,</span>
+<span id="cb17-290"><a href="#cb17-290" aria-hidden="true" tabindex="-1"></a>                <span class="at">center =</span> mean)</span>
 <span id="cb17-291"><a href="#cb17-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-292"><a href="#cb17-292" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-293"><a href="#cb17-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r leveneTestkable, echo = FALSE, eval = TRUE}</span></span>
-<span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::kable(car::leveneTest(resid(model1) ~ group,</span></span>
-<span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a><span class="in">                      data = BSJ92,</span></span>
-<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a><span class="in">                      center = mean), col.names = c("df","statistic", "p-value"), digits = c(0,2,2))</span></span>
+<span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(car<span class="sc">::</span><span class="fu">leveneTest</span>(<span class="fu">resid</span>(model1) <span class="sc">~</span> group,</span>
+<span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> BSJ92,</span>
+<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a>                      <span class="at">center =</span> mean), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"df"</span>,<span class="st">"statistic"</span>, <span class="st">"p-value"</span>), <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb17-297"><a href="#cb17-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-298"><a href="#cb17-298" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-299"><a href="#cb17-299" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-300"><a href="#cb17-300" aria-hidden="true" tabindex="-1"></a>Fitting a variance per group and doing a comparison between group mean is oftentimes referred to as Welch's ANOVA. If we are only interested in the global null, the function <span class="in">`oneway.test()`</span> does this assuming by default unequal variance. This only returns the $F$ statistic for the global null hypothesis $\mu_{\texttt{DR}} = \mu_{\texttt{DRTA}} = \mu_{\texttt{TA}}$.</span>
 <span id="cb17-301"><a href="#cb17-301" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-302"><a href="#cb17-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r WelchANOVA, echo = TRUE, eval = FALSE}</span></span>
-<span id="cb17-303"><a href="#cb17-303" aria-hidden="true" tabindex="-1"></a><span class="in">lm_detrend &lt;- lm(posttest2 ~ pretest2, </span></span>
-<span id="cb17-304"><a href="#cb17-304" aria-hidden="true" tabindex="-1"></a><span class="in">                       data = BSJ92)</span></span>
-<span id="cb17-305"><a href="#cb17-305" aria-hidden="true" tabindex="-1"></a><span class="in">oneway.test(resid(lm_detrend)~ group, </span></span>
-<span id="cb17-306"><a href="#cb17-306" aria-hidden="true" tabindex="-1"></a><span class="in">            data = BSJ92)</span></span>
+<span id="cb17-303"><a href="#cb17-303" aria-hidden="true" tabindex="-1"></a>lm_detrend <span class="ot">&lt;-</span> <span class="fu">lm</span>(posttest2 <span class="sc">~</span> pretest2, </span>
+<span id="cb17-304"><a href="#cb17-304" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-305"><a href="#cb17-305" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(<span class="fu">resid</span>(lm_detrend)<span class="sc">~</span> group, </span>
+<span id="cb17-306"><a href="#cb17-306" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> BSJ92)</span>
 <span id="cb17-307"><a href="#cb17-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-308"><a href="#cb17-308" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-309"><a href="#cb17-309" aria-hidden="true" tabindex="-1"></a><span class="fu">## Models with different variance per group</span></span>
@@ -1691,11 +1467,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-311"><a href="#cb17-311" aria-hidden="true" tabindex="-1"></a>If we wanted to do pairwise comparisons or look at custom contrasts, we need rather a more explicit model in which the mean and variance differ by group, using the <span class="in">`nlme`</span> package. The argument <span class="in">`weights`</span> is used to specify the variance.</span>
 <span id="cb17-312"><a href="#cb17-312" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-313"><a href="#cb17-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gls, echo = TRUE, eval = TRUE}</span></span>
-<span id="cb17-314"><a href="#cb17-314" aria-hidden="true" tabindex="-1"></a><span class="in">model_samevar &lt;- nlme::gls(posttest2 ~ group + pretest2,</span></span>
-<span id="cb17-315"><a href="#cb17-315" aria-hidden="true" tabindex="-1"></a><span class="in">                     data = BSJ92)</span></span>
-<span id="cb17-316"><a href="#cb17-316" aria-hidden="true" tabindex="-1"></a><span class="in">model_diffvar &lt;- nlme::gls(posttest2 ~ group + pretest2,</span></span>
-<span id="cb17-317"><a href="#cb17-317" aria-hidden="true" tabindex="-1"></a><span class="in">                    data = BSJ92,</span></span>
-<span id="cb17-318"><a href="#cb17-318" aria-hidden="true" tabindex="-1"></a><span class="in">                    weights = nlme::varIdent(form =  ~ 1 | group))</span></span>
+<span id="cb17-314"><a href="#cb17-314" aria-hidden="true" tabindex="-1"></a>model_samevar <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2,</span>
+<span id="cb17-315"><a href="#cb17-315" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> BSJ92)</span>
+<span id="cb17-316"><a href="#cb17-316" aria-hidden="true" tabindex="-1"></a>model_diffvar <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(posttest2 <span class="sc">~</span> group <span class="sc">+</span> pretest2,</span>
+<span id="cb17-317"><a href="#cb17-317" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> BSJ92,</span>
+<span id="cb17-318"><a href="#cb17-318" aria-hidden="true" tabindex="-1"></a>                    <span class="at">weights =</span> nlme<span class="sc">::</span><span class="fu">varIdent</span>(<span class="at">form =</span>  <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> group))</span>
 <span id="cb17-319"><a href="#cb17-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-320"><a href="#cb17-320" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-321"><a href="#cb17-321" aria-hidden="true" tabindex="-1"></a>The syntax <span class="in">`nlme::varIdent(form =  ~ 1 | group)`</span> specifies that the variance is constant (<span class="in">`~ 1`</span>) for observations within a group, but changes from one experimental <span class="in">`group`</span> to the next.</span>
@@ -1704,8 +1480,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-324"><a href="#cb17-324" aria-hidden="true" tabindex="-1"></a>The first benefit of this approach is that we get another test of equality of variance; this is a likelihood ratio test, where we are using the normality assumption to fit the model and make comparisons. Comparison of two nested models (think Russian dolls) that have the same specification for the mean can be done using the function <span class="in">`anova`</span>.</span>
 <span id="cb17-325"><a href="#cb17-325" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-326"><a href="#cb17-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r anovanested, echo = TRUE, eval = FALSE}</span></span>
-<span id="cb17-327"><a href="#cb17-327" aria-hidden="true" tabindex="-1"></a><span class="in"># compute likelihood ratio test</span></span>
-<span id="cb17-328"><a href="#cb17-328" aria-hidden="true" tabindex="-1"></a><span class="in">anova(model_diffvar, model_samevar)</span></span>
+<span id="cb17-327"><a href="#cb17-327" aria-hidden="true" tabindex="-1"></a><span class="co"># compute likelihood ratio test</span></span>
+<span id="cb17-328"><a href="#cb17-328" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_diffvar, model_samevar)</span>
 <span id="cb17-329"><a href="#cb17-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-330"><a href="#cb17-330" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-331"><a href="#cb17-331" aria-hidden="true" tabindex="-1"></a>In large samples and under normality, the likelihood ratio statistic follows a $\chi^2_{g-1}$ distribution, where $g$ is the number of groups.^<span class="co">[</span><span class="ot">This follows the general rule when comparing two nested models: the degrees of freedom are the difference between the number of parameters under the alternative (the more complicated model) and the null model (which we upon by setting restrictions on the alternative model).</span><span class="co">]</span> From the table, we can extract the value of the test statistic (<span class="in">`L.Ratio`</span>), which is <span class="in">`r round(anova(model_diffvar, model_samevar)[2,8],2)`</span>. We compare this to the null $\chi^2_2$ distribution, giving a tail probability of <span class="in">`r round(anova(model_diffvar, model_samevar)[2,9],3)`</span>; there is weak evidence of heterogeneity. </span>
@@ -1714,26 +1490,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-334"><a href="#cb17-334" aria-hidden="true" tabindex="-1"></a>The benefit of using this framework is that <span class="in">`emmeans`</span> will recognize the unequal variance and use them accordingly for computing contrasts.  The $t$-test values for the contrasts have non-integer degrees of freedom, since the null distribution is intractable; however, the Student-$t$ distribution provides a reasonable approximation if we evaluate it at a particular value for the degrees of freedom, a method know as Satterthwaite's approximation. See this mention in the output of the method.</span>
 <span id="cb17-335"><a href="#cb17-335" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-336"><a href="#cb17-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r contrasts2, echo = TRUE, eval = TRUE}</span></span>
-<span id="cb17-337"><a href="#cb17-337" aria-hidden="true" tabindex="-1"></a><span class="in">contrast(emmeans(model_diffvar, specs = "group"),</span></span>
-<span id="cb17-338"><a href="#cb17-338" aria-hidden="true" tabindex="-1"></a><span class="in">         method = planned_contrasts,</span></span>
-<span id="cb17-339"><a href="#cb17-339" aria-hidden="true" tabindex="-1"></a><span class="in">         p.adjust = "holm")</span></span>
-<span id="cb17-340"><a href="#cb17-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb17-337"><a href="#cb17-337" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(<span class="fu">emmeans</span>(model_diffvar, <span class="at">specs =</span> <span class="st">"group"</span>),</span>
+<span id="cb17-338"><a href="#cb17-338" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> planned_contrasts,</span>
+<span id="cb17-339"><a href="#cb17-339" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.adjust =</span> <span class="st">"holm"</span>)</span>
+<span id="cb17-340"><a href="#cb17-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
-</div>   
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2021-2024 by <a href="https://www.lbelzile.bitbucket.io">Léo Belzile</a>, Website template by <a href="https://www.andrewheiss.com/">Dr.&nbsp;Andrew Heiss</a> under <a href="https://mit-license.org/">MIT License</a><br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">
-<p>Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></p>
-</div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/lbelzile/experimental">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a></div>
   </div>
 </footer>
-
 
 
 

@@ -4,7 +4,7 @@
     <title>Complete factorial designs</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-02-06" />
+    <meta name="date" content="2024-04-14" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -627,6 +627,44 @@ Effect together&lt;br&gt;
 Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
 
 ---
+ 
+# Example 1 : loans versus credit
+
+.pull-left[
+[Sharma, Tully, and Cryder (2021)](https://doi.org/10.1177/0022243721993816) Supplementary study 5 consists of a `\(2 \times 2\)` between-subject ANOVA with factors
+
+- debt type (`debttype`), either "loan" or "credit"
+- `purchase` type, either `discretionary` or not (`need`)
+
+]
+
+.pull-right[
+
+&lt;img src="05-slides_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+No evidence of interaction
+
+]
+---
+
+
+# Example 2 - psychological distance
+
+.pull-left[
+[Maglio and Polman (2014)](https://doi.org/10.1177/0956797614530571) Study 1 uses a `\(4 \times 2\)` between-subject ANOVA with factors
+
+- subway `station`, one of Spadina, St. George, Bloor-Yonge and Sherbourne
+- `direction` of travel, either east or west
+
+]
+
+.pull-right[
+
+&lt;img src="05-slides_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+Clear evidence of interaction (symmetry?)
+
+]
+
+---
 
 layout: false
 name: formulation
@@ -645,7 +683,9 @@ class: title title-5
 An analysis of variance model is simply a **linear regression** with categorical covariate(s).
 
 - Typically, the parametrization is chosen so that parameters reflect differences to the global mean (sum-to-zero parametrization).
-- The full model includes interactions between all factors (so we consider all combinations of factors, as subcategories).
+- The full model includes interactions between all combinations of factors
+   - one average for each subcategory
+   - one-way ANOVA!
 
 ---
 
@@ -716,15 +756,30 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
 
 .color-5[**Main effects**] are comparisons between row or column averages
 
+Obtained by *marginalization*, i.e., averaging over the other dimension.
 
-<div id="dbgvzfontn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+Main effects are not of interest if there is an interaction.
+
+<div id="bgvzfontnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bgvzfontnx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#dbgvzfontn .gt_table {
+#bgvzfontnx thead, #bgvzfontnx tbody, #bgvzfontnx tfoot, #bgvzfontnx tr, #bgvzfontnx td, #bgvzfontnx th {
+  border-style: none;
+}
+
+#bgvzfontnx p {
+  margin: 0;
+  padding: 0;
+}
+
+#bgvzfontnx .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -747,19 +802,12 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-left-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#bgvzfontnx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#dbgvzfontn .gt_title {
+#bgvzfontnx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -771,25 +819,37 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-width: 0;
 }
 
-#dbgvzfontn .gt_subtitle {
+#bgvzfontnx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#dbgvzfontn .gt_bottom_border {
+#bgvzfontnx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bgvzfontnx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_col_headings {
+#bgvzfontnx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -804,7 +864,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_col_heading {
+#bgvzfontnx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -824,7 +884,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   overflow-x: hidden;
 }
 
-#dbgvzfontn .gt_column_spanner_outer {
+#bgvzfontnx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -836,15 +896,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 4px;
 }
 
-#dbgvzfontn .gt_column_spanner_outer:first-child {
+#bgvzfontnx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dbgvzfontn .gt_column_spanner_outer:last-child {
+#bgvzfontnx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dbgvzfontn .gt_column_spanner {
+#bgvzfontnx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -856,7 +916,11 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   width: 100%;
 }
 
-#dbgvzfontn .gt_group_heading {
+#bgvzfontnx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bgvzfontnx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -879,9 +943,10 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#dbgvzfontn .gt_empty_group_heading {
+#bgvzfontnx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -896,15 +961,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   vertical-align: middle;
 }
 
-#dbgvzfontn .gt_from_md > :first-child {
+#bgvzfontnx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dbgvzfontn .gt_from_md > :last-child {
+#bgvzfontnx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dbgvzfontn .gt_row {
+#bgvzfontnx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -923,7 +988,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   overflow-x: hidden;
 }
 
-#dbgvzfontn .gt_stub {
+#bgvzfontnx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -936,7 +1001,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#dbgvzfontn .gt_stub_row_group {
+#bgvzfontnx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -950,11 +1015,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   vertical-align: top;
 }
 
-#dbgvzfontn .gt_row_group_first td {
+#bgvzfontnx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dbgvzfontn .gt_summary_row {
+#bgvzfontnx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bgvzfontnx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -964,16 +1033,16 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#dbgvzfontn .gt_first_summary_row {
+#bgvzfontnx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_first_summary_row.thick {
+#bgvzfontnx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dbgvzfontn .gt_last_summary_row {
+#bgvzfontnx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +1052,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_grand_summary_row {
+#bgvzfontnx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,7 +1062,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#dbgvzfontn .gt_first_grand_summary_row {
+#bgvzfontnx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,11 +1072,21 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-top-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_striped {
+#bgvzfontnx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bgvzfontnx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dbgvzfontn .gt_table_body {
+#bgvzfontnx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1016,7 +1095,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_footnotes {
+#bgvzfontnx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1030,30 +1109,8 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-color: #D3D3D3;
 }
 
-#dbgvzfontn .gt_footnote {
+#bgvzfontnx .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dbgvzfontn .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dbgvzfontn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1061,92 +1118,106 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#dbgvzfontn .gt_left {
+#bgvzfontnx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bgvzfontnx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bgvzfontnx .gt_left {
   text-align: left;
 }
 
-#dbgvzfontn .gt_center {
+#bgvzfontnx .gt_center {
   text-align: center;
 }
 
-#dbgvzfontn .gt_right {
+#bgvzfontnx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dbgvzfontn .gt_font_normal {
+#bgvzfontnx .gt_font_normal {
   font-weight: normal;
 }
 
-#dbgvzfontn .gt_font_bold {
+#bgvzfontnx .gt_font_bold {
   font-weight: bold;
 }
 
-#dbgvzfontn .gt_font_italic {
+#bgvzfontnx .gt_font_italic {
   font-style: italic;
 }
 
-#dbgvzfontn .gt_super {
+#bgvzfontnx .gt_super {
   font-size: 65%;
 }
 
-#dbgvzfontn .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#dbgvzfontn .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#bgvzfontnx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#dbgvzfontn .gt_asterisk {
+#bgvzfontnx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dbgvzfontn .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#bgvzfontnx .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#dbgvzfontn .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#bgvzfontnx .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#dbgvzfontn .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#bgvzfontnx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bgvzfontnx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bgvzfontnx .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table" style="table-layout: fixed;">
+<table class="gt_table" style="table-layout: fixed;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <colgroup>
     <col/>
     <col style="width:120px;"/>
     <col style="width:120px;"/>
   </colgroup>
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"> </th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">happy</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">sad</th>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="happy">happy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="sad">sad</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">column means</td>
-<td class="gt_row gt_left">$$\mu_{.1}$$</td>
-<td class="gt_row gt_left">$$\mu_{.2}$$</td></tr>
+    <tr><td headers="X" class="gt_row gt_left">column means</td>
+<td headers="happy" class="gt_row gt_left">$$\mu_{.1}$$</td>
+<td headers="sad" class="gt_row gt_left">$$\mu_{.2}$$</td></tr>
   </tbody>
   
   
@@ -1158,14 +1229,26 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
 
 .pull-right[
 
-<div id="xdduhtxcdz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div id="dduhtxcdze" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dduhtxcdze table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#xdduhtxcdz .gt_table {
+#dduhtxcdze thead, #dduhtxcdze tbody, #dduhtxcdze tfoot, #dduhtxcdze tr, #dduhtxcdze td, #dduhtxcdze th {
+  border-style: none;
+}
+
+#dduhtxcdze p {
+  margin: 0;
+  padding: 0;
+}
+
+#dduhtxcdze .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -1188,19 +1271,12 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-left-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#dduhtxcdze .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#xdduhtxcdz .gt_title {
+#dduhtxcdze .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1212,25 +1288,37 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-width: 0;
 }
 
-#xdduhtxcdz .gt_subtitle {
+#dduhtxcdze .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#xdduhtxcdz .gt_bottom_border {
+#dduhtxcdze .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dduhtxcdze .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_col_headings {
+#dduhtxcdze .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1245,7 +1333,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_col_heading {
+#dduhtxcdze .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -1265,7 +1353,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   overflow-x: hidden;
 }
 
-#xdduhtxcdz .gt_column_spanner_outer {
+#dduhtxcdze .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -1277,15 +1365,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 4px;
 }
 
-#xdduhtxcdz .gt_column_spanner_outer:first-child {
+#dduhtxcdze .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xdduhtxcdz .gt_column_spanner_outer:last-child {
+#dduhtxcdze .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xdduhtxcdz .gt_column_spanner {
+#dduhtxcdze .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1297,7 +1385,11 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   width: 100%;
 }
 
-#xdduhtxcdz .gt_group_heading {
+#dduhtxcdze .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dduhtxcdze .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1320,9 +1412,10 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#xdduhtxcdz .gt_empty_group_heading {
+#dduhtxcdze .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1337,15 +1430,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   vertical-align: middle;
 }
 
-#xdduhtxcdz .gt_from_md > :first-child {
+#dduhtxcdze .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xdduhtxcdz .gt_from_md > :last-child {
+#dduhtxcdze .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xdduhtxcdz .gt_row {
+#dduhtxcdze .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1364,7 +1457,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   overflow-x: hidden;
 }
 
-#xdduhtxcdz .gt_stub {
+#dduhtxcdze .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1377,7 +1470,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#xdduhtxcdz .gt_stub_row_group {
+#dduhtxcdze .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1391,11 +1484,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   vertical-align: top;
 }
 
-#xdduhtxcdz .gt_row_group_first td {
+#dduhtxcdze .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xdduhtxcdz .gt_summary_row {
+#dduhtxcdze .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dduhtxcdze .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1405,16 +1502,16 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#xdduhtxcdz .gt_first_summary_row {
+#dduhtxcdze .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_first_summary_row.thick {
+#dduhtxcdze .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xdduhtxcdz .gt_last_summary_row {
+#dduhtxcdze .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1424,7 +1521,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_grand_summary_row {
+#dduhtxcdze .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1434,7 +1531,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#xdduhtxcdz .gt_first_grand_summary_row {
+#dduhtxcdze .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1444,11 +1541,21 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-top-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_striped {
+#dduhtxcdze .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dduhtxcdze .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xdduhtxcdz .gt_table_body {
+#dduhtxcdze .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1457,7 +1564,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_footnotes {
+#dduhtxcdze .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1471,30 +1578,8 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-color: #D3D3D3;
 }
 
-#xdduhtxcdz .gt_footnote {
+#dduhtxcdze .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#xdduhtxcdz .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#xdduhtxcdz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1502,93 +1587,107 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#xdduhtxcdz .gt_left {
+#dduhtxcdze .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dduhtxcdze .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dduhtxcdze .gt_left {
   text-align: left;
 }
 
-#xdduhtxcdz .gt_center {
+#dduhtxcdze .gt_center {
   text-align: center;
 }
 
-#xdduhtxcdz .gt_right {
+#dduhtxcdze .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xdduhtxcdz .gt_font_normal {
+#dduhtxcdze .gt_font_normal {
   font-weight: normal;
 }
 
-#xdduhtxcdz .gt_font_bold {
+#dduhtxcdze .gt_font_bold {
   font-weight: bold;
 }
 
-#xdduhtxcdz .gt_font_italic {
+#dduhtxcdze .gt_font_italic {
   font-style: italic;
 }
 
-#xdduhtxcdz .gt_super {
+#dduhtxcdze .gt_super {
   font-size: 65%;
 }
 
-#xdduhtxcdz .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#xdduhtxcdz .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#dduhtxcdze .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#xdduhtxcdz .gt_asterisk {
+#dduhtxcdze .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xdduhtxcdz .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#dduhtxcdze .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#xdduhtxcdz .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#dduhtxcdze .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#xdduhtxcdz .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#dduhtxcdze .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dduhtxcdze .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dduhtxcdze .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table" style="table-layout: fixed;">
+<table class="gt_table" style="table-layout: fixed;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <colgroup>
     <col/>
     <col style="width:120px;"/>
   </colgroup>
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">complexity</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">row means</th>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="complexity">complexity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="row means">row means</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">complicated</td>
-<td class="gt_row gt_left" style="background-color: rgba(255,179,186,0.8); color: #000000;">$$\mu_{1.}$$</td></tr>
-    <tr><td class="gt_row gt_left">average</td>
-<td class="gt_row gt_left" style="background-color: rgba(255,223,186,0.8); color: #000000;">$$\mu_{2.}$$</td></tr>
-    <tr><td class="gt_row gt_left">easy</td>
-<td class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{3.}$$</td></tr>
+    <tr><td headers="complexity" class="gt_row gt_left">complicated</td>
+<td headers="response" class="gt_row gt_left" style="background-color: rgba(255,179,186,0.8); color: #000000;">$$\mu_{1.}$$</td></tr>
+    <tr><td headers="complexity" class="gt_row gt_left">average</td>
+<td headers="response" class="gt_row gt_left" style="background-color: rgba(255,223,186,0.8); color: #000000;">$$\mu_{2.}$$</td></tr>
+    <tr><td headers="complexity" class="gt_row gt_left">easy</td>
+<td headers="response" class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{3.}$$</td></tr>
   </tbody>
   
   
@@ -2076,14 +2175,26 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
 
 .pull-right[
 
-<div id="svdhjkbuov" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div id="vdhjkbuovq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vdhjkbuovq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#svdhjkbuov .gt_table {
+#vdhjkbuovq thead, #vdhjkbuovq tbody, #vdhjkbuovq tfoot, #vdhjkbuovq tr, #vdhjkbuovq td, #vdhjkbuovq th {
+  border-style: none;
+}
+
+#vdhjkbuovq p {
+  margin: 0;
+  padding: 0;
+}
+
+#vdhjkbuovq .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -2106,19 +2217,12 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-left-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#vdhjkbuovq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#svdhjkbuov .gt_title {
+#vdhjkbuovq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2130,25 +2234,37 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-width: 0;
 }
 
-#svdhjkbuov .gt_subtitle {
+#vdhjkbuovq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#svdhjkbuov .gt_bottom_border {
+#vdhjkbuovq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vdhjkbuovq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_col_headings {
+#vdhjkbuovq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2163,7 +2279,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_col_heading {
+#vdhjkbuovq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -2183,7 +2299,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   overflow-x: hidden;
 }
 
-#svdhjkbuov .gt_column_spanner_outer {
+#vdhjkbuovq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 40px;
@@ -2195,15 +2311,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 4px;
 }
 
-#svdhjkbuov .gt_column_spanner_outer:first-child {
+#vdhjkbuovq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#svdhjkbuov .gt_column_spanner_outer:last-child {
+#vdhjkbuovq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#svdhjkbuov .gt_column_spanner {
+#vdhjkbuovq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2215,7 +2331,11 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   width: 100%;
 }
 
-#svdhjkbuov .gt_group_heading {
+#vdhjkbuovq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vdhjkbuovq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2238,9 +2358,10 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#svdhjkbuov .gt_empty_group_heading {
+#vdhjkbuovq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2255,15 +2376,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   vertical-align: middle;
 }
 
-#svdhjkbuov .gt_from_md > :first-child {
+#vdhjkbuovq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#svdhjkbuov .gt_from_md > :last-child {
+#vdhjkbuovq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#svdhjkbuov .gt_row {
+#vdhjkbuovq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2282,7 +2403,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   overflow-x: hidden;
 }
 
-#svdhjkbuov .gt_stub {
+#vdhjkbuovq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2295,7 +2416,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#svdhjkbuov .gt_stub_row_group {
+#vdhjkbuovq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2309,11 +2430,15 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   vertical-align: top;
 }
 
-#svdhjkbuov .gt_row_group_first td {
+#vdhjkbuovq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#svdhjkbuov .gt_summary_row {
+#vdhjkbuovq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vdhjkbuovq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2323,16 +2448,16 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#svdhjkbuov .gt_first_summary_row {
+#vdhjkbuovq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_first_summary_row.thick {
+#vdhjkbuovq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#svdhjkbuov .gt_last_summary_row {
+#vdhjkbuovq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2342,7 +2467,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_grand_summary_row {
+#vdhjkbuovq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2352,7 +2477,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#svdhjkbuov .gt_first_grand_summary_row {
+#vdhjkbuovq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2362,11 +2487,21 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-top-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_striped {
+#vdhjkbuovq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vdhjkbuovq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#svdhjkbuov .gt_table_body {
+#vdhjkbuovq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2375,7 +2510,7 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-bottom-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_footnotes {
+#vdhjkbuovq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2389,30 +2524,8 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   border-right-color: #D3D3D3;
 }
 
-#svdhjkbuov .gt_footnote {
+#vdhjkbuovq .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#svdhjkbuov .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#svdhjkbuov .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2420,93 +2533,107 @@ where `\(Y_{ijr}\)` are independent observations with a common std. deviation `\
   padding-right: 5px;
 }
 
-#svdhjkbuov .gt_left {
+#vdhjkbuovq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vdhjkbuovq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vdhjkbuovq .gt_left {
   text-align: left;
 }
 
-#svdhjkbuov .gt_center {
+#vdhjkbuovq .gt_center {
   text-align: center;
 }
 
-#svdhjkbuov .gt_right {
+#vdhjkbuovq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#svdhjkbuov .gt_font_normal {
+#vdhjkbuovq .gt_font_normal {
   font-weight: normal;
 }
 
-#svdhjkbuov .gt_font_bold {
+#vdhjkbuovq .gt_font_bold {
   font-weight: bold;
 }
 
-#svdhjkbuov .gt_font_italic {
+#vdhjkbuovq .gt_font_italic {
   font-style: italic;
 }
 
-#svdhjkbuov .gt_super {
+#vdhjkbuovq .gt_super {
   font-size: 65%;
 }
 
-#svdhjkbuov .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#svdhjkbuov .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#vdhjkbuovq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#svdhjkbuov .gt_asterisk {
+#vdhjkbuovq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#svdhjkbuov .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#vdhjkbuovq .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#svdhjkbuov .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#vdhjkbuovq .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#svdhjkbuov .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#vdhjkbuovq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vdhjkbuovq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vdhjkbuovq .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
-<table class="gt_table" style="table-layout: fixed;">
+<table class="gt_table" style="table-layout: fixed;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <colgroup>
     <col/>
     <col style="width:120px;"/>
   </colgroup>
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">complexity</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">mean (happy)</th>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="complexity">complexity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="mean (happy)">mean (happy)</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">complicated</td>
-<td class="gt_row gt_left" style="background-color: rgba(255,179,186,0.8); color: #000000;">$$\mu_{11}$$</td></tr>
-    <tr><td class="gt_row gt_left">average</td>
-<td class="gt_row gt_left" style="background-color: rgba(255,223,186,0.8); color: #000000;">$$\mu_{21}$$</td></tr>
-    <tr><td class="gt_row gt_left">easy</td>
-<td class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{31}$$</td></tr>
+    <tr><td headers="complexity" class="gt_row gt_left">complicated</td>
+<td headers="response" class="gt_row gt_left" style="background-color: rgba(255,179,186,0.8); color: #000000;">$$\mu_{11}$$</td></tr>
+    <tr><td headers="complexity" class="gt_row gt_left">average</td>
+<td headers="response" class="gt_row gt_left" style="background-color: rgba(255,223,186,0.8); color: #000000;">$$\mu_{21}$$</td></tr>
+    <tr><td headers="complexity" class="gt_row gt_left">easy</td>
+<td headers="response" class="gt_row gt_left" style="background-color: rgba(186,225,255,0.8); color: #000000;">$$\mu_{31}$$</td></tr>
   </tbody>
   
   
@@ -2653,6 +2780,250 @@ The model always includes an overall average `\(\mu\)`.  There are
 |*column mean* | `\(\mu_{.1}\)` | `\(\mathsf{X}\)` | `\(\mu\)` |
  
 Terms with `\(\mathsf{X}\)` are fully determined by row/column/total averages
+
+]
+
+---
+
+# Example 1
+
+The interaction plot suggested that the two-way interaction wasn't significant. The `\(F\)` test confirms this.
+
+There is a significant main effect of both `purchase` and `debttype`.
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SS &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; purchase &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 752.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 98.21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; debttype &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 92.2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; purchase:debttype &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.79 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.182 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11467.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1497 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+
+# Example 2
+
+There is a significant interaction between `station` and `direction`, so follow-up by looking at simple effects or contrasts.
+
+The tests for the main effects are not of interest! Disregard other entries of the ANOVA table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SS &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; station &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75.2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; direction &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.541 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; station:direction &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 52.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 208.2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Main effects for Example 1
+
+We consider differences between debt type labels. 
+
+Participants are more likely to consider the offer if it is branded as `credit` than loan. The difference is roughly 0.5 (on a Likert scale from 1 to 9).
+.small[
+
+
+```
+## $emmeans
+##  debttype emmean    SE   df lower.CL upper.CL
+##  credit     5.12 0.101 1497     4.93     5.32
+##  loan       4.63 0.101 1497     4.43     4.83
+## 
+## Results are averaged over the levels of: purchase 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast      estimate    SE   df t.ratio p.value
+##  credit - loan    0.496 0.143 1497   3.469  0.0005
+## 
+## Results are averaged over the levels of: purchase
+```
+]
+---
+
+# Toronto subway station
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/05/Toronto_subway.png" alt="Simplified depiction of the Toronto metro stations used in the experiment, based on work by Craftwerker on Wikipedia, distributed under CC-BY-SA 4.0." width="70%" /&gt;
+&lt;p class="caption"&gt;Simplified depiction of the Toronto metro stations used in the experiment, based on work by Craftwerker on Wikipedia, distributed under CC-BY-SA 4.0.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+# Reparametrization for Example 2
+
+Set `stdist` as `\(-2\)`, `\(-1\)`, `\(+1\)`, `\(+2\)` to indicate station distance, with negative signs indicating stations in opposite direction of travel
+
+
+
+The ANOVA table for the reparametrized models shows no evidence against the null of symmetry (interaction).
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SS &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; stdist &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 121.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; direction &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.554 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; stdist:direction &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.154 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 208.2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Interaction plot for reformated data
+
+&lt;img src="05-slides_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+---
+
+# Custom contrasts for Example 2
+
+We are interested in testing the perception of distance, by looking at `\(\mathscr{H}_0: \mu_{-1} = \mu_{+1}, \mu_{-2} = \mu_{+2}\)`.
+
+
+
+```r
+mod3 &lt;- lm(distance ~ stdist * direction, data = MP14_S1) 
+(emm &lt;- emmeans(mod3, specs = "stdist"))
+  # order is -2, -1, 1, 2
+contrasts &lt;- emm |&gt; contrast(
+  list("two dist" = c(-1, 0, 0, 1), 
+        "one dist" = c(0, -1, 1, 0)))
+contrasts # print pairwise contrasts
+test(contrasts, joint = TRUE)
+```
+---
+
+# Estimated marginal means and contrasts
+
+.small[
+Strong evidence ofifferences in perceived distance depending on direction of travel.
+
+
+
+```
+##  stdist emmean    SE  df lower.CL upper.CL
+##  -2       3.83 0.145 194     3.54     4.11
+##  -1       2.48 0.144 194     2.20     2.76
+##  +1       1.62 0.150 194     1.33     1.92
+##  +2       2.70 0.145 194     2.42     2.99
+## 
+## Results are averaged over the levels of: direction 
+## Confidence level used: 0.95
+```
+
+```
+##  contrast estimate    SE  df t.ratio p.value
+##  two dist   -1.122 0.205 194  -5.470  &lt;.0001
+##  one dist   -0.856 0.207 194  -4.129  0.0001
+## 
+## Results are averaged over the levels of: direction
+```
+
+```
+##  df1 df2 F.ratio p.value
+##    2 194  23.485  &lt;.0001
+```
 
 ]
     </textarea>

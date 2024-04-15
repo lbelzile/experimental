@@ -1,4 +1,79 @@
-## Example of two-way ANOVA
+options(contrasts = c("contr.sum","contr.poly"))
+data(STC21_SS5, package = "hecedsm")
+library(emmeans) # estimated marginal means
+library(ggplot2) # grammar of graphics
+
+# Example 1 - interaction plot
+mod1 <- lm(likelihood ~ purchase * debttype, data = STC21_SS5)
+# Compute mean of each of the four cells
+emm1 <- emmeans::emmeans(
+  mod1,
+  specs = c("debttype","purchase"))
+# Produce an interaction plot with confidence intervals
+emmeans::emmip(emm1,  debttype ~ purchase, CIs = TRUE) +
+  theme_classic() + # change theme and move legend
+  theme(legend.position = "bottom")
+# Type 2 sum of square decomposition
+car::Anova(mod1, type = 2)
+# Interaction is not significant
+# so we can look at marginal means
+emmeans::emmeans(
+  mod1,  # model name
+  specs = "debttype", # vector with variables to keep
+  contr = "pairwise") # compute contrasts
+
+# Example 2
+data(MP14_S1, package = "hecedsm")
+mod2 <- lm(distance ~ station * direction, data = MP14_S1)
+emm2 <- emmeans::emmeans(
+  mod2,
+  specs = c("station", "direction"))
+# Interaction plot
+emmeans::emmip(emm, direction ~ station, CIs = TRUE) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+# Compute ANOVA table - interaction is significant, so keep as is
+car::Anova(mod2, type = 2)
+# Model reparametrization
+MP14_S1 <- MP14_S1 |>
+  dplyr::mutate(stdist = factor(dplyr::case_when(
+    station == "Spadina" & direction == "east" ~ "-2",
+    station == "Spadina" & direction == "west" ~ "+2",
+    station == "St. George" & direction == "east" ~ "-1",
+    station == "St. George" & direction == "west" ~ "+1",
+    station == "Bloor-Yonge" & direction == "east" ~ "+1",
+    station == "Bloor-Yonge" & direction == "west" ~ "-1",
+    station == "Sherbourne" & direction == "east" ~ "+2",
+    station == "Sherbourne" & direction == "west" ~ "-2"))) |>
+  dplyr::mutate(stdist = relevel(stdist, ref = "-2"))
+mod3 <- lm(distance ~ stdist * direction, data = MP14_S1)
+emm3 <- emmeans(mod3, specs = c("stdist", "direction"))
+car::Anova(mod3, type = 2)
+# We could also compare the distances by direction of travel
+# one pair at the time using contrasts
+# This is just a one way ANOVA with 8 categories
+clist <- list("-2 * dir" = c(1, 0, 0, 0, -1, 0, 0, 0),
+              "-1 * dir" = c(0, 1, 0, 0, 0, -1, 0, 0),
+              "+1 * dir" = c(0, 0, 1, 0, 0, 0, -1, 0),
+              "+2 * dir" = c(0, 0, 0, 1, 0, 0, 0, -1))
+contrast(emm3, method = clist, adjust = "holm")
+# Interaction plot
+emmip(emm3, formula = ~ stdist | direction,
+      CIs = TRUE) +
+  labs(x = "station distance") +
+  theme_classic()
+# Testing perception of distance
+(emm4 <- emmeans(mod3, specs = "stdist"))
+# order is -2, -1, 1, 2
+contrasts <- emm4  |> contrast(
+  list("two dist" = c(-1, 0, 0, 1),
+       "one dist" = c(0, -1, 1, 0)))
+contrasts # print pairwise contrasts
+test(contrasts, joint = TRUE) #joint test
+
+###########################################################
+
+## Other examples of two-way ANOVA
 library(emmeans)
 # Grossmann and Kross (2014)
 data(GK14_S3, package = "hecedsm")
@@ -22,9 +97,13 @@ with(GK14_S3, table(condition))
 options(contrasts = c("contr.sum", "contr.poly"))
 # The R notation A*B mean A + B + A:B, where the latter denotes interaction
 mod1 <- lm(change ~ distance*target, data = GK14_S3)
-# For those familiar with linear models, the 'sum to zero' constraint amounts to
-# coding baseline with -1, and 1 if you are in level k (sum of effects is zero)
-# default comparison uses 0 baseline, 1 if you are in level k (difference to baseline)
+# For those familiar with linear models,
+# the 'sum to zero' constraint amounts to
+# coding baseline with -1, 1 if you
+# are in level k and zero otherwise
+# so that sum of effects is zero
+# VERSUS default comparison uses 0 baseline,
+# 1 if you are in level k (difference to baseline)
 
 
 # Compute mean of each cell and standard errors
