@@ -21,4 +21,4 @@ The exam format is as follows:
   - contrasts and pairwise comparisons
   - tests for model assumptions and diagnostic plots
   
-A practice final can be downloaded [here](/evaluations/MATH80667A_final_practice.pdf)
+A practice final can be downloaded [here](/evaluations/MATH80667A_final_practice.pdf), along with the [answers](/evaluations/MATH80667A_final_practice_solutions.pdf).

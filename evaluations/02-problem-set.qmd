@@ -23,4 +23,3 @@ Section 3.2 of @Duke.Amir:2023 report the results of an online experiment (Exper
 Reproduce the results reported in Section 3.2.2 and check that your results match those of the paper. Submit your code alongside your report.
 
 
-

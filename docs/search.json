@@ -1433,12 +1433,7 @@
     "href": "evaluations/final-exam.html",
     "title": "Final examination",
     "section": "",
-    "text": "The final is a 180 minutes closed-book examination covering all of the material from class.\nThe exam format is as follows:\n\nOne question on the fundamentals of experimental designs (blocking, randomization, etc.)\nOne question on reproducibility/replication crisis\nOne question on key concepts (power, effect size, multiple testing).\nOne question on advanced topics (mixed models, causal inference and mediation analysis, etc.)\nTwo data analysis questions, using completely randomized or blocked designs (between-subjects or within-subject) with multi-way analysis of variance, ANCOVA, mixed model, with specific questions on various aspects including\n\nparametrization of ANOVA\nadequate setup of model\ninteraction plots\nuse of different tests and methods\ncalculation of degrees of freedom of the model / sample size\nconclusions related to output of tests\ninterpretation of effect sizes\ncontrasts and pairwise comparisons\ntests for model assumptions and diagnostic plots\n\n\nA practice final can be downloaded here",
-    "crumbs": [
-      "Evaluations",
-      "Overview",
-      "Final examination"
-    ]
+    "text": "The final is a 180 minutes closed-book examination covering all of the material from class.\nThe exam format is as follows:\n\nOne question on the fundamentals of experimental designs (blocking, randomization, etc.)\nOne question on reproducibility/replication crisis\nOne question on key concepts (power, effect size, multiple testing).\nOne question on advanced topics (mixed models, causal inference and mediation analysis, etc.)\nTwo data analysis questions, using completely randomized or blocked designs (between-subjects or within-subject) with multi-way analysis of variance, ANCOVA, mixed model, with specific questions on various aspects including\n\nparametrization of ANOVA\nadequate setup of model\ninteraction plots\nuse of different tests and methods\ncalculation of degrees of freedom of the model / sample size\nconclusions related to output of tests\ninterpretation of effect sizes\ncontrasts and pairwise comparisons\ntests for model assumptions and diagnostic plots\n\n\nA practice final can be downloaded here, along with the answers."
   },
   {
     "objectID": "evaluations/paper-review.html",
