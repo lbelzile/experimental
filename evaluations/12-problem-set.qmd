@@ -31,7 +31,7 @@ chisq.test(xtabs(count ~ grade + frequency, data = FBC66_T1))
 
 1. Looking at the output, what is the conclusion of the test? 
 2. The authors report a test for second versus fifth grade only. Repeat their analysis by discarding the row for kindergarden students: do the result match those reported in the paper? 
-3. Usual recommendations for the chi-square test is that the expected counts in each cell be at least 5. Under the null hypothesis of **equal frequency per grade**, what is the expected number of students in each cell? *Hint: calculate the marginal proportion per column*.^[If the expected number is less than 5, the asymptotic $\chi^2$ approximation is dubious.  We could resort to permutation and simulation to assess the accuracy of the $\chi^2$ benchmark. The row sum for the counts (per grade) is fixed to 20, but the columns are allowed to vary.]
+3. Usual recommendations for the chi-square test is that the expected counts in each cell be at least 5. Under the null hypothesis of **equal frequency per grade**, what is the expected number of students in each cell? *Hint: calculate the marginal proportion per column*.^[For a two-way contingency table under the null hypothesis of no interaction, the expected counts $E_{ij}$ of cell $(i,j)$ is obtained as the (total of row $i$) times (total of column $j$), divided by the overall count. If the expected number is less than 5, the asymptotic $\chi^2$ approximation is dubious.  We could resort to permutation and simulation to assess the accuracy of the $\chi^2$ benchmark. The row sum for the counts (per grade) is fixed to 20, but the columns are allowed to vary.]
 
 ```{r}
 #| echo: false
@@ -43,5 +43,5 @@ coin::independence_test(frequency ~ grade,
                         distribution = "approximate")
 ```
 
-4. The replication @Elliot:2021 consider children of different ages corresponding roughly to @Flavell:1966, but with an additional year. Repeat the test and the pairwise comparisons (*Hint: use `xtabs` to cross-classify counts of factor*).
+4. The replication @Elliot:2021 consider children of different ages corresponding roughly to @Flavell:1966, but with an additional year. Repeat the test and the pairwise comparisons (*Hint: in **R**, use `xtabs` to cross-classify counts of factor*).
 5. Why is the $p$-value so small in their replication?
