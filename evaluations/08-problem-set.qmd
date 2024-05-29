@@ -9,6 +9,8 @@ title: "Problem set 8"
 
 Look at the [effect size and power](/example/effectsizepower.html); this should be helpful in completing the problem set.
 
+# Task 1
+
 The following text is a quote from [Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14)](https://osf.io/3467b) about a replication of @Oppenheimer.Monin:2009 work on the retrospective gambler fallacy.
 
 > The differences between groups was reliable, omnibus $F(2, 77) = 4.8$, [...] Cohen’s $f = 0.18$. Pairwise comparisons showed that all differences between conditions were reliable as well, $t(47, 48, 57) = 1.94, 2.32, 2.65$; $p < .05$, Cohen’s $d$ = $(.56, .67, .69)$. 
@@ -19,3 +21,8 @@ The following text is a quote from [Investigating variation in replicability: A 
 2. Compute the overall sample size necessary to replicate this study with a power of at least $0.99:$ compute the power for both the overall effect and the three pairwise $t$-tests based on the reported values of Cohen's $d$ and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).
 3. Read the results of the replication in [ManyLabs1](https://psycnet.apa.org/fulltext/2014-20922-002.pdf); these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen's $d$) are reported in Table 2 [@ManyLab1:2014] under retrospective gambler fallacy. Comment about the success of the replication.
 4. Based on observation of Figure 1 of @ManyLab1:2014, why might one object to using estimated effect size reported in peer-reviewed papers?^[*Hint*: are the original effect size in line with the replications or not?]
+
+
+# Task 2
+
+Read the editorial by @Chambers:2019
