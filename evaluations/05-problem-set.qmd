@@ -17,10 +17,10 @@ The database in package `hecedsm` in **R** is labelled `JZBJG22_E2`. You can als
 
 
 1. A dataset is said to be *balanced* if there are the same number of people in each experimental condition. Are the data balanced over `condition` and `order`? Justify your answer.
-2. Plot the response variables using a suitable graph (e.g., half-violin or density plot), for each of the four conditions. Comment on the repartition of the scores along the scale.
+2. Plot the response variables using a suitable graph (e.g., half-violin or density plot), for each of the four conditions. Comment on the distribution of the scores along the scale.
 3. Using Levene's test, check whether the variance in each subgroup is the same.
-4. Perform the two-way analysis of variance for both `conf_dying` and `conf_pilot` and report the null and alternative hypotheses, the test statistic, the $P$-value and the conclusion of the test. 
-5. For each response variable `conf_dying` and `conf_pilot`, perform follow tests. If the interaction is significant, compute simple effects and 95% confidence intervals for the difference in score for `video` conditions. Otherwise, compute marginal effects.
+4. Perform the two-way analysis of variance for both `conf_dying` and `conf_pilot` and report the null and alternative hypotheses, the test statistic, the $P$-value and the conclusion of the test. Use Welch's ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3.
+5. For each response variable `conf_dying` and `conf_pilot`, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for `video` conditions. 
 
 
 *Hint*: to create a pretty plot in **R**, try the following:

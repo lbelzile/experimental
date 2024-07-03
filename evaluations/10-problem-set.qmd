@@ -14,6 +14,7 @@ Complete this task individually or in teams of up to three students.
 Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html#example-chocolate-data) and some of the [examples](/example/mixedmodel.html) from the course notes.
 
 
+
 @Elliot:2021 attempt to replicate a study of @Flavell:1966 and study unprompted verbalization by children aged 5 to 10 in an experiment. Data `MULTI21_D2` from package `hecedsm` contains the data, including unique participant `id`, `lab`, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the [SPSS database via this link](/files/data/SPSS/MULTI21_D2.sav).
 
 1. Using @Oehlert:2010 approach

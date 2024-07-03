@@ -389,14 +389,24 @@
     "href": "evaluations/12-problem-set.html",
     "title": "Problem set 12",
     "section": "",
-    "text": "Complete this task individually.\nSubmission information: please submit on ZoneCours\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. The data containing the counts of the number of verbalization across all labs are given in the FBC66_T1 and MULTI21_D1 datasets. You can also download the SPSS databases via these links (FBC66_T1 and MULTI21_D1).\nThe data from Table 1 of Flavell et al. (1966) is the number of children who verbalized without prompting overall in the first two experimental conditions (immediate recall and delayed recall subtasks).1\nFor the \\(\\chi^2\\) test to be valid, we need the expected number of counts to be at least five in each subcondition (otherwise the large sample approximation breaks down and is unreliable).\nThe number of students for each grade (kindergarden, second and fifth) is 20. The rows of the table are the ordered number of instances of verbalization.\n# Reinstall package\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(FBC66_T1, package = \"hecedsm\")\nchisq.test(xtabs(count ~ grade + frequency, data = FBC66_T1))\n\n\n    Pearson's Chi-squared test\n\ndata:  xtabs(count ~ grade + frequency, data = FBC66_T1)\nX-squared = 28.358, df = 4, p-value = 1.055e-05"
+    "text": "Complete this task individually.\nSubmission information: please submit on ZoneCours\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. The data containing the counts of the number of verbalization across all labs are given in the FBC66_T1 and MULTI21_D1 datasets. You can also download the SPSS databases via these links (FBC66_T1 and MULTI21_D1). Questions 1–3 refer to the FBC66_T1 data, the remainder to the MULTI21_D1 data.\nThe data from Table 1 of Flavell et al. (1966) are the number of children who verbalized without prompting overall in the first two experimental conditions (immediate recall and delayed recall subtasks).1\nFor the \\(\\chi^2\\) test to be valid, we need the expected number of counts to be at least five in each subcondition (otherwise the large sample approximation breaks down and is unreliable).\nThe number of students for each grade (kindergarden, second and fifth) is 20. The rows of the table are the ordered number of instances of verbalization.\n# Reinstall package\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(FBC66_T1, package = \"hecedsm\")\nchisq.test(xtabs(count ~ grade + frequency, data = FBC66_T1))\n\n\n    Pearson's Chi-squared test\n\ndata:  xtabs(count ~ grade + frequency, data = FBC66_T1)\nX-squared = 28.358, df = 4, p-value = 1.055e-05",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 12"
+    ]
   },
   {
     "objectID": "evaluations/12-problem-set.html#footnotes",
     "href": "evaluations/12-problem-set.html#footnotes",
     "title": "Problem set 12",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nThe last task, point-and-name, is not considered because it specifically instructed students to speak out loud.↩︎\nFor a two-way contingency table under the null hypothesis of no interaction, the expected counts \\(E_{ij}\\) of cell \\((i,j)\\) is obtained as the (total of row \\(i\\)) times (total of column \\(j\\)), divided by the overall count. If the expected number is less than 5, the asymptotic \\(\\chi^2\\) approximation is dubious. We could resort to permutation and simulation to assess the accuracy of the \\(\\chi^2\\) benchmark. The row sum for the counts (per grade) is fixed to 20, but the columns are allowed to vary.↩︎"
+    "text": "Footnotes\n\n\nThe last task, point-and-name, is not considered here because it specifically instructed students to speak out loud.↩︎\nFor a two-way contingency table under the null hypothesis of no interaction, the expected counts \\(E_{ij}\\) of cell \\((i,j)\\) is obtained as the (total of row \\(i\\)) times (total of column \\(j\\)), divided by the overall count. If the expected number is less than 5, the asymptotic \\(\\chi^2\\) approximation is dubious. We could resort to permutation and simulation to assess the accuracy of the \\(\\chi^2\\) benchmark. The row sum for the counts (per grade) is fixed to 20, but the columns are allowed to vary.↩︎",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 12"
+    ]
   },
   {
     "objectID": "evaluations/10-problem-set.html",
@@ -1166,35 +1176,60 @@
     "href": "evaluations/11-problem-set.html",
     "title": "Problem set 11",
     "section": "",
-    "text": "Complete this task in teams of up to three students.\nSubmission information: please submit on ZoneCours"
+    "text": "Complete this task in teams of up to three students.\nSubmission information: please submit on ZoneCours",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 11"
+    ]
   },
   {
     "objectID": "evaluations/11-problem-set.html#task-1",
     "href": "evaluations/11-problem-set.html#task-1",
     "title": "Problem set 11",
     "section": "Task 1",
-    "text": "Task 1\nRead Rohrer et al. (2022) and write a summary."
+    "text": "Task 1\nRead Rohrer et al. (2022) and write a summary.",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 11"
+    ]
   },
   {
     "objectID": "evaluations/11-problem-set.html#task-2",
     "href": "evaluations/11-problem-set.html#task-2",
     "title": "Problem set 11",
     "section": "Task 2",
-    "text": "Task 2\nLiu et al. (2023) postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from LRMM23_S5b in the R package hecedsm. You can also download the SPSS database via this link.\n\nFit the linear mediation model using the PROCESS macro or the mediate function from the mediation R package\n\nuse the nonparametric bootstrap with the percentile method to get confidence intervals\ncompare the coefficients with those of Figure 1 from the paper.\n\nZhao et al. (2010) review the typology of mediation. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.\n\ncomplementary mediation when both direct and indirect effects are of the same sign and non-zero.\ncompetitive mediation when direct and indirect effects are of opposite signs.\nindirect-only mediation when the direct effect of \\(X \\to Y\\) is null, but the effect \\(X \\to M \\to Y\\) isn’t.\n\nThe paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by Liu et al. (2023)."
+    "text": "Task 2\nLiu et al. (2023) postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from LRMM23_S5b in the R package hecedsm. You can also download the SPSS database via this link.\n\nFit the linear mediation model using the PROCESS macro or the mediate function from the mediation R package\n\nuse the nonparametric bootstrap with the percentile method to get confidence intervals\ncompare the coefficients with those of Figure 1 from the paper.\n\nZhao et al. (2010) review the typology of mediation. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.\n\ncomplementary mediation when both direct and indirect effects are of the same sign and non-zero.\ncompetitive mediation when direct and indirect effects are of opposite signs.\nindirect-only mediation when the direct effect of \\(X \\to Y\\) is null, but the effect \\(X \\to M \\to Y\\) isn’t.\n\nThe paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by Liu et al. (2023).",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 11"
+    ]
   },
   {
     "objectID": "evaluations/11-problem-set.html#task-3",
     "href": "evaluations/11-problem-set.html#task-3",
     "title": "Problem set 11",
     "section": "Task 3",
-    "text": "Task 3\nStudy 4 of Risen & Gilovich (2008) (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the Baron & Kenny (1986) methodology.\n\nRead the description and comment on the following aspects:\n\nuse of the Baron and Kenny original testing procedure1\nthe plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.\n\nUsing the summary statistics and coefficients estimates reported, recompute Sobel’s statistic2 and the p-value and compare them with the values reported.3\nList the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?\nCan the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?"
+    "text": "Task 3\nStudy 4 of Risen & Gilovich (2008) (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the Baron & Kenny (1986) methodology.\n\nRead the description and comment on the following aspects:\n\nuse of the Baron and Kenny original testing procedure1\nthe plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.\n\nUsing the summary statistics and coefficients estimates reported, recompute Sobel’s statistic2 and the p-value and compare them with the values reported.3\nList the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?\nCan the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 11"
+    ]
   },
   {
     "objectID": "evaluations/11-problem-set.html#footnotes",
     "href": "evaluations/11-problem-set.html#footnotes",
     "title": "Problem set 11",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nThe latter is said to be suboptimal; explain why in your words.↩︎\nThe square of the std. error of \\(\\widehat{\\gamma}\\widehat{\\alpha}\\) is \\(\\widehat{\\gamma}^2\\mathsf{Va}(\\widehat{\\alpha}) + \\widehat{\\alpha}^2\\mathsf{Va}(\\widehat{\\gamma}) + \\mathsf{Va}(\\widehat{\\gamma})\\mathsf{Va}(\\widehat{\\alpha})\\), where \\(\\mathsf{Va}(\\widehat{\\alpha})\\) is the square of the standard error for \\(\\widehat{\\alpha}\\) in the summary table of the linear regression. Some authors may be excluding the \\(\\mathsf{Va}(\\widehat{\\gamma})\\mathsf{Va}(\\widehat{\\alpha})\\) term from the equation.↩︎\nIn R, the \\(p\\)-value for the two-sided test can be computed via 2*pnorm(abs(stat), lower.tail = FALSE), where stat is Sobel’s statistic.↩︎"
+    "text": "Footnotes\n\n\nThe latter is said to be suboptimal; explain why in your words.↩︎\nThe square of the std. error of \\(\\widehat{\\gamma}\\widehat{\\alpha}\\) is \\(\\widehat{\\gamma}^2\\mathsf{Va}(\\widehat{\\alpha}) + \\widehat{\\alpha}^2\\mathsf{Va}(\\widehat{\\gamma}) + \\mathsf{Va}(\\widehat{\\gamma})\\mathsf{Va}(\\widehat{\\alpha})\\), where \\(\\mathsf{Va}(\\widehat{\\alpha})\\) is the square of the standard error for \\(\\widehat{\\alpha}\\) in the summary table of the linear regression. Some authors may be excluding the \\(\\mathsf{Va}(\\widehat{\\gamma})\\mathsf{Va}(\\widehat{\\alpha})\\) term from the equation.↩︎\nSpoiler alert: you may not manage to reproduce this result. In R, the \\(p\\)-value for the two-sided test can be computed via 2*pnorm(abs(stat), lower.tail = FALSE), where stat is Sobel’s statistic. You can use an online calculator to compute the test statistic and it’s variants.↩︎",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 11"
+    ]
   },
   {
     "objectID": "evaluations/final-exam.html",
