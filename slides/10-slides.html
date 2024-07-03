@@ -4,13 +4,13 @@
     <title>Introduction to mixed models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-03-17" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <meta name="date" content="2024-07-03" />
+    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
-    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
     <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
     <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
@@ -23,6 +23,8 @@
     <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
     <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -48,6 +50,301 @@ HEC Montréal
 ]
 
 ]
+
+---
+class: title title-1
+
+# Outline
+
+
+.box-3.large.sp-after-half[Blocking]
+
+
+.box-4.large.sp-after-half[Mixed effects]
+
+
+---
+
+layout: false
+name: blocking
+class: center middle section-title section-title-3 animated fadeIn
+
+# Blocking
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Terminology for *nuisance*
+
+.pull-left.center[
+
+.box-inv-3.sp-after-half[
+**Block**
+]
+
+Source of variation, but of no interest
+&lt;br&gt; known and controllable
+
+.box-inv-3.sp-after-half[Example]
+timing &lt;br&gt; lab technician &lt;br&gt;  machine
+
+]
+
+
+.pull-right.center[
+
+.box-inv-3.sp-after-half[
+**Noise factor**
+]
+
+Under which setting is response least affected?
+
+.box-inv-3.sp-after-half[Example]
+temperature &lt;br&gt; processing
+]
+
+???
+
+Example 15.2.3 in Dean &amp; Voss of Lipton soup mixture
+
+A: number of mixer ports through which vegetable oil was added (two levels, 1 and 3);
+B: temperature of mixer jacket (two levels; ambient temperature, presence of cooling water);
+C: mixing time (two levels; 60 and 80 sec);
+D: batch weight (two levels; 1500 and 2000 lb);
+E: delay between mixing and packaging (two levels; 1 day and 7 days).
+
+
+---
+
+
+# Why blocking? 
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[ 
+Design experiment to reduce the effect of uncontrolled variations 
+]
+]
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+In general, increases the power of the `\(F\)`
+test for treatment effects.
+]
+]
+
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[
+Group units in sets as alike as possible.
+]
+]
+
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+(Often) compare only treatments, so interactions are not included.
+]
+]
+
+---
+
+# Assignment to treatment
+
+.box-inv-3.medium.sp-after-half[
+Divide subjects within each block
+]
+
+.box-inv-3.medium.sp-after-half[
+Randomly allocate to treatment within block
+]
+
+.box-3.sp-after-half[
+(stratified sampling)
+]
+
+---
+
+
+# Block-treatment design
+
+Without interaction,
+
+`$$\underset{\text{response}\vphantom{b}}{Y_{ij}} =  \underset{\text{global mean}}{\mu\vphantom{\beta_j}} + \underset{\text{treatment}\vphantom{b}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}\vphantom{b}}{\varepsilon_{ij}\vphantom{\beta_j}}$$`
+
+Compromise between 
+
+- reduced variability for residuals,
+- loss of degrees of freedom due to estimation of `\(\beta\)`'s.
+
+---
+
+# Example: Resting metabolic rate
+From Dean, Voss and Draguljić (2017), Example 10.4.1 (p. 311)
+
+&gt; experiment that was run to compare the effects of inpatient and outpatient protocols on the in-laboratory measurement of resting metabolic rate (RMR) in humans. A previous study had indicated measurements of RMR on elderly individuals to be 8% higher using an outpatient protocol than with an inpatient protocol. If the measurements depend on the protocol, then comparison of the results of studies conducted by different laboratories using different protocols would be difficult. The experimenters hoped to conclude that the effect on RMR of different protocols was negligible.
+
+???
+
+The experimental treatments consisted of three protocols: (1) an inpatient protocol in which meals
+were controlled—the patient was fed the evening meal and spent the night in the laboratory, then RMR
+was measured in the morning; (2) an outpatient protocol in which meals were controlled—the patient
+was fed the same evening meal at the laboratory but spent the night at home, then RMR was measured
+in the morning; and (3) an outpatient protocol in which meals were not strictly controlled—the patient
+was instructed to fast for 12 hours prior to measurement of RMR in the morning.
+
+---
+# Fitting the complete block design
+
+.panelset[
+
+.panel[ .panel-name[Load]
+
+
+
+``` r
+url &lt;- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
+# transform integers to factors (categorical)
+resting &lt;- read.table(url, header = TRUE) |&gt;
+  dplyr::mutate(
+    subject = factor(subject), #blocking factor
+    protocol = factor(protocol), #experimental factor
+    rate = rate/1000)
+```
+
+.small[This is *de facto* a repeated measure design.]
+
+]
+
+.panel[.panel-name[Fit]    
+
+
+
+
+``` r
+# Force sum-to-zero parametrization for unordered factors
+options(contrasts = c("contr.sum", "contr.poly"))
+# Fit model with blocking
+model_block &lt;- aov(rate ~ subject + protocol, data = resting)
+# One-way ANOVA (no blocking)
+model_raw &lt;- aov(rate ~ protocol, data = resting)
+# anova(model_block)
+# anova(model_raw)
+```
+]
+
+  .panel[.panel-name[Plot]       
+
+``` r
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+     geom_line() + 
+     labs(y = "mean resting\n metabolic rate") + 
+     theme_classic() +
+     theme(legend.position = "bottom")
+```
+]
+]
+---
+
+# Interaction plot
+
+&lt;img src="10-slides_files/figure-html/plotblocking2-1.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Impact of blocking
+.panelset[
+.panel[.panel-name[ANOVA table (with blocking)]
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Analysis of variance table - with blocking&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Degrees of freedom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean square &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; subject &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protocol &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.795 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.panel[.panel-name[ANOVA table (without blocking)]
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Analysis of variance table - without blocking&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Degrees of freedom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean square &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protocol &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.982 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+]
+
+
+---
+
+layout: false
+name: blocking
+class: center middle section-title section-title-4 animated fadeIn
+
+# Random effects and mixed models
+
 
 ---
 
@@ -130,7 +427,7 @@ Random effects are specified using the notation `(1 | factor)`.
 
 
 
-```r
+``` r
 library(lmerTest) # also loads lme4
 rmod &lt;- lmer(time ~ (1 | id), data = hecedsm::workhours)
 summary_rmod &lt;- summary(rmod)
@@ -175,7 +472,7 @@ We can use confidence intervals for the parameters.
 Those are based on profile likelihood methods (asymmetric).
 
 
-```r
+``` r
 (conf &lt;- confint(rmod, oldNames = FALSE))
 ```
 
@@ -231,7 +528,7 @@ Data need to be in long format, i.e., one response per line with an id column.
 We consider a repeated measure ANOVA (2 by 2 design, within-between) from [Hatano et al. (2022)](https://doi.org/10.1037/xge0001255).
 
 
-```r
+``` r
 data(HOSM22_E3, package = "hecedsm")
 fmod &lt;- afex::aov_ez(
   id = "id", 
@@ -264,7 +561,7 @@ anova(fmod)
 Results are the same as for repeated measures ANOVA if the correlation estimate between observations of the same id are nonnegative.
 
 
-```r
+``` r
 mixmod &lt;- lmerTest::lmer(
   imscore ~ waiting*ratingtype +
     (1 | id), # random intercept per id
@@ -384,7 +681,7 @@ Mixed models vs repeated measures
 Add student `id` as random effect, `stimulus` as fixed effect and their interaction as random effect (since one parent is random)
 
 
-```r
+``` r
 data(AA21, package = "hecedsm")
 anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
   lmerTest::lmer(
@@ -398,7 +695,7 @@ anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
 ## stimulus 65.573  32.786     2 21.878  0.8465 0.4425
 ```
 
-```r
+``` r
 # Approximately 22 degrees of freedom (as for repeated measures)
 ```
 
@@ -409,7 +706,7 @@ anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
 # Data structure
 
 
-&lt;img src="img/11/Hasse_diagram.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/10/Hasse_diagram.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 ---

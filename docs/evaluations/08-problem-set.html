@@ -80,8 +80,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -288,41 +286,39 @@ div.csl-indent {
 
 </header>
 
+<p>Complete this task in teams of two or three students.</p>
 <p><strong>Submission information</strong>: please submit on ZoneCours</p>
 <ul>
 <li>a PDF report</li>
 <li>your code</li>
 </ul>
-<p>Look at the <a href="../example/effectsizepower.html">effect size and power</a>; this should be helpful in completing the problem set.</p>
-<p>The following text is a quote from <a href="https://osf.io/3467b">Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp.&nbsp;13-14)</a> about a replication of <span class="citation" data-cites="Oppenheimer.Monin:2009">Oppenheimer &amp; Monin (<a href="#ref-Oppenheimer.Monin:2009" role="doc-biblioref">2009</a>)</span> work on the retrospective gambler fallacy.</p>
-<blockquote class="blockquote">
-<p>The differences between groups was reliable, omnibus <span class="math inline">\(F(2, 77) = 4.8\)</span>, […] Cohen’s <span class="math inline">\(f = 0.18\)</span>. Pairwise comparisons showed that all differences between conditions were reliable as well, <span class="math inline">\(t(47, 48, 57) = 1.94, 2.32, 2.65\)</span>; <span class="math inline">\(p &lt; .05\)</span>, Cohen’s <span class="math inline">\(d\)</span> = <span class="math inline">\((.56, .67, .69)\)</span>.</p>
-</blockquote>
+<p>Look at the <a href="../example/ancova.html">ANCOVA example</a>; this should be helpful in completing the problem set.</p>
+<p>We consider Experiment 3 of <span class="citation" data-cites="vanStekelenburg:2021">Stekelenburg et al. (<a href="#ref-vanStekelenburg:2021" role="doc-biblioref">2021</a>)</span>; (<a href="https://doi.org/10.1177/09567976211007788">download the paper</a>). The database can be found in <code>SSVB21_S3</code> in the <code>hecedsm</code> package. You can also download the <a href="../files/data/SPSS/SSVB21_S3.sav">SPSS database via this link</a>.</p>
 <ol type="1">
-<li>Using the information from the quote, compute the effect size for Cohen’s <span class="math inline">\(f\)</span> and <span class="math inline">\(\widehat{\omega}^2\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Note that you won’t necessarily get the same value of Cohen’s <span class="math inline">\(f\)</span> that is reported.</li>
-<li>Compute the overall sample size necessary to replicate this study with a power of at least <span class="math inline">\(0.99:\)</span> compute the power for both the overall effect and the three pairwise <span class="math inline">\(t\)</span>-tests based on the reported values of Cohen’s <span class="math inline">\(d\)</span> and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).</li>
-<li>Read the results of the replication in <a href="https://psycnet.apa.org/fulltext/2014-20922-002.pdf">ManyLabs1</a>; these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen’s <span class="math inline">\(d\)</span>) are reported in Table 2 <span class="citation" data-cites="ManyLab1:2014">(<a href="#ref-ManyLab1:2014" role="doc-biblioref">Klein et al., 2014</a>)</span> under retrospective gambler fallacy. Comment about the success of the replication.</li>
-<li>Based on observation of Figure 1 of <span class="citation" data-cites="ManyLab1:2014">Klein et al. (<a href="#ref-ManyLab1:2014" role="doc-biblioref">2014</a>)</span>, why might one object to using estimated effect size reported in peer-reviewed papers?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li>Have a quick look at the exclusion guidelines in the <a href="https://osf.io/4w9tq">preregistration</a>. Do they make sense? think about other potential criteria that could have been listed.</li>
+<li>Write down potential improvement points related to <strong>statistics and experimental setup</strong> that you could raise if you were assigned to peer-review the paper.</li>
+<li>The author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the <a href="https://osf.io/4yatk/download">script</a>). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?</li>
+<li>Test the assumptions of
+<ol type="a">
+<li>equal variance per experimental condition with the ANCOVA</li>
+<li>proper randomization based only on <code>Prior</code> scores</li>
+<li>equality of slopes</li>
+</ol></li>
+<li>If the variance are unequal, fit the model with unequal variances per group (see the <a href="example/ancova.html">ANCOVA example</a>) — otherwise proceed as usual.
+<ul>
+<li>Look at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.</li>
+<li>Does the conclusion of the test change relative to that reported in the paper?</li>
+</ul></li>
 </ol>
-
 
 
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-ManyLab1:2014" class="csl-entry" role="listitem">
-Klein, R. A., Ratliff, K. A., Vianello, M., Adams Jr., R. B., Bahník, Š., Bernstein, M. J., Bocian, K., Brandt, M. J., Brooks, B., Brumbaugh, C. C., Cemalcilar, Z., Chandler, J., Cheong, W., Davis, W. E., Devos, T., Eisner, M., Frankowska, N., Furrow, D., Galliani, E. M., … Nosek, B. A. (2014). Investigating variation in replicability: A <span>“many labs”</span> replication project. <em>Social Psychology</em>, <em>45</em>, 142–152. <a href="https://doi.org/10.1027/1864-9335/a000178">https://doi.org/10.1027/1864-9335/a000178</a>
+<div id="ref-vanStekelenburg:2021" class="csl-entry" role="listitem">
+Stekelenburg, A. van, Schaap, G., Veling, H., &amp; Buijzen, M. (2021). Boosting understanding and identification of scientific consensus can help to correct false beliefs. <em>Psychological Science</em>, <em>32</em>(10), 1549–1565. <a href="https://doi.org/10.1177/09567976211007788">https://doi.org/10.1177/09567976211007788</a>
 </div>
-<div id="ref-Oppenheimer.Monin:2009" class="csl-entry" role="listitem">
-Oppenheimer, D. M., &amp; Monin, B. (2009). The retrospective gambler’s fallacy: Unlikely events, constructing the past, and multiple universes. <em>Judgment and Decision Making</em>, <em>4</em>, 326–334.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>In <strong>R</strong>, check out the function <code>F_to_omega2</code> and <code>F_to_f</code> from the <code>effectsize</code> package. You can also use the formula presented in the slides.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><em>Hint</em>: are the original effect size in line with the replications or not?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

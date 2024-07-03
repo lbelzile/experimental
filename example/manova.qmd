@@ -17,11 +17,7 @@ str(AVC02)
 xtabs(~ format, data = AVC02)
 ```
 
-The data are unbalanced by condition. In general, we need them to be roughly balanced. The `manova` function will not be usable and we need to enforce sum-to-zero constraints to get sensible outputs, otherwise answers will be off.
-
-## Model fitting
-
-After having done so, we can fit the multivariate linear model with `lm` by binding columns on the left of the `~` sign to gather the response vectors.
+The data are unbalanced by condition. In general, we need them to be roughly balanced to maximize power. The `manova` function will not be usable unless data are balanced, and we need to enforce sum-to-zero constraints to get sensible outputs. After this is done, we can fit the multivariate linear model with `lm` by binding columns on the left of the `~` sign to gather the response vectors.
 ```{r}
 options(contrasts = c("contr.sum", "contr.poly"))
 model <- lm(cbind(prime, debt, profitability) ~ format, 
@@ -75,7 +71,7 @@ MASS::lda(format ~ prime + debt + profitability,
           data = AVC02)
 ```
 
-Interpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks (TODO add reference).
+Interpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks [e.g., Chapter 12 of @Mardia.Kent.Taylor:2024].
 
 ## Model assumptions
 
@@ -86,7 +82,7 @@ biotools::boxM(cbind(prime, debt, profitability),
                grouping = format))
 ```
 
-Here, there is a smallish $p$-value, so weak evidence against equality of covariance matrices. The data were generated from normal distribution, but the small $p$-value is an artifact of the rounding of the Likert scale.
+Here, there is a smallish $p$-value, so weak evidence against equality of covariance matrices. The data were generated from normal distribution, but the small $p$-value is an artifact of the rounding of the Likert scale. 
 
 We can test the normality assumption using univariate quantile-quantile plots or tests of normality, including Shapiro-Wilks.
 
@@ -105,7 +101,7 @@ car::qqPlot(rstudent(model)[,3],
 
 We see severe rounding impacts for debt and profitability. There is little to be done about this, but the sample size are large enough that this shouldn't be too much a concern.
 
-We can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to be happy.
+We can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to work.
 
 ```{r}
 mvnormtest::mshapiro.test(U = t(resid(model)))

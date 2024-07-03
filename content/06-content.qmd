@@ -1,35 +1,33 @@
 ---
-title: "Multiway factorial designs"
+title: "Repeated measures"
 ---
-
-
-
 
 ## Content
 
 - Unbalanced designs
-- Multiway factorial designs
-
+- Analysis of within-subject designs
+- Repeated measures and sphericity
 
 ## Learning objectives
 
 At the end of the session, students should be capable of
 
 - listing the benefits of balanced designs
-- correctly interpreting analysis of variance table
-- specifying and calculating custom contrasts in multiway factorial designs
-- correcting for multiple testing
+- adequately modelling repeated measures
+- correctly interpreting tests of sphericity using software
+- explaining the benefits and disadvantages of repeated-measure designs
 
 ## Readings
 
--  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/05-interactions_multiway.html) of the course notes
-- {{< fa book-open-reader >}} [Two-way ANOVA example](/example/twowayanova.html)
-- {{< fa book-open-reader >}} [Three-way ANOVA example](/example/threewayanova.html)
+- {{< fa book >}} [Chapter 6](https://lbelzile.github.io/math80667a/repeated.html) of the course notes
+- {{< fa book-open-reader >}} [Repeated measure example](/example/repeated.html)
+
 
 ## Complementary readings
 
-- {{< fa book >}}  Chapter 8 of @Maxwell.Delaney.Kelley:2017.
-- {{< fa book >}}  Chapters 21-22 of @Keppel/Wickens:2004.
+- <i class="fas fa-book"></i> [Chapter 5.2 ](https://opentext.wsu.edu/carriecuttler/chapter/experimental-design/) of @Price:2017
+- {{< fa book >}}  Chapters 11--12 of @Maxwell.Delaney.Kelley:2017.
+- {{< fa book >}}  Chapters 16--18 of @Keppel/Wickens:2004.
 
 ## Videos
 
@@ -70,6 +68,5 @@ xaringanExtra::embed_xaringan(
 
 
 - [R script](/content/MATH80667A-06-content.R)
-- [SPSS script](/content/MATH80667A-06-content.sps)
 
 

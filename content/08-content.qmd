@@ -1,34 +1,33 @@
 ---
-title: "Effect size and power"
+title: "Analysis of covariance"
 ---
 
 ## Content
 
-- Measures of effect size
-- Power calculations
-- Interplay between sample size, effect and power
+- Analysis of covariance and linear regression models
 
 
 ## Learning objectives
 
 At the end of the session, students should be capable of
 
-- correctly report effect size for common statistics in analysis of variance models
-- deduce the sample size necessary to replicate a study at a given power
-- explain the interplay between sample size, power and effect size.
+- explain the benefits ANCOVA over completely randomized designs
+- using control covariates
+- testing equality of slopes
+
 
 ## Readings
 
-- {{< fa book >}}  [Chapter 7](https://lbelzile.github.io/math80667a/07-power_effect.html) of the course notes
-- {{< fa book >}}  [Chapter 8](https://lbelzile.github.io/math80667a/08-reproducibility_crisis.html) of the course notes
-- {{< fa book-open-reader >}} [Effect size and power example](/example/effectsizepower.html)
+-  {{< fa book >}}  [Chapter 9](https://lbelzile.github.io/math80667a/ancova.html) of the course notes
+
 
 ## Complementary readings
 
-- {{< fa book >}} Chapters 3 (section *Power of the $F$ Test*) and 4 (section *Measures of Effects*) of @Maxwell.Delaney.Kelley:2017.
-- {{< fa file >}} @Lakens:2013
-- {{< fa file >}} @Steiger:2004
-- {{< fa file >}} @Kelley/Preacher:2012
+
+
+- {{< fa book >}}  Chapter 6 of @Maxwell.Delaney.Kelley:2017.
+- <i class="fas fa-book"></i> Chapter 14--15 of @Keppel/Wickens:2004
+
 
 ## Slides
 
@@ -41,7 +40,6 @@ source(here::here("R", "slide-things.R"))
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/08-slides")
-# slide_tabs(slide_details, "/slides/06-slides.html")
 ```
 
 ```{r show-slides-xaringan, echo=FALSE}
@@ -51,17 +49,19 @@ xaringanExtra::embed_xaringan(
 )
 ```
 
-:::{.callout-tip}
-**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
-:::
+## Videos
 
-## Exercise
 
-- [Power calculations](/example/power.html)
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube.com/embed/gTLp0pplRXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
 
 ## Code
 
-
 - [R script](/content/MATH80667A-08-content.R)
-- [Exercise solution](/example/power.R)
 
+
+:::{.callout-tip}
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
+:::

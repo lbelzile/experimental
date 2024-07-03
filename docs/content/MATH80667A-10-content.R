@@ -65,7 +65,7 @@ emmeans(model, specs = "anchor") |> pairs()
 emmeans(model, specs = "verdictsyst", by = "vignette") |> pairs()
 
 ##################################################################################
-#################     Example 3 - Chocolat rating!             ###################
+#################     Example 3 - Chocolate rating!             ##################
 ##################################################################################
 book.url <- "http://stat.ethz.ch/~meier/teaching/book-anova"
 chocolate <- read.table(file.path(book.url, "data/chocolate.dat"),

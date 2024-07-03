@@ -4,7 +4,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\n\n\n   Winter 2024\n   Monday\n   8:30-11:30\n   C-Ste-Cath, Caracas"
+    "text": "Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\n\n\n   Fall 2024\n   Friday\n   8:30-11:30\n   C-Ste-Cath, TBD"
   },
   {
     "objectID": "syllabus.html#textbooks",
@@ -25,14 +25,14 @@
     "href": "syllabus.html#student-hours",
     "title": "Syllabus",
     "section": "Student hours",
-    "text": "Student hours\nI am available Monday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.\nPlease watch this video:\n\n\nStudent hours are set times dedicated to all of you (most professors call these “office hours”; I don’t3). This means that I will be in my office waiting for you to come by if you want to talk to me in person (or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns."
+    "text": "Student hours\nI am available Friday after class and by appointment. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.\nPlease watch this video:\n\n\nStudent hours are set times dedicated to all of you (most professors call these “office hours”; I don’t3). This means that I will be in my office waiting for you to come by if you want to talk to me in person (or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns."
   },
   {
     "objectID": "syllabus.html#late-work",
     "href": "syllabus.html#late-work",
     "title": "Syllabus",
     "section": "Late work",
-    "text": "Late work\nProblem sets and weekly check-ins are due by Sunday. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track."
+    "text": "Late work\nProblem sets and weekly check-ins are due by Thursday noon. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track."
   },
   {
     "objectID": "syllabus.html#intellectual-integrity",
@@ -74,7 +74,7 @@
     "href": "index.html",
     "title": "\n            Experimental Designs and Statistical Methods\n        ",
     "section": "",
-    "text": "Experimental Designs and Statistical Methods\n        \n        \n            Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs.\n        \n        \n            MATH 80667A, Winter 2024HEC Montréal\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\nCourse details\n\n   Winter 2024\n   Monday\n   8:30-11:30\n   C-Ste-Cath, Caracas\n\n\n\nContacting me\nI am best reached by email."
+    "text": "Experimental Designs and Statistical Methods\n        \n        \n            Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs.\n        \n        \n            MATH 80667A, Fall 2024HEC Montréal\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\nCourse details\n\n   Fall 2024\n   Friday\n   8:30-11:30\n   C-Ste-Cath, TBD\n\n\n\nContacting me\nI am best reached by email."
   },
   {
     "objectID": "example/threewayanova.html",
@@ -403,49 +403,21 @@
     "href": "evaluations/10-problem-set.html",
     "title": "Problem set 10",
     "section": "",
-    "text": "Complete this task individually or in teams of up to three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nRead the chocolate example from Meier (2022) and some of the examples from the course notes.\n\n\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. Data MULTI21_D2 from package hecedsm contains the data, including unique participant id, lab, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the SPSS database via this link.\n\nUsing Oehlert (2000) approach\n\nIdentify sources of variation\nIdentify whether factors are crossed or nested\nDetermine whether factors should be fixed or random\nFigure out which interactions can exist and whether they can be fitted.\n\nFit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance:\n\nare there difference between recall task?\nis the increase between 5 and 7 years the same as from 7 to 10?\n\nReport estimated marginal means across age groups (separately for each timing if there is an interaction), with standard errors.\nProduce an interaction plot for mean memory span to mimic Figure 4 of Elliot.\nReport the lab-specific variability and comment on regional differences, if any.\nCompute the correlation of measurements for different individuals in a given lab\n\n\n\n\n\n\n\n\nReferences\n\nElliott, E. M., Morey, C. C., AuBuchon, A. M., Cowan, N., Jarrold, C., Adams, E. J., Attwood, M., Bayram, B., Beeler-Duden, S., Blakstvedt, T. Y., Büttner, G., Castelain, T., Cave, S., Crepaldi, D., Fredriksen, E., Glass, B. A., Graves, A. J., Guitard, D., Hoehl, S., … Voracek, M. (2021). Multilab direct replication of Flavell, Beach, and Chinsky (1966): Spontaneous verbal rehearsal in a memory task as a function of age. Advances in Methods and Practices in Psychological Science, 4(2), 1–20. https://doi.org/10.1177/25152459211018187\n\n\nFlavell, J. H., Beach, D. R., & Chinsky, J. M. (1966). Spontaneous verbal rehearsal in a memory task as a function of age. Child Development, 37(2), 283–299. http://proxy2.hec.ca/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=pbh&AN=10398223&lang=fr&site=ehost-live\n\n\nMeier, L. (2022). ANOVA and mixed models: A short introduction using R (Chapman & Hall/CRC, Eds.). https://doi.org/10.1201/9781003146216\n\n\nOehlert, G. (2000). A first course in design and analysis of experiments. W. H. Freeman. http://users.stat.umn.edu/~gary/Book.html"
+    "text": "Complete this task individually or in teams of up to three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nRead the chocolate example from Meier (2022) and some of the examples from the course notes.\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. Data MULTI21_D2 from package hecedsm contains the data, including unique participant id, lab, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the SPSS database via this link.\n\nUsing Oehlert (2000) approach\n\nIdentify sources of variation\nIdentify whether factors are crossed or nested\nDetermine whether factors should be fixed or random\nFigure out which interactions can exist and whether they can be fitted.\n\nFit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance:\n\nare there difference between recall task?\nis the increase between 5 and 7 years the same as from 7 to 10?\n\nReport estimated marginal means across age groups (separately for each timing if there is an interaction), with standard errors.\nProduce an interaction plot for mean memory span to mimic Figure 4 of Elliot.\nReport the lab-specific variability and comment on regional differences, if any.\nCompute the correlation of measurements for different individuals in a given lab\n\n\n\n\n\n\n\nReferences\n\nElliott, E. M., Morey, C. C., AuBuchon, A. M., Cowan, N., Jarrold, C., Adams, E. J., Attwood, M., Bayram, B., Beeler-Duden, S., Blakstvedt, T. Y., Büttner, G., Castelain, T., Cave, S., Crepaldi, D., Fredriksen, E., Glass, B. A., Graves, A. J., Guitard, D., Hoehl, S., … Voracek, M. (2021). Multilab direct replication of Flavell, Beach, and Chinsky (1966): Spontaneous verbal rehearsal in a memory task as a function of age. Advances in Methods and Practices in Psychological Science, 4(2), 1–20. https://doi.org/10.1177/25152459211018187\n\n\nFlavell, J. H., Beach, D. R., & Chinsky, J. M. (1966). Spontaneous verbal rehearsal in a memory task as a function of age. Child Development, 37(2), 283–299. http://proxy2.hec.ca/login?url=https://search.ebscohost.com/login.aspx?direct=true\\&db=pbh\\&AN=10398223\\&lang=fr\\&site=ehost-live\n\n\nMeier, L. (2022). ANOVA and mixed models: A short introduction using R (Chapman & Hall/CRC, Eds.). https://doi.org/10.1201/9781003146216\n\n\nOehlert, G. (2000). A first course in design and analysis of experiments. W. H. Freeman. http://users.stat.umn.edu/~gary/Book.html"
   },
   {
     "objectID": "evaluations/08-problem-set.html",
     "href": "evaluations/08-problem-set.html",
     "title": "Problem set 8",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy."
-  },
-  {
-    "objectID": "evaluations/08-problem-set.html#footnotes",
-    "href": "evaluations/08-problem-set.html#footnotes",
-    "title": "Problem set 8",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nIn R, check out the function F_to_omega2 and F_to_f from the effectsize package. You can also use the formula presented in the slides.↩︎\nHint: are the original effect size in line with the replications or not?↩︎"
+    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nLook at the ANCOVA example; this should be helpful in completing the problem set.\nWe consider Experiment 3 of Stekelenburg et al. (2021); (download the paper). The database can be found in SSVB21_S3 in the hecedsm package. You can also download the SPSS database via this link.\n\nHave a quick look at the exclusion guidelines in the preregistration. Do they make sense? think about other potential criteria that could have been listed.\nWrite down potential improvement points related to statistics and experimental setup that you could raise if you were assigned to peer-review the paper.\nThe author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the script). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?\nTest the assumptions of\n\nequal variance per experimental condition with the ANCOVA\nproper randomization based only on Prior scores\nequality of slopes\n\nIf the variance are unequal, fit the model with unequal variances per group (see the ANCOVA example) — otherwise proceed as usual.\n\nLook at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.\nDoes the conclusion of the test change relative to that reported in the paper?\n\n\n\n\n\n\nReferences\n\nStekelenburg, A. van, Schaap, G., Veling, H., & Buijzen, M. (2021). Boosting understanding and identification of scientific consensus can help to correct false beliefs. Psychological Science, 32(10), 1549–1565. https://doi.org/10.1177/09567976211007788"
   },
   {
     "objectID": "evaluations/06-problem-set.html",
     "href": "evaluations/06-problem-set.html",
     "title": "Problem set 6",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours"
-  },
-  {
-    "objectID": "evaluations/06-problem-set.html#task-1",
-    "href": "evaluations/06-problem-set.html#task-1",
-    "title": "Problem set 6",
-    "section": "Task 1",
-    "text": "Task 1\nRead Wilkinson (1999)’s guidelines for reporting statistical analyses.\nNext, look at one of the experiments conducted in Stekelenburg et al. (2021). Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors."
-  },
-  {
-    "objectID": "evaluations/06-problem-set.html#task-2",
-    "href": "evaluations/06-problem-set.html#task-2",
-    "title": "Problem set 6",
-    "section": "Task 2",
-    "text": "Task 2\nRead Nosek et al. (2018) and list three benefits of preregistration. Reflect on the practical aspects and on the impact.1\nWe will organize a discussion in the near future in class on preregistration and the replication crisis."
-  },
-  {
-    "objectID": "evaluations/06-problem-set.html#footnotes",
-    "href": "evaluations/06-problem-set.html#footnotes",
-    "title": "Problem set 6",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nFeel free to discuss field-specific issues.↩︎"
+    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nWe consider Study 2 of Bobak et al. (2019), who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). Bobak et al. (2019) report that\n\nParticipants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.\n\nPerform a repeated measure one-way ANOVA with color as within-factor and pcorr as response with the BMH19_S2 data, which can be found in the R package hecedsm. You can also download the SPSS database via this link.\n\nExplain in your own words the purpose of randomization and counterbalancing in a repeated measure experiment.\nIs there evidence against the hypothesis of sphericity? Report Mauchly’s statistic and the conclusion of the hypothesis test.\nAre there differences overall between color match (monochrome, mixed or colored)? Report the \\(F\\)-statistic, the degrees of freedom and the \\(p\\)-value and a measure of effect size (e.g., \\(\\widehat{R}^2_p\\)). If the sphericity assumption isn’t met, use the Greenhouse–Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor \\(\\widehat{\\epsilon}\\).\nCompute pairwise differences applying Tukey’s honest significance difference multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in pcorr), the \\(t\\)-test statistics and the associated \\(p\\)-values. \n\n\n\n\n\nReferences\n\nBobak, A. K., Mileva, V. R., & Hancock, P. J. B. (2019). A grey area: How does image hue affect unfamiliar face matching? Cognitive Research: Principles and Implications, 4(1), 27. https://doi.org/10.1186/s41235-019-0174-3"
   },
   {
     "objectID": "evaluations/04-problem-set.html",
@@ -501,14 +473,14 @@
     "href": "content/12-content.html#learning-objectives",
     "title": "Mediation and moderation",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUsing the linear mediation model\ndiscussing limitations of the linear mediation model\ntesting for moderating variables (interactions)"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nfitting a linear mediation model\ndiscussing limitations of the linear mediation model\ntesting for moderating variables (interactions)"
   },
   {
     "objectID": "content/12-content.html#readings",
     "href": "content/12-content.html#readings",
     "title": "Mediation and moderation",
     "section": "Readings",
-    "text": "Readings\n\nChapter 11 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions (Imai et al., 2010; Pearl, 2014)"
+    "text": "Readings\n\nChapter 13 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions (Imai et al., 2010; Pearl, 2014)"
   },
   {
     "objectID": "content/12-content.html#slides",
@@ -529,35 +501,35 @@
     "href": "content/10-content.html",
     "title": "Intro to mixed models",
     "section": "",
-    "text": "Introduction to mixed models"
+    "text": "Fixed vs random effects\nBlocking factors\nIntroduction to linear mixed models"
   },
   {
     "objectID": "content/10-content.html#content",
     "href": "content/10-content.html#content",
     "title": "Intro to mixed models",
     "section": "",
-    "text": "Introduction to mixed models"
+    "text": "Fixed vs random effects\nBlocking factors\nIntroduction to linear mixed models"
   },
   {
     "objectID": "content/10-content.html#learning-objectives",
     "href": "content/10-content.html#learning-objectives",
     "title": "Intro to mixed models",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ndetermining the structure of an experimental design with random and fixed effects\ncorrectly determining whether effects are crossed or nested\nsetting up a linear mixed model"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ndetermining the structure of an experimental design with random and fixed effects\ncorrectly determining whether effects are crossed or nested\ncorrectly analyzing models with blocking factors\nsetting up a linear mixed model"
   },
   {
     "objectID": "content/10-content.html#readings",
     "href": "content/10-content.html#readings",
     "title": "Intro to mixed models",
     "section": "Readings",
-    "text": "Readings\n\nChapter 6 Random and Mixed-Effects Models of Lukas Meier’s ANOVA and Mixed Models: A Short Intro Using R]\n Chapter 10 of the course notes"
+    "text": "Readings\n\n Chapter 5 (Complete Block Designs) of Meier (2022) (5.1-5.2)\nChapter 6 Random and Mixed-Effects Models of Meier (2022)\n Chapter 12 of the course notes"
   },
   {
     "objectID": "content/10-content.html#complementary-readings",
     "href": "content/10-content.html#complementary-readings",
     "title": "Intro to mixed models",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 10 and 15 of Maxwell et al. (2017)."
+    "text": "Complementary readings\n\n Chapter 4 of Cox (1958).\n Chapters 10 and 15 of Maxwell et al. (2017)."
   },
   {
     "objectID": "content/10-content.html#slides",
@@ -576,114 +548,114 @@
   {
     "objectID": "content/08-content.html",
     "href": "content/08-content.html",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "",
-    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
+    "text": "Analysis of covariance and linear regression models"
   },
   {
     "objectID": "content/08-content.html#content",
     "href": "content/08-content.html#content",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "",
-    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
+    "text": "Analysis of covariance and linear regression models"
   },
   {
     "objectID": "content/08-content.html#learning-objectives",
     "href": "content/08-content.html#learning-objectives",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncorrectly report effect size for common statistics in analysis of variance models\ndeduce the sample size necessary to replicate a study at a given power\nexplain the interplay between sample size, power and effect size."
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits ANCOVA over completely randomized designs\nusing control covariates\ntesting equality of slopes"
   },
   {
     "objectID": "content/08-content.html#readings",
     "href": "content/08-content.html#readings",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 7 of the course notes\n Chapter 8 of the course notes\n Effect size and power example"
+    "text": "Readings\n\n Chapter 9 of the course notes"
   },
   {
     "objectID": "content/08-content.html#complementary-readings",
     "href": "content/08-content.html#complementary-readings",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)"
+    "text": "Complementary readings\n\n Chapter 6 of Maxwell et al. (2017).\n Chapter 14–15 of Keppel & Wickens (2004)"
   },
   {
     "objectID": "content/08-content.html#slides",
     "href": "content/08-content.html#slides",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides"
   },
   {
-    "objectID": "content/08-content.html#exercise",
-    "href": "content/08-content.html#exercise",
-    "title": "Effect size and power",
-    "section": "Exercise",
-    "text": "Exercise\n\nPower calculations"
+    "objectID": "content/08-content.html#videos",
+    "href": "content/08-content.html#videos",
+    "title": "Analysis of covariance",
+    "section": "Videos",
+    "text": "Videos"
   },
   {
     "objectID": "content/08-content.html#code",
     "href": "content/08-content.html#code",
-    "title": "Effect size and power",
+    "title": "Analysis of covariance",
     "section": "Code",
-    "text": "Code\n\nR script\nExercise solution"
+    "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
     "objectID": "content/06-content.html",
     "href": "content/06-content.html",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "",
-    "text": "Unbalanced designs\nMultiway factorial designs"
+    "text": "Unbalanced designs\nAnalysis of within-subject designs\nRepeated measures and sphericity"
   },
   {
     "objectID": "content/06-content.html#content",
     "href": "content/06-content.html#content",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "",
-    "text": "Unbalanced designs\nMultiway factorial designs"
+    "text": "Unbalanced designs\nAnalysis of within-subject designs\nRepeated measures and sphericity"
   },
   {
     "objectID": "content/06-content.html#learning-objectives",
     "href": "content/06-content.html#learning-objectives",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of balanced designs\ncorrectly interpreting analysis of variance table\nspecifying and calculating custom contrasts in multiway factorial designs\ncorrecting for multiple testing"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of balanced designs\nadequately modelling repeated measures\ncorrectly interpreting tests of sphericity using software\nexplaining the benefits and disadvantages of repeated-measure designs"
   },
   {
     "objectID": "content/06-content.html#readings",
     "href": "content/06-content.html#readings",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 5 of the course notes\n Two-way ANOVA example\n Three-way ANOVA example"
+    "text": "Readings\n\n Chapter 6 of the course notes\n Repeated measure example"
   },
   {
     "objectID": "content/06-content.html#complementary-readings",
     "href": "content/06-content.html#complementary-readings",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 8 of Maxwell et al. (2017).\n Chapters 21-22 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 5.2 of Price et al. (2017)\n Chapters 11–12 of Maxwell et al. (2017).\n Chapters 16–18 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/06-content.html#videos",
     "href": "content/06-content.html#videos",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "Videos",
     "text": "Videos"
   },
   {
     "objectID": "content/06-content.html#slides",
     "href": "content/06-content.html#slides",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
     "objectID": "content/06-content.html#code",
     "href": "content/06-content.html#code",
-    "title": "Multiway factorial designs",
+    "title": "Repeated measures",
     "section": "Code",
-    "text": "Code\n\nR script\nSPSS script"
+    "text": "Code\n\nR script"
   },
   {
     "objectID": "content/04-content.html",
@@ -891,156 +863,156 @@
   {
     "objectID": "content/05-content.html",
     "href": "content/05-content.html",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "",
-    "text": "Benefits of factorial designs\nInteractions\nSimple, marginal and interaction contrasts"
+    "text": "Between vs within-subject designs\nInteractions\nSimple, marginal and interaction contrasts"
   },
   {
     "objectID": "content/05-content.html#content",
     "href": "content/05-content.html#content",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "",
-    "text": "Benefits of factorial designs\nInteractions\nSimple, marginal and interaction contrasts"
+    "text": "Between vs within-subject designs\nInteractions\nSimple, marginal and interaction contrasts"
   },
   {
     "objectID": "content/05-content.html#learning-objectives",
     "href": "content/05-content.html#learning-objectives",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of factorial designs\ninterpreting an interaction plot and being aware of it’s limitation\ninterpreting model effects in sum-to-zero parametrization\nreporting results from a two-way analysis of variance\ndetermining whether or not simple or main effects are most suitable"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of factorial designs\ninterpreting an interaction plot and being aware of it’s limitation\ninterpreting model effects in sum-to-zero parametrization\nreporting results from a two-way analysis of variance\ndetermining whether or not simple or main effects are most suitable for comparisons"
   },
   {
     "objectID": "content/05-content.html#readings",
     "href": "content/05-content.html#readings",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "Readings",
     "text": "Readings\n\n Chapter 4 of Meier (2022)\n Chapter 5 of the course notes"
   },
   {
     "objectID": "content/05-content.html#complementary-readings",
     "href": "content/05-content.html#complementary-readings",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10-13 of Keppel & Wickens (2004)."
+    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10–13 of Keppel & Wickens (2004)."
   },
   {
     "objectID": "content/05-content.html#slides",
     "href": "content/05-content.html#slides",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
     "objectID": "content/05-content.html#code",
     "href": "content/05-content.html#code",
-    "title": "Complete factorial designs",
+    "title": "Factorial designs and interactions",
     "section": "Code",
     "text": "Code\n\nR script\nSPSS script"
   },
   {
     "objectID": "content/07-content.html",
     "href": "content/07-content.html",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "",
-    "text": "Blocking\nAnalysis of covariance"
+    "text": "ANOVA with two or more factors\nANOVA with both within-subject and between-subject factors\nMultivariate analysis of variance"
   },
   {
     "objectID": "content/07-content.html#content",
     "href": "content/07-content.html#content",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "",
-    "text": "Blocking\nAnalysis of covariance"
+    "text": "ANOVA with two or more factors\nANOVA with both within-subject and between-subject factors\nMultivariate analysis of variance"
   },
   {
     "objectID": "content/07-content.html#learning-objectives",
     "href": "content/07-content.html#learning-objectives",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits of blocked design and ANCOVA over completely randomized designs\nusing control covariates or blocking factors\ntesting equality of slopes"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nanalyzing models with both within-subject and between-subject factors\nspecifying and calculating custom contrasts in multiway factorial designs\ncorrectly interpreting an analysis of variance table\ntesting model assumptions in multivariate model"
   },
   {
     "objectID": "content/07-content.html#readings",
     "href": "content/07-content.html#readings",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 6 of the course notes\n Chapter 5 (Complete Block Designs) of Meier (2022) (5.1-5.2)"
+    "text": "Readings\n\n Chapter 7 of the course notes\n Chapter 8 of the course notes\n Three-way ANOVA example\n MANOVA example"
   },
   {
     "objectID": "content/07-content.html#complementary-readings",
     "href": "content/07-content.html#complementary-readings",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 9 of Maxwell et al. (2017).\n Chapter 4 of Cox (1958)."
-  },
-  {
-    "objectID": "content/07-content.html#videos",
-    "href": "content/07-content.html#videos",
-    "title": "Designs to reduce the error",
-    "section": "Videos",
-    "text": "Videos"
+    "text": "Complementary readings\n\n Chapters 8 and 14 of Maxwell et al. (2017).\n Chapters 20–23 of Maxwell et al. (2017)."
   },
   {
     "objectID": "content/07-content.html#slides",
     "href": "content/07-content.html#slides",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides"
   },
   {
     "objectID": "content/07-content.html#code",
     "href": "content/07-content.html#code",
-    "title": "Designs to reduce the error",
+    "title": "Multiway ANOVA and MANOVA",
     "section": "Code",
-    "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
   },
   {
     "objectID": "content/09-content.html",
     "href": "content/09-content.html",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "",
-    "text": "Analysis of within-subject designs\nRepeated measures and test of sphericity\nMultivariate analysis of variance"
+    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
   },
   {
     "objectID": "content/09-content.html#content",
     "href": "content/09-content.html#content",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "",
-    "text": "Analysis of within-subject designs\nRepeated measures and test of sphericity\nMultivariate analysis of variance"
+    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power"
   },
   {
     "objectID": "content/09-content.html#learning-objectives",
     "href": "content/09-content.html#learning-objectives",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nadequately modelling repeated measures\ncorrectly interpreting tests of sphericity using software\nexplaining the benefits and disadvantages of repeated-measure designs\ntesting model assumptions in multivariate model"
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncorrectly report effect size for common statistics in analysis of variance models\ndeduce the sample size necessary to replicate a study at a given power\nexplain the interplay between sample size, power and effect size."
   },
   {
     "objectID": "content/09-content.html#readings",
     "href": "content/09-content.html#readings",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 9 of the course notes"
+    "text": "Readings\n\n Chapter 10 of the course notes\n Chapter 11 of the course notes\n Effect size and power example\n Zhang & Yuan (2018), pages 143–148 of the web manual"
   },
   {
     "objectID": "content/09-content.html#complementary-readings",
     "href": "content/09-content.html#complementary-readings",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Zhang & Yuan (2018), pages 143–148 of the web manual\n Chapters 11–13 of Maxwell et al. (2017).\n Chapter 5.2 of Price et al. (2017)\n Chapter 16 to 18 of Keppel & Wickens (2004)"
+    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)"
   },
   {
     "objectID": "content/09-content.html#slides",
     "href": "content/09-content.html#slides",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+  },
+  {
+    "objectID": "content/09-content.html#exercise",
+    "href": "content/09-content.html#exercise",
+    "title": "Effect size and power",
+    "section": "Exercise",
+    "text": "Exercise\n\nPower calculations"
   },
   {
     "objectID": "content/09-content.html#code",
     "href": "content/09-content.html#code",
-    "title": "Repeated measures and multivariate ANOVA",
+    "title": "Effect size and power",
     "section": "Code",
-    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands."
+    "text": "Code\n\nR script\nExercise solution"
   },
   {
     "objectID": "content/11-content.html",
@@ -1068,7 +1040,7 @@
     "href": "content/11-content.html#readings",
     "title": "Introduction to causal inference",
     "section": "Readings",
-    "text": "Readings\n\nChapter 2 of VanderWeele (2015)\n\nAndrew Heiss’ course notes on directed acyclic graphs (DAG) and types of association.\n\nCausal models (video and slides)\nPaths, doors, and adjustment (video and slides)\n\nThe structural equation modelling (SEM) approach to mediation\n\nPaper popularizing linear mediation (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\n\nThe causal inference approach\n\nPearl (2014)\nImai et al. (2010)"
+    "text": "Readings\n\nChapter 2 of VanderWeele (2015)\nSection 13.1 of the course notes\n\nAndrew Heiss’ course notes on directed acyclic graphs (DAG) and types of association.\n\nCausal models (video and slides)\nPaths, doors, and adjustment (video and slides)\n\nThe structural equation modelling (SEM) approach to mediation\n\nPaper popularizing linear mediation (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\n\nThe causal inference approach\n\nPearl (2014)\nImai et al. (2010)"
   },
   {
     "objectID": "content/11-content.html#complementary-readings",
@@ -1089,14 +1061,14 @@
     "href": "content/13-content.html",
     "title": "Nonparametric tests and count data",
     "section": "",
-    "text": "Models and tests for count data\nNonparametric tests"
+    "text": "Models and tests for categorical and count data\nNonparametric tests"
   },
   {
     "objectID": "content/13-content.html#content",
     "href": "content/13-content.html#content",
     "title": "Nonparametric tests and count data",
     "section": "",
-    "text": "Models and tests for count data\nNonparametric tests"
+    "text": "Models and tests for categorical and count data\nNonparametric tests"
   },
   {
     "objectID": "content/13-content.html#learning-objectives",
@@ -1110,7 +1082,7 @@
     "href": "content/13-content.html#readings",
     "title": "Nonparametric tests and count data",
     "section": "Readings",
-    "text": "Readings\n\nChapter 12 Categorical data analysis of Navarro (2019)\nChapters 12 and 13 of the course notes"
+    "text": "Readings\n\nChapter 12 Categorical data analysis of Navarro (2019)\nChapters 14 and 15 of the course notes"
   },
   {
     "objectID": "content/13-content.html#slides",
@@ -1152,21 +1124,42 @@
     "href": "evaluations/07-problem-set.html",
     "title": "Problem set 7",
     "section": "",
-    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nLook at the ANCOVA example; this should be helpful in completing the problem set.\nWe consider Experiment 3 of Stekelenburg et al. (2021); (download the paper). The database can be found in SSVB21_S3 in the hecedsm package. You can also download the SPSS database via this link.\n\nHave a quick look at the exclusion guidelines in the preregistration. Do they make sense? think about other potential criteria that could have been listed.\nWrite down potential improvement points related to statistics and experimental setup that you could raise if you were assigned to peer-review the paper.\nThe author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the script). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?\nTest the assumptions of\n\nequal variance per experimental condition with the ANCOVA\nproper randomization based only on Prior scores\nequality of slopes\n\nIf the variance are unequal, fit the model with unequal variances per group (see the ANCOVA example) — otherwise proceed as usual.\n\nLook at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.\nDoes the conclusion of the test change relative to that reported in the paper?\n\n\n\n\n\n\nReferences\n\nStekelenburg, A. van, Schaap, G., Veling, H., & Buijzen, M. (2021). Boosting understanding and identification of scientific consensus can help to correct false beliefs. Psychological Science, 32(10), 1549–1565. https://doi.org/10.1177/09567976211007788"
+    "text": "Submission information: please submit on ZoneCours"
+  },
+  {
+    "objectID": "evaluations/07-problem-set.html#task-1",
+    "href": "evaluations/07-problem-set.html#task-1",
+    "title": "Problem set 7",
+    "section": "Task 1",
+    "text": "Task 1\nRead Wilkinson (1999)’s guidelines for reporting statistical analyses.\nNext, look at one of the experiments conducted in Stekelenburg et al. (2021). Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors."
+  },
+  {
+    "objectID": "evaluations/07-problem-set.html#task-2",
+    "href": "evaluations/07-problem-set.html#task-2",
+    "title": "Problem set 7",
+    "section": "Task 2",
+    "text": "Task 2\nRead Nosek et al. (2018) and list three benefits of preregistration. Reflect on the practical aspects and on the impact.1\nWe will organize a discussion in the near future in class on preregistration and the replication crisis."
+  },
+  {
+    "objectID": "evaluations/07-problem-set.html#footnotes",
+    "href": "evaluations/07-problem-set.html#footnotes",
+    "title": "Problem set 7",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFeel free to discuss field-specific issues.↩︎"
   },
   {
     "objectID": "evaluations/09-problem-set.html",
     "href": "evaluations/09-problem-set.html",
     "title": "Problem set 9",
     "section": "",
-    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\nWe consider Study 2 of Bobak et al. (2019), who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). Bobak et al. (2019) report that\nPerform a repeated measure one-way ANOVA with color as within-factor and pcorr as response with the BMH19_S2 data, which can be found in the R package hecedsm. You can also download the SPSS database via this link."
+    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy."
   },
   {
     "objectID": "evaluations/09-problem-set.html#footnotes",
     "href": "evaluations/09-problem-set.html#footnotes",
     "title": "Problem set 9",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nIf you fit the model with afex package functions aov_ez, the output contains a slot $Anova with the value of this test.↩︎"
+    "text": "Footnotes\n\n\nIn R, check out the function F_to_omega2 and F_to_f from the effectsize package. You can also use the formula presented in the slides.↩︎\nHint: are the original effect size in line with the replications or not?↩︎"
   },
   {
     "objectID": "evaluations/11-problem-set.html",
@@ -1334,14 +1327,7 @@
     "href": "example/manova.html#data",
     "title": "Multivariate analysis of variance",
     "section": "Data",
-    "text": "Data\nWe first load the data from the package and inspect the content.\n\n\nCode\ndata(AVC02, package = \"hecedsm\")\nstr(AVC02)\n\n\nClasses 'tbl_df', 'tbl' and 'data.frame':   132 obs. of  4 variables:\n $ format       : Factor w/ 3 levels \"integrated note\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ prime        : num  0.5 1.5 0.5 0.25 1.5 1.25 2 0.5 1.5 0.5 ...\n $ debt         : int  3 4 1 4 3 3 3 5 2 2 ...\n $ profitability: int  3 2 2 5 2 2 2 3 2 3 ...\n\n\nCode\nxtabs(~ format, data = AVC02)\n\n\nformat\n        integrated note        stand-alone note modified auditor report \n                     40                      45                      47 \n\n\nThe data are unbalanced by condition. In general, we need them to be roughly balanced. The manova function will not be usable and we need to enforce sum-to-zero constraints to get sensible outputs, otherwise answers will be off."
-  },
-  {
-    "objectID": "example/manova.html#model-fitting",
-    "href": "example/manova.html#model-fitting",
-    "title": "Multivariate analysis of variance",
-    "section": "Model fitting",
-    "text": "Model fitting\nAfter having done so, we can fit the multivariate linear model with lm by binding columns on the left of the ~ sign to gather the response vectors.\n\n\nCode\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\nmodel &lt;- lm(cbind(prime, debt, profitability) ~ format, \n            data = AVC02)\n\n\nWe can check the residual correlation matrix to see if there was a strong dependence between our measurements. The benefit of MANOVA is to be able to leverage this correlation, if any.\n\n\nCode\ncor(resid(model))\n\n\n\n\n              prime  debt profitability\nprime          1.00 -0.40         -0.54\ndebt          -0.40  1.00          0.65\nprofitability -0.54  0.65          1.00\n\n\nWe can look at the global mean for each variable and the estimated mean differences for all groups, including the reference which is omitted. It’s easy to see that the mean differences sum to zero.\n\n\nCode\ndummy.coef(model)\n\n\nFull coefficients are \n                                                               \n(Intercept):             prime        1.280511                 \n                          debt        2.881521                 \n                 profitability        2.597695                 \nformat:                        integrated note stand-alone note\n                         prime    -0.099261229     -0.013844563\n                          debt     0.068479117     -0.059298660\n                 profitability     0.127304965      0.002304965\n                                       \n(Intercept):                           \n                                       \n                                       \nformat:         modified auditor report\n                            0.113105792\n                           -0.009180457\n                           -0.129609929"
+    "text": "Data\nWe first load the data from the package and inspect the content.\n\n\nCode\ndata(AVC02, package = \"hecedsm\")\nstr(AVC02)\n\n\nClasses 'tbl_df', 'tbl' and 'data.frame':   132 obs. of  4 variables:\n $ format       : Factor w/ 3 levels \"integrated note\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ prime        : num  0.5 1.5 0.5 0.25 1.5 1.25 2 0.5 1.5 0.5 ...\n $ debt         : int  3 4 1 4 3 3 3 5 2 2 ...\n $ profitability: int  3 2 2 5 2 2 2 3 2 3 ...\n\n\nCode\nxtabs(~ format, data = AVC02)\n\n\nformat\n        integrated note        stand-alone note modified auditor report \n                     40                      45                      47 \n\n\nThe data are unbalanced by condition. In general, we need them to be roughly balanced to maximize power. The manova function will not be usable unless data are balanced, and we need to enforce sum-to-zero constraints to get sensible outputs. After this is done, we can fit the multivariate linear model with lm by binding columns on the left of the ~ sign to gather the response vectors.\n\n\nCode\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\nmodel &lt;- lm(cbind(prime, debt, profitability) ~ format, \n            data = AVC02)\n\n\nWe can check the residual correlation matrix to see if there was a strong dependence between our measurements. The benefit of MANOVA is to be able to leverage this correlation, if any.\n\n\nCode\ncor(resid(model))\n\n\n\n\n              prime  debt profitability\nprime          1.00 -0.40         -0.54\ndebt          -0.40  1.00          0.65\nprofitability -0.54  0.65          1.00\n\n\nWe can look at the global mean for each variable and the estimated mean differences for all groups, including the reference which is omitted. It’s easy to see that the mean differences sum to zero.\n\n\nCode\ndummy.coef(model)\n\n\nFull coefficients are \n                                                               \n(Intercept):             prime        1.280511                 \n                          debt        2.881521                 \n                 profitability        2.597695                 \nformat:                        integrated note stand-alone note\n                         prime    -0.099261229     -0.013844563\n                          debt     0.068479117     -0.059298660\n                 profitability     0.127304965      0.002304965\n                                       \n(Intercept):                           \n                                       \n                                       \nformat:         modified auditor report\n                            0.113105792\n                           -0.009180457\n                           -0.129609929"
   },
   {
     "objectID": "example/manova.html#multivariate-analysis-of-variance",
@@ -1355,21 +1341,21 @@
     "href": "example/manova.html#effect-sizes",
     "title": "Multivariate analysis of variance",
     "section": "Effect sizes",
-    "text": "Effect sizes\nWe can compute effect sizes overall for the MANOVA statistic using the correspondance with the \\(F\\) distribution, and also the individual effect size variable per variable. Here, the values returned are partial \\(\\widehat{\\eta}^2\\) measures.\n\n\nCode\neffectsize::eta_squared(car::Manova(model))\n\n\n# Effect Size for ANOVA (Type II)\n\nParameter | Eta2 (partial) |       95% CI\n-----------------------------------------\nformat    |           0.01 | [0.00, 1.00]\n\n- One-sided CIs: upper bound fixed at [1.00].\n\n\nCode\n# Since it's a one-way between-subject MANOVA, no partial measure\neffectsize::eta_squared(model, partial = FALSE)\n\n\n# Effect Size for ANOVA (Type I)\n\nResponse      | Parameter |     Eta2 |       95% CI\n---------------------------------------------------\nprime         |    format |     0.01 | [0.00, 1.00]\ndebt          |    format | 2.23e-03 | [0.00, 1.00]\nprofitability |    format |     0.02 | [0.00, 1.00]"
+    "text": "Effect sizes\nWe can compute effect sizes overall for the MANOVA statistic using the correspondance with the \\(F\\) distribution, and also the individual effect size variable per variable. Here, the values returned are partial \\(\\widehat{\\eta}^2\\) measures.\n\n\nCode\neffectsize::eta_squared(car::Manova(model))\n\n\n# Effect Size for ANOVA (Type II)\n\nParameter | Eta2 (partial) |       95% CI\n-----------------------------------------\nformat    |           0.01 | [0.00, 1.00]\n\n- One-sided CIs: upper bound fixed at [1.00].\n\n\nCode\n# Since it's a one-way between-subject MANOVA, no partial measure\neffectsize::eta_squared(model, partial = FALSE)\n\n\nWarning: Argument `effectsize_type` is deprecated. Use `es_type` instead.\n\n\n# Effect Size for ANOVA (Type I)\n\nResponse      | Parameter |     Eta2 |       95% CI\n---------------------------------------------------\nprime         |    format |     0.01 | [0.00, 1.00]\ndebt          |    format | 2.23e-03 | [0.00, 1.00]\nprofitability |    format |     0.02 | [0.00, 1.00]"
   },
   {
     "objectID": "example/manova.html#post-hoc-analyses",
     "href": "example/manova.html#post-hoc-analyses",
     "title": "Multivariate analysis of variance",
     "section": "Post-hoc analyses",
-    "text": "Post-hoc analyses\nWe can continue with descriptive discriminant analysis for the post-hoc comparisons. To fit the model using the lda function from the MASS package, we swap the role of the experimental factor and responses in the formula. The output shows the weights for the linear combinations.\n\n\nCode\nMASS::lda(format ~ prime + debt + profitability,\n          data = AVC02)\n\n\nCall:\nlda(format ~ prime + debt + profitability, data = AVC02)\n\nPrior probabilities of groups:\n        integrated note        stand-alone note modified auditor report \n              0.3030303               0.3409091               0.3560606 \n\nGroup means:\n                           prime     debt profitability\nintegrated note         1.181250 2.950000      2.725000\nstand-alone note        1.266667 2.822222      2.600000\nmodified auditor report 1.393617 2.872340      2.468085\n\nCoefficients of linear discriminants:\n                     LD1         LD2\nprime          0.5171202  0.16521149\ndebt           0.6529450  0.97286350\nprofitability -1.2016530 -0.04412713\n\nProportion of trace:\n   LD1    LD2 \n0.9257 0.0743 \n\n\nInterpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks (TODO add reference)."
+    "text": "Post-hoc analyses\nWe can continue with descriptive discriminant analysis for the post-hoc comparisons. To fit the model using the lda function from the MASS package, we swap the role of the experimental factor and responses in the formula. The output shows the weights for the linear combinations.\n\n\nCode\nMASS::lda(format ~ prime + debt + profitability,\n          data = AVC02)\n\n\nCall:\nlda(format ~ prime + debt + profitability, data = AVC02)\n\nPrior probabilities of groups:\n        integrated note        stand-alone note modified auditor report \n              0.3030303               0.3409091               0.3560606 \n\nGroup means:\n                           prime     debt profitability\nintegrated note         1.181250 2.950000      2.725000\nstand-alone note        1.266667 2.822222      2.600000\nmodified auditor report 1.393617 2.872340      2.468085\n\nCoefficients of linear discriminants:\n                     LD1         LD2\nprime          0.5171202  0.16521149\ndebt           0.6529450  0.97286350\nprofitability -1.2016530 -0.04412713\n\nProportion of trace:\n   LD1    LD2 \n0.9257 0.0743 \n\n\nInterpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks (e.g., Chapter 12 of Mardia et al., 2024)."
   },
   {
     "objectID": "example/manova.html#model-assumptions",
     "href": "example/manova.html#model-assumptions",
     "title": "Multivariate analysis of variance",
     "section": "Model assumptions",
-    "text": "Model assumptions\nThe next step before writing about any of our conclusions is to check the model assumptions. As before, we could check for each variable in turn whether the variance are the same in each group. Here, we rather check equality of covariance matrix. The test has typically limited power, but unfortunately is very sensitive to departure from the multivariate normality assumption, so sometimes rejection are false positive.\n\n\nCode\nwith(AVC02,\nbiotools::boxM(cbind(prime, debt, profitability),\n               grouping = format))\n\n\n\n    Box's M-test for Homogeneity of Covariance Matrices\n\ndata:  cbind(prime, debt, profitability)\nChi-Sq (approx.) = 21.274, df = 12, p-value = 0.0465\n\n\nHere, there is a smallish \\(p\\)-value, so weak evidence against equality of covariance matrices. The data were generated from normal distribution, but the small \\(p\\)-value is an artifact of the rounding of the Likert scale.\nWe can test the normality assumption using univariate quantile-quantile plots or tests of normality, including Shapiro-Wilks.\n\n\nCode\npar(mfrow = c(1,3)) # one row, 3 columns for plot layout\ncar::qqPlot(rstudent(model)[,1], \n            id = FALSE, # don't flag outliers\n            ylab = \"studentized residuals (prime)\")\ncar::qqPlot(rstudent(model)[,2], \n            id = FALSE, \n            ylab = \"studentized residuals (debt)\")\ncar::qqPlot(rstudent(model)[,3], \n            id = FALSE, \n            ylab = \"studentized residuals (profitability)\")\n\n\n\n\n\nWe see severe rounding impacts for debt and profitability. There is little to be done about this, but the sample size are large enough that this shouldn’t be too much a concern.\nWe can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to be happy.\n\n\nCode\nmvnormtest::mshapiro.test(U = t(resid(model)))\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  Z\nW = 0.96982, p-value = 0.004899\n\n\nThere is (unsurprisingly) strong evidence against multivariate normality, but it matters less due to sample size. This is a consequence of the discrete univariate measurements, which explain rejection of the null (for data to be multivariate normal, each of the response must be univariate normal and the dependence structure must also match.\nSince assumptions are doubtful, we recommend using Pilai’s trace as test statistic for the MANOVA."
+    "text": "Model assumptions\nThe next step before writing about any of our conclusions is to check the model assumptions. As before, we could check for each variable in turn whether the variance are the same in each group. Here, we rather check equality of covariance matrix. The test has typically limited power, but unfortunately is very sensitive to departure from the multivariate normality assumption, so sometimes rejection are false positive.\n\n\nCode\nwith(AVC02,\nbiotools::boxM(cbind(prime, debt, profitability),\n               grouping = format))\n\n\n\n    Box's M-test for Homogeneity of Covariance Matrices\n\ndata:  cbind(prime, debt, profitability)\nChi-Sq (approx.) = 21.274, df = 12, p-value = 0.0465\n\n\nHere, there is a smallish \\(p\\)-value, so weak evidence against equality of covariance matrices. The data were generated from normal distribution, but the small \\(p\\)-value is an artifact of the rounding of the Likert scale.\nWe can test the normality assumption using univariate quantile-quantile plots or tests of normality, including Shapiro-Wilks.\n\n\nCode\npar(mfrow = c(1,3)) # one row, 3 columns for plot layout\ncar::qqPlot(rstudent(model)[,1], \n            id = FALSE, # don't flag outliers\n            ylab = \"studentized residuals (prime)\")\ncar::qqPlot(rstudent(model)[,2], \n            id = FALSE, \n            ylab = \"studentized residuals (debt)\")\ncar::qqPlot(rstudent(model)[,3], \n            id = FALSE, \n            ylab = \"studentized residuals (profitability)\")\n\n\n\n\n\nWe see severe rounding impacts for debt and profitability. There is little to be done about this, but the sample size are large enough that this shouldn’t be too much a concern.\nWe can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to work.\n\n\nCode\nmvnormtest::mshapiro.test(U = t(resid(model)))\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  Z\nW = 0.96982, p-value = 0.004899\n\n\nThere is (unsurprisingly) strong evidence against multivariate normality, but it matters less due to sample size. This is a consequence of the discrete univariate measurements, which explain rejection of the null (for data to be multivariate normal, each of the response must be univariate normal and the dependence structure must also match.\nSince assumptions are doubtful, we recommend using Pilai’s trace as test statistic for the MANOVA."
   },
   {
     "objectID": "example/moderatedmediation.html",
@@ -1439,7 +1425,7 @@
     "href": "example/repeated.html#data",
     "title": "Repeated measure ANOVA",
     "section": "Data",
-    "text": "Data\nWe first load the data from the package and inspect the content.\n\n\nCode\ndata(HOSM22_E3, package = \"hecedsm\")\nstr(HOSM22_E3)\n\n\nClasses 'tbl_df', 'tbl' and 'data.frame':   126 obs. of  4 variables:\n $ id        : Factor w/ 63 levels \"1\",\"2\",\"3\",\"4\",..: 1 1 2 2 3 3 4 4 5 5 ...\n $ waiting   : Factor w/ 2 levels \"long\",\"short\": 2 2 1 1 1 1 2 2 1 1 ...\n $ ratingtype: Factor w/ 2 levels \"experience\",\"prediction\": 2 1 2 1 2 1 2 1 2 1 ...\n $ imscore   : num  2.33 3.33 1.25 1.92 1 ...\n\n\nCode\nwith(HOSM22_E3, table(waiting)/2)\n\n\nwaiting\n long short \n   32    31 \n\n\nFrom this, we can see that there each student is assigned to a single waiting time, but that they have both rating types. Since there are 63 students, the study is unbalanced but by a single person; this may be due to exclusions."
+    "text": "Data\nWe first load the data from the package and inspect the content.\n\n\nCode\ndata(HOSM22_E3, package = \"hecedsm\")\nstr(HOSM22_E3)\n\n\nClasses 'tbl_df', 'tbl' and 'data.frame':   126 obs. of  4 variables:\n $ id        : Factor w/ 63 levels \"1\",\"2\",\"3\",\"4\",..: 1 1 2 2 3 3 4 4 5 5 ...\n $ waiting   : Factor w/ 2 levels \"long\",\"short\": 2 2 1 1 1 1 2 2 1 1 ...\n $ ratingtype: Factor w/ 2 levels \"experience\",\"prediction\": 2 1 2 1 2 1 2 1 2 1 ...\n $ imscore   : num  2.33 3.33 1.25 1.92 1 ...\n\n\nCode\n# Number of people in each group\nwith(HOSM22_E3, table(waiting)/2)\n\n\nwaiting\n long short \n   32    31 \n\n\nFrom this, we can see that there each student is assigned to a single waiting time, but that they have both rating types. Since there are 63 students, the study is unbalanced but by a single person; this may be due to exclusions."
   },
   {
     "objectID": "example/repeated.html#model-fitting",
@@ -1481,6 +1467,6 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Content (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by noon on the day before class.\n\n\nIntroduction\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nJanuary 8\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 14\n\n\nWeekly check-in 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 14\n\n\nProblem set 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 8\n\n\nInstalling R and Rstudio\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nJanuary 15\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 15\n\n\nExample 1 – Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 21\n\n\nWeekly check-in 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 21\n\n\nProblem set 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompletely randomized designs\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nJanuary 22\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 22\n\n\nExample 2 – One-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 28\n\n\nWeekly check-in 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nJanuary 28\n\n\nProblem set 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 4\n\n\n\n\nJanuary 29\n\n\nContrasts and multiple testing\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 4\n\n\nWeekly check-in 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 4\n\n\nProblem set 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 5\n\n\n\n\nFebruary 5\n\n\nComplete factorial designs\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 5\n\n\nExample 3 – Two-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 11\n\n\nWeekly check-in 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 11\n\n\nProblem set 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced topics\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 6\n\n\n\n\nFebruary 12\n\n\nMultiway factorial designs\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 12\n\n\nExample 4 – Three-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 18\n\n\nWeekly check-in 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 18\n\n\nProblem set 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 7\n\n\n\n\nFebruary 19\n\n\nBlock designs and analysis of covariance\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 19\n\n\nExample 5 – Analysis of covariance\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 25\n\n\nWeekly check-in 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nFebruary 25\n\n\nProblem set 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nBreak\n\n\n\n\nFebruary 24–March 1\n\n\nWinter break\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 8\n\n\n\n\nMarch 4\n\n\nEffect sizes and the replication crisis\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 4\n\n\nExample 6 – Effect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 10\n\n\nWeekly check-in 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 10\n\n\nProblem set 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRepeated measure designs\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 9\n\n\n\n\nMarch 11\n\n\nRepeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 11\n\n\nExample 7 – Repeated measures ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 11\n\n\nExample 8 – MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 17\n\n\nWeekly check-in 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 17\n\n\nProblem set 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 10\n\n\n\n\nMarch 18\n\n\nMixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 18\n\n\nExample 9 – Linear mixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 24\n\n\nWeekly check-in 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 24\n\n\nProblem set 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCausal inference\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nBreak\n\n\n\n\nMarch 25\n\n\nIntro to causal inference\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 11\n\n\n\n\nMarch 31\n\n\nWeekly check-in 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nMarch 29–April 1\n\n\nEaster\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 12\n\n\n\n\nApril 8\n\n\nLinear mediation analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 8\n\n\nExample 10 – Linear causal mediation\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 14\n\n\nWeekly check-in 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 14\n\n\nProblem set 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategorical data\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 13\n\n\n\n\nApril 15\n\n\nCategorical data, nonparametric test and final review\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 15\n\n\nExample 11 – Nonparametric tests\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 15\n\n\nExample 12 – Count data\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 19\n\n\nWeekly check-in 13  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 19\n\n\nProblem set 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFinal\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nEnd of term\n\n\n\n\nApril 19\n\n\nPaper review  (submit by 23:55:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nApril 20\n\n\nFinal exam  (submit by 13:30:00)"
+    "text": "Content (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by noon on the day before class.\n\n\nIntroduction\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nAugust 30\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\nWeekly check-in 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\nProblem set 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 30\n\n\nInstalling R and Rstudio\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nSeptember 6\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 6\n\n\nExample 1 – Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\nWeekly check-in 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\nProblem set 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFactorial designs\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nSeptember 13\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 13\n\n\nExample 2 – One-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\nWeekly check-in 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\nProblem set 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 4\n\n\n\n\nSeptember 20\n\n\nContrasts and multiple testing\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\nWeekly check-in 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\nProblem set 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 5\n\n\n\n\nSeptember 27\n\n\nTwo-way factorial designs\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 27\n\n\nExample 3 – Two-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\nWeekly check-in 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\nProblem set 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 6\n\n\n\n\nOctober 4\n\n\nRepeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 4\n\n\nExample 4 – Repeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 10\n\n\nWeekly check-in 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 10\n\n\nProblem set 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 7\n\n\n\n\nOctober 11\n\n\nMultiway ANOVA and MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 11\n\n\nExample 5 – Three-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 11\n\n\nExample 6 – MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 17\n\n\nWeekly check-in 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 17\n\n\nProblem set 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced topics\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nBreak\n\n\n\n\nOctober 17–October 23\n\n\nFall break\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 8\n\n\n\n\nOctober 25\n\n\nAnalysis of covariance\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 25\n\n\nExample 7 – Analysis of covariance  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\nWeekly check-in 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\nProblem set 8\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 9\n\n\n\n\nNovember 1\n\n\nEffect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 1\n\n\nExample 8 – Effect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 6\n\n\nWeekly check-in 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 6\n\n\nProblem set 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 10\n\n\n\n\nNovember 7\n\n\nMixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\nExample 9 – Linear mixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 13\n\n\nWeekly check-in 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 13\n\n\nProblem set 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCausal inference\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 11\n\n\n\n\nNovember 14\n\n\nIntro to causal inference\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 20\n\n\nWeekly check-in 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 12\n\n\n\n\nNovember 21\n\n\nLinear mediation and moderation\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\nExample 10 – Linear causal mediation\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 27\n\n\nWeekly check-in 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 27\n\n\nProblem set 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategorical data\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 13\n\n\n\n\nNovember 28\n\n\nCategorical data, nonparametric test and final review\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 28\n\n\nExample 11 – Nonparametric tests\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 28\n\n\nExample 12 – Count data\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 4\n\n\nWeekly check-in 13  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 4\n\n\nProblem set 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFinal\n\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nEnd of term\n\n\n\n\nDecember 6\n\n\nFinal exam  (submit by 18:30:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\nPaper review  (submit by 23:55:00)"
   }
 ]

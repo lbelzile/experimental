@@ -1,5 +1,5 @@
 ---
-title: "Complete factorial designs"
+title: "Factorial designs and interactions"
 ---
 
 ```{r}
@@ -16,7 +16,7 @@ playlist_id <- ""
 
 ## Content
 
-- Benefits of factorial designs
+- Between vs within-subject designs
 - Interactions
 - Simple, marginal and interaction contrasts
 
@@ -29,19 +29,19 @@ At the end of the session, students should be capable of
 - interpreting an interaction plot and being aware of it's limitation
 - interpreting model effects in sum-to-zero parametrization
 - reporting results from a two-way analysis of variance
-- determining whether or not simple or main effects are most suitable
+- determining whether or not simple or main effects are most suitable for comparisons
 
 
 ## Readings
 
 - {{< fa book >}}  [Chapter 4](https://stat.ethz.ch/~meier/teaching/anova/factorial-treatment-structure.html) of @Meier:2022
--  {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/05-interactions_multiway.html) of the course notes
+- {{< fa book >}}  [Chapter 5](https://lbelzile.github.io/math80667a/twoway) of the course notes
 
 
 ## Complementary readings
 
 - {{< fa book >}}  Chapter 7 of @Maxwell.Delaney.Kelley:2017.
-- {{< fa book >}}  Chapters 10-13 of @Keppel/Wickens:2004.
+- {{< fa book >}}  Chapters 10--13 of @Keppel/Wickens:2004.
 
 
 ## Slides

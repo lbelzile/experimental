@@ -257,8 +257,20 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../example/repeated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repeated measures ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../example/threewayanova.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Three-way ANOVA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../example/manova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">MANOVA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -271,18 +283,6 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../example/effectsizepower.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Effect size and power</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../example/repeated.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Repeated measures ANOVA</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../example/manova.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">MANOVA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -322,7 +322,6 @@ div.csl-indent {
    
   <ul>
   <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
-  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting">Model fitting</a></li>
   <li><a href="#multivariate-analysis-of-variance" id="toc-multivariate-analysis-of-variance" class="nav-link" data-scroll-target="#multivariate-analysis-of-variance">Multivariate analysis of variance</a></li>
   <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes">Effect sizes</a></li>
   <li><a href="#post-hoc-analyses" id="toc-post-hoc-analyses" class="nav-link" data-scroll-target="#post-hoc-analyses">Post-hoc analyses</a></li>
@@ -377,11 +376,7 @@ div.csl-indent {
                      40                      45                      47 </code></pre>
 </div>
 </div>
-<p>The data are unbalanced by condition. In general, we need them to be roughly balanced. The <code>manova</code> function will not be usable and we need to enforce sum-to-zero constraints to get sensible outputs, otherwise answers will be off.</p>
-</section>
-<section id="model-fitting" class="level2">
-<h2 class="anchored" data-anchor-id="model-fitting">Model fitting</h2>
-<p>After having done so, we can fit the multivariate linear model with <code>lm</code> by binding columns on the left of the <code>~</code> sign to gather the response vectors.</p>
+<p>The data are unbalanced by condition. In general, we need them to be roughly balanced to maximize power. The <code>manova</code> function will not be usable unless data are balanced, and we need to enforce sum-to-zero constraints to get sensible outputs. After this is done, we can fit the multivariate linear model with <code>lm</code> by binding columns on the left of the <code>~</code> sign to gather the response vectors.</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
@@ -470,6 +465,9 @@ format    |           0.01 | [0.00, 1.00]
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Since it's a one-way between-subject MANOVA, no partial measure</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(model, <span class="at">partial =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Argument `effectsize_type` is deprecated. Use `es_type` instead.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Effect Size for ANOVA (Type I)
 
@@ -487,8 +485,8 @@ profitability |    format |     0.02 | [0.00, 1.00]</code></pre>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">lda</span>(format <span class="sc">~</span> prime <span class="sc">+</span> debt <span class="sc">+</span> profitability,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> AVC02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">lda</span>(format <span class="sc">~</span> prime <span class="sc">+</span> debt <span class="sc">+</span> profitability,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> AVC02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
@@ -515,7 +513,7 @@ Proportion of trace:
 0.9257 0.0743 </code></pre>
 </div>
 </div>
-<p>Interpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks (TODO add reference).</p>
+<p>Interpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks <span class="citation" data-cites="Mardia.Kent.Taylor:2024">(e.g., Chapter 12 of <a href="#ref-Mardia.Kent.Taylor:2024" role="doc-biblioref">Mardia et al., 2024</a>)</span>.</p>
 </section>
 <section id="model-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-assumptions">Model assumptions</h2>
@@ -523,9 +521,9 @@ Proportion of trace:
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(AVC02,</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>biotools<span class="sc">::</span><span class="fu">boxM</span>(<span class="fu">cbind</span>(prime, debt, profitability),</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">grouping =</span> format))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(AVC02,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>biotools<span class="sc">::</span><span class="fu">boxM</span>(<span class="fu">cbind</span>(prime, debt, profitability),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">grouping =</span> format))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -540,27 +538,27 @@ Chi-Sq (approx.) = 21.274, df = 12, p-value = 0.0465</code></pre>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># one row, 3 columns for plot layout</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">1</span>], </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, <span class="co"># don't flag outliers</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (prime)"</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">2</span>], </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (debt)"</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">3</span>], </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (profitability)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># one row, 3 columns for plot layout</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">1</span>], </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, <span class="co"># don't flag outliers</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (prime)"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">2</span>], </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (debt)"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">3</span>], </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (profitability)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="manova_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We see severe rounding impacts for debt and profitability. There is little to be done about this, but the sample size are large enough that this shouldn’t be too much a concern.</p>
-<p>We can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to be happy.</p>
+<p>We can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to work.</p>
 <div class="cell">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mvnormtest<span class="sc">::</span><span class="fu">mshapiro.test</span>(<span class="at">U =</span> <span class="fu">t</span>(<span class="fu">resid</span>(model)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mvnormtest<span class="sc">::</span><span class="fu">mshapiro.test</span>(<span class="at">U =</span> <span class="fu">t</span>(<span class="fu">resid</span>(model)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -582,6 +580,9 @@ W = 0.96982, p-value = 0.004899</code></pre>
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
 <div id="ref-Anandarajan:2002" class="csl-entry" role="listitem">
 Anandarajan, A., Viger, C., &amp; Curatola, A. P. (2002). An experimental investigation of alternative going-concern reporting formats: A <span>C</span>anadian experience. <em>Canadian Accounting Perspectives</em>, <em>1</em>(2), 141–162. <a href="https://doi.org/10.1506/5947-NQTC-C3Y5-H46N">https://doi.org/10.1506/5947-NQTC-C3Y5-H46N</a>
+</div>
+<div id="ref-Mardia.Kent.Taylor:2024" class="csl-entry" role="listitem">
+Mardia, K. V., Kent, J. T., &amp; Taylor, C. C. (2024). <em>Multivariate analysis</em> (Wiley, Ed.; 2nd ed.).
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -868,121 +869,117 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Multivariate analysis of variance"</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">type:</span><span class="co"> docs</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>The data presented in this example vignette is inspired by a study from @Anandarajan:2002, who looked at the impact of communication means through different disclosure format on the perceived risk of organization on the brink of bankruptcy in accountancy. There is a single between-subject factor for the disclore format, and three measures of the performance, ratings for the interest rate premium assessed, for the ability to service debt and that to improve profitability.</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data </span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>We first load the data from the package and inspect the content.</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(AVC02, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(AVC02)</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> format, <span class="at">data =</span> AVC02)</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>The data are unbalanced by condition. In general, we need them to be roughly balanced. The <span class="in">`manova`</span> function will not be usable and we need to enforce sum-to-zero constraints to get sensible outputs, otherwise answers will be off.</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model fitting</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>After having done so, we can fit the multivariate linear model with <span class="in">`lm`</span> by binding columns on the left of the <span class="in">`~`</span> sign to gather the response vectors.</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(prime, debt, profitability) <span class="sc">~</span> format, </span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> AVC02)</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>We can check the residual correlation matrix to see if there was a strong dependence between our measurements. The benefit of MANOVA is to be able to leverage this correlation, if any.</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">resid</span>(model))</span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(<span class="fu">resid</span>(model)), <span class="dv">2</span>)</span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>We can look at the global mean for each variable and the estimated mean differences for all groups, including the reference which is omitted. It's easy to see that the mean differences sum to zero.</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a><span class="fu">dummy.coef</span>(model)</span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multivariate analysis of variance</span></span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a>Next, we compute the multivariate analysis of variance table and the follow-up with the univariate functions. By default, we can add a multiplicity correction for the tests, using Holm-Bonferonni with option <span class="in">`'holm'`</span>. For the MANOVA test, there are multiple statistics to pick from, including <span class="in">`Pillai`</span>, <span class="in">`Wilks`</span>, <span class="in">`Hotelling-Lawley`</span> and <span class="in">`Roy`</span>. The default is <span class="in">`Pillai`</span>, which is more robust to departures from the model hypothesis, but <span class="in">`Wilks`</span> is also popular choice among practitioners.</span>
-<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Manova</span>(model, <span class="at">test =</span> <span class="st">"Pillai"</span>)</span>
-<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Effect sizes</span></span>
-<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a>We can compute effect sizes overall for the MANOVA statistic using the correspondance with the $F$ distribution, and also the individual effect size variable per variable. Here, the values returned are partial $\widehat{\eta}^2$ measures.</span>
-<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(car<span class="sc">::</span><span class="fu">Manova</span>(model))</span>
-<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Since it's a one-way between-subject MANOVA, no partial measure</span></span>
-<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(model, <span class="at">partial =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post-hoc analyses</span></span>
-<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a>We can continue with descriptive discriminant analysis for the post-hoc comparisons. To fit the model using the <span class="in">`lda`</span> function from the <span class="in">`MASS`</span> package, we swap the role of the experimental factor and responses in the formula. The output shows the weights for the linear combinations.</span>
-<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">lda</span>(format <span class="sc">~</span> prime <span class="sc">+</span> debt <span class="sc">+</span> profitability,</span>
-<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> AVC02)</span>
-<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a>Interpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks (TODO add reference).</span>
-<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions</span></span>
-<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a>The next step before writing about any of our conclusions is to check the model assumptions. As before, we could check for each variable in turn whether the variance are the same in each group. Here, we rather check equality of covariance matrix. The test has typically limited power, but unfortunately is very sensitive to departure from the multivariate normality assumption, so sometimes rejection are false positive.</span>
-<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(AVC02,</span>
-<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a>biotools<span class="sc">::</span><span class="fu">boxM</span>(<span class="fu">cbind</span>(prime, debt, profitability),</span>
-<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a>               <span class="at">grouping =</span> format))</span>
-<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a>Here, there is a smallish $p$-value, so weak evidence against equality of covariance matrices. The data were generated from normal distribution, but the small $p$-value is an artifact of the rounding of the Likert scale.</span>
-<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a>We can test the normality assumption using univariate quantile-quantile plots or tests of normality, including Shapiro-Wilks.</span>
-<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># one row, 3 columns for plot layout</span></span>
-<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">1</span>], </span>
-<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, <span class="co"># don't flag outliers</span></span>
-<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (prime)"</span>)</span>
-<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">2</span>], </span>
-<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (debt)"</span>)</span>
-<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">3</span>], </span>
-<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (profitability)"</span>)</span>
-<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>We see severe rounding impacts for debt and profitability. There is little to be done about this, but the sample size are large enough that this shouldn't be too much a concern.</span>
-<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>We can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to be happy.</span>
-<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a>mvnormtest<span class="sc">::</span><span class="fu">mshapiro.test</span>(<span class="at">U =</span> <span class="fu">t</span>(<span class="fu">resid</span>(model)))</span>
-<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a>There is (unsurprisingly) strong evidence against multivariate normality, but it matters less due to sample size. This is a consequence of the discrete univariate measurements, which explain rejection of the null (for data to be multivariate normal, each of the response must be univariate normal and the dependence structure must also match.</span>
-<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a>Since assumptions are doubtful, we recommend using Pilai's trace as test statistic for the MANOVA.</span>
+<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Multivariate analysis of variance"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="an">type:</span><span class="co"> docs</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>The data presented in this example vignette is inspired by a study from @Anandarajan:2002, who looked at the impact of communication means through different disclosure format on the perceived risk of organization on the brink of bankruptcy in accountancy. There is a single between-subject factor for the disclore format, and three measures of the performance, ratings for the interest rate premium assessed, for the ability to service debt and that to improve profitability.</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data </span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>We first load the data from the package and inspect the content.</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(AVC02, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(AVC02)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> format, <span class="at">data =</span> AVC02)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>The data are unbalanced by condition. In general, we need them to be roughly balanced to maximize power. The <span class="in">`manova`</span> function will not be usable unless data are balanced, and we need to enforce sum-to-zero constraints to get sensible outputs. After this is done, we can fit the multivariate linear model with <span class="in">`lm`</span> by binding columns on the left of the <span class="in">`~`</span> sign to gather the response vectors.</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(prime, debt, profitability) <span class="sc">~</span> format, </span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> AVC02)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>We can check the residual correlation matrix to see if there was a strong dependence between our measurements. The benefit of MANOVA is to be able to leverage this correlation, if any.</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">resid</span>(model))</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(<span class="fu">resid</span>(model)), <span class="dv">2</span>)</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>We can look at the global mean for each variable and the estimated mean differences for all groups, including the reference which is omitted. It's easy to see that the mean differences sum to zero.</span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a><span class="fu">dummy.coef</span>(model)</span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multivariate analysis of variance</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>Next, we compute the multivariate analysis of variance table and the follow-up with the univariate functions. By default, we can add a multiplicity correction for the tests, using Holm-Bonferonni with option <span class="in">`'holm'`</span>. For the MANOVA test, there are multiple statistics to pick from, including <span class="in">`Pillai`</span>, <span class="in">`Wilks`</span>, <span class="in">`Hotelling-Lawley`</span> and <span class="in">`Roy`</span>. The default is <span class="in">`Pillai`</span>, which is more robust to departures from the model hypothesis, but <span class="in">`Wilks`</span> is also popular choice among practitioners.</span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Manova</span>(model, <span class="at">test =</span> <span class="st">"Pillai"</span>)</span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Effect sizes</span></span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a>We can compute effect sizes overall for the MANOVA statistic using the correspondance with the $F$ distribution, and also the individual effect size variable per variable. Here, the values returned are partial $\widehat{\eta}^2$ measures.</span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(car<span class="sc">::</span><span class="fu">Manova</span>(model))</span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Since it's a one-way between-subject MANOVA, no partial measure</span></span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(model, <span class="at">partial =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post-hoc analyses</span></span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a>We can continue with descriptive discriminant analysis for the post-hoc comparisons. To fit the model using the <span class="in">`lda`</span> function from the <span class="in">`MASS`</span> package, we swap the role of the experimental factor and responses in the formula. The output shows the weights for the linear combinations.</span>
+<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">lda</span>(format <span class="sc">~</span> prime <span class="sc">+</span> debt <span class="sc">+</span> profitability,</span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> AVC02)</span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a>Interpretation of these is beyond the scope of the course, but you can find information about linear discriminant analysis in good textbooks <span class="co">[</span><span class="ot">e.g., Chapter 12 of @Mardia.Kent.Taylor:2024</span><span class="co">]</span>.</span>
+<span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions</span></span>
+<span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a>The next step before writing about any of our conclusions is to check the model assumptions. As before, we could check for each variable in turn whether the variance are the same in each group. Here, we rather check equality of covariance matrix. The test has typically limited power, but unfortunately is very sensitive to departure from the multivariate normality assumption, so sometimes rejection are false positive.</span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(AVC02,</span>
+<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a>biotools<span class="sc">::</span><span class="fu">boxM</span>(<span class="fu">cbind</span>(prime, debt, profitability),</span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a>               <span class="at">grouping =</span> format))</span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a>Here, there is a smallish $p$-value, so weak evidence against equality of covariance matrices. The data were generated from normal distribution, but the small $p$-value is an artifact of the rounding of the Likert scale. </span>
+<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a>We can test the normality assumption using univariate quantile-quantile plots or tests of normality, including Shapiro-Wilks.</span>
+<span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># one row, 3 columns for plot layout</span></span>
+<span id="cb24-111"><a href="#cb24-111" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">1</span>], </span>
+<span id="cb24-112"><a href="#cb24-112" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, <span class="co"># don't flag outliers</span></span>
+<span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (prime)"</span>)</span>
+<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">2</span>], </span>
+<span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (debt)"</span>)</span>
+<span id="cb24-117"><a href="#cb24-117" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(<span class="fu">rstudent</span>(model)[,<span class="dv">3</span>], </span>
+<span id="cb24-118"><a href="#cb24-118" aria-hidden="true" tabindex="-1"></a>            <span class="at">id =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb24-119"><a href="#cb24-119" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"studentized residuals (profitability)"</span>)</span>
+<span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-122"><a href="#cb24-122" aria-hidden="true" tabindex="-1"></a>We see severe rounding impacts for debt and profitability. There is little to be done about this, but the sample size are large enough that this shouldn't be too much a concern.</span>
+<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a>We can also test the multivariate normality assumption. The latter supposes that observations in each group have the same mean. To get this, we detrend using multivariate linear model by subtracting the mean of each group. Thus, our input is the matrix of residuals, which must be transposed for the function to work.</span>
+<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-128"><a href="#cb24-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a>mvnormtest<span class="sc">::</span><span class="fu">mshapiro.test</span>(<span class="at">U =</span> <span class="fu">t</span>(<span class="fu">resid</span>(model)))</span>
+<span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a>There is (unsurprisingly) strong evidence against multivariate normality, but it matters less due to sample size. This is a consequence of the discrete univariate measurements, which explain rejection of the null (for data to be multivariate normal, each of the response must be univariate normal and the dependence structure must also match.</span>
+<span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a>Since assumptions are doubtful, we recommend using Pilai's trace as test statistic for the MANOVA.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

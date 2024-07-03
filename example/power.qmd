@@ -26,6 +26,7 @@ a level of power of $99$%. This will require a minimum of $100$ participants (as
 5.
 > We aim at testing the two main effects of prediction 1 and prediction 3. Given the $2 \times 3$ within factors design for both main effects, we calculated $\eta^2_p$ based on $F$-Values and degrees of freedom. This procedure resulted in $\eta^2_p=0.427$ and $\eta^2_p=0.389$ for the effect of prediction 1 ($F(1, 36)=22.88$) and prediction 3 ($F(1, 36)=26.88$), respectively. Accordingly, G*Power (Version 3.1) indicates that a power of $80$%, $90$%, and $95$% is achieved with sample sizes of $3$, $4$, and $4$ participants, respectively, for both effects (assuming a correlation of $r=0.5$ between repeated measures in all power calculations).
 
+
 6. 
 > The original effect size for the one-sample t-test that tested the primary prediction was Cohen's $d=0.93$, $95$% Cl $[0.72, 1.14]$. A power analysis using G*Power to determine the sample sizes necessary to achieve $80$%, $90$%, $95$% power to detect the effect size indicates that samples with $12$, $15$, and $18$ total participants are necessary. 
 

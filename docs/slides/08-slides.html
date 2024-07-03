@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Effect size and power</title>
+    <title>Analysis of covariance</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-03-02" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <meta name="date" content="2024-07-03" />
+    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
-    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset-0.2.6/panelset.js"></script>
-    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
-    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
-    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
     <script src="libs/peerjs-1.3.1/peerjs.min.js"></script>
     <script src="libs/tiny.toast-1.0.0/toast.min.js"></script>
     <link href="libs/xaringanExtra-broadcast-0.2.6/broadcast.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-broadcast-0.2.6/broadcast.js"></script>
+    <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
     <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -31,9 +37,11 @@
 
 
 
+
+
 class: center middle main-title section-title-1
 
-# Effect size and power
+# Analysis of covariance
 
 .class-info[
 
@@ -46,646 +54,504 @@ HEC Montréal
 ]
 
 ---
-
-name: outline
-class: title title-inv-1
-
-# Outline
---
-
-.box-1.medium.sp-after-half[Effect sizes]
-
---
-
-.box-3.medium.sp-after-half[Power]
-
-
-
----
 layout: false
-name: effect
-class: center middle section-title section-title-1 animated fadeIn
+name: ancova
+class: center middle section-title section-title-7
 
-# Effect size
+# Analysis of covariance
 
 ---
+
 layout: true
-class: title title-1
+class: title title-7
+---
+
+# Covariates
+
+.center[
+
+.box-inv-7.large.sp-after-half[Covariate]
+Explanatory measured **before** the experiment
+
+Typically, cannot be acted upon.
+
+.box-inv-7.large.sp-after-half[Example]
+socioeconomic variables &lt;br&gt; environmental conditions
+
+]
+
 
 ---
 
+# IJLR: It's Just a Linear Regression...
 
-# Motivating example 
+All ANOVA models covered so far are linear regression model.
 
-Quote from the OSC psychology replication
+The latter says that 
 
-&gt; The key statistics provided in the paper to test the “depletion” hypothesis is the main effect of a one-way ANOVA with three experimental conditions and confirmatory information processing as the dependent variable; `\(F(2, 82) = 4.05\)`, `\(p = 0.02\)`, `\(\eta^2 = 0.09\)`. Considering the original effect size and an alpha of `\(0.05\)` the sample size needed to achieve `\(90\)`% power is `\(132\)` subjects.
+`$$\underset{\text{average response}\vphantom{l}}{\textsf{E}(Y_{i}\vphantom{\beta_p})}  = \underset{\text{linear (i.e., additive) combination of explanatories}}{\beta_0 + \beta_1 \mathrm{X}_{1i} + \cdots + \beta_p \mathrm{X}_{pi}}$$`
 
-.small[
-Replication report of Fischer, Greitemeyer, and Frey (2008, JPSP, Study 2) by E.M. Galliani
+In an ANOVA, the model matrix `\(\mathbf{X}\)` simply includes columns with `\(-1\)`, `\(0\)` and `\(1\)` for group indicators that enforce sum-to-zero constraints.
+
+---
+
+# What's in a model?
+
+In experimental designs, the explanatories are 
+
+- experimental factors (categorical)
+- continuous (dose-response)
+
+.box-inv-7.medium[
+Random assignment implies&lt;br&gt; no systematic difference between groups.
 ]
 
 ---
 
-# Translating statement into science
+# ANCOVA = Analysis of covariance
 
-.box-inv-1.medium.sp-after-half[Q: How many observations should &lt;br&gt;I gather to reliably detect an effect?]
-.box-inv-1.medium.sp-after-half[Q: How big is this effect?]
-
----
-
-# Does it matter?
-
-
-With large enough sample size, **any** sized difference between treatments becomes statistically significant.
-
-
-.box-inv-1.medium.sp-before-half[
-Statistical significance `\(\neq\)` practical relevance
-]
-
-But whether this is important depends on the scientific question.
-
----
-
-# Example
-
-- What is the minimum difference between two treatments that would be large enough to justify commercialization of a drug?
-- Tradeoff between efficacy of new treatment vs status quo, cost of drug, etc.
-
-
----
-
-
-# Using statistics to measure effects
-
-
-
-Statistics and `\(p\)`-values are not good summaries of magnitude of an effect:
-
-- the larger the sample size, the bigger the statistic, the smaller the `\(p\)`-value
-
-Instead use 
-
-.pull-left[
-.box-inv-1[standardized differences]
-]
-.pull-right[
-.box-inv-1[percentage of variability explained]
-]
-
-
-
-
-Estimators popularized in the handbook
-&gt; Cohen, Jacob. Statistical Power Analysis for the Behavioral Sciences, 2nd ed., Routhledge, 1988.
-
----
-
-
-
-# Illustrating effect size (differences)
-
-
-&lt;img src="08-slides_files/figure-html/effectsize-1.png" width="90%" style="display: block; margin: auto;" /&gt;
-
-.tiny[
-The plot shows null (thick) and true sampling distributions (dashed) for the same difference in sample mean with small (left) and large (right) samples.
-]
----
-
-# Estimands, estimators, estimates
-
-- `\(\mu_i\)` is the (unknown) population mean of group `\(i\)` (parameter, or estimand)
-- `\(\widehat{\mu}_i\)` is a formula (an estimator) that takes data as input and returns a numerical value (an estimate).
-- throughout, use hats to denote estimated quantities:
-
-.pull-left-3[
-&lt;img src="img/08/estimand.jpg" width="90%" style="display: block; margin: auto;" /&gt;
-]
-.pull-middle-3[
-&lt;img src="img/08/estimator.jpg" width="90%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right-3[
-&lt;img src="img/08/estimate.jpg" width="90%" style="display: block; margin: auto;" /&gt;
-]
-
-
-.tiny[
-Left to right: parameter `\(\mu\)` (target), estimator `\(\widehat{\mu}\)` (recipe) and estimate `\(\widehat{\mu}=10\)` (numerical value, proxy)
-]
-
-???
-
-From Twitter, @simongrund89
-
----
-
-# Cohen's _d_
-
-Standardized measure of effect (dimensionless=no units): 
-
-Assuming equal variance `\(\sigma^2\)`, compare mean of two groups `\(i\)` and `\(j\)`:
-
-$$
-d = \frac{\mu_i - \mu_j}{\sigma}
-$$
-
-- Usual estimator of Cohen's `\(d\)`, `\(\widehat{d}\)`, uses sample average of groups and the pooled variance estimator `\(\widehat{\sigma}\)`.
-
-Cohen's classification: small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_) effect size.
-
-???
-
-Note: this is not the `\(t\)`-statistic (the denominator is the estimated standard deviation, not the standard error of the mean
-
-Note that there are multiple versions of Cohen's coefficients. 
-These are the effects of the pwr package.
-The small/medium/large effect size varies depending on the test! See the vignette of pwr for defaults.
-
----
-
-# Cohen's _f_
-
-For a one-way ANOVA (equal variance `\(\sigma^2\)`) with more than two groups, 
-
-$$
-f^2 = \frac{1}{\sigma^2} \sum_{j=1}^k \frac{n_j}{n}(\mu_j - \mu)^2,
-$$
-a weighted sum of squared difference relative to the overall mean `\(\mu\)`.
-
-For `\(k=2\)` groups, Cohen's `\(f\)` and Cohen's `\(d\)` are related via `\(f=d/2\)`.
-
----
-
-# Effect size: proportion of variance
-
-
-If there is a single experimental factor, use **total** effect size.
-
-Break down the variability `$$\sigma^2_{\text{total}} = \sigma^2_{\text{resid}} + \sigma^2_{\text{effect}}$$` and define the percentage of variability explained by the `\(\text{effect}\)`.
-`$$\eta^2 = \frac{\text{explained variability}}{\text{total variability}}= \frac{\sigma^2_{\text{effect}}}{\sigma^2_{\text{total}}}.$$`
  
----
-
-# Coefficient of determination estimator
-
-For the balanced one-way between-subject ANOVA, typical estimator is the **coefficient of determination**
-
-$$
-\widehat{R}{}^2 = \frac{F\nu_1}{F\nu_1 + \nu_2}
-$$
-where `\(\nu_1 = K-1\)` and `\(\nu_2 = n-K\)` are the degrees of freedom for the one-way ANOVA with `\(n\)` observations and `\(K\)` groups. 
-
-- `\(\widehat{R}{}^2\)` is an upward biased estimator (too large on average).
-- People frequently write `\(\eta^2\)` when they mean `\(\widehat{R}{}^2\)`
-- for the replication, `\(\widehat{R}{}^2 = (4.05\times 2)/(4.05\times 2 + 82) = 0.09\)`
-
+- Analysis of variance with added continuous covariate(s) to reduce experimental error (similar to blocking).
+- These continuous covariates are typically concomitant variables (measured alongside response).
+- Including them in the mean response (as slopes) can help reduce the experimental error (residual error).
 
 ---
 
-# `\(\omega^2\)` square estimator
-
-Another estimator of `\(\eta^2\)` that is recommended in Keppel &amp; Wickens (2004) for power calculations is `\(\widehat{\omega}^2\)`.
-
-For one-way  between-subject ANOVA, the latter is obtained from the `\(F\)`-statistic as
-
-`$$\widehat{\omega}^2 = \frac{\nu_1 (F-1)}{\nu_1(F-1)+n}$$`
-
-- for the replication, `\(\widehat{\omega}^2 = (3.05\times 2)/(3.05\times 2 + 84) = 0.0677.\)`
-- if the value returned is negative, report zero.
-
-???
-
-Since the `\(F\)` statistic is approximately 1 on average, this measure removes the average.
-
----
-
-# Converting `\(\eta^2\)` to Cohen's `\(f\)`
-
-Software usually take Cohen's `\(f\)` (or `\(f^2\)`) as input for the effect size.
-
-Convert from `\(\eta\)` to `\(f\)` via the relationship
-
-`$$f^2=\frac{\eta^2}{1-\eta^2}.$$`
+# Control to gain power!
 
 
-If we plug-in estimated values 
-- with `\(\widehat{R}{}^2\)`, we get `\(\widehat{f} = 0.314\)`
-- with `\(\widehat{\omega}^2\)`, we get `\(\widetilde{f} = 0.27\)`.
-
----
-
-# Effect sizes for multiway ANOVA
-
-
-With a completely randomized design with only experimental factors, use **partial** effect size 
-`$$\eta^2_{\langle \text{effect} \rangle} = \sigma^2_{\text{effect}} / (\sigma^2_{\text{effect}} + \sigma^2_{\text{resid}})$$`
-
-.small[
-
-In **R**, use `effectsize::omega_squared(model, partial = TRUE)`.
-
+.box-inv-7.sp-after-half[
+Identify external sources of variations
 ]
 
+- enhance balance of design (randomization)
+- reduce mean squared error of residuals to increase power
 
----
-# Partial effects and variance decomposition
-
-Consider a completely randomized balanced design with two factors `\(A\)`, `\(B\)` and their interaction `\(AB\)`. In a balanced design, we can decompose the total variance as
-
-`$$\sigma^2_{\text{total}} = \sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}.$$`
-
-
-Cohen's partial `\(f\)` measures the proportion of variability that is explained by a main effect or an interaction, e.g.,
-
-`$$f_{\langle A \rangle}= \frac{\sigma^2_A}{\sigma^2_{\text{resid}}}, \qquad f_{\langle AB \rangle} = \frac{\sigma^2_{AB}}{\sigma^2_{\text{resid}}}.$$`
-
-???
-
-These variance quantities are **unknown**, so need to be estimated somehow.
+These steps should in principle increase power **if** the variables used as control are correlated with the response.
 
 ---
 
-# Partial effect size (variance)
-
-Effect size are often reported in terms of variability via the ratio
-`$$\eta^2_{\langle \text{effect} \rangle} = \frac{\sigma^2_{\text{effect}}}{\sigma^2_{\text{effect}} + \sigma^2_{\text{resid}}}.$$`
-
-- Both `\(\widehat{\eta}^2_{\langle \text{effect} \rangle}\)` (aka `\(\widehat{R}^2_{\langle \text{effect} \rangle}\)`) and `\(\widehat{\omega}^2_{\langle \text{effect} \rangle}\)` are **estimators** of this quantity and obtained from the `\(F\)` statistic and degrees of freedom of the effect.
-
-
-???
-
-`\(\widehat{\omega}^2_{\langle \text{effect} \rangle}\)` is presumed less biased than `\(\widehat{\eta}^2_{\langle \text{effect} \rangle}\)`, as is `\(\widehat{\epsilon}_{\langle \text{effect} \rangle}\)`. 
-
-
----
-
-# Estimation of partial `\(\omega^2\)`
-
-Similar formulas as the one-way case for between-subject experiments, with 
-
-`$$\widehat{\omega}^2_{\langle \text{effect} \rangle} = \frac{\text{df}_{\text{effect}}(F_{\text{effect}}-1)}{\text{df}_{\text{effect}}(F_{\text{effect}}-1) + n},$$`
-where `\(n\)` is the overall sample size.
-
-In **R**, `effectsize::omega_squared` reports these estimates with one-sided confidence intervals. 
-
-.small[Reference for confidence intervals: Steiger (2004), Psychological Methods]
-
-???
-
-The confidence intervals are based on the F distribution, by changing the non-centrality parameter and inverting the distribution function (pivot method). There is a one-to-one correspondence with Cohen's f, and a bijection between the latter and omega_sq_partial or eta_sq_partial. This yields asymmetric intervals.
----
-
-# Converting `\(\omega^2\)` to Cohen's `\(f\)`
-
-Given an estimate of  `\(\eta^2_{\langle \text{effect} \rangle}\)`, convert it into an estimate of Cohen's partial `\(f^2_{\langle \text{effect} \rangle}\)`, e.g.,
-`$$\widehat{f}^2_{\langle \text{effect} \rangle} = \frac{\widehat{\omega}^2_{\langle \text{effect}}\rangle }{1-\widehat{\omega}^2_{\langle \text{effect}}\rangle }.$$`
-
-The package `effectsize::cohens_f` returns `\(\widetilde{f}^2 = n^{-1}F_{\text{effect}}\text{df}_{\text{effect}}\)`, a transformation of `\(\widehat{\eta}^2_{\langle \text{effect}\rangle}\)`.
-
----
-
-
-# Semipartial effect sizes
-
-
-If there is a mix of experimental and blocking factor...
-
-Include the variance of all blocking factors and interactions (only with the effect!) in denominator.
-
-- e.g., if `\(A\)` is effect of interest, `\(B\)` is a blocking factor and `\(C\)` is another experimental factor, use
-`$$\eta_{\langle A \rangle}^2 = \frac{\sigma^2_A}{\sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}}.$$`
-
-.small[
-
-In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "blocking")` where `blocking` gets replaced with a vector containing the name of the blocking factors.
-
-]
-
----
-
-# Summary
-
-- Effect sizes can be recovered using information found in the ANOVA table.
-- Multiple estimators for the same quantity
-   - report the one used along with confidence or tolerance intervals.
-   - some estimators are prefered (less biased): this matters for power studies
-- The correct measure may depend on the design
-   - partial vs total effects,
-   - different formulas for within-subjects (repeated measures) designs!
-- Include blocking as part of the variability considered.
-
----
-
-layout: false
-name: power
-class: center middle section-title section-title-3 animated fadeIn
-
-# Power
-
----
-
-layout: true
-class: title title-3
----
-
-# Power and sample size calculations
-
-Journals and grant agencies oftentimes require an estimate of the sample size needed for a study.
-
-- large enough to pick-up effects of scientific interest (good signal-to-noise)
-- efficient allocation of resources (don't waste time/money)
-
-Same for replication studies: how many participants needed?
-
----
-
-
-# I cried power!
-
-.medium[
-- **Power** is the ability to detect when the null is false, for a given alternative
-- It is the *probability* of correctly rejecting the null hypothesis under an alternative.
-- The larger the power, the better.
-]
-
----
-
-
-# Living in an alternative world
-
-How does the _F_-test behaves under an alternative?
-
-&lt;img src="08-slides_files/figure-html/unnamed-chunk-1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
----
-
-# Thinking about power
-
-What do you think is the effect on **power** of an increase of the
-- group sample size `\(n_1, \ldots, n_K\)`.
-- variability `\(\sigma^2\)`.
-- true mean difference `\(\mu_j - \mu\)`.
-
-
----
-
-# What happens under the alternative?
-
-The peak of the distribution shifts to the right.
-
-Why? on average, the numerator of the `\(F\)`-statistic is
-
-`$$\begin{align*}
-\mathsf{E}(\text{between-group variability}) = \sigma^2+ \frac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{K-1}.
-\end{align*}$$`
-
-
-Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)`
-   - the rightmost term is 0.
-
-
----
-
-# Noncentrality parameter and power
-
-The alternative distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter 
-`$$\begin{align*}
-\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
-\end{align*}$$`
-
----
-
-
-
-
-
-# I cried power!
-
-The null alternative corresponds to a single value (equality in mean), whereas there are infinitely many alternatives...
-
-
-.pull-left[
-&lt;img src="08-slides_files/figure-html/powercurve1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-  .small.center[Power is the ability to detect when the null is false, for a given alternative (dashed).]
-]
-.pull-right[
-&lt;img src="08-slides_files/figure-html/powercurve2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
- .small.center[ Power is the area in white under the dashed curved, beyond the cutoff. ]
-]
-
-???
-  
-In which of the two figures is power the largest?
-
----
-
-
-
-# What determines power?
-
-Think in your head of potential factors impact power for a factorial design.
-
---
-
-1. The size of the effects, `\(\delta_1 = \mu_1-\mu\)`, `\(\ldots\)`, `\(\delta_K = \mu_K-\mu\)`
-2. The background noise (intrinsic variability, `\(\sigma^2\)`)
-3. The level of the test, `\(\alpha\)`
-4. The sample size in each group, `\(n_j\)`
-5. The choice of experimental design
-6. The choice of test statistic
-
---
-
-We focus on the interplay between 
-
-.box-3.wide[
-
-`\(\quad\)` effect size `\(\quad\)`  |  `\(\quad\)`  power `\(\quad\)`   |  `\(\quad\)`  sample size `\(\quad\)`
-
-]
-
-
-
-
-???
-
-The level is fixed, but we may consider multiplicity correction within the power function.
-The noise level is oftentimes intrinsic to the measurement.
-
----
-
-
-
-# Living in an alternative world
-
-In a one-way ANOVA, the alternative distribution of the `\(F\)` test has an additional parameter `\(\Delta\)`, which depends on both the sample and the effect sizes.
-
-$$
-\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2} = nf^2.
-$$
-
-Under the null hypothesis, `\(\mu_j=\mu\)` for `\(j=1, \ldots, K\)` and `\(\Delta=0\)`.
-
-The greater `\(\Delta\)`, the further the mode (peak of the distribution) is from unity.
-
----
-
-
-# Noncentrality parameter and power
-
-$$
-\Delta = \dfrac{\sum_{j=1}^K n_j(\mu_j - \mu)^2}{\sigma^2}.
-$$
-
-.box-inv-3.medium[When does power increase?]
-
-What is the effect of an increase of the
-- group sample size `\(n_1, \ldots, n_K\)`.
-- variability `\(\sigma^2\)`.
-- true mean difference `\(\mu_j - \mu\)`.
-
----
-
-# Noncentrality parameter
-
-The alternative distribution is `\(F(\nu_1, \nu_2, \Delta)\)` distribution with degrees of freedom `\(\nu_1\)` and `\(\nu_2\)` and noncentrality parameter `\(\Delta\)`.
-
-&lt;img src="08-slides_files/figure-html/power_curve-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-???
-
-For other tests, parameters vary but the story is the same.
-
-The plot shows the null and alternative distributions. The noncentral F is shifted to the right (mode = peak) and right skewed. The power is shaded in blue, the null distribution is shown in dashed lines.
-
----
-
-
-# Power for factorial experiments
-
-- `\(\mathrm{G}^{\star}\mathrm{Power}\)` and **R** packages take Cohen's `\(f\)` (or `\(f^2\)`) as inputs.
-- Calculation based on `\(F\)` distribution with 
-   - `\(\nu_1=\text{df}_{\text{effect}}\)` degrees of freedom
-   - `\(\nu_2 = n - n_g\)`, where `\(n_g\)` is the number of mean parameters estimated. 
-   - noncentrality parameter `\(\phi = nf^2_{\langle \text{effect}\rangle}\)`
-
----
 
 # Example
 
-Consider a completely randomized design with two crossed factors `\(A\)` and `\(B\)`.
+Abstract of [van Stekelenburg et al. (2021)](https://doi.org/10.1177/09567976211007788)
 
-We are interested by the interaction, `\(\eta^2_{\langle AB \rangle}\)`, and we want 80% power:
+&gt; In three experiments with more than 1,500 U.S. adults who held false beliefs, participants first learned the value of scientific consensus and how to identify it. Subsequently, they read a news article with information about a scientific consensus opposing their beliefs. We found strong evidence that in the domain of genetically engineered food, this two-step communication strategy was more successful in correcting misperceptions than merely communicating scientific consensus.
+
+???
 
 
-```r
-# Estimate Cohen's f from omega.sq.partial
-fhat &lt;- sqrt(omega.sq.part/(1-omega.sq.part))
-# na and nb are number of levels of factors
-WebPower::wp.kanova(power = 0.8, 
-                    f = fhat, 
-                    ndf = (na-1)*(nb-1), 
-                    ng = na*nb)
-```
+Aart van Stekelenburg, Gabi Schaap, Harm Veling and Moniek Buijzen (2021), Boosting Understanding and Identification of Scientific Consensus Can Help to Correct False Beliefs, Psychological Science
+https://doi.org/10.1177/09567976211007788
+---
+
+# Experiment 2: Genetically Engineered Food
+
+We focus on a single experiment; preregistered exclusion criteria led to `\(n=442\)` total sample size (unbalanced design).
+
+Three experimental conditions:
+
+.float-left.center[.box-7[`Boost`] .box-7[`Boost Plus`] .box-7[Consensus only (`consensus`)] ]
+
 
 ---
 
-# Power curves
-.pull-left[
+# Model formulation
+
+Use `post` as response variable and `prior` beliefs as a control variable in the analysis of covariance.
+
+&gt; their response was measured on a visual analogue scale ranging from –⁠100 (I am 100% certain this is false) to 100 (I am 100% certain this is true) with 0 (I don’t know) in the middle.
 
 
-```r
-library(pwr)
-power_curve &lt;- 
- pwr.anova.test(
-  f = 0.314, #from R-squared
-  k = 3, 
-  power = 0.9,
-  sig.level = 0.05)
-plot(power_curve)
+
+---
+# Plot of post vs prior response
+
+&lt;img src="img/07/Experiment2.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Model formulation
+
+Average for the `\(r\)`th replication of the `\(i\)`th experimental group is
+`$$\begin{align*}\mathsf{E}(\texttt{post}_{ir}) &amp;= \mu + \alpha_i\texttt{condition}_i + \beta \texttt{prior}_{ir}.\\
+\mathsf{Va}(\texttt{post}_{ir}) &amp;= \sigma^2\end{align*}$$`
+
+We assume that there is no interaction between `condition` and `prior`
+- the slopes for `prior` are the same for each `condition` group.
+- the effect of prior is linear
+
+
+---
+
+# Contrasts of interest
+
+1. Difference between average boosts (`Boost` and `BoostPlus`) and control (`consensus`)
+2. Difference between `Boost` and `BoostPlus` (pairwise)
+
+Inclusion of the `prior` score leads to increased precision for the mean (reduces variability).
+
+---
+
+# Contrasts with ANCOVA
+
+- The estimated marginal means will be based on detrended values `\(\neq\)` group averages
+- In the `emmeans` package, the average of the covariate is used as value.
+- the difference between levels of `condition` are the same for any value of `prior` (parallel lines), but the uncertainty changes.
+
+Multiple testing adjustments:
+
+- Methods of Bonferroni (prespecified number of tests) and Scheffé (arbitrary contrasts) still apply
+- Can't use Tukey anymore (adjusted means are not independent anymore).
+
+---
+
+# Data analysis - loading data
+
+
+
+
+``` r
+library(emmeans)
+options(contrasts = c("contr.sum", "contr.poly"))
+data(SSVB21_S2, package = "hecedsm")
+# Check balance
+with(SSVB21_S2, table(condition))
 ```
 
-.tiny[
+```
+## condition
+##     Boost BoostPlus consensus 
+##       149       147       146
+```
 
-Recall: convert `\(\eta^2\)` to Cohen's `\(f\)` (the effect size reported in `pwr`) via `\(f^2=\eta^2/(1-\eta^2)\)`
 
-Using `\(\widetilde{f}\)` instead (from `\(\widehat{\omega}^2\)`) yields `\(n=59\)` observations per group!
+---
 
-]
+# Data analysis - scatterplot
+.pull-left.small[
 
+``` r
+library(ggplot2)
+ggplot(data = SSVB21_S2,
+       aes(x = prior, y = post)) + 
+       geom_point() + 
+       geom_smooth(method = "lm",
+                   se = FALSE)
+```
+.small[Strong correlation; note responses that achieve max of scale.]
 ]
 .pull-right[
-&lt;img src="08-slides_files/figure-html/powercurvefig-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/07/Experiment2_scatter.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
 ]
----
-
-
-# Effect size estimates
-
-.box-inv-3.large[WARNING!]
-
-Most effects reported in the literature are severely inflated.
-
-.box-3[Publication bias &amp; the file drawer problem]
-
-- Estimates reported in meta-analysis, etc. are not reliable. 
-- Run pilot study, provide educated guesses.
-- Estimated effects size are uncertain (report confidence intervals).
-
-???
-
-Recall the file drawer problem: most studies with small effects lead to *non significant results* and are not published. So the reported effects are larger than expected.
 
 ---
 
-# Beware of small samples
+# Data analysis - model
 
-Better to do a large replication than multiple small studies. 
-
-Otherwise, you risk being in this situation:
-
-&lt;img src="img/08/you-have-no-power-here.jpg" width="50%" style="display: block; margin: auto;" /&gt;
+``` r
+# Check that the data are well randomized
+car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 3)
+# Fit linear model with continuous covariate
+model1 &lt;- lm(post ~ condition + prior, data = SSVB21_S2)
+# Fit model without for comparison
+model2 &lt;- lm(post ~ condition, data = SSVB21_S2)
+# Global test for differences - of NO INTEREST
+car::Anova(model1, type = 3)
+car::Anova(model2, type = 3)
+```
 
 
 ---
 
-# Observed (post-hoc) power
+# Data analysis - ANOVA table
+.pull-left.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 166341 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 71.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 14107 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prior &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 385385 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 166.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1016461 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.pull-right.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 123377 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 11680 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 1.83 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.162 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1401846 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
 
-Sometimes, the estimated values of the effect size, etc. are used as plug-in.
+---
 
-- The (estimated) effect size in studies are noisy! 
-- Post-hoc power estimates are also noisy and typically overoptimistic.
-- Not recommended, but useful pointer if the observed difference seems important (large), but there isn't enough evidence (too low signal-to-noise).
-
-.box-inv-3[Statistical fallacy]
-
-Because we reject a null doesn't mean the alternative is true!
-
-We either correctly reject the null or we don't (0/1): we observe this decision.
-
-???
-
-Not recommended unless the observed differences among
-the means seem important in practice but
-are not statistically significant
+# Data analysis - contrasts
 
 
+``` r
+emm1 &lt;- emmeans(model1, specs = "condition")
+# Note order: Boost, BoostPlus, consensus
+emm2 &lt;- emmeans(model2, specs = "condition")
+# Not comparable: since one is detrended and the other isn't
+contrast_list &lt;- list(
+   "boost vs control" = c(0.5,  0.5, -1), 
+   #av. boosts vs consensus
+   "Boost vs BoostPlus" = c(1, -1,  0))
+contrast(emm1, 
+         method = contrast_list, 
+         p.adjust = "holm")
+```
+
+---
+# Data analysis - _t_-tests
+
+.pull-left.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; se &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; boost vs control &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -8.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.09 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Boost vs BoostPlus &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+Contrasts with ANCOVA with `prior` (Holm-Bonferroni adjustment with `\(k=2\)` tests)
+]
+.pull-right.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; se &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; boost vs control &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Boost vs BoostPlus &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+Contrasts for ANOVA (Holm-Bonferroni adjustment with `\(k=2\)` tests)
+]
+
+---
+
+# Data analysis - assumption checks
+
+.pull-left.small[
+
+``` r
+# Test equality of variance
+levene &lt;- car::leveneTest(
+   resid(model1) ~ condition, 
+   data = SSVB21_S2,
+   center = 'mean')
+# Equality of slopes (interaction)
+car::Anova(lm(post ~ condition * prior, 
+           data = SSVB21_S2),
+           model1, type = 3)
+```
+
+Levene's test of equality of variance: _F_ (2, 439) = 2.05 with a `\(p\)`-value of 0.13.
+]
+.pull-right.small[
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 165573 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 71.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4245 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; prior &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 382596 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 164.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition:prior &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 3257 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.7 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1016461 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+Model with interaction `condition*prior`. Slopes don't differ between condition.
+]
+
+---
+
+# The kitchen sink approach
+
+.box-inv-7.medium.sp-after[Should we control for more stuff?]
+
+.box-7.medium.sp-after[NO! ANCOVA is a design to reduce error]
+
+
+- Randomization should ensure that there is no confounding
+- No difference (on average) between group given a value of the covariate.
+- If it isn't the case, adjustment matters
+
+---
+
+# Equal trends
+.small[
+- If trends are different, meaningful comparisons (?)
+- Differences between groups depend on value of the covariate
+]
+&lt;img src="08-slides_files/figure-html/ancovadifftrend-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+.small[Due to lack of overlap, comparisons hazardous as they entail extrapolation one way or another.]
+
+---
+
+# Testing equal slope
+
+.box-7.sp-after[Compare two nested models]
+
+- Null `\(\mathscr{H}_0\)`: model with covariate
+- Alternative `\(\mathscr{H}_a\)`: model with interaction covariate * experimental factor
+
+.center[Use `anova` to compare the models in **R**.]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
-"highlightLines": true,
+"highlightLines": false,
 "countIncrementalSlides": false,
-"ratio": "16:9",
-"navigation": {
-"scroll": false
-}
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
@@ -764,24 +630,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       links[i].target = '_blank';
     }
   }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 slideshow._releaseMath = function(el) {

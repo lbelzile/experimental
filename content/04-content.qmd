@@ -32,7 +32,7 @@ At the end of the session, students should be capable of
 
 ## Readings
 
-- {{< fa book >}}  [Chapter 4](https://lbelzile.github.io/math80667a/04-contrasts_multipletesting.html) of the course notes
+- {{< fa book >}}  [Chapter 4](https://lbelzile.github.io/math80667a/contrasts_multipletesting.html) of the course notes
 - {{< fa book >}}  [Chapter 3](https://stat.ethz.ch/~meier/teaching/anova/contrasts-and-multiple-testing.html) of @Meier:2022
 - {{< fa book-open-reader >}} [One-way ANOVA example](/example/onewayanova.html)
 

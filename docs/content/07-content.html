@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods - Designs to reduce the error</title>
+<title>Experimental Designs and Statistical Methods - Multiway ANOVA and MANOVA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/07-content.html">7: Designs to reduce the error</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/07-content.html">7: Multiway factorial designs</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -206,31 +206,31 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Complete factorial designs</span></a>
+ <span class="menu-text">5: Factorial designs and interactions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Multiway factorial designs</span></a>
+ <span class="menu-text">6: Repeated measures</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/07-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">7: Designs to reduce the error</span></a>
+ <span class="menu-text">7: Multiway factorial designs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8: Effect sizes and power</span></a>
+ <span class="menu-text">8: Analysis of covariance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">9: Repeated measures</span></a>
+ <span class="menu-text">9: Effect sizes and power</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -273,7 +273,6 @@ div.csl-indent {
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
   <li><a href="#complementary-readings" id="toc-complementary-readings" class="nav-link" data-scroll-target="#complementary-readings">Complementary readings</a></li>
-  <li><a href="#videos" id="toc-videos" class="nav-link" data-scroll-target="#videos">Videos</a></li>
   <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
   </ul>
@@ -283,46 +282,43 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Designs to reduce the error</h1>
+<h1 class="title display-7">Multiway ANOVA and MANOVA</h1>
 
 </header>
 
 <section id="content" class="level2">
 <h2 class="anchored" data-anchor-id="content">Content</h2>
 <ul>
-<li>Blocking</li>
-<li>Analysis of covariance</li>
+<li>ANOVA with two or more factors</li>
+<li>ANOVA with both within-subject and between-subject factors</li>
+<li>Multivariate analysis of variance</li>
 </ul>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
 <p>At the end of the session, students should be capable of</p>
 <ul>
-<li>explain the benefits of blocked design and ANCOVA over completely randomized designs</li>
-<li>using control covariates or blocking factors</li>
-<li>testing equality of slopes</li>
+<li>analyzing models with both within-subject and between-subject factors</li>
+<li>specifying and calculating custom contrasts in multiway factorial designs</li>
+<li>correctly interpreting an analysis of variance table</li>
+<li>testing model assumptions in multivariate model</li>
 </ul>
 </section>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
 <ul>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/06-blocking_ancova.html">Chapter 6</a> of the course notes</li>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 5 (<a href="https://stat.ethz.ch/~meier/teaching/anova/block-designs.html">Complete Block Designs</a>) of <span class="citation" data-cites="Meier:2022">Meier (<a href="#ref-Meier:2022" role="doc-biblioref">2022</a>)</span> (5.1-5.2)</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/multiway.html">Chapter 7</a> of the course notes</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/manova.html">Chapter 8</a> of the course notes</li>
+<li><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i> <a href="../example/threewayanova.html">Three-way ANOVA example</a></li>
+<li><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i> <a href="../example/manova.html">MANOVA example</a></li>
 </ul>
 </section>
 <section id="complementary-readings" class="level2">
 <h2 class="anchored" data-anchor-id="complementary-readings">Complementary readings</h2>
 <ul>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 9 of <span class="citation" data-cites="Maxwell.Delaney.Kelley:2017">Maxwell et al. (<a href="#ref-Maxwell.Delaney.Kelley:2017" role="doc-biblioref">2017</a>)</span>.</li>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 4 of <span class="citation" data-cites="Cox:1958">Cox (<a href="#ref-Cox:1958" role="doc-biblioref">1958</a>)</span>.</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapters 8 and 14 of <span class="citation" data-cites="Maxwell.Delaney.Kelley:2017">Maxwell et al. (<a href="#ref-Maxwell.Delaney.Kelley:2017" role="doc-biblioref">2017</a>)</span>.</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapters 20–23 of <span class="citation" data-cites="Maxwell.Delaney.Kelley:2017">Maxwell et al. (<a href="#ref-Maxwell.Delaney.Kelley:2017" role="doc-biblioref">2017</a>)</span>.</li>
 </ul>
-</section>
-<section id="videos" class="level2">
-<h2 class="anchored" data-anchor-id="videos">Videos</h2>
-<div class="ratio ratio-16x9">
-<iframe src="https://www.youtube.com/embed/gTLp0pplRXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-</iframe>
-</div>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
@@ -342,6 +338,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <ul>
 <li><a href="../content/MATH80667A-07-content.R">R script</a></li>
+<li><a href="../content/MATH80667A-07-content.sps">SPSS script</a></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -362,14 +359,8 @@ Tip
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-Cox:1958" class="csl-entry" role="listitem">
-Cox, D. R. (1958). <em>Planning of experiments</em>. Wiley.
-</div>
 <div id="ref-Maxwell.Delaney.Kelley:2017" class="csl-entry" role="listitem">
 Maxwell, S. E., Delaney, H. D., &amp; Kelley, K. (2017). <em>Designing experiments and analyzing data: A model comparison perspective</em> (3rd ed.). routledge. <a href="https://doi.org/10.4324/9781315642956">https://doi.org/10.4324/9781315642956</a>
-</div>
-<div id="ref-Meier:2022" class="csl-entry" role="listitem">
-Meier, L. (2022). <em><span>ANOVA</span> and mixed models: A short introduction using <span>R</span></em> (Chapman &amp; Hall/CRC, Eds.). <a href="https://doi.org/10.1201/9781003146216">https://doi.org/10.1201/9781003146216</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

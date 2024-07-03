@@ -1,56 +1,55 @@
 group,subgroup,date,date_end,title,deadline,content,example,evaluations
-Introduction,Session 1,2024-01-08,,Introduction to experimental designs and motivation,,content/01-content,,
-Introduction,Session 1,2024-01-14,,Weekly check-in 1,12:00,,,evaluations/weekly-check-in
-Introduction,Session 1,2024-01-14,,Problem set 1,12:00,,,evaluations/01-problem-set
-Introduction,Session 1,2024-01-08,,Installing **R** and Rstudio,,,example/installation,
-Introduction,Session 2,2024-01-15,,Review of key statistics concepts,,content/02-content,,
-Introduction,Session 2,2024-01-15,,Example 1 – Introduction,,,example/introduction,
-Introduction,Session 2,2024-01-21,,Weekly check-in 2,12:00,,,evaluations/weekly-check-in
-Introduction,Session 2,2024-01-21,,Problem set 2,12:00,,,evaluations/02-problem-set
-Completely randomized designs,Session 3,2024-01-22,,Completely randomized designs with one factor,,content/03-content,,
-Completely randomized designs,Session 3,2024-01-22,,Example 2 – One-way ANOVA,,,example/onewayanova,
-Completely randomized designs,Session 3,2024-01-28,,Weekly check-in 3,12:00,,,evaluations/weekly-check-in
-Completely randomized designs,Session 3,2024-01-28,,Problem set 3,12:00,,,evaluations/03-problem-set
-Completely randomized designs,Session 4,2024-01-29,,Contrasts and multiple testing,,content/04-content,,
-Completely randomized designs,Session 4,2024-02-04,,Weekly check-in 4,12:00,,,evaluations/weekly-check-in
-Completely randomized designs,Session 4,2024-02-04,,Problem set 4,12:00,,,evaluations/04-problem-set
-Completely randomized designs,Session 5,2024-02-05,,Complete factorial designs,,content/05-content,,
-Completely randomized designs,Session 5,2024-02-05,,Example 3 – Two-way ANOVA,,,example/twowayanova,
-Completely randomized designs,Session 5,2024-02-11,,Weekly check-in 5,12:00,,,evaluations/weekly-check-in
-Completely randomized designs,Session 5,2024-02-11,,Problem set 5,12:00,,,evaluations/05-problem-set
-Advanced topics,Session 6,2024-02-12,,Multiway factorial designs,,content/06-content,,
-Advanced topics,Session 6,2024-02-12,,Example 4 – Three-way ANOVA,,,example/threewayanova,
-Advanced topics,Session 6,2024-02-18,,Weekly check-in 6,12:00,,,evaluations/weekly-check-in
-Advanced topics,Session 6,2024-02-18,,Problem set 6,12:00,,,evaluations/06-problem-set
-Advanced topics,Session 7,2024-02-19,,Block designs and analysis of covariance,,content/07-content,,
-Advanced topics,Session 7,2024-02-19,,Example 5 – Analysis of covariance,,,example/ancova,
-Advanced topics,Session 7,2024-02-25,,Weekly check-in 7,12:00,,,evaluations/weekly-check-in
-Advanced topics,Session 7,2024-02-25,,Problem set 7,12:00,,,evaluations/07-problem-set
-Advanced topics,Break,2024-02-24,2024-03-01,Winter break,,,,
-Advanced topics,Session 8,2024-03-04,,Effect sizes and the replication crisis,,content/08-content,,
-Advanced topics,Session 8,2024-03-04,,Example 6 – Effect size and power,,,example/effectsizepower,
-Advanced topics,Session 8,2024-03-10,,Weekly check-in 8,12:00,,,evaluations/weekly-check-in
-Advanced topics,Session 8,2024-03-10,,Problem set 8,12:00,,,evaluations/08-problem-set
-Repeated measure designs,Session 9,2024-03-11,,Repeated measures,,content/09-content,,
-Repeated measure designs,Session 9,2024-03-11,,Example 7 – Repeated measures ANOVA,,,example/repeated,
-Repeated measure designs,Session 9,2024-03-11,,Example 8 – MANOVA,,,example/repeated,
-Repeated measure designs,Session 9,2024-03-17,,Weekly check-in 9,12:00,,,evaluations/weekly-check-in
-Repeated measure designs,Session 9,2024-03-17,,Problem set 9,12:00,,,evaluations/09-problem-set
-Repeated measure designs,Session 10,2024-03-18,,Mixed models,,content/10-content,,
-Repeated measure designs,Session 10,2024-03-18,,Example 9 – Linear mixed models,,,example/mixedmodel,
-Repeated measure designs,Session 10,2024-03-24,,Weekly check-in 10,12:00,,,evaluations/weekly-check-in
-Repeated measure designs,Session 10,2024-03-24,,Problem set 10,12:00,,,evaluations/10-problem-set
-Causal inference,Session 11,2024-03-25,,Intro to causal inference,,content/11-content,,
-Causal inference,Session 11,2024-03-31,,Weekly check-in 11,12:00,,,evaluations/weekly-check-in
-Causal inference,Break,2024-03-29,2024-04-01,Easter,,,,
-Causal inference,Session 12,2024-04-08,,Linear mediation analysis,,content/12-content,,
-Causal inference,Session 12,2024-04-08,,Example 10 – Linear causal mediation,,,example/linearmediation,
-Causal inference,Session 12,2024-04-14,,Weekly check-in 12,12:00,,,evaluations/weekly-check-in
-Causal inference,Session 12,2024-04-14,,Problem set 11,12:00,,,evaluations/11-problem-set
-Categorical data,Session 13,2024-04-15,,"Categorical data, nonparametric test and final review",,content/13-content,,
-Categorical data,Session 13,2024-04-15,,Example 11 – Nonparametric tests,,,example/nonparametric,
-Categorical data,Session 13,2024-04-15,,Example 12 – Count data,,,example/counts,
-Categorical data,Session 13,2024-04-19,,Weekly check-in 13,12:00,,,evaluations/weekly-check-in
-Categorical data,Session 13,2024-04-19,,Problem set 12,12:00,,,evaluations/12-problem-set
-Final,End of term,2024-04-19,,Paper review,23:55,,,evaluations/paper-review
-Final,End of term,2024-04-20,,Final exam,13:30,,,evaluations/final-exam
+Introduction,Session 1,2024-08-30,,Introduction to experimental designs and motivation,,content/01-content,,
+Introduction,Session 1,2024-09-05,,Weekly check-in 1,12:00,,,evaluations/weekly-check-in
+Introduction,Session 1,2024-09-05,,Problem set 1,12:00,,,evaluations/01-problem-set
+Introduction,Session 1,2024-08-30,,Installing **R** and Rstudio,,,example/installation,
+Introduction,Session 2,2024-09-06,,Review of key statistics concepts,,content/02-content,,
+Introduction,Session 2,2024-09-06,,Example 1 – Introduction,,,example/introduction,
+Introduction,Session 2,2024-09-12,,Weekly check-in 2,12:00,,,evaluations/weekly-check-in
+Introduction,Session 2,2024-09-12,,Problem set 2,12:00,,,evaluations/02-problem-set
+Factorial designs,Session 3,2024-09-13,,Completely randomized designs with one factor,,content/03-content,,
+Factorial designs,Session 3,2024-09-13,,Example 2 – One-way ANOVA,,,example/onewayanova,
+Factorial designs,Session 3,2024-09-19,,Weekly check-in 3,12:00,,,evaluations/weekly-check-in
+Factorial designs,Session 3,2024-09-19,,Problem set 3,12:00,,,evaluations/03-problem-set
+Factorial designs,Session 4,2024-09-20,,Contrasts and multiple testing,,content/04-content,,
+Factorial designs,Session 4,2024-09-26,,Weekly check-in 4,12:00,,,evaluations/weekly-check-in
+Factorial designs,Session 4,2024-09-26,,Problem set 4,12:00,,,evaluations/04-problem-set
+Factorial designs,Session 5,2024-09-27,,Two-way factorial designs,,content/05-content,,
+Factorial designs,Session 5,2024-09-27,,Example 3 – Two-way ANOVA,,,example/twowayanova,
+Factorial designs,Session 5,2024-10-03,,Weekly check-in 5,12:00,,,evaluations/weekly-check-in
+Factorial designs,Session 5,2024-10-03,,Problem set 5,12:00,,,evaluations/05-problem-set
+Factorial designs,Session 6,2024-10-04,,Repeated measures,,content/06-content,,
+Factorial designs,Session 6,2024-10-04,,Example 4 – Repeated measures,,,example/repeated,
+Factorial designs,Session 6,2024-10-10,,Weekly check-in 6,12:00,,,evaluations/weekly-check-in
+Factorial designs,Session 6,2024-10-10,,Problem set 6,12:00,,,evaluations/06-problem-set
+Factorial designs,Session 7,2024-10-11,,Multiway ANOVA and MANOVA,,content/07-content,,
+Factorial designs,Session 7,2024-10-11,,Example 5 – Three-way ANOVA,,,example/threewayanova,
+Factorial designs,Session 7,2024-10-11,,Example 6 – MANOVA,,,example/manova,
+Factorial designs,Session 7,2024-10-17,,Weekly check-in 7,12:00,,,evaluations/weekly-check-in
+Factorial designs,Session 7,2024-10-17,,Problem set 7,,,,evaluations/07-problem-set
+Advanced topics,Break,2024-10-17,2024-10-23,Fall break,,,,
+Advanced topics,Session 8,2024-10-25,,Analysis of covariance,,content/08-content,,
+Advanced topics,Session 8,2024-10-25,,Example 7 – Analysis of covariance,12:00,,example/ancova,
+Advanced topics,Session 8,2024-10-31,,Weekly check-in 8,12:00,,,evaluations/weekly-check-in
+Advanced topics,Session 8,2024-10-31,,Problem set 8,,,,evaluations/08-problem-set
+Advanced topics,Session 9,2024-11-01,,Effect size and power,,content/09-content,,
+Advanced topics,Session 9,2024-11-01,,Example 8 – Effect size and power,,,example/effectsizepower,
+Advanced topics,Session 9,2024-11-06,,Weekly check-in 9,12:00,,,evaluations/weekly-check-in
+Advanced topics,Session 9,2024-11-06,,Problem set 9,12:00,,,evaluations/09-problem-set
+Advanced topics,Session 10,2024-11-07,,Mixed models,,content/10-content,,
+Advanced topics,Session 10,2024-11-07,,Example 9 – Linear mixed models,,,example/mixedmodel,
+Advanced topics,Session 10,2024-11-13,,Weekly check-in 10,12:00,,,evaluations/weekly-check-in
+Advanced topics,Session 10,2024-11-13,,Problem set 10,12:00,,,evaluations/10-problem-set
+Causal inference,Session 11,2024-11-14,,Intro to causal inference,,content/11-content,,
+Causal inference,Session 11,2024-11-20,,Weekly check-in 11,12:00,,,evaluations/weekly-check-in
+Causal inference,Session 12,2024-11-21,,Linear mediation and moderation,,content/12-content,,
+Causal inference,Session 12,2024-11-21,,Example 10 – Linear causal mediation,,,example/linearmediation,
+Causal inference,Session 12,2024-11-27,,Weekly check-in 12,12:00,,,evaluations/weekly-check-in
+Causal inference,Session 12,2024-11-27,,Problem set 11,12:00,,,evaluations/11-problem-set
+Categorical data,Session 13,2024-11-28,,"Categorical data, nonparametric test and final review",,content/13-content,,
+Categorical data,Session 13,2024-11-28,,Example 11 – Nonparametric tests,,,example/nonparametric,
+Categorical data,Session 13,2024-11-28,,Example 12 – Count data,,,example/counts,
+Categorical data,Session 13,2024-12-04,,Weekly check-in 13,12:00,,,evaluations/weekly-check-in
+Categorical data,Session 13,2024-12-04,,Problem set 12,12:00,,,evaluations/12-problem-set
+Final,End of term,2024-12-06,,Final exam,18:30,,,evaluations/final-exam
+Final,End of term,2024-12-13,,Paper review,23:55,,,evaluations/paper-review

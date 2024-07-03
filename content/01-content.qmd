@@ -51,7 +51,7 @@ slide_details <- tibble::tribble(
 These readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies --- the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.
 :::
 
-- {{< fa book >}} Chapter 1 of the [Course notes](https://lbelzile.github.io/math80667a/01-introduction.html)
+- {{< fa book >}} Chapter 1 of the [Course notes](https://lbelzile.github.io/math80667a/introduction.html)
 - {{< fa book >}} Chapter 2 of [*Introduction to Modern Statistics*](https://openintro-ims.netlify.app/data-design.html)
 
 Feel free to inform me in the weekly check-in of your take on these references.

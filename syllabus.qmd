@@ -112,29 +112,28 @@ Below is a tentative schedule for the semester.
     - Multiple testing, family-wise error rate and false discovery rate
     - Methods for control: methods for ANOVA (Tukey, Dunnett and Scheffé) 
     - General methods (Bonferroni, Holm and Benjamini-Hochberg)
-5. **Completely randomized designs with two factors**
+5. **Completely randomized designs with two between-subject factors**
     - Interactions
     - Marginal and conditional contrasts
-6. **General completely randomized designs**
+6. **Repeated measures and within-subject two factor designs**
     - Unbalanced designs and implications for inference 
-    - Three-way ANOVA: Simple, marginal and conditional means
-7. **Blocked designs and analysis of covariance**
-    - Designs to reduce the error
-    - Terminology (blocking factor, covariate, noise variable)
-    - Complete block design
-    - Repeated measure designs and tests of sphericity
-    - Analysis of covariance and equal slope assumptions
-8. **Effect sizes and power**
+    - Repeated measures and within-subject correlation
+    - Tests of sphericity
+7. **Multiway analysis of variance**
+    - Models with within-subject and between-subject factors
+    - Three-way ANOVA: simple, marginal and conditional means
+8. **Analysis of covariance**
+    - Analysis of covariance
+    - Pre-post experiments
+    - Linear regression models
+    - Assumption of equal slopes
+9. **Effect sizes and power**
     - Effect sizes
     - Interplay between sample size, effect and power
     - Power calculations
-9. **General design principles**
-    - More general linear regression models
-    - Nonparametric tests (rank tests, via linear model)
-    - AB testing and stopping rules
-    - Repeated measures and tests of sphericity
-10. **Mixed models**
-    - Intro to random effects
+10. **Mixed models** 
+    - Fixed vs random effects
+    - Blocking factors
     - Linear mixed models
     - Model specification: crossed and nested factors
     - Showcase: replication and meta-analysis
@@ -144,14 +143,15 @@ Below is a tentative schedule for the semester.
     - Solutions to replication crisis
     - Directed acyclic graphs
     - Types of association: causation, mediation, confounding and collision
-12. **Causal inference (continued) and linear mediation model**
     - Assumptions for causal inference
-    - *do*-operator and backdoor
-    - Baron--Kenny linear mediation model: Sobol's statistic and introduction to the bootstrap.
+12. **Linear mediation and moderation**
+    - Baron--Kenny linear mediation model: Sobol's statistic
+    - Nonparametric bootstrap
     - Linear mediation model
+    - Mediation and interactions
 13. **Categorical data analysis and final review**
-    - Contingency tables and count data
-    - Goodness-of-fit, independence, Fisher and McNemar tests
+    - Contingency tables and count data: goodness-of-fit, independence, symmetry
+    - Nonparametric tests
     - Q&A, final review and practice exam
 
 
@@ -160,7 +160,7 @@ Below is a tentative schedule for the semester.
 
 ## Student hours
 
-I am available Monday after class and from 13:30-15:00. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.
+I am available Friday after class and by appointment. My office, 4.850, is located next to the southern elevators in Côte-Sainte-Catherine building.
 
 Please watch this video:
 
@@ -170,7 +170,7 @@ Student hours are set times dedicated to all of you (most professors call these 
 
 ## Late work
 
-Problem sets and weekly check-ins are due by Sunday. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track.
+Problem sets and weekly check-ins are due by Thursday noon. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track.
 
 
 ## Intellectual integrity

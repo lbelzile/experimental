@@ -11,10 +11,10 @@ instructor:
 
 course:
   number: "MATH 80667A"
-  semester: "Winter 2024"
-  days: "Monday"
+  semester: "Fall 2024"
+  days: "Friday"
   time: "8:30-11:30"
-  location: "C-Ste-Cath, Caracas"
+  location: "C-Ste-Cath, TBD"
   github: "https://www.github.com/lbelzile/experimental"
   copyright_year: "2021-2024"
 

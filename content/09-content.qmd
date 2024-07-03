@@ -1,36 +1,35 @@
 ---
-title: "Repeated measures and multivariate ANOVA"
+title: "Effect size and power"
 ---
 
 ## Content
 
-- Analysis of within-subject designs
-- Repeated measures and test of sphericity
-- Multivariate analysis of variance
+- Measures of effect size
+- Power calculations
+- Interplay between sample size, effect and power
 
 
 ## Learning objectives
 
 At the end of the session, students should be capable of
 
-- adequately modelling repeated measures
-- correctly interpreting tests of sphericity using software
-- explaining the benefits and disadvantages of repeated-measure designs
-- testing model assumptions in multivariate model
+- correctly report effect size for common statistics in analysis of variance models
+- deduce the sample size necessary to replicate a study at a given power
+- explain the interplay between sample size, power and effect size.
 
 ## Readings
 
--  {{< fa book >}}  [Chapter 9](https://lbelzile.github.io/math80667a/09-repeated.html) of the course notes
-
+- {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/power_effect.html) of the course notes
+- {{< fa book >}}  [Chapter 11](https://lbelzile.github.io/math80667a/reproducibility_crisis.html) of the course notes
+- {{< fa book-open-reader >}} [Effect size and power example](/example/effectsizepower.html)
+- {{< fa book >}} @WebPower, pages 143--148 [of the web manual](https://webpower.psychstat.org/wiki/_media/grant/webpower_manual_book.pdf)
 
 ## Complementary readings
 
-
-- {{< fa book >}} @WebPower, pages 143--148 [of the web manual](https://webpower.psychstat.org/wiki/_media/grant/webpower_manual_book.pdf) 
-- {{< fa book >}}  Chapters 11--13 of @Maxwell.Delaney.Kelley:2017.
-- <i class="fas fa-book"></i> [Chapter 5.2 ](https://opentext.wsu.edu/carriecuttler/chapter/experimental-design/) of @Price:2017
-- <i class="fas fa-book"></i> Chapter 16 to 18 of @Keppel/Wickens:2004
-
+- {{< fa book >}} Chapters 3 (section *Power of the $F$ Test*) and 4 (section *Measures of Effects*) of @Maxwell.Delaney.Kelley:2017.
+- {{< fa file >}} @Lakens:2013
+- {{< fa file >}} @Steiger:2004
+- {{< fa file >}} @Kelley/Preacher:2012
 
 ## Slides
 
@@ -43,7 +42,6 @@ source(here::here("R", "slide-things.R"))
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/09-slides")
-# slide_tabs(slide_details, "/slides/06-slides.html")
 ```
 
 ```{r show-slides-xaringan, echo=FALSE}
@@ -53,11 +51,18 @@ xaringanExtra::embed_xaringan(
 )
 ```
 
-## Code
-
-- [R script](/content/MATH80667A-09-content.R)
-- [SPSS script](/content/MATH80667A-09-content.sps)
-
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
 :::
+
+## Exercise
+
+- [Power calculations](/example/power.html)
+
+## Code
+
+
+- [R script](/content/MATH80667A-09-content.R)
+- [Exercise solution](/example/power.R)
+
+

@@ -38,7 +38,7 @@ At the end of the session, students should be capable of
 
 ## Readings
 
-- {{< fa book >}} Chapter 3 of the [Course notes](https://lbelzile.github.io/math80667a/03-completely_randomized_trials.html)
+- {{< fa book >}} Chapter 3 of the [Course notes](https://lbelzile.github.io/math80667a/completely_randomized_trials.html)
 
 
 ## Complementary readings

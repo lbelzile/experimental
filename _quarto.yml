@@ -64,15 +64,15 @@ website:
               file: content/03-content.qmd
             - text: "4: Contrasts and multiple testing"
               file: content/04-content.qmd
-            - text: "5: Complete factorial designs"
+            - text: "5: Factorial designs and interactions"
               file: content/05-content.qmd
-            - text: "6: Multiway factorial designs"
+            - text: "6: Repeated measures"
               file: content/06-content.qmd
-            - text: "7: Designs to reduce the error"
+            - text: "7: Multiway factorial designs"
               file: content/07-content.qmd
-            - text: "8: Effect sizes and power"
+            - text: "8: Analysis of covariance"
               file: content/08-content.qmd
-            - text: "9: Repeated measures"
+            - text: "9: Effect sizes and power"
               file: content/09-content.qmd
             - text: "10: Intro to mixed models"
               file: content/10-content.qmd
@@ -132,16 +132,16 @@ website:
               file: example/onewayanova.qmd
             - text: "Two-way ANOVA"
               file: example/twowayanova.qmd
+            - text: "Repeated measures ANOVA"
+              file: example/repeated.qmd
             - text: "Three-way ANOVA"
               file: example/threewayanova.qmd
+            - text: "MANOVA"
+              file: example/manova.qmd
             - text: "Analysis of covariance"
               file: example/ancova.qmd
             - text: "Effect size and power"
               file: example/effectsizepower.qmd
-            - text: "Repeated measures ANOVA"
-              file: example/repeated.qmd
-            - text: "MANOVA"
-              file: example/manova.qmd
             - text: "Linear mixed models"
               file: example/mixedmodel.qmd
             - text: "Linear causal mediation"

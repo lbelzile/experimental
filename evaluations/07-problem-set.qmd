@@ -2,25 +2,21 @@
 title: "Problem set 7"
 ---
 
-Complete this task in teams of two or three students.
 
 **Submission information**: please submit on ZoneCours
 
--   a PDF report
--   your code
+- A PDF report
 
-Look at the [ANCOVA example](/example/ancova.html); this should be helpful in completing the problem set.
+## Task 1
 
-We consider Experiment 3 of @vanStekelenburg:2021; ([download the paper](https://doi.org/10.1177/09567976211007788)). The database can be found in `SSVB21_S3` in the `hecedsm` package. You can also download the [SPSS database via this link](/files/data/SPSS/SSVB21_S3.sav).
+Read @Wilkinson:1999's guidelines for reporting statistical analyses.
 
-1. Have a quick look at the exclusion guidelines in the [preregistration](https://osf.io/4w9tq). Do they make sense? think about other potential criteria that could have been listed.
-2. Write down potential improvement points related to **statistics and experimental setup** that you could raise if you were assigned to peer-review the paper.
-3. The author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the [script](https://osf.io/4yatk/download)). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?
-5. Test the assumptions of 
-   a. equal variance per experimental condition with the ANCOVA 
-   b. proper randomization based only on `Prior` scores
-   c. equality of slopes
-6. If the variance are unequal, fit the model with unequal variances per group (see the [ANCOVA example](example/ancova.html)) --- otherwise proceed as usual.
-   - Look at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.
-   - Does the conclusion of the test change relative to that reported in the paper?
-   
+Next, look at one of the experiments conducted in @vanStekelenburg:2021. Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors.
+
+
+## Task 2
+
+
+Read @Nosek:2018preregistration and list three benefits of preregistration. Reflect on the practical aspects and on the impact.^[Feel free to discuss field-specific issues.]
+
+We will organize a discussion in the near future in class on preregistration and the replication crisis.

@@ -2,20 +2,25 @@
 title: "Problem set 8"
 ---
 
+Complete this task in teams of two or three students.
+
 **Submission information**: please submit on ZoneCours
 
 -   a PDF report
 -   your code
 
-Look at the [effect size and power](/example/effectsizepower.html); this should be helpful in completing the problem set.
+Look at the [ANCOVA example](/example/ancova.html); this should be helpful in completing the problem set.
 
-The following text is a quote from [Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14)](https://osf.io/3467b) about a replication of @Oppenheimer.Monin:2009 work on the retrospective gambler fallacy.
+We consider Experiment 3 of @vanStekelenburg:2021; ([download the paper](https://doi.org/10.1177/09567976211007788)). The database can be found in `SSVB21_S3` in the `hecedsm` package. You can also download the [SPSS database via this link](/files/data/SPSS/SSVB21_S3.sav).
 
-> The differences between groups was reliable, omnibus $F(2, 77) = 4.8$, [...] Cohen’s $f = 0.18$. Pairwise comparisons showed that all differences between conditions were reliable as well, $t(47, 48, 57) = 1.94, 2.32, 2.65$; $p < .05$, Cohen’s $d$ = $(.56, .67, .69)$. 
+1. Have a quick look at the exclusion guidelines in the [preregistration](https://osf.io/4w9tq). Do they make sense? think about other potential criteria that could have been listed.
+2. Write down potential improvement points related to **statistics and experimental setup** that you could raise if you were assigned to peer-review the paper.
+3. The author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the [script](https://osf.io/4yatk/download)). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?
+5. Test the assumptions of
+   a. equal variance per experimental condition with the ANCOVA
+   b. proper randomization based only on `Prior` scores
+   c. equality of slopes
+6. If the variance are unequal, fit the model with unequal variances per group (see the [ANCOVA example](example/ancova.html)) --- otherwise proceed as usual.
+   - Look at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.
+   - Does the conclusion of the test change relative to that reported in the paper?
 
-
-
-1. Using the information from the quote, compute the effect size for Cohen's $f$ and $\widehat{\omega}^2$.^[In **R**, check out the function `F_to_omega2` and `F_to_f` from the `effectsize` package. You can also use the formula presented in the slides.] Note that you won't necessarily get the same value of Cohen's $f$ that is reported.
-2. Compute the overall sample size necessary to replicate this study with a power of at least $0.99:$ compute the power for both the overall effect and the three pairwise $t$-tests based on the reported values of Cohen's $d$ and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).
-3. Read the results of the replication in [ManyLabs1](https://psycnet.apa.org/fulltext/2014-20922-002.pdf); these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen's $d$) are reported in Table 2 [@ManyLab1:2014] under retrospective gambler fallacy. Comment about the success of the replication.
-4. Based on observation of Figure 1 of @ManyLab1:2014, why might one object to using estimated effect size reported in peer-reviewed papers?^[*Hint*: are the original effect size in line with the replications or not?]

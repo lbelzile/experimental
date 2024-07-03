@@ -276,7 +276,14 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#task-1" id="toc-task-1" class="nav-link active" data-scroll-target="#task-1">Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -286,39 +293,41 @@ div.csl-indent {
 
 </header>
 
-<p>Complete this task in teams of two or three students.</p>
 <p><strong>Submission information</strong>: please submit on ZoneCours</p>
 <ul>
-<li>a PDF report</li>
-<li>your code</li>
+<li>A PDF report</li>
 </ul>
-<p>Look at the <a href="../example/ancova.html">ANCOVA example</a>; this should be helpful in completing the problem set.</p>
-<p>We consider Experiment 3 of <span class="citation" data-cites="vanStekelenburg:2021">Stekelenburg et al. (<a href="#ref-vanStekelenburg:2021" role="doc-biblioref">2021</a>)</span>; (<a href="https://doi.org/10.1177/09567976211007788">download the paper</a>). The database can be found in <code>SSVB21_S3</code> in the <code>hecedsm</code> package. You can also download the <a href="../files/data/SPSS/SSVB21_S3.sav">SPSS database via this link</a>.</p>
-<ol type="1">
-<li>Have a quick look at the exclusion guidelines in the <a href="https://osf.io/4w9tq">preregistration</a>. Do they make sense? think about other potential criteria that could have been listed.</li>
-<li>Write down potential improvement points related to <strong>statistics and experimental setup</strong> that you could raise if you were assigned to peer-review the paper.</li>
-<li>The author proceed with splitting the data set in three groups and performing each pairwise comparisons in turn, corresponding to the different hypotheses (circa lines 499-533 of the <a href="https://osf.io/4yatk/download">script</a>). Why might this approach be suboptimal relative to the one that consists in fitting a model to the three categories (pooled variance) and proceeding later with computing pairwise differences and contrasts?</li>
-<li>Test the assumptions of
-<ol type="a">
-<li>equal variance per experimental condition with the ANCOVA</li>
-<li>proper randomization based only on <code>Prior</code> scores</li>
-<li>equality of slopes</li>
-</ol></li>
-<li>If the variance are unequal, fit the model with unequal variances per group (see the <a href="example/ancova.html">ANCOVA example</a>) — otherwise proceed as usual.
-<ul>
-<li>Look at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.</li>
-<li>Does the conclusion of the test change relative to that reported in the paper?</li>
-</ul></li>
-</ol>
+<section id="task-1" class="level2">
+<h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
+<p>Read <span class="citation" data-cites="Wilkinson:1999">Wilkinson (<a href="#ref-Wilkinson:1999" role="doc-biblioref">1999</a>)</span>’s guidelines for reporting statistical analyses.</p>
+<p>Next, look at one of the experiments conducted in <span class="citation" data-cites="vanStekelenburg:2021">Stekelenburg et al. (<a href="#ref-vanStekelenburg:2021" role="doc-biblioref">2021</a>)</span>. Cross-check with the guidelines and formulate criticism (positive or negative) in relation with the reporting done by the authors.</p>
+</section>
+<section id="task-2" class="level2">
+<h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
+<p>Read <span class="citation" data-cites="Nosek:2018preregistration">Nosek et al. (<a href="#ref-Nosek:2018preregistration" role="doc-biblioref">2018</a>)</span> and list three benefits of preregistration. Reflect on the practical aspects and on the impact.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>We will organize a discussion in the near future in class on preregistration and the replication crisis.</p>
 
 
+
+</section>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-Nosek:2018preregistration" class="csl-entry" role="listitem">
+Nosek, B. A., Ebersole, C. R., DeHaven, A. C., &amp; Mellor, D. T. (2018). The preregistration revolution. <em>Proceedings of the National Academy of Sciences</em>, <em>115</em>(11), 2600–2606. <a href="https://doi.org/10.1073/pnas.1708274114">https://doi.org/10.1073/pnas.1708274114</a>
+</div>
 <div id="ref-vanStekelenburg:2021" class="csl-entry" role="listitem">
 Stekelenburg, A. van, Schaap, G., Veling, H., &amp; Buijzen, M. (2021). Boosting understanding and identification of scientific consensus can help to correct false beliefs. <em>Psychological Science</em>, <em>32</em>(10), 1549–1565. <a href="https://doi.org/10.1177/09567976211007788">https://doi.org/10.1177/09567976211007788</a>
 </div>
-</div></section></div></main> <!-- /main -->
+<div id="ref-Wilkinson:1999" class="csl-entry" role="listitem">
+Wilkinson, L. (1999). Statistical methods in psychology journals: Guidelines and explanations. <em>American Psychologist</em>, <em>54</em>, 594–604. <a href="https://doi.org/10.1037/0003-066X.54.8.594">https://doi.org/10.1037/0003-066X.54.8.594</a>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Feel free to discuss field-specific issues.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

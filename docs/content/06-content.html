@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Experimental Designs and Statistical Methods - Multiway factorial designs</title>
+<title>Experimental Designs and Statistical Methods - Repeated measures</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/06-content.html">6: Multiway factorial designs</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/06-content.html">6: Repeated measures</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -206,31 +206,31 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Complete factorial designs</span></a>
+ <span class="menu-text">5: Factorial designs and interactions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/06-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">6: Multiway factorial designs</span></a>
+ <span class="menu-text">6: Repeated measures</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7: Designs to reduce the error</span></a>
+ <span class="menu-text">7: Multiway factorial designs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8: Effect sizes and power</span></a>
+ <span class="menu-text">8: Analysis of covariance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">9: Repeated measures</span></a>
+ <span class="menu-text">9: Effect sizes and power</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -283,7 +283,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Multiway factorial designs</h1>
+<h1 class="title display-7">Repeated measures</h1>
 
 </header>
 
@@ -291,7 +291,8 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="content">Content</h2>
 <ul>
 <li>Unbalanced designs</li>
-<li>Multiway factorial designs</li>
+<li>Analysis of within-subject designs</li>
+<li>Repeated measures and sphericity</li>
 </ul>
 </section>
 <section id="learning-objectives" class="level2">
@@ -299,24 +300,24 @@ div.csl-indent {
 <p>At the end of the session, students should be capable of</p>
 <ul>
 <li>listing the benefits of balanced designs</li>
-<li>correctly interpreting analysis of variance table</li>
-<li>specifying and calculating custom contrasts in multiway factorial designs</li>
-<li>correcting for multiple testing</li>
+<li>adequately modelling repeated measures</li>
+<li>correctly interpreting tests of sphericity using software</li>
+<li>explaining the benefits and disadvantages of repeated-measure designs</li>
 </ul>
 </section>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
 <ul>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/05-interactions_multiway.html">Chapter 5</a> of the course notes</li>
-<li><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i> <a href="../example/twowayanova.html">Two-way ANOVA example</a></li>
-<li><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i> <a href="../example/threewayanova.html">Three-way ANOVA example</a></li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> <a href="https://lbelzile.github.io/math80667a/repeated.html">Chapter 6</a> of the course notes</li>
+<li><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i> <a href="../example/repeated.html">Repeated measure example</a></li>
 </ul>
 </section>
 <section id="complementary-readings" class="level2">
 <h2 class="anchored" data-anchor-id="complementary-readings">Complementary readings</h2>
 <ul>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapter 8 of <span class="citation" data-cites="Maxwell.Delaney.Kelley:2017">Maxwell et al. (<a href="#ref-Maxwell.Delaney.Kelley:2017" role="doc-biblioref">2017</a>)</span>.</li>
-<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapters 21-22 of <span class="citation" data-cites="Keppel/Wickens:2004">Keppel &amp; Wickens (<a href="#ref-Keppel/Wickens:2004" role="doc-biblioref">2004</a>)</span>.</li>
+<li><i class="fas fa-book"></i> <a href="https://opentext.wsu.edu/carriecuttler/chapter/experimental-design/">Chapter 5.2</a> of <span class="citation" data-cites="Price:2017">Price et al. (<a href="#ref-Price:2017" role="doc-biblioref">2017</a>)</span></li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapters 11–12 of <span class="citation" data-cites="Maxwell.Delaney.Kelley:2017">Maxwell et al. (<a href="#ref-Maxwell.Delaney.Kelley:2017" role="doc-biblioref">2017</a>)</span>.</li>
+<li><i class="fa-solid fa-book" aria-hidden="true"></i> Chapters 16–18 of <span class="citation" data-cites="Keppel/Wickens:2004">Keppel &amp; Wickens (<a href="#ref-Keppel/Wickens:2004" role="doc-biblioref">2004</a>)</span>.</li>
 </ul>
 </section>
 <section id="videos" class="level2">
@@ -357,7 +358,6 @@ Tip
 <h2 class="anchored" data-anchor-id="code">Code</h2>
 <ul>
 <li><a href="../content/MATH80667A-06-content.R">R script</a></li>
-<li><a href="../content/MATH80667A-06-content.sps">SPSS script</a></li>
 </ul>
 
 
@@ -370,6 +370,9 @@ Keppel, G., &amp; Wickens, T. D. (2004). <em>Design and analysis: A researcher�
 </div>
 <div id="ref-Maxwell.Delaney.Kelley:2017" class="csl-entry" role="listitem">
 Maxwell, S. E., Delaney, H. D., &amp; Kelley, K. (2017). <em>Designing experiments and analyzing data: A model comparison perspective</em> (3rd ed.). routledge. <a href="https://doi.org/10.4324/9781315642956">https://doi.org/10.4324/9781315642956</a>
+</div>
+<div id="ref-Price:2017" class="csl-entry" role="listitem">
+Price, P. C., Jhangiani, R. S., Chiang, I.-C. A., Leighton, D. C., &amp; Cuttler, C. (2017). <em>Research methods in psychology</em> (3rd ed.). PressBooks. <a href="https://opentext.wsu.edu/carriecuttler/">https://opentext.wsu.edu/carriecuttler/</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

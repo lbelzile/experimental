@@ -12,14 +12,14 @@ title: "Mediation and moderation"
 
 At the end of the session, students should be capable of
 
-- Using the linear mediation model
+- fitting a linear mediation model
 - discussing limitations of the linear mediation model
 - testing for moderating variables (interactions)
 
 
 ## Readings
 
-- <i class="fas fa-book"></i>Chapter 11 of the [course notes](https://lbelzile.github.io/math80667a/11-causal-inference.html)
+- <i class="fas fa-book"></i>Chapter 13 of the [course notes](https://lbelzile.github.io/math80667a/causal-inference.html)
 - <i class="fas fa-book"></i>Chapter 11 of @Vanderweele:2015
 
 - Linear mediation model [@Baron/Kenny:1986]

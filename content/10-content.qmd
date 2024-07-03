@@ -4,7 +4,9 @@ title: "Intro to mixed models"
 
 ## Content
 
-- Introduction to mixed models
+- Fixed vs random effects
+- Blocking factors
+- Introduction to linear mixed models
 
 ## Learning objectives
 
@@ -12,19 +14,22 @@ At the end of the session, students should be capable of
 
 - determining the structure of an experimental design with random and fixed effects
 - correctly determining whether effects are crossed or nested
+- correctly analyzing models with blocking factors
 - setting up a linear mixed model
 
 
 
 ## Readings
 
-- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of Lukas Meier's ANOVA and Mixed Models: A Short Intro Using R] 
--  {{< fa book >}}  [Chapter 10](https://lbelzile.github.io/math80667a/10-mixed.html) of the course notes
+- {{< fa book >}} Chapter 5 ([Complete Block Designs](https://stat.ethz.ch/~meier/teaching/anova/block-designs.html)) of @Meier:2022 (5.1-5.2)
+- <i class="fas fa-book"></i>[Chapter 6 Random and Mixed-Effects Models](https://stat.ethz.ch/~meier/teaching/anova/random-and-mixed-effects-models.html) of @Meier:2022
+-  {{< fa book >}}  [Chapter 12](https://lbelzile.github.io/math80667a/mixed.html) of the course notes
 
 
 ## Complementary readings
 
 
+- {{< fa book >}}  Chapter 4 of @Cox:1958.
 - {{< fa book >}}  Chapters 10 and 15 of @Maxwell.Delaney.Kelley:2017.
 
 ## Slides

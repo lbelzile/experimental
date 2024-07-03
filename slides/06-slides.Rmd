@@ -1,5 +1,5 @@
 ---
-title: "Complete factorial designs"
+title: "Repeated measures"
 author: "Léo Belzile"
 date: "`r Sys.Date()`"
 output:
@@ -43,7 +43,7 @@ xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipbo
 
 class: center middle main-title section-title-1
 
-# Complete factorial designs
+# Repeated measures
 
 .class-info[
 
@@ -64,21 +64,24 @@ class: title title-inv-1
 
 
 
-.box-5.medium.sp-after-half[Unbalanced designs]
+.box-5.large.sp-after-half[Unbalanced designs]
 
-
-.box-6.medium.sp-after-half[Multifactorial designs]
-
+.box-8.large.sp-after-half[Repeated measures]
 
 ---
 layout: false
 name: unbalanced-designs
 class: center middle section-title section-title-5
 
+
 # Unbalanced designs
 
 ---
+layout: true
 class: title title-5
+
+---
+
 # Premise
 
 So far, we have exclusively considered balanced samples 
@@ -91,7 +94,7 @@ Most experiments (even planned) end up with unequal sample sizes.
 
 ---
 
-class: title title-5
+
 # Noninformative drop-out
 
 Unbalanced samples may be due to many causes, including randomization (need not balance) and loss-to-follow up (dropout)
@@ -102,7 +105,7 @@ If dropout is random, not a  problem
 
 ---
 
-class: title title-5
+
 # Problematic drop-out or exclusion
 
 If loss of units due to treatment or underlying conditions, problematic!
@@ -120,19 +123,19 @@ Review of: “Hydroxychloroquine and azithromycin as a treatment of COVID-19: re
 https://doi.org/10.1016/j.ijantimicag.2020.106063
 ---
 
-class: title title-5
+
 # Why seek balance?
 
 Two main reasons
 
 
-1. Power considerations: with equal variance in each group, balanced samples gives the best allocation
+1. Power considerations: with equal variance in each group, balanced samples gives the best sample allocation (easier to detect true differences in mean) by minimizing variability.
 2. Simplicity of interpretation and calculations: the interpretation of the $F$ test in a linear regression is unambiguous
 
 
 ---
 
-class: title title-5
+
 # Finding power in balance
 
 Consider a t-test for assessing the difference between treatments $A$ and $B$ with equal variability
@@ -142,7 +145,7 @@ The standard error of the average difference is
 $$\sqrt{\frac{\text{variance}_A}{\text{nb of obs. in }A} + \frac{\text{variance}_B}{\text{nb of obs. in }B}} = \sqrt{\frac{\sigma^2}{n_A} + \frac{\sigma^2}{n_B}}$$
 
 ---
-class: title title-5
+
 # Optimal allocation of ressources
 
 ```{r stderrordiffcurve, echo = FALSE, eval = TRUE, out.width = '65%', fig.retina = 3, fig.width = 5, fig.height = 3}
@@ -159,7 +162,7 @@ The allocation  of $n=n_A + n_B$ units that minimizes the std error is $n_A = n_
 ]
 
 ---
-class: title title-5
+
 # Example: tempting fate
 
 We consider data from Multi Lab 2, a replication study that examined Risen and Gilovich (2008) who
@@ -171,10 +174,7 @@ The replication data gathered in 37 different labs focuses on a 2 by 2 factorial
 
 ---
 
-
-.panelset[
-
-.panel[.panel-name[Load data]
+# Example - loading data
 
 - We consider a 2 by 2 factorial design.
 - The response is `likelihod`
@@ -190,9 +190,9 @@ url2 <- "https://edsm.rbind.io/files/data/RG08rep_bal.csv"
 RS_bal <- read_csv(url2, col_types = c("iiff"))
 ```
 
-]
+---
 
-.panel[.panel-name[Check balance]
+# Checking balance
 
 .pull-left.small[
 ```{r sampsize, echo = TRUE, eval = TRUE, cache = TRUE}
@@ -212,9 +212,9 @@ knitr::kable(summary_stats,
 ```
   
 ]
-]
 
-.panel[.panel-name[Marginal means]
+---
+# Marginal means
 
 .pull-left.small[
 
@@ -242,10 +242,8 @@ knitr::kable(summary(emm)[,c(1:3)],
 Note unequal standard errors.
 ]
 ]
-]
-]
 ---
-class: title title-5
+
 # Explaining the discrepancies
 
 Estimated marginal means are based on equiweighted groups:
@@ -257,7 +255,7 @@ The sample mean is the sum of observations divided by the sample size.
 The two coincide when $n_{11} = \cdots = n_{22}$.
 
 ---
-class: title title-5
+
 # Why equal weight?
 
 
@@ -267,7 +265,7 @@ class: title title-5
 
 
 ---
-class: title title-5
+
 # Revisiting the $F$ statistic
 
 Statistical tests contrast competing **nested** models:
@@ -278,14 +276,14 @@ Statistical tests contrast competing **nested** models:
 The numerator of the $F$-statistic compares the sum of square of a model with (given) main effect, etc., to a model without.
 
 ---
-class: title title-5
+
 # What is explained by condition?
 
 Consider the $2 \times 2$ factorial design with factors $A$: `gender` and $B$: `condition` (prepared vs unprepared) without interaction.
 
 What is the share of variability (sum of squares) explained by the experimental condition?
 ---
-class: title title-5
+
 # Comparing differences in sum of squares (1)
 
 Consider a balanced sample
@@ -304,7 +302,7 @@ The difference in sum of squares is 141.86 in both cases.
 ]
 
 ---
-class: title title-5
+
 # Comparing differences in sum of squares (2)
 
 Consider an unbalanced sample
@@ -326,7 +324,7 @@ The differences of sum of squares are respectively 330.95 and 332.34.
 
 ---
 
-class: title title-5
+
 # Orthogonality
 
 Balanced designs yield orthogonal factors: the improvement in the goodness of fit (characterized by change in sum of squares) is the same regardless of other factors.
@@ -340,7 +338,7 @@ We lose this property with unbalanced samples: there are distinct formulations o
 
 ---
 
-class: title title-5
+
 # Analysis of variance - Type I (sequential)
 
 The default method in **R** with `anova` is the sequential decomposition: in the order of the variables $A$, $B$ in the formula 
@@ -357,7 +355,7 @@ Since the order in which we list the variable is **arbitrary**, these $F$ tests 
 
 ---
 
-class: title title-5
+
 # Analysis of variance - Type II
 
 Impact of 
@@ -369,7 +367,7 @@ Impact of
 
 ---
 
-class: title title-5
+
 # Analysis of variance - Type III
 
 Most commonly used approach
@@ -383,7 +381,7 @@ Most commonly used approach
 - In **R**, use `car::Anova(model, type = 3)`
 
 ---
-class: title title-5
+
 # ANOVA for unbalanced data
 .pull-left.small[
 
@@ -417,7 +415,7 @@ caption = "ANOVA (type III)",
 
 ]
 ---
-class: title title-5
+
 # ANOVA for balanced data
 .pull-left.small[
 
@@ -454,7 +452,7 @@ caption = "ANOVA (type III)",
 
 ]
 ---
-class: title title-5
+
 # Recap
 
 - If each observation has the same variability, a balanced sample maximizes power.
@@ -466,7 +464,7 @@ class: title title-5
 
 ---
 
-class: title title-5
+
 
 # Practice  
 
@@ -486,366 +484,326 @@ In three experimental studies the authors demonstrate this predicted basic effec
 
 ---
 
+
 layout: false
-name: factorial-designs
-class: center middle section-title section-title-6 animated fadeIn
+name: repeated-measures
+class: center middle section-title section-title-8
 
-# Multifactorial designs
+# Repeated measures ANOVA
 
 ---
 
-class: title title-6
-# Beyond two factors
+layout: true
+class: title title-8
 
-We can consider multiple factors $A$, $B$, $C$, $\ldots$ with respectively $n_a$, $n_b$, $n_c$, $\ldots$ levels and with $n_r$ replications for each.
+---
 
-The total number of treatment combinations is 
+# Beyond between-designs
 
-.box-inv-6.sp-after-half[
-$n_a \times n_b \times n_c \times \cdots$
+Each subject (experimental unit) assigned to a single condition.
+
+- individuals (subjects) are **nested** within condition/treatment.
+
+
+In many instances, it may be possible to randomly assign multiple conditions to each experimental unit.
+
+---
+
+# Benefits of within-designs
+
+Assign (some or) all treatments to subjects and measure the response.
+
+Benefits: 
+
+- Each subject (experimental unit) serves as its own control (greater comparability among treatment conditions).
+- Filter out effect due to subject (like blocking):
+  - increased precision
+  - increased power (tests are based on within-subject variability)
+
+
+Impact: need smaller sample sizes than between-subjects designs
+
+---
+
+# Drawbacks of within-designs
+
+Potential sources of bias include
+  - Period effect (e.g., practice or fatigue).
+  - Carryover effects.
+  - Permanent change in the subject condition after a treatment assignment.
+  - Loss of subjects over time (attrition).
+
+---
+
+# Minimizing sources of bias
+
+- Randomize the order of treatment conditions among
+subjects 
+- or use a balanced crossover design and include the period and carryover effect in the statistical model (confounding or control variables to better isolate the treatment effect).
+- Allow enough time between treatment conditions to reduce or eliminate period or carryover effects.
+
+
+---
+
+
+# One-way ANOVA with a random effect
+
+As before, we have one experimental factor $A$ with $n_a$ levels, with
+
+$$\begin{align*}\underset{\text{response}\vphantom{l}}{Y_{ij}} = \underset{\text{global mean}}{\mu_{\vphantom{j}}} + \underset{\text{mean difference}}{\alpha_j} + \underset{\text{random effect for subject}}{S_{i\vphantom{j}}} + \underset{\text{error}\vphantom{l}}{\varepsilon_{ij}}\end{align*}$$
+
+where $S_i \sim \mathsf{Normal}(0, \sigma^2_s)$ and $\varepsilon_{ij} \sim \mathsf{Normal}(0, \sigma^2_e)$ are random variables.
+
+The errors and random effects are independent from one another.
+
+
+
+---
+
+
+# Variance components
+
+The model **parameters** includes two measures of variability $\sigma^2_s$ and $\sigma^2_e$.
+
+
+- The variance of the response $Y_{ij}$ is $\sigma^2_s + \sigma^2_e$.
+- The **intra-class correlation** between observations in group $i$ is $\rho = \sigma^2_s/(\sigma^2_s + \sigma^2_e)$.
+   - observations from the same subject are correlated
+   - observations from different subjects are independent
+   
+This dependence structure within group is termed **compound symmetry**.
+
+---
+
+# Example: happy fakes
+
+An experiment conducted in a graduate course at HEC gathered electroencephalography (EEG) data.
+
+The response variable is the amplitude of a brain signal measured at 170 ms after the participant has been exposed to different faces. 
+
+Repeated measures were collected on 12 participants, but we focus only on the average of the replications.
+
+---
+
+
+# Experimental conditions
+
+.pull-left-wide[
+The control (`real`) is a true image, whereas the other were generated using a generative adversarial network (GAN) so be slightly smiling (`GAN1`) or extremely smiling (`GAN2`, looks more fake).
+
+Research question: do the GAN image trigger different reactions (pairwise difference with control)?
 ]
+.pull-right-narrow[
 
+![](img/10/face_real.jpg)
+![](img/10/face_GAN_S.jpg)
+![](img/10/face_GAN_E.jpg)
 
---
-
-.box-6.medium[
-**Curse of dimensionality**
 ]
-
 ---
 
-class: title title-6
-# Full three-way ANOVA model
 
-Each cell of the cube is allowed to have a different mean
+# Models for repeated measures
 
-$$\begin{align*}
-\underset{\text{response}\vphantom{cell}}{Y_{ijkr}\vphantom{\mu_{j}}} = \underset{\text{cell mean}}{\mu_{ijk}} + \underset{\text{error}\vphantom{cell}}{\varepsilon_{ijkr}\vphantom{\mu_{j}}}
-\end{align*}$$
-with $\varepsilon_{ijkt}$ are independent error term for 
-- row $i$
-- column $j$
-- depth $k$
-- replication $r$
+If we average, we have a balanced randomized blocked design with
+
+- `id` (blocking factor)
+- `stimulus` (experimental factor)
+
+We use the `afex` package to model the within-subject structure.
 
 ---
-class: title title-6
-# Parametrization of a three-way ANOVA model
+# Load data
 
-With the **sum-to-zero** parametrization with factors $A$, $B$ and $C$, write the response as
-
-$$\begin{align*}\underset{\text{theoretical average}}{\mathsf{E}(Y_{ijkr})} &= \quad \underset{\text{global mean}}{\mu} \\ &\quad +\underset{\text{main effects}}{\alpha_i + \beta_j + \gamma_k}  \\ & \quad + \underset{\text{two-way interactions}}{(\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk}} \\ & \quad + \underset{\text{three-way interaction}}{(\alpha\beta\gamma)_{ijk}}\end{align*}$$
-
----
-.small[
-```{r cube1, out.width = '20%', echo = FALSE,  fig.show = 'hold', eval = TRUE, fig.cap = "global mean, row, column and depth main effects"}
-knitr::include_graphics("img/06/cube.png")
-knitr::include_graphics("img/06/cube_rows.png")
-knitr::include_graphics("img/06/cube_column.png")
-knitr::include_graphics("img/06/cube_depth.png")
-```
-]
-.small[
-```{r cube2, out.width = '20%', echo = FALSE, eval = TRUE, fig.show = 'hold', fig.cap = "row/col, row/depth and col/depth interactions and three-way interaction."}
-
-knitr::include_graphics("img/06/cube_rowcol.png")
-knitr::include_graphics("img/06/cube_rowdepth.png")
-knitr::include_graphics("img/06/cube_coldepth.png")
-knitr::include_graphics("img/06/cube_all.png")
-```
-]
-
----
-class: title title-6
-# Example of three-way design
-
-.small[
-Petty, Cacioppo and Heesacker (1981). Effects of rhetorical questions on persuasion: A cognitive response analysis. Journal of Personality and Social Psychology.
-
-A $2 \times 2 \times 2$ factorial design with 8 treatments groups and $n=160$ undergraduates.
-
-Setup: should a comprehensive exam be administered to bachelor students in their final year?
-
-- **Response** Likert scale on $-5$ (do not agree at all) to $5$ (completely agree)
-- **Factors**
-- $A$: strength of the argument (`strong` or `weak`)
-- $B$: involvement of students `low` (far away, in a long time) or  `high` (next year, at their university)
-- $C$: style of argument, either `regular` form or `rhetorical` (Don't you think?, ...)
-]
-
----
-class: title title-6
-
-# Interaction plot
-
-.small[
-Interaction plot for a  $2 \times 2 \times 2$ factorial design from Petty, Cacioppo and Heesacker (1981)
-]
-
-```{r interactionpetty, echo = FALSE, fig.retina = 3, fig.width=6,fig.height=2,out.width = '70%'}
-petty <- tibble(agreement = c(0.04,0.75,-0.1,-0.66,0.61,0.05,-0.46,-0.24),
-"strength" = factor(rep(rep(c("strong","weak"), each = 2), length.out = 8)),
-"involvement" = relevel(factor(rep(c("low","high"), length.out = 8)), ref = "low"),
-"style" = factor(rep(c("regular","rhetorical"), each = 4)))
-ggplot(data = petty, 
-aes(x = involvement, y = agreement, col = strength, group = strength)) + 
-geom_line(stat = "identity") + 
-facet_wrap(~style) + 
-  labs(y = "", 
-       subtitle = "mean agreement rating") + 
-theme_bw() + theme(legend.position = "bottom")
-```
-
-???
-
-p.472 of Keppel and Wickens
-
-
----
-class: title title-6
-#  The microwave popcorn experiment
-
-What is the best brand of microwave popcorn? 
-
-- **Factors**
-- brand (two national, one local)
-- power: 500W and 600W
-- time: 4, 4.5 and 5 minutes
-- **Response**: <s>weight</s>, <s>volume</s>, <s>number</s>, percentage of popped kernels.
-- Pilot study showed average of 70% overall popped kernels (10% standard dev), timing values reasonable
-- Power calculation suggested at least $r=4$ replicates, but researchers proceeded with $r=2$...
-
----
-
-```{r popcorn_pre, echo = FALSE, eval = TRUE}
-# Somehow there is an error message when knitting
-library(tidyverse) #load packages
-# Sum-to-zero parametrization
-data(popcorn, package = "hecedsm")
-model <- aov(percentage ~ brand * power * time, 
-             data = popcorn)
-# ANOVA table
-anova_table <- anova(model) # 'anova' is for balanced designs
+```{r interaction, echo = TRUE, eval = TRUE, cache = TRUE}
+# Set sum-to-zero constraint for factors
+options(contrasts = c("contr.sum", "contr.poly"))
+data(AA21, package = "hecedsm")
+# Compute mean
+AA21_m <- AA21 |>
+  dplyr::group_by(id, stimulus) |>
+  dplyr::summarize(latency = mean(latency))
 ```
 
-.panelset[
+---
 
-.panel[.panel-name[ANOVA]
-```{r popcorn_qqplot, echo = TRUE, eval = FALSE}
-data(popcorn, package = 'hecedsm')
-# Fit model with three-way interaction
-model <- aov(percentage ~ brand*power*time,
-             data = popcorn)
-# ANOVA table - 'anova' is ONLY for balanced designs
-anova_table <- anova(model) 
-# Quantile-quantile plot
-car::qqPlot(model)
-```
+# Graph
 
-.small[Model assumptions: plots and tests are meaningless with $n_r=2$ replications per group...]
-
-]
-
-.panel[.panel-name[QQ-plot]
-
-```{r popcornplotqqplot, out.width = '35%', fig.retina = 3, fig.asp = 1,eval = TRUE, echo = FALSE}
-
-car::qqPlot(model, # points should be on straight line!
-id = FALSE, 
-ylab = 'studentized residuals',
-xlab = "Student-t quantiles")
-```
-
-All points fall roughly on a straight line.
-
-]
-
-.panel[.panel-name[**R** code]
-```{r popcorn_plot, echo = TRUE, eval = FALSE, message = FALSE}
-popcorn |> 
-   group_by(brand, time, power) |>
-   summarize(meanp = mean(percentage)) |>
-ggplot(mapping = aes(x = power, 
-                     y = meanp, 
-                     col = time, 
-                     group = time)) + 
-  geom_line() + 
-  facet_wrap(~brand)
+.pull-left[
+```{r graph, echo = TRUE, eval = FALSE}
+library(ggplot2)
+ggplot(data = AA21_m,
+       aes(x = id,
+           colour = stimulus,
+           y = latency)) +
+  geom_point()
 ```
 ]
-
-
-.panel[.panel-name[Interaction plot]
-
-```{r popcornplot2, echo = FALSE, eval = TRUE, message = FALSE, cache = TRUE, fig.asp = 0.35, out.width = '80%'}
-popcorn |>
-  group_by(brand, time, power) |>
-  summarize(mean_percentage = mean(percentage)) |>
-  ggplot(aes(
-    x = power,
-    y = mean_percentage,
-    col = time,
-    group = time
-  )) +
-  geom_line() +
-  facet_wrap( ~ brand) +
-  labs(y = "percentage of\n popped kernels",
-       col = "time (min)",
-       x = "power (W)") +
-  theme_bw() +
+.pull-right[
+```{r graph2, echo = FALSE, eval = TRUE, out.width = '90%', fig.asp = 0.689, fig.width = 5}
+library(ggplot2)
+ggplot(data = AA21_m,
+       aes(x = id,
+           colour = stimulus,
+           y = latency)) +
+  geom_point() +
+  theme_classic() +
+  labs(subtitle = "latency measure",
+       y = "",
+       x = "participant identifier") + 
   theme(legend.position = "bottom")
 ```
-
-No evidence of three-way interaction (hard to tell with $r=2$ replications).
 ]
+---
 
+# ANOVA
 
+.pull-left[
+.small[
+```{r aovcall, eval = FALSE, echo = TRUE}
+model <- afex::aov_ez(
+  id = "id",           # subject id
+  dv = "latency",      # response
+  within = "stimulus", # within-subject
+  data = hecedsm::AA21,
+  fun_aggregate = mean)
+anova(model, # mixed ANOVA model
+      correction = "none", # sphericity
+      es = "none") # effect size
+```
+
+- No detectable difference between conditions.
+```{r aovcall2, eval = TRUE, echo = FALSE}
+model <- afex::aov_ez(
+  id = "id",           # subject id
+  dv = "latency",      # response
+  within = "stimulus", # within-subject
+  data = hecedsm::AA21,
+  fun_aggregate = mean)
+```
+]
+]
+.pull-right[
+
+.small[
+```
+# Anova Table (Type 3 tests)
+# 
+# Response: latency
+#          num Df den Df   MSE     F Pr(>F)
+# stimulus      2     22 1.955 0.496 0.6155
+```
+
+- Residual degrees of freedom: $(n_a-1) \times (n_s-1)=22$ for $n_s=12$ subjects and $n_a=3$ levels.
+
+]
 ]
 
 ---
 
-class: title title-6
-# Analysis of variance table for balanced designs
+
+# Model assumptions
+
+The validity of the $F$ null distribution relies on the model having the correct structure.
+
+- Same variance per observation
+- equal correlation between measurements of the same subject (*compound symmetry*)
+- normality of the random effect
+
+
+---
+
+# Sphericity
+
+
+Since we care only about differences in treatment, can get away with a weaker assumption than compound symmetry.
+
+
+**Sphericity**: variance of difference between treatment is constant.
+
+
+Typically, Mauchly's test of sphericity is used to test this assumption
+   - if statistically significant, use a correction (later)
+   - if no evidence, proceed with $F$ tests as usual with $\mathsf{F}(\nu_1, \nu_2)$ benchmark distribution.
+   
+---
+
+# Sphericity tests with `afex`
+
+
+```{r, eval = FALSE, echo = TRUE}
+summary(model) #truncated output
+```
+
+```
+Mauchly Tests for Sphericity
+
+         Test statistic p-value
+stimulus        0.67814 0.14341
+```
 
 .small[
 
-| terms | degrees of freedom | 
-|:---:|:-----|:-------|
-| $A$ | $n_a-1$ | 
-| $B$ | $n_b-1$ | 
-| $C$ | $n_c-1$ | 
-| $AB$ | $(n_a-1)(n_b-1)$ | 
-| $AC$ | $(n_a-1)(n_c-1)$ | 
-| $BC$ | $(n_b-1)(n_c-1)$ | 
-| $ABC$ | ${\small (n_a-1)(n_b-1)(n_c-1)}$ | 
-| $\text{residual}$ | $n_an_bn_c(R-1)$ | 
-| $\text{total}$ | $n_an_bn_cn_r-1$ | 
+- $p$-value for Mauchly's test is large, no evidence that sphericity is violated.
+
+- Report the $p$-value of the $F$-test: $F(2, 22) = 0.6155$.
+
+]
+---
+
+# Corrections for sphericity
+
+If we reject the hypothesis of sphericity (small $p$-value for Mauchly's test), we need to change our reference distribution.
+
+
+Box suggested to multiply both degrees of freedom of $F$ statistic by $\epsilon < 1$ and compare to $\mathsf{F}(\epsilon \nu_1, \epsilon \nu_2)$ distribution instead
+
+- Three common correction factors $\epsilon$:
+   - Greenhouse‒Geisser 
+   - Huynh‒Feldt (more powerful)
+   - take $\epsilon=1/\nu_1$, giving $\mathsf{F}(1, \nu_2/\nu_1)$.
+
+Another option is to go fully multivariate (MANOVA tests).
+
+---
+
+# Corrections for sphericity tests with `afex`
+
+
+The estimated corrections $\widehat{\epsilon}$ are reported by default with $p$-values. Use only if sphericity fails to hold, or to check robustness.
+
+```{r, eval = FALSE, echo = TRUE}
+summary(model) # truncated output
+```
+
+```
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+          GG eps Pr(>F[GG])
+stimulus 0.75651     0.5667
+
+            HF eps Pr(>F[HF])
+stimulus 0.8514944  0.5872648
+```
+
+.tiny[
+
+Note: $\widehat{\epsilon}$ can be larger than 1, replace by the upper bound 1 if it happens
 
 ]
 
 ---
 
-```{r printanovaPopcorn, echo = FALSE, eval = TRUE}
-knitr::kable(anova_table,
-digits = c(0,2,2,2,3),
-caption = "Analysis of variance table for microwave-popcorn",
-col.names = c("Degrees of freedom",
-     "Sum of squares",
-     "Mean square",
-     "F statistic",
-     "p-value")) |>
-kableExtra::kable_styling(position = "center")
-```
+# Contrasts
 
----
-class: title title-6
-# Omitting terms in a factorial design
-
-The more levels and factors, the more parameters to estimate (and replications needed)
-- Costly to get enough observations / power
-- The assumption of normality becomes more critical when $r=2$!
-
-It may be useful not to consider some interactions if they are known or (strongly) suspected not to be present
-
-- If important interactions are omitted from the model, biased estimates/output!
-
----
-class: title title-6
-# Guidelines for the interpretation of effects
-
-Start with the most complicated term (top down)
-
-- If the three-way interaction $ABC$ is significative:
-    - don't interpret main effects or two-way interactions!
-    - comparison is done cell by cell within each level
-- If the $ABC$ term isn't significative:
-    - can marginalize and interpret lower order terms
-    - back to a series of two-way ANOVAs
-
----
-
-class: title title-6
-
-# What contrasts are of interest?
-
-- Can view a three-way ANOVA as a series of one-way ANOVA or two-way ANOVAs...
-
-Depending on the goal, could compare for variable $A$
-- marginal contrast $\psi_A$ (averaging over $B$ and $C$)
-- marginal conditional contrast for particular subgroup: $\psi_A$ within $c_1$
-- contrast involving two variables: $\psi_{AB}$
-- contrast differences between treatment at $\psi_A \times B$, averaging over $C$.
-- etc.
-
-See helper code and chapter 22 of Keppel & Wickens (2004) for a detailed example.
-
----
-class: title title-6
-# Effects and contrasts for microwave-popcorn
-
-Following preplanned comparisons
-
-- Which combo (brand, power, time) gives highest popping rate? (pairwise comparisons of all combos)
-- Best brand overall (marginal means marginalizing over power and time, assuming no interaction)
-- Effect of time and power on percentage of popped kernels 
-- pairwise comparison of time $\times$ power
-- main effect of power
-- main effect of time
-
----
-
-class: title title-6
-# Preplanned comparisons using `emmeans`
-
-
-Let $A$=brand, $B$=power, $C$=time
-
-Compare difference between percentage of popped kernels for 4.5 versus 5 minutes, for brands 1 and 2
-
-$$\mathscr{H}_0: (\mu_{1.2} -\mu_{1.3}) - (\mu_{2.2} - \mu_{2.3}) = 0$$
+In within-subject designs, contrasts are obtained by computing the contrast for every subject. Make sure to check degrees of freedom!
 
 .small[
-```{r plannedcomparisonspopcorn, echo = TRUE, eval = FALSE}
-library(emmeans)
-# marginal means
-emm_popcorn_AC <- emmeans(model, 
-                          specs = c("brand","time"))
-contrast_list <- 
-  list(
-    brand12with4.5vs5min = c(0, 0, 0, 1, -1, 0, -1, 1,0))
-contrast(emm_popcorn_AC,  # marginal mean (no time)
-         method = contrast_list) # list of contrasts
-```
-
-```{r Scheffebyhand, echo = FALSE, eval = FALSE}
-# Scheffé adjustment by hand 
-# emmeans is off because of marginalization - 
-# could be solved but specifying the 18 dim vector for contrast...
-Scrit <- sqrt(17*qf(0.99, 17, 18)) # 18 cells, but all in terms of 17 combos of differences
-# qf() is 99% quantile of F distribution 
-# with 17 df and 18 df=(degrees of freedom of residual, 36 obs - 18 param)
-# with(contrast_popcorn, c(lower = estimate - Scrit*SE, upper = estimate + Scrit*SE))
+```{r, eval = TRUE, echo = TRUE}
+# Set up contrast vector
+cont_vec <- list("real vs GAN" = c(1, -0.5, -0.5))
+model |> emmeans::emmeans(spec = "stimulus", contr = cont_vec)
 ```
 ]
-
----
-
-class: title title-6
-# Preplanned comparisons
-
-Compare all three times (4, 4.5 and 5 minutes)
-
-At level 99% with Tukey's HSD method
-
-- Careful! Potentially misleading because there is a `brand * time` interaction present.
-
-```{r plannedcomparisons2popcorn, echo = TRUE, eval = FALSE}
-# List of variables to keep go in `specs`: keep only time
-emm_popcorn_C <- emmeans(model, specs = "time")
-pairs(emm_popcorn_C, 
-      adjust = "tukey", 
-      level = 0.99, 
-      infer = TRUE)
-
-```
 

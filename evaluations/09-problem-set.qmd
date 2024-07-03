@@ -2,23 +2,20 @@
 title: "Problem set 9"
 ---
 
-Complete this task in teams of two or three students.
-
 **Submission information**: please submit on ZoneCours
 
 -   a PDF report
 -   your code
 
+Look at the [effect size and power](/example/effectsizepower.html); this should be helpful in completing the problem set.
 
-We consider Study 2 of @Bobak:2019, who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). @Bobak:2019 report that 
+The following text is a quote from [Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14)](https://osf.io/3467b) about a replication of @Oppenheimer.Monin:2009 work on the retrospective gambler fallacy.
 
-> Participants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.
+> The differences between groups was reliable, omnibus $F(2, 77) = 4.8$, [...] Cohen’s $f = 0.18$. Pairwise comparisons showed that all differences between conditions were reliable as well, $t(47, 48, 57) = 1.94, 2.32, 2.65$; $p < .05$, Cohen’s $d$ = $(.56, .67, .69)$.
 
 
-Perform a repeated measure one-way ANOVA with `color` as within-factor and `pcorr` as response with the `BMH19_S2` data, which can be found in the **R** package `hecedsm`.  You can also download the [SPSS database via this link](/files/data/SPSS/BMH19_S2.sav).
 
-1. Explain in your own words the purpose of randomization and [counterbalancing](https://explorable.com/counterbalanced-measures-design) in a repeated measure experiment.
-2. Is there evidence against the hypothesis of sphericity? Report Mauchly's statistic and the conclusion of the hypothesis test.
-2. Are there differences overall between color match (monochrome, mixed or colored)? Report the $F$-statistic, the degrees of freedom and the $p$-value and a measure of effect size (e.g., $\widehat{R}^2_p$). If the sphericity assumption isn't met, use the Greenhouse--Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor $\widehat{\epsilon}$.
-3. Compute pairwise differences applying Tukey's honest significance difference multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in `pcorr`), the $t$-test statistics and the associated $p$-values.
-4. An alternative procedure would be to fit the model as a one-way MANOVA: do this and report the value of Pillai's trace with the approximate $F$ statistic, degrees of freedom and $p$-values. Does your conclusions change?^[If you fit the model with `afex` package functions `aov_ez`, the output contains a slot `$Anova` with the value of this test.]
+1. Using the information from the quote, compute the effect size for Cohen's $f$ and $\widehat{\omega}^2$.^[In **R**, check out the function `F_to_omega2` and `F_to_f` from the `effectsize` package. You can also use the formula presented in the slides.] Note that you won't necessarily get the same value of Cohen's $f$ that is reported.
+2. Compute the overall sample size necessary to replicate this study with a power of at least $0.99:$ compute the power for both the overall effect and the three pairwise $t$-tests based on the reported values of Cohen's $d$ and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).
+3. Read the results of the replication in [ManyLabs1](https://psycnet.apa.org/fulltext/2014-20922-002.pdf); these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen's $d$) are reported in Table 2 [@ManyLab1:2014] under retrospective gambler fallacy. Comment about the success of the replication.
+4. Based on observation of Figure 1 of @ManyLab1:2014, why might one object to using estimated effect size reported in peer-reviewed papers?^[*Hint*: are the original effect size in line with the replications or not?]

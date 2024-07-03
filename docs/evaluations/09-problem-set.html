@@ -288,23 +288,21 @@ div.csl-indent {
 
 </header>
 
-<p>Complete this task in teams of two or three students.</p>
 <p><strong>Submission information</strong>: please submit on ZoneCours</p>
 <ul>
 <li>a PDF report</li>
 <li>your code</li>
 </ul>
-<p>We consider Study 2 of <span class="citation" data-cites="Bobak:2019">Bobak et al. (<a href="#ref-Bobak:2019" role="doc-biblioref">2019</a>)</span>, who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). <span class="citation" data-cites="Bobak:2019">Bobak et al. (<a href="#ref-Bobak:2019" role="doc-biblioref">2019</a>)</span> report that</p>
+<p>Look at the <a href="../example/effectsizepower.html">effect size and power</a>; this should be helpful in completing the problem set.</p>
+<p>The following text is a quote from <a href="https://osf.io/3467b">Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp.&nbsp;13-14)</a> about a replication of <span class="citation" data-cites="Oppenheimer.Monin:2009">Oppenheimer &amp; Monin (<a href="#ref-Oppenheimer.Monin:2009" role="doc-biblioref">2009</a>)</span> work on the retrospective gambler fallacy.</p>
 <blockquote class="blockquote">
-<p>Participants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.</p>
+<p>The differences between groups was reliable, omnibus <span class="math inline">\(F(2, 77) = 4.8\)</span>, […] Cohen’s <span class="math inline">\(f = 0.18\)</span>. Pairwise comparisons showed that all differences between conditions were reliable as well, <span class="math inline">\(t(47, 48, 57) = 1.94, 2.32, 2.65\)</span>; <span class="math inline">\(p &lt; .05\)</span>, Cohen’s <span class="math inline">\(d\)</span> = <span class="math inline">\((.56, .67, .69)\)</span>.</p>
 </blockquote>
-<p>Perform a repeated measure one-way ANOVA with <code>color</code> as within-factor and <code>pcorr</code> as response with the <code>BMH19_S2</code> data, which can be found in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/BMH19_S2.sav">SPSS database via this link</a>.</p>
 <ol type="1">
-<li>Explain in your own words the purpose of randomization and <a href="https://explorable.com/counterbalanced-measures-design">counterbalancing</a> in a repeated measure experiment.</li>
-<li>Is there evidence against the hypothesis of sphericity? Report Mauchly’s statistic and the conclusion of the hypothesis test.</li>
-<li>Are there differences overall between color match (monochrome, mixed or colored)? Report the <span class="math inline">\(F\)</span>-statistic, the degrees of freedom and the <span class="math inline">\(p\)</span>-value and a measure of effect size (e.g., <span class="math inline">\(\widehat{R}^2_p\)</span>). If the sphericity assumption isn’t met, use the Greenhouse–Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor <span class="math inline">\(\widehat{\epsilon}\)</span>.</li>
-<li>Compute pairwise differences applying Tukey’s honest significance difference multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in <code>pcorr</code>), the <span class="math inline">\(t\)</span>-test statistics and the associated <span class="math inline">\(p\)</span>-values.</li>
-<li>An alternative procedure would be to fit the model as a one-way MANOVA: do this and report the value of Pillai’s trace with the approximate <span class="math inline">\(F\)</span> statistic, degrees of freedom and <span class="math inline">\(p\)</span>-values. Does your conclusions change?<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Using the information from the quote, compute the effect size for Cohen’s <span class="math inline">\(f\)</span> and <span class="math inline">\(\widehat{\omega}^2\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Note that you won’t necessarily get the same value of Cohen’s <span class="math inline">\(f\)</span> that is reported.</li>
+<li>Compute the overall sample size necessary to replicate this study with a power of at least <span class="math inline">\(0.99:\)</span> compute the power for both the overall effect and the three pairwise <span class="math inline">\(t\)</span>-tests based on the reported values of Cohen’s <span class="math inline">\(d\)</span> and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).</li>
+<li>Read the results of the replication in <a href="https://psycnet.apa.org/fulltext/2014-20922-002.pdf">ManyLabs1</a>; these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen’s <span class="math inline">\(d\)</span>) are reported in Table 2 <span class="citation" data-cites="ManyLab1:2014">(<a href="#ref-ManyLab1:2014" role="doc-biblioref">Klein et al., 2014</a>)</span> under retrospective gambler fallacy. Comment about the success of the replication.</li>
+<li>Based on observation of Figure 1 of <span class="citation" data-cites="ManyLab1:2014">Klein et al. (<a href="#ref-ManyLab1:2014" role="doc-biblioref">2014</a>)</span>, why might one object to using estimated effect size reported in peer-reviewed papers?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 </ol>
 
 
@@ -312,13 +310,17 @@ div.csl-indent {
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-Bobak:2019" class="csl-entry" role="listitem">
-Bobak, A. K., Mileva, V. R., &amp; Hancock, P. J. B. (2019). A grey area: How does image hue affect unfamiliar face matching? <em>Cognitive Research: Principles and Implications</em>, <em>4</em>(1), 27. <a href="https://doi.org/10.1186/s41235-019-0174-3">https://doi.org/10.1186/s41235-019-0174-3</a>
+<div id="ref-ManyLab1:2014" class="csl-entry" role="listitem">
+Klein, R. A., Ratliff, K. A., Vianello, M., Adams Jr., R. B., Bahník, Š., Bernstein, M. J., Bocian, K., Brandt, M. J., Brooks, B., Brumbaugh, C. C., Cemalcilar, Z., Chandler, J., Cheong, W., Davis, W. E., Devos, T., Eisner, M., Frankowska, N., Furrow, D., Galliani, E. M., … Nosek, B. A. (2014). Investigating variation in replicability: A <span>“many labs”</span> replication project. <em>Social Psychology</em>, <em>45</em>, 142–152. <a href="https://doi.org/10.1027/1864-9335/a000178">https://doi.org/10.1027/1864-9335/a000178</a>
+</div>
+<div id="ref-Oppenheimer.Monin:2009" class="csl-entry" role="listitem">
+Oppenheimer, D. M., &amp; Monin, B. (2009). The retrospective gambler’s fallacy: Unlikely events, constructing the past, and multiple universes. <em>Judgment and Decision Making</em>, <em>4</em>, 326–334.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>If you fit the model with <code>afex</code> package functions <code>aov_ez</code>, the output contains a slot <code>$Anova</code> with the value of this test.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>In <strong>R</strong>, check out the function <code>F_to_omega2</code> and <code>F_to_f</code> from the <code>effectsize</code> package. You can also use the formula presented in the slides.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><em>Hint</em>: are the original effect size in line with the replications or not?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

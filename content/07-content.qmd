@@ -1,38 +1,41 @@
 ---
-title: "Designs to reduce the error"
+title: "Multiway ANOVA and MANOVA"
 ---
 
 ## Content
 
-- Blocking
-- Analysis of covariance
+- ANOVA with two or more factors
+- ANOVA with both within-subject and between-subject factors
+- Multivariate analysis of variance
+
+
+
 
 
 ## Learning objectives
 
 At the end of the session, students should be capable of
 
-- explain the benefits of blocked design and ANCOVA over completely randomized designs
-- using control covariates or blocking factors
-- testing equality of slopes
+- analyzing models with both within-subject and between-subject factors
+- specifying and calculating custom contrasts in multiway factorial designs
+- correctly interpreting an analysis of variance table
+- testing model assumptions in multivariate model
 
 ## Readings
 
-- {{< fa book >}} [Chapter 6](https://lbelzile.github.io/math80667a/06-blocking_ancova.html) of the course notes
-- {{< fa book >}} Chapter 5 ([Complete Block Designs](https://stat.ethz.ch/~meier/teaching/anova/block-designs.html)) of @Meier:2022 (5.1-5.2)
+- {{< fa book >}} [Chapter 7](https://lbelzile.github.io/math80667a/multiway.html) of the course notes
+- {{< fa book >}} [Chapter 8](https://lbelzile.github.io/math80667a/manova.html) of the course notes
+- {{< fa book-open-reader >}} [Three-way ANOVA example](/example/threewayanova.html)
+- {{< fa book-open-reader >}} [MANOVA example](/example/manova.html)
+
 
 ## Complementary readings
 
-- {{< fa book >}}  Chapter 9 of @Maxwell.Delaney.Kelley:2017.
-- {{< fa book >}}  Chapter 4 of @Cox:1958.
-
-## Videos
+- {{< fa book >}}  Chapters 8 and 14 of @Maxwell.Delaney.Kelley:2017.
+- {{< fa book >}}  Chapters 20--23 of @Maxwell.Delaney.Kelley:2017.
 
 
-<div class="ratio ratio-16x9">
-<iframe src="https://www.youtube.com/embed/gTLp0pplRXk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
-</div>
+
 
 
 ## Slides
@@ -46,7 +49,7 @@ source(here::here("R", "slide-things.R"))
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/07-slides")
-# slide_tabs(slide_details, "/slides/06-slides.html")
+# slide_tabs(slide_details, "/slides/07-slides.html")
 ```
 
 ```{r show-slides-xaringan, echo=FALSE}
@@ -59,6 +62,7 @@ xaringanExtra::embed_xaringan(
 ## Code
 
 - [R script](/content/MATH80667A-07-content.R)
+- [SPSS script](/content/MATH80667A-07-content.sps)
 
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.

@@ -56,6 +56,264 @@ HEC Montréal
 ]
 
 ---
+class: title title-1
+
+# Outline
+
+
+.box-3.large.sp-after-half[Blocking]
+
+
+.box-4.large.sp-after-half[Mixed effects]
+
+
+---
+
+layout: false
+name: blocking
+class: center middle section-title section-title-3 animated fadeIn
+
+# Blocking
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Terminology for *nuisance*
+
+.pull-left.center[
+
+.box-inv-3.sp-after-half[
+**Block**
+]
+
+Source of variation, but of no interest
+<br> known and controllable
+
+.box-inv-3.sp-after-half[Example]
+timing <br> lab technician <br>  machine
+
+]
+
+
+.pull-right.center[
+
+.box-inv-3.sp-after-half[
+**Noise factor**
+]
+
+Under which setting is response least affected?
+
+.box-inv-3.sp-after-half[Example]
+temperature <br> processing
+]
+
+???
+
+Example 15.2.3 in Dean & Voss of Lipton soup mixture
+
+A: number of mixer ports through which vegetable oil was added (two levels, 1 and 3);
+B: temperature of mixer jacket (two levels; ambient temperature, presence of cooling water);
+C: mixing time (two levels; 60 and 80 sec);
+D: batch weight (two levels; 1500 and 2000 lb);
+E: delay between mixing and packaging (two levels; 1 day and 7 days).
+
+
+---
+
+
+# Why blocking? 
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[ 
+Design experiment to reduce the effect of uncontrolled variations 
+]
+]
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+In general, increases the power of the $F$
+test for treatment effects.
+]
+]
+
+.pull-left.sp-after-half[
+.box-inv-3.sp-after-half[
+Group units in sets as alike as possible.
+]
+]
+
+.pull-right.sp-after-half[
+.box-inv-3.sp-after-half[
+(Often) compare only treatments, so interactions are not included.
+]
+]
+
+---
+
+# Assignment to treatment
+
+.box-inv-3.medium.sp-after-half[
+Divide subjects within each block
+]
+
+.box-inv-3.medium.sp-after-half[
+Randomly allocate to treatment within block
+]
+
+.box-3.sp-after-half[
+(stratified sampling)
+]
+
+---
+
+
+# Block-treatment design
+
+Without interaction,
+
+$$\underset{\text{response}\vphantom{b}}{Y_{ij}} =  \underset{\text{global mean}}{\mu\vphantom{\beta_j}} + \underset{\text{treatment}\vphantom{b}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}\vphantom{b}}{\varepsilon_{ij}\vphantom{\beta_j}}$$
+
+Compromise between 
+
+- reduced variability for residuals,
+- loss of degrees of freedom due to estimation of $\beta$'s.
+
+---
+
+# Example: Resting metabolic rate
+From Dean, Voss and Draguljić (2017), Example 10.4.1 (p. 311)
+
+> experiment that was run to compare the effects of inpatient and outpatient protocols on the in-laboratory measurement of resting metabolic rate (RMR) in humans. A previous study had indicated measurements of RMR on elderly individuals to be 8% higher using an outpatient protocol than with an inpatient protocol. If the measurements depend on the protocol, then comparison of the results of studies conducted by different laboratories using different protocols would be difficult. The experimenters hoped to conclude that the effect on RMR of different protocols was negligible.
+
+???
+
+The experimental treatments consisted of three protocols: (1) an inpatient protocol in which meals
+were controlled—the patient was fed the evening meal and spent the night in the laboratory, then RMR
+was measured in the morning; (2) an outpatient protocol in which meals were controlled—the patient
+was fed the same evening meal at the laboratory but spent the night at home, then RMR was measured
+in the morning; and (3) an outpatient protocol in which meals were not strictly controlled—the patient
+was instructed to fast for 12 hours prior to measurement of RMR in the morning.
+
+---
+# Fitting the complete block design
+
+.panelset[
+
+.panel[ .panel-name[Load]
+
+
+```{r cleanblocking, echo = TRUE}
+url <- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
+# transform integers to factors (categorical)
+resting <- read.table(url, header = TRUE) |>
+  dplyr::mutate(
+    subject = factor(subject), #blocking factor
+    protocol = factor(protocol), #experimental factor
+    rate = rate/1000)
+```
+
+.small[This is *de facto* a repeated measure design.]
+
+]
+
+.panel[.panel-name[Fit]    
+
+
+
+```{r fitblocking, echo = TRUE} 
+# Force sum-to-zero parametrization for unordered factors
+options(contrasts = c("contr.sum", "contr.poly"))
+# Fit model with blocking
+model_block <- aov(rate ~ subject + protocol, data = resting)
+# One-way ANOVA (no blocking)
+model_raw <- aov(rate ~ protocol, data = resting)
+# anova(model_block)
+# anova(model_raw)
+```
+]
+
+  .panel[.panel-name[Plot]       
+```{r plotblocking, echo = TRUE, fig.show = 'hide', out.width = '50%'} 
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+     geom_line() + 
+     labs(y = "mean resting\n metabolic rate") + 
+     theme_classic() +
+     theme(legend.position = "bottom")
+```
+]
+]
+---
+
+# Interaction plot
+
+```{r plotblocking2, echo = FALSE, eval = TRUE, out.width = '85%'} 
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+     geom_line() + 
+     labs(subtitle = "mean resting metabolic rate",
+          y = "",
+          x = "subject identifier") + 
+     theme_classic() +
+     theme(legend.position = "bottom")
+
+```
+
+---
+
+# Impact of blocking
+.panelset[
+.panel[.panel-name[ANOVA table (with blocking)]
+```{r printanovaBlockin1, echo = FALSE, eval = TRUE}
+knitr::kable(anova(model_block),
+             digits = c(0,2,2,2,3),
+             caption = "Analysis of variance table - with blocking",
+             col.names = c("Degrees of freedom",
+                           "Sum of squares",
+                           "Mean square",
+                           "F statistic",
+                           "p-value")) %>%
+  kableExtra::kable_styling(position = "center")# %>%
+#  kableExtra::cell_spec(c(2,4), bold = TRUE, color = "black", background = "yellow")
+```
+]
+
+.panel[.panel-name[ANOVA table (without blocking)]
+```{r printanovaBlockin2, echo = FALSE, eval = TRUE}
+knitr::kable(anova(model_raw),
+             digits = c(0,2,2,2,3),
+             caption = "Analysis of variance table - without blocking",
+             col.names = c("Degrees of freedom",
+                           "Sum of squares",
+                           "Mean square",
+                           "F statistic",
+                           "p-value")) %>%
+  kableExtra::kable_styling(position = "center") 
+```
+]
+
+
+]
+
+
+---
+
+layout: false
+name: blocking
+class: center middle section-title section-title-4 animated fadeIn
+
+# Random effects and mixed models
+
+
+---
 
 layout: true
 class: title title-4

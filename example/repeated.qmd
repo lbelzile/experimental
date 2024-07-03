@@ -19,6 +19,7 @@ We first load the data from the package and inspect the content.
 ```{r}
 data(HOSM22_E3, package = "hecedsm")
 str(HOSM22_E3)
+# Number of people in each group
 with(HOSM22_E3, table(waiting)/2)
 ```
 

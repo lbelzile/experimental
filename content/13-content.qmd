@@ -4,7 +4,7 @@ title: "Nonparametric tests and count data"
 
 ## Content
 
-- Models and tests for count data
+- Models and tests for categorical and count data
 - Nonparametric tests
 
 
@@ -20,7 +20,7 @@ At the end of the session, students should be capable of
 ## Readings
 
 - {{< fa book >}}[Chapter 12 *Categorical data analysis*](https://learningstatisticswithr.com/book/chisquare.html) of @Navarro:2019
--  Chapters [12](https://lbelzile.github.io/math80667a/12-nonparametric.html) and [13](https://lbelzile.github.io/math80667a/13-count.html) of the course notes
+-  Chapters [14](https://lbelzile.github.io/math80667a/nonparametric.html) and [15](https://lbelzile.github.io/math80667a/count.html) of the course notes
 
 
 
