@@ -4,17 +4,17 @@ instructor:
   name: Dr. Léo Belzile
   name_no_title: Léo Belzile
   email: "leo.belzile@hec.ca"
-  url: "https://www.lbelzile.bitbucket.io"
+  url: "https://lbelzile.bitbucket.io"
   github: lbelzile
   office: "4.850, Côte-Sainte-Catherine"
-  contact_policy: "I am best reached by email."
+  contact_policy: "Please us [Piazza](https://piazza.com/hec.ca/fall2024/math80667a/home) for any course-related question. For other queries, I am best reached by email."
 
 course:
   number: "MATH 80667A"
   semester: "Fall 2024"
   days: "Friday"
   time: "8:30-11:30"
-  location: "C-Ste-Cath, TBD"
+  location: "C-Ste-Cath, [Caracas](https://www.hec.ca/campus/cote_sainte_catherine/1er_etage/salles_cours/caracas.html)"
   github: "https://www.github.com/lbelzile/experimental"
   copyright_year: "2021-2024"
 

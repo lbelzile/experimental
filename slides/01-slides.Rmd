@@ -398,7 +398,13 @@ class: title title-3
 <img src="img/01/nyt-wellness-program.png" alt="Figure from a New York Times on a RCT studying the effectiveness of wellness programs." title="" width="60%">
 </figure>
 ]
+???
 
+Figure from the Upshot https://www.nytimes.com/2018/08/06/upshot/employer-wellness-programs-randomized-trials.html
+
+based on the paper
+
+Damon Jones, David Molitor, Julian Reif, What do Workplace Wellness Programs do? Evidence from the Illinois Workplace Wellness Study, The Quarterly Journal of Economics, Volume 134, Issue 4, November 2019, Pages 1747–1791, https://doi.org/10.1093/qje/qjz023
 ---
 
 layout: false

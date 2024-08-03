@@ -248,6 +248,6 @@ grading %>%
                col.names = c("Grade", "Range", "Grade", "Range"))
 ```
 
-<div>
+</div>
 
 # References {-}

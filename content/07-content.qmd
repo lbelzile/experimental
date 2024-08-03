@@ -1,5 +1,5 @@
 ---
-title: "Multiway ANOVA and MANOVA"
+title: "Multiway and multivariate factorial designs"
 ---
 
 ## Content

@@ -68,7 +68,7 @@ website:
               file: content/05-content.qmd
             - text: "6: Repeated measures"
               file: content/06-content.qmd
-            - text: "7: Multiway factorial designs"
+            - text: "7: Multiway and multivariate factorial designs"
               file: content/07-content.qmd
             - text: "8: Analysis of covariance"
               file: content/08-content.qmd
