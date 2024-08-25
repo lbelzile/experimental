@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Analysis of covariance</title>
+    <title>Analysis of covariance and moderation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-07-03" />
+    <meta name="date" content="2024-08-25" />
     <script src="libs/header-attrs-2.27/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -41,7 +41,7 @@
 
 class: center middle main-title section-title-1
 
-# Analysis of covariance
+# Analysis of covariance and moderation
 
 .class-info[
 
@@ -544,6 +544,241 @@ Model with interaction `condition*prior`. Slopes don't differ between condition.
 - Alternative `\(\mathscr{H}_a\)`: model with interaction covariate * experimental factor
 
 .center[Use `anova` to compare the models in **R**.]
+
+---
+
+layout: false
+name: linear-mediation
+class: center middle section-title section-title-6
+
+# Moderation
+
+---
+
+layout: true
+class: title title-6
+
+---
+
+
+# Moderator
+
+A **moderator** `\(W\)` modifies the direction or strength of the effect of an explanatory variable `\(X\)` on a response `\(Y\)` (interaction term).
+
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="08-slides_files/figure-html/fig-dag-moderation-1.png" alt="Directed acyclic graph of moderation" width="50%" /&gt;
+&lt;p class="caption"&gt;Directed acyclic graph of moderation&lt;/p&gt;
+&lt;/div&gt;
+
+.small[
+Interactions are not limited to experimental factors: we can also have interactions with confounders, explanatories, mediators, etc.
+]
+
+---
+
+# Moderation in a linear regression model
+
+In a regression model, we simply include an **interaction** term to the model between `\(W\)` and `\(X\)`.
+
+For example, if `\(X\)` is categorical with `\(K\)` levels and `\(W\)` is binary or continuous, imposing sum-to-zero constraints for `\(\alpha_1, \ldots, \alpha_K\)` and `\(\beta_1, \ldots, \beta_K\)` gives
+$$
+\underset{\text{average response of group `\(k\)` at `\(w\)`}}{\mathrm{E}(Y \mid X=k, W=w)} = \underset{\text{intercept of group `\(k\)`}}{\alpha_0 +\alpha_k} + \underset{\text{slope of group `\(k\)`}}{(\beta_0 + \beta_k)} w
+$$
+
+---
+
+# Testing for the interaction
+
+Test jointly whether coefficients associated to `\(XW\)` are zero, i.e., `$$\beta_1 = \cdots = \beta_K=0.$$`
+
+The moderator `\(W\)` can be continuous or categorical with `\(L \geq 2\)` levels
+
+The degrees of freedom (additional parameters for the interaction) in the `\(F\)` test are
+
+- `\(K-1\)` for continuous `\(W\)`
+   - are slopes parallel?
+- `\((K-1) \times (L-1)\)` for categorical `\(W\)`
+   - are all subgroup averages the same?
+
+---
+
+# Example
+
+We consider data from [Garcia et al. (2010)](https://doi.org/10.1002/ejsp.644), a study on gender discrimination. Participants were given a fictional file where a women was turned down promotion in favour of male colleague despite her being clearly more experimented and qualified. 
+
+The authors manipulated the decision of the participant, with choices:
+.small[
+
+- not to challenge the decision (no protest), 
+- a request to reconsider based on individual qualities of the applicants (individual)
+- a request to reconsider based on abilities of women (collective). 
+
+]
+The postulated moderator variable is `sexism`, which assesses pervasiveness of gender discrimination.
+
+---
+# Model fit
+
+We fit the linear model with the interaction.
+
+
+``` r
+data(GSBE10, package = "hecedsm")
+lin_moder &lt;- lm(respeval ~ protest*sexism, 
+               data = GSBE10)
+summary(lin_moder) # coefficients
+car::Anova(lin_moder, type = 3) # tests
+```
+
+---
+
+# ANOVA table
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; stat &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protest &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.34 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.45 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .091 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; sexism &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .749 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protest:sexism &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.82 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .010 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 159.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Effects
+
+&lt;img src="08-slides_files/figure-html/unnamed-chunk-4-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+.small[
+
+Results won't necessarily be reliable outside of the range of observed values of sexism. 
+
+]
+---
+
+# Comparisons between groups
+
+Simple effects and comparisons must be done for a fixed value of sexism (since the slopes are not parallel).
+
+The default value in `emmeans` is the mean value of `sexism`, but we could query for averages at different values of sexism (below for empirical quartiles).
+
+
+``` r
+quart &lt;-  quantile(GSBE10$sexism, probs = c(0.25, 0.5, 0.75))
+emmeans(lin_moder, 
+        specs = "protest", 
+        by = "sexism",
+        at = list("sexism" = quart))
+```
+
+.small[
+
+With moderating *factors*, give weights to each sub-mean corresponding to the frequency of the moderator rather than equal-weight to each category (`weights = "prop"`).
+
+]
+---
+
+# Sensitivity analysis
+
+The [Johnson and Neyman (1936)](https://doi.org/10.1007/bf02288864) method looks at the range of values of moderator `\(W\)` for which difference between treatments (binary `\(X\)`) is not statistically significant.
+
+
+
+``` r
+lin_moder2 &lt;- lm(
+  respeval ~ protest*sexism, 
+  data = GSBE10 |&gt; 
+  # We dichotomize the manipulation, pooling protests together
+  dplyr::mutate(protest = as.integer(protest != "no protest")))
+# Test for equality of slopes/intercept for two protest groups
+anova(lin_moder, lin_moder2)
+# p-value of 0.18: fail to reject individual = collective.
+```
+
+
+---
+# Syntax for plot
+
+
+``` r
+jn &lt;- interactions::johnson_neyman(
+  model = lin_moder2, # linear model
+  pred = protest, # binary experimental factor
+  modx = sexism, # moderator
+  control.fdr = TRUE, # control for false discovery rate
+  mod.range = range(GSBE10$sexism)) # range of values for sexism
+jn$plot
+```
+
+
+---
+
+# Plot of Johnson−Neyman intervals
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="08-slides_files/figure-html/fig-jn-1.png" alt="Johnson−Neyman plot for difference between protest and no protest as a function of sexism." width="70%" /&gt;
+&lt;p class="caption"&gt;Johnson−Neyman plot for difference between protest and no protest as a function of sexism.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+# Moderation
+
+More generally, **moderation** refers to any explanatory variable (whether continuous or categorical) which **interacts** with the experimental manipulation.
+
+- For categorical-categorical, this is a multiway ANOVA model
+- For continuous-categorical, use linear regression
+
+
+---
+
+# Summary
+
+.small[
+
+* Inclusion of continuous covariates may help filtering out unwanted variability.
+* These are typically concomitant variables (measured alongside the response variable).
+* This designs reduce the residual error, leading to an increase in power (more ability to detect differences in average between experimental conditions).
+* We are only interested in differences due to experimental condition (marginal effects).
+* In general, there should be no interaction between covariates/blocking factors and experimental conditions. 
+* This hypothesis can be assessed by comparing the models with and without interaction, if there are enough units (e.g., equality of slope for ANCOVA).
+* Moderators are variables that interact with the experimental factor. We assess their presence by testing for an interaction in a linear regresison model.
+
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>

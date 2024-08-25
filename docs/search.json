@@ -1242,7 +1242,31 @@
     "href": "evaluations/09-problem-set.html",
     "title": "Problem set 9",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy.",
+    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 9"
+    ]
+  },
+  {
+    "objectID": "evaluations/09-problem-set.html#task-1",
+    "href": "evaluations/09-problem-set.html#task-1",
+    "title": "Problem set 9",
+    "section": "Task 1",
+    "text": "Task 1\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy.\n\nThe differences between groups was reliable, omnibus \\(F(2, 77) = 4.8\\), […] Cohen’s \\(f = 0.18\\). Pairwise comparisons showed that all differences between conditions were reliable as well, \\(t(47, 48, 57) = 1.94, 2.32, 2.65\\); \\(p &lt; .05\\), Cohen’s \\(d\\) = \\((.56, .67, .69)\\).\n\n\nUsing the information from the quote, compute the effect size for Cohen’s \\(f\\) and \\(\\widehat{\\omega}^2\\).1 Note that you won’t necessarily get the same value of Cohen’s \\(f\\) that is reported.\nCompute the overall sample size necessary to replicate this study with a power of at least \\(0.99:\\) compute the power for both the overall effect and the three pairwise \\(t\\)-tests based on the reported values of Cohen’s \\(d\\) and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).\nRead the results of the replication in ManyLabs1; these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen’s \\(d\\)) are reported in Table 2 (Klein et al., 2014) under retrospective gambler fallacy. Comment about the success of the replication.\nBased on observation of Figure 1 of Klein et al. (2014), why might one object to using estimated effect size reported in peer-reviewed papers?2",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 9"
+    ]
+  },
+  {
+    "objectID": "evaluations/09-problem-set.html#task-2",
+    "href": "evaluations/09-problem-set.html#task-2",
+    "title": "Problem set 9",
+    "section": "Task 2",
+    "text": "Task 2\nRead the Section “Going Beyond Null Hypothesis Significance Testing” of the Academy of Management Journal 2024 editorial (Bliese et al., 2024) in preparation for a in-class discussion.",
     "crumbs": [
       "Evaluations",
       "Problem sets",
@@ -1772,97 +1796,97 @@
   {
     "objectID": "content/08-content.html",
     "href": "content/08-content.html",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "",
-    "text": "Analysis of covariance and linear regression models",
+    "text": "Analysis of covariance and linear regression models\nModeration analysis",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#content",
     "href": "content/08-content.html#content",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "",
-    "text": "Analysis of covariance and linear regression models",
+    "text": "Analysis of covariance and linear regression models\nModeration analysis",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#learning-objectives",
     "href": "content/08-content.html#learning-objectives",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits ANCOVA over completely randomized designs\nusing control covariates\ntesting equality of slopes",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits ANCOVA over completely randomized designs\nusing control covariates\ntesting equality of slopes\ntesting for moderating variables (interactions)",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#readings",
     "href": "content/08-content.html#readings",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "Readings",
     "text": "Readings\n\n Chapter 9 of the course notes",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#complementary-readings",
     "href": "content/08-content.html#complementary-readings",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "Complementary readings",
     "text": "Complementary readings\n\n Chapter 6 of Maxwell et al. (2017).\n Chapter 14–15 of Keppel & Wickens (2004)",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#slides",
     "href": "content/08-content.html#slides",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#videos",
     "href": "content/08-content.html#videos",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "Videos",
     "text": "Videos",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
     "objectID": "content/08-content.html#code",
     "href": "content/08-content.html#code",
-    "title": "Analysis of covariance",
+    "title": "Analysis of covariance and moderation",
     "section": "Code",
     "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance"
+      "8: Analysis of covariance and moderation"
     ]
   },
   {
@@ -1952,73 +1976,73 @@
   {
     "objectID": "content/12-content.html",
     "href": "content/12-content.html",
-    "title": "Mediation and moderation",
+    "title": "Linear mediation",
     "section": "",
-    "text": "Linear mediation model\nModeration",
+    "text": "Linear mediation model",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Linear mediation and moderation"
+      "12: Linear mediation"
     ]
   },
   {
     "objectID": "content/12-content.html#content",
     "href": "content/12-content.html#content",
-    "title": "Mediation and moderation",
+    "title": "Linear mediation",
     "section": "",
-    "text": "Linear mediation model\nModeration",
+    "text": "Linear mediation model",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Linear mediation and moderation"
+      "12: Linear mediation"
     ]
   },
   {
     "objectID": "content/12-content.html#learning-objectives",
     "href": "content/12-content.html#learning-objectives",
-    "title": "Mediation and moderation",
+    "title": "Linear mediation",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nfitting a linear mediation model\ndiscussing limitations of the linear mediation model\ntesting for moderating variables (interactions)",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nfitting a linear mediation model\ndiscussing limitations of the linear mediation model",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Linear mediation and moderation"
+      "12: Linear mediation"
     ]
   },
   {
     "objectID": "content/12-content.html#readings",
     "href": "content/12-content.html#readings",
-    "title": "Mediation and moderation",
+    "title": "Linear mediation",
     "section": "Readings",
     "text": "Readings\n\nChapter 13 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions (Imai et al., 2010; Pearl, 2014)",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Linear mediation and moderation"
+      "12: Linear mediation"
     ]
   },
   {
     "objectID": "content/12-content.html#slides",
     "href": "content/12-content.html#slides",
-    "title": "Mediation and moderation",
+    "title": "Linear mediation",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Linear mediation and moderation"
+      "12: Linear mediation"
     ]
   },
   {
     "objectID": "content/12-content.html#code",
     "href": "content/12-content.html#code",
-    "title": "Mediation and moderation",
+    "title": "Linear mediation",
     "section": "Code",
     "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Linear mediation and moderation"
+      "12: Linear mediation"
     ]
   },
   {

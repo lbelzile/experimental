@@ -70,7 +70,7 @@ website:
               file: content/06-content.qmd
             - text: "7: Multiway and multivariate factorial designs"
               file: content/07-content.qmd
-            - text: "8: Analysis of covariance"
+            - text: "8: Analysis of covariance and moderation"
               file: content/08-content.qmd
             - text: "9: Effect sizes and power"
               file: content/09-content.qmd
@@ -78,7 +78,7 @@ website:
               file: content/10-content.qmd
             - text: "11: Intro to causal inference"
               file: content/11-content.qmd
-            - text: "12: Linear mediation and moderation"
+            - text: "12: Linear mediation"
               file: content/12-content.qmd
             - text: "13: Nonparametric tests and count data"
               file: content/13-content.qmd

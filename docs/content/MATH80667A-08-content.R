@@ -68,3 +68,52 @@ levene <- car::leveneTest(
 car::Anova(lm(post ~ condition * prior,
            data = SSVB21_S2),
            model1, type = 3)
+
+#-------------------------------------------------
+
+
+data(GSBE10, package = "hecedsm")
+lin_moder <- lm(respeval ~ protest*sexism,
+                data = GSBE10)
+summary(lin_moder) # coefficients
+car::Anova(lin_moder, type = 3) #if significant, look at simple effects
+
+# Plot response as a function of sexism (the continuous variable)
+ggplot(data = GSBE10,
+       aes(x = sexism,
+           y = respeval,
+           color = protest)) +
+  geom_point() +
+  geom_smooth(se = TRUE, method = "lm", formula = y ~ x) +
+  labs(subtitle = "evaluation of response",
+       y = "",
+       color = "experimental condition") +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+# Compute quartiles of sexism and return the estimated marginal means
+# for each subgroup
+quart <-  quantile(GSBE10$sexism, probs = c(0.25, 0.5, 0.75))
+emmeans(lin_moder,
+        specs = "protest",
+        by = "sexism",
+        at = list("sexism" = quart))
+
+# Consider again a simpler version with both pooled
+lin_moder2 <- lm(
+  respeval ~ protest*sexism,
+  data = GSBE10 |>
+    # We dichotomize the manipulation, pooling protests together
+    dplyr::mutate(protest = as.integer(protest != "no protest")))
+# Test for equality of slopes/intercept for two protest groups
+anova(lin_moder, lin_moder2)
+# p-value of 0.18: fail to reject individual = collective.
+
+# Johnson-Neyman plot
+jn <- interactions::johnson_neyman(
+  model = lin_moder2, # linear model
+  pred = protest, # binary experimental factor
+  modx = sexism, # moderator
+  control.fdr = TRUE, # control for false discovery rate
+  mod.range = range(GSBE10$sexism)) # range of values for sexism
+jn$plot

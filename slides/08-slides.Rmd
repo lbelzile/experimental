@@ -1,5 +1,5 @@
 ---
-title: "Analysis of covariance"
+title: "Analysis of covariance and moderation"
 author: "Léo Belzile"
 date: "`r Sys.Date()`"
 output:
@@ -46,7 +46,7 @@ xaringanExtra::use_xaringan_extra(c("tile_view","freezeframe","panelset","clipbo
 
 class: center middle main-title section-title-1
 
-# Analysis of covariance
+# Analysis of covariance and moderation
 
 .class-info[
 
@@ -450,3 +450,274 @@ ggplot(data = dat, aes(x = covariate, y = response, group = group, color = group
 - Alternative $\mathscr{H}_a$: model with interaction covariate * experimental factor
 
 .center[Use `anova` to compare the models in **R**.]
+
+---
+
+layout: false
+name: linear-mediation
+class: center middle section-title section-title-6
+
+# Moderation
+
+---
+
+layout: true
+class: title title-6
+
+---
+
+
+# Moderator
+
+A **moderator** $W$ modifies the direction or strength of the effect of an explanatory variable $X$ on a response $Y$ (interaction term).
+
+
+
+```{tikz}
+#| echo: false
+#| cache: false
+#| label: fig-dag-moderation
+#| fig-cap: "Directed acyclic graph of moderation"
+#| fig-align: 'center'
+#| fig-ext: "png"
+#| fig-dpi: 300
+#| fig-width: 8
+#| fig-height: 6
+#| out-width: '50%'
+\usetikzlibrary{positioning}
+\begin{tikzpicture}[every node/.append style={minimum size=0.5cm}]
+\node [draw,circle] (X) at (-2,0) {$X$};
+\node [draw,circle] (Y) at (2,0) {$Y$};
+\node [draw,circle] (W) at (0,1) {$W$};
+\draw [-latex] (X) edge (Y);
+\draw [-latex] (W) edge (0,0);
+\end{tikzpicture}
+```
+
+.small[
+Interactions are not limited to experimental factors: we can also have interactions with confounders, explanatories, mediators, etc.
+]
+
+---
+
+# Moderation in a linear regression model
+
+In a regression model, we simply include an **interaction** term to the model between $W$ and $X$.
+
+For example, if $X$ is categorical with $K$ levels and $W$ is binary or continuous, imposing sum-to-zero constraints for $\alpha_1, \ldots, \alpha_K$ and $\beta_1, \ldots, \beta_K$ gives
+$$
+\underset{\text{average response of group $k$ at $w$}}{\mathrm{E}(Y \mid X=k, W=w)} = \underset{\text{intercept of group $k$}}{\alpha_0 +\alpha_k} + \underset{\text{slope of group $k$}}{(\beta_0 + \beta_k)} w
+$$
+
+---
+
+# Testing for the interaction
+
+Test jointly whether coefficients associated to $XW$ are zero, i.e., $$\beta_1 = \cdots = \beta_K=0.$$
+
+The moderator $W$ can be continuous or categorical with $L \geq 2$ levels
+
+The degrees of freedom (additional parameters for the interaction) in the $F$ test are
+
+- $K-1$ for continuous $W$
+   - are slopes parallel?
+- $(K-1) \times (L-1)$ for categorical $W$
+   - are all subgroup averages the same?
+
+---
+
+# Example
+
+We consider data from [Garcia et al. (2010)](https://doi.org/10.1002/ejsp.644), a study on gender discrimination. Participants were given a fictional file where a women was turned down promotion in favour of male colleague despite her being clearly more experimented and qualified. 
+
+The authors manipulated the decision of the participant, with choices:
+.small[
+
+- not to challenge the decision (no protest), 
+- a request to reconsider based on individual qualities of the applicants (individual)
+- a request to reconsider based on abilities of women (collective). 
+
+]
+The postulated moderator variable is `sexism`, which assesses pervasiveness of gender discrimination.
+
+---
+# Model fit
+
+We fit the linear model with the interaction.
+
+```{r}
+#| eval: false
+#| echo: true
+data(GSBE10, package = "hecedsm")
+lin_moder <- lm(respeval ~ protest*sexism, 
+               data = GSBE10)
+summary(lin_moder) # coefficients
+car::Anova(lin_moder, type = 3) # tests
+```
+
+---
+
+# ANOVA table
+
+```{r}
+#| label: tbl-testsmoder
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+#| tbl-cap: "Analysis of variance table for the linear moderation model."
+data(GSBE10, package = "hecedsm")
+lin_moder <- lm(respeval ~ protest*sexism, 
+               data = GSBE10)
+# summary(linmoder) # coefficients
+
+options(knitr.kable.NA = '')
+tab_anova <- broom::tidy(
+    car::Anova(lin_moder, type = 3)[-1,])
+tab_anova$p.value <- papaja::apa_p(tab_anova$p.value)
+knitr::kable(tab_anova,
+  booktabs = TRUE,
+  col.names = c("term", "sum of squares","df","stat","p-value"),
+  digits = c(0,2,1,2,3,3)) |>
+  kableExtra::kable_styling()
+```
+
+---
+
+# Effects
+
+```{r}
+#| eval: true
+#| echo: false
+#| warning: false
+#| message: false
+#| out-width: '65%'
+ggplot(data = GSBE10,
+       aes(x = sexism,
+           y = respeval,
+           color = protest,
+           group = protest)) + 
+  geom_point() +
+  geom_smooth(se = FALSE, method = "lm", formula = y ~ x) +
+  labs(subtitle = "evaluation of response",
+       y = "",
+       color = "experimental condition") +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+.small[
+
+Results won't necessarily be reliable outside of the range of observed values of sexism. 
+
+]
+---
+
+# Comparisons between groups
+
+Simple effects and comparisons must be done for a fixed value of sexism (since the slopes are not parallel).
+
+The default value in `emmeans` is the mean value of `sexism`, but we could query for averages at different values of sexism (below for empirical quartiles).
+
+```{r}
+#| echo: true
+#| eval: false
+quart <-  quantile(GSBE10$sexism, probs = c(0.25, 0.5, 0.75))
+emmeans(lin_moder, 
+        specs = "protest", 
+        by = "sexism",
+        at = list("sexism" = quart))
+```
+
+.small[
+
+With moderating *factors*, give weights to each sub-mean corresponding to the frequency of the moderator rather than equal-weight to each category (`weights = "prop"`).
+
+]
+---
+
+# Sensitivity analysis
+
+The [Johnson and Neyman (1936)](https://doi.org/10.1007/bf02288864) method looks at the range of values of moderator $W$ for which difference between treatments (binary $X$) is not statistically significant.
+
+
+```{r}
+#| eval: false
+#| echo: true
+lin_moder2 <- lm(
+  respeval ~ protest*sexism, 
+  data = GSBE10 |> 
+  # We dichotomize the manipulation, pooling protests together
+  dplyr::mutate(protest = as.integer(protest != "no protest")))
+# Test for equality of slopes/intercept for two protest groups
+anova(lin_moder, lin_moder2)
+# p-value of 0.18: fail to reject individual = collective.
+```
+
+
+---
+# Syntax for plot
+
+```{r}
+#| eval: false
+#| echo: true
+jn <- interactions::johnson_neyman(
+  model = lin_moder2, # linear model
+  pred = protest, # binary experimental factor
+  modx = sexism, # moderator
+  control.fdr = TRUE, # control for false discovery rate
+  mod.range = range(GSBE10$sexism)) # range of values for sexism
+jn$plot
+
+```
+
+
+---
+
+# Plot of Johnson−Neyman intervals
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-cap: "Johnson−Neyman plot for difference between protest and no protest as a function of sexism."
+#| label: fig-jn
+#| out-width: '70%'
+# Fit model with interaction (binary)
+lin_moder2 <- lm(
+  respeval ~ protest*sexism, 
+  data = GSBE10 |> 
+  dplyr::mutate(protest = as.integer(protest != "no protest")))
+# anova(lin_moder, lin_moder2)
+jn <- interactions::johnson_neyman(
+  model = lin_moder2, # linear model
+  pred = protest, # binary experimental factor
+  modx = sexism, # moderator
+  control.fdr = TRUE, # control for false discovery rate
+  mod.range = range(GSBE10$sexism)) # range of values for sexism
+jn$plot
+```
+
+---
+
+# Moderation
+
+More generally, **moderation** refers to any explanatory variable (whether continuous or categorical) which **interacts** with the experimental manipulation.
+
+- For categorical-categorical, this is a multiway ANOVA model
+- For continuous-categorical, use linear regression
+
+
+---
+
+# Summary
+
+.small[
+
+* Inclusion of continuous covariates may help filtering out unwanted variability.
+* These are typically concomitant variables (measured alongside the response variable).
+* This designs reduce the residual error, leading to an increase in power (more ability to detect differences in average between experimental conditions).
+* We are only interested in differences due to experimental condition (marginal effects).
+* In general, there should be no interaction between covariates/blocking factors and experimental conditions. 
+* This hypothesis can be assessed by comparing the models with and without interaction, if there are enough units (e.g., equality of slope for ANCOVA).
+* Moderators are variables that interact with the experimental factor. We assess their presence by testing for an interaction in a linear regresison model.
+
+]

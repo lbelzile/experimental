@@ -1,11 +1,11 @@
 ---
-title: "Analysis of covariance"
+title: "Analysis of covariance and moderation"
 ---
 
 ## Content
 
 - Analysis of covariance and linear regression models
-
+- Moderation analysis
 
 ## Learning objectives
 
@@ -14,7 +14,7 @@ At the end of the session, students should be capable of
 - explain the benefits ANCOVA over completely randomized designs
 - using control covariates
 - testing equality of slopes
-
+- testing for moderating variables (interactions)
 
 ## Readings
 
