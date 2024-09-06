@@ -13,11 +13,11 @@ title: "Problem set 1"
 4. Comment on the quality of the sample and the generalizability of the findings.
 5. Identify the response variable, the factor and the treatment levels.
 
-Consider next the first field experiment of @Goldstein:2008:
+Consider next the first field experiment of @Goldstein:2008 :
 
-1. Briefly describe the experimental setup
-2. What is the population of interest?
-3. Identify the experimental units and the sample size.
+6. Briefly describe the experimental setup of the first experiment.
+7. What is the population of interest?
+8. Identify the experimental units and the sample size.
 
 
 

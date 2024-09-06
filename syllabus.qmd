@@ -173,9 +173,11 @@ Student hours are set times dedicated to all of you (most professors call these 
 Problem sets and weekly check-ins are due by Thursday noon. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track.
 
 
-## Intellectual integrity
+## Intellectual integrity and generative AI
 
-Please don't cheat! The [official policy](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf) lists the school rules regarding plagiarism and academic integrity.
+The [official policy](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf) lists the school rules regarding plagiarism and academic integrity. Cite your sources adequately.
+
+Use of generative artificial intelligence tools and large language models is not permitted in this class. Part of the reason is that you need some level of knowledge to determine whether the output of LLM is correct or not, and this won't be acquired by asking the AI to generate text or code for you. Writing is hard work, but it helps you organize your thoughts and this is valuable from a learning perspective. You could use these tools for spell checking, but there are better alternatives around. I share [Andrew Heiss' view of AI as a bullshit generator](https://datavizf24.classes.andrewheiss.com/resource/ai-bs.html).
 
 ## Student services
 
@@ -205,7 +207,7 @@ You can find descriptions for all the assignments on the [evaluations](/evaluati
 
 
 
-Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Saturday, April 20th, from 13:30--16:30. 
+Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Friday, December 6th, from 18:30--21:30. 
 
 
 ```{r assignments-grades, include=FALSE}

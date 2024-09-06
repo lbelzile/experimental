@@ -195,7 +195,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#student-hours" id="toc-student-hours" class="nav-link" data-scroll-target="#student-hours">Student hours</a></li>
   <li><a href="#late-work" id="toc-late-work" class="nav-link" data-scroll-target="#late-work">Late work</a></li>
-  <li><a href="#intellectual-integrity" id="toc-intellectual-integrity" class="nav-link" data-scroll-target="#intellectual-integrity">Intellectual integrity</a></li>
+  <li><a href="#intellectual-integrity-and-generative-ai" id="toc-intellectual-integrity-and-generative-ai" class="nav-link" data-scroll-target="#intellectual-integrity-and-generative-ai">Intellectual integrity and generative AI</a></li>
   <li><a href="#student-services" id="toc-student-services" class="nav-link" data-scroll-target="#student-services">Student services</a></li>
   <li><a href="#harassment-and-sexual-violence" id="toc-harassment-and-sexual-violence" class="nav-link" data-scroll-target="#harassment-and-sexual-violence">Harassment and sexual violence</a></li>
   <li><a href="#family-policy" id="toc-family-policy" class="nav-link" data-scroll-target="#family-policy">Family policy</a></li>
@@ -402,9 +402,10 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="late-work">Late work</h2>
 <p>Problem sets and weekly check-ins are due by Thursday noon. Timely submission will allow me to discuss problem sets in class. The submission modules will stay open for two weeks after the due date. I will not assign late work penalties, but will gently nudge you to stay on track.</p>
 </section>
-<section id="intellectual-integrity" class="level2">
-<h2 class="anchored" data-anchor-id="intellectual-integrity">Intellectual integrity</h2>
-<p>Please don’t cheat! The <a href="https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf">official policy</a> lists the school rules regarding plagiarism and academic integrity.</p>
+<section id="intellectual-integrity-and-generative-ai" class="level2">
+<h2 class="anchored" data-anchor-id="intellectual-integrity-and-generative-ai">Intellectual integrity and generative AI</h2>
+<p>The <a href="https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf">official policy</a> lists the school rules regarding plagiarism and academic integrity. Cite your sources adequately.</p>
+<p>Use of generative artificial intelligence tools and large language models is not permitted in this class. Part of the reason is that you need some level of knowledge to determine whether the output of LLM is correct or not, and this won’t be acquired by asking the AI to generate text or code for you. Writing is hard work, but it helps you organize your thoughts and this is valuable from a learning perspective. You could use these tools for spell checking, but there are better alternatives around. I share <a href="https://datavizf24.classes.andrewheiss.com/resource/ai-bs.html">Andrew Heiss’ view of AI as a bullshit generator</a>.</p>
 </section>
 <section id="student-services" class="level2">
 <h2 class="anchored" data-anchor-id="student-services">Student services</h2>
@@ -429,7 +430,7 @@ window.Quarto = {
 <section id="evaluations-and-grades" class="level1">
 <h1>Evaluations and grades</h1>
 <p>You can find descriptions for all the assignments on the <a href="./evaluations/">evaluations</a> page.</p>
-<p>Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Saturday, April 20th, from 13:30–16:30.</p>
+<p>Your final grade will be based on weekly assignments and feedback, a methodological review of a paper and a final examination. The exam will take place on Friday, December 6th, from 18:30–21:30.</p>
 <p>Team work counts towards your final grade only if you score more than 50% on individual evaluations.</p>
 <div class="centered-table">
 <table class="caption-top table">
@@ -637,7 +638,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/edsm\.rbind\.io");
+      var filterRegex = new RegExp("https:\/\/lbelzile\.github\.io\/experimental");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

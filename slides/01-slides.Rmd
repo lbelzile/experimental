@@ -426,7 +426,7 @@ class: title title-2
 
 .box-inv-2.medium.sp-after[Observational unit]
 
-.box-inv-2.medium.sp-after[Factor / treatment]
+.box-inv-2.medium.sp-after[Factor]
 
 
 
@@ -446,7 +446,7 @@ From Davison (2008), Example 9.2
 
 In pairs, identify
 - the experimental and observational units
-- the treatment levels
+- the factor levels
 - the response variable
 
 ]
@@ -457,11 +457,11 @@ countdown::countdown(minutes = 3, seconds = 0)
 ---
 
 
-# Comparing treatments
+# Comparing groups (factor levels)
 
 .medium[
-- Without treatment, .color-2[**variability**] in output from one observation to the next.
-- Differences between treatment are .color-2[**comparatively stable**].
+- Without any intervention, .color-2[**variability**] in output from one observation to the next.
+- Differences between groups are .color-2[**comparatively stable**].
 
 ]
 
@@ -471,7 +471,7 @@ countdown::countdown(minutes = 3, seconds = 0)
 
 .medium[
 
-- **treatments** for comparison
+- **factor levels** being compared
 - observations to be made (number of repetitions, etc.)
 - experimental units
 
