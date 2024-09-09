@@ -89,7 +89,7 @@ class: title title-2
 # Studying a population
 .medium[
 
-Interest in impacts of intervention or policy
+Interested in impacts of intervention or policy
 
 ]
 
@@ -102,22 +102,27 @@ prob2 <- mev::rdir(n = 1, alpha = 3 + prob)[1,]
 prob2 <- prob2/sum(prob2)
 p1 <- ggplot(data = data.frame(x = 1:10, 
                          p = prob)) +
-  geom_bar(mapping = aes(x = x, weight = p)) +
+  geom_bar(mapping = aes(x = x, weight = p),
+           fill = MetBrewer::met.brewer("Hiroshige", 2)[2]) +
   scale_x_continuous(breaks = 1:10, labels = 1:10) +
+  scale_y_continuous(expand = expansion(), limits = c(0,0.25)) +
   labs(subtitle = "control",
        x = "",
        y = "probability") + 
   theme_classic()
 p2 <- ggplot(data = data.frame(x = 1:10, 
                          p = prob2)) +
-  geom_bar(mapping = aes(x = x, weight = p)) +
+  geom_bar(mapping = aes(x = x, weight = p),
+           fill = MetBrewer::met.brewer("Hiroshige", 2)
+[1]) +
   scale_x_continuous(breaks = 1:10, labels = 1:10) +
+  scale_y_continuous(expand = expansion(), limits = c(0,0.25)) +
   labs(subtitle = "treatment",
        y = "probability",
        x = "") +
   theme_classic()
 library(patchwork)
-  p1 + p2
+  p2 + p1
 ```
 
 Population distribution (describing possible outcomes and their frequencies) encodes everything we could be interested in.
@@ -128,20 +133,28 @@ Population distribution (describing possible outcomes and their frequencies) enc
 
 # Sampling variability
 
-```{r unifsamp1, fig.cap="Histograms for 10 random samples of size 20 from a discrete uniform distribution.", fig.width = 8, fig.height = 4.5, cache = TRUE, echo = FALSE, out.width = '80%'}
+```{r unifsamp1, fig.cap="", fig.width = 8, fig.height = 4.5, cache = TRUE, echo = FALSE, out.width = '80%'}
 set.seed(1234)
 ng <- 10
 ns <- 20
-df <- tibble(x = runif(ng*ns,1,10),
-             sample=rep(1:ng,each=ns))
-ggplot(df, aes(x = x, y = ..density..)) +
+df <- tibble::tibble(x = runif(ng*ns,1,10),
+             sample=rep(1:ng,each=ns),
+             group = factor(rep(1:2, each = 100)))
+ggplot(df, aes(x = x, y = after_stat(density), fill = group)) +
   geom_hline(yintercept = 0.1, col = "gray", lty = 2) +
-  geom_histogram(bins=10, color="white",)+
+  geom_histogram(bins=10, color="white")+
   facet_wrap(~sample, nrow = 2)+
+  MetBrewer::scale_fill_met_d(name = "Hiroshige") + 
   labs(y = "", subtitle = "sample proportion for treatment (top) and control (bottom)", x = "") +
   scale_x_continuous(breaks=c(0,5,10)) +
-  theme_classic()
+  theme_classic() +
+  theme(legend.position = "none")
 ```
+.tiny[
+
+Histograms for 10 random samples of size 20 from a discrete uniform distribution.
+
+]
 
 ---
 
@@ -204,7 +217,7 @@ samp <- data.frame(
               mean = mu, 
               sd = sd)))
 p1 <- ggplot(data = samp) + 
-  geom_histogram(aes(x = x, y = ..density..)) +
+  geom_histogram(aes(x = x, y = after_stat(density))) +
   stat_function(xlim = c(0, 10),
                 fun = function(x, rate, mean, sd, weight){weight * dexp(x, rate = rate) +
                     (1 - weight) * 
@@ -262,6 +275,7 @@ ggplot(data = samp,
                geom = "point",
                shape = 95,
                size = 20) + 
+  MetBrewer::scale_colour_met_d(name = "Hiroshige") + 
   theme_bw() +
   theme(legend.position = "none") + 
   transition_states(
@@ -294,6 +308,7 @@ g1 <- ggplot(dat = dat1, aes(x = group,
                        col = group)) +
   geom_boxplot() +
   geom_jitter(width = 0.3) +
+  MetBrewer::scale_color_met_d(name = "Hiroshige") +
   labs(y = "observations",
          subtitle = "weak signal, strong noise") +
   theme_bw() +
@@ -308,6 +323,7 @@ g2 <- ggplot(dat = dat2, aes(x = group,
                        col = group)) +
   geom_boxplot() +
   geom_jitter(width = 0.3) +
+  MetBrewer::scale_color_met_d(name = "Hiroshige") +
   labs(y = "observations",
          subtitle = "strong signal, weak noise") +
   theme_bw() +
@@ -341,7 +357,7 @@ df <- tibble(
                     rep(3, 1000),
                     rep(4, 1e4)),
                     labels = c("10","100","1000","10 000")), length.out = 2*ntot))
-g1 <- ggplot(df |> filter(group == "alternative"), aes(x = x, y = ..density..)) +
+g1 <- ggplot(df |> filter(group == "alternative"), aes(x = x, y = after_stat(density))) +
   geom_hline(yintercept = 0.1, col = "gray", lty = 2) +
   geom_histogram(bins = 10, color="white", fill = 2)+
   facet_wrap(~sample, nrow = 1,
@@ -349,7 +365,7 @@ g1 <- ggplot(df |> filter(group == "alternative"), aes(x = x, y = ..density..)) 
   labs(y = "proportion", x = "") +
   scale_x_continuous(breaks=c(0,5,10)) + 
   theme_classic()
-g2 <- ggplot(df |> filter(group == "null"), aes(x = x, y = ..density..)) +
+g2 <- ggplot(df |> filter(group == "null"), aes(x = x, y = after_stat(density))) +
   geom_hline(yintercept = 0.1, col = "gray", lty = 2) +
   geom_histogram(bins = 10, color="white", fill = 4)+
   facet_wrap(~sample, nrow = 1,
@@ -623,7 +639,7 @@ for(i in 1:nrep){
 }
 ggplot(tibble(statistic = c(bootnull, stat)),
        aes(x = statistic)) +
-  geom_histogram(mapping = aes( y = ..density..),
+  geom_histogram(mapping = aes( y = after_stat(density)),
                  bins = 50L, alpha = 0.2) +
   geom_vline(xintercept = c(-stat, stat), col = 2) +
   stat_function(fun = dt,
@@ -830,19 +846,19 @@ ggplot() +
                 args = list(df = 40), 
                 xlim = c(qt(0.975, df = 40),5),
                 geom = "area", 
-                fill = "red", 
+                fill = 2, 
                 alpha = 0.2) +
     stat_function(fun = dt, 
                 args = list(df = 40), 
                 xlim = c(-5, qt(0.025, df = 40)),
                 geom = "area", 
-                fill = "red", 
+                fill = 2, 
                 alpha = 0.2) +
     stat_function(fun = dt, 
                 args = list(df = 40), 
                 xlim = c(qt(0.025, df = 40), qt(0.975, df = 40)),
                 geom = "area", 
-                fill = "blue", 
+                fill = 4, 
                 alpha = 0.2) + 
     stat_function(fun = dt, 
     xlim = c(-5,5),
@@ -923,7 +939,7 @@ ggplot(data = confint_dat,
                              xend = replicate,
                              col = covers), 
                alpha = 0.5) +
-  scale_color_discrete(type = c("blue","red")) +
+  scale_color_discrete(type = c(c(4,2))) +
   labs(x = "replicate study",
        y = "",
        col = "") +
