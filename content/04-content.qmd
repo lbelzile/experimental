@@ -39,7 +39,7 @@ At the end of the session, students should be capable of
 
 ## Complementary readings
 
-- @Gelman.Carlin:2014
+
 - {{< fa book >}}  Chapter 5 of @Maxwell.Delaney.Kelley:2017.
 - {{< fa book >}}  Chapters 4 and 6 of @Keppel/Wickens:2004.
 
@@ -61,6 +61,10 @@ xaringanExtra::embed_xaringan(
 :::{.callout-tip}
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of slide-specific commands.
 :::
+
+## Exercise
+
+- Compute means and contrasts listed in the abstract of @Baumann:1992.
 
 
 

@@ -366,7 +366,7 @@ window.Quarto = {
 <p>following the naming convention <code>PS3-studentid.extension</code> where <code>studentid</code> is replaced with your student ID and <code>extension</code> is the file extension (e.g., <code>.pdf</code>, <code>.R</code>, <code>.Rmd</code>, <code>.sps</code>)</p>
 <p><strong>Instructions</strong>: We consider data collected for Study 3 of <span class="citation" data-cites="Grossman:2014">Grossmann &amp; Kross (<a href="#ref-Grossman:2014" role="doc-biblioref">2014</a>)</span> (click the links to download <a href="https://journals.sagepub.com/stoken/default+domain/vIg5KBmaiJHKTXfUpXZK/full">the paper</a> and the <a href="https://journals.sagepub.com/doi/suppl/10.1177/0956797614535400/suppl_file/DS_10.11770956797614535400_SupplementalMethodandResults.pdf">Supplementary material</a>). You can access these data directly from <strong>R</strong> from the <code>hecedsm</code> package or <a href="../files/data/SPSS/GK14_S3.sav">download the SPSS data</a>.</p>
 <p>If you work with <strong>R</strong>, check out this <a href="../evaluations/03-problem-set.R">helper code</a></p>
-<p>Have a quick look at the paper and fit the one way analysis of variance model for the consideration of other’s perspective (<code>persp</code>) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years).</p>
+<p>Have a quick look at the paper and fit the one way analysis of variance model for the consideration of other’s perspective (<code>persp</code>) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years) (<code>age == "young"</code>).</p>
 <ol type="1">
 <li>Report the <span class="math inline">\(F\)</span>-test statistic, the null distribution and the <span class="math inline">\(p\)</span>-value.</li>
 <li>Provide a conclusion in the context of the study.</li>
@@ -381,40 +381,46 @@ window.Quarto = {
 <li>Use Welch’s one-way analysis of variance model (<code>oneway.test()</code> in <strong>R</strong>) and compare the output and the conclusion with that of the usual <span class="math inline">\(F\)</span>-test.</li>
 </ol>
 <p><strong>Hints and R snippets</strong></p>
-<p>To subset the data, you can use the following commands:</p>
+<p>To subset the data in a model, you can use the following commands:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(GK14_S3, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span> GK14_S3 <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(persp), <span class="co"># exclude missing values</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      age <span class="sc">==</span> <span class="st">"young"</span>) <span class="co"># only young adults</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(persp <span class="sc">~</span> condition, <span class="at">data =</span> GK14_S3, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">subset =</span> (age <span class="sc">==</span> <span class="st">"young"</span>)) <span class="co"># select specific subset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The following code filters out missing values for <code>persp</code> for young adults and shows the counts for each condition:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>GK14_S3 <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(persp),      </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                age <span class="sc">==</span> <span class="st">"young"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span> </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">count =</span> dplyr<span class="sc">::</span><span class="fu">n</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(age <span class="sc">==</span> <span class="st">"young"</span>) <span class="sc">|&gt;</span> <span class="co"># select only young adults (20-40 years old)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span>  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(persp)), <span class="co"># count of non-missing observations</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nmiss =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(persp)))  <span class="co"># count of missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  condition       count
-  &lt;fct&gt;           &lt;int&gt;
-1 self immersed       3
-2 self distanced      3
-3 other immersed      3
-4 other distanced     2</code></pre>
+<pre><code># A tibble: 4 × 3
+  condition       count nmiss
+  &lt;fct&gt;           &lt;int&gt; &lt;int&gt;
+1 self immersed      69     3
+2 self distanced     62     3
+3 other immersed     63     3
+4 other distanced    62     2</code></pre>
 </div>
 </div>
 <p>and finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># grammar of graphics</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> db,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> GK14_S3 <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(age <span class="sc">==</span> <span class="st">"young"</span>),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condition,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> persp,</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> condition)) <span class="sc">+</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 11 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

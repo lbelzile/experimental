@@ -13,7 +13,7 @@ following the naming convention `PS3-studentid.extension` where `studentid` is r
 
 If you work with **R**, check out this [helper code](/evaluations/03-problem-set.R)
 
-Have a quick look at the paper and fit the one way analysis of variance model for the consideration of other's perspective (`persp`) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years).
+Have a quick look at the paper and fit the one way analysis of variance model for the consideration of other's perspective (`persp`) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years) (`age == "young"`).
 
 1. Report the $F$-test statistic, the null distribution and the $p$-value.
 2. Provide a conclusion in the context of the study.
@@ -29,30 +29,28 @@ We next look at model assumptions
 
 **Hints and R snippets**
 
-To subset the data, you can use the following commands:
+To subset the data in a model, you can use the following commands:
 
 ```{r}
 data(GK14_S3, package = "hecedsm")
-db <- GK14_S3 |>
-    dplyr::filter(
-      !is.na(persp), # exclude missing values
-      age == "young") # only young adults
+model <- aov(persp ~ condition, data = GK14_S3, 
+             subset = (age == "young")) # select specific subset
 ```
 
 The following code filters out missing values for `persp` for young adults and shows the counts for each condition:
 ```{r}
 GK14_S3 |>
-  dplyr::filter(is.na(persp),      
-                age == "young") |> 
-  dplyr::group_by(condition) |> 
-  dplyr::summarize(count = dplyr::n()) 
+  dplyr::filter(age == "young") |> # select only young adults (20-40 years old)
+  dplyr::group_by(condition) |>  
+  dplyr::summarize(count = sum(!is.na(persp)), # count of non-missing observations
+                   nmiss = sum(is.na(persp)))  # count of missing values
 ```
 
 and finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.
 
 ```{r}
 library(ggplot2) # grammar of graphics
-ggplot(data = db,
+ggplot(data = GK14_S3 |> dplyr::filter(age == "young"),
        mapping = aes(x = condition,
                      y = persp,
                      color = condition)) +

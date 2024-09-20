@@ -69,10 +69,7 @@ Double click on RStudio to run it (check your applications folder or start menu)
 ```{r, echo=FALSE, out.width="40%"}
 include_graphics("../files/img/install/install-r-package-panel.png", error = FALSE)
 ```
-
-This can sometimes be tedious when you're installing lots of packages, though. [The tidyverse](https://www.tidyverse.org/), for instance, consists of dozens of packages (including **ggplot2**) that all work together. Rather than install each individually, you can install a single magical package and get them all at the same time.
-
-Go to the packages panel in RStudio, click on "Install," type "tidyverse", and press enter. You'll see a bunch of output in the RStudio console as all the tidyverse packages are installed.
+For example, go to the packages panel in RStudio, click on "Install," type "tidyverse", and press enter. You'll see a bunch of output in the RStudio console as all the tidyverse packages are installed.
 
 ```{r, echo=FALSE, out.width="60%"}
 include_graphics("../files/img/install/install-r-tidyverse.png", error = FALSE)
@@ -80,6 +77,20 @@ include_graphics("../files/img/install/install-r-tidyverse.png", error = FALSE)
 
 Notice also that RStudio will generate a line of code for you and run it: `install.packages("tidyverse")`. You can also just paste and run this instead of using the packages panel.
 
+To install all **R** packages used throughout the course, use the commands
+```{r, eval=FALSE, echo=TRUE}
+libs <- c("afex", "car", "dplyr", "emmeans", "effectsize", 
+         "ggplot2", "lme4", "lmerTest", "mediation", "nlme", 
+         "patchwork", "pwr", "remotes", "tidyr", "WebPower")
+for(lib in libs){
+  if(!lib %in% installed.packages()[,"Package"]){
+   install.packages(lib)
+  }
+}
+# Load package containing databases
+remotes::install_github("lbelzile/hecedsm")
+
+```
 
 ### Install `tinytex`
 

@@ -30,6 +30,7 @@ At the end of the session, students should be capable of
 - {{< fa file >}} @Lakens:2013
 - {{< fa file >}} @Steiger:2004
 - {{< fa file >}} @Kelley/Preacher:2012
+- @Gelman.Carlin:2014
 
 ## Slides
 
