@@ -971,7 +971,7 @@ test(contrasts, joint = TRUE)
 # Estimated marginal means and contrasts
 
 .small[
-Strong evidence ofifferences in perceived distance depending on direction of travel.
+Strong evidence of differences in perceived distance depending on direction of travel.
 
 
 ```{r}
