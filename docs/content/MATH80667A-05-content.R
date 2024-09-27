@@ -120,7 +120,7 @@ cont <- list(other_vs_selfdistanced = c(0.5, -1, 0.5, 0),
 mmeans |> emmeans::contrast(cont)
 
 # Compute analysis of variance table
-car::Anova(mod1, type = 3) # need type 3 b/c unequal sample size
+car::Anova(mod1, type = 2) # need type 2 b/c unequal sample size
 # Read table bottom to top, only consider the last line for interaction
 # p-value is 0.98, so we proceed with marginal effects
 emmeans::test(mmeans, joint = TRUE)
@@ -163,7 +163,7 @@ emmeans::emmip(mod1, course ~ nweeks, CIs = TRUE)
 # Strong evidence of non-parallel lines!
 # There is some improvement
 
-car::Anova(mod1, type = 3)
+car::Anova(mod1, type = 2)
 anova(mod1)
 # same as "anova(mod1)" for balanced data
 # differences are due to rounding when printed

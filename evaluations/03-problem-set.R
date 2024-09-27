@@ -5,14 +5,18 @@
 library(hecedsm)
 library(ggplot2)
 
+# Load the dataset
 data("GK14_S3", package = "hecedsm")
-?GK14_S3 # Get documentation
+?GK14_S3 # Help - get documentation
 
 # Fit the ANOVA model and test equality of mean at level 5%.
 # Fit one-way analysis of variance model
 model <- aov(persp ~ condition, data = GK14_S3, subset = (age == "young"))
 # Output table with results and p-values
 anova(model)
+# For Welch test (ANOVA with unequal variance),
+# replace the function 'aov' on line 13 by 'oneway.test'
+# TODO
 
 # - Report the test statistic, the null distribution and the p-value.
 # - Provide a conclusion in the context of the study.
@@ -46,6 +50,7 @@ car::qqPlot(model)
 # - There are missing values (use `summary(GK14_S3)`: do you think it will impact the conclusions or not?
 # - How many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition?
 GK14_S3 |>
-  dplyr::filter(!is.na(persp)) |>
-  dplyr::group_by(condition) |>
-  dplyr::summarize(count = dplyr::n())
+  dplyr::filter(!is.na(persp), # non missing values only ! = 'not', is.na = TRUE if missing, FALSE otherwise
+                age == "young") |> # keep only age group for 'young' (age 20-40)
+  dplyr::group_by(condition) |> # split by group before calculating summary statistics
+  dplyr::summarize(count = dplyr::n()) #get tally of number

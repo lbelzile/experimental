@@ -338,9 +338,14 @@ window.Quarto = {
 <ol type="1">
 <li>Determine the contrast vectors (i.e., the weights) for the four hypothesis tests outlined in <span class="citation" data-cites="Grossman:2014">Grossmann &amp; Kross (<a href="#ref-Grossman:2014" role="doc-biblioref">2014</a>)</span>.</li>
 <li>Compute the contrasts in the pre-planned comparisons reported in Table S4. Check whether these match the reported values.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
-<li>Using the helper code, obtain adjusted <em>p</em>-values using Bonferroni’s method and compare them to (a) the raw <em>p</em>-values and (b) the Bonferroni-Holm adjusted <em>p</em>-values. How many of the planned comparisons are significant at level <span class="math inline">\(\alpha=0.05\)</span> if you modify the <em>p</em>-values?</li>
-<li>Another way to present the results of the two-sided <em>t</em>-test for contrasts is to report confidence intervals rather than <em>p</em>-values. Which interval would be the largest between (a) an unadjusted confidence interval and (b) one derived using Bonferroni’s method? Justify your answer.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+<li>Using the helper code, compare</li>
 </ol>
+<ol type="a">
+<li>the raw <em>p</em>-values</li>
+<li>Bonferroni’s adjusted <em>p</em>-values</li>
+<li>the Holm–Bonferroni adjusted <em>p</em>-values.</li>
+</ol>
+<p>How many of the planned comparisons are significant at level <span class="math inline">\(\alpha=0.05\)</span> if you modify the <em>p</em>-values? 4. Another way to present the results of the two-sided <em>t</em>-test for contrasts is to report confidence intervals rather than <em>p</em>-values. Which interval would be the largest between (a) an unadjusted confidence interval and (b) one derived using Bonferroni’s method? Justify your answer.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 
 
 
@@ -354,8 +359,9 @@ Grossmann, I., &amp; Kross, E. (2014). Exploring <span>S</span>olomon’s parado
 
 <ol>
 <li id="fn1"><p>Technical aside: there are four correlated outcome variables, so this is technically a multivariate problem. <a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The sign may be different from the paper depending on how you set up the contrasts, but the <span class="math inline">\(p\)</span>-values should be the same.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><em>Hint: Bonferroni’s method amounts to making the tests at level <span class="math inline">\(\alpha/m\)</span>. Try modifying the level in the code for the confidence intervals to see which is largest.</em><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The sign may be different from the paper depending on how you set up the contrasts, but the <span class="math inline">\(p\)</span>-values should be the same. <!--The authors seemingly made a copy-paste mistake in two entries: "Other vs self-distanced" and "Other vs self-immmersed" for the model with response `persp` for the `young` participants.
+--><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><em>Hint: Bonferroni’s method amounts to making the tests at level <span class="math inline">\(\alpha^{\star}=\alpha/m\)</span>. Try modifying the level in the code for the confidence intervals to see which is largest.</em><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

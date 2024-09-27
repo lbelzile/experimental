@@ -709,7 +709,7 @@ Q: How would you write the weights for contrasts for testing the
 - main effect of $B$: happy vs sad.
 - interaction $A$ and $B$: difference between complicated and average, for happy versus sad?
 
-The order of the categories is $(a_1, b1)$, $(a_1, b_2)$, $\ldots$, $(a_3, b_2)$.
+The order of the categories is $(a_1, b_1)$, $(a_1, b_2)$, $\ldots$, $(a_3, b_2)$.
 
 ---
 
@@ -753,10 +753,10 @@ $\mathscr{H}_0$: $\mu_{ij} = \mu_{i \cdot} + \mu_{\cdot j}$ (sum of main effects
 
 Rather than present the specifics of ANOVA, we consider a general hypothesis testing framework which is more widely applicable.
 
-We compare two competing models
+We compare two competing models, $\mathbb{M}_a$ and $\mathbb{M}_0$.
 
-- the alternative or full model $\mathscr{H}_a$
-- the simpler null model $\mathscr{H}_0$, which imposes $\nu$ restrictions on the full model
+- the **alternative** or full model $\mathbb{M}_a$ under the alternative $\mathscr{H}_a$ with $p$ parameters for the mean
+- the simpler **null** model $\mathbb{M}_0$ under the null $\mathscr{H}_0$, which imposes $\nu$ restrictions on the full model
 
 ???
 
@@ -766,9 +766,13 @@ The same holds for analysis of deviance for generalized linear models. The latte
 
 # Intuition behind $F$-test for ANOVA
 
+The **residual sum of squares** measures how much variability is leftover,
+$$\mathsf{RSS}_a = \sum_{i=1}^n \left(y_i - \widehat{y}_i^{\mathbb{M}_a}\right)^2$$
+where $\widehat{y}_i$ is the estimated mean under model $\mathbb{M}_a$ for the observation $y_i$.
+
 The more complex fits better (it is necessarily more flexible), but requires estimation of more parameters.
 
-- Test compares the goodness-of-fit and attempts to determine what is the improvement that would occur by chance, if the null model was correct, given $\nu$ additional parameters.
+- We wish to assess the improvement that would occur by chance, if the null model was correct.
 
 ---
 
@@ -786,18 +790,6 @@ F = \frac{(\mathsf{RSS}_0 - \mathsf{RSS}_a)/\nu}{\mathsf{RSS}_a/(n-p)}
 
 ---
 
-# Analysis of deviance
-
-For other generalized linear models with parameters $\boldsymbol{\theta}$, we proceed similarly, but we use the log *likelihood* function, $\ell(\boldsymbol{\theta})$ as goodness-of-fit measure.
-
-- The higher the (log) likelihood, the better the fit.
-- Obtain parameter estimates  $\widehat{\boldsymbol{\theta}}_0$ under the null hypothesis and 
- $\widehat{\boldsymbol{\theta}}_a$ under the alternative by maximum likelihood estimation.
-- Consider the likelihood ratio statistic  $$R = 2\{\ell(\widehat{\boldsymbol{\theta}}_a) - \ell(\widehat{\boldsymbol{\theta}}_0)\}$$
-- Under regularity conditions, we compare $R$ to a chi-square distribution with $\nu$ degrees of freedom, $\chi^2_{\nu}$.
-
----
-
 # Analysis of variance table
 
 
@@ -808,7 +800,7 @@ For other generalized linear models with parameters $\boldsymbol{\theta}$, we pr
 | $A$  | $n_a-1$   | $\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)$ | $\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}$ |
 | $B$  | $n_b-1$   | $\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)$ | $\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}$ |
 | $AB$ | $(n_a-1)(n_b-1)$ | $\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}$ | $\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}$ |
-| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-ab)$ | |
+| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-n_an_b)$ | |
 | total | $n-1$ | | 
     
 ]
@@ -850,7 +842,8 @@ There is a significant main effect of both `purchase` and `debttype`.
 #| eval: true
 #| echo: false
 broom::tidy(car::Anova(mod1, type = 2)) |>
-  kable(col.names = c("term","SS","df","F stat","p-value"),
+  dplyr::mutate(p.value = ifelse(is.na(p.value), NA, papaja::apa_p(p.value))) |>
+  knitr::kable(col.names = c("term","SS","df","F stat","p-value"),
                digits = c(0,1,0,2,3))
 ```
 
@@ -867,6 +860,7 @@ The tests for the main effects are not of interest! Disregard other entries of t
 #| eval: true
 #| echo: false
 broom::tidy(car::Anova(mod2, type = 2)) |>
+  dplyr::mutate(p.value = ifelse(is.na(p.value), NA, papaja::apa_p(p.value))) |>
   kable(col.names = c("term","SS","df","F stat","p-value"),
                digits = c(0,1,0,2,3))
 ```
@@ -931,7 +925,8 @@ The ANOVA table for the reparametrized models shows no evidence against the null
 options(contrasts = c("contr.sum", "contr.poly"))
 mod3 <- lm(distance ~ stdist * direction, data = MP14_S1) 
 broom::tidy(car::Anova(mod3, type = 2)) |>
-  kable(col.names = c("term","SS","df","F stat","p-value"),
+  dplyr::mutate(p.value = ifelse(is.na(p.value), NA, papaja::apa_p(p.value))) |>
+  knitr::kable(col.names = c("term","SS","df","F stat","p-value"),
                digits = c(0,1,0,2,3))
 ```
 
@@ -942,9 +937,10 @@ broom::tidy(car::Anova(mod3, type = 2)) |>
 #| eval: true
 #| echo: false
 emm <- emmeans(mod3, specs = c("stdist","direction"))
-emmip(emm, formula = ~ stdist | direction,
+emmip(emm, formula =  direction ~ stdist,
                CIs = TRUE) +
   labs(x = "station distance") + 
+  MetBrewer::scale_color_met_d(name = "Hiroshige") + 
   theme_classic()
 ```
 ---
@@ -971,7 +967,7 @@ test(contrasts, joint = TRUE)
 # Estimated marginal means and contrasts
 
 .small[
-Strong evidence of differences in perceived distance depending on direction of travel.
+Strong evidence of differences in perceived distance depending on orientation.
 
 
 ```{r}

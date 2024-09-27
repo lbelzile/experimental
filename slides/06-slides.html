@@ -4,8 +4,8 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-07-03" />
-    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
+    <meta name="date" content="2024-09-27" />
+    <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -353,7 +353,7 @@ We lose this property with unbalanced samples: there are distinct formulations o
 ---
 
 
-# Analysis of variance - Type I (sequential)
+# Analysis of variance - Type 1 (sequential)
 
 The default method in **R** with `anova` is the sequential decomposition: in the order of the variables `\(A\)`, `\(B\)` in the formula 
 
@@ -370,19 +370,19 @@ Since the order in which we list the variable is **arbitrary**, these `\(F\)` te
 ---
 
 
-# Analysis of variance - Type II
+# Analysis of variance - Type 2
 
 Impact of 
 - `\(A \mid B\)`  based on `\(\mathsf{SS}(A, B) - \mathsf{SS}(B)\)`
 - `\(B \mid A\)` based on `\(\mathsf{SS}(A, B) - \mathsf{SS}(A)\)`
 - `\(AB \mid A, B\)` based on `\(\mathsf{SS}(A, B, AB) - \mathsf{SS}(A, B)\)`
-- tests invalid if there is an interaction.
+- the first tests are not of interest if there is an interaction.
 - In **R**, use `car::Anova(model, type = 2)`
 
 ---
 
 
-# Analysis of variance - Type III
+# Analysis of variance - Type 3
 
 Most commonly used approach
 
@@ -390,8 +390,8 @@ Most commonly used approach
 - What is improved by adding a factor, interaction, etc. given the rest 
 - may require imposing equal mean for rows for `\(A \mid B, AB\)`, etc. 
    - (**requires** sum-to-zero parametrization)
-- valid in the presence of interaction
-- but `\(F\)`-tests for main effects are not of interest
+- valid in the presence of interaction, but `\(F\)`-tests for main effects are not of interest
+- does not respect the marginality principle.
 - In **R**, use `car::Anova(model, type = 3)`
 
 ---
@@ -411,7 +411,7 @@ car::Anova(model, type = 3)
 ```
 
 &lt;table&gt;
-&lt;caption&gt;ANOVA (type I)&lt;/caption&gt;
+&lt;caption&gt;ANOVA (type 1)&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -452,7 +452,7 @@ car::Anova(model, type = 3)
 
 .pull-right.small[
 &lt;table&gt;
-&lt;caption&gt;ANOVA (type II)&lt;/caption&gt;
+&lt;caption&gt;ANOVA (type 2)&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -490,7 +490,7 @@ car::Anova(model, type = 3)
 &lt;/table&gt;
 
 &lt;table&gt;
-&lt;caption&gt;ANOVA (type III)&lt;/caption&gt;
+&lt;caption&gt;ANOVA (type 3)&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -545,7 +545,7 @@ car::Anova(model2, type = 3)
 ```
 
 &lt;table&gt;
-&lt;caption&gt;ANOVA (type I)&lt;/caption&gt;
+&lt;caption&gt;ANOVA (type 1)&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -586,7 +586,7 @@ car::Anova(model2, type = 3)
 
 .pull-right.small[
 &lt;table&gt;
-&lt;caption&gt;ANOVA (type II)&lt;/caption&gt;
+&lt;caption&gt;ANOVA (type 2)&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -624,7 +624,7 @@ car::Anova(model2, type = 3)
 &lt;/table&gt;
 
 &lt;table&gt;
-&lt;caption&gt;ANOVA (type III)&lt;/caption&gt;
+&lt;caption&gt;ANOVA (type 3)&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -670,7 +670,7 @@ car::Anova(model2, type = 3)
 - Balanced designs have interesting properties:
    - estimated marginal means coincide with (sub)samples averages
    - the tests of effects are unambiguous
-   - for unbalanced samples, we work with marginal means and type 3 ANOVA
+   - for unbalanced samples, we work with marginal means and type 2 ANOVA
    - if empty cells (no one assigned to a combination of treatment), cannot estimate corresponding coefficients (typically higher order interactions)
 
 ---

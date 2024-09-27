@@ -24,7 +24,16 @@ Use the [helper code](/evaluations/04-problem-set.R) to get started. Don't be in
 
 
 1. Determine the contrast vectors (i.e., the weights) for the four hypothesis tests outlined in @Grossman:2014. 
-2. Compute the contrasts in the pre-planned comparisons reported in Table S4. Check whether these match the reported values.^[The sign may be different from the paper depending on how you set up the contrasts, but the $p$-values should be the same.]
-3. Using the helper code, obtain adjusted _p_-values using Bonferroni's method and compare them to (a) the raw _p_-values and (b) the Bonferroni-Holm adjusted _p_-values. How many of the planned comparisons are significant at level $\alpha=0.05$ if you modify the _p_-values?
-4. Another way to present the results of the two-sided _t_-test for contrasts is to report confidence intervals rather than _p_-values. Which interval would be the largest between (a) an unadjusted confidence interval and (b) one derived using Bonferroni's method? Justify your answer.^[*Hint: Bonferroni's method amounts to making the tests at level $\alpha/m$. Try modifying the level in the code for the confidence intervals to see which is largest.*]
+2. Compute the contrasts in the pre-planned comparisons reported in Table S4. Check whether these match the reported values.^[The sign may be different from the paper depending on how you set up the contrasts, but the $p$-values should be the same. 
+<!--The authors seemingly made a copy-paste mistake in two entries: "Other vs self-distanced" and "Other vs self-immmersed" for the model with response `persp` for the `young` participants.
+-->
+]
+3. Using the helper code, compare
+
+a. the raw _p_-values
+b. Bonferroni's adjusted _p_-values
+b. the Holm--Bonferroni adjusted _p_-values. 
+
+How many of the planned comparisons are significant at level $\alpha=0.05$ if you modify the _p_-values?
+4. Another way to present the results of the two-sided _t_-test for contrasts is to report confidence intervals rather than _p_-values. Which interval would be the largest between (a) an unadjusted confidence interval and (b) one derived using Bonferroni's method? Justify your answer.^[*Hint: Bonferroni's method amounts to making the tests at level $\alpha^{\star}=\alpha/m$. Try modifying the level in the code for the confidence intervals to see which is largest.*]
 

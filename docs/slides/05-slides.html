@@ -4,7 +4,7 @@
     <title>Complete factorial designs</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-09-24" />
+    <meta name="date" content="2024-09-27" />
     <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -2686,7 +2686,7 @@ Q: How would you write the weights for contrasts for testing the
 - main effect of `\(B\)`: happy vs sad.
 - interaction `\(A\)` and `\(B\)`: difference between complicated and average, for happy versus sad?
 
-The order of the categories is `\((a_1, b1)\)`, `\((a_1, b_2)\)`, `\(\ldots\)`, `\((a_3, b_2)\)`.
+The order of the categories is `\((a_1, b_1)\)`, `\((a_1, b_2)\)`, `\(\ldots\)`, `\((a_3, b_2)\)`.
 
 ---
 
@@ -2730,10 +2730,10 @@ Interaction
 
 Rather than present the specifics of ANOVA, we consider a general hypothesis testing framework which is more widely applicable.
 
-We compare two competing models
+We compare two competing models, `\(\mathbb{M}_a\)` and `\(\mathbb{M}_0\)`.
 
-- the alternative or full model `\(\mathscr{H}_a\)`
-- the simpler null model `\(\mathscr{H}_0\)`, which imposes `\(\nu\)` restrictions on the full model
+- the **alternative** or full model `\(\mathbb{M}_a\)` under the alternative `\(\mathscr{H}_a\)` with `\(p\)` parameters for the mean
+- the simpler **null** model `\(\mathbb{M}_0\)` under the null `\(\mathscr{H}_0\)`, which imposes `\(\nu\)` restrictions on the full model
 
 ???
 
@@ -2743,9 +2743,13 @@ The same holds for analysis of deviance for generalized linear models. The latte
 
 # Intuition behind `\(F\)`-test for ANOVA
 
+The **residual sum of squares** measures how much variability is leftover,
+`$$\mathsf{RSS}_a = \sum_{i=1}^n \left(y_i - \widehat{y}_i^{\mathbb{M}_a}\right)^2$$`
+where `\(\widehat{y}_i\)` is the estimated mean under model `\(\mathbb{M}_a\)` for the observation `\(y_i\)`.
+
 The more complex fits better (it is necessarily more flexible), but requires estimation of more parameters.
 
-- Test compares the goodness-of-fit and attempts to determine what is the improvement that would occur by chance, if the null model was correct, given `\(\nu\)` additional parameters.
+- We wish to assess the improvement that would occur by chance, if the null model was correct.
 
 ---
 
@@ -2763,18 +2767,6 @@ F = \frac{(\mathsf{RSS}_0 - \mathsf{RSS}_a)/\nu}{\mathsf{RSS}_a/(n-p)}
 
 ---
 
-# Analysis of deviance
-
-For other generalized linear models with parameters `\(\boldsymbol{\theta}\)`, we proceed similarly, but we use the log *likelihood* function, `\(\ell(\boldsymbol{\theta})\)` as goodness-of-fit measure.
-
-- The higher the (log) likelihood, the better the fit.
-- Obtain parameter estimates  `\(\widehat{\boldsymbol{\theta}}_0\)` under the null hypothesis and 
- `\(\widehat{\boldsymbol{\theta}}_a\)` under the alternative by maximum likelihood estimation.
-- Consider the likelihood ratio statistic  `$$R = 2\{\ell(\widehat{\boldsymbol{\theta}}_a) - \ell(\widehat{\boldsymbol{\theta}}_0)\}$$`
-- Under regularity conditions, we compare `\(R\)` to a chi-square distribution with `\(\nu\)` degrees of freedom, `\(\chi^2_{\nu}\)`.
-
----
-
 # Analysis of variance table
 
 
@@ -2785,7 +2777,7 @@ For other generalized linear models with parameters `\(\boldsymbol{\theta}\)`, w
 | `\(A\)`  | `\(n_a-1\)`   | `\(\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)\)` | `\(\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}\)` |
 | `\(B\)`  | `\(n_b-1\)`   | `\(\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)\)` | `\(\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}\)` |
 | `\(AB\)` | `\((n_a-1)(n_b-1)\)` | `\(\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}\)` | `\(\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}\)` |
-| residuals | `\(n-n_an_b\)` | `\(\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-ab)\)` | |
+| residuals | `\(n-n_an_b\)` | `\(\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-n_an_b)\)` | |
 | total | `\(n-1\)` | | 
     
 ]
@@ -2830,7 +2822,7 @@ There is a significant main effect of both `purchase` and `debttype`.
    &lt;th style="text-align:right;"&gt; SS &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; F stat &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; p-value &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
@@ -2839,28 +2831,28 @@ There is a significant main effect of both `purchase` and `debttype`.
    &lt;td style="text-align:right;"&gt; 752.3 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 98.21 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; .001 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; debttype &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 92.2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 12.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; .001 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; purchase:debttype &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 13.7 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.79 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.182 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .182 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 11467.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1497 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2881,7 +2873,7 @@ The tests for the main effects are not of interest! Disregard other entries of t
    &lt;th style="text-align:right;"&gt; SS &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; F stat &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; p-value &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
@@ -2890,28 +2882,28 @@ The tests for the main effects are not of interest! Disregard other entries of t
    &lt;td style="text-align:right;"&gt; 75.2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 23.35 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; .001 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; direction &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.38 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.541 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .541 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; station:direction &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 52.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 16.28 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; .001 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 208.2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2967,7 +2959,7 @@ The ANOVA table for the reparametrized models shows no evidence against the null
    &lt;th style="text-align:right;"&gt; SS &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; F stat &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; p-value &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
@@ -2976,28 +2968,28 @@ The ANOVA table for the reparametrized models shows no evidence against the null
    &lt;td style="text-align:right;"&gt; 121.9 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 37.86 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; .001 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; direction &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.35 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.554 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .554 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; stdist:direction &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 5.7 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.77 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.154 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .154 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 208.2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -3029,7 +3021,7 @@ test(contrasts, joint = TRUE)
 # Estimated marginal means and contrasts
 
 .small[
-Strong evidence of differences in perceived distance depending on direction of travel.
+Strong evidence of differences in perceived distance depending on orientation.
 
 
 

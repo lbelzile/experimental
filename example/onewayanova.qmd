@@ -49,7 +49,7 @@ suppressPackageStartupMessages(library(effectsize))
 We can begin by testing whether the group average for the initial measurements at the beginning of the study, prior to any treatment) have the same mean. Strong indication against this null hypothesis would be evidence of a potential problem with the randomization. We compute the one-way analysis of variance table, which includes quantities that enter the _F_-statistic (named after its large-sample null distribution, which is an _F_-distribution).^[The _F_ stands for Fisher, who pioneered much of the work on experimental design.]
 
 
-We use the `lm` function function to fit the model: an analysis of variance is a special case of linear model, in which the explanatory variables are categorical variables. The first argument of the function is a formula `response ~ treatment`, where `treatment` is the factor or categorical variable indicating the treatment.
+We use the `lm` function to fit the model: an analysis of variance is a special case of linear model, in which the explanatory variables are categorical variables. The first argument of the function is a formula `response ~ treatment`, where `treatment` is the factor or categorical variable indicating the treatment.
 
 The function `anova` is a method: when applied to the result of a call to `lm`, it produces an analysis of variance table including among other things the following information:
 
