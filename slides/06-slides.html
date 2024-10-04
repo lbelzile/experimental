@@ -4,7 +4,7 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-09-27" />
+    <meta name="date" content="2024-10-04" />
     <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -901,9 +901,9 @@ anova(model, # mixed ANOVA model
 
 The validity of the `\(F\)` null distribution relies on the model having the correct structure.
 
-- Same variance per observation
-- equal correlation between measurements of the same subject (*compound symmetry*)
-- normality of the random effect
+- Same variance per observation `\(\mathsf{H}_0: \sigma^2_{\texttt{real}} = \sigma^2_{\texttt{GAN1}} = \sigma^2_{\texttt{GAN2}}\)`
+- equal correlation between measurements of the same subject (*compound symmetry*) `\(\mathsf{H}_0: \rho_{\texttt{real},\texttt{GAN1}} = \rho_{\texttt{real},\texttt{GAN2}} = \rho_{\texttt{GAN1},\texttt{GAN2}}\)`
+- normality of the **random** (subject specific) effect
 
 
 ---
@@ -916,6 +916,17 @@ Since we care only about differences in treatment, can get away with a weaker as
 
 **Sphericity**: variance of difference between treatment is constant.
 
+In our example, this means: 
+`$$\mathscr{H}_0: \mathsf{Va}(\widehat{\mu}_{\texttt{real}}- \widehat{\mu}_{\texttt{GAN1}}) =
+\mathsf{Va}(\widehat{\mu}_{\texttt{real}}- \widehat{\mu}_{\texttt{GAN2}}) =
+\mathsf{Va}(\widehat{\mu}_{\texttt{GAN1}}- \widehat{\mu}_{\texttt{GAN2}})$$`
+against the hypothesis that at least one is different from the rest.
+
+Sphericity only applies with more than 2 groups (otherwise, there is a single correlation for the pair).
+
+---
+
+# Mauchly's test of sphericity
 
 Typically, Mauchly's test of sphericity is used to test this assumption
    - if statistically significant, use a correction (later)
@@ -1019,6 +1030,23 @@ model |&gt; emmeans::emmeans(spec = "stimulus", contr = cont_vec)
 ```
 ]
 
+---
+
+# Recap
+
+- Repeated measure ANOVA pools data from participants to keep a single measurement (average) per experimental condition
+  - **within-subject** factors are those which are completed by everyone
+  - **between-subject** factors are mutually exclusive (different people in those subgroups).
+- Correlated data allows us to compare measurements within same individuals
+  - the more the variability is due to individuals (higher correlation), the smaller the sample size needed for the study.
+  
+---
+
+# Recap
+
+-   
+  - Extra assumptions: sphericity ($J &gt; 2$ groups)
+  - If sphericity is violated, need to change our reference benchmark
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>

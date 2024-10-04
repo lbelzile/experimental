@@ -368,7 +368,7 @@ window.Quarto = {
 <p>The database in package <code>hecedsm</code> in <strong>R</strong> is labelled <code>JZBJG22_E2</code>. You can also download the <a href="../files/data/SPSS/JZBJG22_E2.sav">SPSS database via this link</a>.</p>
 <ol type="1">
 <li>A dataset is said to be <em>balanced</em> if there are the same number of people in each experimental condition. Are the data balanced over <code>condition</code> and <code>order</code>? Justify your answer.</li>
-<li>Plot the response variables using a suitable graph (e.g., half-violin or density plot), for each of the four conditions. Comment on the distribution of the scores along the scale.</li>
+<li>Plot the response variables using a suitable graph (e.g., half-violin or density plot, see below), for each of the four conditions. Comment on the distribution of the scores along the scale.</li>
 <li>Using Levene’s test, check whether the variance in each subgroup is the same.</li>
 <li>Perform the two-way analysis of variance for both <code>conf_dying</code> and <code>conf_pilot</code> and report the null and alternative hypotheses, the test statistic, the <span class="math inline">\(P\)</span>-value and the conclusion of the test. Use Welch’s ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3.</li>
 <li>For each response variable <code>conf_dying</code> and <code>conf_pilot</code>, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for <code>video</code> conditions.</li>
@@ -383,11 +383,12 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> JZBJG22_E2, </span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">group =</span> order, <span class="at">y =</span> conf_dying)) <span class="sc">+</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="at">adjust =</span> .<span class="dv">5</span>, <span class="at">width =</span> .<span class="dv">3</span>, <span class="at">.width =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_dots</span>(<span class="at">side =</span> <span class="st">"left"</span>, <span class="at">dotsize =</span> .<span class="dv">4</span>, <span class="at">justification =</span> <span class="fl">1.05</span>, <span class="at">binwidth =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>order) <span class="sc">+</span> </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">subtitle =</span> <span class="st">"confidence in landing without dying"</span>) <span class="sc">+</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_halfeye</span>(<span class="at">adjust =</span> .<span class="dv">5</span>, <span class="at">width =</span> <span class="dv">1</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">.width =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.95</span>)) <span class="sc">+</span> <span class="co"># 50% (box) and 95% confidence intervals</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ggdist<span class="sc">::</span><span class="fu">stat_dots</span>(<span class="at">side =</span> <span class="st">"left"</span>, <span class="at">dotsize =</span> .<span class="dv">4</span>, <span class="at">justification =</span> <span class="fl">1.05</span>, <span class="at">binwidth =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>order) <span class="sc">+</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">subtitle =</span> <span class="st">"confidence in landing without dying"</span>) <span class="sc">+</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -396,6 +397,18 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p><em>If the variance are unequal, we want to fit a model to observations in subgroup <span class="math inline">\((a_j, b_k)\)</span> for <span class="math inline">\(j=1, \ldots, n_a\)</span> and <span class="math inline">\(k=1, \ldots, n_b\)</span>, specifying that in the subgroup the average is <span class="math inline">\(\mu_{jk}\)</span> and the variance <span class="math inline">\(\sigma^2_{jk}\)</span>. Use the function <code>gls</code> in package <code>nlme</code> as follows.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> conf_dying <span class="sc">~</span> condition<span class="sc">*</span>order,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> JZBJG22_E2,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> nlme<span class="sc">::</span><span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> condition<span class="sc">*</span>order))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use condition*order to get a different variance for each subgroup</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA table for testing the interaction - use type 2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(model, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To obtain the analysis of variance table in <strong>R</strong> to an object <code>model</code> representing an ANOVA with unbalanced data, use the <code>car::Anova</code> function. Use <code>type=2</code> as argument (the default). You can pass <code>model</code> to <code>emmeans</code> as before to compute main/simple effects.</p>
 
 
 

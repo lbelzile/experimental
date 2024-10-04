@@ -17,7 +17,7 @@ The database in package `hecedsm` in **R** is labelled `JZBJG22_E2`. You can als
 
 
 1. A dataset is said to be *balanced* if there are the same number of people in each experimental condition. Are the data balanced over `condition` and `order`? Justify your answer.
-2. Plot the response variables using a suitable graph (e.g., half-violin or density plot), for each of the four conditions. Comment on the distribution of the scores along the scale.
+2. Plot the response variables using a suitable graph (e.g., half-violin or density plot, see below), for each of the four conditions. Comment on the distribution of the scores along the scale.
 3. Using Levene's test, check whether the variance in each subgroup is the same.
 4. Perform the two-way analysis of variance for both `conf_dying` and `conf_pilot` and report the null and alternative hypotheses, the test statistic, the $P$-value and the conclusion of the test. Use Welch's ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3.
 5. For each response variable `conf_dying` and `conf_pilot`, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for `video` conditions. 
@@ -36,9 +36,28 @@ library(ggdist)
 
 ggplot(data = JZBJG22_E2, 
        mapping = aes(x = condition, group = order, y = conf_dying)) + 
-  ggdist::stat_halfeye(adjust = .5, width = .3, .width = c(0.5, 1)) + 
+  ggdist::stat_halfeye(adjust = .5, width = 1, 
+                       .width = c(0.5, 0.95)) + # 50% (box) and 95% confidence intervals
   ggdist::stat_dots(side = "left", dotsize = .4, justification = 1.05, binwidth = .1) +
   facet_grid(~order) + 
   labs(y = "", subtitle = "confidence in landing without dying") +
   theme_classic()
 ```
+
+*If the variance are unequal, we want to fit a model to observations in subgroup $(a_j, b_k)$ for $j=1, \ldots, n_a$ and $k=1, \ldots, n_b$, specifying that in the subgroup the average is $\mu_{jk}$ and the variance $\sigma^2_{jk}$. Use the function `gls` in package `nlme` as follows.*
+
+
+```{r}
+#| eval: false
+#| echo: true
+model <- nlme::gls(
+  model = conf_dying ~ condition*order,
+  data = JZBJG22_E2,
+  weights = nlme::varIdent(form = ~ 1 | condition*order))
+# Use condition*order to get a different variance for each subgroup
+
+# ANOVA table for testing the interaction - use type 2
+car::Anova(model, type = 2)
+```
+
+To obtain the analysis of variance table in **R** to an object `model` representing an ANOVA with unbalanced data, use the `car::Anova` function. Use `type=2` as argument (the default). You can pass `model` to `emmeans` as before to compute main/simple effects.
