@@ -4,7 +4,7 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-10-04" />
+    <meta name="date" content="2024-10-07" />
     <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -763,7 +763,7 @@ As before, we have one experimental factor `\(A\)` with `\(n_a\)` levels, with
 
 `$$\begin{align*}\underset{\text{response}\vphantom{l}}{Y_{ij}} = \underset{\text{global mean}}{\mu_{\vphantom{j}}} + \underset{\text{mean difference}}{\alpha_j} + \underset{\text{random effect for subject}}{S_{i\vphantom{j}}} + \underset{\text{error}\vphantom{l}}{\varepsilon_{ij}}\end{align*}$$`
 
-where `\(S_i \sim \mathsf{Normal}(0, \sigma^2_s)\)` and `\(\varepsilon_{ij} \sim \mathsf{Normal}(0, \sigma^2_e)\)` are random variables.
+where `\(S_i \sim \mathsf{normal}(0, \sigma^2_s)\)` and `\(\varepsilon_{ij} \sim \mathsf{normal}(0, \sigma^2_e)\)`.
 
 The errors and random effects are independent from one another.
 
@@ -868,7 +868,8 @@ model &lt;- afex::aov_ez(
   dv = "latency",      # response
   within = "stimulus", # within-subject
   data = hecedsm::AA21,
-  fun_aggregate = mean)
+  fun_aggregate = mean) 
+# aggregate to one measure per id/condition
 anova(model, # mixed ANOVA model
       correction = "none", # sphericity
       es = "none") # effect size
@@ -929,7 +930,7 @@ Sphericity only applies with more than 2 groups (otherwise, there is a single co
 # Mauchly's test of sphericity
 
 Typically, Mauchly's test of sphericity is used to test this assumption
-   - if statistically significant, use a correction (later)
+   - if statistically significant, use a correction.
    - if no evidence, proceed with `\(F\)` tests as usual with `\(\mathsf{F}(\nu_1, \nu_2)\)` benchmark distribution.
    
 ---
@@ -953,7 +954,6 @@ stimulus        0.67814 0.14341
 
 - `\(p\)`-value for Mauchly's test is large, no evidence that sphericity is violated.
 
-- Report the `\(p\)`-value of the `\(F\)`-test: `\(F(2, 22) = 0.6155\)`.
 
 ]
 ---
@@ -963,7 +963,7 @@ stimulus        0.67814 0.14341
 If we reject the hypothesis of sphericity (small `\(p\)`-value for Mauchly's test), we need to change our reference distribution.
 
 
-Box suggested to multiply both degrees of freedom of `\(F\)` statistic by `\(\epsilon &lt; 1\)` and compare to `\(\mathsf{F}(\epsilon \nu_1, \epsilon \nu_2)\)` distribution instead
+Box suggested to multiply both degrees of freedom of `\(F\)` statistic by `\(\epsilon &lt; 1\)` and compare to `\(\mathsf{F}(\epsilon \nu_1, \epsilon \nu_2)\)` distribution instead. This yields conservative tests (size greater than `\(\alpha\)`).
 
 - Three common correction factors `\(\epsilon\)`:
    - Greenhouse‒Geisser 
@@ -1003,6 +1003,18 @@ Note: `\(\widehat{\epsilon}\)` can be larger than 1, replace by the upper bound 
 
 ---
 
+# Reporting
+
+&gt; We conducted a within-subject one-way ANOVA for the effect of stimulus on latency. Mauchly's test, `\(p=0.143\)`, gives no evidence against the assumption of sphericity. There is no overall effect of GAN, `\(F(2, 22) = 4.96\)`, `\(p=0.6155\)`.
+
+If there were differences in variances, write instead something like 
+
+&gt; Mauchly's test shows strong evidence of departure from sphericity. Consequently, we used Huynh-Feldt correction `\(F(2\widehat{\epsilon}, 22\widehat{\epsilon}) = 4.96\)`, `\(\widehat{\epsilon} =0.85\)`, adjusted `\(p=0.587\)`.
+
+
+
+---
+
 # Contrasts
 
 In within-subject designs, contrasts are obtained by computing the contrast for every subject. Make sure to check degrees of freedom!
@@ -1034,19 +1046,23 @@ model |&gt; emmeans::emmeans(spec = "stimulus", contr = cont_vec)
 
 # Recap
 
-- Repeated measure ANOVA pools data from participants to keep a single measurement (average) per experimental condition
-  - **within-subject** factors are those which are completed by everyone
-  - **between-subject** factors are mutually exclusive (different people in those subgroups).
-- Correlated data allows us to compare measurements within same individuals
+- Repeated measure ANOVA pools data from participants to keep a single measurement (average) per experimental condition.
+- It treat individuals as a factor (but no interaction).
+  - **within-subject** factors are those which are completed by everyone.
+  - **between-subject** factors are mutually exclusive (different individual in those subgroups).
+- Correlated data allows us to compare measurements within same individuals:
+  - measurements from different individuals are still assumed independent of one another.
   - the more the variability is due to individuals (higher correlation), the smaller the sample size needed for the study.
   
 ---
 
 # Recap
 
--   
-  - Extra assumptions: sphericity ($J &gt; 2$ groups)
-  - If sphericity is violated, need to change our reference benchmark
+- Since observations are correlated, we need to account for the correlation within individuals.
+  - We can assume equicorrelation of measurements from same individuals.
+  - A weaker statement, sphericity, can be used if we only care about pairwise differences.
+  - Sphericity only applies for `\(J &gt; 2\)` groups
+  - If sphericity is violated, we need to change our reference benchmark and use a correction, or go fully multivariate.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>

@@ -234,7 +234,11 @@ anova_table <- anova(model)
 car::qqPlot(model)
 ```
 
-.small[Model assumptions: plots and tests are meaningless with $n_r=2$ replications per group...]
+.small[
+
+Model assumptions: plots and tests are meaningless with $n_r=2$ replications per group...
+
+]
 
 ---
 
@@ -343,7 +347,7 @@ It may be useful not to consider some interactions if they are known or (strongl
 
 # Guidelines for the interpretation of effects
 
-Start with the most complicated term (top down)
+Start with the most complicated term (bottom up)
 
 - If the three-way interaction $ABC$ is significative:
     - don't interpret main effects or two-way interactions!
@@ -354,13 +358,22 @@ Start with the most complicated term (top down)
 
 ---
 
+# Marginalization vs main effects
+
+**Marginalization** means that we reduce the dimension of the problem, e.g., we transform a three-way ANOVA into a two-way ANOVA by collapsing over a dimension.
+
+**Main effects** are the effects of factors $A$, $B$, $C$ (i.e., row, column and depth effects).
+
+
+---
+
 
 
 # What contrasts are of interest?
 
-- Can view a three-way ANOVA as a series of one-way ANOVA or two-way ANOVAs...
+- Can view a three-way ANOVA as a series of one-way ANOVA or two-way ANOVA...
 
-Depending on the goal, could compare for variable $A$
+Depending on the goal and if the interactions are significative or not, could compare for variable $A$
 - marginal contrast $\psi_A$ (averaging over $B$ and $C$)
 - marginal conditional contrast for particular subgroup: $\psi_A$ within $c_1$
 - contrast involving two variables: $\psi_{AB}$
