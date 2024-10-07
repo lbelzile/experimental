@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.6.1">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -330,19 +330,28 @@ window.Quarto = {
 <li>a PDF report</li>
 <li>your code</li>
 </ul>
-<p>We consider Study 2 of <span class="citation" data-cites="Bobak:2019">Bobak et al. (<a href="#ref-Bobak:2019" role="doc-biblioref">2019</a>)</span>, who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). <span class="citation" data-cites="Bobak:2019">Bobak et al. (<a href="#ref-Bobak:2019" role="doc-biblioref">2019</a>)</span> report that</p>
+<p>We consider Experiment 2 of <span class="citation" data-cites="Bobak:2019">Bobak et al. (<a href="#ref-Bobak:2019" role="doc-biblioref">2019</a>)</span>, who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). <span class="citation" data-cites="Bobak:2019">Bobak et al. (<a href="#ref-Bobak:2019" role="doc-biblioref">2019</a>)</span> report that</p>
 <blockquote class="blockquote">
 <p>Participants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.</p>
 </blockquote>
-<p>Perform a repeated measure one-way ANOVA with <code>color</code> as within-factor and <code>pcorr</code> as response with the <code>BMH19_S2</code> data, which can be found in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/BMH19_S2.sav">SPSS database via this link</a>.</p>
+<p>The result we want to reproduce is the following:</p>
+<blockquote class="blockquote">
+<p>There was a significant main effect of image hue, <span class="math inline">\(F(2,102) = 11.61\)</span>, <span class="math inline">\(p &lt; .001\)</span> […] Follow-up pairwise comparisons (Bonferroni corrected) showed that […] participants were more accurate in the colour and mixed conditions than in the grayscale condition, <span class="math inline">\(p &lt; .001\)</span> […] and <span class="math inline">\(p &lt; .004\)</span>, respectively […] the mixed and colour conditions did not differ from each other, <span class="math inline">\(p = .36\)</span> […]</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Accuracy was also examined for mismatched trials, using within-subjects ANOVA with three hue levels […] There was a significant main effect of condition, <span class="math inline">\(F(2,102)=15.32\)</span>, <span class="math inline">\(p&lt;.001\)</span>. Pairwise comparisons (Bonferroni corrected) revealed that the accuracy was lower in the “mixed” condition than in colour and grayscale conditions […] Accuracy in grayscale and colour conditions did not differ.</p>
+</blockquote>
+<p>Perform a repeated measure one-way ANOVA with <code>color</code> as within-factor and either <code>accuracy</code> or <code>pcorr</code> as response with the <code>BMH19_E2</code> data, which can be found in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/BMH19_E2.sav">SPSS database via this link</a>.</p>
 <ol type="1">
 <li>Explain in your own words the purpose of randomization and <a href="https://explorable.com/counterbalanced-measures-design">counterbalancing</a> in a repeated measure experiment.</li>
 <li>Is there evidence against the hypothesis of sphericity? Report Mauchly’s statistic and the conclusion of the hypothesis test.</li>
-<li>Are there differences overall between color match (monochrome, mixed or colored)? Report the <span class="math inline">\(F\)</span>-statistic, the degrees of freedom and the <span class="math inline">\(p\)</span>-value and a measure of effect size (e.g., <span class="math inline">\(\widehat{R}^2_p\)</span>). If the sphericity assumption isn’t met, use the Greenhouse–Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor <span class="math inline">\(\widehat{\epsilon}\)</span>.</li>
-<li>Compute pairwise differences applying Tukey’s honest significance difference multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in <code>pcorr</code>), the <span class="math inline">\(t\)</span>-test statistics and the associated <span class="math inline">\(p\)</span>-values. <!--
-4. An alternative procedure would be to fit the model as a one-way MANOVA: do this and report the value of Pillai's trace with the approximate $F$ statistic, degrees of freedom and $p$-values. Does your conclusions change?^[If you fit the model with `afex` package functions `aov_ez`, the output contains a slot `$Anova` with the value of this test.]
---></li>
+<li>Are there differences overall between color match (monochrome, mixed or colored)? Report the <span class="math inline">\(F\)</span>-statistic, the degrees of freedom and the <span class="math inline">\(p\)</span>-value. If the sphericity assumption isn’t met, use the Greenhouse–Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor <span class="math inline">\(\widehat{\epsilon}\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Compute <strong>pairwise differences</strong> applying Tukey’s honest significance difference or Bonferroni multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in <code>pcorr</code> and <code>accuracy</code>), the <span class="math inline">\(t\)</span>-test statistics and the associated <span class="math inline">\(p\)</span>-values.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 </ol>
+<!--
+4. An alternative procedure would be to fit the model as a one-way MANOVA: do this and report the value of Pillai's trace with the approximate $F$ statistic, degrees of freedom and $p$-values. Does your conclusions change?^[If you fit the model with `afex` package functions `aov_ez`, the output contains a slot `$Anova` with the value of this test.]
+-->
+
 
 
 
@@ -351,7 +360,13 @@ window.Quarto = {
 <div id="ref-Bobak:2019" class="csl-entry" role="listitem">
 Bobak, A. K., Mileva, V. R., &amp; Hancock, P. J. B. (2019). A grey area: How does image hue affect unfamiliar face matching? <em>Cognitive Research: Principles and Implications</em>, <em>4</em>(1), 27. <a href="https://doi.org/10.1186/s41235-019-0174-3">https://doi.org/10.1186/s41235-019-0174-3</a>
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Use <code>anova(..., correction = "none")</code> for <code>afex</code> output in <strong>R</strong> to get the ANOVA table without correction, as the authors reported.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Note 2: only the <span class="math inline">\(p\)</span>-values are reported, and the estimated marginal means in Table 2 of the paper. The <span class="math inline">\(d\)</span> values quoted in the article (with confidence intervals) are Cohen’s <span class="math inline">\(d\)</span>, which we will cover later.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

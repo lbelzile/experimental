@@ -9,18 +9,27 @@ Complete this task in teams of two or three students.
 -   a PDF report
 -   your code
 
-
-We consider Study 2 of @Bobak:2019, who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). @Bobak:2019 report that
+We consider Experiment 2 of @Bobak:2019, who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). @Bobak:2019 report that
 
 > Participants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.
 
+The result we want to reproduce is the following:
 
-Perform a repeated measure one-way ANOVA with `color` as within-factor and `pcorr` as response with the `BMH19_S2` data, which can be found in the **R** package `hecedsm`.  You can also download the [SPSS database via this link](/files/data/SPSS/BMH19_S2.sav).
+> There was a significant main effect of image hue, $F(2,102) = 11.61$, $p < .001$ \[...\] Follow-up pairwise comparisons (Bonferroni corrected) showed that \[...\] participants were more accurate in the colour and mixed conditions than in the grayscale condition, $p < .001$ \[...\] and $p < .004$, respectively \[...\] the mixed and colour conditions did not differ from each other, $p = .36$ \[...\]
 
-1. Explain in your own words the purpose of randomization and [counterbalancing](https://explorable.com/counterbalanced-measures-design) in a repeated measure experiment.
-2. Is there evidence against the hypothesis of sphericity? Report Mauchly's statistic and the conclusion of the hypothesis test.
-2. Are there differences overall between color match (monochrome, mixed or colored)? Report the $F$-statistic, the degrees of freedom and the $p$-value and a measure of effect size (e.g., $\widehat{R}^2_p$). If the sphericity assumption isn't met, use the Greenhouse--Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor $\widehat{\epsilon}$.
-3. Compute pairwise differences applying Tukey's honest significance difference multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in `pcorr`), the $t$-test statistics and the associated $p$-values.
+> Accuracy was also examined for mismatched trials, using within-subjects ANOVA with three hue levels \[...\] There was a significant main effect of condition, $F(2,102)=15.32$, $p<.001$. Pairwise comparisons (Bonferroni corrected) revealed that the accuracy was lower in the "mixed" condition than in colour and grayscale conditions \[...\] Accuracy in grayscale and colour conditions did not differ.
+
+Perform a repeated measure one-way ANOVA with `color` as within-factor and either `accuracy` or `pcorr` as response with the `BMH19_E2` data, which can be found in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/BMH19_E2.sav).
+
+1.  Explain in your own words the purpose of randomization and [counterbalancing](https://explorable.com/counterbalanced-measures-design) in a repeated measure experiment.
+2.  Is there evidence against the hypothesis of sphericity? Report Mauchly's statistic and the conclusion of the hypothesis test.
+3.  Are there differences overall between color match (monochrome, mixed or colored)? Report the $F$-statistic, the degrees of freedom and the $p$-value. If the sphericity assumption isn't met, use the Greenhouse--Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor $\widehat{\epsilon}$.[^1]
+4.  Compute **pairwise differences** applying Tukey's honest significance difference or Bonferroni multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in `pcorr` and `accuracy`), the $t$-test statistics and the associated $p$-values.[^2]
+
+[^1]: Use `anova(..., correction = "none")` for `afex` output in **R** to get the ANOVA table without correction, as the authors reported.
+
+[^2]: Note 2: only the $p$-values are reported, and the estimated marginal means in Table 2 of the paper. The $d$ values quoted in the article (with confidence intervals) are Cohen's $d$, which we will cover later.
+
 <!--
 4. An alternative procedure would be to fit the model as a one-way MANOVA: do this and report the value of Pillai's trace with the approximate $F$ statistic, degrees of freedom and $p$-values. Does your conclusions change?^[If you fit the model with `afex` package functions `aov_ez`, the output contains a slot `$Anova` with the value of this test.]
 -->

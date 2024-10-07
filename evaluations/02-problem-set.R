@@ -6,7 +6,7 @@
 # uncomment the following two lines and run once
 # install.packages("remotes")
 # remotes::install_github("lbelzile/hecedsm")
-
+library(hecedsm)
 library(tidyverse)
 # Data from Bastian, Jetten and Ferris (2014)
 # https://doi.org/10.1177/0956797614545886

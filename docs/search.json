@@ -530,627 +530,593 @@
     ]
   },
   {
-    "objectID": "content/13-content.html",
-    "href": "content/13-content.html",
-    "title": "Nonparametric tests and count data",
-    "section": "",
-    "text": "Models and tests for categorical and count data\nNonparametric tests",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "13: Nonparametric tests and count data"
-    ]
-  },
-  {
-    "objectID": "content/13-content.html#content",
-    "href": "content/13-content.html#content",
-    "title": "Nonparametric tests and count data",
-    "section": "",
-    "text": "Models and tests for categorical and count data\nNonparametric tests",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "13: Nonparametric tests and count data"
-    ]
-  },
-  {
-    "objectID": "content/13-content.html#learning-objectives",
-    "href": "content/13-content.html#learning-objectives",
-    "title": "Nonparametric tests and count data",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUnderstanding the benefits and drawback of rank-based tests.\nPerforming tests for count data and correctly report their output.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "13: Nonparametric tests and count data"
-    ]
-  },
-  {
-    "objectID": "content/13-content.html#readings",
-    "href": "content/13-content.html#readings",
-    "title": "Nonparametric tests and count data",
-    "section": "Readings",
-    "text": "Readings\n\nChapter 12 Categorical data analysis of Navarro (2019)\nChapters 14 and 15 of the course notes",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "13: Nonparametric tests and count data"
-    ]
-  },
-  {
-    "objectID": "content/13-content.html#slides",
-    "href": "content/13-content.html#slides",
-    "title": "Nonparametric tests and count data",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "13: Nonparametric tests and count data"
-    ]
-  },
-  {
-    "objectID": "content/13-content.html#code",
-    "href": "content/13-content.html#code",
-    "title": "Nonparametric tests and count data",
-    "section": "Code",
-    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "13: Nonparametric tests and count data"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html",
-    "href": "content/11-content.html",
-    "title": "Introduction to causal inference",
-    "section": "",
-    "text": "Introduction to causal inference",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Intro to causal inference"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html#content",
-    "href": "content/11-content.html#content",
-    "title": "Introduction to causal inference",
-    "section": "",
-    "text": "Introduction to causal inference",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Intro to causal inference"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html#learning-objectives",
-    "href": "content/11-content.html#learning-objectives",
-    "title": "Introduction to causal inference",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the importance of listing potential confounders\ndetermining which variables to control for (confounders vs colliders)\ndrawing a directed acyclic graph describing the interrelation between variables\nexplaining the differences between experimental and observational studies for studying mediation",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Intro to causal inference"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html#readings",
-    "href": "content/11-content.html#readings",
-    "title": "Introduction to causal inference",
-    "section": "Readings",
-    "text": "Readings\n\nChapter 2 of VanderWeele (2015)\nSection 13.1 of the course notes\n\nAndrew Heiss’ course notes on directed acyclic graphs (DAG) and types of association.\n\nCausal models (video and slides)\nPaths, doors, and adjustment (video and slides)\n\nThe structural equation modelling (SEM) approach to mediation\n\nPaper popularizing linear mediation (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\n\nThe causal inference approach\n\nPearl (2014)\nImai et al. (2010)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Intro to causal inference"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html#complementary-readings",
-    "href": "content/11-content.html#complementary-readings",
-    "title": "Introduction to causal inference",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\nPearl et al. (2016), Chapter 3\nRohrer (2018)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Intro to causal inference"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html#slides",
-    "href": "content/11-content.html#slides",
-    "title": "Introduction to causal inference",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Intro to causal inference"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html",
-    "href": "content/09-content.html",
-    "title": "Effect sizes and power",
-    "section": "",
-    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#content",
-    "href": "content/09-content.html#content",
-    "title": "Effect sizes and power",
-    "section": "",
-    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#learning-objectives",
-    "href": "content/09-content.html#learning-objectives",
-    "title": "Effect sizes and power",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncorrectly report effect size for common statistics in analysis of variance models\ndeduce the sample size necessary to replicate a study at a given power\nexplain the interplay between sample size, power and effect size.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#readings",
-    "href": "content/09-content.html#readings",
-    "title": "Effect sizes and power",
-    "section": "Readings",
-    "text": "Readings\n\n Chapter 10 of the course notes\n Chapter 11 of the course notes\n Effect size and power example\n Zhang & Yuan (2018), pages 143–148 of the web manual",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#complementary-readings",
-    "href": "content/09-content.html#complementary-readings",
-    "title": "Effect sizes and power",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)\nGelman & Carlin (2014)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#slides",
-    "href": "content/09-content.html#slides",
-    "title": "Effect sizes and power",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#exercise",
-    "href": "content/09-content.html#exercise",
-    "title": "Effect sizes and power",
-    "section": "Exercise",
-    "text": "Exercise\n\nPower calculations",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#code",
-    "href": "content/09-content.html#code",
-    "title": "Effect sizes and power",
-    "section": "Code",
-    "text": "Code\n\nR script\nExercise solution",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Effect sizes and power"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html",
-    "href": "content/07-content.html",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "",
-    "text": "ANOVA with two or more factors\nANOVA with both within-subject and between-subject factors\nMultivariate analysis of variance",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#content",
-    "href": "content/07-content.html#content",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "",
-    "text": "ANOVA with two or more factors\nANOVA with both within-subject and between-subject factors\nMultivariate analysis of variance",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#learning-objectives",
-    "href": "content/07-content.html#learning-objectives",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nanalyzing models with both within-subject and between-subject factors\nspecifying and calculating custom contrasts in multiway factorial designs\ncorrectly interpreting an analysis of variance table\ntesting model assumptions in multivariate model",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#readings",
-    "href": "content/07-content.html#readings",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "Readings",
-    "text": "Readings\n\n Chapter 7 of the course notes\n Chapter 8 of the course notes\n Three-way ANOVA example\n MANOVA example",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#complementary-readings",
-    "href": "content/07-content.html#complementary-readings",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapters 8 and 14 of Maxwell et al. (2017).\n Chapters 20–23 of Maxwell et al. (2017).",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#slides",
-    "href": "content/07-content.html#slides",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#code",
-    "href": "content/07-content.html#code",
-    "title": "Multiway and multivariate factorial designs",
-    "section": "Code",
-    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Multiway and multivariate factorial designs"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html",
-    "href": "content/05-content.html",
-    "title": "Factorial designs and interactions",
-    "section": "",
-    "text": "Between vs within-subject designs\nInteractions\nSimple, marginal and interaction contrasts",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#content",
-    "href": "content/05-content.html#content",
-    "title": "Factorial designs and interactions",
-    "section": "",
-    "text": "Between vs within-subject designs\nInteractions\nSimple, marginal and interaction contrasts",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#learning-objectives",
-    "href": "content/05-content.html#learning-objectives",
-    "title": "Factorial designs and interactions",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of factorial designs\ninterpreting an interaction plot and being aware of it’s limitation\ninterpreting model effects in sum-to-zero parametrization\nreporting results from a two-way analysis of variance\ndetermining whether or not simple or main effects are most suitable for comparisons",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#readings",
-    "href": "content/05-content.html#readings",
-    "title": "Factorial designs and interactions",
-    "section": "Readings",
-    "text": "Readings\n\n Chapter 4 of Meier (2022)\n Chapter 5 of the course notes",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#complementary-readings",
-    "href": "content/05-content.html#complementary-readings",
-    "title": "Factorial designs and interactions",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10–13 of Keppel & Wickens (2004).",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#slides",
-    "href": "content/05-content.html#slides",
-    "title": "Factorial designs and interactions",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#code",
-    "href": "content/05-content.html#code",
-    "title": "Factorial designs and interactions",
-    "section": "Code",
-    "text": "Code\n\nR script\nSPSS script",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "5: Factorial designs and interactions"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
-    "title": "Analysis of variance",
-    "section": "",
-    "text": "ANOVA and F-test statistic\nModel assumptions",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#content",
-    "href": "content/03-content.html#content",
-    "title": "Analysis of variance",
-    "section": "",
-    "text": "ANOVA and F-test statistic\nModel assumptions",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#learning-objectives",
-    "href": "content/03-content.html#learning-objectives",
-    "title": "Analysis of variance",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncarry-out a one-way analysis of variance test\ncheck model assumptions using hypothesis tests and graphics.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#readings",
-    "href": "content/03-content.html#readings",
-    "title": "Analysis of variance",
-    "section": "Readings",
-    "text": "Readings\n\n Chapter 3 of the Course notes",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#complementary-readings",
-    "href": "content/03-content.html#complementary-readings",
-    "title": "Analysis of variance",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 3 of Maxwell et al. (2017) (up to page 113).\n Chapter 2 of Meier (2022)\n Chapter 3 and 7 of Keppel & Wickens (2004).",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#slides",
-    "href": "content/03-content.html#slides",
-    "title": "Analysis of variance",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#code",
-    "href": "content/03-content.html#code",
-    "title": "Analysis of variance",
-    "section": "Code",
-    "text": "Code\n\nR script\nSPSS script",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "3: One way ANOVA"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html",
-    "href": "content/01-content.html",
-    "title": "Introduction",
-    "section": "",
-    "text": "Syllabus and learning objectives\nReview\n\nPopulation and samples\nObservational versus experimental studies\nSampling schemes: random, stratified and cluster sampling\n\nIntroduction to experimental designs\nTerminology of experimental design\nRequirements for a good experiment",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#content",
-    "href": "content/01-content.html#content",
-    "title": "Introduction",
-    "section": "",
-    "text": "Syllabus and learning objectives\nReview\n\nPopulation and samples\nObservational versus experimental studies\nSampling schemes: random, stratified and cluster sampling\n\nIntroduction to experimental designs\nTerminology of experimental design\nRequirements for a good experiment",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#learning-objectives",
-    "href": "content/01-content.html#learning-objectives",
-    "title": "Introduction",
-    "section": "Learning objectives",
-    "text": "Learning objectives\n\nLearning the terminology associated to experiments.\nAssessing the generalizability of a study based on the consideration of the sample characteristics, sampling scheme and population.\nDistinguishing between observational and experimental studies.\nUnderstanding the rationale behind the requirements for good experimental studies.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#preliminaries",
-    "href": "content/01-content.html#preliminaries",
-    "title": "Introduction",
-    "section": "Preliminaries",
-    "text": "Preliminaries\n\nFamiliarize yourself with the syllabus, content, examples, and evaluations pages for this class.\n Read Chapter 1 (Intro to Data) of OpenIntro Statistics and the accompanying  videos",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#readings",
-    "href": "content/01-content.html#readings",
-    "title": "Introduction",
-    "section": "Readings",
-    "text": "Readings\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.\n\n\n\n Chapter 1 of the Course notes\n Chapter 2 of Introduction to Modern Statistics\n\nFeel free to inform me in the weekly check-in of your take on these references.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#complementary-readings",
-    "href": "content/01-content.html#complementary-readings",
-    "title": "Introduction",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n\n\n\n\n\nWarning\n\n\n\nComplementary readings are additional sources of information that are not required readings, but may be useful substitutes. Sometimes, they go beyond the scope of what we cover (in more details).\n\n\n\n Chapter 1 (Preliminaries) in Planning of experiments (Cox, 1958). Out of print, but addresses the basic concepts using a variety of examples (mostly from agricultural field trials), and particularly well written.\n Chapter 1 and Sections 2.1-2.2 in Design and Analysis of Experiments (Dean et al., 2017)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#slides",
-    "href": "content/01-content.html#slides",
-    "title": "Introduction",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#case-study",
-    "href": "content/01-content.html#case-study",
-    "title": "Introduction",
-    "section": "Case study",
-    "text": "Case study\nWe will discuss the summary of Abaluck et al. (2022) “The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh” (pdf) in class.\nDuring the activity, you will be asked to identify in teams the following:\n\nthe objective of the study\nthe target population (which findings generalize?)\nthe sampling scheme\nthe observational and experimental units\nthe treatments\nthe outcome variable(s)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "1: Introduction"
-    ]
-  },
-  {
-    "objectID": "evaluations/03-problem-set.html",
-    "href": "evaluations/03-problem-set.html",
-    "title": "Problem set 3",
-    "section": "",
-    "text": "Submission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nfollowing the naming convention PS3-studentid.extension where studentid is replaced with your student ID and extension is the file extension (e.g., .pdf, .R, .Rmd, .sps)\nInstructions: We consider data collected for Study 3 of Grossmann & Kross (2014) (click the links to download the paper and the Supplementary material). You can access these data directly from R from the hecedsm package or download the SPSS data.\nIf you work with R, check out this helper code\nHave a quick look at the paper and fit the one way analysis of variance model for the consideration of other’s perspective (persp) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years) (age == \"young\").\n\nReport the \\(F\\)-test statistic, the null distribution and the \\(p\\)-value.\nProvide a conclusion in the context of the study.\nThere are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?\n\nWe next look at model assumptions\n\nIs the independence assumption plausible in the context?\nHow many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition and forego normality checks?\nProduce a normal quantile-quantile plot and comment on the distribution of the residuals (check out this response on CrossValidated first).\nCheck the equality of variance assumption using a suitable test statistic and report the results.\nUse Welch’s one-way analysis of variance model (oneway.test() in R) and compare the output and the conclusion with that of the usual \\(F\\)-test.\n\nHints and R snippets\nTo subset the data in a model, you can use the following commands:\n\ndata(GK14_S3, package = \"hecedsm\")\nmodel &lt;- aov(persp ~ condition, data = GK14_S3, \n             subset = (age == \"young\")) # select specific subset\n\nThe following code filters out missing values for persp for young adults and shows the counts for each condition:\n\nGK14_S3 |&gt;\n  dplyr::filter(age == \"young\") |&gt; # select only young adults (20-40 years old)\n  dplyr::group_by(condition) |&gt;  \n  dplyr::summarize(count = sum(!is.na(persp)), # count of non-missing observations\n                   nmiss = sum(is.na(persp)))  # count of missing values\n\n# A tibble: 4 × 3\n  condition       count nmiss\n  &lt;fct&gt;           &lt;int&gt; &lt;int&gt;\n1 self immersed      69     3\n2 self distanced     62     3\n3 other immersed     63     3\n4 other distanced    62     2\n\n\nand finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.\n\nlibrary(ggplot2) # grammar of graphics\nggplot(data = GK14_S3 |&gt; dplyr::filter(age == \"young\"),\n       mapping = aes(x = condition,\n                     y = persp,\n                     color = condition)) +\n  geom_boxplot() +\n  geom_jitter()\n\nWarning: Removed 11 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 11 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nGrossmann, I., & Kross, E. (2014). Exploring Solomon’s paradox: Self-distancing eliminates the self-other asymmetry in wise reasoning about close relationships in younger and older adults. Psychological Science, 25(8), 1571–1580. https://doi.org/10.1177/0956797614535400",
-    "crumbs": [
-      "Evaluations",
-      "Problem sets",
-      "Problem set 3"
-    ]
-  },
-  {
-    "objectID": "example/SPSS.html",
-    "href": "example/SPSS.html",
-    "title": "Programming with SPSS",
-    "section": "",
-    "text": "The databases for SPSS can be downloaded through this link.\n\nVideos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nLoading data and two-sample t-test\nPairwise contrasts\nOne-way ANOVA\nOne-way ANOVA (website example)\nLogical filters\nContrasts and post-hoc comparisons\nCreating categorical variables with if-else statements\nTwo-way ANOVA\nTwo-way ANOVA (website example)\nThree-way ANOVA (website example)\nANCOVA (website example)\nRepeated measures\nRepeated measures (within-between design)\nMANOVA\nRepeated measures using linear mixed model (Syntax)\nRepeated measures using linear mixed model (Menus)\nIncomplete mixed design\nNested random effects\nLinear mediation\n\nYou can also watch the playlist (and skip around to different sections) here:\n\n\n\n\n\n\nCode\n\nOne-way analysis of variance\nTwo-way analysis of variance\nThree-way analysis of variance\nAnalysis of covariance\nRepeated measures\nMANOVA\nRepeated measures using mixed models\nMixed models\nLinear mediation",
-    "crumbs": [
-      "Examples",
-      "Programming",
-      "SPSS"
-    ]
-  },
-  {
     "objectID": "evaluations/05-problem-set.html",
     "href": "evaluations/05-problem-set.html",
     "title": "Problem set 5",
     "section": "",
-    "text": "Complete this task individually\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nWe consider data from Experiment 2 of Jordan et al. (2022), who measured the confidence of participants on their ability to land successfully a plane if the pilot was incapacitated, after they were exposed to a trivially uninformative 3 minute video of a pilot landing a plane, but filmed in such a way that it was utterly useless. The authors pre-registered a comparison between experimental conditions video vs no video, and found that people watching the video answered higher for the question “How confident are you that you would be able to land the plane without dying”, but there was no discernible effect for “How confident are you that you would be able to successfully land the plane as well as a pilot could”, contrary to expectations. They found that the order in which the questions were asked (order, either pilot first, or dying first) changed the response.\nThe database in package hecedsm in R is labelled JZBJG22_E2. You can also download the SPSS database via this link.\n\nA dataset is said to be balanced if there are the same number of people in each experimental condition. Are the data balanced over condition and order? Justify your answer.\nPlot the response variables using a suitable graph (e.g., half-violin or density plot, see below), for each of the four conditions. Comment on the distribution of the scores along the scale.\nUsing Levene’s test, check whether the variance in each subgroup is the same.\nPerform the two-way analysis of variance for both conf_dying and conf_pilot and report the null and alternative hypotheses, the test statistic, the \\(P\\)-value and the conclusion of the test. Use Welch’s ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3.\nFor each response variable conf_dying and conf_pilot, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for video conditions.\n\nHint: to create a pretty plot in R, try the following:\n\n# install.packages(c(\"ggplot2\",\"ggdist\"))\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(JZBJG22_E2, package = \"hecedsm\")\nlibrary(ggplot2)\nlibrary(ggdist)\n\nggplot(data = JZBJG22_E2, \n       mapping = aes(x = condition, group = order, y = conf_dying)) + \n  ggdist::stat_halfeye(adjust = .5, width = 1, \n                       .width = c(0.5, 0.95)) + # 50% (box) and 95% confidence intervals\n  ggdist::stat_dots(side = \"left\", dotsize = .4, justification = 1.05, binwidth = .1) +\n  facet_grid(~order) + \n  labs(y = \"\", subtitle = \"confidence in landing without dying\") +\n  theme_classic()\n\n\n\n\n\n\n\n\nIf the variance are unequal, we want to fit a model to observations in subgroup \\((a_j, b_k)\\) for \\(j=1, \\ldots, n_a\\) and \\(k=1, \\ldots, n_b\\), specifying that in the subgroup the average is \\(\\mu_{jk}\\) and the variance \\(\\sigma^2_{jk}\\). Use the function gls in package nlme as follows.\n\nmodel &lt;- nlme::gls(\n  model = conf_dying ~ condition*order,\n  data = JZBJG22_E2,\n  weights = nlme::varIdent(form = ~ 1 | condition*order))\n# Use condition*order to get a different variance for each subgroup\n\n# ANOVA table for testing the interaction - use type 2\ncar::Anova(model, type = 2)\n\nTo obtain the analysis of variance table in R to an object model representing an ANOVA with unbalanced data, use the car::Anova function. Use type=2 as argument (the default). You can pass model to emmeans as before to compute main/simple effects.\n\n\n\n\nReferences\n\nJordan, K., Zajac, R., Bernstein, D., Joshi, C., & Garry, M. (2022). Trivially informative semantic context inflates people’s confidence they can perform a highly complex skill. Royal Society Open Science, 9(3), 211977. https://doi.org/10.1098/rsos.211977",
+    "text": "Complete this task individually\nSubmission information: please submit on ZoneCours",
     "crumbs": [
       "Evaluations",
       "Problem sets",
       "Problem set 5"
+    ]
+  },
+  {
+    "objectID": "evaluations/05-problem-set.html#task-1",
+    "href": "evaluations/05-problem-set.html#task-1",
+    "title": "Problem set 5",
+    "section": "Task 1",
+    "text": "Task 1\nWe consider data from Experiment 2 of Jordan et al. (2022), who measured the confidence of participants on their ability to land successfully a plane if the pilot was incapacitated, after they were exposed to a trivially uninformative 3 minute video of a pilot landing a plane, but filmed in such a way that it was utterly useless. The authors pre-registered a comparison between experimental conditions video vs no video, and found that people watching the video answered higher for the question “How confident are you that you would be able to land the plane without dying”, but there was no discernible effect for “How confident are you that you would be able to successfully land the plane as well as a pilot could”, contrary to expectations. They found that the order in which the questions were asked (order, either pilot first, or dying first) changed the response.\nThe database in package hecedsm in R is labelled JZBJG22_E2. You can also download the SPSS database via this link.\n\nA dataset is said to be balanced if there are the same number of people in each experimental condition. Are the data balanced over condition and order? Justify your answer.\nPlot the response variables using a suitable graph (e.g., half-violin or density plot, see below), for each of the four conditions. Comment on the distribution of the scores along the scale. See Section 2.1 for help.\nUsing Levene’s test, check whether the variance in each subgroup is the same.\nPerform the two-way analysis of variance for both conf_dying and conf_pilot and report the null and alternative hypotheses, the test statistic, the \\(P\\)-value and the conclusion of the test. Use Welch’s ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3: see Section 2.2.\nFor each response variable conf_dying and conf_pilot, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for video conditions.",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 5"
+    ]
+  },
+  {
+    "objectID": "evaluations/05-problem-set.html#indications-and-helper-code",
+    "href": "evaluations/05-problem-set.html#indications-and-helper-code",
+    "title": "Problem set 5",
+    "section": "Indications and helper code",
+    "text": "Indications and helper code\nThere is no R script this week, but below are some instructions for fitting the different models.\n\nGraphics\nTo create a pretty plot in R, try the following:\n\n# install.packages(c(\"ggplot2\",\"ggdist\"))\n# remotes::install_github(\"lbelzile/hecedsm\")\ndata(JZBJG22_E2, package = \"hecedsm\")\nlibrary(ggplot2)\nlibrary(ggdist)\n\nggplot(data = JZBJG22_E2, \n       mapping = aes(x = condition, group = order, y = conf_dying)) + \n  ggdist::stat_halfeye(adjust = .5, width = 1, \n                       .width = c(0.5, 0.95)) + # 50% (box) and 95% confidence intervals\n  ggdist::stat_dots(side = \"left\", dotsize = .4, justification = 1.05, binwidth = .1) +\n  facet_grid(~order) + \n  labs(y = \"\", subtitle = \"confidence in landing without dying\") +\n  theme_classic()\n\n\n\n\n\n\n\n\nYou must repeat this for the other response variable.\nIn SPSS, you need to specify manually with GGRAPH the format. This post shows an example of such plots.\n\n\nWelch ANOVA\nIf the variance are unequal, we want to fit a model to observations in subgroup \\((a_j, b_k)\\) for \\(j=1, \\ldots, n_a\\) and \\(k=1, \\ldots, n_b\\), specifying that in the subgroup the average is \\(\\mu_{jk}\\) and the variance \\(\\sigma^2_{jk}\\). The resulting \\(F\\) test from comparing overall means is typically named Welch after Welch (1947).\nIn R, the Welch ANOVA can be obtained via oneway.test, but there is no possibility of follow-up for marginal means and contrasts. Rather, use the function gls in package nlme as follows.\n\nmodel &lt;- nlme::gls(\n  model = conf_dying ~ condition*order,\n  data = JZBJG22_E2,\n  weights = nlme::varIdent(form = ~ 1 | condition*order))\n# Use condition*order to get a different variance for each subgroup\n\n# ANOVA table for testing the interaction - use type 2\ncar::Anova(model, type = 2)\n\nTo obtain the analysis of variance table in R to an object model representing an ANOVA with unbalanced data, use the car::Anova function. Use type=2 as argument (the default). You can pass model to emmeans as before to compute main/simple effects.\nIn SPSS, you must first transform the \\(2 \\times 2\\) into a one-way ANOVA with a categorical variable having \\(4\\) levels. Then, use oneway and code directly the contrasts for the interaction, and either the simple effects of condition for each level of order, and the main effect of condition, depending on which is most suitable.",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 5"
+    ]
+  },
+  {
+    "objectID": "content/12-content.html",
+    "href": "content/12-content.html",
+    "title": "Linear mediation",
+    "section": "",
+    "text": "Linear mediation model",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Linear mediation"
+    ]
+  },
+  {
+    "objectID": "content/12-content.html#content",
+    "href": "content/12-content.html#content",
+    "title": "Linear mediation",
+    "section": "",
+    "text": "Linear mediation model",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Linear mediation"
+    ]
+  },
+  {
+    "objectID": "content/12-content.html#learning-objectives",
+    "href": "content/12-content.html#learning-objectives",
+    "title": "Linear mediation",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nfitting a linear mediation model\ndiscussing limitations of the linear mediation model",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Linear mediation"
+    ]
+  },
+  {
+    "objectID": "content/12-content.html#readings",
+    "href": "content/12-content.html#readings",
+    "title": "Linear mediation",
+    "section": "Readings",
+    "text": "Readings\n\nChapter 13 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions (Imai et al., 2010; Pearl, 2014)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Linear mediation"
+    ]
+  },
+  {
+    "objectID": "content/12-content.html#slides",
+    "href": "content/12-content.html#slides",
+    "title": "Linear mediation",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Linear mediation"
+    ]
+  },
+  {
+    "objectID": "content/12-content.html#code",
+    "href": "content/12-content.html#code",
+    "title": "Linear mediation",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Linear mediation"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html",
+    "href": "content/10-content.html",
+    "title": "Intro to mixed models",
+    "section": "",
+    "text": "Fixed vs random effects\nBlocking factors\nIntroduction to linear mixed models",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#content",
+    "href": "content/10-content.html#content",
+    "title": "Intro to mixed models",
+    "section": "",
+    "text": "Fixed vs random effects\nBlocking factors\nIntroduction to linear mixed models",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#learning-objectives",
+    "href": "content/10-content.html#learning-objectives",
+    "title": "Intro to mixed models",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ndetermining the structure of an experimental design with random and fixed effects\ncorrectly determining whether effects are crossed or nested\ncorrectly analyzing models with blocking factors\nsetting up a linear mixed model",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#readings",
+    "href": "content/10-content.html#readings",
+    "title": "Intro to mixed models",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 5 (Complete Block Designs) of Meier (2022) (5.1-5.2)\nChapter 6 Random and Mixed-Effects Models of Meier (2022)\n Chapter 12 of the course notes",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#complementary-readings",
+    "href": "content/10-content.html#complementary-readings",
+    "title": "Intro to mixed models",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapter 4 of Cox (1958).\n Chapters 10 and 15 of Maxwell et al. (2017).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#slides",
+    "href": "content/10-content.html#slides",
+    "title": "Intro to mixed models",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/10-content.html#code",
+    "href": "content/10-content.html#code",
+    "title": "Intro to mixed models",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Intro to mixed models"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html",
+    "href": "content/08-content.html",
+    "title": "Analysis of covariance and moderation",
+    "section": "",
+    "text": "Analysis of covariance and linear regression models\nModeration analysis",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#content",
+    "href": "content/08-content.html#content",
+    "title": "Analysis of covariance and moderation",
+    "section": "",
+    "text": "Analysis of covariance and linear regression models\nModeration analysis",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#learning-objectives",
+    "href": "content/08-content.html#learning-objectives",
+    "title": "Analysis of covariance and moderation",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits ANCOVA over completely randomized designs\nusing control covariates\ntesting equality of slopes\ntesting for moderating variables (interactions)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#readings",
+    "href": "content/08-content.html#readings",
+    "title": "Analysis of covariance and moderation",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 9 of the course notes",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#complementary-readings",
+    "href": "content/08-content.html#complementary-readings",
+    "title": "Analysis of covariance and moderation",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapter 6 of Maxwell et al. (2017).\n Chapter 14–15 of Keppel & Wickens (2004)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#slides",
+    "href": "content/08-content.html#slides",
+    "title": "Analysis of covariance and moderation",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#videos",
+    "href": "content/08-content.html#videos",
+    "title": "Analysis of covariance and moderation",
+    "section": "Videos",
+    "text": "Videos",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#code",
+    "href": "content/08-content.html#code",
+    "title": "Analysis of covariance and moderation",
+    "section": "Code",
+    "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Analysis of covariance and moderation"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
+    "title": "Repeated measures",
+    "section": "",
+    "text": "Unbalanced designs\nAnalysis of within-subject designs\nRepeated measures and sphericity",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#content",
+    "href": "content/06-content.html#content",
+    "title": "Repeated measures",
+    "section": "",
+    "text": "Unbalanced designs\nAnalysis of within-subject designs\nRepeated measures and sphericity",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#learning-objectives",
+    "href": "content/06-content.html#learning-objectives",
+    "title": "Repeated measures",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of balanced designs\nadequately modelling repeated measures\ncorrectly interpreting tests of sphericity using software\nexplaining the benefits and disadvantages of repeated-measure designs",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#readings",
+    "href": "content/06-content.html#readings",
+    "title": "Repeated measures",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 6 of the course notes\n Repeated measure example",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#complementary-readings",
+    "href": "content/06-content.html#complementary-readings",
+    "title": "Repeated measures",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapter 5.2 of Price et al. (2017)\n Chapters 11–12 of Maxwell et al. (2017).\n Chapters 16–18 of Keppel & Wickens (2004).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#videos",
+    "href": "content/06-content.html#videos",
+    "title": "Repeated measures",
+    "section": "Videos",
+    "text": "Videos",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#slides",
+    "href": "content/06-content.html#slides",
+    "title": "Repeated measures",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#code",
+    "href": "content/06-content.html#code",
+    "title": "Repeated measures",
+    "section": "Code",
+    "text": "Code\n\nR script",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Repeated measures"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html",
+    "href": "content/04-content.html",
+    "title": "Contrasts and multiple testing",
+    "section": "",
+    "text": "Contrasts\nMultiple testing",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#content",
+    "href": "content/04-content.html#content",
+    "title": "Contrasts and multiple testing",
+    "section": "",
+    "text": "Contrasts\nMultiple testing",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#learning-objectives",
+    "href": "content/04-content.html#learning-objectives",
+    "title": "Contrasts and multiple testing",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nspecifying and calculating custom contrasts in factorial designs\ndetermining the number of tests in a family that need to be corrected for\nunderstanding how to correct p-values to account for multiple testing\nlisting multiplicity testing methods suitable depending on context",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#readings",
+    "href": "content/04-content.html#readings",
+    "title": "Contrasts and multiple testing",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 4 of the course notes\n Chapter 3 of Meier (2022)\n One-way ANOVA example",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#complementary-readings",
+    "href": "content/04-content.html#complementary-readings",
+    "title": "Contrasts and multiple testing",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapter 5 of Maxwell et al. (2017).\n Chapters 4 and 6 of Keppel & Wickens (2004).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#slides",
+    "href": "content/04-content.html#slides",
+    "title": "Contrasts and multiple testing",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#exercise",
+    "href": "content/04-content.html#exercise",
+    "title": "Contrasts and multiple testing",
+    "section": "Exercise",
+    "text": "Exercise\n\nCompute means and contrasts listed in the abstract of Baumann et al. (1992).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Contrasts and multiple testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Hypothesis testing",
+    "section": "",
+    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#content",
+    "href": "content/02-content.html#content",
+    "title": "Hypothesis testing",
+    "section": "",
+    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#learning-objectives",
+    "href": "content/02-content.html#learning-objectives",
+    "title": "Hypothesis testing",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the mechanics behind generic hypothesis tests\ninterpreting the output of generic tests\ncorrectly reporting the output of a testing procedure",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#readings",
+    "href": "content/02-content.html#readings",
+    "title": "Hypothesis testing",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 5 (Foundations for inference) of Matthew Crump’s course notes. These notes are non-technical, but do a good job at explaining the notion of sampling variability and chance. If you find them too basic, skip directly to the next item.\n Chapter 2 of the Course notes\n The permutation test by Jared Wilson",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#complementary-readings",
+    "href": "content/02-content.html#complementary-readings",
+    "title": "Hypothesis testing",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapter 2 of Maxwell et al. (2017)\n Chapter 3 of Keppel & Wickens (2004).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#slides",
+    "href": "content/02-content.html#slides",
+    "title": "Hypothesis testing",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#case-study",
+    "href": "content/02-content.html#case-study",
+    "title": "Hypothesis testing",
+    "section": "Case study",
+    "text": "Case study\nWe will look at the way authors report the conclusion of their statistical tests with\n\nRosen & Jerdee (1974)\nBrucks & Levav (2022)\nLiu et al. (2023), Experiment 1",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#code",
+    "href": "content/02-content.html#code",
+    "title": "Hypothesis testing",
+    "section": "Code",
+    "text": "Code\nThe following code reproduces the applications in the course slides and the case study\n\nR script\nSPSS scripts\nPython script for the case study",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Hypothesis testing"
+    ]
+  },
+  {
+    "objectID": "example/moderatedmediation.html",
+    "href": "example/moderatedmediation.html",
+    "title": "Moderated mediation",
+    "section": "",
+    "text": "This example from Roczniewska & Higgins (2019) is an instance of moderated mediation model with two postulated mediators. While such models can be fitted with the PROCESS macros (Hayes, 2022), we illustrate below the postulated causal diagram, the nonparametric bootstrap. We pay particular attention to verification of the linear model assumptions.\nThe context of the research is a natural experiment (or quasi-experiment): the authors study changes in behaviour due to modifications in the schooling system.\nThe statistical model in Roczniewska & Higgins (2019) can be implicitly deduced from Table 2: the manipulated variable is the message framing and there are three postulated mediators (message fluency, message engagement, process fairness), the latter of which interacts or moderate with the change in outcome, and two moderators assumed to impact both mediators through linear interactions, termed promotion focus and prevention focus.\nThe mean response from the linear models are\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{PF}) &= \\alpha_0 + \\alpha_1 \\texttt{Fram} + \\alpha_2\\texttt{Prom} + \\alpha_3 \\texttt{Prev}\\\\&\\quad  + \\alpha_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\alpha_5 \\texttt{Fram}\\times\\texttt{Prev}\n\\end{align}\n\\tag{1}\\]\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{ME}) &= \\beta_0 + \\beta_1 \\texttt{Fram} + \\beta_2\\texttt{Prom} + \\beta_3 \\texttt{Prev}\\\\&\\quad  + \\beta_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\beta_5 \\texttt{Fram}\\times\\texttt{Prev}\n\\end{align}\n\\tag{2}\\]\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{MF}) &= \\alpha_0 + \\alpha_1 \\texttt{Fram} + \\alpha_2\\texttt{Prom} + \\alpha_3 \\texttt{Prev}\\\\&\\quad  + \\alpha_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\alpha_5 \\texttt{Fram}\\times\\texttt{Prev}\n\\end{align}\n\\tag{3}\\]\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{Open}) &= \\gamma_0 + \\gamma_1 \\texttt{Fram} + \\gamma_2\\texttt{Prom} + \\gamma_3 \\texttt{Prev}\\\\&\\quad  + \\gamma_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\gamma_5 \\texttt{Fram}\\times\\texttt{Prev} \\\\& +\\gamma_6 \\texttt{PF} + \\gamma_7\\texttt{ME} + \\gamma_8 \\texttt{MF} +  \\gamma_9\\texttt{CO} \\\\&\\quad+ \\gamma_{10} \\texttt{ME} \\times \\texttt{CO} +\n+ \\gamma_{11} \\texttt{PF} \\times \\texttt{CO} +\n+ \\gamma_{12} \\texttt{MF} \\times \\texttt{CO}\n\\end{align}\n\\tag{4}\\]\nyielding a total of 31 coefficients for \\(n=198\\) observations.\n\n\nCode\ndata(RH19_S1, package = \"hecedsm\")\nset.seed(80667)\njoint_reg &lt;- function(data, indices = 1:nrow(data)){\n  mod1 &lt;- lm(fairness ~ \n               regfocus * (promem + prevem), \n             data = data[indices,])\n  mod2 &lt;- lm(engagement ~ \n               regfocus * (promem + prevem), \n             data = data[indices,])\n  mod3 &lt;- lm(fluency ~ \n               regfocus * (promem + prevem), \n             data = data[indices,])\n  resp &lt;- lm(dopenness ~\n               regfocus * (promem + prevem) +\n               (fairness + fluency + \n       engagement) * change,\n             data = data[indices,])\n  coefs &lt;- c(coef(mod1), \n             coef(mod2), \n             coef(mod3), \n             coef(resp))\n  return(coefs)\n}\nnpboot &lt;- boot::boot(\n  data = RH19_S1, \n  statistic = joint_reg,\n  R = 9999, # number of bootstrap replicates\n  sim = \"ordinary\")\nresults &lt;- rbind(\n  npboot$t0, \n  apply(npboot$t, 2, \n        quantile, c(0.025, 0.975)))\n\n\n\n\n\nCode\ntestImplications &lt;- function( covariance.matrix, sample.size ){\n    library(ggm)\n    tst &lt;- function(i){ pcor.test( pcor(i,covariance.matrix), length(i)-2, sample.size )$pvalue }\ntos &lt;- function(i){ paste(i,collapse=\" \") }\nimplications &lt;- list(c(\"M1\",\"M2\",\"V1\",\"V2\",\"X\"),\n        c(\"M1\",\"M3\",\"V1\",\"V2\",\"X\"),\n        c(\"M1\",\"W\"),\n        c(\"M2\",\"M3\",\"V1\",\"V2\",\"X\"),\n        c(\"M2\",\"W\"),\n        c(\"M3\",\"W\"),\n        c(\"V1\",\"V2\"),\n        c(\"V1\",\"W\"),\n        c(\"V1\",\"X\"),\n        c(\"V2\",\"W\"),\n        c(\"V2\",\"X\"),\n        c(\"W\",\"X\"))\n    data.frame( implication=unlist(lapply(implications,tos)),\n        pvalue=unlist( lapply( implications, tst ) ) )\n\n}\n\n\n\n\n\n\n\n\nReferences\n\nHayes, A. F. (2022). Introduction to mediation, moderation, and conditional process analysis: A regression-based approach (3rd ed.). Guilford Press.\n\n\nRoczniewska, M., & Higgins, E. T. (2019). Messaging organizational change: How regulatory fit relates to openness to change through fairness perceptions. Journal of Experimental Social Psychology, 85, 103882. https://doi.org/10.1016/j.jesp.2019.103882"
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Content (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by noon on the day before class.\n\n\nIntroduction\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nAugust 30\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\nWeekly check-in 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\nProblem set 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 30\n\n\nInstalling R and Rstudio\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nSeptember 6\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 6\n\n\nExample 1 – Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\nWeekly check-in 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\nProblem set 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFactorial designs\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nSeptember 13\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 13\n\n\nExample 2 – One-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\nWeekly check-in 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\nProblem set 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 4\n\n\n\n\nSeptember 20\n\n\nContrasts and multiple testing\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\nWeekly check-in 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\nProblem set 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 5\n\n\n\n\nSeptember 27\n\n\nTwo-way factorial designs\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 27\n\n\nExample 3 – Two-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\nWeekly check-in 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\nProblem set 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 6\n\n\n\n\nOctober 4\n\n\nRepeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 4\n\n\nExample 4 – Repeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 10\n\n\nWeekly check-in 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 10\n\n\nProblem set 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 7\n\n\n\n\nOctober 11\n\n\nMultiway ANOVA and MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 11\n\n\nExample 5 – Three-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 11\n\n\nExample 6 – MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 17\n\n\nWeekly check-in 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 17\n\n\nProblem set 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced topics\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nBreak\n\n\n\n\nOctober 17–October 23\n\n\nFall break\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 8\n\n\n\n\nOctober 25\n\n\nAnalysis of covariance\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 25\n\n\nExample 7 – Analysis of covariance  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\nWeekly check-in 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\nProblem set 8\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 9\n\n\n\n\nNovember 1\n\n\nEffect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 1\n\n\nExample 8 – Effect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\nWeekly check-in 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\nProblem set 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 10\n\n\n\n\nNovember 8\n\n\nMixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 8\n\n\nExample 9 – Linear mixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\nWeekly check-in 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\nProblem set 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCausal inference\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 11\n\n\n\n\nNovember 15\n\n\nIntro to causal inference\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\nWeekly check-in 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 12\n\n\n\n\nNovember 22\n\n\nLinear mediation and moderation\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 22\n\n\nExample 10 – Linear causal mediation\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 28\n\n\nWeekly check-in 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 28\n\n\nProblem set 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategorical data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 13\n\n\n\n\nNovember 29\n\n\nCategorical data, nonparametric test and final review\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 29\n\n\nExample 11 – Nonparametric tests\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 29\n\n\nExample 12 – Count data\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\nWeekly check-in 13  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\nProblem set 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFinal\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nEnd of term\n\n\n\n\nDecember 6\n\n\nFinal exam  (submit by 18:30:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\nPaper review  (submit by 23:55:00)"
+  },
+  {
+    "objectID": "evaluations/10-problem-set.html",
+    "href": "evaluations/10-problem-set.html",
+    "title": "Problem set 10",
+    "section": "",
+    "text": "Complete this task individually or in teams of up to three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nRead the chocolate example from Meier (2022) and some of the examples from the course notes.\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. Data MULTI21_D2 from package hecedsm contains the data, including unique participant id, lab, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the SPSS database via this link.\n\nUsing Oehlert (2000) approach\n\nIdentify sources of variation\nIdentify whether factors are crossed or nested\nDetermine whether factors should be fixed or random\nFigure out which interactions can exist and whether they can be fitted.\n\nFit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance:\n\nare there difference between recall task?\nis the increase between 5 and 7 years the same as from 7 to 10?\n\nReport estimated marginal means across age groups (separately for each timing if there is an interaction), with standard errors.\nProduce an interaction plot for mean memory span to mimic Figure 4 of Elliot.\nReport the lab-specific variability and comment on regional differences, if any.\nCompute the correlation of measurements for different individuals in a given lab\n\n\n\n\n\n\nReferences\n\nElliott, E. M., Morey, C. C., AuBuchon, A. M., Cowan, N., Jarrold, C., Adams, E. J., Attwood, M., Bayram, B., Beeler-Duden, S., Blakstvedt, T. Y., Büttner, G., Castelain, T., Cave, S., Crepaldi, D., Fredriksen, E., Glass, B. A., Graves, A. J., Guitard, D., Hoehl, S., … Voracek, M. (2021). Multilab direct replication of Flavell, Beach, and Chinsky (1966): Spontaneous verbal rehearsal in a memory task as a function of age. Advances in Methods and Practices in Psychological Science, 4(2), 1–20. https://doi.org/10.1177/25152459211018187\n\n\nFlavell, J. H., Beach, D. R., & Chinsky, J. M. (1966). Spontaneous verbal rehearsal in a memory task as a function of age. Child Development, 37(2), 283–299. http://proxy2.hec.ca/login?url=https://search.ebscohost.com/login.aspx?direct=true\\&db=pbh\\&AN=10398223\\&lang=fr\\&site=ehost-live\n\n\nMeier, L. (2022). ANOVA and mixed models: A short introduction using R (Chapman & Hall/CRC, Eds.). https://doi.org/10.1201/9781003146216\n\n\nOehlert, G. (2000). A first course in design and analysis of experiments. W. H. Freeman. http://users.stat.umn.edu/~gary/Book.html",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 10"
     ]
   },
   {
@@ -1410,7 +1376,19 @@
     "href": "evaluations/06-problem-set.html",
     "title": "Problem set 6",
     "section": "",
-    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nWe consider Study 2 of Bobak et al. (2019), who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). Bobak et al. (2019) report that\n\nParticipants saw all 96 trials in a random order and the colour condition was counterbalanced for each set.\n\nPerform a repeated measure one-way ANOVA with color as within-factor and pcorr as response with the BMH19_S2 data, which can be found in the R package hecedsm. You can also download the SPSS database via this link.\n\nExplain in your own words the purpose of randomization and counterbalancing in a repeated measure experiment.\nIs there evidence against the hypothesis of sphericity? Report Mauchly’s statistic and the conclusion of the hypothesis test.\nAre there differences overall between color match (monochrome, mixed or colored)? Report the \\(F\\)-statistic, the degrees of freedom and the \\(p\\)-value and a measure of effect size (e.g., \\(\\widehat{R}^2_p\\)). If the sphericity assumption isn’t met, use the Greenhouse–Geisser adjustment for the degrees of freedom of the tests and report the estimated correction factor \\(\\widehat{\\epsilon}\\).\nCompute pairwise differences applying Tukey’s honest significance difference multiplicity correction. Report the pairwise differences in terms of percentage of correct values (differences in pcorr), the \\(t\\)-test statistics and the associated \\(p\\)-values. \n\n\n\n\n\nReferences\n\nBobak, A. K., Mileva, V. R., & Hancock, P. J. B. (2019). A grey area: How does image hue affect unfamiliar face matching? Cognitive Research: Principles and Implications, 4(1), 27. https://doi.org/10.1186/s41235-019-0174-3",
+    "text": "Complete this task in teams of two or three students.\nSubmission information: please submit on ZoneCours\nWe consider Experiment 2 of Bobak et al. (2019), who collected responses for 52 participants and computed the average of the correctly identified figures as response out of 96 trials (32 per condition). Bobak et al. (2019) report that\nThe result we want to reproduce is the following:\nPerform a repeated measure one-way ANOVA with color as within-factor and either accuracy or pcorr as response with the BMH19_E2 data, which can be found in the R package hecedsm. You can also download the SPSS database via this link.",
+    "crumbs": [
+      "Evaluations",
+      "Problem sets",
+      "Problem set 6"
+    ]
+  },
+  {
+    "objectID": "evaluations/06-problem-set.html#footnotes",
+    "href": "evaluations/06-problem-set.html#footnotes",
+    "title": "Problem set 6",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nUse anova(..., correction = \"none\") for afex output in R to get the ANOVA table without correction, as the authors reported.↩︎\nNote 2: only the \\(p\\)-values are reported, and the estimated marginal means in Table 2 of the paper. The \\(d\\) values quoted in the article (with confidence intervals) are Cohen’s \\(d\\), which we will cover later.↩︎",
     "crumbs": [
       "Evaluations",
       "Problem sets",
@@ -1504,557 +1482,615 @@
     "text": "Experimental Designs and Statistical Methods\n        \n        \n            Basic concepts for data collection planning; appropriate statistical analyses of these data and interpretation of results. Advantages and disadvantages of the various experimental designs.\n        \n        \n            MATH 80667A, Fall 2024HEC Montréal\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   4.850, Côte-Sainte-Catherine\n   leo.belzile@hec.ca\n\n\n\nCourse details\n\n   Fall 2024\n   Friday\n   8:30-11:30\n   C-Ste-Cath, Caracas\n\n\n\nContacting me\nPlease us Piazza for any course-related question. For other queries, I am best reached by email."
   },
   {
-    "objectID": "evaluations/10-problem-set.html",
-    "href": "evaluations/10-problem-set.html",
-    "title": "Problem set 10",
+    "objectID": "example/SPSS.html",
+    "href": "example/SPSS.html",
+    "title": "Programming with SPSS",
     "section": "",
-    "text": "Complete this task individually or in teams of up to three students.\nSubmission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nRead the chocolate example from Meier (2022) and some of the examples from the course notes.\nElliott et al. (2021) attempt to replicate a study of Flavell et al. (1966) and study unprompted verbalization by children aged 5 to 10 in an experiment. Data MULTI21_D2 from package hecedsm contains the data, including unique participant id, lab, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the SPSS database via this link.\n\nUsing Oehlert (2000) approach\n\nIdentify sources of variation\nIdentify whether factors are crossed or nested\nDetermine whether factors should be fixed or random\nFigure out which interactions can exist and whether they can be fitted.\n\nFit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance:\n\nare there difference between recall task?\nis the increase between 5 and 7 years the same as from 7 to 10?\n\nReport estimated marginal means across age groups (separately for each timing if there is an interaction), with standard errors.\nProduce an interaction plot for mean memory span to mimic Figure 4 of Elliot.\nReport the lab-specific variability and comment on regional differences, if any.\nCompute the correlation of measurements for different individuals in a given lab\n\n\n\n\n\n\nReferences\n\nElliott, E. M., Morey, C. C., AuBuchon, A. M., Cowan, N., Jarrold, C., Adams, E. J., Attwood, M., Bayram, B., Beeler-Duden, S., Blakstvedt, T. Y., Büttner, G., Castelain, T., Cave, S., Crepaldi, D., Fredriksen, E., Glass, B. A., Graves, A. J., Guitard, D., Hoehl, S., … Voracek, M. (2021). Multilab direct replication of Flavell, Beach, and Chinsky (1966): Spontaneous verbal rehearsal in a memory task as a function of age. Advances in Methods and Practices in Psychological Science, 4(2), 1–20. https://doi.org/10.1177/25152459211018187\n\n\nFlavell, J. H., Beach, D. R., & Chinsky, J. M. (1966). Spontaneous verbal rehearsal in a memory task as a function of age. Child Development, 37(2), 283–299. http://proxy2.hec.ca/login?url=https://search.ebscohost.com/login.aspx?direct=true\\&db=pbh\\&AN=10398223\\&lang=fr\\&site=ehost-live\n\n\nMeier, L. (2022). ANOVA and mixed models: A short introduction using R (Chapman & Hall/CRC, Eds.). https://doi.org/10.1201/9781003146216\n\n\nOehlert, G. (2000). A first course in design and analysis of experiments. W. H. Freeman. http://users.stat.umn.edu/~gary/Book.html",
+    "text": "The databases for SPSS can be downloaded through this link.\n\nVideos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nLoading data and two-sample t-test\nPairwise contrasts\nOne-way ANOVA\nOne-way ANOVA (website example)\nLogical filters\nContrasts and post-hoc comparisons\nCreating categorical variables with if-else statements\nTwo-way ANOVA\nTwo-way ANOVA (website example)\nThree-way ANOVA (website example)\nANCOVA (website example)\nRepeated measures\nRepeated measures (within-between design)\nMANOVA\nRepeated measures using linear mixed model (Syntax)\nRepeated measures using linear mixed model (Menus)\nIncomplete mixed design\nNested random effects\nLinear mediation\n\nYou can also watch the playlist (and skip around to different sections) here:\n\n\n\n\n\n\nCode\n\nOne-way analysis of variance\nTwo-way analysis of variance\nThree-way analysis of variance\nAnalysis of covariance\nRepeated measures\nMANOVA\nRepeated measures using mixed models\nMixed models\nLinear mediation",
+    "crumbs": [
+      "Examples",
+      "Programming",
+      "SPSS"
+    ]
+  },
+  {
+    "objectID": "evaluations/03-problem-set.html",
+    "href": "evaluations/03-problem-set.html",
+    "title": "Problem set 3",
+    "section": "",
+    "text": "Submission information: please submit on ZoneCours\n\na PDF report\nyour code\n\nfollowing the naming convention PS3-studentid.extension where studentid is replaced with your student ID and extension is the file extension (e.g., .pdf, .R, .Rmd, .sps)\nInstructions: We consider data collected for Study 3 of Grossmann & Kross (2014) (click the links to download the paper and the Supplementary material). You can access these data directly from R from the hecedsm package or download the SPSS data.\nIf you work with R, check out this helper code\nHave a quick look at the paper and fit the one way analysis of variance model for the consideration of other’s perspective (persp) scores as a function of experimental condition, restricting attention to the subsample consisting of young adults (20 to 40 years) (age == \"young\").\n\nReport the \\(F\\)-test statistic, the null distribution and the \\(p\\)-value.\nProvide a conclusion in the context of the study.\nThere are missing values (see code output below). One thing to check normally is whether the lack of response is due to the treatment (for example, tasks that are more difficult or longer lead to higher dropout rate). Using the code provided below, inspect the pattern. Do you think there is a cause for concern in the present context?\n\nWe next look at model assumptions\n\nIs the independence assumption plausible in the context?\nHow many observations are there in each group (excluding missing values)? Is the number sufficient to reliably estimate the sample mean of each experimental condition and forego normality checks?\nProduce a normal quantile-quantile plot and comment on the distribution of the residuals (check out this response on CrossValidated first).\nCheck the equality of variance assumption using a suitable test statistic and report the results.\nUse Welch’s one-way analysis of variance model (oneway.test() in R) and compare the output and the conclusion with that of the usual \\(F\\)-test.\n\nHints and R snippets\nTo subset the data in a model, you can use the following commands:\n\ndata(GK14_S3, package = \"hecedsm\")\nmodel &lt;- aov(persp ~ condition, data = GK14_S3, \n             subset = (age == \"young\")) # select specific subset\n\nThe following code filters out missing values for persp for young adults and shows the counts for each condition:\n\nGK14_S3 |&gt;\n  dplyr::filter(age == \"young\") |&gt; # select only young adults (20-40 years old)\n  dplyr::group_by(condition) |&gt;  \n  dplyr::summarize(count = sum(!is.na(persp)), # count of non-missing observations\n                   nmiss = sum(is.na(persp)))  # count of missing values\n\n# A tibble: 4 × 3\n  condition       count nmiss\n  &lt;fct&gt;           &lt;int&gt; &lt;int&gt;\n1 self immersed      69     3\n2 self distanced     62     3\n3 other immersed     63     3\n4 other distanced    62     2\n\n\nand finally the following code chunk creates box and whiskers plots and overlays the (jittered) data.\n\nlibrary(ggplot2) # grammar of graphics\nggplot(data = GK14_S3 |&gt; dplyr::filter(age == \"young\"),\n       mapping = aes(x = condition,\n                     y = persp,\n                     color = condition)) +\n  geom_boxplot() +\n  geom_jitter()\n\nWarning: Removed 11 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\nWarning: Removed 11 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nGrossmann, I., & Kross, E. (2014). Exploring Solomon’s paradox: Self-distancing eliminates the self-other asymmetry in wise reasoning about close relationships in younger and older adults. Psychological Science, 25(8), 1571–1580. https://doi.org/10.1177/0956797614535400",
     "crumbs": [
       "Evaluations",
       "Problem sets",
-      "Problem set 10"
+      "Problem set 3"
     ]
   },
   {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Schedule",
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "Introduction",
     "section": "",
-    "text": "Content (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nExample (): This page contains fully annotated R code and other supplementary information that you can use as a reference for your evaluations. This is only a reference page—you don’t have to necessarily do anything here. Some sections also contain videos of me live coding the examples so you can see what it looks like to work in real time. This page will be very helpful as you work on your evaluations.\nEvaluations (): This page contains the instructions for each evaluation. Weekly check-ins and problem sets are due by noon on the day before class.\n\n\nIntroduction\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 1\n\n\n\n\nAugust 30\n\n\nIntroduction to experimental designs and motivation\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\nWeekly check-in 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\nProblem set 1  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 30\n\n\nInstalling R and Rstudio\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 2\n\n\n\n\nSeptember 6\n\n\nReview of key statistics concepts\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 6\n\n\nExample 1 – Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\nWeekly check-in 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\nProblem set 2  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFactorial designs\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 3\n\n\n\n\nSeptember 13\n\n\nCompletely randomized designs with one factor\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 13\n\n\nExample 2 – One-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\nWeekly check-in 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\nProblem set 3  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 4\n\n\n\n\nSeptember 20\n\n\nContrasts and multiple testing\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\nWeekly check-in 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\nProblem set 4  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 5\n\n\n\n\nSeptember 27\n\n\nTwo-way factorial designs\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 27\n\n\nExample 3 – Two-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\nWeekly check-in 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\nProblem set 5  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 6\n\n\n\n\nOctober 4\n\n\nRepeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 4\n\n\nExample 4 – Repeated measures\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 10\n\n\nWeekly check-in 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 10\n\n\nProblem set 6  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 7\n\n\n\n\nOctober 11\n\n\nMultiway ANOVA and MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 11\n\n\nExample 5 – Three-way ANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 11\n\n\nExample 6 – MANOVA\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 17\n\n\nWeekly check-in 7  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 17\n\n\nProblem set 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced topics\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nBreak\n\n\n\n\nOctober 17–October 23\n\n\nFall break\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 8\n\n\n\n\nOctober 25\n\n\nAnalysis of covariance\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 25\n\n\nExample 7 – Analysis of covariance  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\nWeekly check-in 8  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\nProblem set 8\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 9\n\n\n\n\nNovember 1\n\n\nEffect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 1\n\n\nExample 8 – Effect size and power\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\nWeekly check-in 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\nProblem set 9  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 10\n\n\n\n\nNovember 8\n\n\nMixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 8\n\n\nExample 9 – Linear mixed models\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\nWeekly check-in 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\nProblem set 10  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCausal inference\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 11\n\n\n\n\nNovember 15\n\n\nIntro to causal inference\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\nWeekly check-in 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nSession 12\n\n\n\n\nNovember 22\n\n\nLinear mediation and moderation\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 22\n\n\nExample 10 – Linear causal mediation\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 28\n\n\nWeekly check-in 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 28\n\n\nProblem set 11  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategorical data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nSession 13\n\n\n\n\nNovember 29\n\n\nCategorical data, nonparametric test and final review\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 29\n\n\nExample 11 – Nonparametric tests\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 29\n\n\nExample 12 – Count data\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\nWeekly check-in 13  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\nProblem set 12  (submit by 12:00:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFinal\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nExample\n\n\nEvaluations\n\n\n\n\n\n\nEnd of term\n\n\n\n\nDecember 6\n\n\nFinal exam  (submit by 18:30:00)\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\nPaper review  (submit by 23:55:00)"
-  },
-  {
-    "objectID": "example/moderatedmediation.html",
-    "href": "example/moderatedmediation.html",
-    "title": "Moderated mediation",
-    "section": "",
-    "text": "This example from Roczniewska & Higgins (2019) is an instance of moderated mediation model with two postulated mediators. While such models can be fitted with the PROCESS macros (Hayes, 2022), we illustrate below the postulated causal diagram, the nonparametric bootstrap. We pay particular attention to verification of the linear model assumptions.\nThe context of the research is a natural experiment (or quasi-experiment): the authors study changes in behaviour due to modifications in the schooling system.\nThe statistical model in Roczniewska & Higgins (2019) can be implicitly deduced from Table 2: the manipulated variable is the message framing and there are three postulated mediators (message fluency, message engagement, process fairness), the latter of which interacts or moderate with the change in outcome, and two moderators assumed to impact both mediators through linear interactions, termed promotion focus and prevention focus.\nThe mean response from the linear models are\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{PF}) &= \\alpha_0 + \\alpha_1 \\texttt{Fram} + \\alpha_2\\texttt{Prom} + \\alpha_3 \\texttt{Prev}\\\\&\\quad  + \\alpha_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\alpha_5 \\texttt{Fram}\\times\\texttt{Prev}\n\\end{align}\n\\tag{1}\\]\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{ME}) &= \\beta_0 + \\beta_1 \\texttt{Fram} + \\beta_2\\texttt{Prom} + \\beta_3 \\texttt{Prev}\\\\&\\quad  + \\beta_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\beta_5 \\texttt{Fram}\\times\\texttt{Prev}\n\\end{align}\n\\tag{2}\\]\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{MF}) &= \\alpha_0 + \\alpha_1 \\texttt{Fram} + \\alpha_2\\texttt{Prom} + \\alpha_3 \\texttt{Prev}\\\\&\\quad  + \\alpha_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\alpha_5 \\texttt{Fram}\\times\\texttt{Prev}\n\\end{align}\n\\tag{3}\\]\n\\[\n\\begin{align}\n\\mathsf{E}(\\texttt{Open}) &= \\gamma_0 + \\gamma_1 \\texttt{Fram} + \\gamma_2\\texttt{Prom} + \\gamma_3 \\texttt{Prev}\\\\&\\quad  + \\gamma_4 \\texttt{Fram}\\times\\texttt{Prom} +  \\gamma_5 \\texttt{Fram}\\times\\texttt{Prev} \\\\& +\\gamma_6 \\texttt{PF} + \\gamma_7\\texttt{ME} + \\gamma_8 \\texttt{MF} +  \\gamma_9\\texttt{CO} \\\\&\\quad+ \\gamma_{10} \\texttt{ME} \\times \\texttt{CO} +\n+ \\gamma_{11} \\texttt{PF} \\times \\texttt{CO} +\n+ \\gamma_{12} \\texttt{MF} \\times \\texttt{CO}\n\\end{align}\n\\tag{4}\\]\nyielding a total of 31 coefficients for \\(n=198\\) observations.\n\n\nCode\ndata(RH19_S1, package = \"hecedsm\")\nset.seed(80667)\njoint_reg &lt;- function(data, indices = 1:nrow(data)){\n  mod1 &lt;- lm(fairness ~ \n               regfocus * (promem + prevem), \n             data = data[indices,])\n  mod2 &lt;- lm(engagement ~ \n               regfocus * (promem + prevem), \n             data = data[indices,])\n  mod3 &lt;- lm(fluency ~ \n               regfocus * (promem + prevem), \n             data = data[indices,])\n  resp &lt;- lm(dopenness ~\n               regfocus * (promem + prevem) +\n               (fairness + fluency + \n       engagement) * change,\n             data = data[indices,])\n  coefs &lt;- c(coef(mod1), \n             coef(mod2), \n             coef(mod3), \n             coef(resp))\n  return(coefs)\n}\nnpboot &lt;- boot::boot(\n  data = RH19_S1, \n  statistic = joint_reg,\n  R = 9999, # number of bootstrap replicates\n  sim = \"ordinary\")\nresults &lt;- rbind(\n  npboot$t0, \n  apply(npboot$t, 2, \n        quantile, c(0.025, 0.975)))\n\n\n\n\n\nCode\ntestImplications &lt;- function( covariance.matrix, sample.size ){\n    library(ggm)\n    tst &lt;- function(i){ pcor.test( pcor(i,covariance.matrix), length(i)-2, sample.size )$pvalue }\ntos &lt;- function(i){ paste(i,collapse=\" \") }\nimplications &lt;- list(c(\"M1\",\"M2\",\"V1\",\"V2\",\"X\"),\n        c(\"M1\",\"M3\",\"V1\",\"V2\",\"X\"),\n        c(\"M1\",\"W\"),\n        c(\"M2\",\"M3\",\"V1\",\"V2\",\"X\"),\n        c(\"M2\",\"W\"),\n        c(\"M3\",\"W\"),\n        c(\"V1\",\"V2\"),\n        c(\"V1\",\"W\"),\n        c(\"V1\",\"X\"),\n        c(\"V2\",\"W\"),\n        c(\"V2\",\"X\"),\n        c(\"W\",\"X\"))\n    data.frame( implication=unlist(lapply(implications,tos)),\n        pvalue=unlist( lapply( implications, tst ) ) )\n\n}\n\n\n\n\n\n\n\n\nReferences\n\nHayes, A. F. (2022). Introduction to mediation, moderation, and conditional process analysis: A regression-based approach (3rd ed.). Guilford Press.\n\n\nRoczniewska, M., & Higgins, E. T. (2019). Messaging organizational change: How regulatory fit relates to openness to change through fairness perceptions. Journal of Experimental Social Psychology, 85, 103882. https://doi.org/10.1016/j.jesp.2019.103882"
-  },
-  {
-    "objectID": "content/02-content.html",
-    "href": "content/02-content.html",
-    "title": "Hypothesis testing",
-    "section": "",
-    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons",
+    "text": "Syllabus and learning objectives\nReview\n\nPopulation and samples\nObservational versus experimental studies\nSampling schemes: random, stratified and cluster sampling\n\nIntroduction to experimental designs\nTerminology of experimental design\nRequirements for a good experiment",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#content",
-    "href": "content/02-content.html#content",
-    "title": "Hypothesis testing",
+    "objectID": "content/01-content.html#content",
+    "href": "content/01-content.html#content",
+    "title": "Introduction",
     "section": "",
-    "text": "Sampling variability\nHypothesis testing\nPairwise comparisons",
+    "text": "Syllabus and learning objectives\nReview\n\nPopulation and samples\nObservational versus experimental studies\nSampling schemes: random, stratified and cluster sampling\n\nIntroduction to experimental designs\nTerminology of experimental design\nRequirements for a good experiment",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#learning-objectives",
-    "href": "content/02-content.html#learning-objectives",
-    "title": "Hypothesis testing",
+    "objectID": "content/01-content.html#learning-objectives",
+    "href": "content/01-content.html#learning-objectives",
+    "title": "Introduction",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the mechanics behind generic hypothesis tests\ninterpreting the output of generic tests\ncorrectly reporting the output of a testing procedure",
+    "text": "Learning objectives\n\nLearning the terminology associated to experiments.\nAssessing the generalizability of a study based on the consideration of the sample characteristics, sampling scheme and population.\nDistinguishing between observational and experimental studies.\nUnderstanding the rationale behind the requirements for good experimental studies.",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#readings",
-    "href": "content/02-content.html#readings",
-    "title": "Hypothesis testing",
+    "objectID": "content/01-content.html#preliminaries",
+    "href": "content/01-content.html#preliminaries",
+    "title": "Introduction",
+    "section": "Preliminaries",
+    "text": "Preliminaries\n\nFamiliarize yourself with the syllabus, content, examples, and evaluations pages for this class.\n Read Chapter 1 (Intro to Data) of OpenIntro Statistics and the accompanying  videos",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#readings",
+    "href": "content/01-content.html#readings",
+    "title": "Introduction",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 5 (Foundations for inference) of Matthew Crump’s course notes. These notes are non-technical, but do a good job at explaining the notion of sampling variability and chance. If you find them too basic, skip directly to the next item.\n Chapter 2 of the Course notes\n The permutation test by Jared Wilson",
+    "text": "Readings\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes. If you feel a section is redundant and overlaps with the latter, feel free to skim through the rest of the material.\n\n\n\n Chapter 1 of the Course notes\n Chapter 2 of Introduction to Modern Statistics\n\nFeel free to inform me in the weekly check-in of your take on these references.",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#complementary-readings",
-    "href": "content/02-content.html#complementary-readings",
-    "title": "Hypothesis testing",
+    "objectID": "content/01-content.html#complementary-readings",
+    "href": "content/01-content.html#complementary-readings",
+    "title": "Introduction",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 2 of Maxwell et al. (2017)\n Chapter 3 of Keppel & Wickens (2004).",
+    "text": "Complementary readings\n\n\n\n\n\n\nWarning\n\n\n\nComplementary readings are additional sources of information that are not required readings, but may be useful substitutes. Sometimes, they go beyond the scope of what we cover (in more details).\n\n\n\n Chapter 1 (Preliminaries) in Planning of experiments (Cox, 1958). Out of print, but addresses the basic concepts using a variety of examples (mostly from agricultural field trials), and particularly well written.\n Chapter 1 and Sections 2.1-2.2 in Design and Analysis of Experiments (Dean et al., 2017)",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#slides",
-    "href": "content/02-content.html#slides",
-    "title": "Hypothesis testing",
+    "objectID": "content/01-content.html#slides",
+    "href": "content/01-content.html#slides",
+    "title": "Introduction",
     "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#case-study",
-    "href": "content/02-content.html#case-study",
-    "title": "Hypothesis testing",
+    "objectID": "content/01-content.html#case-study",
+    "href": "content/01-content.html#case-study",
+    "title": "Introduction",
     "section": "Case study",
-    "text": "Case study\nWe will look at the way authors report the conclusion of their statistical tests with\n\nRosen & Jerdee (1974)\nBrucks & Levav (2022)\nLiu et al. (2023), Experiment 1",
+    "text": "Case study\nWe will discuss the summary of Abaluck et al. (2022) “The Impact of Mask Distribution and Promotion on Mask Uptake and COVID-19 in Bangladesh” (pdf) in class.\nDuring the activity, you will be asked to identify in teams the following:\n\nthe objective of the study\nthe target population (which findings generalize?)\nthe sampling scheme\nthe observational and experimental units\nthe treatments\nthe outcome variable(s)",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Hypothesis testing"
+      "1: Introduction"
     ]
   },
   {
-    "objectID": "content/02-content.html#code",
-    "href": "content/02-content.html#code",
-    "title": "Hypothesis testing",
-    "section": "Code",
-    "text": "Code\nThe following code reproduces the applications in the course slides and the case study\n\nR script\nSPSS scripts\nPython script for the case study",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "2: Hypothesis testing"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html",
-    "href": "content/04-content.html",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "Analysis of variance",
     "section": "",
-    "text": "Contrasts\nMultiple testing",
+    "text": "ANOVA and F-test statistic\nModel assumptions",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "3: One way ANOVA"
     ]
   },
   {
-    "objectID": "content/04-content.html#content",
-    "href": "content/04-content.html#content",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html#content",
+    "href": "content/03-content.html#content",
+    "title": "Analysis of variance",
     "section": "",
-    "text": "Contrasts\nMultiple testing",
+    "text": "ANOVA and F-test statistic\nModel assumptions",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "3: One way ANOVA"
     ]
   },
   {
-    "objectID": "content/04-content.html#learning-objectives",
-    "href": "content/04-content.html#learning-objectives",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html#learning-objectives",
+    "href": "content/03-content.html#learning-objectives",
+    "title": "Analysis of variance",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nspecifying and calculating custom contrasts in factorial designs\ndetermining the number of tests in a family that need to be corrected for\nunderstanding how to correct p-values to account for multiple testing\nlisting multiplicity testing methods suitable depending on context",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncarry-out a one-way analysis of variance test\ncheck model assumptions using hypothesis tests and graphics.",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "3: One way ANOVA"
     ]
   },
   {
-    "objectID": "content/04-content.html#readings",
-    "href": "content/04-content.html#readings",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html#readings",
+    "href": "content/03-content.html#readings",
+    "title": "Analysis of variance",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 4 of the course notes\n Chapter 3 of Meier (2022)\n One-way ANOVA example",
+    "text": "Readings\n\n Chapter 3 of the Course notes",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "3: One way ANOVA"
     ]
   },
   {
-    "objectID": "content/04-content.html#complementary-readings",
-    "href": "content/04-content.html#complementary-readings",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html#complementary-readings",
+    "href": "content/03-content.html#complementary-readings",
+    "title": "Analysis of variance",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 5 of Maxwell et al. (2017).\n Chapters 4 and 6 of Keppel & Wickens (2004).",
+    "text": "Complementary readings\n\n Chapter 3 of Maxwell et al. (2017) (up to page 113).\n Chapter 2 of Meier (2022)\n Chapter 3 and 7 of Keppel & Wickens (2004).",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "3: One way ANOVA"
     ]
   },
   {
-    "objectID": "content/04-content.html#slides",
-    "href": "content/04-content.html#slides",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html#slides",
+    "href": "content/03-content.html#slides",
+    "title": "Analysis of variance",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "3: One way ANOVA"
     ]
   },
   {
-    "objectID": "content/04-content.html#exercise",
-    "href": "content/04-content.html#exercise",
-    "title": "Contrasts and multiple testing",
+    "objectID": "content/03-content.html#code",
+    "href": "content/03-content.html#code",
+    "title": "Analysis of variance",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "3: One way ANOVA"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html",
+    "href": "content/05-content.html",
+    "title": "Factorial designs and interactions",
+    "section": "",
+    "text": "Between vs within-subject designs\nInteractions\nSimple, marginal and interaction contrasts",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#content",
+    "href": "content/05-content.html#content",
+    "title": "Factorial designs and interactions",
+    "section": "",
+    "text": "Between vs within-subject designs\nInteractions\nSimple, marginal and interaction contrasts",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#learning-objectives",
+    "href": "content/05-content.html#learning-objectives",
+    "title": "Factorial designs and interactions",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of factorial designs\ninterpreting an interaction plot and being aware of it’s limitation\ninterpreting model effects in sum-to-zero parametrization\nreporting results from a two-way analysis of variance\ndetermining whether or not simple or main effects are most suitable for comparisons",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#readings",
+    "href": "content/05-content.html#readings",
+    "title": "Factorial designs and interactions",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 4 of Meier (2022)\n Chapter 5 of the course notes",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#complementary-readings",
+    "href": "content/05-content.html#complementary-readings",
+    "title": "Factorial designs and interactions",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapter 7 of Maxwell et al. (2017).\n Chapters 10–13 of Keppel & Wickens (2004).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#slides",
+    "href": "content/05-content.html#slides",
+    "title": "Factorial designs and interactions",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#code",
+    "href": "content/05-content.html#code",
+    "title": "Factorial designs and interactions",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Factorial designs and interactions"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html",
+    "href": "content/07-content.html",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "",
+    "text": "ANOVA with two or more factors\nANOVA with both within-subject and between-subject factors\nMultivariate analysis of variance",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html#content",
+    "href": "content/07-content.html#content",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "",
+    "text": "ANOVA with two or more factors\nANOVA with both within-subject and between-subject factors\nMultivariate analysis of variance",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html#learning-objectives",
+    "href": "content/07-content.html#learning-objectives",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nanalyzing models with both within-subject and between-subject factors\nspecifying and calculating custom contrasts in multiway factorial designs\ncorrectly interpreting an analysis of variance table\ntesting model assumptions in multivariate model",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html#readings",
+    "href": "content/07-content.html#readings",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 7 of the course notes\n Chapter 8 of the course notes\n Three-way ANOVA example\n MANOVA example",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html#complementary-readings",
+    "href": "content/07-content.html#complementary-readings",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapters 8 and 14 of Maxwell et al. (2017).\n Chapters 20–23 of Maxwell et al. (2017).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html#slides",
+    "href": "content/07-content.html#slides",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/07-content.html#code",
+    "href": "content/07-content.html#code",
+    "title": "Multiway and multivariate factorial designs",
+    "section": "Code",
+    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Multiway and multivariate factorial designs"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
+    "title": "Effect sizes and power",
+    "section": "",
+    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#content",
+    "href": "content/09-content.html#content",
+    "title": "Effect sizes and power",
+    "section": "",
+    "text": "Measures of effect size\nPower calculations\nInterplay between sample size, effect and power",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#learning-objectives",
+    "href": "content/09-content.html#learning-objectives",
+    "title": "Effect sizes and power",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ncorrectly report effect size for common statistics in analysis of variance models\ndeduce the sample size necessary to replicate a study at a given power\nexplain the interplay between sample size, power and effect size.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#readings",
+    "href": "content/09-content.html#readings",
+    "title": "Effect sizes and power",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 10 of the course notes\n Chapter 11 of the course notes\n Effect size and power example\n Zhang & Yuan (2018), pages 143–148 of the web manual",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#complementary-readings",
+    "href": "content/09-content.html#complementary-readings",
+    "title": "Effect sizes and power",
+    "section": "Complementary readings",
+    "text": "Complementary readings\n\n Chapters 3 (section Power of the \\(F\\) Test) and 4 (section Measures of Effects) of Maxwell et al. (2017).\n Lakens (2013)\n Steiger (2004)\n Kelley & Preacher (2012)\nGelman & Carlin (2014)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#slides",
+    "href": "content/09-content.html#slides",
+    "title": "Effect sizes and power",
+    "section": "Slides",
+    "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#exercise",
+    "href": "content/09-content.html#exercise",
+    "title": "Effect sizes and power",
     "section": "Exercise",
-    "text": "Exercise\n\nCompute means and contrasts listed in the abstract of Baumann et al. (1992).",
+    "text": "Exercise\n\nPower calculations",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Contrasts and multiple testing"
+      "9: Effect sizes and power"
     ]
   },
   {
-    "objectID": "content/06-content.html",
-    "href": "content/06-content.html",
-    "title": "Repeated measures",
+    "objectID": "content/09-content.html#code",
+    "href": "content/09-content.html#code",
+    "title": "Effect sizes and power",
+    "section": "Code",
+    "text": "Code\n\nR script\nExercise solution",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Effect sizes and power"
+    ]
+  },
+  {
+    "objectID": "content/11-content.html",
+    "href": "content/11-content.html",
+    "title": "Introduction to causal inference",
     "section": "",
-    "text": "Unbalanced designs\nAnalysis of within-subject designs\nRepeated measures and sphericity",
+    "text": "Introduction to causal inference",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Repeated measures"
+      "11: Intro to causal inference"
     ]
   },
   {
-    "objectID": "content/06-content.html#content",
-    "href": "content/06-content.html#content",
-    "title": "Repeated measures",
+    "objectID": "content/11-content.html#content",
+    "href": "content/11-content.html#content",
+    "title": "Introduction to causal inference",
     "section": "",
-    "text": "Unbalanced designs\nAnalysis of within-subject designs\nRepeated measures and sphericity",
+    "text": "Introduction to causal inference",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Repeated measures"
+      "11: Intro to causal inference"
     ]
   },
   {
-    "objectID": "content/06-content.html#learning-objectives",
-    "href": "content/06-content.html#learning-objectives",
-    "title": "Repeated measures",
+    "objectID": "content/11-content.html#learning-objectives",
+    "href": "content/11-content.html#learning-objectives",
+    "title": "Introduction to causal inference",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nlisting the benefits of balanced designs\nadequately modelling repeated measures\ncorrectly interpreting tests of sphericity using software\nexplaining the benefits and disadvantages of repeated-measure designs",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nunderstanding the importance of listing potential confounders\ndetermining which variables to control for (confounders vs colliders)\ndrawing a directed acyclic graph describing the interrelation between variables\nexplaining the differences between experimental and observational studies for studying mediation",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Repeated measures"
+      "11: Intro to causal inference"
     ]
   },
   {
-    "objectID": "content/06-content.html#readings",
-    "href": "content/06-content.html#readings",
-    "title": "Repeated measures",
+    "objectID": "content/11-content.html#readings",
+    "href": "content/11-content.html#readings",
+    "title": "Introduction to causal inference",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 6 of the course notes\n Repeated measure example",
+    "text": "Readings\n\nChapter 2 of VanderWeele (2015)\nSection 13.1 of the course notes\n\nAndrew Heiss’ course notes on directed acyclic graphs (DAG) and types of association.\n\nCausal models (video and slides)\nPaths, doors, and adjustment (video and slides)\n\nThe structural equation modelling (SEM) approach to mediation\n\nPaper popularizing linear mediation (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\n\nThe causal inference approach\n\nPearl (2014)\nImai et al. (2010)",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Repeated measures"
+      "11: Intro to causal inference"
     ]
   },
   {
-    "objectID": "content/06-content.html#complementary-readings",
-    "href": "content/06-content.html#complementary-readings",
-    "title": "Repeated measures",
+    "objectID": "content/11-content.html#complementary-readings",
+    "href": "content/11-content.html#complementary-readings",
+    "title": "Introduction to causal inference",
     "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 5.2 of Price et al. (2017)\n Chapters 11–12 of Maxwell et al. (2017).\n Chapters 16–18 of Keppel & Wickens (2004).",
+    "text": "Complementary readings\n\nPearl et al. (2016), Chapter 3\nRohrer (2018)",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Repeated measures"
+      "11: Intro to causal inference"
     ]
   },
   {
-    "objectID": "content/06-content.html#videos",
-    "href": "content/06-content.html#videos",
-    "title": "Repeated measures",
-    "section": "Videos",
-    "text": "Videos",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "6: Repeated measures"
-    ]
-  },
-  {
-    "objectID": "content/06-content.html#slides",
-    "href": "content/06-content.html#slides",
-    "title": "Repeated measures",
+    "objectID": "content/11-content.html#slides",
+    "href": "content/11-content.html#slides",
+    "title": "Introduction to causal inference",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Repeated measures"
+      "11: Intro to causal inference"
     ]
   },
   {
-    "objectID": "content/06-content.html#code",
-    "href": "content/06-content.html#code",
-    "title": "Repeated measures",
-    "section": "Code",
-    "text": "Code\n\nR script",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "6: Repeated measures"
-    ]
-  },
-  {
-    "objectID": "content/08-content.html",
-    "href": "content/08-content.html",
-    "title": "Analysis of covariance and moderation",
+    "objectID": "content/13-content.html",
+    "href": "content/13-content.html",
+    "title": "Nonparametric tests and count data",
     "section": "",
-    "text": "Analysis of covariance and linear regression models\nModeration analysis",
+    "text": "Models and tests for categorical and count data\nNonparametric tests",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance and moderation"
+      "13: Nonparametric tests and count data"
     ]
   },
   {
-    "objectID": "content/08-content.html#content",
-    "href": "content/08-content.html#content",
-    "title": "Analysis of covariance and moderation",
+    "objectID": "content/13-content.html#content",
+    "href": "content/13-content.html#content",
+    "title": "Nonparametric tests and count data",
     "section": "",
-    "text": "Analysis of covariance and linear regression models\nModeration analysis",
+    "text": "Models and tests for categorical and count data\nNonparametric tests",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance and moderation"
+      "13: Nonparametric tests and count data"
     ]
   },
   {
-    "objectID": "content/08-content.html#learning-objectives",
-    "href": "content/08-content.html#learning-objectives",
-    "title": "Analysis of covariance and moderation",
+    "objectID": "content/13-content.html#learning-objectives",
+    "href": "content/13-content.html#learning-objectives",
+    "title": "Nonparametric tests and count data",
     "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nexplain the benefits ANCOVA over completely randomized designs\nusing control covariates\ntesting equality of slopes\ntesting for moderating variables (interactions)",
+    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nUnderstanding the benefits and drawback of rank-based tests.\nPerforming tests for count data and correctly report their output.",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance and moderation"
+      "13: Nonparametric tests and count data"
     ]
   },
   {
-    "objectID": "content/08-content.html#readings",
-    "href": "content/08-content.html#readings",
-    "title": "Analysis of covariance and moderation",
+    "objectID": "content/13-content.html#readings",
+    "href": "content/13-content.html#readings",
+    "title": "Nonparametric tests and count data",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 9 of the course notes",
+    "text": "Readings\n\nChapter 12 Categorical data analysis of Navarro (2019)\nChapters 14 and 15 of the course notes",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance and moderation"
+      "13: Nonparametric tests and count data"
     ]
   },
   {
-    "objectID": "content/08-content.html#complementary-readings",
-    "href": "content/08-content.html#complementary-readings",
-    "title": "Analysis of covariance and moderation",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 6 of Maxwell et al. (2017).\n Chapter 14–15 of Keppel & Wickens (2004)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "8: Analysis of covariance and moderation"
-    ]
-  },
-  {
-    "objectID": "content/08-content.html#slides",
-    "href": "content/08-content.html#slides",
-    "title": "Analysis of covariance and moderation",
+    "objectID": "content/13-content.html#slides",
+    "href": "content/13-content.html#slides",
+    "title": "Nonparametric tests and count data",
     "section": "Slides",
     "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Analysis of covariance and moderation"
+      "13: Nonparametric tests and count data"
     ]
   },
   {
-    "objectID": "content/08-content.html#videos",
-    "href": "content/08-content.html#videos",
-    "title": "Analysis of covariance and moderation",
-    "section": "Videos",
-    "text": "Videos",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "8: Analysis of covariance and moderation"
-    ]
-  },
-  {
-    "objectID": "content/08-content.html#code",
-    "href": "content/08-content.html#code",
-    "title": "Analysis of covariance and moderation",
-    "section": "Code",
-    "text": "Code\n\nR script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "8: Analysis of covariance and moderation"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html",
-    "href": "content/10-content.html",
-    "title": "Intro to mixed models",
-    "section": "",
-    "text": "Fixed vs random effects\nBlocking factors\nIntroduction to linear mixed models",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#content",
-    "href": "content/10-content.html#content",
-    "title": "Intro to mixed models",
-    "section": "",
-    "text": "Fixed vs random effects\nBlocking factors\nIntroduction to linear mixed models",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#learning-objectives",
-    "href": "content/10-content.html#learning-objectives",
-    "title": "Intro to mixed models",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\ndetermining the structure of an experimental design with random and fixed effects\ncorrectly determining whether effects are crossed or nested\ncorrectly analyzing models with blocking factors\nsetting up a linear mixed model",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#readings",
-    "href": "content/10-content.html#readings",
-    "title": "Intro to mixed models",
-    "section": "Readings",
-    "text": "Readings\n\n Chapter 5 (Complete Block Designs) of Meier (2022) (5.1-5.2)\nChapter 6 Random and Mixed-Effects Models of Meier (2022)\n Chapter 12 of the course notes",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#complementary-readings",
-    "href": "content/10-content.html#complementary-readings",
-    "title": "Intro to mixed models",
-    "section": "Complementary readings",
-    "text": "Complementary readings\n\n Chapter 4 of Cox (1958).\n Chapters 10 and 15 of Maxwell et al. (2017).",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#slides",
-    "href": "content/10-content.html#slides",
-    "title": "Intro to mixed models",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/10-content.html#code",
-    "href": "content/10-content.html#code",
-    "title": "Intro to mixed models",
+    "objectID": "content/13-content.html#code",
+    "href": "content/13-content.html#code",
+    "title": "Nonparametric tests and count data",
     "section": "Code",
     "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
     "crumbs": [
       "Content",
       "Course content",
-      "10: Intro to mixed models"
-    ]
-  },
-  {
-    "objectID": "content/12-content.html",
-    "href": "content/12-content.html",
-    "title": "Linear mediation",
-    "section": "",
-    "text": "Linear mediation model",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "12: Linear mediation"
-    ]
-  },
-  {
-    "objectID": "content/12-content.html#content",
-    "href": "content/12-content.html#content",
-    "title": "Linear mediation",
-    "section": "",
-    "text": "Linear mediation model",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "12: Linear mediation"
-    ]
-  },
-  {
-    "objectID": "content/12-content.html#learning-objectives",
-    "href": "content/12-content.html#learning-objectives",
-    "title": "Linear mediation",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nAt the end of the session, students should be capable of\n\nfitting a linear mediation model\ndiscussing limitations of the linear mediation model",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "12: Linear mediation"
-    ]
-  },
-  {
-    "objectID": "content/12-content.html#readings",
-    "href": "content/12-content.html#readings",
-    "title": "Linear mediation",
-    "section": "Readings",
-    "text": "Readings\n\nChapter 13 of the course notes\nChapter 11 of VanderWeele (2015)\nLinear mediation model (Baron & Kenny, 1986)\nLimitations of the linear mediation model approach (Bullock et al., 2010)\nModel assumptions (Imai et al., 2010; Pearl, 2014)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "12: Linear mediation"
-    ]
-  },
-  {
-    "objectID": "content/12-content.html#slides",
-    "href": "content/12-content.html#slides",
-    "title": "Linear mediation",
-    "section": "Slides",
-    "text": "Slides\n\n View all slides in new window  Download PDF of all slides",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "12: Linear mediation"
-    ]
-  },
-  {
-    "objectID": "content/12-content.html#code",
-    "href": "content/12-content.html#code",
-    "title": "Linear mediation",
-    "section": "Code",
-    "text": "Code\n\nR script\nSPSS script\n\n\n\n\n\n\n\nTip\n\n\n\nFun fact: If you type ? (or shift + /) while going through the slides, you can see a list of slide-specific commands.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "12: Linear mediation"
+      "13: Nonparametric tests and count data"
     ]
   },
   {

@@ -667,7 +667,8 @@ model <- afex::aov_ez(
   dv = "latency",      # response
   within = "stimulus", # within-subject
   data = hecedsm::AA21,
-  fun_aggregate = mean)
+  fun_aggregate = mean) 
+# aggregate to one measure per id/condition
 anova(model, # mixed ANOVA model
       correction = "none", # sphericity
       es = "none") # effect size
@@ -680,7 +681,7 @@ model <- afex::aov_ez(
   dv = "latency",      # response
   within = "stimulus", # within-subject
   data = hecedsm::AA21,
-  fun_aggregate = mean)
+  fun_aggregate = mean) # if repeated measurements
 ```
 ]
 ]
@@ -758,7 +759,6 @@ stimulus        0.67814 0.14341
 
 - $p$-value for Mauchly's test is large, no evidence that sphericity is violated.
 
-- Report the $p$-value of the $F$-test: $F(2, 22) = 0.6155$.
 
 ]
 ---
@@ -804,6 +804,13 @@ stimulus 0.8514944  0.5872648
 Note: $\widehat{\epsilon}$ can be larger than 1, replace by the upper bound 1 if it happens
 
 ]
+
+---
+
+# Reporting
+
+> We conducted a within-subject ANOVA. There is no overall effect of GAN ($F$
+
 
 ---
 
