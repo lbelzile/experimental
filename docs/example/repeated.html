@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.1">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -356,7 +356,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link active" data-scroll-target="#example-1">Example 1</a>
+  <li><a href="#videos" id="toc-videos" class="nav-link active" data-scroll-target="#videos">Videos</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a>
   <ul class="collapse">
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting">Model fitting</a></li>
@@ -388,6 +389,26 @@ window.Quarto = {
 
 
 <p>The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the <a href="../example/repeated.R"><strong>R</strong> code</a> or the <a href="../example/repeated.sps">SPSS code</a>. Such models can also be fitted using linear mixed models, see the <a href="../example/repeatedwmixedmodels.R"><strong>R</strong> code</a> or the <a href="../example/repeatedwmixedmodels.sps">SPSS code</a> for a demonstration.</p>
+<section id="videos" class="level1">
+<h1>Videos</h1>
+<p>The <strong>R</strong> code created in the video <a href="../example/repeated.R">can be downloaded here</a> and the <a href="../example/repeated.sps">SPSS code here</a>.</p>
+<p>There’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in <a href="https://www.youtube.com/playlist?list=PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp">one YouTube playlist</a>.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=tJ0O4uUJMis&amp;list=PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp">One-way within design</a></li>
+<li><a href="https://www.youtube.com/watch?v=mJ7-_mjoaHo&amp;list=PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp">Two-way mixed design</a></li>
+<li><a href="https://www.youtube.com/watch?v=VKGDHscj0P0&amp;list=PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp">Three-way mixed design</a></li>
+</ul>
+<p>You can also watch the playlist (and skip around to different sections) here:</p>
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube.com/embed/playlist?list=PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</div>
+<p>You can also watch SPSS videos:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=VPck9Z8m9hc&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Repeated measures</a></li>
+<li><a href="https://www.youtube.com/watch?v=1eVVFziSN_k&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62">Repeated measures (within-between design)</a></li>
+</ul>
+</section>
 <section id="example-1" class="level1">
 <h1>Example 1</h1>
 <p>We consider Experiment 3 from <span class="citation" data-cites="Hatano:2022">Hatano et al. (<a href="#ref-Hatano:2022" role="doc-biblioref">2022</a>)</span>. The data consist in a two by two mixed analysis of variance. The authors studied engagement and enjoyment from waiting tasks, and “potential effects of time interval on the underestimation of task motivation by manipulating the time for the waiting task”. The waiting time was randomly assigned to either short (3 minutes) or long (20 minutes) with equal probability, but participants were either told that there was a 70% chance of being assigned to the short session, or 30% chance.</p>
@@ -401,11 +422,11 @@ window.Quarto = {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(HOSM22_E3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Classes 'tbl_df', 'tbl' and 'data.frame':   126 obs. of  4 variables:
+<pre><code>tibble [126 × 4] (S3: tbl_df/tbl/data.frame)
  $ id        : Factor w/ 63 levels "1","2","3","4",..: 1 1 2 2 3 3 4 4 5 5 ...
  $ waiting   : Factor w/ 2 levels "long","short": 2 2 1 1 1 1 2 2 1 1 ...
  $ ratingtype: Factor w/ 2 levels "experience","prediction": 2 1 2 1 2 1 2 1 2 1 ...
- $ imscore   : num  2.33 3.33 1.25 1.92 1 ...</code></pre>
+ $ imscore   : num [1:126] 2.33 3.33 1.25 1.92 1 ...</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1062,99 +1083,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the <span class="co">[</span><span class="ot">**R** code</span><span class="co">](/example/repeated.R)</span> or the <span class="co">[</span><span class="ot">SPSS code</span><span class="co">](/example/repeated.sps)</span>. Such models can also be fitted using linear mixed models, see the <span class="co">[</span><span class="ot">**R** code</span><span class="co">](/example/repeatedwmixedmodels.R)</span> or the <span class="co">[</span><span class="ot">SPSS code</span><span class="co">](/example/repeatedwmixedmodels.sps)</span> for a demonstration.</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 1</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>We consider Experiment 3 from @Hatano:2022. The data consist in a two by two mixed analysis of variance. The authors studied engagement and enjoyment from waiting tasks, and "potential effects of time interval on the underestimation of task motivation by manipulating the time for the waiting task". The waiting time was randomly assigned to either short (3 minutes) or long (20 minutes) with equal probability, but participants were either told that there was a 70% chance of being assigned to the short session, or 30% chance.</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data </span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>We first load the data from the package and inspect the content.</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HOSM22_E3, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(HOSM22_E3)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of people in each group</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(HOSM22_E3, <span class="fu">table</span>(waiting)<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r slides-videos, echo=FALSE, include=FALSE}</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="in">source(here::here("R", "youtube-playlist.R"))</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="in">playlist_id &lt;- "PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp"</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="in">slide_details &lt;- tibble::tribble(</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="in">~title, ~youtube_id,</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="in">"One-way within design", "tJ0O4uUJMis",</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="in">"Two-way mixed design", "mJ7-_mjoaHo",</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="in">"Three-way mixed design", "VKGDHscj0P0"</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># Videos</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>The **R** code created in the video <span class="co">[</span><span class="ot">can be downloaded here</span><span class="co">](/example/repeated.R)</span> and the <span class="co">[</span><span class="ot">SPSS code here</span><span class="co">](/example/repeated.sps)</span>.</span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>From this, we can see that there each student is assigned to a single waiting time, but that they have both rating types. Since there are 63 students, the study is unbalanced but by a single person; this may be due to exclusions.</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model fitting</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show-youtube-list, echo=FALSE, results="asis"}</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="in">youtube_list(slide_details, playlist_id, example = TRUE)</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`afex`</span> package (analysis of factorial design) with the <span class="in">`aov_ez`</span>. We need to specify the identifier of the subjects (<span class="in">`id`</span>), the response variable (<span class="in">`dv`</span>) and both between- (<span class="in">`between`</span>) and within-subject (<span class="in">`within`</span>) factors. Each of those names must be quoted (strings)</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>You can also watch SPSS videos:</span>
 <span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>fmod <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"id"</span>, </span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>                     <span class="at">dv =</span> <span class="st">"imscore"</span>, </span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>                     <span class="at">between =</span> <span class="st">"waiting"</span>,</span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>                     <span class="at">within =</span> <span class="st">"ratingtype"</span>,</span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> HOSM22_E3)</span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fmod)</span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co"># MANOVA tests</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>fmod<span class="sc">$</span>Anova</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>The output includes the $F$-tests for the two main effects and the interaction and global effect sizes $\widehat{\eta}^2$ (<span class="in">`ges`</span>). There is no output for tests of sphericity, since there are only two measurements per person and thus a single mean different within-subject (so the test to check equality doesn't make sense with a single number). We could however compare variance between groups using Levene's test</span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>Notice that the degrees of freedom for the denominator of the test are based on the number of participants, here <span class="in">`r length(unique(HOSM22_E3$id))`</span>.</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 2</span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Repeated measures</span><span class="co">](https://www.youtube.com/watch?v=VPck9Z8m9hc&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62)</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Repeated measures (within-between design)</span><span class="co">](https://www.youtube.com/watch?v=1eVVFziSN_k&amp;list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62)</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 1</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>We consider Experiment 3 from @Hatano:2022. The data consist in a two by two mixed analysis of variance. The authors studied engagement and enjoyment from waiting tasks, and "potential effects of time interval on the underestimation of task motivation by manipulating the time for the waiting task". The waiting time was randomly assigned to either short (3 minutes) or long (20 minutes) with equal probability, but participants were either told that there was a 70% chance of being assigned to the short session, or 30% chance.</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data </span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>We first load the data from the package and inspect the content.</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HOSM22_E3, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(HOSM22_E3)</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of people in each group</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(HOSM22_E3, <span class="fu">table</span>(waiting)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>From this, we can see that there each student is assigned to a single waiting time, but that they have both rating types. Since there are 63 students, the study is unbalanced but by a single person; this may be due to exclusions.</span>
 <span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>Study 5 of @Halevy.Berson:2022 aimed to demonstrate that events in the distant future rather than the near future influenced the prospect of peace, along with the degree of abstractness. The experimental design is a </span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model fitting</span></span>
 <span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 2 (current state: war vs. peace) by 2 (predicted outcome: war vs. peace) by 2 (temporal distance: next year vs. twenty years into the future) mixed design</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`afex`</span> package (analysis of factorial design) with the <span class="in">`aov_ez`</span>. We need to specify the identifier of the subjects (<span class="in">`id`</span>), the response variable (<span class="in">`dv`</span>) and both between- (<span class="in">`between`</span>) and within-subject (<span class="in">`within`</span>) factors. Each of those names must be quoted (strings)</span>
 <span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>with current state and predicted outcome as between-subject factors and temporal distance as within-subject factor. The response is the estimated likelihood of each outcome on a 7-point Likert scale ranging from extremely unlikely (1) to extremely likely (7). Data are presented in long-format. The question asked was of the form </span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;There is currently </span><span class="co">[</span><span class="ot">war/peace</span><span class="co">]</span><span class="at"> between the two tribes in Velvetia. Thinking about </span><span class="co">[</span><span class="ot">next year/in 20 years</span><span class="co">]</span><span class="at">, how likely is it that there will be </span><span class="co">[</span><span class="ot">war/peace</span><span class="co">]</span><span class="at"> in Velvetia?</span></span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>We begin by loading the data and looking at the repartition of the measurements over conditions for the between-subject factors:</span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HB22_S5, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> curstate <span class="sc">+</span> predout, <span class="at">data =</span> HB22_S5)</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>fmod <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"id"</span>, </span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>                     <span class="at">dv =</span> <span class="st">"imscore"</span>, </span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>                     <span class="at">between =</span> <span class="st">"waiting"</span>,</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>                     <span class="at">within =</span> <span class="st">"ratingtype"</span>,</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> HOSM22_E3)</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fmod)</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="co"># MANOVA tests</span></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>fmod<span class="sc">$</span>Anova</span>
 <span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>The data is unbalanced, but there are sufficient measurements in each condition.</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>The output includes the $F$-tests for the two main effects and the interaction and global effect sizes $\widehat{\eta}^2$ (<span class="in">`ges`</span>). There is no output for tests of sphericity, since there are only two measurements per person and thus a single mean different within-subject (so the test to check equality doesn't make sense with a single number). We could however compare variance between groups using Levene's test</span>
 <span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>mmod <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"id"</span>,</span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">dv =</span> <span class="st">"likelihood"</span>,</span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"curstate"</span>,<span class="st">"predout"</span>),</span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="at">within =</span> <span class="st">"tempdist"</span>,</span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> HB22_S5)</span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mmod)</span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>Notice that the degrees of freedom for the denominator of the test are based on the number of participants, here <span class="in">`r length(unique(HOSM22_E3$id))`</span>.</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example 2</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>Study 5 of @Halevy.Berson:2022 aimed to demonstrate that events in the distant future rather than the near future influenced the prospect of peace, along with the degree of abstractness. The experimental design is a </span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 2 (current state: war vs. peace) by 2 (predicted outcome: war vs. peace) by 2 (temporal distance: next year vs. twenty years into the future) mixed design</span></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>with current state and predicted outcome as between-subject factors and temporal distance as within-subject factor. The response is the estimated likelihood of each outcome on a 7-point Likert scale ranging from extremely unlikely (1) to extremely likely (7). Data are presented in long-format. The question asked was of the form </span>
 <span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>Again, there is no output for the test of sphericity and no difference with the multivariate analysis of variance model because each measurement per person has it's own variance and correlation parameter, but there is a single comparison for the likelihood scores (for the temporal distance).</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;There is currently </span><span class="co">[</span><span class="ot">war/peace</span><span class="co">]</span><span class="at"> between the two tribes in Velvetia. Thinking about </span><span class="co">[</span><span class="ot">next year/in 20 years</span><span class="co">]</span><span class="at">, how likely is it that there will be </span><span class="co">[</span><span class="ot">war/peace</span><span class="co">]</span><span class="at"> in Velvetia?</span></span>
 <span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>Since the three-way interaction is statistically significant, we need to compare each cell within the levels of the other factor: for example, we could fix the temporal horizon to 1 year and compare the predictions based on both current state and predicted outcome.</span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mmod, </span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>               <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"curstate"</span>,<span class="st">"predout"</span>),</span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>               <span class="at">by =</span> <span class="st">"tempdist"</span>)</span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="fu">emmip</span>(emm, </span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">formula =</span> curstate <span class="sc">~</span> predout <span class="sc">|</span> tempdist,</span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">CIs =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"predicted output"</span>,</span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"current state"</span>)</span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>The interaction plot suggest quite strongly that the difference in the reaction is much more pronounced score-wise for short-term horizon predictions than for the long-run. The authors commented this finding by stating</span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; when the current state is characterized by war (intergroup conflict), peace is seen as significantly more likely in the distant future than in the near future. In contrast, when the current state is characterized by peace, war is seen as significantly more likely in the distant future than in the near future.</span></span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>We begin by loading the data and looking at the repartition of the measurements over conditions for the between-subject factors:</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HB22_S5, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> curstate <span class="sc">+</span> predout, <span class="at">data =</span> HB22_S5)</span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>The data is unbalanced, but there are sufficient measurements in each condition.</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>mmod <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_ez</span>(</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"id"</span>,</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>  <span class="at">dv =</span> <span class="st">"likelihood"</span>,</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>  <span class="at">between =</span> <span class="fu">c</span>(<span class="st">"curstate"</span>,<span class="st">"predout"</span>),</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">within =</span> <span class="st">"tempdist"</span>,</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> HB22_S5)</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mmod)</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>Again, there is no output for the test of sphericity and no difference with the multivariate analysis of variance model because each measurement per person has it's own variance and correlation parameter, but there is a single comparison for the likelihood scores (for the temporal distance).</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>Since the three-way interaction is statistically significant, we need to compare each cell within the levels of the other factor: for example, we could fix the temporal horizon to 1 year and compare the predictions based on both current state and predicted outcome.</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mmod, </span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>               <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"curstate"</span>,<span class="st">"predout"</span>),</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>               <span class="at">by =</span> <span class="st">"tempdist"</span>)</span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a><span class="fu">emmip</span>(emm, </span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>      <span class="at">formula =</span> curstate <span class="sc">~</span> predout <span class="sc">|</span> tempdist,</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>      <span class="at">CIs =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"predicted output"</span>,</span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"current state"</span>)</span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>The interaction plot suggest quite strongly that the difference in the reaction is much more pronounced score-wise for short-term horizon predictions than for the long-run. The authors commented this finding by stating</span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; when the current state is characterized by war (intergroup conflict), peace is seen as significantly more likely in the distant future than in the near future. In contrast, when the current state is characterized by peace, war is seen as significantly more likely in the distant future than in the near future.</span></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
