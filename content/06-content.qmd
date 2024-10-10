@@ -68,5 +68,6 @@ xaringanExtra::embed_xaringan(
 
 
 - [R script](/content/MATH80667A-06-content.R)
+- [SPSS script](/content/MATH80667A-06-content.sps)
 
 
