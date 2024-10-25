@@ -4,8 +4,8 @@
     <title>Analysis of covariance and moderation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-08-25" />
-    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
+    <meta name="date" content="2024-10-25" />
+    <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -195,7 +195,7 @@ Inclusion of the `prior` score leads to increased precision for the mean (reduce
 
 # Contrasts with ANCOVA
 
-- The estimated marginal means will be based on detrended values `\(\neq\)` group averages
+- The estimated marginal means will be based on a fixed value of the covariate (rather than detrended values)
 - In the `emmeans` package, the average of the covariate is used as value.
 - the difference between levels of `condition` are the same for any value of `prior` (parallel lines), but the uncertainty changes.
 
@@ -253,14 +253,14 @@ ggplot(data = SSVB21_S2,
 
 ``` r
 # Check that the data are well randomized
-car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 3)
+car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 2)
 # Fit linear model with continuous covariate
 model1 &lt;- lm(post ~ condition + prior, data = SSVB21_S2)
 # Fit model without for comparison
 model2 &lt;- lm(post ~ condition, data = SSVB21_S2)
-# Global test for differences - of NO INTEREST
-car::Anova(model1, type = 3)
-car::Anova(model2, type = 3)
+# Global test for differences
+car::Anova(model1)
+car::Anova(model2)
 ```
 
 
@@ -280,25 +280,18 @@ car::Anova(model2, type = 3)
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 166341 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 71.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14107 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 14107 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 3.0 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.05 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; prior &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 385385 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 166.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; prior &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 385385 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 166.1 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.00 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
@@ -323,25 +316,18 @@ car::Anova(model2, type = 3)
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 123377 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 38.64 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; condition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11680 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.162 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 11680 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 1.83 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.162 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1401846 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 439 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 1401846 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 439 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -451,10 +437,10 @@ levene &lt;- car::leveneTest(
 # Equality of slopes (interaction)
 car::Anova(lm(post ~ condition * prior, 
            data = SSVB21_S2),
-           model1, type = 3)
+           model1, type = 2)
 ```
 
-Levene's test of equality of variance: _F_ (2, 439) = 2.05 with a `\(p\)`-value of 0.13.
+Levene's test of equality of variance: _F_ (2, 439) = 2.04 with a `\(p\)`-value of 0.131.
 ]
 .pull-right.small[
 
@@ -471,39 +457,32 @@ Levene's test of equality of variance: _F_ (2, 439) = 2.05 with a `\(p\)`-value 
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 165573 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 71.3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; condition &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4245 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14107 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; prior &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 382596 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 385385 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 164.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 166.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; condition:prior &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 3257 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.7 &lt;/td&gt;
-   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 0.5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; condition:prior &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3257 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.50 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1016461 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 438 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 1016461 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt; 438 &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;font-weight: bold;color: black !important;background-color: yellow !important;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -629,7 +608,7 @@ data(GSBE10, package = "hecedsm")
 lin_moder &lt;- lm(respeval ~ protest*sexism, 
                data = GSBE10)
 summary(lin_moder) # coefficients
-car::Anova(lin_moder, type = 3) # tests
+car::Anova(lin_moder, type = 2) # tests
 ```
 
 ---
@@ -648,18 +627,11 @@ car::Anova(lin_moder, type = 3) # tests
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; protest &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.34 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.45 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; .091 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; sexism &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.13 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.27 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.10 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; .749 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.21 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .648 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; protest:sexism &lt;/td&gt;
@@ -771,12 +743,12 @@ More generally, **moderation** refers to any explanatory variable (whether conti
 .small[
 
 * Inclusion of continuous covariates may help filtering out unwanted variability.
-* These are typically concomitant variables (measured alongside the response variable).
-* This designs reduce the residual error, leading to an increase in power (more ability to detect differences in average between experimental conditions).
+* These are typically variables measured before or alongside the response variable.
+* This design reduce the residual error, leading to an increase in power (more ability to detect differences in average between experimental conditions).
 * We are only interested in differences due to experimental condition (marginal effects).
 * In general, there should be no interaction between covariates/blocking factors and experimental conditions. 
 * This hypothesis can be assessed by comparing the models with and without interaction, if there are enough units (e.g., equality of slope for ANCOVA).
-* Moderators are variables that interact with the experimental factor. We assess their presence by testing for an interaction in a linear regresison model.
+* Moderators are variables that interact with the experimental factor. We assess their presence by testing for an interaction in a linear regression model.
 
 ]
     </textarea>

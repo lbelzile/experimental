@@ -25,8 +25,8 @@ model1 <- lm(post ~ condition + prior, data = SSVB21_S2)
 # Fit model without for comparison
 model2 <- lm(post ~ condition, data = SSVB21_S2)
 # Global test for differences - of NO INTEREST
-car::Anova(model1, type = 3)
-car::Anova(model2, type = 3)
+car::Anova(model1)
+car::Anova(model2)
 
 # Estimated marginal means
 emm1 <- emmeans(model1, specs = "condition")
@@ -38,7 +38,7 @@ contrast_list <- list(
    #av. boosts vs consensus
    "Boost vs BoostPlus" = c(1, -1,  0))
 # Compute contrast
-contrast(emm1,
+c1 <- contrast(emm1,
          method = contrast_list,
          p.adjust = "holm")
 
@@ -58,36 +58,48 @@ c2 <- contrast(emm2,
          method = contrast_list,
          p.adjust = "holm")
 c2
-
 # Test equality of variance
 levene <- car::leveneTest(
-   resid(model1) ~ condition,
+   rstudent(model1) ~ condition,
    data = SSVB21_S2,
    center = 'mean')
 # Equality of slopes (interaction)
 car::Anova(lm(post ~ condition * prior,
            data = SSVB21_S2),
-           model1, type = 3)
+           model1)
+# Linearity of effect
+car::residualPlots(model = model1, terms = ~ prior)
+# Here, while the straight line isn't quite perfect,
+# it's a good enough approximation.
+# There are however several subgroups/clusters
+# firm disbelievers (100 to 100), people who have no more opinion (move to 0)
+# people who have the same posterio and prior score, etc.
+# and the weird scale /selection mechanisms caps the effect, so the larger
+# fitted values have more dispersion
 
 #-------------------------------------------------
 
-
+# Moderation analysis
 data(GSBE10, package = "hecedsm")
 lin_moder <- lm(respeval ~ protest*sexism,
                 data = GSBE10)
 summary(lin_moder) # coefficients
-car::Anova(lin_moder, type = 3) #if significant, look at simple effects
+car::Anova(lin_moder) #if significant, look at simple effects
 
 # Plot response as a function of sexism (the continuous variable)
 ggplot(data = GSBE10,
        aes(x = sexism,
            y = respeval,
-           color = protest)) +
+           color = protest,
+           fill = protest)) +
   geom_point() +
   geom_smooth(se = TRUE, method = "lm", formula = y ~ x) +
   labs(subtitle = "evaluation of response",
        y = "",
-       color = "experimental condition") +
+       color = "experimental condition",
+       fill = "experimental condition") +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
   theme_classic() +
   theme(legend.position = "bottom")
 
@@ -109,6 +121,9 @@ lin_moder2 <- lm(
 anova(lin_moder, lin_moder2)
 # p-value of 0.18: fail to reject individual = collective.
 
+# With a single binary covariate, we can try to check the zone of
+# significance on the x-axis (covariate) at which the difference
+# between averages of groups becomes significant
 # Johnson-Neyman plot
 jn <- interactions::johnson_neyman(
   model = lin_moder2, # linear model
@@ -117,3 +132,7 @@ jn <- interactions::johnson_neyman(
   control.fdr = TRUE, # control for false discovery rate
   mod.range = range(GSBE10$sexism)) # range of values for sexism
 jn$plot
+
+# There are other examples of moderation, e.g. LKUK24_S4
+# where political ideology (conservative/liberal) is a moderator
+# for the

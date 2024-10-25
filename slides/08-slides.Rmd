@@ -202,7 +202,7 @@ Inclusion of the `prior` score leads to increased precision for the mean (reduce
 
 # Contrasts with ANCOVA
 
-- The estimated marginal means will be based on detrended values $\neq$ group averages
+- The estimated marginal means will be based on a fixed value of the covariate (rather than detrended values)
 - In the `emmeans` package, the average of the covariate is used as value.
 - the difference between levels of `condition` are the same for any value of `prior` (parallel lines), but the uncertainty changes.
 
@@ -222,7 +222,7 @@ data(SSVB21_S2, package = "hecedsm")
 model1 <- lm(post ~ condition + prior, data = SSVB21_S2)
 model2 <- lm(post ~ condition, data = SSVB21_S2)
 levene <- car::leveneTest(
-   resid(model1) ~ condition, 
+   rstudent(model1) ~ condition, 
    data = SSVB21_S2,
    center = 'mean')
 ```
@@ -263,14 +263,14 @@ knitr::include_graphics("img/07/Experiment2_scatter.png")
 # Data analysis - model
 ```{r ancova3, echo = TRUE, eval = FALSE}
 # Check that the data are well randomized
-car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 3)
+car::Anova(lm(prior ~ condition, data = SSVB21_S2), type = 2)
 # Fit linear model with continuous covariate
 model1 <- lm(post ~ condition + prior, data = SSVB21_S2)
 # Fit model without for comparison
 model2 <- lm(post ~ condition, data = SSVB21_S2)
-# Global test for differences - of NO INTEREST
-car::Anova(model1, type = 3)
-car::Anova(model2, type = 3)
+# Global test for differences
+car::Anova(model1)
+car::Anova(model2)
 ```
 
 
@@ -279,7 +279,7 @@ car::Anova(model2, type = 3)
 # Data analysis - ANOVA table
 .pull-left.small[
 ```{r ancova3b, echo = FALSE, eval = TRUE}
-kableExtra::kable(broom::tidy(car::Anova(model1, type = 3)), 
+kableExtra::kable(broom::tidy(car::Anova(model1, type = 2)), 
 		 col.names = c("term",
 			 "sum of squares",
 			 "df",
@@ -291,7 +291,7 @@ kableExtra::row_spec(2, bold = TRUE, color = "black", background = "yellow")
 ]
 .pull-right.small[
 ```{r ancova3c, echo = FALSE, eval = TRUE}
-kableExtra::kable(broom::tidy(car::Anova(model2, type = 3)), 
+kableExtra::kable(broom::tidy(car::Anova(model2, type = 2)), 
 		 col.names = c("term",
 			 "sum of squares",
 			 "df",
@@ -380,7 +380,7 @@ levene <- car::leveneTest(
 # Equality of slopes (interaction)
 car::Anova(lm(post ~ condition * prior, 
            data = SSVB21_S2),
-           model1, type = 3)
+           model1, type = 2)
 ```
 
 Levene's test of equality of variance: _F_ (`r broom::tidy(levene)$df`, `r broom::tidy(levene)$df.residual`) = `r round(broom::tidy(levene)$statistic, 2)` with a $p$-value of `r format.pval(broom::tidy(levene)$p.value,digits = 3)`.
@@ -390,7 +390,7 @@ Levene's test of equality of variance: _F_ (`r broom::tidy(levene)$df`, `r broom
 
 ```{r kableEqSlope, eval = TRUE, echo = FALSE, cache = TRUE}
 kableExtra::kable(broom::tidy(car::Anova(lm(post ~ condition * prior, 
-		 data = hecedsm::SSVB21_S2), model1, type = 3)), 
+		 data = hecedsm::SSVB21_S2), model1, type = 2)), 
 		 col.names = c("term",
 			 "sum of squares",
 			 "df",
@@ -552,7 +552,7 @@ data(GSBE10, package = "hecedsm")
 lin_moder <- lm(respeval ~ protest*sexism, 
                data = GSBE10)
 summary(lin_moder) # coefficients
-car::Anova(lin_moder, type = 3) # tests
+car::Anova(lin_moder, type = 2) # tests
 ```
 
 ---
@@ -573,7 +573,7 @@ lin_moder <- lm(respeval ~ protest*sexism,
 
 options(knitr.kable.NA = '')
 tab_anova <- broom::tidy(
-    car::Anova(lin_moder, type = 3)[-1,])
+    car::Anova(lin_moder, type = 2)[-1,])
 tab_anova$p.value <- papaja::apa_p(tab_anova$p.value)
 knitr::kable(tab_anova,
   booktabs = TRUE,
@@ -713,11 +713,11 @@ More generally, **moderation** refers to any explanatory variable (whether conti
 .small[
 
 * Inclusion of continuous covariates may help filtering out unwanted variability.
-* These are typically concomitant variables (measured alongside the response variable).
-* This designs reduce the residual error, leading to an increase in power (more ability to detect differences in average between experimental conditions).
+* These are typically variables measured before or alongside the response variable.
+* This design reduce the residual error, leading to an increase in power (more ability to detect differences in average between experimental conditions).
 * We are only interested in differences due to experimental condition (marginal effects).
 * In general, there should be no interaction between covariates/blocking factors and experimental conditions. 
 * This hypothesis can be assessed by comparing the models with and without interaction, if there are enough units (e.g., equality of slope for ANCOVA).
-* Moderators are variables that interact with the experimental factor. We assess their presence by testing for an interaction in a linear regresison model.
+* Moderators are variables that interact with the experimental factor. We assess their presence by testing for an interaction in a linear regression model.
 
 ]
