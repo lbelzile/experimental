@@ -17,10 +17,10 @@ The database in package `hecedsm` in **R** is labelled `JZBJG22_E2`. You can als
 
 
 1. A dataset is said to be *balanced* if there are the same number of people in each experimental condition. Are the data balanced over `condition` and `order`? Justify your answer.
-2. Plot the response variables using a suitable graph (e.g., half-violin or density plot, see below), for each of the four conditions. Comment on the distribution of the scores along the scale. See @sec-plots for help.
-3. Using Levene's test, check whether the variance in each subgroup is the same.
-4. Perform the two-way analysis of variance for both `conf_dying` and `conf_pilot` and report the null and alternative hypotheses, the test statistic, the $P$-value and the conclusion of the test. Use Welch's ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3: see @sec-welch.
-5. For each response variable `conf_dying` and `conf_pilot`, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for `video` conditions. 
+2. Look at Figure @fig-repartition and comment on the distribution of the scores along the scale.
+<!-- 3. Using Levene's test, check whether the variance in each subgroup is the same. -->
+3. Perform the two-way analysis of variance for both `conf_dying` and `conf_pilot` and report the null and alternative hypotheses, the test statistic, the $P$-value and the conclusion of the test. 
+4. For each response variable `conf_dying` and `conf_pilot`, perform follow-up tests. Compute simple or main effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for `video` conditions. 
 
 ## Indications and helper code
 
@@ -33,6 +33,8 @@ To create a pretty plot in **R**, try the following:
 ```{r}
 #| eval: true
 #| echo: true
+#| label: fig-repartition
+#| fig-cap: "Half-violin (density) plots, with box plots and 95% intervals, and jittered scatterplot for confidence in landing without dying, as a function of order and condition."
 # install.packages(c("ggplot2","ggdist"))
 # remotes::install_github("lbelzile/hecedsm")
 data(JZBJG22_E2, package = "hecedsm")
@@ -57,6 +59,7 @@ In SPSS, you need to specify manually with `GGRAPH` the format. This [post](http
 
 ### Welch ANOVA {#sec-welch}
 
+Using Levene's test, we can check whether the variance in each subgroup is the same. In this example, we find that there are significant differences in variance per subgroup, but the effect on $p$-values is negligeable, so we can safely ignore it here.
 
 If the variance are unequal, we want to fit a model to observations in subgroup $(a_j, b_k)$ for $j=1, \ldots, n_a$ and $k=1, \ldots, n_b$, specifying that in the subgroup the average is $\mu_{jk}$ and the variance $\sigma^2_{jk}$. The resulting $F$ test from comparing overall means is typically named Welch after @Welch:1947.
 

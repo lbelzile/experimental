@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.1">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -381,10 +381,9 @@ window.Quarto = {
 <p>The database in package <code>hecedsm</code> in <strong>R</strong> is labelled <code>JZBJG22_E2</code>. You can also download the <a href="../files/data/SPSS/JZBJG22_E2.sav">SPSS database via this link</a>.</p>
 <ol type="1">
 <li>A dataset is said to be <em>balanced</em> if there are the same number of people in each experimental condition. Are the data balanced over <code>condition</code> and <code>order</code>? Justify your answer.</li>
-<li>Plot the response variables using a suitable graph (e.g., half-violin or density plot, see below), for each of the four conditions. Comment on the distribution of the scores along the scale. See <a href="#sec-plots" class="quarto-xref">Section&nbsp;2.1</a> for help.</li>
-<li>Using Levene’s test, check whether the variance in each subgroup is the same.</li>
-<li>Perform the two-way analysis of variance for both <code>conf_dying</code> and <code>conf_pilot</code> and report the null and alternative hypotheses, the test statistic, the <span class="math inline">\(P\)</span>-value and the conclusion of the test. Use Welch’s ANOVA, i.e., an analysis of variance model with different variance for each subgroup if you rejected the null of homogeneity of variance in Question 3: see <a href="#sec-welch" class="quarto-xref">Section&nbsp;2.2</a>.</li>
-<li>For each response variable <code>conf_dying</code> and <code>conf_pilot</code>, perform follow-up tests. Compute simple or marginal effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for <code>video</code> conditions.</li>
+<li>Look at Figure <a href="#fig-repartition" class="quarto-xref">Figure&nbsp;1</a> and comment on the distribution of the scores along the scale. <!-- 3. Using Levene's test, check whether the variance in each subgroup is the same. --></li>
+<li>Perform the two-way analysis of variance for both <code>conf_dying</code> and <code>conf_pilot</code> and report the null and alternative hypotheses, the test statistic, the <span class="math inline">\(P\)</span>-value and the conclusion of the test.</li>
+<li>For each response variable <code>conf_dying</code> and <code>conf_pilot</code>, perform follow-up tests. Compute simple or main effects (depending on whether the interaction is significant or not), along with 95% confidence intervals for the difference in score for <code>video</code> conditions.</li>
 </ol>
 </section>
 <section id="indications-and-helper-code" class="level2">
@@ -409,9 +408,14 @@ window.Quarto = {
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">subtitle =</span> <span class="st">"confidence in landing without dying"</span>) <span class="sc">+</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="05-problem-set_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-repartition" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-repartition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-problem-set_files/figure-html/fig-repartition-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-repartition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Half-violin (density) plots, with box plots and 95% intervals, and jittered scatterplot for confidence in landing without dying, as a function of order and condition.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -421,6 +425,7 @@ window.Quarto = {
 </section>
 <section id="sec-welch" class="level3">
 <h3 class="anchored" data-anchor-id="sec-welch">Welch ANOVA</h3>
+<p>Using Levene’s test, we can check whether the variance in each subgroup is the same. In this example, we find that there are significant differences in variance per subgroup, but the effect on <span class="math inline">\(p\)</span>-values is negligeable, so we can safely ignore it here.</p>
 <p>If the variance are unequal, we want to fit a model to observations in subgroup <span class="math inline">\((a_j, b_k)\)</span> for <span class="math inline">\(j=1, \ldots, n_a\)</span> and <span class="math inline">\(k=1, \ldots, n_b\)</span>, specifying that in the subgroup the average is <span class="math inline">\(\mu_{jk}\)</span> and the variance <span class="math inline">\(\sigma^2_{jk}\)</span>. The resulting <span class="math inline">\(F\)</span> test from comparing overall means is typically named Welch after <span class="citation" data-cites="Welch:1947">Welch (<a href="#ref-Welch:1947" role="doc-biblioref">1947</a>)</span>.</p>
 <p>In <strong>R</strong>, the Welch ANOVA can be obtained via <code>oneway.test</code>, but there is no possibility of follow-up for marginal means and contrasts. Rather, use the function <code>gls</code> in package <code>nlme</code> as follows.</p>
 <div class="cell">

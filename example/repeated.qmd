@@ -8,6 +8,32 @@ editor_options:
 The following demonstration explains how to compute repeated measures ANOVA that include within-subject factors. Download the [**R** code](/example/repeated.R) or the [SPSS code](/example/repeated.sps). Such models can also be fitted using linear mixed models, see the [**R** code](/example/repeatedwmixedmodels.R) or the [SPSS code](/example/repeatedwmixedmodels.sps) for a demonstration.
 
 
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "youtube-playlist.R"))
+playlist_id <- "PLUB8VZzxA8IucBRbpQTZCF5GzJX2KUVfp"
+slide_details <- tibble::tribble(
+~title, ~youtube_id,
+"One-way within design", "tJ0O4uUJMis",
+"Two-way mixed design", "mJ7-_mjoaHo",
+"Three-way mixed design", "VKGDHscj0P0"
+)
+
+```
+
+# Videos
+
+The **R** code created in the video [can be downloaded here](/example/repeated.R) and the [SPSS code here](/example/repeated.sps).
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id, example = TRUE)
+```
+
+You can also watch SPSS videos:
+
+- [Repeated measures](https://www.youtube.com/watch?v=VPck9Z8m9hc&list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62)
+- [Repeated measures (within-between design)](https://www.youtube.com/watch?v=1eVVFziSN_k&list=PLUB8VZzxA8Iv41lUAoTRNoat3oCVlFY62)
+
 # Example 1
 
 We consider Experiment 3 from @Hatano:2022. The data consist in a two by two mixed analysis of variance. The authors studied engagement and enjoyment from waiting tasks, and "potential effects of time interval on the underestimation of task motivation by manipulating the time for the waiting task". The waiting time was randomly assigned to either short (3 minutes) or long (20 minutes) with equal probability, but participants were either told that there was a 70% chance of being assigned to the short session, or 30% chance.
