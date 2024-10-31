@@ -410,35 +410,15 @@ The package `effectsize::cohens_f` returns $\widetilde{f}^2 = n^{-1}F_{\text{eff
 
 ---
 
-
-# Semipartial effect sizes
-
-
-If there is a mix of experimental and blocking factor...
-
-Include the variance of all blocking factors and interactions (only with the effect!) in denominator.
-
-- e.g., if $A$ is effect of interest, $B$ is a blocking factor and $C$ is another experimental factor, use
-$$\eta_{\langle A \rangle}^2 = \frac{\sigma^2_A}{\sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}}.$$
-
-.small[
-
-In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "blocking")` where `blocking` gets replaced with a vector containing the name of the blocking factors.
-
-]
-
----
-
 # Summary
 
 - Effect sizes can be recovered using information found in the ANOVA table.
 - Multiple estimators for the same quantity
    - report the one used along with confidence or tolerance intervals.
-   - some estimators are prefered (less biased): this matters for power studies
+   - some estimators are preferred (less biased): this matters for power studies
 - The correct measure may depend on the design
    - partial vs total effects,
    - different formulas for within-subjects (repeated measures) designs!
-- Include blocking as part of the variability considered.
 
 ---
 

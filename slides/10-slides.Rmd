@@ -171,7 +171,7 @@ Randomly allocate to treatment within block
 
 # Block-treatment design
 
-Without interaction,
+Linear model (two-way ANOVA) **without** interaction,
 
 $$\underset{\text{response}\vphantom{b}}{Y_{ij}} =  \underset{\text{global mean}}{\mu\vphantom{\beta_j}} + \underset{\text{treatment}\vphantom{b}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}\vphantom{b}}{\varepsilon_{ij}\vphantom{\beta_j}}$$
 
@@ -197,14 +197,10 @@ in the morning; and (3) an outpatient protocol in which meals were not strictly 
 was instructed to fast for 12 hours prior to measurement of RMR in the morning.
 
 ---
-# Fitting the complete block design
 
-.panelset[
+# Interaction plot
 
-.panel[ .panel-name[Load]
-
-
-```{r cleanblocking, echo = TRUE}
+```{r plotblocking2, echo = FALSE, eval = TRUE, out.width = '85%'} 
 url <- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
 # transform integers to factors (categorical)
 resting <- read.table(url, header = TRUE) |>
@@ -212,17 +208,6 @@ resting <- read.table(url, header = TRUE) |>
     subject = factor(subject), #blocking factor
     protocol = factor(protocol), #experimental factor
     rate = rate/1000)
-```
-
-.small[This is *de facto* a repeated measure design.]
-
-]
-
-.panel[.panel-name[Fit]    
-
-
-
-```{r fitblocking, echo = TRUE} 
 # Force sum-to-zero parametrization for unordered factors
 options(contrasts = c("contr.sum", "contr.poly"))
 # Fit model with blocking
@@ -231,28 +216,6 @@ model_block <- aov(rate ~ subject + protocol, data = resting)
 model_raw <- aov(rate ~ protocol, data = resting)
 # anova(model_block)
 # anova(model_raw)
-```
-]
-
-  .panel[.panel-name[Plot]       
-```{r plotblocking, echo = TRUE, fig.show = 'hide', out.width = '50%'} 
-ggplot(data = resting,
-       aes(x = subject,
-           y = rate,
-           group = protocol,
-           color = protocol)) +
-     geom_line() + 
-     labs(y = "mean resting\n metabolic rate") + 
-     theme_classic() +
-     theme(legend.position = "bottom")
-```
-]
-]
----
-
-# Interaction plot
-
-```{r plotblocking2, echo = FALSE, eval = TRUE, out.width = '85%'} 
 ggplot(data = resting,
        aes(x = subject,
            y = rate,
@@ -269,9 +232,24 @@ ggplot(data = resting,
 
 ---
 
-# Impact of blocking
-.panelset[
-.panel[.panel-name[ANOVA table (with blocking)]
+# ANOVA table (without blocking)
+
+```{r printanovaBlockin2, echo = FALSE, eval = TRUE}
+knitr::kable(anova(model_raw),
+             digits = c(0,2,2,2,3),
+             caption = "Analysis of variance table - without blocking",
+             col.names = c("Degrees of freedom",
+                           "Sum of squares",
+                           "Mean square",
+                           "F statistic",
+                           "p-value")) %>%
+  kableExtra::kable_styling(position = "center") 
+```
+
+---
+
+# ANOVA table (with blocking)
+
 ```{r printanovaBlockin1, echo = FALSE, eval = TRUE}
 knitr::kable(anova(model_block),
              digits = c(0,2,2,2,3),
@@ -284,22 +262,24 @@ knitr::kable(anova(model_block),
   kableExtra::kable_styling(position = "center")# %>%
 #  kableExtra::cell_spec(c(2,4), bold = TRUE, color = "black", background = "yellow")
 ```
-]
 
-.panel[.panel-name[ANOVA table (without blocking)]
-```{r printanovaBlockin2, echo = FALSE, eval = TRUE}
-knitr::kable(anova(model_raw),
-             digits = c(0,2,2,2,3),
-             caption = "Analysis of variance table - without blocking",
-             col.names = c("Degrees of freedom",
-                           "Sum of squares",
-                           "Mean square",
-                           "F statistic",
-                           "p-value")) %>%
-  kableExtra::kable_styling(position = "center") 
-```
-]
+---
 
+
+
+# Semipartial effect sizes
+
+
+If there is a mix of experimental and blocking factors...
+
+Include the variance of all blocking factors and interactions (only with the effect!) in denominator.
+
+- e.g., if $A$ is effect of interest, $B$ is a blocking factor and $C$ is another experimental factor, use
+$$\eta_{\langle A \rangle}^2 = \frac{\sigma^2_A}{\sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}}.$$
+
+.small[
+
+In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "blocking")` where `blocking` gets replaced with a vector containing the name of the blocking factors.
 
 ]
 

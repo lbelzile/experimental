@@ -4,8 +4,8 @@
     <title>Introduction to mixed models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-07-03" />
-    <script src="libs/header-attrs-2.27/header-attrs.js"></script>
+    <meta name="date" content="2024-10-31" />
+    <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -167,7 +167,7 @@ Randomly allocate to treatment within block
 
 # Block-treatment design
 
-Without interaction,
+Linear model (two-way ANOVA) **without** interaction,
 
 `$$\underset{\text{response}\vphantom{b}}{Y_{ij}} =  \underset{\text{global mean}}{\mu\vphantom{\beta_j}} + \underset{\text{treatment}\vphantom{b}}{\alpha_i\vphantom{\beta_j}} + \underset{\text{blocking}}{\beta_j}+ \underset{\text{error}\vphantom{b}}{\varepsilon_{ij}\vphantom{\beta_j}}$$`
 
@@ -193,61 +193,6 @@ in the morning; and (3) an outpatient protocol in which meals were not strictly 
 was instructed to fast for 12 hours prior to measurement of RMR in the morning.
 
 ---
-# Fitting the complete block design
-
-.panelset[
-
-.panel[ .panel-name[Load]
-
-
-
-``` r
-url &lt;- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
-# transform integers to factors (categorical)
-resting &lt;- read.table(url, header = TRUE) |&gt;
-  dplyr::mutate(
-    subject = factor(subject), #blocking factor
-    protocol = factor(protocol), #experimental factor
-    rate = rate/1000)
-```
-
-.small[This is *de facto* a repeated measure design.]
-
-]
-
-.panel[.panel-name[Fit]    
-
-
-
-
-``` r
-# Force sum-to-zero parametrization for unordered factors
-options(contrasts = c("contr.sum", "contr.poly"))
-# Fit model with blocking
-model_block &lt;- aov(rate ~ subject + protocol, data = resting)
-# One-way ANOVA (no blocking)
-model_raw &lt;- aov(rate ~ protocol, data = resting)
-# anova(model_block)
-# anova(model_raw)
-```
-]
-
-  .panel[.panel-name[Plot]       
-
-``` r
-ggplot(data = resting,
-       aes(x = subject,
-           y = rate,
-           group = protocol,
-           color = protocol)) +
-     geom_line() + 
-     labs(y = "mean resting\n metabolic rate") + 
-     theme_classic() +
-     theme(legend.position = "bottom")
-```
-]
-]
----
 
 # Interaction plot
 
@@ -255,9 +200,44 @@ ggplot(data = resting,
 
 ---
 
-# Impact of blocking
-.panelset[
-.panel[.panel-name[ANOVA table (with blocking)]
+# ANOVA table (without blocking)
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;caption&gt;Analysis of variance table - without blocking&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Degrees of freedom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum of squares &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean square &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; protocol &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.982 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# ANOVA table (with blocking)
+
 &lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
 &lt;caption&gt;Analysis of variance table - with blocking&lt;/caption&gt;
  &lt;thead&gt;
@@ -297,42 +277,24 @@ ggplot(data = resting,
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-]
 
-.panel[.panel-name[ANOVA table (without blocking)]
-&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
-&lt;caption&gt;Analysis of variance table - without blocking&lt;/caption&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Degrees of freedom &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sum of squares &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Mean square &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; F statistic &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; p-value &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; protocol &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.982 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 24.35 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-]
+---
 
+
+
+# Semipartial effect sizes
+
+
+If there is a mix of experimental and blocking factors...
+
+Include the variance of all blocking factors and interactions (only with the effect!) in denominator.
+
+- e.g., if `\(A\)` is effect of interest, `\(B\)` is a blocking factor and `\(C\)` is another experimental factor, use
+`$$\eta_{\langle A \rangle}^2 = \frac{\sigma^2_A}{\sigma^2_A + \sigma^2_B + \sigma^2_{AB} + \sigma^2_{\text{resid}}}.$$`
+
+.small[
+
+In **R**, use `effectsize::omega_squared(model, partial = TRUE, generalized = "blocking")` where `blocking` gets replaced with a vector containing the name of the blocking factors.
 
 ]
 

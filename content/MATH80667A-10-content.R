@@ -1,3 +1,47 @@
+library(emmeans)
+library(hecedsm)
+library(ggplot2)
+
+
+## Blocking factor
+# Note that this is fundamentally repeated measures
+url <- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
+# transform integers to factors (categorical)
+resting <- read.table(url, header = TRUE) |>
+  dplyr::mutate(
+    subject = factor(subject), #blocking factor
+    protocol = factor(protocol), #experimental factor
+    rate = rate/1000)
+# Force sum-to-zero parametrization for unordered factors
+options(contrasts = c("contr.sum", "contr.poly"))
+# Fit model with blocking factor
+model_block <- aov(rate ~ subject + protocol, data = resting)
+# One-way ANOVA (no blocking)
+model_raw <- aov(rate ~ protocol, data = resting)
+
+# ANOVA tables with and without blocking factor
+anova(model_block)
+anova(model_raw)
+# Use ANOVA table to compute etasquared effect size
+etasq <- 0.0359/(23.1175 + 1.2355 + 0.0359)
+effectsize::eta_squared(model_block, partial = TRUE, generalized = "subject")
+
+# Interaction plot
+ggplot(data = resting,
+       aes(x = subject,
+           y = rate,
+           group = protocol,
+           color = protocol)) +
+  geom_line(linewidth = 1.5) +
+  labs(subtitle = "mean resting metabolic rate",
+       y = "",
+       x = "subject identifier") +
+  scale_color_grey()+
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+
+
 ##################################################################################
 ###########          Example 1 - Hosano et al. (2022)                  ###########
 ###########       Equivalence repeated measures and mixed models       ###########
