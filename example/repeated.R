@@ -59,6 +59,7 @@ xtabs(~ waiting + ratingtype, data = HOSM22_E3)
 
 # Fit an ANOVA model
 
+options(contrasts = c("contr.sum", "contr.poly"))
 fmod <- afex::aov_ez(id = "id",
                      dv = "imscore",
                      between = "waiting",
@@ -68,6 +69,21 @@ fmod <- afex::aov_ez(id = "id",
 anova(fmod)
 # MANOVA tests
 fmod$Anova
+
+# Alternative - different variance, equal correlations
+# Fit a compound symmetry model
+# and compare to the output of MANOVA and Mauchly's test
+modGLS_CS <- nlme::gls(model = imscore ~ waiting*ratingtype,
+          data = HOSM22_E3,
+          correlation = nlme::corCompSymm(form = ~ 1 | id))
+car::Anova(modGLS, type = 2, test.statistic = "F")
+modGLS_UN <- nlme::gls(model = imscore ~ waiting*ratingtype,
+                 data = HOSM22_E3,
+                 correlation = nlme::corSymm(form = ~ 1 | id),
+                 weights = nlme::varIdent(form = ~ 1 | ratingtype))
+# Here, there is a single correlation so the difference comes from the change in variance
+anova(modGLS_UN, modGLS_CS)
+emmeans::emmeans(modGLS_UN, specs = "ratingtype")
 
 # To get type 2, use the following
 rstatix::anova_test(wid = "id",
@@ -99,6 +115,7 @@ emmip(object = emmeans(fmod, specs = c("ratingtype","waiting")),
 ## Example 2 - three-way mixed ANOVA (2x2x2)
 ##############################################################################
 # Halevy and Berson, Study 5
+
 data(HB22_S5, package = "hecedsm")
 # Check sample size and balance
 xtabs(~ curstate + predout, data = HB22_S5)
@@ -118,6 +135,17 @@ anova(mmod)
 # get a single dimension conditioning on two others
 # or compute a 4 way ANOVA separately for each predout (simple effects)
 
+emm <- emmeans(mmod,
+               specs = c("curstate","predout"),
+               by = "tempdist")
+emmip(emm,
+      formula = curstate ~ predout | tempdist,
+      CIs = TRUE) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = "predicted output",
+       color = "current state")
+
 # Get sub tables of marginal means
 emm_rc <- emmeans(mmod,
                   specs = c("curstate","predout"),
@@ -135,4 +163,3 @@ emmip(emm_rc,
        x = "current state") + 
   theme_classic() +
   theme(legend.position = "bottom")
-
