@@ -92,11 +92,14 @@ head(C22)
 options(contrasts = c("contr.sum", "contr.poly"))
 # balanced!
 xtabs(~ anchor + vignette + verdictsyst, data = C22)
+# Incomplete block design: there are two (counterbalanced) combo of anchor, vignette, verdictsyst
+# but participants see 2 out of 8 combinations. So no interaction between these and ID is possible.
+xtabs(~  id + interaction(anchor, vignette, verdictsyst), data = C22)
 model <- lmer(
-  guilt ~ anchor*vignette*verdictsyst + prior + (1|id),
+  guilt ~ anchor*vignette*verdictsyst + pjaq + (1|id),
   data = C22)
-# prior is a covariate (so used to reduce error, plus the slope is of interest on it's own
-# Cannot have interaction prior * id, because we get a single prior score per person
+# pjaq is a covariate (so used to reduce error, plus the slope is of interest on it's own
+# Cannot have interaction pjaq * id, because we get a single pjaq score per person
 
 # No ambiguity for sum of square decomposition
 anova(model)

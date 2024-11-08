@@ -1208,7 +1208,7 @@
     "href": "evaluations/09-problem-set.html",
     "title": "Problem set 9",
     "section": "",
-    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power; this should be helpful in completing the problem set.",
+    "text": "Submission information: please submit on ZoneCours\nLook at the effect size and power examples; this should be helpful in completing the problem set.",
     "crumbs": [
       "Evaluations",
       "Problem sets",
@@ -1220,19 +1220,7 @@
     "href": "evaluations/09-problem-set.html#task-1",
     "title": "Problem set 9",
     "section": "Task 1",
-    "text": "Task 1\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy.\n\nThe differences between groups was reliable, omnibus \\(F(2, 77) = 4.8\\), […] Cohen’s \\(f = 0.18\\). Pairwise comparisons showed that all differences between conditions were reliable as well, \\(t(47, 48, 57) = 1.94, 2.32, 2.65\\); \\(p &lt; .05\\), Cohen’s \\(d\\) = \\((.56, .67, .69)\\).\n\n\nUsing the information from the quote, compute the effect size for Cohen’s \\(f\\) and \\(\\widehat{\\omega}^2\\).1 Note that you won’t necessarily get the same value of Cohen’s \\(f\\) that is reported.\nCompute the overall sample size necessary to replicate this study with a power of at least \\(0.99:\\) compute the power for both the overall effect and the three pairwise \\(t\\)-tests based on the reported values of Cohen’s \\(d\\) and pick the maximum sample size needed for balanced design (i.e., gathering the same number of participants in each subgroup).\nRead the results of the replication in ManyLabs1; these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen’s \\(d\\)) are reported in Table 2 (Klein et al., 2014) under retrospective gambler fallacy. Comment about the success of the replication.\nBased on observation of Figure 1 of Klein et al. (2014), why might one object to using estimated effect size reported in peer-reviewed papers?2",
-    "crumbs": [
-      "Evaluations",
-      "Problem sets",
-      "Problem set 9"
-    ]
-  },
-  {
-    "objectID": "evaluations/09-problem-set.html#task-2",
-    "href": "evaluations/09-problem-set.html#task-2",
-    "title": "Problem set 9",
-    "section": "Task 2",
-    "text": "Task 2\nRead the Section “Going Beyond Null Hypothesis Significance Testing” of the Academy of Management Journal 2024 editorial (Bliese et al., 2024) in preparation for a in-class discussion.",
+    "text": "Task 1\nThe following text is a quote from Investigating variation in replicability: A “Many Labs” Replication Project by Richard A. Klein, Kate A. Ratliff, and Brian A. Nosek (pp. 13-14) about a replication of Oppenheimer & Monin (2009) work on the retrospective gambler fallacy.\n\nThe differences between groups was reliable, omnibus \\(F(2, 77) = 4.8\\), […] Cohen’s \\(f = 0.18\\). Pairwise comparisons showed that all differences between conditions were reliable as well, \\(t(47, 48, 57) = 1.94, 2.32, 2.65\\); \\(p &lt; .05\\), Cohen’s \\(d\\) = \\((.56, .67, .69)\\).\n\n\nUsing the information from the quote, compute the effect size for Cohen’s \\(f\\) and \\(\\widehat{\\omega}^2\\).1 Note that you won’t normally get the same value of Cohen’s \\(f\\) that is reported.\nCompute the overall sample size necessary to replicate this study with a power of at least \\(0.99:\\) compute the sample sizes for both the overall effect (using the value you calculated in 1.) and the three pairwise \\(t\\)-tests based on the reported values of Cohen’s \\(d\\) and pick the maximum sample size needed for a balanced design, i.e., gathering the same number of participants in each subgroup.\nRead the results of the replication in ManyLabs1; these are illustrated in Figure 1 and summary statistics about standardized mean differences (Cohen’s \\(d\\)) are reported in Table 2 (Klein et al., 2014) under retrospective gambler fallacy. Comment about the success of the replication.\nBased on observation of Figure 1 of Klein et al. (2014), why might one object to using estimated effect size reported in peer-reviewed papers?2",
     "crumbs": [
       "Evaluations",
       "Problem sets",

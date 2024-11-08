@@ -635,7 +635,7 @@ With moderating *factors*, give weights to each sub-mean corresponding to the fr
 ]
 ---
 
-# Sensitivity analysis
+# Johnson and Neyman method
 
 The [Johnson and Neyman (1936)](https://doi.org/10.1007/bf02288864) method looks at the range of values of moderator $W$ for which difference between treatments (binary $X$) is not statistically significant.
 

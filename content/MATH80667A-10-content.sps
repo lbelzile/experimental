@@ -1,9 +1,23 @@
+GET FILE='C:\Users\11187439\Desktop\SPSS\workhours.sav'. 
+DATASET NAME workhours WINDOW=FRONT.
+
+MIXED time
+  /CRITERIA=DFMETHOD(SATTERTHWAITE)
+  /FIXED= | SSTYPE(3) 
+  /METHOD=REML 
+  /PRINT=SOLUTION 
+  /RANDOM=INTERCEPT | SUBJECT(id) COVTYPE(VC).
+
+
+DATASET CLOSE workhours.
+
+
 GET FILE='C:\Users\11187439\Desktop\SPSS\C22_E3.sav'. 
 DATASET NAME C22 WINDOW=FRONT.
 
-MIXED guilt BY anchor vignette verdictsyst WITH prior
+MIXED guilt BY anchor vignette verdictsyst WITH pjaq
   /CRITERIA=DFMETHOD(SATTERTHWAITE)
-  /FIXED=anchor vignette verdictsyst anchor*vignette anchor*verdictsyst vignette*verdictsyst anchor*vignette*verdictsyst prior | SSTYPE(3) 
+  /FIXED=anchor vignette verdictsyst anchor*vignette anchor*verdictsyst vignette*verdictsyst anchor*vignette*verdictsyst pjaq | SSTYPE(3) 
   /METHOD=REML 
   /PRINT=SOLUTION 
   /RANDOM=INTERCEPT | SUBJECT(id) COVTYPE(VC).
