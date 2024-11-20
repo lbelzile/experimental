@@ -4,13 +4,13 @@
     <title>Introduction to causal inference</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-03-24" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <meta name="date" content="2024-11-20" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
-    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
     <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
     <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
@@ -23,6 +23,8 @@
     <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
     <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -69,14 +71,18 @@ layout: false
 name: basicscausal
 class: center middle section-title section-title-1
 
+
+# Causal inference
+
 ---
 
 layout: true
 class: title title-1
 
 ---
-# Causal inference
 
+
+# Correlation is not causation
 
 &lt;div class="figure" style="text-align: center"&gt;
 &lt;img src="img/11/xkcd552_correlation.png" alt="xkcd comic 552 by Randall Munroe, CC BY-NC 2.5 license. Alt text: Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'." width="55%" /&gt;
@@ -84,7 +90,7 @@ class: title title-1
 &lt;/div&gt;
 ---
 
-# Correlation is not causation
+# Spurious correlation
 
 &lt;div class="figure" style="text-align: center"&gt;
 &lt;img src="img/11/5920_per-capita-consumption-of-margarine_correlates-with_the-divorce-rate-in-maine.png" alt="Spurious correlation by Tyler Vigen, licensed under CC BY 4.0" width="60%" /&gt;
@@ -114,7 +120,7 @@ Both are possible, but only one will be realized.
 
 .box-1.medium[Observe outcome for a single treatment]
 
-- Result `\(Y(X)\)` of your test given that you either party ( `\(X=1\)` ) or study ( `\(X=0\)` ) the night before your exam.
+- Result `\(Y(X)\)` of your test given that you either party `\((X=1)\)` or study `\((X=0)\)` the night before your exam.
 
 
 ---
@@ -124,61 +130,61 @@ Both are possible, but only one will be realized.
 
 
 
-&lt;!-- With binary treatment `\(X_i\)`, I observed either `\(Y_i \mid \text{do}(X_i=1)\)` or `\(Y_i \mid \text{do}(X_i=0)\)` given intervention **do**. --&gt;
+With binary treatment `\(X_i\)`, I observe either `\(Y_i \mid \text{do}(X_i=1)\)` or `\(Y_i \mid \text{do}(X_i=0)\)`.
 
 
-&lt;table&gt;
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; i &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; X &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Y(0) &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Y(1) &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Y(1)-Y(0) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(i\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(X_i\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(Y_i(0)\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(Y_i(1)\) &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; \(Y_i(1)-Y_i(0)\) &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 7 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ? &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -280,7 +286,7 @@ class: title title-2
 
 .box-2.SMALL[Graphical model of the process that generates the data]
 
-.box-2.SMALL[Maps your philosophical model]
+.box-2.SMALL[Maps your logical model]
 
 ]
 
@@ -288,133 +294,11 @@ class: title title-2
 
 ![](11-slides_files/figure-html/simple-dag-1.png)
 ]
----
 
-# How to draw a DAG
-.box-inv-2.medium.sp-after-half[What is the causal effect of an&lt;br&gt;additional year of education on earnings?]
---
-.box-2.sp-after-half[Step 1: List variables]
---
-.box-2.sp-after-half[Step 2: Simplify]
---
-.box-2.sp-after-half[Step 3: Connect arrows]
---
-.box-2.sp-after-half[Step 4: Use logic and math to determine&lt;br&gt;which nodes and arrows to measure]
----
-
-# 1. List variables
-.box-2.sp-after[Education (treatment) → Earnings (outcome)]
-.center.float-left.sp-after-half[
-.box-inv-2.sp-after-half[Location]&amp;ensp;.box-inv-2.sp-after-half[Ability]&amp;ensp;.box-inv-2.sp-after-half[Demographics]
-]
-.center.float-left.sp-after-half[
-.box-inv-2.sp-after-half[Socioeconomic status]&amp;ensp;.box-inv-2.sp-after-half[Year of birth]
-]
-.center.float-left[
-.box-inv-2.sp-after-half[Compulsory schooling laws]&amp;ensp;.box-inv-2.sp-after-half[Job connections]
-]
----
-
-# 2. Simplify
-.box-2.sp-after[Education (treatment) → Earnings (outcome)]
-.center.float-left.sp-after-half[
-.box-inv-2.sp-after-half[Location]&amp;ensp;.box-inv-3[Ability]&amp;ensp;.box-inv-3[Demographics]
-]
-.center.float-left.sp-after-half[
-.box-inv-3[Socioeonomic status]&amp;ensp;.box-inv-2.sp-after-half[Year of birth]
-]
-.center.float-left[
-.box-inv-2.sp-after-half[Compulsory schooling laws]&amp;ensp;.box-inv-2.sp-after-half[Job connections]
-]
-.box-inv-4[Background]
----
-
-# 3. Draw arrows
-.pull-left-narrow[
-.box-inv-2.sp-after-half[Education causes earnings]
-]
-.pull-right-wide[
-&lt;img src="11-slides_files/figure-html/edu-earn-simple-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Background, year of birth, location, job connections, and school requirements all cause education]
-
-]
-
-.pull-right-wide[
-
-&lt;img src="11-slides_files/figure-html/edu-earn-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Background, year of birth, and location all cause earnings too]
-
-]
-
-.pull-right-wide[
-
-&lt;img src="11-slides_files/figure-html/edu-earn-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Education causes job earnings]
-
-]
-
-.pull-right-wide[
-
-&lt;img src="11-slides_files/figure-html/edu-earn-4-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Location and background are probably related, but neither causes the other. Something unobservable (U1) does that.]
-
-]
-
-.pull-right-wide[
-
-&lt;img src="11-slides_files/figure-html/edu-earn-full-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-
-# Causal identification
-.box-inv-2.medium.sp-after-half[A causal effect is *identified* if the association between treatment and outcome is propertly stripped and isolated]
----
-
-# Paths and associations
-.box-inv-2.medium.sp-after-half[Arrows in a DAG transmit associations]
-.box-inv-2.medium.sp-after-half[You can redirect and control those paths by "adjusting" or "conditioning"]
 ---
 
 # Three types of associations
+
 .pull-left-3[
 .box-2.medium[Confounding]
 &lt;img src="11-slides_files/figure-html/confounding-dag-1.png" width="100%" style="display: block; margin: auto;" /&gt;
@@ -454,32 +338,10 @@ class: title title-2
 .box-inv-2.medium.sp-after-half[**Z** * confounds* the **X** → **Y** association]
 ]
 
+
 ---
 
-# Paths
-
-.pull-left-wide[
-![](11-slides_files/figure-html/confounding-dag-big-1.png)
-]
-.pull-right-narrow[
-.box-inv-2.sp-after-half[Paths between&lt;br&gt;**X** and **Y**?]
-.box-2.sp-after-half[**X** → **Y**]
-.box-2.sp-after-half[**X** ← **Z** → **Y**]
-.box-inv-2.medium.sp-after-half[**Z** is a *backdoor*]
-]
----
-
-# *d*-connection
-.pull-left-wide[
-![](11-slides_files/figure-html/confounding-dag-big-1.png)
-]
-.pull-right-narrow[
-.box-inv-2.sp-after-half[**X** and **Y** are&lt;br&gt;"*d*-connected" because associations can pass through **Z**]
-.box-2.sp-after-half[The relationship between **X** and **Y** is not identified / isolated]
-]
----
-
-# Effect of money on elections
+# Confounder: effect of money on elections
 .box-inv-2.medium.sp-after-half[What are the paths&lt;br&gt;between **money** and **win margin**?]
 .pull-left[
 &lt;img src="11-slides_files/figure-html/money-elections-1.png" width="100%" style="display: block; margin: auto;" /&gt;
@@ -492,121 +354,29 @@ class: title title-2
 
 .box-2.sp-after-half[Money ← Quality → Margin]
 
-.box-inv-2.sp-after-half[Quality is a *backdoor*]
+.box-inv-2.sp-after-half[Quality is a *confounder*]
 ]
+
 
 ---
 
-# Closing doors
+# Experimental data
 
-.pull-left[
-&lt;img src="11-slides_files/figure-html/confounding-dag-adjusted-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
+Since we randomize assignment to treatment `\(X\)`, all arrows **incoming** in `\(X\)` are removed.
 
-.pull-right[
-.box-inv-2.medium.sp-after-half[Close the backdoor by adjusting for **Z**]
-]
+
+
+With observational data, we need to explicitly model the relationship and strip out the effect of `\(X\)` on `\(Y\)`.
 
 ---
 
-# Closing doors
+# How to adjust with observational data
 
-.pull-left[
-.box-inv-2.small.sp-after-half[Find the part of campaign money that is explained by quality, remove it.&lt;br&gt;This is the residual part of money.]
 
-.box-inv-2.small[Find the part of win margin that is explained by quality, remove it. This is the residual part of win margin.]
-
-.box-inv-2.small[Find the relationship between the residual part of money and residual part of win margin.&lt;br&gt;**This is the causal effect**.]
-]
-
-.pull-right[
-&lt;img src="11-slides_files/figure-html/money-elections-adjusted-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-# Closing doors
-
-.pull-left[
-.box-inv-2[Compare candidates as if they had the same quality]
-
-.box-inv-2[Remove differences that are predicted by quality]
-
-.box-inv-2[Hold quality constant]
-]
-
-.pull-right[
-![](11-slides_files/figure-html/money-elections-adjusted-1.png)
-]
----
-
-# How to adjust
 .box-inv-2.medium.sp-after-half[Include covariate in regression]
 .center.float-left[
 .box-inv-2.medium[Matching] .box-inv-2.medium[Stratifying]
 .box-inv-2.medium.sp-before-half[Inverse probability weighting]
-]
----
-
-# *d*-separation
-.pull-left[
-![](11-slides_files/figure-html/confounding-dag-adjusted-1.png)
-]
-.pull-right[
-.box-inv-2.medium[If we control for **Z**,&lt;br&gt;**X** and **Y** are now&lt;br&gt;"*d*-separated" and the association is isolated!]
-]
----
-
-# Closing backdoors
-.pull-left-narrow[
-.box-inv-2[Block all backdoor paths to identify the main pathway you care about]
-]
-.pull-right-wide[
-![](11-slides_files/figure-html/edu-earn-full-1.png)
-]
----
-
-# All paths
-.pull-left.left[
-.box-2.smaller.sp-after-half[Education → Earnings]
-.box-2.smaller.sp-after-half[Education → Job connections → Earnings]
-.box-3.smaller.sp-after-half[Education ← Background → Earnings]
-.box-3.smaller.sp-after-half[Education ← Background ← U1 → Location → Earnings]
-.box-3.smaller.sp-after-half[Education ← Location → Earnings]
-.box-3.smaller.sp-after-half[Education ← Location ← U1 → Background → Earnings]
-.box-3.smaller.sp-after-half[Education ← Year → Earnings]
-]
-.pull-right[
-![](11-slides_files/figure-html/edu-earn-full-1.png)
-]
----
-
-# All paths
-.pull-left-narrow[
-.box-inv-2[Adjust for **Location**, **Background** and **Year** to isolate the **Education → Earnings** causal effect]
-]
-.pull-right-wide[
-&lt;img src="11-slides_files/figure-html/edu-earn-adjust-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-# How do you know if this is right?
-
-.pull-left-narrow[
-.box-inv-2[You can test the implications of the model to see if they're right in your data]
-
-$$
-X {\perp\mkern-10mu\perp} Y\ |\ Z
-$$
-
-.box-2.small[X is independent of Y, given Z]
-]
-
-.pull-right-wide[
-&lt;figure&gt;
-  &lt;img src="img/12/dagitty-implications.png" alt="Dagitty implications" title="Dagitty implications" width="100%"&gt;
-&lt;/figure&gt;
 ]
 
 ---
@@ -643,34 +413,6 @@ $$
 
 ---
 
-# Programming and social skills
-
-.box-inv-2.medium[Do programming skills reduce social skills?]
-
-.pull-left[
-&lt;img src="11-slides_files/figure-html/programming-social-skills-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
---
-
-.pull-right[
-.box-2[You go to a tech company and conduct a survey. You find a negative relationship!&lt;br&gt;Is it real?]
-]
-
----
-
-# Programming and social skills
-
-.box-inv-2.medium[Do programming skills reduce social skills?]
-
-.pull-left[
-![](11-slides_files/figure-html/programming-social-skills-1.png)
-]
-.pull-right[
-.box-2.sp-after-half[No! **Hired by a tech company** is a collider and we controlled for it.]
-.box-2.sp-after-half[This inadvertently connected the two.]
-]
----
 layout: false
 .pull-left[
 .box-2.medium[Colliders can create&lt;br&gt;fake causal effects]
@@ -790,9 +532,9 @@ Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Co
 - potential mediation given treatment `\(x\)` as `\(M_i(x)\)` and
 - potential outcome for treatment `\(x\)` and mediator `\(m\)` as `\(Y_i(x, m)\)`.
 
-Given pre-treatment covariates `\(\boldsymbol{Z}\)`, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
+- Given pre-treatment covariates `\(\boldsymbol{Z}\)`, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
 $$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid \boldsymbol{Z}_i = \boldsymbol{z}$$
-Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
+- Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
 $$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \boldsymbol{z}$$
 
 ---
@@ -826,17 +568,19 @@ Problem: this forces manipulation of the mediator, and only gives outcome for a 
 
 # Direct and indirect effects
 
-**Natural direct effect**: `\(\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}]\)`    
-   - expected change in `\(Y\)` under treatment `\(x\)` if `\(M\)` is set to whatever value it would take under control `\(x^*\)`
+The **natural direct effect** is the expected change in `\(Y\)` under treatment `\(x\)` if `\(M\)` is set to whatever value it would take under control `\(x^*\)`: `$$\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}].$$`    
 
-**Natural indirect effect**: `\(\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}]\)`  
-   - expected change in `\(Y\)` if we set `\(X\)` to its control value and change the mediator value which it would attain under `\(x\)`
 
-.small[
+The **natural indirect effect** is the expected change in `\(Y\)` if we set `\(X\)` to its control value and change the mediator value which it would attain under `\(x\)`: `$$\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}].$$`  
+
+
+---
+# Total effect
+
 Counterfactual conditioning reflects a physical intervention, not mere (probabilistic) conditioning.
-]
 
-Total effect is `\(\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x)\)`
+
+We define the **total effect** as `$$\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x).$$`
 ???
 
 ---

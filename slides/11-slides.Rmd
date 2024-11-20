@@ -76,14 +76,18 @@ layout: false
 name: basicscausal
 class: center middle section-title section-title-1
 
+
+# Causal inference
+
 ---
 
 layout: true
 class: title title-1
 
 ---
-# Causal inference
 
+
+# Correlation is not causation
 
 ```{r}
 #| eval: true
@@ -95,7 +99,7 @@ knitr::include_graphics("img/11/xkcd552_correlation.png")
 ```
 ---
 
-# Correlation is not causation
+# Spurious correlation
 
 ```{r}
 #| eval: true
@@ -133,7 +137,7 @@ Both are possible, but only one will be realized.
 
 .box-1.medium[Observe outcome for a single treatment]
 
-- Result $Y(X)$ of your test given that you either party ( $X=1$ ) or study ( $X=0$ ) the night before your exam.
+- Result $Y(X)$ of your test given that you either party $(X=1)$ or study $(X=0)$ the night before your exam.
 
 
 ---
@@ -143,7 +147,7 @@ Both are possible, but only one will be realized.
 
 
 
-<!-- With binary treatment $X_i$, I observed either $Y_i \mid \text{do}(X_i=1)$ or $Y_i \mid \text{do}(X_i=0)$ given intervention **do**. -->
+With binary treatment $X_i$, I observe either $Y_i \mid \text{do}(X_i=1)$ or $Y_i \mid \text{do}(X_i=0)$.
 
 
 ```{r}
@@ -158,8 +162,9 @@ knitr::kable(tibble::tibble(i = 1:6, X = x, "Y(0)" = ifelse(x == 0L, Y, "?"),
                 "Y(1)" = ifelse(x == 1L, Y, "?"),
                 "Y(1)-Y(0)" = rep("?", 6)),
              booktabs = TRUE,
-             # col.names = c("$i$", "$X$", "$Y(0)$", "$Y(1)$", "$Y(1)-Y(0)$"),
-             linesep = "")
+             col.names = c("\\(i\\)", "\\(X_i\\)", "\\(Y_i(0)\\)", "\\(Y_i(1)\\)", "\\(Y_i(1)-Y_i(0)\\)"),
+             linesep = "",align = "c") |>
+  kableExtra::kable_styling()
 ```
 
 ---
@@ -271,7 +276,7 @@ dagify(
 
 .box-2.SMALL[Graphical model of the process that generates the data]
 
-.box-2.SMALL[Maps your philosophical model]
+.box-2.SMALL[Maps your logical model]
 
 ]
 
@@ -279,231 +284,11 @@ dagify(
 
 ![](`r knitr::fig_chunk("simple-dag", "png")`)
 ]
----
 
-# How to draw a DAG
-.box-inv-2.medium.sp-after-half[What is the causal effect of an<br>additional year of education on earnings?]
---
-.box-2.sp-after-half[Step 1: List variables]
---
-.box-2.sp-after-half[Step 2: Simplify]
---
-.box-2.sp-after-half[Step 3: Connect arrows]
---
-.box-2.sp-after-half[Step 4: Use logic and math to determine<br>which nodes and arrows to measure]
----
-
-# 1. List variables
-.box-2.sp-after[Education (treatment) → Earnings (outcome)]
-.center.float-left.sp-after-half[
-.box-inv-2.sp-after-half[Location]&ensp;.box-inv-2.sp-after-half[Ability]&ensp;.box-inv-2.sp-after-half[Demographics]
-]
-.center.float-left.sp-after-half[
-.box-inv-2.sp-after-half[Socioeconomic status]&ensp;.box-inv-2.sp-after-half[Year of birth]
-]
-.center.float-left[
-.box-inv-2.sp-after-half[Compulsory schooling laws]&ensp;.box-inv-2.sp-after-half[Job connections]
-]
----
-
-# 2. Simplify
-.box-2.sp-after[Education (treatment) → Earnings (outcome)]
-.center.float-left.sp-after-half[
-.box-inv-2.sp-after-half[Location]&ensp;.box-inv-3[Ability]&ensp;.box-inv-3[Demographics]
-]
-.center.float-left.sp-after-half[
-.box-inv-3[Socioeonomic status]&ensp;.box-inv-2.sp-after-half[Year of birth]
-]
-.center.float-left[
-.box-inv-2.sp-after-half[Compulsory schooling laws]&ensp;.box-inv-2.sp-after-half[Job connections]
-]
-.box-inv-4[Background]
----
-
-# 3. Draw arrows
-.pull-left-narrow[
-.box-inv-2.sp-after-half[Education causes earnings]
-]
-.pull-right-wide[
-```{r edu-earn-simple, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-edu_earn_coords <- list(x = c(Edu = 2, Earn = 4, Year = 2, Bkgd = 4, 
-                              Loc = 3, JobCx = 3, Req = 1, U1 = 3),
-                        y = c(Edu = 2, Earn = 2, Year = 3, Bkgd = 3, 
-                              Loc = 3, JobCx = 1, Req = 2, U1 = 4))
-dagify(
-  Earn ~ Edu,
-  exposure = "Edu",
-  outcome = "Earn",
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Background, year of birth, location, job connections, and school requirements all cause education]
-
-]
-
-.pull-right-wide[
-
-```{r edu-earn-2, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Earn ~ Edu,
-  Edu ~ Req + Loc + Bkgd + Year,
-  exposure = "Edu",
-  outcome = "Earn",
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  coord_cartesian(ylim = c(1, 3)) +
-  theme_dag()
-```
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Background, year of birth, and location all cause earnings too]
-
-]
-
-.pull-right-wide[
-
-```{r edu-earn-3, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
-  Edu ~ Req + Loc + Bkgd + Year,
-  exposure = "Edu",
-  outcome = "Earn",
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Education causes job earnings]
-
-]
-
-.pull-right-wide[
-
-```{r edu-earn-4, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
-  Edu ~ Req + Loc + Bkgd + Year,
-  JobCx ~ Edu,
-  exposure = "Edu",
-  outcome = "Earn",
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-
-]
-
----
-
-# 3. Draw arrows
-
-.pull-left-narrow[
-
-.box-inv-2.sp-after-half[Location and background are probably related, but neither causes the other. Something unobservable (U1) does that.]
-
-]
-
-.pull-right-wide[
-
-```{r edu-earn-full, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
-  Edu ~ Req + Loc + Bkgd + Year,
-  JobCx ~ Edu,
-  Bkgd ~ U1,
-  Loc ~ U1,
-  exposure = "Edu",
-  outcome = "Earn",
-  latent = "U1",
-  labels = c("Earn" = "Earnings", "Edu" = "Education",
-             "Year" = "Year", "Bkgd" = "Background",
-             "Loc" = "Location", "JobCx" = "Job connections",
-             "U1" = "Unobserved stuff"),
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-
-]
-
----
-
-
-# Causal identification
-.box-inv-2.medium.sp-after-half[A causal effect is *identified* if the association between treatment and outcome is propertly stripped and isolated]
----
-
-# Paths and associations
-.box-inv-2.medium.sp-after-half[Arrows in a DAG transmit associations]
-.box-inv-2.medium.sp-after-half[You can redirect and control those paths by "adjusting" or "conditioning"]
 ---
 
 # Three types of associations
+
 .pull-left-3[
 .box-2.medium[Confounding]
 ```{r confounding-dag, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
@@ -592,32 +377,10 @@ dagify(
 .box-inv-2.medium.sp-after-half[**Z** * confounds* the **X** → **Y** association]
 ]
 
+
 ---
 
-# Paths
-
-.pull-left-wide[
-![](`r knitr::fig_chunk("confounding-dag-big", "png")`)
-]
-.pull-right-narrow[
-.box-inv-2.sp-after-half[Paths between<br>**X** and **Y**?]
-.box-2.sp-after-half[**X** → **Y**]
-.box-2.sp-after-half[**X** ← **Z** → **Y**]
-.box-inv-2.medium.sp-after-half[**Z** is a *backdoor*]
-]
----
-
-# *d*-connection
-.pull-left-wide[
-![](`r knitr::fig_chunk("confounding-dag-big", "png")`)
-]
-.pull-right-narrow[
-.box-inv-2.sp-after-half[**X** and **Y** are<br>"*d*-connected" because associations can pass through **Z**]
-.box-2.sp-after-half[The relationship between **X** and **Y** is not identified / isolated]
-]
----
-
-# Effect of money on elections
+# Confounder: effect of money on elections
 .box-inv-2.medium.sp-after-half[What are the paths<br>between **money** and **win margin**?]
 .pull-left[
 ```{r money-elections, echo=FALSE, fig.width=5, fig.height=3, out.width="100%"}
@@ -652,189 +415,29 @@ dagify(
 
 .box-2.sp-after-half[Money ← Quality → Margin]
 
-.box-inv-2.sp-after-half[Quality is a *backdoor*]
+.box-inv-2.sp-after-half[Quality is a *confounder*]
 ]
+
 
 ---
 
-# Closing doors
+# Experimental data
 
-.pull-left[
-```{r confounding-dag-adjusted, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Y ~ X + Z,
-  X ~ Z,
-  coords = list(x = c(X = 1, Y = 3, Z = 2),
-                y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  tidy_dagitty() %>% 
-  adjust_for("Z") %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(shape = adjusted, color = adjusted), size = 15) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_shape_manual(values = c(15, 19)) +
-  scale_color_manual(values = c("#FFDC00", "grey80")) +
-  guides(shape = "none", color = "none") +
-  theme_dag()
-```
-]
+Since we randomize assignment to treatment $X$, all arrows **incoming** in $X$ are removed.
 
-.pull-right[
-.box-inv-2.medium.sp-after-half[Close the backdoor by adjusting for **Z**]
-]
+
+
+With observational data, we need to explicitly model the relationship and strip out the effect of $X$ on $Y$.
 
 ---
 
-# Closing doors
+# How to adjust with observational data
 
-.pull-left[
-.box-inv-2.small.sp-after-half[Find the part of campaign money that is explained by quality, remove it.<br>This is the residual part of money.]
 
-.box-inv-2.small[Find the part of win margin that is explained by quality, remove it. This is the residual part of win margin.]
-
-.box-inv-2.small[Find the relationship between the residual part of money and residual part of win margin.<br>**This is the causal effect**.]
-]
-
-.pull-right[
-```{r money-elections-adjusted, echo=FALSE, fig.width=5, fig.height=3.3, out.width="100%"}
-dagify(
-  Y ~ X + Z,
-  X ~ Z,
-  coords = list(x = c(X = 1, Y = 3, Z = 2),
-                y = c(X = 1, Y = 1, Z = 2)),
-  exposure = "X",
-  outcome = "Y",
-  labels = c("X" = "Campaign money", "Y" = "Win margin",
-             "Z" = "Candidate quality")
-) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  adjust_for("Z") %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status, shape = adjusted), size = 15) +
-  geom_dag_text(color = "white", size = 5) +
-  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, -0.25, 0.25)) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#FFDC00") +
-  scale_shape_manual(values = c(15, 19)) +
-  guides(color = "none", shape = "none") +
-  theme_dag()
-```
-]
-
----
-
-# Closing doors
-
-.pull-left[
-.box-inv-2[Compare candidates as if they had the same quality]
-
-.box-inv-2[Remove differences that are predicted by quality]
-
-.box-inv-2[Hold quality constant]
-]
-
-.pull-right[
-![](`r knitr::fig_chunk("money-elections-adjusted", "png")`)
-]
----
-
-# How to adjust
 .box-inv-2.medium.sp-after-half[Include covariate in regression]
 .center.float-left[
 .box-inv-2.medium[Matching] .box-inv-2.medium[Stratifying]
 .box-inv-2.medium.sp-before-half[Inverse probability weighting]
-]
----
-
-# *d*-separation
-.pull-left[
-![](`r knitr::fig_chunk("confounding-dag-adjusted", "png")`)
-]
-.pull-right[
-.box-inv-2.medium[If we control for **Z**,<br>**X** and **Y** are now<br>"*d*-separated" and the association is isolated!]
-]
----
-
-# Closing backdoors
-.pull-left-narrow[
-.box-inv-2[Block all backdoor paths to identify the main pathway you care about]
-]
-.pull-right-wide[
-![](`r knitr::fig_chunk("edu-earn-full", "png")`)
-]
----
-
-# All paths
-.pull-left.left[
-.box-2.smaller.sp-after-half[Education → Earnings]
-.box-2.smaller.sp-after-half[Education → Job connections → Earnings]
-.box-3.smaller.sp-after-half[Education ← Background → Earnings]
-.box-3.smaller.sp-after-half[Education ← Background ← U1 → Location → Earnings]
-.box-3.smaller.sp-after-half[Education ← Location → Earnings]
-.box-3.smaller.sp-after-half[Education ← Location ← U1 → Background → Earnings]
-.box-3.smaller.sp-after-half[Education ← Year → Earnings]
-]
-.pull-right[
-![](`r knitr::fig_chunk("edu-earn-full", "png")`)
-]
----
-
-# All paths
-.pull-left-narrow[
-.box-inv-2[Adjust for **Location**, **Background** and **Year** to isolate the **Education → Earnings** causal effect]
-]
-.pull-right-wide[
-```{r edu-earn-adjust, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
-  Edu ~ Req + Loc + Bkgd + Year,
-  JobCx ~ Edu,
-  Bkgd ~ U1,
-  Loc ~ U1,
-  exposure = "Edu",
-  outcome = "Earn",
-  latent = "U1",
-  labels = c("Earn" = "Earnings", "Edu" = "Education",
-             "Year" = "Year", "Bkgd" = "Background",
-             "Loc" = "Location", "JobCx" = "Job connections",
-             "U1" = "Unobserved stuff"),
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  adjust_for(c("Loc", "Bkgd", "Year")) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status, shape = adjusted), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  scale_shape_manual(values = c(15, 19)) +
-  guides(color = "none", shape = "none") +
-  theme_dag()
-```
-]
-
----
-
-# How do you know if this is right?
-
-.pull-left-narrow[
-.box-inv-2[You can test the implications of the model to see if they're right in your data]
-
-$$
-X {\perp\mkern-10mu\perp} Y\ |\ Z
-$$
-
-.box-2.small[X is independent of Y, given Z]
-]
-
-.pull-right-wide[
-<figure>
-  <img src="img/12/dagitty-implications.png" alt="Dagitty implications" title="Dagitty implications" width="100%">
-</figure>
 ]
 
 ---
@@ -896,57 +499,6 @@ dagify(
 
 ---
 
-# Programming and social skills
-
-.box-inv-2.medium[Do programming skills reduce social skills?]
-
-.pull-left[
-```{r programming-social-skills, echo=FALSE, fig.width=5, fig.height=3, out.width="100%"}
-dagify(
-  Y ~ X,
-  Z ~ Y,
-  Z ~ X,
-  coords = list(x = c(X = 1, Y = 3, Z = 2),
-                y = c(X = 1, Y = 1, Z = 2)),
-  exposure = "X",
-  outcome = "Y",
-  labels = c("X" = "Programming skills", "Y" = "Social skills",
-             "Z" = "Hired by a tech company")
-) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 15) +
-  geom_dag_text(color = "white", size = 5) +
-  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, 0.25, -0.25)) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-]
-
---
-
-.pull-right[
-.box-2[You go to a tech company and conduct a survey. You find a negative relationship!<br>Is it real?]
-]
-
----
-
-# Programming and social skills
-
-.box-inv-2.medium[Do programming skills reduce social skills?]
-
-.pull-left[
-![](`r knitr::fig_chunk("programming-social-skills", "png")`)
-]
-.pull-right[
-.box-2.sp-after-half[No! **Hired by a tech company** is a collider and we controlled for it.]
-.box-2.sp-after-half[This inadvertently connected the two.]
-]
----
 layout: false
 .pull-left[
 .box-2.medium[Colliders can create<br>fake causal effects]
@@ -1119,9 +671,9 @@ Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Co
 - potential mediation given treatment $x$ as $M_i(x)$ and
 - potential outcome for treatment $x$ and mediator $m$ as $Y_i(x, m)$.
 
-Given pre-treatment covariates $\boldsymbol{Z}$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
+- Given pre-treatment covariates $\boldsymbol{Z}$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
 $$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid \boldsymbol{Z}_i = \boldsymbol{z}$$
-Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
+- Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
 $$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \boldsymbol{z}$$
 
 ---
@@ -1174,17 +726,19 @@ Problem: this forces manipulation of the mediator, and only gives outcome for a 
 
 # Direct and indirect effects
 
-**Natural direct effect**: $\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}]$    
-   - expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x^*$
+The **natural direct effect** is the expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x^*$: $$\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}].$$    
 
-**Natural indirect effect**: $\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}]$  
-   - expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$
 
-.small[
+The **natural indirect effect** is the expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$: $$\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}].$$  
+
+
+---
+# Total effect
+
 Counterfactual conditioning reflects a physical intervention, not mere (probabilistic) conditioning.
-]
 
-Total effect is $\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x)$
+
+We define the **total effect** as $$\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x).$$
 ???
 
 ---
