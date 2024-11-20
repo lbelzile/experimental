@@ -20,7 +20,7 @@ We consider Experiment 3 of @vanStekelenburg:2021; ([download the paper](https:/
    a. equal variance per experimental condition with the ANCOVA
    b. proper randomization based only on `Prior` scores
    c. equality of slopes
-6. If the variance are unequal, fit the model with unequal variances per group (see the [ANCOVA example](example/ancova.html)) --- otherwise proceed as usual.
+6. If the variance are unequal, fit the model with unequal variances per group (see the [ANCOVA example](/example/ancova.html)) --- otherwise proceed as usual.
    - Look at the pairwise difference between between Boost+ and consensus only condition and report the results of this test.
    - Does the conclusion of the test change relative to that reported in the paper?
 

@@ -4,7 +4,7 @@
     <title>Introduction to mixed models</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-10-31" />
+    <meta name="date" content="2024-11-08" />
     <script src="libs/header-attrs-2.28/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -593,23 +593,6 @@ https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent
 
 ---
 
-# Formulae in **R**
-
-**R** uses the following notation 
-
-- `group1/group2` means `group2` is nested within `group1`. 
-
-The formula expands to `group1 + group1:group2`.
-
-- `group1*group2` means `group` and `group2` are **crossed**
-
-The formula is a shorthand for `group1 + group2 + group1:group2`.
-
-.small[
-To fit the model, identifiers of subjects must be declared as factors (categorical variables).
-]
-
----
 
 # Specifying interactions
 
@@ -648,7 +631,7 @@ data(AA21, package = "hecedsm")
 anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
   lmerTest::lmer(
     data = AA21 |&gt; dplyr::filter(latency &gt; -40), 
-    latency ~ stimulus + (1|id) + (1|id:stimulus)))
+    latency ~ stimulus + (1 | id) + (1 | id:stimulus)))
 ```
 
 ```
@@ -673,6 +656,15 @@ anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
 
 ---
 
+# Example: chocolate rating
+
+Example from L. Meier, adapted from Oehlert (2010)
+
+&gt; A group of 10 rural and 10 urban raters rated 4 different chocolate types. Every rater got to eat two samples from the same chocolate type in random order.
+
+
+---
+
 # Example: Curley et al. (2022)
 
 .small[
@@ -683,14 +675,7 @@ anova(ddf = "Kenward-Roger", # other option is "Satterthwaite"
 
 ]
 
----
-
-# Example: chocolate rating
-
-Example from L. Meier, adapted from Oehlert (2010)
-
-&gt; A group of 10 rural and 10 urban raters rated 4 different chocolate types. Every rater got to eat two samples from the same chocolate type in random order.
-
+This study is an instance of **incomplete** design.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
