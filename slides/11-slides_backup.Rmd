@@ -1107,6 +1107,7 @@ layout: true
 class: title title-3
 
 ---
+
 # Key references
 
 - Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
@@ -1133,9 +1134,9 @@ Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Co
 - potential mediation given treatment $x$ as $M_i(x)$ and
 - potential outcome for treatment $x$ and mediator $m$ as $Y_i(x, m)$.
 
-Given pre-treatment covariates $\boldsymbol{Z}$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
+- Given pre-treatment covariates $\boldsymbol{Z}$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
 $$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid \boldsymbol{Z}_i = \boldsymbol{z}$$
-Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
+- Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
 $$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \boldsymbol{z}$$
 
 ---
@@ -1188,17 +1189,19 @@ Problem: this forces manipulation of the mediator, and only gives outcome for a 
 
 # Direct and indirect effects
 
-**Natural direct effect**: $\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}]$    
-   - expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x^*$
+The **natural direct effect** is the expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x^*$: $$\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}].$$    
 
-**Natural indirect effect**: $\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}]$  
-   - expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$
 
-.small[
+The **natural indirect effect** is the expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$: $$\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}].$$  
+
+
+---
+# Total effect
+
 Counterfactual conditioning reflects a physical intervention, not mere (probabilistic) conditioning.
-]
 
-Total effect is $\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x)$
+
+We define the **total effect** as $$\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x).$$
 ???
 
 ---
@@ -1213,3 +1216,4 @@ From Pearl (2014):
 
 - In linear systems, changing the order of arguments amounts to flipping signs
 - This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
+

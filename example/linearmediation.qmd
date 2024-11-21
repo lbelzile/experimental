@@ -208,4 +208,3 @@ The `medsens` function implements the sensitivity diagnostic presented in Sectio
 
 According to the documentation of the `medsens` function (`?medsens`), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, `R^2_M~R^2_Y`) or residual (starred, `R^2_M*R^2_Y*`) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. 
 
-

@@ -65,3 +65,44 @@ linmed_sensitivity <- medsens(linmed)
 summary(linmed_sensitivity)
 plot(linmed_sensitivity)
 
+
+## Example of moderated mediation
+
+?mediation::mediate
+library(mediation)
+data(jobs, package = "mediation")
+# Mediator model
+model_m <- lm(job_seek ~ treat +  depress1 + econ_hard +
+                sex + age + occp + marital + nonwhite + educ + income, data = jobs)
+alpha <- coef(model_m)["treat"]
+# Outcome model
+model_y <- lm(depress2 ~ job_seek + treat + depress1 + econ_hard +
+                sex + age + occp + marital + nonwhite + educ + income, data = jobs) # mediator model
+gamma <- coef(model_y)["job_seek"]
+
+acme <- alpha*gamma
+
+# Simulation approach to estimate average causal mediation effect
+out <- mediate(model.m = model_m,
+               model.y = model_y,
+               sims = 100, # usually more, just for speed
+               boot = TRUE,
+               treat = "treat",
+               mediator = "job_seek")
+summary(out)
+# Plot of causal estimates with confidence intervals
+plot(out)
+medsens(out)
+# Can generalize this to include moderated mediation
+# (where there is an interaction between X and M, X:M, in the outcome model
+model_y2 <- lm(depress2 ~ treat*job_seek  + depress1 + econ_hard +
+                 sex + age + occp + marital + nonwhite + educ + income, data = jobs) # mediator model
+out <- mediate(model.m = model_m,
+               model.y = model_y2,
+               sims = 100,
+               boot = TRUE,
+               treat = "treat",
+               mediator = "job_seek")
+summary(out)
+plot(out)
+

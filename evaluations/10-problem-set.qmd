@@ -24,11 +24,10 @@ Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teachi
     d. Figure out which interactions can exist and whether they can be fitted.
 2. Fit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance: 
     a. are there difference between recall task?
-    b. is the increase between 5 and 7 years the same as from 7 to 10?
+    b. is the increase between 5 and 7 years the same as from 7 to 10? *Note: this is a contrast*
 3. Report estimated marginal means  across age groups (separately for each `timing` if there is an interaction), with standard errors.
-4. Produce an interaction plot for mean memory span to mimic Figure 4 of Elliot.
-5. Report the lab-specific variability  and comment on regional differences, if any.
-6. Compute the correlation of measurements for different individuals in a given lab
+4. Report the lab-specific variability  and comment on regional differences, if any.
+5. Compute the correlation of measurements for different individuals in a given lab, following [the example from the course notes](https://lbelzile.github.io/math80667a/mixed.html#exm-verbalization-memorization)
 
 <!--
 

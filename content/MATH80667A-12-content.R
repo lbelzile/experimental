@@ -233,3 +233,4 @@ process(data = LWSH23_S3 |>
         mcw = 1, # dummy coding for moderator w (so compare to base level, here 'included')
         model = 1, # number of model in Hayes (simple)
         plot = TRUE) # add plot, doesn't seem to work...
+

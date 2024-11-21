@@ -155,43 +155,13 @@ $$ Y_i(x', m)\ \perp\mkern-10mu\perp\  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \b
 $\boldsymbol{Z}$ are potential confounders. If we randomly allocate $X$ (experiment), then all incoming arrows vanish and we have no confounder for $X$ vs $M$ or $X$ vs $Y$.
 
 ]
-
 ---
-
-# Average directed effect
-
-The $\mathsf{ADE}$ measures the flow along $X \rightarrow Y$, disabling the pathway $X \to M \to Y$ by fixing the mediator value: it is
-\begin{align*}
-\mathsf{ADE}(x) &= \mathsf{E}[Y_i(1, M_i(x)) -Y_i(0, M_i(x))\}
-\end{align*}
-
-This measures the expected change in response when the experimental factor changes from treatment to control, while the mediator is set to a fixed value $M_i(x)$ uniformly over the population. Fixing the mediator may or not be feasible experimentally.
-
-If there is no interaction between the treatment and the mediator, then $\mathsf{ADE}(0)=\mathsf{ADE}(1)$.
-
-
----
-
-# Average causal mediation effect
-
-Also called indirect effect, obtained for a fixed intervention due to changing the values of the mediator to those it would take under the treatment and control group, respectively $M_i(1)$ and $M_i(0)$.
-
-\begin{align*}
-\mathsf{ACME}(x) &=  \mathsf{E}[Y_i\{x, M_i(1)\} -Y_i\{x, M_i(0)\}]
-\end{align*}
-
-If there is no interaction between the treatment and the mediator, then $\mathsf{ACME}(0)=\mathsf{ACME}(1)$
-
----
-
 
 # Total effect
 
 **Total effect**: overall impact of $X$ (both through $M$ and directly)
 
-\begin{align*}
-\mathsf{TE} = \mathsf{E}[ Y \mid \text{do}(X=1)] - \mathsf{E}[ Y \mid \text{do}(X=0)]
-\end{align*}
+$$\begin{align*}\mathsf{TE}(x, x_0) = \mathsf{E}[ Y \mid \text{do}(X=x)] - \mathsf{E}[ Y \mid \text{do}(X=x_0)]\end{align*}$$
 
 .pull-left[
 .box-inv-4[
@@ -222,27 +192,55 @@ dagify(
 
 ]
 
-The total effect is the average change in response if we randomize treatment assignment and consider the difference treatment vs control.
+---
+
+# Average controlled direct effect
+.small[
+
+\begin{align*}
+\textsf{ACDE}(m, x, x_0) &= \mathsf{E}\{Y_i(x, m) - Y_i(x_0, m)\}
+\\&= \mathsf{E}\{Y \mid \text{do}(X=x, m=m)\} - \mathsf{E}\{Y \mid \text{do}(X=x_0, m=m)\} 
+\end{align*}
+
+]
+
+The average controlled direct effect (ACDE) is the expected change in response for the population when 
+
+- the experimental factor changes from $x$ to $x_0$ and 
+- the mediator is set to a fixed value $m$
+
+This typically requires experimental manipulation of both variables.
 
 ---
 
-# Total effect
+# Direct and indirect effects
+
+**Natural direct effect**: the expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x_0$
+
+$$\textsf{NDE}(x, x_0) = \mathsf{E}[Y\{x, M(x_0)\} - Y\{x_0,  M({x_0})\}]$$
+
+**Natural indirect effect**: the expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$
+
+$$\textsf{NIE}(x, x_0) = \mathsf{E}[Y\{x_0, M(x)\} - Y\{x_0,  M(x_0)\}]$$
 
 
-The **total effect** measures the average overall impact of changes in outcome $Y$ (both through $M$ and directly) when experimentally manipulating $X$,
-\begin{align*}
-\mathsf{TE} &= \mathsf{E}[Y_i\{1, M(1)\}] - \mathsf{E}[Y_i\{0, M(0)\}],
-\end{align*}
+.small[
+Counterfactual conditioning reflects a physical intervention (experimentation), not mere conditioning.
+]
+
+---
+
+# Necessary and sufficiency of mediation
+
+From Pearl (2014):
+
+> The difference $\textsf{TE}-\textsf{NDE}$ quantifies the extent to which the response of $Y$ is owed to mediation, while $\textsf{NIE}$ quantifies the extent to which it is explained by mediation. These two components of mediation, the necessary and the sufficient, coincide into one in models void of interactions (e.g., linear) but differ substantially under moderation
 
 
-- The total effect is obtained as 
-$$\mathsf{TE} = \mathsf{ACME}(X) + \mathsf{ADE}(1-X), \qquad X=0,1.$$
 
 ???
 
-The values of the average causal mediation effect and the average direct effect are the same regardless of the treatment assignment $x$ if there is no interaction.
-
-
+This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not). In linear systems, changing the order of arguments amounts to flipping signs
 
 ---
 
@@ -282,24 +280,20 @@ $$
 
 # Product of coefficient method
 
-In the linear mediation model of Baron and Kenny, the quantities of interest are
-
-\begin{align*}
-\mathsf{ACME}(x) &= \mathsf{E}[Y\{x, M(1)\} -Y\{x, M(0)\}] = \alpha \gamma\\
-\mathsf{ADE}(x) &= \mathsf{E}[Y\{1, M(x)\} -Y\{0, M(x)\}] = \beta \\
-\mathsf{TE} &= \mathsf{E}[Y\{1, M(1)\} -Y\{0, M(0)\}] = \beta + \alpha \gamma
-\end{align*}
-
----
-
-# Model assumptions
-
+In the linear mediation model of Baron and Kenny, the quantity of interest is the product of coefficients $\alpha\gamma$.
 
 There are three main assumptions for this quantity to be a valid estimator of the causal mediation effect
 
 - the effect of treatment is **linear**.
 - there is no interaction between mediator $M$ and treatment $X$.
 - the sequential ignorability assumption holds.
+
+---
+
+```{r}
+
+```
+
 
 ---
 
@@ -324,6 +318,28 @@ satisfaction is mediated by the positivity of their causal
 attributions of negative experiences. ”
 
 ]
+
+---
+
+# Old method 
+
+This approach has been discontinued, but still appears in older papers.
+
+Baron and Kenny recommended running three linear regressions and testing
+
+1. whether $\mathscr{H}_0: \alpha=0$
+2. whether $\mathscr{H}_0: \tau=0$ (total effect)
+3. whether $\mathscr{H}_0: \gamma=0$
+
+The average conditional mediation effect (ACME) in the linear mediation model is $\alpha\gamma$ and we can check whether it's zero using Sobel's test statistic.
+
+---
+
+# Problems with Baron–Kenny approach
+
+- We conduct three tests, so this inflates the Type I error.
+- The total effect can be zero because $\alpha\gamma = - \beta$, even if there is mediation.
+- The method has lower power to detect mediation when effect sizes are small.
 
 ---
 
@@ -410,7 +426,8 @@ Conclusions about mediation are valid only when causal assumptions hold.
 
 Assuming that $X$ is randomized, we need
 
-- Lack of interaction between $X$ and $M$ (moderated mediation)
+- Lack of interaction between $X$ and $M$
+  - can be added to model, then use NID definition
 - Causal direction: $M \to Y$, so $M$ must be an antecedent cause
   - $M$ must be measured before $Y$
 - Reliability of $M$ (no measurement error)
@@ -420,15 +437,14 @@ Assuming that $X$ is randomized, we need
 
 ---
 
-
 # Sensitivity analysis
 
 The no-unmeasured confounders assumption should be challenged.
 
-Check the robustness of the conclusions by considering potential correlation between errors, as
-$$\mathsf{E}(\widehat{\gamma})= \gamma + \mathsf{Cor}(\varepsilon_m, \varepsilon_y)\sqrt{\frac{\mathsf{Va}(\varepsilon_y)}{\mathsf{Va}(\varepsilon_m)}}$$ 
+One way to assess the robustness of the conclusions to this is to consider correlation between errors, as (e.g., [Bullock, Green and Ha, 2010](https://doi.org/10.1037/a0018933))
+$$\mathsf{E}(\widehat{\gamma})= \gamma + \mathsf{Cov}(\varepsilon_m, \varepsilon_y)/\mathsf{Va}(\varepsilon_m)$$ 
 
-- We vary $\rho=\mathsf{Cor}(\varepsilon_m, \varepsilon_y)$ to assess the sensitivity to confounding.
+- We vary $\rho=\mathsf{Cor}(\varepsilon_m, \varepsilon_y)$ to assess the sensitivity of our conclusions to confounding.
 - The `medsens` function in the **R** package `mediation` implements the diagnostic of [Imai, Keele and Yamamoto (2010)](https://doi.org/10.1214/10-STS321) for the linear mediation model.
 
 
@@ -441,7 +457,7 @@ $$\mathsf{E}(\widehat{\gamma})= \gamma + \mathsf{Cor}(\varepsilon_m, \varepsilon
 - Definitions contingent on model 
    - (even if causal quantities have a meaning regardless of estimation method)
 - Most papers do not consider confounders, or even check for assumptions
-- Generalizations to interactions, multiple mediators, etc., requires care.
+- Generalizations to interactions, multiple mediators, etc., requires care
 
 ]
 .pull-right-narrow[
@@ -451,67 +467,16 @@ $$\mathsf{E}(\widehat{\gamma})= \gamma + \mathsf{Cor}(\varepsilon_m, \varepsilon
 
 ---
 
-# Extension: moderated mediation
-
-Consider a more complex setting where the effect of the experimental factor $X$ depends on the mediator, a case termed **moderated mediator** [Judd and Kenny (1982)]().
-
-In this case, the equation for the response variable becomes
-\begin{align*}
-\mathsf{E}(Y \mid M=m, X=x, \boldsymbol{Z} = \boldsymbol{z}) = c_Y + \beta x + \gamma m + \kappa x m + \boldsymbol{z}\boldsymbol{\omega}
-\end{align*}
-
----
-
-# ACME for moderated mediation
-
-Upon substituting the equations for both inside the definition of average causal mediation effect, we find that the latter equals
-\begin{align*}
-\mathsf{ACME}(x) = (\gamma + \kappa x)\{M(1)-M(0)\} = \alpha (\gamma + \kappa x).
-\end{align*}
-and thus the value differs depending on experimental regime (treatment or control), due to the presence of the interaction.
-
-
-Both the average direct and total effects now depend on the theoretical average values of the covariates $\boldsymbol{Z}$ added to the model to control for confounding.
-
----
-
-# General approach
-
-Imai et al. (2010) suggest using simulation for general models that naturally account for nonlinear effects, different natures of the mediator (binary, categorical, etc.) and the response.
-
-.small[
-
-- [1] **Modelling**. Specify models to each relationship
-     1. a mediator model $f_M(x, \boldsymbol{z}; \boldsymbol{\theta}_M)$ that includes $X$ and potential confounders $\boldsymbol{Z}$
-     2. an outcome model $f_Y(x, m, \boldsymbol{z}; \boldsymbol{\theta}_Y)$ with both treatment indicator $X$, mediator $M$ and potential confounders $\boldsymbol{Z}$.
-- [2] **Estimation uncertainty**: Either use nonparametric bootstrap or a large-sample approximation to the distribution of model parameters $\boldsymbol{\theta}_M$ and $\boldsymbol{Y}$ to get $J$ copies.
-
-]
----
-
-# General approach
-
-.small[
-
-- [3] For each copy of the parameters $j=1, \ldots, J$, draw $M$ realizations of the mediation model for each observation $i=1, \ldots, n$, giving $M^{(jm)}_i(1)$ and $M^{(jm)}_i(0)$. Use these resulting to obtain one draw from the outcome model for each of  
-    $$Y_{i}^{(jm)}\{x_1, M^{(jm)}_i(x_2)\}, \qquad x_1, x_2 \in \{0,1\}.$$
-- [4] Plug these quantities in the definitions of $\mathsf{ACME}(x)$, $\mathsf{ADE}(x)$ and $\mathsf{TE}$, averaging over the $nM$ replications, over both observations $i=1, \ldots, n$ and replications $m=1, \ldots, M$. This yields a collection of $J$ values $\mathsf{ACME}_j(x)$, $\mathsf{ADE}_j(x)$ and $\mathsf{TE}_j$ for each parameter value.
-- [5] Use the $J$ replications to compute a 95% percentile interval and return the sample means over $J$ for the average causal effects.
-]
-
----
-
 # Key references
 
-.tiny[
+.small[
 
-- Judd and Kenny (1981). [Process analysis: Estimating mediation in treatment evaluations](https://doi.org/10.1177/0193841X8100500502), Evaluation Review
-- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-4514.51.6.1173), *Journal of Personality and Social Psychology*.
-- Shrout and Bolger(2002), [Mediation in experimental and nonexperimental studies: New procedures and recommendations](https://doi.org/10.1037/1082-989X.7.4.422), *Psychological Methods*.
-- Preacher, K. J., and Hayes, A. F. (2004). [SPSS and SAS procedures for estimating indirect effects in simple mediation models](https://doi.org/10.3758/BF03206553). Behavior Research Methods, Instruments & Computers. 
+- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-4514.51.6.1173), *Journal of Personality and Social Psychology*
 - Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
 - Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
 - Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
 - Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
 - Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
+- Preacher, K. J., and Hayes, A. F. (2004). [SPSS and SAS procedures for estimating indirect effects in simple mediation models](https://doi.org/10.3758/BF03206553). Behavior Research Methods, Instruments & Computers. 
+- [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
 ]

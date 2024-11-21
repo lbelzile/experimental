@@ -185,9 +185,9 @@ When is this a valid causal effect?
 
 # (Untestable) assumptions
 
-For the ATE to be equivalent to $\mathsf{E}\{Y(1) - Y(0)\}$, we need:
+For the ATE to be equivalent to $\mathsf{E}\{Y(1) - Y(0)\}$, the following are sufficient:
 
-1. conditional *ignorability*, which states that potential outcomes are independent (denoted with the ${\perp\mkern-10mu\perp}$ symbol) of assignment to treatment given a set of explanatories $\boldsymbol{Z}$. In notation $\{Y(0), Y(1)\} {\perp\mkern-10mu\perp} X \mid \boldsymbol{Z}$
+1. *ignorability*, which states that potential outcomes are independent  of assignment to treatment
 2. lack of interference: the outcome of any participant is unaffected by the treatment assignment of other participants.
 3. consistency: given a treatment $X$ taking level $j$, the observed value for the response $Y \mid X=j$ is equal to the corresponding potential outcome $Y(j)$.
 
@@ -256,7 +256,7 @@ dagify(
   X ~ Z,
   coords = list(x = c(X = 1, Y = 3, Z = 2),
                 y = c(X = 1, Y = 1, Z = 2))
-) %>% 
+) |>
   ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
   geom_dag_edges() +
   geom_dag_point(color = "grey80", size = 14) +
@@ -297,11 +297,10 @@ dagify(
   X ~ Z,
   coords = list(x = c(X = 1, Y = 3, Z = 2),
                 y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 17) +
-  geom_dag_text(color = "black", size = 5) +
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
   theme_dag()
 ```
 
@@ -317,11 +316,10 @@ dagify(
   Z ~ X,
   coords = list(x = c(X = 1, Y = 3, Z = 2),
                 y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 17) +
-  geom_dag_text(color = "black", size = 5) +
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") +
   theme_dag()
 ```
 
@@ -338,11 +336,10 @@ dagify(
   Z ~ X,
   coords = list(x = c(X = 1, Y = 3, Z = 2),
                 y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 17) +
-  geom_dag_text(color = "black", size = 5) +
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
   theme_dag()
 ```
 
@@ -360,11 +357,10 @@ dagify(
   X ~ Z,
   coords = list(x = c(X = 1, Y = 3, Z = 2),
                 y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 15) +
-  geom_dag_text(color = "black", size = 5) +
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
   theme_dag()
 ```
 ]
@@ -383,7 +379,7 @@ dagify(
 # Confounder: effect of money on elections
 .box-inv-2.medium.sp-after-half[What are the paths<br>between **money** and **win margin**?]
 .pull-left[
-```{r money-elections, echo=FALSE, fig.width=5, fig.height=3, out.width="100%"}
+```{r money-elections, echo=FALSE, fig.width=8, fig.height=3, fig.align='center', out.width="100%"}
 dagify(
   Y ~ X + Z,
   X ~ Z,
@@ -393,22 +389,15 @@ dagify(
   outcome = "Y",
   labels = c("X" = "Campaign money", "Y" = "Win margin",
              "Z" = "Candidate quality")
-) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 15) +
-  geom_dag_text(color = "white", size = 5) +
-  geom_dag_label_repel(aes(label = label), nudge_y = c(0.5, -0.5, 0.5)) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
+  geom_dag_label(aes(label = label), nudge_y = 0.2) + 
   theme_dag()
 ```
 ]
 
---
 
 .pull-right[
 .box-2.sp-after-half[Money → Margin]
@@ -433,12 +422,10 @@ With observational data, we need to explicitly model the relationship and strip 
 
 # How to adjust with observational data
 
-
-.box-inv-2.medium.sp-after-half[Include covariate in regression]
-.center.float-left[
-.box-inv-2.medium[Matching] .box-inv-2.medium[Stratifying]
-.box-inv-2.medium.sp-before-half[Inverse probability weighting]
-]
+- Include covariate in regression
+- Matching: pair observations that are more alike in each group, and compute difference between these 
+- Stratification: estimate effects separately for subpopulation (e.g., young and old, if age is a confounder)
+- Inverse probability weighting: estimate probability of self-selection in treatment group, and reweight outcome.
 
 ---
 
@@ -451,11 +438,10 @@ dagify(
   Z ~ X,
   coords = list(x = c(X = 1, Y = 3, Z = 2),
                 y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 15) +
-  geom_dag_text(color = "black", size = 5) +
+)|>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
   theme_dag()
 ```
 ]
@@ -475,16 +461,15 @@ dagify(
 .pull-left-wide[
 ```{r collider-dag-big, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
 dagify(
-  Y ~ X,
-  Z ~ Y,
-  Z ~ X,
-  coords = list(x = c(X = 1, Y = 3, Z = 2),
-                y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 15) +
-  geom_dag_text(color = "black", size = 5) +
+    Y ~ X,
+    Z ~ Y,
+    Z ~ X,
+    coords = list(x = c(X = 1, Y = 3, Z = 2),
+                  y = c(X = 1, Y = 1, Z = 2))
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
   theme_dag()
 ```
 ]
@@ -550,7 +535,7 @@ class: title title-2
 
 # Colliders and selection bias
 
-```{r nba-dag, echo=FALSE, fig.width=5, fig.height=3, out.width="65%"}
+```{r nba-dag, echo=FALSE, fig.width=7, fig.height=3, out.width="65%"}
 dagify(
   Y ~ X,
   Z ~ Y,
@@ -561,17 +546,11 @@ dagify(
   outcome = "Y",
   labels = c("X" = "Height", "Y" = "Points scored",
              "Z" = "Being in the NBA")
-) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 15) +
-  geom_dag_text(color = "white", size = 5) +
-  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, 0.25, -0.25)) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
+) |>
+  ggdag::ggdag(node = FALSE) +
+  geom_dag_node(color = "gray") + 
+  geom_dag_text(col = "black") + 
+  geom_dag_label(aes(label = label), nudge_y = 0.2) + 
   theme_dag()
 ```
 
@@ -630,127 +609,3 @@ knitr::include_graphics("img/12/dagitty-model.png")
 Source: Andrew Heiss (?), likely from
 
 McQuire, C., Daniel, R., Hurt, L. et al. The causal web of foetal alcohol spectrum disorders: a review and causal diagram. Eur Child Adolesc Psychiatry 29, 575–594 (2020). https://doi.org/10.1007/s00787-018-1264-3
-
----
-
-layout: false
-name: causal-mediation
-class: center middle section-title section-title-3
-
-# Causal mediation
-
----
-
-layout: true
-class: title title-3
-
----
-# Key references
-
-- Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
-- Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
-- Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-3514.51.6.1173), *Journal of Personality and Social Psychology*
-
-Limitations: 
-
-- Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
-- Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
-
-<!--
-- Zhao, Lynch and Chen (2010), [Reconsidering Baron and Kenny: Myths and
-Truths about Mediation Analysis](https://doi.org/10.1086/651257), *Journal of Consumer Research*
-- [David Kenny's website](https://davidakenny.net/cm/mediate.htm)
-- Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
--->
-
----
-
-
-# Sequential ignorability assumption
-
-- potential mediation given treatment $x$ as $M_i(x)$ and
-- potential outcome for treatment $x$ and mediator $m$ as $Y_i(x, m)$.
-
-- Given pre-treatment covariates $\boldsymbol{Z}$, potential outcomes for mediation and treatment are conditionally independent of treatment assignment.
-$$ Y_i(x', m), M_i(x) \perp\mkern-10mu\perp X_i \mid \boldsymbol{Z}_i = \boldsymbol{z}$$
-- Given pre-treatment covariates and observed treatment, potential outcomes are independent of mediation.
-$$ Y_i(x', m) \perp\mkern-10mu\perp  M_i(x) \mid X_i =x, \boldsymbol{Z}_i = \boldsymbol{z}$$
-
----
-
-# Total effect
-
-**Total effect**: overall impact of $X$ (both through $M$ and directly)
-
-$$\begin{align*}\mathsf{TE}(x, x^*) = \mathsf{E}[ Y \mid \text{do}(X=x)] - \mathsf{E}[ Y \mid \text{do}(X=x^*)]\end{align*}$$
-
-.pull-left[
-.box-inv-3[
-**X** → **M** → **Y** <br>plus <br>**X** → **Y**
-]
-]
-.pull-right[
-```{r moderation, echo=FALSE, fig.width=4, fig.height=2, out.width="80%"}
-dagify(
-  Y ~ X + M,
-  M ~ X,
-  coords = list(x = c(X = 1, Y = 3, M = 2),
-                y = c(X = 1, Y = 1, M = 2)),
-  exposure = "X",
-  outcome = "Y"
-) %>%
-  tidy_dagitty() %>%
-  node_status() %>%
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 15) +
-  geom_dag_text(color = "white", size = 5) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-]
-
----
-
-# Average controlled direct effect
-
-$$\begin{align*}\textsf{CDE}(m, x, x^*) &= \mathsf{E}[Y \mid \text{do}(X=x, m=m)] - \mathsf{E}[Y \mid \text{do}(X=x^*, m=m) \\&= \mathsf{E}\{Y(x, m) - Y(x^*, m)\}
-\end{align*}$$
-Expected population change in response when the experimental factor changes from $x$ to $x^*$ and the mediator is set to a fixed value $m$.
-
-Problem: this forces manipulation of the mediator, and only gives outcome for a fixed value $m$.
-
----
-
-# Direct and indirect effects
-
-The **natural direct effect** is the expected change in $Y$ under treatment $x$ if $M$ is set to whatever value it would take under control $x^*$: $$\textsf{NDE}(x, x^*) = \mathsf{E}[Y\{x, M(x^*)\} - Y\{x^*,  M({x^*})\}].$$    
-
-
-The **natural indirect effect** is the expected change in $Y$ if we set $X$ to its control value and change the mediator value which it would attain under $x$: $$\textsf{NIE}(x, x^*) = \mathsf{E}[Y\{x^*, M(x)\} - Y\{x^*,  M(x^*)\}].$$  
-
-
----
-# Total effect
-
-Counterfactual conditioning reflects a physical intervention, not mere (probabilistic) conditioning.
-
-
-We define the **total effect** as $$\mathsf{TE}(x, x^*) = \textsf{NDE}(x, x^*) - \textsf{NIE}(x^*, x).$$
-???
-
----
-
-
-# Necessary and sufficiency of mediation
-
-From Pearl (2014):
-
-> The difference $\textsf{TE}-\textsf{NDE}$ quantifies the extent to which the response of $Y$ is owed to mediation, while $\textsf{NIE}$ quantifies the extent to which it is explained by mediation. These two components of mediation, the necessary and the sufficient, coincide into one in models void of interactions (e.g., linear) but differ substantially under moderation
-
-
-- In linear systems, changing the order of arguments amounts to flipping signs
-- This definition works under temporal reversal and gives the correct answer (the regression-slope approach of the linear structural equation model does not).
-

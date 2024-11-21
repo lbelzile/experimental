@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.1">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1381,7 +1381,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a>The <span class="in">`medsens`</span> function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in <span class="co">[</span><span class="ot">-0.4, 0.4</span><span class="co">]</span>$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artefact of correlation and vanish.</span>
 <span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a>According to the documentation of the <span class="in">`medsens`</span> function (<span class="in">`?medsens`</span>), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, <span class="in">`R^2_M~R^2_Y`</span>) or residual (starred, <span class="in">`R^2_M*R^2_Y*`</span>) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. </span>
-<span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
