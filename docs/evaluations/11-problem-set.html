@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.6.1">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -319,7 +319,6 @@ window.Quarto = {
   <ul>
   <li><a href="#task-1" id="toc-task-1" class="nav-link active" data-scroll-target="#task-1">Task 1</a></li>
   <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a></li>
-  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3">Task 3</a></li>
   </ul>
 </nav>
     </div>
@@ -359,35 +358,37 @@ window.Quarto = {
 </ul></li>
 <li>The paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by <span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span>.</li>
 </ol>
-</section>
-<section id="task-3" class="level2">
-<h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
-<p>Study 4 of <span class="citation" data-cites="Risen/Gilovich:2008">Risen &amp; Gilovich (<a href="#ref-Risen/Gilovich:2008" role="doc-biblioref">2008</a>)</span> (pp.&nbsp;297-299) perform a mediation analysis with a two-way ANOVA using the <span class="citation" data-cites="Baron/Kenny:1986">Baron &amp; Kenny (<a href="#ref-Baron/Kenny:1986" role="doc-biblioref">1986</a>)</span> methodology.</p>
-<ol type="1">
-<li>Read the description and comment on the following aspects:
-<ol type="a">
-<li>use of the Baron and Kenny original testing procedure<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li>the plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.</li>
-</ol></li>
-<li>Using the summary statistics and coefficients estimates reported, recompute Sobel’s statistic<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and the <em>p</em>-value and compare them with the values reported.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
-<li>List the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors?</li>
-<li>Can the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?</li>
-</ol>
+<!--
+## Task 3
+
+Study 4 of @Risen/Gilovich:2008 (pp. 297-299) perform a mediation analysis with a two-way ANOVA using the @Baron/Kenny:1986 methodology. 
+
+
+
+
+::: {.cell}
+
+:::
+
+
+
+
+1. Read the description and comment on the following aspects:
+    a. use of the Baron and Kenny original testing procedure^[The latter is said to be suboptimal; explain why in your words.]
+    b. the plausibility of the causal model implied by the directed acyclic graph drawn in Figure 2.
+2. Using the summary statistics and coefficients estimates reported, recompute Sobel's statistic^[The square of the std. error of $\widehat{\gamma}\widehat{\alpha}$ is $\widehat{\gamma}^2\mathsf{Va}(\widehat{\alpha}) + \widehat{\alpha}^2\mathsf{Va}(\widehat{\gamma}) + \mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})$, where $\mathsf{Va}(\widehat{\alpha})$ is the square of the standard error for $\widehat{\alpha}$ in the summary table of the linear regression. Some authors may be excluding the $\mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})$ term from the equation.] and the _p_-value and compare them with the values reported.^[Spoiler alert: you may not manage to reproduce this result. In **R**, the $p$-value for the two-sided test can be computed via `2*pnorm(abs(stat), lower.tail = FALSE)`, where `stat` is Sobel's statistic. You can use an [online calculator](https://www.quantpsy.org/sobel/sobel.htm) to compute the test statistic and it's variants.]
+3. List the assumptions of the linear causal mediation model. Are there any check of these and, if so, do they support the claims of the authors? 
+4. Can the authors successfully claim mediation considering the study uses an experimental design and randomly allocates experimental condition? Why or why not?
+
+-->
 
 
 
 </section>
-
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-Baron/Kenny:1986" class="csl-entry" role="listitem">
-Baron, R., &amp; Kenny, D. (1986). The moderator-mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. <em>Journal of Personality and Social Psychology</em>, <em>51</em>(6), 1173–1182. <a href="https://doi.org/10.1037/0022-3514.51.6.1173">https://doi.org/10.1037/0022-3514.51.6.1173</a>
-</div>
 <div id="ref-Liu.Rim.Min.Min:2023" class="csl-entry" role="listitem">
 Liu, P. J., Rim, S., Min, L., &amp; Min, K. E. (2023). The surprise of reaching out: Appreciated more than we think. <em>Journal of Personality and Social Psychology</em>, <em>124</em>(4), 754–771. <a href="https://doi.org/10.1037/pspi0000402">https://doi.org/10.1037/pspi0000402</a>
-</div>
-<div id="ref-Risen/Gilovich:2008" class="csl-entry" role="listitem">
-Risen, J. L., &amp; Gilovich, T. (2008). Why people are reluctant to tempt fate. <em>Journal of Personality and Social Psychology</em>, <em>95</em>(2), 293–307. <a href="https://doi.org/10.1037/0022-3514.95.2.293">https://doi.org/10.1037/0022-3514.95.2.293</a>
 </div>
 <div id="ref-Rohrer:2022" class="csl-entry" role="listitem">
 Rohrer, J. M., Hünermund, P., Arslan, R. C., &amp; Elson, M. (2022). That’s a lot to process! Pitfalls of popular path models. <em>Advances in Methods and Practices in Psychological Science</em>, <em>5</em>(2). <a href="https://doi.org/10.1177/25152459221095827">https://doi.org/10.1177/25152459221095827</a>
@@ -395,14 +396,7 @@ Rohrer, J. M., Hünermund, P., Arslan, R. C., &amp; Elson, M. (2022). That’s a
 <div id="ref-Zhao:2010" class="csl-entry" role="listitem">
 Zhao, X., Lynch, Jr., John G., &amp; Chen, Q. (2010). Reconsidering <span>B</span>aron and <span>K</span>enny: Myths and truths about mediation analysis. <em>Journal of Consumer Research</em>, <em>37</em>(2), 197–206. <a href="https://doi.org/10.1086/651257">https://doi.org/10.1086/651257</a>
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>The latter is said to be suboptimal; explain why in your words.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The square of the std. error of <span class="math inline">\(\widehat{\gamma}\widehat{\alpha}\)</span> is <span class="math inline">\(\widehat{\gamma}^2\mathsf{Va}(\widehat{\alpha}) + \widehat{\alpha}^2\mathsf{Va}(\widehat{\gamma}) + \mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})\)</span>, where <span class="math inline">\(\mathsf{Va}(\widehat{\alpha})\)</span> is the square of the standard error for <span class="math inline">\(\widehat{\alpha}\)</span> in the summary table of the linear regression. Some authors may be excluding the <span class="math inline">\(\mathsf{Va}(\widehat{\gamma})\mathsf{Va}(\widehat{\alpha})\)</span> term from the equation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Spoiler alert: you may not manage to reproduce this result. In <strong>R</strong>, the <span class="math inline">\(p\)</span>-value for the two-sided test can be computed via <code>2*pnorm(abs(stat), lower.tail = FALSE)</code>, where <code>stat</code> is Sobel’s statistic. You can use an <a href="https://www.quantpsy.org/sobel/sobel.htm">online calculator</a> to compute the test statistic and it’s variants.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
