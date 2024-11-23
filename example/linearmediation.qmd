@@ -10,13 +10,13 @@ Download the [**R** code](/example/linearmediation.R) and the [SPSS code](/examp
 Consider linear regression models in a system where some response variable $Y$ depends on a mediator, $M$, and an experimental factor, $X \in \{0,1\}$.
 The mediator model has expected value
 $$
-M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{\boldsymbol{Z}_M^\top\boldsymbol{\delta}} + \underset{\text{error term}}{\varepsilon_M}
+M = \underset{\text{intercept}}{c_M} + \alpha X + \underset{\text{control variates}}{g_M(\boldsymbol{Z})} + \underset{\text{error term}}{\varepsilon_M}
 $$ {#eq-mediator-model}
 while we have for the response
 $$
-Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M + \underset{\text{control variates}}{\boldsymbol{Z}_Y^\top\boldsymbol{\omega}}  + \underset{\text{error term}}{\varepsilon_Y}, \label{eq-responsemodel}
+Y = \underset{\text{intercept}}{c_Y} + \underset{\text{direct effect}}{\beta X} + \gamma M + \underset{\text{control variates}}{g_Y(\boldsymbol{Z})}  + \underset{\text{error term}}{\varepsilon_Y}, \label{eq-responsemodel}
 $$ {#eq-response-model}
-The explanatory variables $\boldsymbol{Z}_M$ for the mediator model of @eq-mediator-model, and $\boldsymbol{Z}_Y$ for the response model @eq-response-model are control covariates to account for confounders, and need not be the same in both models (but could be). In a randomized experiment where we manipulate the mediator, there is no need to include any control in @eq-mediator-model lest we mistakenly create correlation by including colliders. The error terms $\varepsilon_Y$ and $\varepsilon_M$ are assumed to be independent mean-zero with common variance.
+The explanatory variables $\boldsymbol{Z}$  are control covariates to account for confounders, and need not be the same in both models (but could be), depending on the functional form $g_M(\cdot)$ and $g_Y(\cdot)$.  The error terms $\varepsilon_Y$ and $\varepsilon_M$ are assumed to be **independent** mean-zero errors terms, each with constant variance.
 
 ```{tikz}
 #| echo: false
@@ -32,8 +32,7 @@ The explanatory variables $\boldsymbol{Z}_M$ for the mediator model of @eq-media
 \node [draw,circle] (X) at (-2,0) {$X$};
 \node [draw,circle] (Y) at (2,0) {$Y$};
 \node [draw,circle] (M) at (0,1) {$M$};
-\node [draw, rectangle,fill=black!10] (Zm) at (-2,1) {$\boldsymbol{Z}_M$};
-\node [draw,rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}_Y$};
+\node [draw,rectangle,fill=black!10] (Zy) at (2,1) {$\boldsymbol{Z}$};
 \draw [-latex] (X) edge (Y);
 \draw [-latex] (M) edge (Y);
 \draw [-latex] (X) edge (M);
@@ -41,7 +40,7 @@ The explanatory variables $\boldsymbol{Z}_M$ for the mediator model of @eq-media
 \node [fill=white,line width=0pt](gamma) at (1,0.5) {$\gamma$};
 \node [fill=white,line width=0pt](beta) at (-1,0.5) {$\alpha$};
 \draw [-latex] (Zy) edge (Y);
-\draw [-latex] (Zm) edge (M);
+\draw [-latex] (Zy) edge (M);
 \end{tikzpicture}
 ```
 
@@ -53,8 +52,8 @@ The average causal mediation effect (ACME) or natural indirect effect for treatm
 \end{align*}
 In the linear mediation model, we get subtituting the value of $M$ from equation @eq-mediator-model into @eq-response-model
 $$\begin{align*}
-\mathsf{E}[Y_i\{x, M_i(1)\}]  &= \underset{\text{intercept}}{c_Y + \gamma c_M} + \underset{\text{ACME}}{\alpha\gamma} + \beta x+ \underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}\\
-\mathsf{E}[Y_i\{x, M_i(0)\}]  &=\underset{\text{intercept}}{c_Y + \gamma c_M} + \beta x +\underset{\text{effect of control variates}}{\gamma\boldsymbol{Z}_M^\top\boldsymbol{\delta}  + \boldsymbol{Z}_Y^\top\boldsymbol{\omega}}\\
+\mathsf{E}[Y_i\{x, M_i(1)\}]  &= \underset{\text{intercept}}{c_Y + \gamma c_M} + \underset{\text{ACME}}{\alpha\gamma} + \beta x+ \underset{\text{effect of control variates}}{\gamma g_M(\boldsymbol{Z})  + g_Y(\boldsymbol{Z})}\\
+\mathsf{E}[Y_i\{x, M_i(0)\}]  &=\underset{\text{intercept}}{c_Y + \gamma c_M} + \beta x +\underset{\text{effect of control variates}}{\gamma g_M(\boldsymbol{Z})  + g_Y(\boldsymbol{Z})}\\
 \end{align*}
 $$
 so the average difference between the two equations is $\mathsf{ACME} = \alpha\gamma$.
@@ -204,7 +203,7 @@ summary(linmed_sensitivity)
 plot(linmed_sensitivity)
 ```
 
-The `medsens` function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in [-0.4, 0.4]$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artefact of correlation and vanish.
+The `medsens` function implements the sensitivity diagnostic presented in Section 5.1 of @Imai.Keele.Yamamoto:2010 for the linear mediation model. By default, the correlation $\rho$ varies in 0.1 increments. We can see the wide range of the ACME if there was correlation between residuals from the mediation and the response model, highlighting the wide range of values that could be returned: the ACME could go from $0.2$ to $-0.288$ for correlations in the range $\rho \in [-0.4, 0.4]$.  In this example, nearly any correlation in this range would lead to "insignificant results", mostly because of the small sample size. In a situation where we had found a significant (sic) result, we could observe how much correlation btween would be needed for this effect to be an artifact of correlation and vanish.
 
 According to the documentation of the `medsens` function (`?medsens`), there are two variants of the estimated effect size, either computing the proportion of the total (tilde, `R^2_M~R^2_Y`) or residual (starred, `R^2_M*R^2_Y*`) variance from the mediation and outcome models that are due to hypothetical unobserved confounders. 
 

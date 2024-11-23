@@ -5,6 +5,12 @@
 GET FILE='C:\Users\11187439\Downloads\L22_E4.sav'. 
 DATASET NAME L22E4 WINDOW=FRONT.
 
+DATASET ACTIVATE L22E4.
+IF (social=1) socialbin=0.
+IF (social=2) socialbin=1.
+IF (social=3) socialbin=1.
+EXECUTE.
+
 /* Linear model for response 1 */
 
 UNIANOVA cutfreq BY socialbin WITH enjoyamount enjoyother 

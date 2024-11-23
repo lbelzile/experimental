@@ -117,6 +117,20 @@ process(
 # Sobel test stat and results are reported in "Indirect effects"
 
 
+B <- 1000
+n <- nrow(L22_E4)
+results <- matrix(nrow = B, ncol = 4)
+for(i in seq_len(B)){
+  # Sample row indices with replacement at random uniformly
+  bootdata <- L22_E4[sample.int(n, n, replace = TRUE),]
+  # Compute the test statistic on the bootstrap sample
+  results[i, ] <- stat(data = bootdata, peOnly = TRUE)
+}
+# Confidence intervals
+apply(results, 2,  quantile, prob = c(0.025, 0.975))
+# Bootstrap p-value for test alpha*gamma=0
+M <- apply(results, 2, function(x){ sum(x < 0) })
+2*min(c(M/B, 1-M/B))
 
 # Using the 'mediation' package
 # to get the same syntax as PROCESS, use the 'bruceR' package
@@ -146,7 +160,7 @@ plot(sensitivity)
 
 #' Bootstrap estimation of statistic
 #' @param data data frame with observations
-#' @param statfn function that returns a vectir of summary statistics
+#' @param statfn function that returns a vector of summary statistics
 #' @param B number of bootstrap replications
 #' @param alpha level of the test
 #' @return a data frame with three columns: the bootstrap p-value \code{pval} and the \eqn{1-\alpha}
@@ -175,27 +189,12 @@ bootFn <- function(data, statfn, B = 1e4L, alpha = 0.05){
 }
 
 ###############################################################################
-# Example 2 -  moderation and mediated moderation
-
+# Example 2 -  Example of mediated moderation
+# Hayes' process macro Model 8 assumes that W interacts with X
+# in both mediation model and outcome model
+# so the mediation equation reads M ~ X + W + X*W
+# and the outcome model reads Y ~ X + W + X*W + M
 data(GSBE10, package = "hecedsm")
-# Using the process macro, perform the moderation analysis
-# (see 08-content for more details)
-process(data = GSBE10 |>
-          dplyr::mutate(protestind = as.integer(protest)),
-        y = "respeval",  # response variable
-        w = "sexism", # postulated moderator (continuous)
-        x = "protestind", # experimental factor
-        model = 1, # number of model in Hayes (simple moderation)
-        plot = TRUE, # add plot
-        moments = TRUE, # probe at mean +/- std. error;
-        # for different values, use argument "wmodval"
-        jn = TRUE)
-
-
-# Example of mediated moderation
-# Model 8 assumes that W impacts both
-# X -> M, so this model now reads M ~ X + W + X*W
-# and X -> Y, so the model Y ~ X + W + X*W + M
 GSBE10 <- GSBE10 |>
   dplyr::mutate(protestind = as.integer(protest))
 process(data = GSBE10,
@@ -211,26 +210,27 @@ process(data = GSBE10,
 modY <- lm(likeability ~ protestind*sexism + respeval, data = GSBE10)
 modM <- lm(respeval ~ protestind*sexism, data = GSBE10)
 
-#################################################################################
+################################################################################
 
 
-# Third example, with PROCESS macro, of moderation analysis
-# This time, the factor of interest is continuous
-# and the moderator is categorical (M=3)
-data(LWSH23_S3, package = "hecedsm")
-mod <- lm(data = LWSH23_S3, needsatis ~ needclosure * cond)
-anova(mod) # interaction is significant
-# Compute estimated marginal means, but with global weights equal to relative weight of each variable
-emmeans(mod, specs = "needclosure", by = "cond", weights = "prop")
-# All values are reported for the average of needclosure
+# Example with moderated mediation and a logistic regression for the response
+data(jobs, package = "mediation")
 
-# Process only understand numeric values for factors...
-process(data = LWSH23_S3 |>
-          dplyr::mutate(condind = as.integer(cond)),
-        y = "needsatis",  # response variable
-        x = "needclosure", # explanatory variable (not manipulated)
-        w = "condind", # postulated moderator
-        mcw = 1, # dummy coding for moderator w (so compare to base level, here 'included')
-        model = 1, # number of model in Hayes (simple)
-        plot = TRUE) # add plot, doesn't seem to work...
+Mmod <- lm(job_seek ~ treat + econ_hard +  sex +
+             age + occp + marital + nonwhite + educ + income, data = jobs)
+Ymod <- glm(work1 ~ treat + job_seek + treat:job_seek + sex +
+              age + occp + marital + nonwhite + educ + income,
+            family = binomial, data = jobs)
+# The software will accomodate directly the different models
+medmod <- mediation::mediate(
+  model.m = Mmod,
+  model.y = Ymod,
+  sims = 1000,
+  boot = TRUE,
+  mediator = "job_seek",
+  treat = "treat")
+# There are now different versions of ACME and ADE since these depend on X
+summary(medmod)
+# Plot effects with confidence intervals
+plot(medmod)
 

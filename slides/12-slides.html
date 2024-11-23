@@ -4,7 +4,7 @@
     <title>Linear mediation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-11-21" />
+    <meta name="date" content="2024-11-22" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -434,7 +434,8 @@ Imai et al. (2010) suggest using simulation for general models that naturally ac
 - [1] **Modelling**. Specify models to each relationship
      1. a mediator model `\(f_M(x, \boldsymbol{z}; \boldsymbol{\theta}_M)\)` that includes `\(X\)` and potential confounders `\(\boldsymbol{Z}\)`
      2. an outcome model `\(f_Y(x, m, \boldsymbol{z}; \boldsymbol{\theta}_Y)\)` with both treatment indicator `\(X\)`, mediator `\(M\)` and potential confounders `\(\boldsymbol{Z}\)`.
-- [2] **Estimation uncertainty**: Either use nonparametric bootstrap or a large-sample approximation to the distribution of model parameters `\(\boldsymbol{\theta}_M\)` and `\(\boldsymbol{Y}\)` to get `\(J\)` copies.
+- [2] Draw `\(M\)` realizations of the mediation model for each observation `\(i=1, \ldots, n\)`, giving `\(M^{(jm)}_i(1)\)` and `\(M^{(jm)}_i(0)\)`. Use these resulting to obtain one draw from the outcome model for each of  
+    `$$Y_{i}^{(m)}\{x_1, M^{(m)}_i(x_2)\}, \qquad x_1, x_2 \in \{0,1\}.$$`
 
 ]
 ---
@@ -443,9 +444,8 @@ Imai et al. (2010) suggest using simulation for general models that naturally ac
 
 .small[
 
-- [3] For each copy of the parameters `\(j=1, \ldots, J\)`, draw `\(M\)` realizations of the mediation model for each observation `\(i=1, \ldots, n\)`, giving `\(M^{(jm)}_i(1)\)` and `\(M^{(jm)}_i(0)\)`. Use these resulting to obtain one draw from the outcome model for each of  
-    `$$Y_{i}^{(jm)}\{x_1, M^{(jm)}_i(x_2)\}, \qquad x_1, x_2 \in \{0,1\}.$$`
-- [4] Plug these quantities in the definitions of `\(\mathsf{ACME}(x)\)`, `\(\mathsf{ADE}(x)\)` and `\(\mathsf{TE}\)`, averaging over the `\(nM\)` replications, over both observations `\(i=1, \ldots, n\)` and replications `\(m=1, \ldots, M\)`. This yields a collection of `\(J\)` values `\(\mathsf{ACME}_j(x)\)`, `\(\mathsf{ADE}_j(x)\)` and `\(\mathsf{TE}_j\)` for each parameter value.
+- [3] Plug these quantities in the definitions of `\(\mathsf{ACME}(x)\)`, `\(\mathsf{ADE}(x)\)` and `\(\mathsf{TE}\)`, averaging over the `\(nM\)` replications, over both observations `\(i=1, \ldots, n\)` and replications `\(m=1, \ldots, M\)`. 
+- [4] **Estimation uncertainty**: Either use nonparametric bootstrap or a large-sample approximation to the distribution of model parameters `\(\boldsymbol{\theta}_M\)` and `\(\boldsymbol{\theta}_Y\)`, repeat steps [2]--[3] to get `\(J\)` copies of `\(\mathsf{ACME}(x)\)`, `\(\mathsf{ADE}(x)\)` and `\(\mathsf{TE}\)`. 
 - [5] Use the `\(J\)` replications to compute a 95% percentile interval and return the sample means over `\(J\)` for the average causal effects.
 ]
 
@@ -455,15 +455,16 @@ Imai et al. (2010) suggest using simulation for general models that naturally ac
 
 .tiny[
 
-- Judd and Kenny (1981). [Process analysis: Estimating mediation in treatment evaluations](https://doi.org/10.1177/0193841X8100500502), Evaluation Review
+- Judd and Kenny (1981). [Process analysis: Estimating mediation in treatment evaluations](https://doi.org/10.1177/0193841X8100500502), *Evaluation Review*
 - Baron and Kenny (1986), [The Moderator-Mediator  Variable  Distinction in Social Psychological Research: Conceptual,  Strategic, and Statistical Considerations](https://doi.org/10.1037/0022-4514.51.6.1173), *Journal of Personality and Social Psychology*.
 - Shrout and Bolger(2002), [Mediation in experimental and nonexperimental studies: New procedures and recommendations](https://doi.org/10.1037/1082-989X.7.4.422), *Psychological Methods*.
-- Preacher, K. J., and Hayes, A. F. (2004). [SPSS and SAS procedures for estimating indirect effects in simple mediation models](https://doi.org/10.3758/BF03206553). Behavior Research Methods, Instruments &amp; Computers. 
+- Preacher, K. J., and Hayes, A. F. (2004). [SPSS and SAS procedures for estimating indirect effects in simple mediation models](https://doi.org/10.3758/BF03206553). *Behavior Research Methods, Instruments &amp; Computers*. 
 - Imai, Keele and Tingley (2010), [A General Approach to Causal Mediation Analysis](https://doi.org/10.1037/a0020761), *Psychological Methods*.
-- Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), Journal of the Royal Statistical Society: Series A.
+- Imai, Tingley and Yamamoto (2013), [Experimental designs for identifying causal mechanisms (with Discussion)](https://doi.org/10.1111/j.1467-985X.2012.01032.x), *Journal of the Royal Statistical Society: Series A*.
 - Pearl (2014), [Interpretation and Identification of Causal Mediation](http://dx.doi.org/10.1037/a0036434), *Psychological Methods*.
-- Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933)
-- Uri Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
+- Bullock, Green, and Ha (2010), [Yes, but what’s the mechanism? (don’t expect an easy answer)](https://doi.org/10.1037/a0018933), *Journal of Personality and Social Psychology*.
+-  Simonsohn (2022) [Mediation Analysis is Counterintuitively Invalid](http://datacolada.org/103)
+- Rohrer, Hünermund, Arslan,  and Elson (2022). [That’s a lot to process! Pitfalls of popular path models](https://doi.org/10.1177/25152459221095827), *Advances in Methods and Practices in Psychological Science*.
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

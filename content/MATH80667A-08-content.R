@@ -133,6 +133,36 @@ jn <- interactions::johnson_neyman(
   mod.range = range(GSBE10$sexism)) # range of values for sexism
 jn$plot
 
-# There are other examples of moderation, e.g. LKUK24_S4
-# where political ideology (conservative/liberal) is a moderator
-# for the
+# Using Hayes' PROCESS macro
+process(data = GSBE10 |>
+          dplyr::mutate(protestind = as.integer(protest)),
+        y = "respeval",  # response variable
+        w = "sexism", # postulated moderator (continuous)
+        x = "protestind", # experimental factor
+        model = 1, # number of model in Hayes (simple moderation)
+        plot = TRUE, # add plot
+        moments = TRUE, # probe at mean +/- std. error;
+        # for different values, use argument "wmodval"
+        jn = TRUE)
+
+
+#--------------------------------------------------------------------
+# Moderation analysis
+# This time, the factor of interest is continuous
+# and the moderator is categorical (K=3 levels)
+data(LWSH23_S3, package = "hecedsm")
+mod <- lm(data = LWSH23_S3, needsatis ~ needclosure * cond)
+anova(mod) # interaction is significant
+# Compute estimated marginal means, but with global weights equal to relative weight of each variable
+emmeans(mod, specs = "needclosure", by = "cond", weights = "prop")
+# All values are reported for the average of needclosure
+
+# With PROCESS macro, which  only understand numeric values for factors...
+process(data = LWSH23_S3 |>
+          dplyr::mutate(condind = as.integer(cond)), # cast factor to numeric integer levels
+        y = "needsatis",  # response variable
+        x = "needclosure", # explanatory variable (not manipulated)
+        w = "condind", # postulated moderator
+        mcw = 1, # dummy coding for moderator w (so compare to base level, here 'included')
+        model = 1, # number of model in Hayes (simple moderation)
+        plot = TRUE) # add plot, doesn't seem to work...
