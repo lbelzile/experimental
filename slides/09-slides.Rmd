@@ -254,13 +254,17 @@ $$
 d = \frac{\mu_i - \mu_j}{\sigma}
 $$
 
-- Usual estimator of Cohen's $d$, $\widehat{d}$, uses sample average of groups and the pooled variance estimator $\widehat{\sigma}$.
+- Usual estimator of Cohen's $d$, $\widehat{d}=(\widehat{\mu}_i - \widehat{\mu}_j)/\widehat{\sigma}$, uses sample average of groups and the square root of the pooled variance.
 
 Cohen's classification: small (_d=0.2_), medium (_d=0.5_) or large (_d=0.8_) effect size.
 
-???
 
-Note: this is not the $t$-statistic (the denominator is the estimated standard deviation, not the standard error of the mean
+.small[
+
+Note: this is not the $t$-statistic (the denominator is the estimated standard deviation, not the standard error of the mean).
+
+]
+???
 
 Note that there are multiple versions of Cohen's coefficients. 
 These are the effects of the pwr package.
@@ -268,9 +272,9 @@ The small/medium/large effect size varies depending on the test! See the vignett
 
 ---
 
-# Cohen's _f_
+# Effect size: ratio of variance
 
-For a one-way ANOVA (equal variance $\sigma^2$) with more than two groups, 
+For a one-way ANOVA (equal variance $\sigma^2$) with more than two groups, Cohen's _f_ is the square root of
 
 $$
 f^2 = \frac{1}{\sigma^2} \sum_{j=1}^k \frac{n_j}{n}(\mu_j - \mu)^2,
@@ -279,15 +283,14 @@ a weighted sum of squared difference relative to the overall mean $\mu$.
 
 For $k=2$ groups, Cohen's $f$ and Cohen's $d$ are related via $f=d/2$.
 
+
 ---
 
 # Effect size: proportion of variance
 
 
-If there is a single experimental factor, use **total** effect size.
-
-Break down the variability $$\sigma^2_{\text{total}} = \sigma^2_{\text{resid}} + \sigma^2_{\text{effect}}$$ and define the percentage of variability explained by the $\text{effect}$.
-$$\eta^2 = \frac{\text{explained variability}}{\text{total variability}}= \frac{\sigma^2_{\text{effect}}}{\sigma^2_{\text{total}}}.$$
+If there is a single experimental factor $A$, we break down the variability as $$\sigma^2_{\text{total}} = \sigma^2_{\text{resid}} + \sigma^2_{\text{A}}$$ and define the percentage of variability explained by the effect of $A$ as.
+$$\eta^2 = \frac{\text{explained variability}}{\text{total variability}}= \frac{\sigma^2_{A}}{\sigma^2_{\text{total}}}.$$
  
 ---
 
@@ -296,15 +299,16 @@ $$\eta^2 = \frac{\text{explained variability}}{\text{total variability}}= \frac{
 For the balanced one-way between-subject ANOVA, typical estimator is the **coefficient of determination**
 
 $$
-\widehat{R}{}^2 = \frac{F\nu_1}{F\nu_1 + \nu_2}
+\widehat{\eta}^2 \equiv \widehat{R}{}^2 = \frac{F\nu_1}{F\nu_1 + \nu_2}
 $$
 where $\nu_1 = K-1$ and $\nu_2 = n-K$ are the degrees of freedom for the one-way ANOVA with $n$ observations and $K$ groups. 
 
-- $\widehat{R}{}^2$ is an upward biased estimator (too large on average).
-- People frequently write $\eta^2$ when they mean $\widehat{R}{}^2$
-- for the replication, $\widehat{R}{}^2 = (4.05\times 2)/(4.05\times 2 + 82) = 0.09$
+- The coefficient of determination $\widehat{R}{}^2$ is an upward biased estimator (too large on average).
+- for the replication, $\widehat{R}{}^2 = (4.05\times 2)/(4.05\times 2 + 82) = 0.09$.
 
+???
 
+People frequently write $\eta^2$ when they mean the estimator $\widehat{R}{}^2$
 ---
 
 # $\omega^2$ square estimator
@@ -315,7 +319,7 @@ For one-way  between-subject ANOVA, the latter is obtained from the $F$-statisti
 
 $$\widehat{\omega}^2 = \frac{\nu_1 (F-1)}{\nu_1(F-1)+n}$$
 
-- for the replication, $\widehat{\omega}^2 = (3.05\times 2)/(3.05\times 2 + 84) = 0.0677.$
+- for the replication, $\widehat{\omega}^2 = (2 \times 3.05)/(2 \times 3.05 + 84) = 0.0677.$
 - if the value returned is negative, report zero.
 
 ???
@@ -324,13 +328,24 @@ Since the $F$ statistic is approximately 1 on average, this measure removes the 
 
 ---
 
-# Converting $\eta^2$ to Cohen's $f$
+# Link between $\eta^2$ to Cohen's $f$
 
 Software usually take Cohen's $f$ (or $f^2$) as input for the effect size.
 
-Convert from $\eta$ to $f$ via the relationship
+Convert from $\eta^2$  (proportion of variance) to $f$ (ratio of variance) via the relationship
 
 $$f^2=\frac{\eta^2}{1-\eta^2}.$$
+
+---
+
+# Calculating Cohen's f
+
+Replace $\eta^2$ by $\widehat{R}^2$ or $\widehat{\omega}^2$ to get
+
+\begin{align*}
+\widehat{f} = \sqrt{\frac{F\nu_1}{\nu_2}}, \qquad 
+\widetilde{f} &= \sqrt{\frac{\nu_1(F-1)}{n}}
+\end{align*}
 
 
 If we plug-in estimated values 

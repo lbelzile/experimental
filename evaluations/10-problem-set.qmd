@@ -15,19 +15,20 @@ Read the [chocolate example from @Meier:2022](https://stat.ethz.ch/~meier/teachi
 
 
 
-@Elliot:2021 attempt to replicate a study of @Flavell:1966 and study unprompted verbalization by children aged 5 to 10 in an experiment. Data `MULTI21_D2` from package `hecedsm` contains the data, including unique participant `id`, `lab`, age group (either 5, 6, 7 or 10 year old), different timing for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the [SPSS database via this link](/files/data/SPSS/MULTI21_D2.sav).
+@Elliot:2021 attempt to replicate a study of @Flavell:1966 and study unprompted verbalization by children aged 5 to 10 in an experiment. Data `MULTI21_D2` from package `hecedsm` contains the data, including unique participant `id`, `lab`, `age` group (either 5, 6, 7 or 10 year old), different `timing` for the recall task (either point-and-name, which is always last, delayed recall with 15 seconds after presenting the last image, or immediate response). You can also download the [SPSS database via this link](/files/data/SPSS/MULTI21_D2.sav).
+
+We consider the following sources of variation: `age`, `id`, `lab` and `timing`.
+
+Fit a linear mixed model for the number of words correctly recalled (`mcorrect`) as a function of task `timing` and `age` categories, their interaction, while accounting for lab and individual-specific variability.
 
 1. Using @Oehlert:2010 approach
-    a. Identify sources of variation
-    b. Identify whether factors are crossed or nested
-    c. Determine whether factors should be fixed or random
-    d. Figure out which interactions can exist and whether they can be fitted.
-2. Fit a linear mixed model with task timing and age categories, accounting for lab and individual-specific variability. Report the conclusions of the two-way analysis of variance: 
-    a. are there difference between recall task?
-    b. is the increase between 5 and 7 years the same as from 7 to 10? *Note: this is a contrast*
+    a. Identify whether factors are crossed or nested.
+    b. Determine whether factors should be fixed or random.
+    c. Figure out which interactions can exist and whether they can be fitted.
+2. Are there difference between recall task (i.e., `timing`)?
 3. Report estimated marginal means  across age groups (separately for each `timing` if there is an interaction), with standard errors.
-4. Report the lab-specific variability  and comment on regional differences, if any.
-5. Compute the correlation of measurements for different individuals in a given lab, following [the example from the course notes](https://lbelzile.github.io/math80667a/mixed.html#exm-verbalization-memorization)
+4. Report the lab-specific variability  and comment on regional differences based on the predictions of the random effects.^[In SPSS, add `SOLUTION` to your `RANDOM` specification for the `lab` effect. In **R**, assuming you fit the model with the `lmerTest` or `lme4` package, we can extract the predictions of the lab specific mean differences from a fitted model via `lme4::ranef` function.]
+5. Compute the correlation of measurements for different individuals in a given lab, following [the example 12.4 from the course notes](https://lbelzile.github.io/math80667a/mixed.html#exm-verbalization-memorization)
 
 <!--
 
