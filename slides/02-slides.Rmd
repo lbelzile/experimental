@@ -771,7 +771,7 @@ class: title title-5
 # Pairwise differences and _t_-tests
 
 
-The pairwise differences (_p_-values) and confidence intervals for groups $j$ and $k$ are based on the _t_-statistic:
+The _p_-values and confidence intervals for pairwise differences between groups $j$ and $k$ are based on the _t_-statistic:
 
 \begin{align*}
 t = \frac{\text{estimated} - \text{postulated difference}}{\text{uncertainty}}= \frac{(\widehat{\mu}_j - \widehat{\mu}_k) - (\mu_j - \mu_k)}{\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)}.
@@ -787,7 +787,7 @@ Note: in an analysis of variance model, the standard error $\mathsf{se}(\widehat
 ---
 
 
-# Pairwise comparison
+# Pairwise differences
 
 Consider the pairwise average difference in scores between the praise (group C) and the reprove (group D) of the `arithmetic` data.
 
@@ -939,7 +939,7 @@ ggplot(data = confint_dat,
                              xend = replicate,
                              col = covers), 
                alpha = 0.5) +
-  scale_color_discrete(type = c(c(4,2))) +
+  scale_color_discrete(type = c("skyblue1","tomato")) +
   labs(x = "replicate study",
        y = "",
        col = "") +
