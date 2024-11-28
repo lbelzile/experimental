@@ -81,6 +81,6 @@ The following code reproduces the applications in the course slides and the case
 - [R script](/content/MATH80667A-02-content.R)
 - [SPSS scripts](/content/MATH80667A-02-content-SPSS.zip)
 - [Python script](/content/MATH80667A-02-content.py) for the case study
-
+- [Quarto report](/content/MATH80667A-02-content.qmd)
 
 ## References

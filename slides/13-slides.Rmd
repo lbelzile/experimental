@@ -125,7 +125,7 @@ $$P =\sum_{i=1}^I \sum_{j=1}^J \frac{(O_{ij}-E_{ij})^2}{E_{ij}}.$$
 
 .small[
 
-Yate's correction for  $2 \times 2$ tables involves subtract $1/2$ from the differences $O_{ij}-E_{ij}$.
+Yate's correction for  $2 \times 2$ tables replaces numerator by $(|O_{ij}-E_{ij}| - 0.5)^2$.
 
 ]
 ---
@@ -172,7 +172,7 @@ Assume $Y_{ij} \sim \mathsf{Poisson}(\mu_{ij})$ where the mean is nonnegative.
 For example, the main-effect model  is of the form
 
 \begin{align*}
-\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
+\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\vphantom{\beta_j}\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
 \end{align*}
 with sum-to-zero constraints for $\alpha_i$, $\beta_j$.
 ---

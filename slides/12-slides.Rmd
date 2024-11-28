@@ -303,8 +303,6 @@ There are three main assumptions for this quantity to be a valid estimator of th
 
 ---
 
----
-
 # Sobel's test
 
 Based on estimators of coefficients $\widehat{\alpha}$ and $\widehat{\gamma}$, construct a test statistic
@@ -392,7 +390,7 @@ Assuming that $X$ is randomized, we need
 - Causal direction: $M \to Y$
   - $M$ must be an antecedent, i.e., must be measured before $Y$
 - Reliability of $M$ (no measurement error)
-- No confounding between $X$ and $M$
+- No confounding between $Y$ and $M$
 - Effect constant over individuals/levels
 
 ---

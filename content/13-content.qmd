@@ -50,6 +50,7 @@ xaringanExtra::embed_xaringan(
 
 - [R script](/content/MATH80667A-13-content.R)
 - [SPSS script](/content/MATH80667A-13-content.sps)
+- [Quarto report](/content/MATH80667A-13-content.qmd)
 
 
 :::{.callout-tip}

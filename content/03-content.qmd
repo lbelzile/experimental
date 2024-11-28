@@ -70,6 +70,6 @@ xaringanExtra::embed_xaringan(
 
 - [R script](/content/MATH80667A-03-content.R)
 - [SPSS script](/content/MATH80667A-03-content.sps)
-
+- [Quarto report](/content/MATH80667A-03-content.qmd)
 
 ## References

@@ -4,13 +4,13 @@
     <title>Hypothesis tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-01-15" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <meta name="date" content="2024-11-27" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
-    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
     <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
@@ -93,7 +93,7 @@ class: title title-2
 # Studying a population
 .medium[
 
-Interest in impacts of intervention or policy
+Interested in impacts of intervention or policy
 
 ]
 
@@ -108,10 +108,12 @@ Population distribution (describing possible outcomes and their frequencies) enc
 
 # Sampling variability
 
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="02-slides_files/figure-html/unifsamp1-1.png" alt="Histograms for 10 random samples of size 20 from a discrete uniform distribution." width="80%" /&gt;
-&lt;p class="caption"&gt;Histograms for 10 random samples of size 20 from a discrete uniform distribution.&lt;/p&gt;
-&lt;/div&gt;
+&lt;img src="02-slides_files/figure-html/unifsamp1-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+.tiny[
+
+Histograms for 10 random samples of size 20 from a discrete uniform distribution.
+
+]
 
 ---
 
@@ -301,7 +303,7 @@ From Davison (2008), Example 9.2
 
 
 
-```r
+``` r
 data(arithmetic, package = "hecedsm")
 # categorical variable = factor
 
@@ -324,7 +326,7 @@ str(arithmetic)
 
 .pull-left[
 
-```r
+``` r
 # compute summary statistics
 summary_stat &lt;-
   arithmetic |&gt; 
@@ -353,7 +355,7 @@ knitr::kable(summary_stat,
 .pull-left[
 
 
-```r
+``` r
 # Boxplot with jittered data
 ggplot(data = arithmetic,
        aes(x = group,
@@ -542,7 +544,7 @@ class: title title-5
 # Pairwise differences and _t_-tests
 
 
-The pairwise differences (_p_-values) and confidence intervals for groups `\(j\)` and `\(k\)` are based on the _t_-statistic:
+The _p_-values and confidence intervals for pairwise differences between groups `\(j\)` and `\(k\)` are based on the _t_-statistic:
 
 `\begin{align*}
 t = \frac{\text{estimated} - \text{postulated difference}}{\text{uncertainty}}= \frac{(\widehat{\mu}_j - \widehat{\mu}_k) - (\mu_j - \mu_k)}{\mathsf{se}(\widehat{\mu}_j - \widehat{\mu}_k)}.
@@ -558,7 +560,7 @@ Note: in an analysis of variance model, the standard error `\(\mathsf{se}(\wideh
 ---
 
 
-# Pairwise comparison
+# Pairwise differences
 
 Consider the pairwise average difference in scores between the praise (group C) and the reprove (group D) of the `arithmetic` data.
 
@@ -667,7 +669,7 @@ class: title title-2
 .small[
 Each interval either contains the true value (black horizontal line) or doesn't.
 ]
-&lt;img src="02-slides_files/figure-html/unnamed-chunk-6-1.png" title="100 confidence intervals" alt="100 confidence intervals" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="02-slides_files/figure-html/unnamed-chunk-6-1.png" alt="100 confidence intervals" width="70%" style="display: block; margin: auto;" /&gt;
 ---
 
 
@@ -701,7 +703,7 @@ The postulated value `\(\delta_{CD}=0\)` is not in the interval: reject `\(\math
 # Pairwise differences in **R**
 
 
-```r
+``` r
 library(emmeans) # marginal means and contrasts
 model &lt;- aov(score ~ group, data = arithmetic)
 margmeans &lt;- emmeans(model, specs = "group")

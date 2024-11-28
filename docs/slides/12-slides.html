@@ -4,7 +4,7 @@
     <title>Linear mediation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-11-22" />
+    <meta name="date" content="2024-11-28" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -253,30 +253,6 @@ There are three main assumptions for this quantity to be a valid estimator of th
 
 ---
 
-# Example from Preacher and Hayes (2004)
-
-.small[
-
-&gt; Suppose an investigator is interested in the effects of a new cognitive therapy on life satisfaction after retirement.
-
-&gt;Residents of a retirement home diagnosed as clinically
-depressed are randomly assigned to receive 10 sessions of a
-new cognitive therapy `\((X = 1)\)` or 10 sessions of an alternative
-(standard) therapeutic method `\((X = 0)\)`.
-
-&gt; After Session 8, the positivity of the attributions the residents
-make for a recent failure experience is assessed `\((M)\)`.
-
-&gt; Finally, at the end of Session 10, the residents are given a
-measure of life satisfaction `\((Y)\)`.
-The question is whether the cognitive therapy’s effect on life
-satisfaction is mediated by the positivity of their causal
-attributions of negative experiences. ”
-
-]
-
----
-
 # Sobel's test
 
 Based on estimators of coefficients `\(\widehat{\alpha}\)` and `\(\widehat{\gamma}\)`, construct a test statistic
@@ -337,7 +313,7 @@ Compute the sample proportion of bootstrap statistics that are larger/smaller th
 
 
 ???
-Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (basic, studentized, bias corrected and accelerated
+Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (basic, studentized, bias corrected and accelerated) for confidence intervals
 
 
 ---
@@ -346,9 +322,9 @@ Note: many bootstraps! parametric, wild, sieve, block, etc. and many methods (ba
 Same assumptions as analysis of variance and linear models
 
 - Linearity of the mean model
-   - residual plots, fitted values `\(\widehat{y}\)` against `\(m\)` and `\(x\)`
+   - check via residual plots, fitted values `\(\widehat{y}\)` against `\(m\)` and `\(x\)`
 - Independent/uncorrelated errors
-   - no confounding, lack of serial correlation (e.g., cross-panels)
+   - no confounding
 - Equal variance of errors in each model (homoskedasticity)
 - Large samples
 
@@ -361,12 +337,11 @@ Conclusions about mediation are valid only when causal assumptions hold.
 Assuming that `\(X\)` is randomized, we need
 
 - Lack of interaction between `\(X\)` and `\(M\)` (moderated mediation)
-- Causal direction: `\(M \to Y\)`, so `\(M\)` must be an antecedent cause
-  - `\(M\)` must be measured before `\(Y\)`
+- Causal direction: `\(M \to Y\)`
+  - `\(M\)` must be an antecedent, i.e., must be measured before `\(Y\)`
 - Reliability of `\(M\)` (no measurement error)
-- No confounding between `\(X\)` and `\(M\)`
-  - can be included, but not mediators/colliders + correct form
-- effect constant over individuals/levels
+- No confounding between `\(Y\)` and `\(M\)`
+- Effect constant over individuals/levels
 
 ---
 

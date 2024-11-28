@@ -34,7 +34,7 @@ for(b in 1:B){
 ggplot(data = data.frame(test),
        mapping = aes(x = test)) +
   geom_histogram(mapping = aes(y = after_stat(density)),
-                 bins = 100L, 
+                 bins = 100L,
                  boundary = 0) +
   stat_function(fun = df, args = list(df1 = 4, df2 = 40)) +
   theme_bw()

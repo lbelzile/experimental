@@ -4,13 +4,13 @@
     <title>Count data and nonparametric tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-04-15" />
-    <script src="libs/header-attrs-2.26/header-attrs.js"></script>
+    <meta name="date" content="2024-11-28" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
-    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
-    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
     <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
     <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
@@ -131,7 +131,7 @@ The test statistic is
 
 .small[
 
-Yate's correction for  `\(2 \times 2\)` tables involves subtract `\(1/2\)` from the differences `\(O_{ij}-E_{ij}\)`.
+Yate's correction for  `\(2 \times 2\)` tables replaces numerator by `\((|O_{ij}-E_{ij}| - 0.5)^2\)`.
 
 ]
 ---
@@ -142,7 +142,7 @@ In large samples (if `\(\min_{i,j} E_{ij} &gt; 5\)`), the statistic behaves like
 The degrees of freedom are the difference between the number of cells `\(N=IJ\)` and the number of parameters under `\(\mathscr{H}_0\)`.
 
 
-```r
+``` r
 data(DA23_E2, package = "hecedsm")
 tabs &lt;- with(DA23_E2, table(purchased, format))
 # Chi-square test for independence
@@ -177,7 +177,7 @@ Assume `\(Y_{ij} \sim \mathsf{Poisson}(\mu_{ij})\)` where the mean is nonnegativ
 For example, the main-effect model  is of the form
 
 `\begin{align*}
-\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
+\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\vphantom{\beta_j}\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
 \end{align*}`
 with sum-to-zero constraints for `\(\alpha_i\)`, `\(\beta_j\)`.
 ---
@@ -211,7 +211,7 @@ We consider [Elliot et al. (2021)](https://doi.org/10.1177/25152459211018187) mu
 .small[
 
 
-```r
+``` r
 data(MULTI21_D1, package = "hecedsm")
 contingency &lt;- xtabs( #pool data
   count ~ age + frequency, 
@@ -234,7 +234,7 @@ contingency &lt;- xtabs( #pool data
 # Poisson regression analog
 
 
-```r
+``` r
 MULTI21_D1_long &lt;- MULTI21_D1 |&gt; # pool data by age freq
   dplyr::group_by(age, frequency) |&gt;  # I=4 age group, J=3 freq
   dplyr::summarize(total = sum(count)) # aggregate counts
@@ -292,7 +292,7 @@ Under the null hypothesis of **symmetry**, the off-diagonal entries of the table
 - Alternative model: saturated model (observed counts)
 
 
-```r
+``` r
 data(BM04_T2, package = "hecedsm")
 # Symmetric model with 6 parameters (3 diag + 3 upper triangular)
 mod_null &lt;- glm(count ~ gnm::Symm(black, white), 
@@ -409,7 +409,7 @@ The `coin` package function reports Hodges–Lehmann estimate of location.
 Intervals and estimates of difference in mean are in seconds (-37 seconds).
 
 
-```r
+``` r
 data(BL22_E, package = "hecedsm")
 (mww &lt;- coin::wilcox_test( # rank-based test
   partner_time ~ cond, 
@@ -446,7 +446,7 @@ We use Quade's test, which ranks responses of each participants `\(1, 2, 3, 4\)`
 
 
 
-```r
+``` r
 data(BRLS21_T3, package = "hecedsm")
 coin::friedman_test(nviolation ~ task | id,
                  data = BRLS21_T3)
@@ -462,7 +462,7 @@ coin::friedman_test(nviolation ~ task | id,
 ## chi-squared = 18.97, df = 3, p-value = 0.0002774
 ```
 
-```r
+``` r
 coin::quade_test(nviolation ~ task | id,
                  data = BRLS21_T3)
 ```
@@ -488,7 +488,7 @@ The repeated measures must use a similar response (e.g., Likert scale).
 Since there are overall differences, we can follow-up by looking at all pairwise differences using Wilcoxon rank-sum test
 
 
-```r
+``` r
 # Transform to wide format - one line per id
 smartwatch &lt;- tidyr::pivot_wider(
   data = BRLS21_T3,
