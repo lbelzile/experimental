@@ -4,7 +4,7 @@
     <title>Count data and nonparametric tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-11-28" />
+    <meta name="date" content="2024-11-29" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -159,7 +159,7 @@ Effect sizes for contingency tables range from 0 (no association) to 1 (perfect 
 
 Measures include 
 
-- `\(\phi\)` for `\(2 \times 2\)` contingency tables, `\(\phi = \sqrt{P/n}\)`.
+- `\(\phi\)` for `\(2 \times 2\)` contingency tables, `\(\phi = \sqrt{P/n}\)`, where `\(n\)` is the sum of the counts.
 - Cramér's `\(V\)`, which is a renormalization, `\(V = \phi/ \sqrt{\min(I-1, J-1)}\)`.
 
 Small sample (bias) corrections are often employed.
@@ -398,7 +398,7 @@ that the statistic can take in small samples.
 - face-to-face meetings
 - videoconference meetings
 
-Data suggests that videoconferencing translates into longer time spent gazing at the partner than in-person meetings.
+Data suggest that videoconferencing translates into longer time spent gazing at the partner than in-person meetings.
 
 ---
 
@@ -418,7 +418,10 @@ data(BL22_E, package = "hecedsm")
 welch &lt;- t.test(partner_time ~ cond, 
   data = BL22_E, # compare results with two sample t-test
   conf.int = TRUE)
+# Effect size
+eff &lt;- effectsize::rank_eta_squared(partner_time ~ cond, data = BL22_E)
 ```
+
 
 
 ---

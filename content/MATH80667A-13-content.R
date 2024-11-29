@@ -1,5 +1,6 @@
 library(coin)
 library(dplyr)
+library(gnm)
 
 ###################################################
 ## Example 1 - Duke and Amir (2023), experiment 2

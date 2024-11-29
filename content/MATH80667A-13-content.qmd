@@ -25,6 +25,7 @@ options(digits = 3)
 ```{r}
 library(coin)
 library(dplyr)
+library(gnm)
 data(DA23_E2, package = "hecedsm")
 tabs <- with(DA23_E2, table(purchased, format))
 # Chi-square test for independence

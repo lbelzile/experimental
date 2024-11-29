@@ -1,8 +1,34 @@
+---
+title: "MATH 80667A - Week 10"
+author: "Léo Belzile"
+format: html
+eval: true
+echo: true
+message: false
+warning: false
+code-tools:
+      source: true
+      toggle: false
+      caption: "Download Quarto file"
+---
+
+
+```{r}
+#| echo: false
+options(digits = 3)
+```
+
+# Blocking factor
+
+```{r}
+#| layout-ncol: 2
 library(emmeans)
 library(hecedsm)
 library(ggplot2)
-
-
+library(afex)
+library(lmerTest)
+# Force sum-to-zero parametrization for unordered factors
+options(contrasts = c("contr.sum", "contr.poly"))
 ## Blocking factor
 # Note that this is fundamentally repeated measures
 url <- "https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"
@@ -12,8 +38,7 @@ resting <- read.table(url, header = TRUE) |>
     subject = factor(subject), #blocking factor
     protocol = factor(protocol), #experimental factor
     rate = rate/1000)
-# Force sum-to-zero parametrization for unordered factors
-options(contrasts = c("contr.sum", "contr.poly"))
+
 # Fit model with blocking factor
 model_block <- aov(rate ~ subject + protocol, data = resting)
 # One-way ANOVA (no blocking)
@@ -22,6 +47,11 @@ model_raw <- aov(rate ~ protocol, data = resting)
 # ANOVA tables with and without blocking factor
 anova(model_block)
 anova(model_raw)
+```
+
+
+
+```{r}
 # Use ANOVA table to compute etasquared effect size
 etasq <- 0.0359/(23.1175 + 1.2355 + 0.0359)
 effectsize::eta_squared(model_block, partial = TRUE, generalized = "subject")
@@ -39,32 +69,44 @@ ggplot(data = resting,
   scale_color_grey()+
   theme_classic() +
   theme(legend.position = "bottom")
+```
 
+# Mixed model
 
+## Hosano et al. (2022)
 
-##################################################################################
-###########          Example 1 - Hosano et al. (2022)                  ###########
-###########       Equivalence repeated measures and mixed models       ###########
-##################################################################################
+The purpose of this is to show the equivalence of repeated measures and mixed models for tests of interest
+in balanced designs with a single repeated measurement per individual, here captured through individual-specific random effects.
+
+We consider three different models for `imscore` as a function of `waiting` (between-subject factor) and `ratingtype` (within-subject factor). Each individual `id` gives two ratings. The `id` are nested withing `waiting`, but crossed with `ratingtype`.
+
+- a mixed ANOVA (within-between) full-factorial design (i.e., including the interaction term),
+- a MANOVA with the two measurements of `imscore` by `ratingtype` as response,
+- a linear mixed model with a random effect for `id` and both `waiting`, `ratingtype` and their interaction.
+
+```{r}
 data(HOSM22_E3, package = 'hecedsm')
 # Pivot from long to wide for MANOVA
 HOSM22_E3w <- HOSM22_E3 |> tidyr::pivot_wider(
   names_from = ratingtype,
   values_from = imscore
 )
+xtabs(~ratingtype + waiting, HOSM22_E3) # crossed factors
+head(xtabs(~id + waiting, HOSM22_E3), n = 5) # id nested in waiting
+head(xtabs(~id + ratingtype, HOSM22_E3), n = 5)
 
-library(afex)
+
 mod <- aov_ez(id = "id",
               dv = "imscore",
               between = "waiting",
               within = "ratingtype",
               data = HOSM22_E3)
-xtabs(~ratingtype + waiting, HOSM22_E3) # crossed factors
-xtabs(~id + waiting, HOSM22_E3) # id nested in waiting
-xtabs(~id + ratingtype, HOSM22_E3)
-# Obtain MANOVA table
-mod$Anova
 
+# Obtain MANOVA table
+MANOVA_tab <- mod$Anova # same as below
+```
+
+```{r}
 # Fit instead the model with MANOVA using multivariate linear regression
 manova_mod <- lm(cbind(prediction, experience) ~ waiting,
                  data = HOSM22_E3w)
@@ -75,7 +117,9 @@ manova_mod <- lm(cbind(prediction, experience) ~ waiting,
 car::Anova(manova_mod,
            idata = data.frame(ratingtype = factor(c("prediction","experience"))),
            idesign =~ratingtype, type = 3)
+```
 
+```{r}
 # Fitting the same 2x2 model (with interaction), including a random intercept per subject
 library(lmerTest)
 mixmod <- lmer(
@@ -83,18 +127,20 @@ mixmod <- lmer(
   data = HOSM22_E3)
 # We get the same table if we set type III
 anova(mixmod, type = 2)
+```
 
-##################################################################################
-#################     Example 2 - Curley et al.               ####################
-##################################################################################
+## Curley et al.
+
+This is an incomplete block design: there are two (counterbalanced) combinations of `anchor`, `vignette`, and `verdictsyst`, but participants see 2 out of 8 combinations. Hence, no interaction between these and ID is possible.
+
+```{r}
 data(C22, package = "hecedsm")
 head(C22)
 options(contrasts = c("contr.sum", "contr.poly"))
 # balanced!
 xtabs(~ anchor + vignette + verdictsyst, data = C22)
-# Incomplete block design: there are two (counterbalanced) combo of anchor, vignette, verdictsyst
-# but participants see 2 out of 8 combinations. So no interaction between these and ID is possible.
-xtabs(~  id + interaction(anchor, vignette, verdictsyst), data = C22)
+
+xtabs(~  interaction(anchor, vignette, verdictsyst) + id, data = C22)[,1:5]
 model <- lmer(
   guilt ~ anchor*vignette*verdictsyst + pjaq + (1|id),
   data = C22)
@@ -105,15 +151,15 @@ model <- lmer(
 anova(model)
 # No three-way interaction
 # A two-way interaction between vignette:verdictsyst
-library(emmeans)
 # Computing differences between anchors
 emmeans(model, specs = "anchor") |> pairs()
 # Computing differences in verdict separately for each vignette
 emmeans(model, specs = "verdictsyst", by = "vignette") |> pairs()
+```
 
-##################################################################################
-#################     Example 3 - Chocolate rating!             ##################
-##################################################################################
+## Chocolate rating
+
+```{r}
 book.url <- "http://stat.ethz.ch/~meier/teaching/book-anova"
 chocolate <- read.table(file.path(book.url, "data/chocolate.dat"),
                         header = TRUE)
@@ -145,9 +191,11 @@ emm |> contrast("pairwise")
 # C has the highest rating, but indistinguishable from A
 # B is worst
 
-# Compare variability
-vars <- c(unlist(VarCorr(model)), sigma(model)^2)
+# Compare variability - extract variance from model
+(vars <- c(unlist(VarCorr(model)), sigma(model)^2))
+# Compare these with the output of summary
 # Correlation between same chocolate/rater
 sum(vars[1:2])/sum(vars)
 # Correlation between measurements from same rater, different chocolates
 vars[2]/sum(vars)
+```

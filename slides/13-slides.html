@@ -4,7 +4,7 @@
     <title>Count data and nonparametric tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-11-28" />
+    <meta name="date" content="2024-11-29" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -96,18 +96,18 @@ Aggregating binary responses gives .color-2[counts].
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; quantity-integrated &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; quantity-sequential &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; did not purchase &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 100 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 133 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; purchased &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
   &lt;/tr&gt;
@@ -117,6 +117,19 @@ Aggregating binary responses gives .color-2[counts].
 **Question**: does the selling format increases sales?
 
 ---
+# Test idea: comparing counts
+
+Counts are modelled (implicitly) as Poisson random variables.
+
+We compare two nested models: 
+
+- typically, the alternative model is the .color-2[**satured model**], which has as many averages as cells (model with an interaction) and for which the averages are given by observed counts, `\(\widehat{\mu}_{ij} = o_{ij}\)`.
+- the null model, a simplification with fewer parameters than cells.
+
+
+
+---
+
 
 # Pearson chi-square test
 
@@ -136,10 +149,23 @@ Yate's correction for  `\(2 \times 2\)` tables replaces numerator by `\((|O_{ij}
 ]
 ---
 
+
 # Null distribution for Pearson chi-square test
+
 In large samples (if `\(\min_{i,j} E_{ij} &gt; 5\)`), the statistic behaves like a chi-square distribution with `\(\nu\)` degrees of freedom, denoted `\(P \stackrel{\cdot}{\sim} \chi^2_\nu\)`.
 
-The degrees of freedom are the difference between the number of cells `\(N=IJ\)` and the number of parameters under `\(\mathscr{H}_0\)`.
+The degrees of freedom `\(\nu\)` encode the difference in the number of parameters between alternative and null model.
+
+.small[
+
+For example, comparing 
+
+- the saturated model with `\(N=IJ\)` cells/parameters and 
+- the null additive model with `\(k=1 +(I-1) + (J-1)\)` parameters
+
+Then, the degrees of freedom for a two-way table with `\(I\)` rows and `\(J\)` columns is the number of interaction parameters, `\(\nu=(I-1) \times (J-1)\)`.
+
+]
 
 
 ``` r
@@ -150,21 +176,6 @@ chisq &lt;- chisq.test(tabs)
 ```
 
 The test statistic is 21.92, with 1 degree of freedom. The `\(p\)`-value is less than `\(10^{-4}\)`, so strong evidence that there are differences between selling format.
-
----
-
-# Effect size 
-
-Effect sizes for contingency tables range from 0 (no association) to 1 (perfect association).
-
-Measures include 
-
-- `\(\phi\)` for `\(2 \times 2\)` contingency tables, `\(\phi = \sqrt{P/n}\)`.
-- Cramér's `\(V\)`, which is a renormalization, `\(V = \phi/ \sqrt{\min(I-1, J-1)}\)`.
-
-Small sample (bias) corrections are often employed.
-
-We obtain `\(V=0.2541\)`, a moderate effect size.
 
 ---
 
@@ -179,28 +190,84 @@ For example, the main-effect model  is of the form
 `\begin{align*}
 \ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\vphantom{\beta_j}\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
 \end{align*}`
-with sum-to-zero constraints for `\(\alpha_i\)`, `\(\beta_j\)`.
+with sum-to-zero constraints for `\(\alpha_i\)`, `\(\beta_j\)`. This has `\(1 + (I-1) + (J-1)\)` parameters.
+
 ---
 
+
+# Expected (null) vs observed (alternative)
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 113.99 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 46.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.01 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 133 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
 # Remarks
 
 - Compared to linear regression and ANOVA, the variance of the cells is solely determined by the mean counts
 - Each dimension of the contingency table (row, column, depth) is a factor
 - Each cell is a response value. There are as many observations, `\(N=IJ\)`, as cells.
+- The standard machinery for comparing models
+
+
 
 
 ---
 
-# Tests for Poisson regression models
+# Effect size 
 
-We can use a likelihood ratio test or score test (aka Pearson `\(\chi^2\)` statistic!)
+Effect sizes for contingency tables range from 0 (no association) to 1 (perfect association).
+
+Measures include 
+
+- `\(\phi\)` for `\(2 \times 2\)` contingency tables, `\(\phi = \sqrt{P/n}\)`, where `\(n\)` is the sum of the counts.
+- Cramér's `\(V\)`, which is a renormalization, `\(V = \phi/ \sqrt{\min(I-1, J-1)}\)`.
+
+Small sample (bias) corrections are often employed.
+
+We obtain `\(V=0.2541\)`, a moderate effect size.
 
 
-We compare two nested models: 
-
-- typically, the alternative model is the .color-2[**satured model**], which has as many averages as cells (model with an interaction) and for which the averages are given by observed counts, `\(\widehat{\mu}_{ij} = o_{ij}\)`.
-- the null model, a simplification with `\(k\)` parameters
-- large-sample distribution of tests is `\(\chi^2_{\nu}\)`, with `\(\nu=N-k\)` degrees of freedom the difference in the number of parameters between alternative and null model.
 
 ---
 
@@ -233,6 +300,8 @@ contingency &lt;- xtabs( #pool data
 
 # Poisson regression analog
 
+We can use a likelihood ratio test or score test
+
 
 ``` r
 MULTI21_D1_long &lt;- MULTI21_D1 |&gt; # pool data by age freq
@@ -243,13 +312,14 @@ mod_main &lt;- glm(total ~ age + frequency, # null model, no interaction
 mod_satur &lt;- glm(total ~ age * frequency, # saturated model
     family = poisson, data = MULTI21_D1_long)
 # Likelihood ratio test and Pearson chi-square
-anova(mod_main, mod_satur, test = "LRT")  # deviance
-anova(mod_main, mod_satur, test = "Rao")  # score test
+# Both tests have (I-1) x (J-1) = 6 degrees of freedom
+anova(mod_main, mod_satur, test = "LRT")  # likelihood ratio/deviance
+anova(mod_main, mod_satur, test = "Rao")  # score test, aka Pearson X2 stat
 ```
 
 .small[
 
-The null model is the .color-2[**main effect model**] (no interaction, "independence between factors"). There are `\((I-1) \times (J-1)\)` interaction terms (6 degrees of freedom) for the tests.
+The null model is the .color-2[**main effect model**] (no interaction, "independence between factors"). 
 
 ]
 
@@ -398,7 +468,7 @@ that the statistic can take in small samples.
 - face-to-face meetings
 - videoconference meetings
 
-Data suggests that videoconferencing translates into longer time spent gazing at the partner than in-person meetings.
+Data suggest that videoconferencing translates into longer time spent gazing at the partner than in-person meetings.
 
 ---
 
@@ -418,7 +488,10 @@ data(BL22_E, package = "hecedsm")
 welch &lt;- t.test(partner_time ~ cond, 
   data = BL22_E, # compare results with two sample t-test
   conf.int = TRUE)
+# Effect size
+eff &lt;- effectsize::rank_eta_squared(partner_time ~ cond, data = BL22_E)
 ```
+
 
 
 ---
