@@ -15,12 +15,15 @@ code-tools:
 
 ```{r}
 #| echo: false
-options(digits = 3)
+options(digits = 3, knitr.kable.NA = '')
 ```
 
 # Blocking factor
 
 ```{r}
+#| label: tbl-anova-blocking
+#| tbl-cap: "Analysis of variance table"
+#| tbl-subcaption: ["with blocking factor","without the blocking factor"]
 #| layout-ncol: 2
 library(emmeans)
 library(hecedsm)
@@ -45,17 +48,26 @@ model_block <- aov(rate ~ subject + protocol, data = resting)
 model_raw <- aov(rate ~ protocol, data = resting)
 
 # ANOVA tables with and without blocking factor
-anova(model_block)
-anova(model_raw)
+anova(model_block) |>
+  knitr::kable()
+anova(model_raw) |>
+  knitr::kable()
 ```
 
 
 
 ```{r}
 # Use ANOVA table to compute etasquared effect size
-etasq <- 0.0359/(23.1175 + 1.2355 + 0.0359)
-effectsize::eta_squared(model_block, partial = TRUE, generalized = "subject")
+(etasq <- 0.0359/(23.1175 + 1.2355 + 0.0359))
+efs <- effectsize::eta_squared(
+  model_block, 
+  partial = TRUE,
+  generalized = "subject")
+```
 
+```{r}
+#| label: fig-interaction-metabolic
+#| fig-cap: "Interaction plot"
 # Interaction plot
 ggplot(data = resting,
        aes(x = subject,
@@ -85,17 +97,24 @@ We consider three different models for `imscore` as a function of `waiting` (bet
 - a linear mixed model with a random effect for `id` and both `waiting`, `ratingtype` and their interaction.
 
 ```{r}
+#| layout-ncol: 3
 data(HOSM22_E3, package = 'hecedsm')
 # Pivot from long to wide for MANOVA
 HOSM22_E3w <- HOSM22_E3 |> tidyr::pivot_wider(
   names_from = ratingtype,
   values_from = imscore
 )
-xtabs(~ratingtype + waiting, HOSM22_E3) # crossed factors
-head(xtabs(~id + waiting, HOSM22_E3), n = 5) # id nested in waiting
-head(xtabs(~id + ratingtype, HOSM22_E3), n = 5)
+
+xtabs(~ratingtype + waiting, HOSM22_E3) |>
+  knitr::kable() # crossed factors
+head(xtabs(~id + waiting, HOSM22_E3), n = 5) |>
+  knitr::kable(row.names = TRUE) # id nested in waiting
+head(xtabs(~id + ratingtype, HOSM22_E3), n = 5) |>
+  knitr::kable(row.names = TRUE)
+```
 
 
+```{r}
 mod <- aov_ez(id = "id",
               dv = "imscore",
               between = "waiting",
@@ -107,6 +126,8 @@ MANOVA_tab <- mod$Anova # same as below
 ```
 
 ```{r}
+#| label: tbl-MANOVA
+#| tbl-cap: "Type III Repeated Measures MANOVA Tests: Pillai test statistic"
 # Fit instead the model with MANOVA using multivariate linear regression
 manova_mod <- lm(cbind(prediction, experience) ~ waiting,
                  data = HOSM22_E3w)
@@ -115,8 +136,9 @@ manova_mod <- lm(cbind(prediction, experience) ~ waiting,
 # that contains the factor levels and the variable name
 # and idesign that includes the additional factors to our models
 car::Anova(manova_mod,
-           idata = data.frame(ratingtype = factor(c("prediction","experience"))),
-           idesign =~ratingtype, type = 3)
+           idata = data.frame(
+             ratingtype = factor(c("prediction","experience"))),
+           idesign =~ratingtype, type = 3) 
 ```
 
 ```{r}

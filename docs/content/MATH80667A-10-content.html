@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.1">
+<meta name="generator" content="quarto-1.6.1">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,10 +69,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-40a97741d360803f1a66e8f017dcaab6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9612342a6da194044be8f4f9069f861a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -179,10 +179,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><div class="quarto-title-block"><div><h1 class="title">MATH 80667A - Week 10</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Download Quarto file</button></div></div></header>
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-
+<div class="quarto-title-block"><div><h1 class="title">MATH 80667A - Week 10</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Download Quarto file</button></div></div>
 
 </header>
 
@@ -212,63 +212,127 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>model_raw <span class="ot">&lt;-</span> <span class="fu">aov</span>(rate <span class="sc">~</span> protocol, <span class="at">data =</span> resting)</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA tables with and without blocking factor</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_block)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_block) <span class="sc">|&gt;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_raw) <span class="sc">|&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-anova-blocking" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anova-blocking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Analysis of variance table
+</figcaption>
+<div aria-describedby="tbl-anova-blocking-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<pre><code>Analysis of Variance Table
-
-Response: rate
-          Df Sum Sq Mean Sq F value  Pr(&gt;F)    
-subject    8  23.12   2.890   37.42 6.3e-09 ***
-protocol   2   0.04   0.018    0.23    0.79    
-Residuals 16   1.24   0.077                    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="do-not-create-environment cell caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">subject</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">23.117</td>
+<td style="text-align: right;">2.890</td>
+<td style="text-align: right;">37.423</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">protocol</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.233</td>
+<td style="text-align: right;">0.795</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">1.235</td>
+<td style="text-align: right;">0.077</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<pre><code>Analysis of Variance Table
-
-Response: rate
-          Df Sum Sq Mean Sq F value Pr(&gt;F)
-protocol   2   0.04   0.018    0.02   0.98
-Residuals 24  24.35   1.015               </code></pre>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<table class="do-not-create-environment cell caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">protocol</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.036</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.982</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">24.353</td>
+<td style="text-align: right;">1.015</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
+</div>
+</figure>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ANOVA table to compute etasquared effect size</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>etasq <span class="ot">&lt;-</span> <span class="fl">0.0359</span><span class="sc">/</span>(<span class="fl">23.1175</span> <span class="sc">+</span> <span class="fl">1.2355</span> <span class="sc">+</span> <span class="fl">0.0359</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(model_block, <span class="at">partial =</span> <span class="cn">TRUE</span>, <span class="at">generalized =</span> <span class="st">"subject"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ANOVA table to compute etasquared effect size</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(etasq <span class="ot">&lt;-</span> <span class="fl">0.0359</span><span class="sc">/</span>(<span class="fl">23.1175</span> <span class="sc">+</span> <span class="fl">1.2355</span> <span class="sc">+</span> <span class="fl">0.0359</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># Effect Size for ANOVA (Type I)
-
-Parameter | Eta2 (generalized) |       95% CI
----------------------------------------------
-subject   |               0.95 | [0.89, 1.00]
-protocol  |           1.47e-03 | [0.00, 1.00]
-
-- Observed variables: subject
-- One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<pre><code>[1] 0.00147</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resting,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> subject,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> rate,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> protocol,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> protocol)) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean resting metabolic rate"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"subject identifier"</span>) <span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_grey</span>()<span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>efs <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  model_block, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">partial =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">generalized =</span> <span class="st">"subject"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resting,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> subject,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> rate,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> protocol,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> protocol)) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean resting metabolic rate"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"subject identifier"</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_grey</span>()<span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="MATH80667A-10-content_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-interaction-metabolic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interaction-metabolic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="MATH80667A-10-content_files/figure-html/fig-interaction-metabolic-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-metabolic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Interaction plot
+</figcaption>
 </figure>
 </div>
 </div>
@@ -285,60 +349,149 @@ protocol  |           1.47e-03 | [0.00, 1.00]
 <li>a MANOVA with the two measurements of <code>imscore</code> by <code>ratingtype</code> as response,</li>
 <li>a linear mixed model with a random effect for <code>id</code> and both <code>waiting</code>, <code>ratingtype</code> and their interaction.</li>
 </ul>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HOSM22_E3, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot from long to wide for MANOVA</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>HOSM22_E3w <span class="ot">&lt;-</span> HOSM22_E3 <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_from =</span> ratingtype,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_from =</span> imscore</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>ratingtype <span class="sc">+</span> waiting, HOSM22_E3) <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="co"># crossed factors</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> waiting, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">TRUE</span>) <span class="co"># id nested in waiting</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> ratingtype, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">long</th>
+<th style="text-align: right;">short</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">experience</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prediction</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">31</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">long</th>
+<th style="text-align: right;">short</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">experience</th>
+<th style="text-align: right;">prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HOSM22_E3, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot from long to wide for MANOVA</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>HOSM22_E3w <span class="ot">&lt;-</span> HOSM22_E3 <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_from =</span> ratingtype,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_from =</span> imscore</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>ratingtype <span class="sc">+</span> waiting, HOSM22_E3) <span class="co"># crossed factors</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            waiting
-ratingtype   long short
-  experience   32    31
-  prediction   32    31</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"id"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">"imscore"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">between =</span> <span class="st">"waiting"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">within =</span> <span class="st">"ratingtype"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> HOSM22_E3)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain MANOVA table</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>MANOVA_tab <span class="ot">&lt;-</span> mod<span class="sc">$</span>Anova <span class="co"># same as below</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> waiting, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>) <span class="co"># id nested in waiting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   waiting
-id  long short
-  1    0     2
-  2    2     0
-  3    2     0
-  4    0     2
-  5    2     0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> ratingtype, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   ratingtype
-id  experience prediction
-  1          1          1
-  2          1          1
-  3          1          1
-  4          1          1
-  5          1          1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"id"</span>,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">"imscore"</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">between =</span> <span class="st">"waiting"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">within =</span> <span class="st">"ratingtype"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> HOSM22_E3)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain MANOVA table</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>MANOVA_tab <span class="ot">&lt;-</span> mod<span class="sc">$</span>Anova <span class="co"># same as below</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit instead the model with MANOVA using multivariate linear regression</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>manova_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(prediction, experience) <span class="sc">~</span> waiting,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> HOSM22_E3w)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For repeated measures, we need to reconstruct the missing factor(s)</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding to the repeated measures via a data frame (idata)</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># that contains the factor levels and the variable name</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># and idesign that includes the additional factors to our models</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(manova_mod,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">idata =</span> <span class="fu">data.frame</span>(<span class="at">ratingtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"prediction"</span>,<span class="st">"experience"</span>))),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">idesign =</span><span class="sc">~</span>ratingtype, <span class="at">type =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-MANOVA" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-MANOVA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Type III Repeated Measures MANOVA Tests: Pillai test statistic
+</figcaption>
+<div aria-describedby="tbl-MANOVA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit instead the model with MANOVA using multivariate linear regression</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>manova_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(prediction, experience) <span class="sc">~</span> waiting,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> HOSM22_E3w)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For repeated measures, we need to reconstruct the missing factor(s)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding to the repeated measures via a data frame (idata)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># that contains the factor levels and the variable name</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># and idesign that includes the additional factors to our models</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(manova_mod,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">idata =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">ratingtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"prediction"</span>,<span class="st">"experience"</span>))),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">idesign =</span><span class="sc">~</span>ratingtype, <span class="at">type =</span> <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Type III Repeated Measures MANOVA Tests: Pillai test statistic
@@ -351,14 +504,16 @@ waiting:ratingtype  1     0.001        0      1     61  0.7757
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+</figure>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting the same 2x2 model (with interaction), including a random intercept per subject</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>mixmod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  imscore <span class="sc">~</span> waiting<span class="sc">*</span>ratingtype <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> HOSM22_E3)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We get the same table if we set type III</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mixmod, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting the same 2x2 model (with interaction), including a random intercept per subject</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mixmod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  imscore <span class="sc">~</span> waiting<span class="sc">*</span>ratingtype <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> HOSM22_E3)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We get the same table if we set type III</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mixmod, <span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Type II Analysis of Variance Table with Satterthwaite's method
                    Sum Sq Mean Sq NumDF DenDF F value  Pr(&gt;F)    
@@ -374,8 +529,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2 class="anchored" data-anchor-id="curley-et-al.">Curley et al.</h2>
 <p>This is an incomplete block design: there are two (counterbalanced) combinations of <code>anchor</code>, <code>vignette</code>, and <code>verdictsyst</code>, but participants see 2 out of 8 combinations. Hence, no interaction between these and ID is possible.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(C22, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(C22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(C22, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(C22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 7
   anchor       vignette id    vorder verdictsyst guilt  pjaq
@@ -387,9 +542,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 5 strong-first 1        5     1      two          76.8    75
 6 strong-first 1        6     1      two          96.2    73</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># balanced!</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> anchor <span class="sc">+</span> vignette <span class="sc">+</span> verdictsyst, <span class="at">data =</span> C22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># balanced!</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> anchor <span class="sc">+</span> vignette <span class="sc">+</span> verdictsyst, <span class="at">data =</span> C22)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , verdictsyst = two
 
@@ -405,7 +560,7 @@ anchor          1  2
   weak-first   32 32
   strong-first 32 32</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>  <span class="fu">interaction</span>(anchor, vignette, verdictsyst) <span class="sc">+</span> id, <span class="at">data =</span> C22)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>  <span class="fu">interaction</span>(anchor, vignette, verdictsyst) <span class="sc">+</span> id, <span class="at">data =</span> C22)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                          id
 interaction(anchor, vignette, verdictsyst) 1 2 3 4 5
@@ -418,14 +573,14 @@ interaction(anchor, vignette, verdictsyst) 1 2 3 4 5
                       weak-first.2.three   1 1 1 1 1
                       strong-first.2.three 0 0 0 0 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  guilt <span class="sc">~</span> anchor<span class="sc">*</span>vignette<span class="sc">*</span>verdictsyst <span class="sc">+</span> pjaq <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id),</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> C22)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pjaq is a covariate (so used to reduce error, plus the slope is of interest on it's own</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Cannot have interaction pjaq * id, because we get a single pjaq score per person</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># No ambiguity for sum of square decomposition</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  guilt <span class="sc">~</span> anchor<span class="sc">*</span>vignette<span class="sc">*</span>verdictsyst <span class="sc">+</span> pjaq <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> C22)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pjaq is a covariate (so used to reduce error, plus the slope is of interest on it's own</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Cannot have interaction pjaq * id, because we get a single pjaq score per person</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># No ambiguity for sum of square decomposition</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Type III Analysis of Variance Table with Satterthwaite's method
                             Sum Sq Mean Sq NumDF DenDF F value  Pr(&gt;F)    
@@ -440,10 +595,10 @@ anchor:vignette:verdictsyst      4       4     1   124    0.02  0.8945
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No three-way interaction</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A two-way interaction between vignette:verdictsyst</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences between anchors</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"anchor"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No three-way interaction</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A two-way interaction between vignette:verdictsyst</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences between anchors</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"anchor"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast                      estimate   SE  df t.ratio p.value
  (weak-first) - (strong-first)        5 1.83 124   2.736  0.0071
@@ -451,8 +606,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 Results are averaged over the levels of: vignette, verdictsyst 
 Degrees-of-freedom method: kenward-roger </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences in verdict separately for each vignette</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"verdictsyst"</span>, <span class="at">by =</span> <span class="st">"vignette"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences in verdict separately for each vignette</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"verdictsyst"</span>, <span class="at">by =</span> <span class="st">"vignette"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vignette = 1:
  contrast    estimate   SE  df t.ratio p.value
@@ -470,12 +625,12 @@ Degrees-of-freedom method: kenward-roger </code></pre>
 <section id="chocolate-rating" class="level2">
 <h2 class="anchored" data-anchor-id="chocolate-rating">Chocolate rating</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>book.url <span class="ot">&lt;-</span> <span class="st">"http://stat.ethz.ch/~meier/teaching/book-anova"</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(book.url, <span class="st">"data/chocolate.dat"</span>),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"rater"</span>]      <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"rater"</span>])</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"background"</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"background"</span>])</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(chocolate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>book.url <span class="ot">&lt;-</span> <span class="st">"http://stat.ethz.ch/~meier/teaching/book-anova"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(book.url, <span class="st">"data/chocolate.dat"</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"rater"</span>]      <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"rater"</span>])</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"background"</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"background"</span>])</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(chocolate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   160 obs. of  4 variables:
  $ choc      : chr  "A" "A" "B" "B" ...
@@ -483,22 +638,22 @@ Degrees-of-freedom method: kenward-roger </code></pre>
  $ background: Factor w/ 2 levels "rural","urban": 1 1 1 1 1 1 1 1 1 1 ...
  $ y         : int  61 64 46 45 63 66 59 56 65 69 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model (note that rater recycles the id 1:10, so we need to be careful here!</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> chocolate <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(background, rater)))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This model is correct</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>background) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>choc<span class="sc">:</span>background),</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This is fine too (because of the distinct IDs)</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> choc<span class="sc">:</span>id),</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># This is WRONG (compare degrees of freedom)</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- lmer(y ~ background*choc +</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                 (1 | rater) + (1 | choc:rater),</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co">#               data = chocolate)</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Data are again balanced</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model (note that rater recycles the id 1:10, so we need to be careful here!</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> chocolate <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(background, rater)))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This model is correct</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>background) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>choc<span class="sc">:</span>background),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This is fine too (because of the distinct IDs)</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> choc<span class="sc">:</span>id),</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># This is WRONG (compare degrees of freedom)</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- lmer(y ~ background*choc +</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                 (1 | rater) + (1 | choc:rater),</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#               data = chocolate)</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Data are again balanced</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Type III Analysis of Variance Table with Satterthwaite's method
                 Sum Sq Mean Sq NumDF DenDF F value  Pr(&gt;F)    
@@ -508,9 +663,9 @@ background:choc     64      21     3    54    2.24   0.094 .
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There is a no evidence of interaction</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The model output includes variance coefficients</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There is a no evidence of interaction</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The model output includes variance coefficients</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 lmerModLmerTest]
@@ -553,8 +708,8 @@ bckgrnd1:c1  0.000  0.000  0.000  0.000  0.000
 bckgrnd1:c2  0.000  0.000  0.000  0.000  0.000 -0.333       
 bckgrnd1:c3  0.000  0.000  0.000  0.000  0.000 -0.333 -0.333</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at best chocolate type overall</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>(emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"choc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at best chocolate type overall</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>(emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"choc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> choc emmean  SE   df lower.CL upper.CL
  A      76.2 1.3 35.8     73.6     78.9
@@ -566,7 +721,7 @@ Results are averaged over the levels of: background
 Degrees-of-freedom method: kenward-roger 
 Confidence level used: 0.95 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span> <span class="fu">contrast</span>(<span class="st">"pairwise"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span> <span class="fu">contrast</span>(<span class="st">"pairwise"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> contrast estimate   SE df t.ratio p.value
  A - B       20.27 1.19 54  17.030  &lt;.0001
@@ -580,23 +735,23 @@ Results are averaged over the levels of: background
 Degrees-of-freedom method: kenward-roger 
 P value adjustment: tukey method for comparing a family of 4 estimates </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C has the highest rating, but indistinguishable from A</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># B is worst</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare variability - extract variance from model</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>(vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unlist</span>(<span class="fu">VarCorr</span>(model)), <span class="fu">sigma</span>(model)<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C has the highest rating, but indistinguishable from A</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># B is worst</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare variability - extract variance from model</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>(vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unlist</span>(<span class="fu">VarCorr</span>(model)), <span class="fu">sigma</span>(model)<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>choc:id      id         
    9.42   19.63    9.52 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare these with the output of summary</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between same chocolate/rater</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(vars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare these with the output of summary</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between same chocolate/rater</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(vars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.753</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between measurements from same rater, different chocolates</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>vars[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(vars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between measurements from same rater, different chocolates</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>vars[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(vars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   id 
 0.509 </code></pre>
@@ -692,6 +847,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -853,6 +1010,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1078,207 +1236,229 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb46" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "MATH 80667A - Week 10"</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Léo Belzile"</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="an">eval:</span><span class="co"> true</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="an">echo:</span><span class="co"> true</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="an">message:</span><span class="co"> false</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="an">warning:</span><span class="co"> false</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co">      source: true</span></span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co">      toggle: false</span></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="co">      caption: "Download Quarto file"</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Blocking factor</span></span>
-<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hecedsm)</span>
-<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(afex)</span>
-<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Force sum-to-zero parametrization for unordered factors</span></span>
-<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Blocking factor</span></span>
-<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is fundamentally repeated measures</span></span>
-<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"</span></span>
-<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a><span class="co"># transform integers to factors (categorical)</span></span>
-<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a>resting <span class="ot">&lt;-</span> <span class="fu">read.table</span>(url, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">subject =</span> <span class="fu">factor</span>(subject), <span class="co">#blocking factor</span></span>
-<span id="cb46-43"><a href="#cb46-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">protocol =</span> <span class="fu">factor</span>(protocol), <span class="co">#experimental factor</span></span>
-<span id="cb46-44"><a href="#cb46-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">rate =</span> rate<span class="sc">/</span><span class="dv">1000</span>)</span>
-<span id="cb46-45"><a href="#cb46-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-46"><a href="#cb46-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model with blocking factor</span></span>
-<span id="cb46-47"><a href="#cb46-47" aria-hidden="true" tabindex="-1"></a>model_block <span class="ot">&lt;-</span> <span class="fu">aov</span>(rate <span class="sc">~</span> subject <span class="sc">+</span> protocol, <span class="at">data =</span> resting)</span>
-<span id="cb46-48"><a href="#cb46-48" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA (no blocking)</span></span>
-<span id="cb46-49"><a href="#cb46-49" aria-hidden="true" tabindex="-1"></a>model_raw <span class="ot">&lt;-</span> <span class="fu">aov</span>(rate <span class="sc">~</span> protocol, <span class="at">data =</span> resting)</span>
-<span id="cb46-50"><a href="#cb46-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-51"><a href="#cb46-51" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA tables with and without blocking factor</span></span>
-<span id="cb46-52"><a href="#cb46-52" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_block)</span>
-<span id="cb46-53"><a href="#cb46-53" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_raw)</span>
-<span id="cb46-54"><a href="#cb46-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-55"><a href="#cb46-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-56"><a href="#cb46-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-57"><a href="#cb46-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-60"><a href="#cb46-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-61"><a href="#cb46-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ANOVA table to compute etasquared effect size</span></span>
-<span id="cb46-62"><a href="#cb46-62" aria-hidden="true" tabindex="-1"></a>etasq <span class="ot">&lt;-</span> <span class="fl">0.0359</span><span class="sc">/</span>(<span class="fl">23.1175</span> <span class="sc">+</span> <span class="fl">1.2355</span> <span class="sc">+</span> <span class="fl">0.0359</span>)</span>
-<span id="cb46-63"><a href="#cb46-63" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(model_block, <span class="at">partial =</span> <span class="cn">TRUE</span>, <span class="at">generalized =</span> <span class="st">"subject"</span>)</span>
-<span id="cb46-64"><a href="#cb46-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-65"><a href="#cb46-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
-<span id="cb46-66"><a href="#cb46-66" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resting,</span>
-<span id="cb46-67"><a href="#cb46-67" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> subject,</span>
-<span id="cb46-68"><a href="#cb46-68" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> rate,</span>
-<span id="cb46-69"><a href="#cb46-69" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> protocol,</span>
-<span id="cb46-70"><a href="#cb46-70" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> protocol)) <span class="sc">+</span></span>
-<span id="cb46-71"><a href="#cb46-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb46-72"><a href="#cb46-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean resting metabolic rate"</span>,</span>
-<span id="cb46-73"><a href="#cb46-73" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb46-74"><a href="#cb46-74" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"subject identifier"</span>) <span class="sc">+</span></span>
-<span id="cb46-75"><a href="#cb46-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_grey</span>()<span class="sc">+</span></span>
-<span id="cb46-76"><a href="#cb46-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb46-77"><a href="#cb46-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
-<span id="cb46-78"><a href="#cb46-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-79"><a href="#cb46-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-80"><a href="#cb46-80" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mixed model</span></span>
-<span id="cb46-81"><a href="#cb46-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-82"><a href="#cb46-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hosano et al. (2022)</span></span>
-<span id="cb46-83"><a href="#cb46-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-84"><a href="#cb46-84" aria-hidden="true" tabindex="-1"></a>The purpose of this is to show the equivalence of repeated measures and mixed models for tests of interest</span>
-<span id="cb46-85"><a href="#cb46-85" aria-hidden="true" tabindex="-1"></a>in balanced designs with a single repeated measurement per individual, here captured through individual-specific random effects.</span>
-<span id="cb46-86"><a href="#cb46-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-87"><a href="#cb46-87" aria-hidden="true" tabindex="-1"></a>We consider three different models for <span class="in">`imscore`</span> as a function of <span class="in">`waiting`</span> (between-subject factor) and <span class="in">`ratingtype`</span> (within-subject factor). Each individual <span class="in">`id`</span> gives two ratings. The <span class="in">`id`</span> are nested withing <span class="in">`waiting`</span>, but crossed with <span class="in">`ratingtype`</span>.</span>
-<span id="cb46-88"><a href="#cb46-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-89"><a href="#cb46-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a mixed ANOVA (within-between) full-factorial design (i.e., including the interaction term),</span>
-<span id="cb46-90"><a href="#cb46-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a MANOVA with the two measurements of <span class="in">`imscore`</span> by <span class="in">`ratingtype`</span> as response,</span>
-<span id="cb46-91"><a href="#cb46-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a linear mixed model with a random effect for <span class="in">`id`</span> and both <span class="in">`waiting`</span>, <span class="in">`ratingtype`</span> and their interaction.</span>
-<span id="cb46-92"><a href="#cb46-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-95"><a href="#cb46-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-96"><a href="#cb46-96" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HOSM22_E3, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
-<span id="cb46-97"><a href="#cb46-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot from long to wide for MANOVA</span></span>
-<span id="cb46-98"><a href="#cb46-98" aria-hidden="true" tabindex="-1"></a>HOSM22_E3w <span class="ot">&lt;-</span> HOSM22_E3 <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
-<span id="cb46-99"><a href="#cb46-99" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_from =</span> ratingtype,</span>
-<span id="cb46-100"><a href="#cb46-100" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_from =</span> imscore</span>
-<span id="cb46-101"><a href="#cb46-101" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb46-102"><a href="#cb46-102" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>ratingtype <span class="sc">+</span> waiting, HOSM22_E3) <span class="co"># crossed factors</span></span>
-<span id="cb46-103"><a href="#cb46-103" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> waiting, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>) <span class="co"># id nested in waiting</span></span>
-<span id="cb46-104"><a href="#cb46-104" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> ratingtype, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>)</span>
-<span id="cb46-105"><a href="#cb46-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-106"><a href="#cb46-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-107"><a href="#cb46-107" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"id"</span>,</span>
-<span id="cb46-108"><a href="#cb46-108" aria-hidden="true" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">"imscore"</span>,</span>
-<span id="cb46-109"><a href="#cb46-109" aria-hidden="true" tabindex="-1"></a>              <span class="at">between =</span> <span class="st">"waiting"</span>,</span>
-<span id="cb46-110"><a href="#cb46-110" aria-hidden="true" tabindex="-1"></a>              <span class="at">within =</span> <span class="st">"ratingtype"</span>,</span>
-<span id="cb46-111"><a href="#cb46-111" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> HOSM22_E3)</span>
-<span id="cb46-112"><a href="#cb46-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-113"><a href="#cb46-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain MANOVA table</span></span>
-<span id="cb46-114"><a href="#cb46-114" aria-hidden="true" tabindex="-1"></a>MANOVA_tab <span class="ot">&lt;-</span> mod<span class="sc">$</span>Anova <span class="co"># same as below</span></span>
-<span id="cb46-115"><a href="#cb46-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-116"><a href="#cb46-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-119"><a href="#cb46-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-120"><a href="#cb46-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit instead the model with MANOVA using multivariate linear regression</span></span>
-<span id="cb46-121"><a href="#cb46-121" aria-hidden="true" tabindex="-1"></a>manova_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(prediction, experience) <span class="sc">~</span> waiting,</span>
-<span id="cb46-122"><a href="#cb46-122" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> HOSM22_E3w)</span>
-<span id="cb46-123"><a href="#cb46-123" aria-hidden="true" tabindex="-1"></a><span class="co"># For repeated measures, we need to reconstruct the missing factor(s)</span></span>
-<span id="cb46-124"><a href="#cb46-124" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding to the repeated measures via a data frame (idata)</span></span>
-<span id="cb46-125"><a href="#cb46-125" aria-hidden="true" tabindex="-1"></a><span class="co"># that contains the factor levels and the variable name</span></span>
-<span id="cb46-126"><a href="#cb46-126" aria-hidden="true" tabindex="-1"></a><span class="co"># and idesign that includes the additional factors to our models</span></span>
-<span id="cb46-127"><a href="#cb46-127" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(manova_mod,</span>
-<span id="cb46-128"><a href="#cb46-128" aria-hidden="true" tabindex="-1"></a>           <span class="at">idata =</span> <span class="fu">data.frame</span>(<span class="at">ratingtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"prediction"</span>,<span class="st">"experience"</span>))),</span>
-<span id="cb46-129"><a href="#cb46-129" aria-hidden="true" tabindex="-1"></a>           <span class="at">idesign =</span><span class="sc">~</span>ratingtype, <span class="at">type =</span> <span class="dv">3</span>)</span>
-<span id="cb46-130"><a href="#cb46-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-131"><a href="#cb46-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-134"><a href="#cb46-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-135"><a href="#cb46-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting the same 2x2 model (with interaction), including a random intercept per subject</span></span>
-<span id="cb46-136"><a href="#cb46-136" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb46-137"><a href="#cb46-137" aria-hidden="true" tabindex="-1"></a>mixmod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
-<span id="cb46-138"><a href="#cb46-138" aria-hidden="true" tabindex="-1"></a>  imscore <span class="sc">~</span> waiting<span class="sc">*</span>ratingtype <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
-<span id="cb46-139"><a href="#cb46-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> HOSM22_E3)</span>
-<span id="cb46-140"><a href="#cb46-140" aria-hidden="true" tabindex="-1"></a><span class="co"># We get the same table if we set type III</span></span>
-<span id="cb46-141"><a href="#cb46-141" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mixmod, <span class="at">type =</span> <span class="dv">2</span>)</span>
-<span id="cb46-142"><a href="#cb46-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-143"><a href="#cb46-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-144"><a href="#cb46-144" aria-hidden="true" tabindex="-1"></a><span class="fu">## Curley et al.</span></span>
-<span id="cb46-145"><a href="#cb46-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-146"><a href="#cb46-146" aria-hidden="true" tabindex="-1"></a>This is an incomplete block design: there are two (counterbalanced) combinations of <span class="in">`anchor`</span>, <span class="in">`vignette`</span>, and <span class="in">`verdictsyst`</span>, but participants see 2 out of 8 combinations. Hence, no interaction between these and ID is possible.</span>
-<span id="cb46-147"><a href="#cb46-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-150"><a href="#cb46-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-151"><a href="#cb46-151" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(C22, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb46-152"><a href="#cb46-152" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(C22)</span>
-<span id="cb46-153"><a href="#cb46-153" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
-<span id="cb46-154"><a href="#cb46-154" aria-hidden="true" tabindex="-1"></a><span class="co"># balanced!</span></span>
-<span id="cb46-155"><a href="#cb46-155" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> anchor <span class="sc">+</span> vignette <span class="sc">+</span> verdictsyst, <span class="at">data =</span> C22)</span>
-<span id="cb46-156"><a href="#cb46-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-157"><a href="#cb46-157" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>  <span class="fu">interaction</span>(anchor, vignette, verdictsyst) <span class="sc">+</span> id, <span class="at">data =</span> C22)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb46-158"><a href="#cb46-158" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
-<span id="cb46-159"><a href="#cb46-159" aria-hidden="true" tabindex="-1"></a>  guilt <span class="sc">~</span> anchor<span class="sc">*</span>vignette<span class="sc">*</span>verdictsyst <span class="sc">+</span> pjaq <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id),</span>
-<span id="cb46-160"><a href="#cb46-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> C22)</span>
-<span id="cb46-161"><a href="#cb46-161" aria-hidden="true" tabindex="-1"></a><span class="co"># pjaq is a covariate (so used to reduce error, plus the slope is of interest on it's own</span></span>
-<span id="cb46-162"><a href="#cb46-162" aria-hidden="true" tabindex="-1"></a><span class="co"># Cannot have interaction pjaq * id, because we get a single pjaq score per person</span></span>
-<span id="cb46-163"><a href="#cb46-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-164"><a href="#cb46-164" aria-hidden="true" tabindex="-1"></a><span class="co"># No ambiguity for sum of square decomposition</span></span>
-<span id="cb46-165"><a href="#cb46-165" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span>
-<span id="cb46-166"><a href="#cb46-166" aria-hidden="true" tabindex="-1"></a><span class="co"># No three-way interaction</span></span>
-<span id="cb46-167"><a href="#cb46-167" aria-hidden="true" tabindex="-1"></a><span class="co"># A two-way interaction between vignette:verdictsyst</span></span>
-<span id="cb46-168"><a href="#cb46-168" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences between anchors</span></span>
-<span id="cb46-169"><a href="#cb46-169" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"anchor"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span>
-<span id="cb46-170"><a href="#cb46-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences in verdict separately for each vignette</span></span>
-<span id="cb46-171"><a href="#cb46-171" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"verdictsyst"</span>, <span class="at">by =</span> <span class="st">"vignette"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span>
-<span id="cb46-172"><a href="#cb46-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-173"><a href="#cb46-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-174"><a href="#cb46-174" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chocolate rating</span></span>
-<span id="cb46-175"><a href="#cb46-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-178"><a href="#cb46-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb46-179"><a href="#cb46-179" aria-hidden="true" tabindex="-1"></a>book.url <span class="ot">&lt;-</span> <span class="st">"http://stat.ethz.ch/~meier/teaching/book-anova"</span></span>
-<span id="cb46-180"><a href="#cb46-180" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(book.url, <span class="st">"data/chocolate.dat"</span>),</span>
-<span id="cb46-181"><a href="#cb46-181" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb46-182"><a href="#cb46-182" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"rater"</span>]      <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"rater"</span>])</span>
-<span id="cb46-183"><a href="#cb46-183" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"background"</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"background"</span>])</span>
-<span id="cb46-184"><a href="#cb46-184" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(chocolate)</span>
-<span id="cb46-185"><a href="#cb46-185" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model (note that rater recycles the id 1:10, so we need to be careful here!</span></span>
-<span id="cb46-186"><a href="#cb46-186" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> chocolate <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(background, rater)))</span>
-<span id="cb46-187"><a href="#cb46-187" aria-hidden="true" tabindex="-1"></a><span class="co"># This model is correct</span></span>
-<span id="cb46-188"><a href="#cb46-188" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
-<span id="cb46-189"><a href="#cb46-189" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>background) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>choc<span class="sc">:</span>background),</span>
-<span id="cb46-190"><a href="#cb46-190" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
-<span id="cb46-191"><a href="#cb46-191" aria-hidden="true" tabindex="-1"></a><span class="co"># This is fine too (because of the distinct IDs)</span></span>
-<span id="cb46-192"><a href="#cb46-192" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
-<span id="cb46-193"><a href="#cb46-193" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> choc<span class="sc">:</span>id),</span>
-<span id="cb46-194"><a href="#cb46-194" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
-<span id="cb46-195"><a href="#cb46-195" aria-hidden="true" tabindex="-1"></a><span class="co"># This is WRONG (compare degrees of freedom)</span></span>
-<span id="cb46-196"><a href="#cb46-196" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- lmer(y ~ background*choc +</span></span>
-<span id="cb46-197"><a href="#cb46-197" aria-hidden="true" tabindex="-1"></a><span class="co">#                 (1 | rater) + (1 | choc:rater),</span></span>
-<span id="cb46-198"><a href="#cb46-198" aria-hidden="true" tabindex="-1"></a><span class="co">#               data = chocolate)</span></span>
-<span id="cb46-199"><a href="#cb46-199" aria-hidden="true" tabindex="-1"></a><span class="co"># Data are again balanced</span></span>
-<span id="cb46-200"><a href="#cb46-200" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span>
-<span id="cb46-201"><a href="#cb46-201" aria-hidden="true" tabindex="-1"></a><span class="co"># There is a no evidence of interaction</span></span>
-<span id="cb46-202"><a href="#cb46-202" aria-hidden="true" tabindex="-1"></a><span class="co"># The model output includes variance coefficients</span></span>
-<span id="cb46-203"><a href="#cb46-203" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span>
-<span id="cb46-204"><a href="#cb46-204" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at best chocolate type overall</span></span>
-<span id="cb46-205"><a href="#cb46-205" aria-hidden="true" tabindex="-1"></a>(emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"choc"</span>))</span>
-<span id="cb46-206"><a href="#cb46-206" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span> <span class="fu">contrast</span>(<span class="st">"pairwise"</span>)</span>
-<span id="cb46-207"><a href="#cb46-207" aria-hidden="true" tabindex="-1"></a><span class="co"># C has the highest rating, but indistinguishable from A</span></span>
-<span id="cb46-208"><a href="#cb46-208" aria-hidden="true" tabindex="-1"></a><span class="co"># B is worst</span></span>
-<span id="cb46-209"><a href="#cb46-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-210"><a href="#cb46-210" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare variability - extract variance from model</span></span>
-<span id="cb46-211"><a href="#cb46-211" aria-hidden="true" tabindex="-1"></a>(vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unlist</span>(<span class="fu">VarCorr</span>(model)), <span class="fu">sigma</span>(model)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb46-212"><a href="#cb46-212" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare these with the output of summary</span></span>
-<span id="cb46-213"><a href="#cb46-213" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between same chocolate/rater</span></span>
-<span id="cb46-214"><a href="#cb46-214" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(vars)</span>
-<span id="cb46-215"><a href="#cb46-215" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between measurements from same rater, different chocolates</span></span>
-<span id="cb46-216"><a href="#cb46-216" aria-hidden="true" tabindex="-1"></a>vars[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(vars)</span>
-<span id="cb46-217"><a href="#cb46-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb40" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "MATH 80667A - Week 10"</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Léo Belzile"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="an">eval:</span><span class="co"> true</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="an">echo:</span><span class="co"> true</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="an">message:</span><span class="co"> false</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="an">warning:</span><span class="co"> false</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">      source: true</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co">      toggle: false</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co">      caption: "Download Quarto file"</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">3</span>, <span class="at">knitr.kable.NA =</span> <span class="st">''</span>)</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Blocking factor</span></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-anova-blocking</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Analysis of variance table"</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-subcaption: ["with blocking factor","without the blocking factor"]</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hecedsm)</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(afex)</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Force sum-to-zero parametrization for unordered factors</span></span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a><span class="do">## Blocking factor</span></span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is fundamentally repeated measures</span></span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://edsm.rbind.io/files/data/resting_metabolic_rate.txt"</span></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a><span class="co"># transform integers to factors (categorical)</span></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a>resting <span class="ot">&lt;-</span> <span class="fu">read.table</span>(url, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">subject =</span> <span class="fu">factor</span>(subject), <span class="co">#blocking factor</span></span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">protocol =</span> <span class="fu">factor</span>(protocol), <span class="co">#experimental factor</span></span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">rate =</span> rate<span class="sc">/</span><span class="dv">1000</span>)</span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model with blocking factor</span></span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a>model_block <span class="ot">&lt;-</span> <span class="fu">aov</span>(rate <span class="sc">~</span> subject <span class="sc">+</span> protocol, <span class="at">data =</span> resting)</span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA (no blocking)</span></span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a>model_raw <span class="ot">&lt;-</span> <span class="fu">aov</span>(rate <span class="sc">~</span> protocol, <span class="at">data =</span> resting)</span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA tables with and without blocking factor</span></span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_block) <span class="sc">|&gt;</span></span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model_raw) <span class="sc">|&gt;</span></span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ANOVA table to compute etasquared effect size</span></span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a>(etasq <span class="ot">&lt;-</span> <span class="fl">0.0359</span><span class="sc">/</span>(<span class="fl">23.1175</span> <span class="sc">+</span> <span class="fl">1.2355</span> <span class="sc">+</span> <span class="fl">0.0359</span>))</span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a>efs <span class="ot">&lt;-</span> effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(</span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a>  model_block, </span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">partial =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">generalized =</span> <span class="st">"subject"</span>)</span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-interaction-metabolic</span></span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Interaction plot"</span></span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction plot</span></span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resting,</span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> subject,</span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> rate,</span>
+<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a>           <span class="at">group =</span> protocol,</span>
+<span id="cb40-84"><a href="#cb40-84" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> protocol)) <span class="sc">+</span></span>
+<span id="cb40-85"><a href="#cb40-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb40-86"><a href="#cb40-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"mean resting metabolic rate"</span>,</span>
+<span id="cb40-87"><a href="#cb40-87" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb40-88"><a href="#cb40-88" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"subject identifier"</span>) <span class="sc">+</span></span>
+<span id="cb40-89"><a href="#cb40-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_grey</span>()<span class="sc">+</span></span>
+<span id="cb40-90"><a href="#cb40-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb40-91"><a href="#cb40-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb40-92"><a href="#cb40-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-93"><a href="#cb40-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-94"><a href="#cb40-94" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mixed model</span></span>
+<span id="cb40-95"><a href="#cb40-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-96"><a href="#cb40-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hosano et al. (2022)</span></span>
+<span id="cb40-97"><a href="#cb40-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-98"><a href="#cb40-98" aria-hidden="true" tabindex="-1"></a>The purpose of this is to show the equivalence of repeated measures and mixed models for tests of interest</span>
+<span id="cb40-99"><a href="#cb40-99" aria-hidden="true" tabindex="-1"></a>in balanced designs with a single repeated measurement per individual, here captured through individual-specific random effects.</span>
+<span id="cb40-100"><a href="#cb40-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-101"><a href="#cb40-101" aria-hidden="true" tabindex="-1"></a>We consider three different models for <span class="in">`imscore`</span> as a function of <span class="in">`waiting`</span> (between-subject factor) and <span class="in">`ratingtype`</span> (within-subject factor). Each individual <span class="in">`id`</span> gives two ratings. The <span class="in">`id`</span> are nested withing <span class="in">`waiting`</span>, but crossed with <span class="in">`ratingtype`</span>.</span>
+<span id="cb40-102"><a href="#cb40-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-103"><a href="#cb40-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a mixed ANOVA (within-between) full-factorial design (i.e., including the interaction term),</span>
+<span id="cb40-104"><a href="#cb40-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a MANOVA with the two measurements of <span class="in">`imscore`</span> by <span class="in">`ratingtype`</span> as response,</span>
+<span id="cb40-105"><a href="#cb40-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a linear mixed model with a random effect for <span class="in">`id`</span> and both <span class="in">`waiting`</span>, <span class="in">`ratingtype`</span> and their interaction.</span>
+<span id="cb40-106"><a href="#cb40-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-109"><a href="#cb40-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-110"><a href="#cb40-110" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 3</span></span>
+<span id="cb40-111"><a href="#cb40-111" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HOSM22_E3, <span class="at">package =</span> <span class="st">'hecedsm'</span>)</span>
+<span id="cb40-112"><a href="#cb40-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot from long to wide for MANOVA</span></span>
+<span id="cb40-113"><a href="#cb40-113" aria-hidden="true" tabindex="-1"></a>HOSM22_E3w <span class="ot">&lt;-</span> HOSM22_E3 <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
+<span id="cb40-114"><a href="#cb40-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_from =</span> ratingtype,</span>
+<span id="cb40-115"><a href="#cb40-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_from =</span> imscore</span>
+<span id="cb40-116"><a href="#cb40-116" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-117"><a href="#cb40-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-118"><a href="#cb40-118" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>ratingtype <span class="sc">+</span> waiting, HOSM22_E3) <span class="sc">|&gt;</span></span>
+<span id="cb40-119"><a href="#cb40-119" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="co"># crossed factors</span></span>
+<span id="cb40-120"><a href="#cb40-120" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> waiting, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-121"><a href="#cb40-121" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">TRUE</span>) <span class="co"># id nested in waiting</span></span>
+<span id="cb40-122"><a href="#cb40-122" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>id <span class="sc">+</span> ratingtype, HOSM22_E3), <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb40-123"><a href="#cb40-123" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-124"><a href="#cb40-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-125"><a href="#cb40-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-126"><a href="#cb40-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-129"><a href="#cb40-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-130"><a href="#cb40-130" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov_ez</span>(<span class="at">id =</span> <span class="st">"id"</span>,</span>
+<span id="cb40-131"><a href="#cb40-131" aria-hidden="true" tabindex="-1"></a>              <span class="at">dv =</span> <span class="st">"imscore"</span>,</span>
+<span id="cb40-132"><a href="#cb40-132" aria-hidden="true" tabindex="-1"></a>              <span class="at">between =</span> <span class="st">"waiting"</span>,</span>
+<span id="cb40-133"><a href="#cb40-133" aria-hidden="true" tabindex="-1"></a>              <span class="at">within =</span> <span class="st">"ratingtype"</span>,</span>
+<span id="cb40-134"><a href="#cb40-134" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> HOSM22_E3)</span>
+<span id="cb40-135"><a href="#cb40-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-136"><a href="#cb40-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain MANOVA table</span></span>
+<span id="cb40-137"><a href="#cb40-137" aria-hidden="true" tabindex="-1"></a>MANOVA_tab <span class="ot">&lt;-</span> mod<span class="sc">$</span>Anova <span class="co"># same as below</span></span>
+<span id="cb40-138"><a href="#cb40-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-139"><a href="#cb40-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-142"><a href="#cb40-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-143"><a href="#cb40-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-MANOVA</span></span>
+<span id="cb40-144"><a href="#cb40-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Type III Repeated Measures MANOVA Tests: Pillai test statistic"</span></span>
+<span id="cb40-145"><a href="#cb40-145" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit instead the model with MANOVA using multivariate linear regression</span></span>
+<span id="cb40-146"><a href="#cb40-146" aria-hidden="true" tabindex="-1"></a>manova_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(prediction, experience) <span class="sc">~</span> waiting,</span>
+<span id="cb40-147"><a href="#cb40-147" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> HOSM22_E3w)</span>
+<span id="cb40-148"><a href="#cb40-148" aria-hidden="true" tabindex="-1"></a><span class="co"># For repeated measures, we need to reconstruct the missing factor(s)</span></span>
+<span id="cb40-149"><a href="#cb40-149" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding to the repeated measures via a data frame (idata)</span></span>
+<span id="cb40-150"><a href="#cb40-150" aria-hidden="true" tabindex="-1"></a><span class="co"># that contains the factor levels and the variable name</span></span>
+<span id="cb40-151"><a href="#cb40-151" aria-hidden="true" tabindex="-1"></a><span class="co"># and idesign that includes the additional factors to our models</span></span>
+<span id="cb40-152"><a href="#cb40-152" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(manova_mod,</span>
+<span id="cb40-153"><a href="#cb40-153" aria-hidden="true" tabindex="-1"></a>           <span class="at">idata =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb40-154"><a href="#cb40-154" aria-hidden="true" tabindex="-1"></a>             <span class="at">ratingtype =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"prediction"</span>,<span class="st">"experience"</span>))),</span>
+<span id="cb40-155"><a href="#cb40-155" aria-hidden="true" tabindex="-1"></a>           <span class="at">idesign =</span><span class="sc">~</span>ratingtype, <span class="at">type =</span> <span class="dv">3</span>) </span>
+<span id="cb40-156"><a href="#cb40-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-157"><a href="#cb40-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-160"><a href="#cb40-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-161"><a href="#cb40-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting the same 2x2 model (with interaction), including a random intercept per subject</span></span>
+<span id="cb40-162"><a href="#cb40-162" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb40-163"><a href="#cb40-163" aria-hidden="true" tabindex="-1"></a>mixmod <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb40-164"><a href="#cb40-164" aria-hidden="true" tabindex="-1"></a>  imscore <span class="sc">~</span> waiting<span class="sc">*</span>ratingtype <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
+<span id="cb40-165"><a href="#cb40-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> HOSM22_E3)</span>
+<span id="cb40-166"><a href="#cb40-166" aria-hidden="true" tabindex="-1"></a><span class="co"># We get the same table if we set type III</span></span>
+<span id="cb40-167"><a href="#cb40-167" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mixmod, <span class="at">type =</span> <span class="dv">2</span>)</span>
+<span id="cb40-168"><a href="#cb40-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-169"><a href="#cb40-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-170"><a href="#cb40-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## Curley et al.</span></span>
+<span id="cb40-171"><a href="#cb40-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-172"><a href="#cb40-172" aria-hidden="true" tabindex="-1"></a>This is an incomplete block design: there are two (counterbalanced) combinations of <span class="in">`anchor`</span>, <span class="in">`vignette`</span>, and <span class="in">`verdictsyst`</span>, but participants see 2 out of 8 combinations. Hence, no interaction between these and ID is possible.</span>
+<span id="cb40-173"><a href="#cb40-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-176"><a href="#cb40-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-177"><a href="#cb40-177" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(C22, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb40-178"><a href="#cb40-178" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(C22)</span>
+<span id="cb40-179"><a href="#cb40-179" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">"contr.sum"</span>, <span class="st">"contr.poly"</span>))</span>
+<span id="cb40-180"><a href="#cb40-180" aria-hidden="true" tabindex="-1"></a><span class="co"># balanced!</span></span>
+<span id="cb40-181"><a href="#cb40-181" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> anchor <span class="sc">+</span> vignette <span class="sc">+</span> verdictsyst, <span class="at">data =</span> C22)</span>
+<span id="cb40-182"><a href="#cb40-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-183"><a href="#cb40-183" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>  <span class="fu">interaction</span>(anchor, vignette, verdictsyst) <span class="sc">+</span> id, <span class="at">data =</span> C22)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb40-184"><a href="#cb40-184" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb40-185"><a href="#cb40-185" aria-hidden="true" tabindex="-1"></a>  guilt <span class="sc">~</span> anchor<span class="sc">*</span>vignette<span class="sc">*</span>verdictsyst <span class="sc">+</span> pjaq <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id),</span>
+<span id="cb40-186"><a href="#cb40-186" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> C22)</span>
+<span id="cb40-187"><a href="#cb40-187" aria-hidden="true" tabindex="-1"></a><span class="co"># pjaq is a covariate (so used to reduce error, plus the slope is of interest on it's own</span></span>
+<span id="cb40-188"><a href="#cb40-188" aria-hidden="true" tabindex="-1"></a><span class="co"># Cannot have interaction pjaq * id, because we get a single pjaq score per person</span></span>
+<span id="cb40-189"><a href="#cb40-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-190"><a href="#cb40-190" aria-hidden="true" tabindex="-1"></a><span class="co"># No ambiguity for sum of square decomposition</span></span>
+<span id="cb40-191"><a href="#cb40-191" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span>
+<span id="cb40-192"><a href="#cb40-192" aria-hidden="true" tabindex="-1"></a><span class="co"># No three-way interaction</span></span>
+<span id="cb40-193"><a href="#cb40-193" aria-hidden="true" tabindex="-1"></a><span class="co"># A two-way interaction between vignette:verdictsyst</span></span>
+<span id="cb40-194"><a href="#cb40-194" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences between anchors</span></span>
+<span id="cb40-195"><a href="#cb40-195" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"anchor"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span>
+<span id="cb40-196"><a href="#cb40-196" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing differences in verdict separately for each vignette</span></span>
+<span id="cb40-197"><a href="#cb40-197" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"verdictsyst"</span>, <span class="at">by =</span> <span class="st">"vignette"</span>) <span class="sc">|&gt;</span> <span class="fu">pairs</span>()</span>
+<span id="cb40-198"><a href="#cb40-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb40-199"><a href="#cb40-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-200"><a href="#cb40-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chocolate rating</span></span>
+<span id="cb40-201"><a href="#cb40-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-204"><a href="#cb40-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb40-205"><a href="#cb40-205" aria-hidden="true" tabindex="-1"></a>book.url <span class="ot">&lt;-</span> <span class="st">"http://stat.ethz.ch/~meier/teaching/book-anova"</span></span>
+<span id="cb40-206"><a href="#cb40-206" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="fu">file.path</span>(book.url, <span class="st">"data/chocolate.dat"</span>),</span>
+<span id="cb40-207"><a href="#cb40-207" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-208"><a href="#cb40-208" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"rater"</span>]      <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"rater"</span>])</span>
+<span id="cb40-209"><a href="#cb40-209" aria-hidden="true" tabindex="-1"></a>chocolate[,<span class="st">"background"</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(chocolate[,<span class="st">"background"</span>])</span>
+<span id="cb40-210"><a href="#cb40-210" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(chocolate)</span>
+<span id="cb40-211"><a href="#cb40-211" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model (note that rater recycles the id 1:10, so we need to be careful here!</span></span>
+<span id="cb40-212"><a href="#cb40-212" aria-hidden="true" tabindex="-1"></a>chocolate <span class="ot">&lt;-</span> chocolate <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(<span class="fu">paste</span>(background, rater)))</span>
+<span id="cb40-213"><a href="#cb40-213" aria-hidden="true" tabindex="-1"></a><span class="co"># This model is correct</span></span>
+<span id="cb40-214"><a href="#cb40-214" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
+<span id="cb40-215"><a href="#cb40-215" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>background) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rater<span class="sc">:</span>choc<span class="sc">:</span>background),</span>
+<span id="cb40-216"><a href="#cb40-216" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
+<span id="cb40-217"><a href="#cb40-217" aria-hidden="true" tabindex="-1"></a><span class="co"># This is fine too (because of the distinct IDs)</span></span>
+<span id="cb40-218"><a href="#cb40-218" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> background<span class="sc">*</span>choc <span class="sc">+</span></span>
+<span id="cb40-219"><a href="#cb40-219" aria-hidden="true" tabindex="-1"></a>                (<span class="dv">1</span> <span class="sc">|</span> id) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> choc<span class="sc">:</span>id),</span>
+<span id="cb40-220"><a href="#cb40-220" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> chocolate)</span>
+<span id="cb40-221"><a href="#cb40-221" aria-hidden="true" tabindex="-1"></a><span class="co"># This is WRONG (compare degrees of freedom)</span></span>
+<span id="cb40-222"><a href="#cb40-222" aria-hidden="true" tabindex="-1"></a><span class="co"># model &lt;- lmer(y ~ background*choc +</span></span>
+<span id="cb40-223"><a href="#cb40-223" aria-hidden="true" tabindex="-1"></a><span class="co">#                 (1 | rater) + (1 | choc:rater),</span></span>
+<span id="cb40-224"><a href="#cb40-224" aria-hidden="true" tabindex="-1"></a><span class="co">#               data = chocolate)</span></span>
+<span id="cb40-225"><a href="#cb40-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Data are again balanced</span></span>
+<span id="cb40-226"><a href="#cb40-226" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span>
+<span id="cb40-227"><a href="#cb40-227" aria-hidden="true" tabindex="-1"></a><span class="co"># There is a no evidence of interaction</span></span>
+<span id="cb40-228"><a href="#cb40-228" aria-hidden="true" tabindex="-1"></a><span class="co"># The model output includes variance coefficients</span></span>
+<span id="cb40-229"><a href="#cb40-229" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span>
+<span id="cb40-230"><a href="#cb40-230" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at best chocolate type overall</span></span>
+<span id="cb40-231"><a href="#cb40-231" aria-hidden="true" tabindex="-1"></a>(emm <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model, <span class="at">specs =</span> <span class="st">"choc"</span>))</span>
+<span id="cb40-232"><a href="#cb40-232" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span> <span class="fu">contrast</span>(<span class="st">"pairwise"</span>)</span>
+<span id="cb40-233"><a href="#cb40-233" aria-hidden="true" tabindex="-1"></a><span class="co"># C has the highest rating, but indistinguishable from A</span></span>
+<span id="cb40-234"><a href="#cb40-234" aria-hidden="true" tabindex="-1"></a><span class="co"># B is worst</span></span>
+<span id="cb40-235"><a href="#cb40-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-236"><a href="#cb40-236" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare variability - extract variance from model</span></span>
+<span id="cb40-237"><a href="#cb40-237" aria-hidden="true" tabindex="-1"></a>(vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unlist</span>(<span class="fu">VarCorr</span>(model)), <span class="fu">sigma</span>(model)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb40-238"><a href="#cb40-238" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare these with the output of summary</span></span>
+<span id="cb40-239"><a href="#cb40-239" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between same chocolate/rater</span></span>
+<span id="cb40-240"><a href="#cb40-240" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vars[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(vars)</span>
+<span id="cb40-241"><a href="#cb40-241" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation between measurements from same rater, different chocolates</span></span>
+<span id="cb40-242"><a href="#cb40-242" aria-hidden="true" tabindex="-1"></a>vars[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(vars)</span>
+<span id="cb40-243"><a href="#cb40-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
