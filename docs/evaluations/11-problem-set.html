@@ -345,9 +345,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
 <p><span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span> postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from <code>LRMM23_S5b</code> in the <strong>R</strong> package <code>hecedsm</code>. You can also download the <a href="../files/data/SPSS/LRMM23_S5b.sav">SPSS database via this link</a>.</p>
 <ol type="1">
-<li>Fit the linear mediation model using the PROCESS macro or the <code>mediate</code> function from the <code>mediation</code> <strong>R</strong> package
+<li>Fit the linear mediation model using the PROCESS macro or the <code>mediate</code> function from the <code>mediation</code> <strong>R</strong> package<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
 <ul>
-<li>use the nonparametric bootstrap with the percentile method to get confidence intervals</li>
+<li>use the nonparametric bootstrap with the percentile method to get confidence intervals.</li>
 <li>compare the coefficients with those of Figure 1 from the paper.</li>
 </ul></li>
 <li><span class="citation" data-cites="Zhao:2010">Zhao et al. (<a href="#ref-Zhao:2010" role="doc-biblioref">2010</a>)</span> review the typology of mediation. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.
@@ -356,7 +356,7 @@ window.Quarto = {
 <li>competitive mediation when direct and indirect effects are of opposite signs.</li>
 <li>indirect-only mediation when the direct effect of <span class="math inline">\(X \to Y\)</span> is null, but the effect <span class="math inline">\(X \to M \to Y\)</span> isn’t.</li>
 </ul></li>
-<li>The paper does not discuss any of the model assumptions. List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by <span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span>.</li>
+<li>The paper does not discuss any of the assumptions needed to make causal claims. List the latter and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by <span class="citation" data-cites="Liu.Rim.Min.Min:2023">Liu et al. (<a href="#ref-Liu.Rim.Min.Min:2023" role="doc-biblioref">2023</a>)</span>.</li>
 </ol>
 <!--
 ## Task 3
@@ -386,6 +386,7 @@ Study 4 of @Risen/Gilovich:2008 (pp. 297-299) perform a mediation analysis with 
 
 </section>
 
+
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-Liu.Rim.Min.Min:2023" class="csl-entry" role="listitem">
 Liu, P. J., Rim, S., Min, L., &amp; Min, K. E. (2023). The surprise of reaching out: Appreciated more than we think. <em>Journal of Personality and Social Psychology</em>, <em>124</em>(4), 754–771. <a href="https://doi.org/10.1037/pspi0000402">https://doi.org/10.1037/pspi0000402</a>
@@ -396,7 +397,12 @@ Rohrer, J. M., Hünermund, P., Arslan, R. C., &amp; Elson, M. (2022). That’s a
 <div id="ref-Zhao:2010" class="csl-entry" role="listitem">
 Zhao, X., Lynch, Jr., John G., &amp; Chen, Q. (2010). Reconsidering <span>B</span>aron and <span>K</span>enny: Myths and truths about mediation analysis. <em>Journal of Consumer Research</em>, <em>37</em>(2), 197–206. <a href="https://doi.org/10.1086/651257">https://doi.org/10.1086/651257</a>
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note that the authors used neither <code>age</code> nor <code>gender</code> in the model fit. For the latter, there are two few <code>other</code> to reliably estimate coefficients, so they should be removed beforehand should one be interested in adding the variable as a potential confounder.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

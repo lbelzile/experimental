@@ -17,15 +17,15 @@ Read @Rohrer:2022 and write a summary.
 
 @Liu.Rim.Min.Min:2023 postulated in their Experiment 5b that the underestimation of the appreciation of initiators relative to recipients was mediated by the degree of surprise of the recipient. Their data can be obtained from `LRMM23_S5b` in the **R** package `hecedsm`. You can also download the [SPSS database via this link](/files/data/SPSS/LRMM23_S5b.sav).
 
-1. Fit the linear mediation model using the PROCESS macro or the `mediate` function from the `mediation` **R** package
-    - use the nonparametric bootstrap with the percentile method to get confidence intervals
+1. Fit the linear mediation model using the PROCESS macro or the `mediate` function from the `mediation` **R** package^[Note that the authors used neither `age` nor `gender` in the model fit. For the latter, there are two few `other` to reliably estimate coefficients, so they should be removed beforehand should one be interested in adding the variable as a potential confounder.]
+    - use the nonparametric bootstrap with the percentile method to get confidence intervals.
     - compare the coefficients with those of Figure 1 from the paper.
 2. @Zhao:2010 review the typology of mediation. Identify the type of mediation (complementary, competitive or indirect only) based on coefficients.
     - complementary mediation when both direct and indirect effects are of the same sign and non-zero.
     - competitive mediation when direct and indirect effects are of opposite signs.
     - indirect-only mediation when the direct effect of $X \to Y$ is null, but the effect $X \to M \to Y$ isn't.
 
-3. The paper does not discuss any of the model assumptions.  List the assumptions of the linear mediation model and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by @Liu.Rim.Min.Min:2023.
+3. The paper does not discuss any of the assumptions needed to make causal claims. List the latter and explain how some may fail to be valid, thus casting doubt on the conclusions drawn by @Liu.Rim.Min.Min:2023.
 
 
 ```{r}
