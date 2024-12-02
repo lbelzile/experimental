@@ -137,6 +137,7 @@ model <- lmer(y ~ background*choc +
 # Data are again balanced
 anova(model)
 # There is a no evidence of interaction
+# The model output includes variance coefficients
 summary(model)
 # Look at best chocolate type overall
 (emm <- emmeans(model, specs = "choc"))
@@ -145,7 +146,7 @@ emm |> contrast("pairwise")
 # B is worst
 
 # Compare variability
-vars <- c(unlist(VarCorr(model)), sigma(model))
+vars <- c(unlist(VarCorr(model)), sigma(model)^2)
 # Correlation between same chocolate/rater
 sum(vars[1:2])/sum(vars)
 # Correlation between measurements from same rater, different chocolates

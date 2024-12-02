@@ -4,7 +4,7 @@
     <title>Count data and nonparametric tests</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-11-29" />
+    <meta name="date" content="2024-11-30" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -23,6 +23,8 @@
     <script src="libs/freezeframe-5.0.2/freezeframe.min.js"></script>
     <script src="libs/xaringanExtra-freezeframe-0.0.1/freezeframe-init.js"></script>
     <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
     <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -79,6 +81,8 @@ class: title title-2
 
 
 
+
+
 # Tabular data
 
 Aggregating binary responses gives .color-2[counts].
@@ -119,12 +123,69 @@ Aggregating binary responses gives .color-2[counts].
 ---
 # Test idea: comparing counts
 
-Counts are modelled (implicitly) as Poisson random variables.
+Assume `\(Y_{ij} \sim \mathsf{Poisson}(\mu_{ij})\)`, an integer-valued random variable. We compare two nested models: 
 
-We compare two nested models: 
+- typically, the alternative model is the .color-2[**satured model**], which has as many averages as cells (model with an interaction) and for which the averages are given by observed counts.
+- the null model, a simplification with fewer parameters than cells. For example, the additive model (without interaction) is
+`\begin{align*}
+\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\vphantom{\beta_j}\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J.
+\end{align*}`
 
-- typically, the alternative model is the .color-2[**satured model**], which has as many averages as cells (model with an interaction) and for which the averages are given by observed counts, `\(\widehat{\mu}_{ij} = o_{ij}\)`.
-- the null model, a simplification with fewer parameters than cells.
+---
+
+
+# Expected (null) vs observed (alternative)
+
+We can compare the predicted counts under
+
+- the additive model under the null `\(\mathscr{H}_0\)` (left, `\(E_{ij}\)`) and 
+- the saturated model under the alternative `\(\mathscr{H}_a\)` (right, `\(O_{ij}\)`).
+
+&lt;table class="table" style="width: auto !important; float: left; margin-right: 10px;"&gt;
+&lt;caption&gt;expected counts&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 113.99 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 46.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.01 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table class="table" style="width: auto !important; "&gt;
+&lt;caption&gt;observed counts&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 133 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 
 
@@ -152,7 +213,7 @@ Yate's correction for  `\(2 \times 2\)` tables replaces numerator by `\((|O_{ij}
 
 # Null distribution for Pearson chi-square test
 
-In large samples (if `\(\min_{i,j} E_{ij} &gt; 5\)`), the statistic behaves like a chi-square distribution with `\(\nu\)` degrees of freedom, denoted `\(P \stackrel{\cdot}{\sim} \chi^2_\nu\)`.
+In large samples (if `\(\min_{i,j} E_{ij} &gt; 5\)`), the statistic `\(P\)` behaves like a chi-square distribution with `\(\nu\)` degrees of freedom, `\(\chi^2_\nu\)`.
 
 The degrees of freedom `\(\nu\)` encode the difference in the number of parameters between alternative and null model.
 
@@ -160,12 +221,17 @@ The degrees of freedom `\(\nu\)` encode the difference in the number of paramete
 
 For example, comparing 
 
-- the saturated model with `\(N=IJ\)` cells/parameters and 
-- the null additive model with `\(k=1 +(I-1) + (J-1)\)` parameters
+- the saturated model with `\(IJ\)` cells/parameters and 
+- the null main effect/additive model with `\(1 +(I-1) + (J-1)\)` parameters
 
 Then, the degrees of freedom for a two-way table with `\(I\)` rows and `\(J\)` columns is the number of interaction parameters, `\(\nu=(I-1) \times (J-1)\)`.
 
 ]
+
+---
+
+
+# Data example
 
 
 ``` r
@@ -175,82 +241,7 @@ tabs &lt;- with(DA23_E2, table(purchased, format))
 chisq &lt;- chisq.test(tabs)
 ```
 
-The test statistic is 21.92, with 1 degree of freedom. The `\(p\)`-value is less than `\(10^{-4}\)`, so strong evidence that there are differences between selling format.
-
----
-
-# Poisson regression models
-
-We cannot use ANOVA for counts, but analysis of deviance is similar.
-
-Assume `\(Y_{ij} \sim \mathsf{Poisson}(\mu_{ij})\)` where the mean is nonnegative.
-
-For example, the main-effect model  is of the form
-
-`\begin{align*}
-\ln \mu_{ij}=\underset{\substack{\text{global}\\\text{mean}}}{\mu} + \underset{\substack{\text{row}\\\text{effect}}}{\vphantom{\beta_j}\alpha_i} + \underset{\substack{\text{column}\\\text{effect}}}{\beta_j}, \quad i=1, \ldots, I; j=1, \ldots, J
-\end{align*}`
-with sum-to-zero constraints for `\(\alpha_i\)`, `\(\beta_j\)`. This has `\(1 + (I-1) + (J-1)\)` parameters.
-
----
-
-
-# Expected (null) vs observed (alternative)
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 119.01 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 113.99 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 46.99 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 45.01 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; integrated &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; sequential &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; no &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 100 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 133 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; yes &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
----
-# Remarks
-
-- Compared to linear regression and ANOVA, the variance of the cells is solely determined by the mean counts
-- Each dimension of the contingency table (row, column, depth) is a factor
-- Each cell is a response value. There are as many observations, `\(N=IJ\)`, as cells.
-- The standard machinery for comparing models
-
-
-
+The test statistic is `\(21.92\)`, with 1 degree of freedom. The `\(p\)`-value is less than `\(10^{-4}\)`, so there is strong evidence of differences between selling format.
 
 ---
 
@@ -266,7 +257,6 @@ Measures include
 Small sample (bias) corrections are often employed.
 
 We obtain `\(V=0.2541\)`, a moderate effect size.
-
 
 
 ---
@@ -300,7 +290,7 @@ contingency &lt;- xtabs( #pool data
 
 # Poisson regression analog
 
-We can use a likelihood ratio test or score test
+We compare nested models
 
 
 ``` r
@@ -311,10 +301,6 @@ mod_main &lt;- glm(total ~ age + frequency, # null model, no interaction
     family = poisson, data = MULTI21_D1_long)
 mod_satur &lt;- glm(total ~ age * frequency, # saturated model
     family = poisson, data = MULTI21_D1_long)
-# Likelihood ratio test and Pearson chi-square
-# Both tests have (I-1) x (J-1) = 6 degrees of freedom
-anova(mod_main, mod_satur, test = "LRT")  # likelihood ratio/deviance
-anova(mod_main, mod_satur, test = "Rao")  # score test, aka Pearson X2 stat
 ```
 
 .small[
@@ -326,7 +312,26 @@ The null model is the .color-2[**main effect model**] (no interaction, "independ
 
 ---
 
+# Remarks
 
+
+- Model comparison relies on likelihood ratio (sometimes termed "deviance") or score test (Pearson `\(X^2\)` test).
+- Compared to linear regression and ANOVA, the variance of the cells is solely determined by the mean counts.
+- Each dimension of the contingency table (row, column, depth) is a factor.
+- Each cell is a response value. There are as many "observations" as cells.
+
+
+``` r
+# Both tests have (I-1) x (J-1) = 6 degrees of freedom
+# likelihood ratio/deviance
+anova(mod_main, mod_satur, test = "LRT")  
+# score test, aka Pearson X2 stat
+anova(mod_main, mod_satur, test = "Rao")  
+```
+
+
+
+---
 # Example 3 - racial discrimination
 
 
@@ -370,7 +375,7 @@ mod_null &lt;- glm(count ~ gnm::Symm(black, white),
                 family = poisson)
 # Compare the two nested models using a likelihood ratio test
 pchisq(deviance(mod_null), lower.tail = FALSE,
-       df = mod_null$df.residual) # 9 cells - 6 parameters = 3
+       df = mod_null$df.residual) # 9 cells - 6 parameters = 3 df
 PearsonX2 &lt;- sum(residuals(mod_null, type = "pearson")^2)
 pchisq(PearsonX2, df = mod_null$df.residual, lower.tail = FALSE)
 ```
