@@ -14,7 +14,53 @@ set.seed(80667) # fix seed to ensure reproducibility
 library(ggplot2)
 library(emmeans)
 library(mediation)
+library(boot) # bootstrap
 
+# Example 0: linear mediation
+# See course notes
+# https://lbelzile.github.io/experimental/example/linearmediation.html
+data(BJF14_S1, package = "hecedsm")
+bootstrap <- boot::boot(
+  data = BJF14_S1,
+  statistic = function(data, wgt){
+    reg1 <- lm(threat ~ condition,
+             weights = wgt,
+             data = data)
+    reg2 <- lm(bonding ~ condition + threat,
+               weights = wgt,
+               data = data)
+    c(coef(reg1)[2], # exp. condition in model for M
+      coef(reg2)[3], # mediation coef in model for Y
+      coef(reg1)[2] * coef(reg2)[3], # ACME
+      coef(reg2)[2], # ADE
+      coef(reg1)[2] * coef(reg2)[3] + coef(reg2)[2])# total
+  },
+  R = 999,
+  stype = "w")
+# The function boot.ci computes confidence intervals
+# separately for each parameter
+conf <- matrix(nrow = length(bootstrap$t0),
+               ncol = 3L)
+conf[,1] <- bootstrap$t0 # stat with the original data
+for(i in 1:5){
+  # The boot.ci returns a list with different
+  # type of confidence intervals
+  # here only "perc"
+  # and for each the
+  # -  [1] level
+  # - [2] rank of the bootstrap for the lower CI bound (i.e., 25 for a bootstrap sample of 1000)
+  # - [3] rank of the observation for the upper bound
+  # - [4] lower bound of the CI
+  # - [5] upper bound of the CI
+conf[i,2:3] <-  boot::boot.ci(
+  boot.out = bootstrap,
+  type = "perc",
+  index = i)$percent[4:5]
+}
+rownames(conf) <- c("alpha","gamma","ACME","ADE","total")
+colnames(conf) <- c("estimate","lower","upper")
+conf |>
+  knitr::kable(digits = 3)
 # Example 1: mediation
 data(L22_E4, package = "hecedsm")
 L22_E4 <- L22_E4 |>
