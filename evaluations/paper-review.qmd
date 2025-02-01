@@ -1,5 +1,5 @@
 ---
-title: "Paper review"
+title: "Peer review"
 ---
 
 
@@ -7,7 +7,7 @@ title: "Paper review"
 
 You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.
 
-Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.
+Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. Make suggestions for improvements (keeping in mind that data has already been collected, so focus on transparency/fixes/suggestions for improvement that are actionable). If your selected paper has too many studies, focus on a handful for the purpose of the project.
 
 
 You should focus on the following elements in your review:
@@ -25,7 +25,8 @@ In addition to the material seen in class, see @Wilkinson:1999 and @Campion:1993
 
 ## Deliverables
 
-A portable document file (PDF) of your critique (maximum 3 pages, excluding bibliography)
+- A portable document file (PDF) of your critique (maximum four pages, excluding bibliography)
+- Code for the partial reproduction.
 
 ## Grading rubric
 
