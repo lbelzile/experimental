@@ -4,8 +4,8 @@
     <title>Repeated measures</title>
     <meta charset="utf-8" />
     <meta name="author" content="Léo Belzile" />
-    <meta name="date" content="2024-10-07" />
-    <script src="libs/header-attrs-2.28/header-attrs.js"></script>
+    <meta name="date" content="2025-07-17" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
@@ -81,7 +81,7 @@ class: title title-5
 So far, we have exclusively considered balanced samples 
 
 .box-inv-5.large.sp-after-half.sp-before[
-balanced = same number of observational units in each subgroup
+balanced = same number of measurement units in each subgroup
 ]
 
 Most experiments (even planned) end up with unequal sample sizes.
@@ -1067,10 +1067,10 @@ model |&gt; emmeans::emmeans(spec = "stimulus", contr = cont_vec)
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": false,
-"countIncrementalSlides": false,
-"ratio": "16:9"
+  "highlightStyle": "github",
+  "highlightLines": false,
+  "countIncrementalSlides": false,
+  "ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

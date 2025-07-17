@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.1">
+<meta name="generator" content="quarto-1.7.3">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Paper review – Experimental Designs and Statistical Methods</title>
+<title>Peer review – Experimental Designs and Statistical Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,10 +54,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-508bcad9dcf2c2e1342fa9dd89cfc9ba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-202485a7980752120cfa11c4c1373806.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -148,7 +148,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../evaluations/paper-review.html">Paper review</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../evaluations/paper-review.html">Peer review</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -184,7 +184,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../evaluations/paper-review.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Paper review</span></a>
+ <span class="menu-text">Peer review</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -295,10 +295,10 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../evaluations/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../evaluations/paper-review.html">Peer review</a></li></ol></nav><h1 class="title display-7">Peer review</h1></header>
 
 <header id="title-block-header">
-<h1 class="title display-7">Paper review</h1>
+
 
 </header>
 
@@ -306,7 +306,7 @@ div.csl-indent {
 <section id="description-of-the-task" class="level2">
 <h2 class="anchored" data-anchor-id="description-of-the-task">Description of the task</h2>
 <p>You will be assigned a scientific paper with open access material (data, code, etc.) to criticize. The purpose of the project is to let you practice peer-reviewing, focusing on reproducibility and correctness of the statistical analyses therein.</p>
-<p>Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. If your selected paper has more than one study, you will be assigned to a particular one for the purpose of the project.</p>
+<p>Comment on the methodology, the statistical analyses and the report of the statistical results in the paper. Make suggestions for improvements (keeping in mind that data has already been collected, so focus on transparency/fixes/suggestions for improvement that are actionable). If your selected paper has too many studies, focus on a handful for the purpose of the project.</p>
 <p>You should focus on the following elements in your review:</p>
 <ul>
 <li>Strengths and weaknesses of the methodology used to test the research hypotheses.</li>
@@ -321,7 +321,10 @@ div.csl-indent {
 </section>
 <section id="deliverables" class="level2">
 <h2 class="anchored" data-anchor-id="deliverables">Deliverables</h2>
-<p>A portable document file (PDF) of your critique (maximum 3 pages, excluding bibliography)</p>
+<ul>
+<li>A portable document file (PDF) of your critique (maximum four pages, excluding bibliography)</li>
+<li>Code for the partial reproduction.</li>
+</ul>
 </section>
 <section id="grading-rubric" class="level2">
 <h2 class="anchored" data-anchor-id="grading-rubric">Grading rubric</h2>
@@ -428,8 +431,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -540,7 +541,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

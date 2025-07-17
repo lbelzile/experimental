@@ -9,7 +9,7 @@ title: "Problem set 1"
 
 1. What is the population under study?
 2. Identify the type of sampling.
-3. What are the observational and experimental units? How many observations are there for each in the sample?
+3. What are the experimental and measurement units? How many observations are there for each in the sample?
 4. Comment on the quality of the sample and the generalizability of the findings.
 5. Identify the response variable, the factor and the treatment levels.
 

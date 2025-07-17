@@ -424,7 +424,7 @@ class: title title-2
 
 .box-inv-2.medium.sp-after[Experimental unit]
 
-.box-inv-2.medium.sp-after[Observational unit]
+.box-inv-2.medium.sp-after[Measurement unit]
 
 .box-inv-2.medium.sp-after[Factor]
 
@@ -445,7 +445,7 @@ From Davison (2008), Example 9.2
 .medium[
 
 In pairs, identify
-- the experimental and observational units
+- the experimental and measurement units
 - the factor levels
 - the response variable
 
